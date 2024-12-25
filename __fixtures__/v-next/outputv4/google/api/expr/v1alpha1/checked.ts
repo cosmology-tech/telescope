@@ -1,9 +1,10 @@
-import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDKType } from "./syntax.js";
-import { Empty, EmptySDKType } from "../../../protobuf/empty.js";
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDKType } from "./syntax";
+import { Empty, EmptySDKType } from "../../../protobuf/empty";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
@@ -144,6 +145,10 @@ export interface CheckedExpr_ReferenceMapEntry {
   key: bigint;
   value?: Reference;
 }
+export interface ReactiveCheckedExpr_ReferenceMapEntry {
+  key: ComputedRef<bigint>;
+  value?: ComputedRef<Reference>;
+}
 export interface CheckedExpr_ReferenceMapEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
@@ -155,6 +160,10 @@ export interface CheckedExpr_ReferenceMapEntrySDKType {
 export interface CheckedExpr_TypeMapEntry {
   key: bigint;
   value?: Type;
+}
+export interface ReactiveCheckedExpr_TypeMapEntry {
+  key: ComputedRef<bigint>;
+  value?: ComputedRef<Type>;
 }
 export interface CheckedExpr_TypeMapEntryProtoMsg {
   typeUrl: string;
@@ -216,6 +225,17 @@ export interface CheckedExpr {
    * may have structural differences.
    */
   expr?: Expr;
+}
+export interface ReactiveCheckedExpr {
+  referenceMap: ComputedRef<{
+    [key: bigint]: Reference;
+  }>;
+  typeMap: ComputedRef<{
+    [key: bigint]: Type;
+  }>;
+  sourceInfo?: ComputedRef<SourceInfo>;
+  exprVersion: ComputedRef<string>;
+  expr?: ComputedRef<Expr>;
 }
 export interface CheckedExprProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.CheckedExpr";
@@ -284,6 +304,21 @@ export interface Type {
   /** Abstract, application defined type. */
   abstractType?: Type_AbstractType;
 }
+export interface ReactiveType {
+  dyn?: ComputedRef<Empty>;
+  null?: ComputedRef<NullValue>;
+  primitive?: ComputedRef<Type_PrimitiveType>;
+  wrapper?: ComputedRef<Type_PrimitiveType>;
+  wellKnown?: ComputedRef<Type_WellKnownType>;
+  listType?: ComputedRef<Type_ListType>;
+  mapType?: ComputedRef<Type_MapType>;
+  function?: ComputedRef<Type_FunctionType>;
+  messageType?: ComputedRef<string>;
+  typeParam?: ComputedRef<string>;
+  type?: ComputedRef<Type>;
+  error?: ComputedRef<Empty>;
+  abstractType?: ComputedRef<Type_AbstractType>;
+}
 export interface TypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Type";
   value: Uint8Array;
@@ -309,6 +344,9 @@ export interface Type_ListType {
   /** The element type. */
   elemType?: Type;
 }
+export interface ReactiveType_ListType {
+  elemType?: ComputedRef<Type>;
+}
 export interface Type_ListTypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ListType";
   value: Uint8Array;
@@ -323,6 +361,10 @@ export interface Type_MapType {
   keyType?: Type;
   /** The type of the value. */
   valueType?: Type;
+}
+export interface ReactiveType_MapType {
+  keyType?: ComputedRef<Type>;
+  valueType?: ComputedRef<Type>;
 }
 export interface Type_MapTypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.MapType";
@@ -340,6 +382,10 @@ export interface Type_FunctionType {
   /** Argument types of the function. */
   argTypes: Type[];
 }
+export interface ReactiveType_FunctionType {
+  resultType?: ComputedRef<Type>;
+  argTypes: ComputedRef<Type[]>;
+}
 export interface Type_FunctionTypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.FunctionType";
   value: Uint8Array;
@@ -355,6 +401,10 @@ export interface Type_AbstractType {
   name: string;
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
+}
+export interface ReactiveType_AbstractType {
+  name: ComputedRef<string>;
+  parameterTypes: ComputedRef<Type[]>;
 }
 export interface Type_AbstractTypeProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.AbstractType";
@@ -387,6 +437,11 @@ export interface Decl {
   ident?: Decl_IdentDecl;
   /** Function declaration. */
   function?: Decl_FunctionDecl;
+}
+export interface ReactiveDecl {
+  name: ComputedRef<string>;
+  ident?: ComputedRef<Decl_IdentDecl>;
+  function?: ComputedRef<Decl_FunctionDecl>;
 }
 export interface DeclProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Decl";
@@ -422,6 +477,11 @@ export interface Decl_IdentDecl {
   /** Documentation string for the identifier. */
   doc: string;
 }
+export interface ReactiveDecl_IdentDecl {
+  type?: ComputedRef<Type>;
+  value?: ComputedRef<Constant>;
+  doc: ComputedRef<string>;
+}
 export interface Decl_IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.IdentDecl";
   value: Uint8Array;
@@ -449,6 +509,9 @@ export interface Decl_IdentDeclSDKType {
 export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
+}
+export interface ReactiveDecl_FunctionDecl {
+  overloads: ComputedRef<Decl_FunctionDecl_Overload[]>;
 }
 export interface Decl_FunctionDeclProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.FunctionDecl";
@@ -521,6 +584,14 @@ export interface Decl_FunctionDecl_Overload {
   /** Documentation string for the overload. */
   doc: string;
 }
+export interface ReactiveDecl_FunctionDecl_Overload {
+  overloadId: ComputedRef<string>;
+  params: ComputedRef<Type[]>;
+  typeParams: ComputedRef<string[]>;
+  resultType?: ComputedRef<Type>;
+  isInstanceFunction: ComputedRef<boolean>;
+  doc: ComputedRef<string>;
+}
 export interface Decl_FunctionDecl_OverloadProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Overload";
   value: Uint8Array;
@@ -566,6 +637,11 @@ export interface Reference {
    */
   value?: Constant;
 }
+export interface ReactiveReference {
+  name: ComputedRef<string>;
+  overloadId: ComputedRef<string[]>;
+  value?: ComputedRef<Constant>;
+}
 export interface ReferenceProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Reference";
   value: Uint8Array;
@@ -584,7 +660,7 @@ function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntr
 }
 export const CheckedExpr_ReferenceMapEntry = {
   encode(message: CheckedExpr_ReferenceMapEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== BigInt(0)) {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
@@ -613,10 +689,10 @@ export const CheckedExpr_ReferenceMapEntry = {
     return message;
   },
   fromJSON(object: any): CheckedExpr_ReferenceMapEntry {
-    const obj = createBaseCheckedExpr_ReferenceMapEntry();
-    if (isSet(object.key)) obj.key = BigInt(object.key.toString());
-    if (isSet(object.value)) obj.value = Reference.fromJSON(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
+      value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: CheckedExpr_ReferenceMapEntry): JsonSafe<CheckedExpr_ReferenceMapEntry> {
     const obj: any = {};
@@ -626,12 +702,8 @@ export const CheckedExpr_ReferenceMapEntry = {
   },
   fromPartial(object: DeepPartial<CheckedExpr_ReferenceMapEntry>): CheckedExpr_ReferenceMapEntry {
     const message = createBaseCheckedExpr_ReferenceMapEntry();
-    if (object.key !== undefined && object.key !== null) {
-      message.key = BigInt(object.key.toString());
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Reference.fromPartial(object.value);
-    }
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
+    message.value = object.value !== undefined && object.value !== null ? Reference.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: CheckedExpr_ReferenceMapEntrySDKType): CheckedExpr_ReferenceMapEntry {
@@ -686,7 +758,7 @@ function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
 }
 export const CheckedExpr_TypeMapEntry = {
   encode(message: CheckedExpr_TypeMapEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== BigInt(0)) {
       writer.uint32(8).int64(message.key);
     }
     if (message.value !== undefined) {
@@ -715,10 +787,10 @@ export const CheckedExpr_TypeMapEntry = {
     return message;
   },
   fromJSON(object: any): CheckedExpr_TypeMapEntry {
-    const obj = createBaseCheckedExpr_TypeMapEntry();
-    if (isSet(object.key)) obj.key = BigInt(object.key.toString());
-    if (isSet(object.value)) obj.value = Type.fromJSON(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
+      value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: CheckedExpr_TypeMapEntry): JsonSafe<CheckedExpr_TypeMapEntry> {
     const obj: any = {};
@@ -728,12 +800,8 @@ export const CheckedExpr_TypeMapEntry = {
   },
   fromPartial(object: DeepPartial<CheckedExpr_TypeMapEntry>): CheckedExpr_TypeMapEntry {
     const message = createBaseCheckedExpr_TypeMapEntry();
-    if (object.key !== undefined && object.key !== null) {
-      message.key = BigInt(object.key.toString());
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Type.fromPartial(object.value);
-    }
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
+    message.value = object.value !== undefined && object.value !== null ? Type.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: CheckedExpr_TypeMapEntrySDKType): CheckedExpr_TypeMapEntry {
@@ -807,7 +875,7 @@ export const CheckedExpr = {
     if (message.sourceInfo !== undefined) {
       SourceInfo.encode(message.sourceInfo, writer.uint32(42).fork()).ldelim();
     }
-    if (message.exprVersion !== undefined) {
+    if (message.exprVersion !== "") {
       writer.uint32(50).string(message.exprVersion);
     }
     if (message.expr !== undefined) {
@@ -851,23 +919,23 @@ export const CheckedExpr = {
     return message;
   },
   fromJSON(object: any): CheckedExpr {
-    const obj = createBaseCheckedExpr();
-    if (isObject(object.referenceMap)) obj.referenceMap = Object.entries(object.referenceMap).reduce<{
-      [key: bigint]: Reference;
-    }>((acc, [key, value]) => {
-      acc[Number(key)] = Reference.fromJSON(value);
-      return acc;
-    }, {});
-    if (isObject(object.typeMap)) obj.typeMap = Object.entries(object.typeMap).reduce<{
-      [key: bigint]: Type;
-    }>((acc, [key, value]) => {
-      acc[Number(key)] = Type.fromJSON(value);
-      return acc;
-    }, {});
-    if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
-    if (isSet(object.exprVersion)) obj.exprVersion = String(object.exprVersion);
-    if (isSet(object.expr)) obj.expr = Expr.fromJSON(object.expr);
-    return obj;
+    return {
+      referenceMap: isObject(object.referenceMap) ? Object.entries(object.referenceMap).reduce<{
+        [key: bigint]: Reference;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Reference.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      typeMap: isObject(object.typeMap) ? Object.entries(object.typeMap).reduce<{
+        [key: bigint]: Type;
+      }>((acc, [key, value]) => {
+        acc[Number(key)] = Type.fromJSON(value);
+        return acc;
+      }, {}) : {},
+      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
+      exprVersion: isSet(object.exprVersion) ? String(object.exprVersion) : "",
+      expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
+    };
   },
   toJSON(message: CheckedExpr): JsonSafe<CheckedExpr> {
     const obj: any = {};
@@ -906,13 +974,9 @@ export const CheckedExpr = {
       }
       return acc;
     }, {});
-    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
-      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
-    }
+    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
     message.exprVersion = object.exprVersion ?? "";
-    if (object.expr !== undefined && object.expr !== null) {
-      message.expr = Expr.fromPartial(object.expr);
-    }
+    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
     return message;
   },
   fromSDK(object: CheckedExprSDKType): CheckedExpr {
@@ -1151,21 +1215,21 @@ export const Type = {
     return message;
   },
   fromJSON(object: any): Type {
-    const obj = createBaseType();
-    if (isSet(object.dyn)) obj.dyn = Empty.fromJSON(object.dyn);
-    if (isSet(object.null)) obj.null = nullValueFromJSON(object.null);
-    if (isSet(object.primitive)) obj.primitive = type_PrimitiveTypeFromJSON(object.primitive);
-    if (isSet(object.wrapper)) obj.wrapper = type_PrimitiveTypeFromJSON(object.wrapper);
-    if (isSet(object.wellKnown)) obj.wellKnown = type_WellKnownTypeFromJSON(object.wellKnown);
-    if (isSet(object.listType)) obj.listType = Type_ListType.fromJSON(object.listType);
-    if (isSet(object.mapType)) obj.mapType = Type_MapType.fromJSON(object.mapType);
-    if (isSet(object.function)) obj.function = Type_FunctionType.fromJSON(object.function);
-    if (isSet(object.messageType)) obj.messageType = String(object.messageType);
-    if (isSet(object.typeParam)) obj.typeParam = String(object.typeParam);
-    if (isSet(object.type)) obj.type = Type.fromJSON(object.type);
-    if (isSet(object.error)) obj.error = Empty.fromJSON(object.error);
-    if (isSet(object.abstractType)) obj.abstractType = Type_AbstractType.fromJSON(object.abstractType);
-    return obj;
+    return {
+      dyn: isSet(object.dyn) ? Empty.fromJSON(object.dyn) : undefined,
+      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
+      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
+      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
+      wellKnown: isSet(object.wellKnown) ? type_WellKnownTypeFromJSON(object.wellKnown) : undefined,
+      listType: isSet(object.listType) ? Type_ListType.fromJSON(object.listType) : undefined,
+      mapType: isSet(object.mapType) ? Type_MapType.fromJSON(object.mapType) : undefined,
+      function: isSet(object.function) ? Type_FunctionType.fromJSON(object.function) : undefined,
+      messageType: isSet(object.messageType) ? String(object.messageType) : undefined,
+      typeParam: isSet(object.typeParam) ? String(object.typeParam) : undefined,
+      type: isSet(object.type) ? Type.fromJSON(object.type) : undefined,
+      error: isSet(object.error) ? Empty.fromJSON(object.error) : undefined,
+      abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined
+    };
   },
   toJSON(message: Type): JsonSafe<Type> {
     const obj: any = {};
@@ -1186,33 +1250,19 @@ export const Type = {
   },
   fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
-    if (object.dyn !== undefined && object.dyn !== null) {
-      message.dyn = Empty.fromPartial(object.dyn);
-    }
+    message.dyn = object.dyn !== undefined && object.dyn !== null ? Empty.fromPartial(object.dyn) : undefined;
     message.null = object.null ?? undefined;
     message.primitive = object.primitive ?? undefined;
     message.wrapper = object.wrapper ?? undefined;
     message.wellKnown = object.wellKnown ?? undefined;
-    if (object.listType !== undefined && object.listType !== null) {
-      message.listType = Type_ListType.fromPartial(object.listType);
-    }
-    if (object.mapType !== undefined && object.mapType !== null) {
-      message.mapType = Type_MapType.fromPartial(object.mapType);
-    }
-    if (object.function !== undefined && object.function !== null) {
-      message.function = Type_FunctionType.fromPartial(object.function);
-    }
+    message.listType = object.listType !== undefined && object.listType !== null ? Type_ListType.fromPartial(object.listType) : undefined;
+    message.mapType = object.mapType !== undefined && object.mapType !== null ? Type_MapType.fromPartial(object.mapType) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? Type_FunctionType.fromPartial(object.function) : undefined;
     message.messageType = object.messageType ?? undefined;
     message.typeParam = object.typeParam ?? undefined;
-    if (object.type !== undefined && object.type !== null) {
-      message.type = Type.fromPartial(object.type);
-    }
-    if (object.error !== undefined && object.error !== null) {
-      message.error = Empty.fromPartial(object.error);
-    }
-    if (object.abstractType !== undefined && object.abstractType !== null) {
-      message.abstractType = Type_AbstractType.fromPartial(object.abstractType);
-    }
+    message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : undefined;
+    message.error = object.error !== undefined && object.error !== null ? Empty.fromPartial(object.error) : undefined;
+    message.abstractType = object.abstractType !== undefined && object.abstractType !== null ? Type_AbstractType.fromPartial(object.abstractType) : undefined;
     return message;
   },
   fromSDK(object: TypeSDKType): Type {
@@ -1373,9 +1423,9 @@ export const Type_ListType = {
     return message;
   },
   fromJSON(object: any): Type_ListType {
-    const obj = createBaseType_ListType();
-    if (isSet(object.elemType)) obj.elemType = Type.fromJSON(object.elemType);
-    return obj;
+    return {
+      elemType: isSet(object.elemType) ? Type.fromJSON(object.elemType) : undefined
+    };
   },
   toJSON(message: Type_ListType): JsonSafe<Type_ListType> {
     const obj: any = {};
@@ -1384,9 +1434,7 @@ export const Type_ListType = {
   },
   fromPartial(object: DeepPartial<Type_ListType>): Type_ListType {
     const message = createBaseType_ListType();
-    if (object.elemType !== undefined && object.elemType !== null) {
-      message.elemType = Type.fromPartial(object.elemType);
-    }
+    message.elemType = object.elemType !== undefined && object.elemType !== null ? Type.fromPartial(object.elemType) : undefined;
     return message;
   },
   fromSDK(object: Type_ListTypeSDKType): Type_ListType {
@@ -1470,10 +1518,10 @@ export const Type_MapType = {
     return message;
   },
   fromJSON(object: any): Type_MapType {
-    const obj = createBaseType_MapType();
-    if (isSet(object.keyType)) obj.keyType = Type.fromJSON(object.keyType);
-    if (isSet(object.valueType)) obj.valueType = Type.fromJSON(object.valueType);
-    return obj;
+    return {
+      keyType: isSet(object.keyType) ? Type.fromJSON(object.keyType) : undefined,
+      valueType: isSet(object.valueType) ? Type.fromJSON(object.valueType) : undefined
+    };
   },
   toJSON(message: Type_MapType): JsonSafe<Type_MapType> {
     const obj: any = {};
@@ -1483,12 +1531,8 @@ export const Type_MapType = {
   },
   fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
     const message = createBaseType_MapType();
-    if (object.keyType !== undefined && object.keyType !== null) {
-      message.keyType = Type.fromPartial(object.keyType);
-    }
-    if (object.valueType !== undefined && object.valueType !== null) {
-      message.valueType = Type.fromPartial(object.valueType);
-    }
+    message.keyType = object.keyType !== undefined && object.keyType !== null ? Type.fromPartial(object.keyType) : undefined;
+    message.valueType = object.valueType !== undefined && object.valueType !== null ? Type.fromPartial(object.valueType) : undefined;
     return message;
   },
   fromSDK(object: Type_MapTypeSDKType): Type_MapType {
@@ -1579,10 +1623,10 @@ export const Type_FunctionType = {
     return message;
   },
   fromJSON(object: any): Type_FunctionType {
-    const obj = createBaseType_FunctionType();
-    if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
-    if (Array.isArray(object?.argTypes)) obj.argTypes = object.argTypes.map((e: any) => Type.fromJSON(e));
-    return obj;
+    return {
+      resultType: isSet(object.resultType) ? Type.fromJSON(object.resultType) : undefined,
+      argTypes: Array.isArray(object?.argTypes) ? object.argTypes.map((e: any) => Type.fromJSON(e)) : []
+    };
   },
   toJSON(message: Type_FunctionType): JsonSafe<Type_FunctionType> {
     const obj: any = {};
@@ -1596,9 +1640,7 @@ export const Type_FunctionType = {
   },
   fromPartial(object: DeepPartial<Type_FunctionType>): Type_FunctionType {
     const message = createBaseType_FunctionType();
-    if (object.resultType !== undefined && object.resultType !== null) {
-      message.resultType = Type.fromPartial(object.resultType);
-    }
+    message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : undefined;
     message.argTypes = object.argTypes?.map(e => Type.fromPartial(e)) || [];
     return message;
   },
@@ -1667,7 +1709,7 @@ function createBaseType_AbstractType(): Type_AbstractType {
 export const Type_AbstractType = {
   typeUrl: "/google.api.expr.v1alpha1.AbstractType",
   encode(message: Type_AbstractType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.parameterTypes) {
@@ -1696,10 +1738,10 @@ export const Type_AbstractType = {
     return message;
   },
   fromJSON(object: any): Type_AbstractType {
-    const obj = createBaseType_AbstractType();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.parameterTypes)) obj.parameterTypes = object.parameterTypes.map((e: any) => Type.fromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      parameterTypes: Array.isArray(object?.parameterTypes) ? object.parameterTypes.map((e: any) => Type.fromJSON(e)) : []
+    };
   },
   toJSON(message: Type_AbstractType): JsonSafe<Type_AbstractType> {
     const obj: any = {};
@@ -1783,7 +1825,7 @@ function createBaseDecl(): Decl {
 export const Decl = {
   typeUrl: "/google.api.expr.v1alpha1.Decl",
   encode(message: Decl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.ident !== undefined) {
@@ -1818,11 +1860,11 @@ export const Decl = {
     return message;
   },
   fromJSON(object: any): Decl {
-    const obj = createBaseDecl();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.ident)) obj.ident = Decl_IdentDecl.fromJSON(object.ident);
-    if (isSet(object.function)) obj.function = Decl_FunctionDecl.fromJSON(object.function);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      ident: isSet(object.ident) ? Decl_IdentDecl.fromJSON(object.ident) : undefined,
+      function: isSet(object.function) ? Decl_FunctionDecl.fromJSON(object.function) : undefined
+    };
   },
   toJSON(message: Decl): JsonSafe<Decl> {
     const obj: any = {};
@@ -1834,12 +1876,8 @@ export const Decl = {
   fromPartial(object: DeepPartial<Decl>): Decl {
     const message = createBaseDecl();
     message.name = object.name ?? "";
-    if (object.ident !== undefined && object.ident !== null) {
-      message.ident = Decl_IdentDecl.fromPartial(object.ident);
-    }
-    if (object.function !== undefined && object.function !== null) {
-      message.function = Decl_FunctionDecl.fromPartial(object.function);
-    }
+    message.ident = object.ident !== undefined && object.ident !== null ? Decl_IdentDecl.fromPartial(object.ident) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? Decl_FunctionDecl.fromPartial(object.function) : undefined;
     return message;
   },
   fromSDK(object: DeclSDKType): Decl {
@@ -1915,7 +1953,7 @@ export const Decl_IdentDecl = {
     if (message.value !== undefined) {
       Constant.encode(message.value, writer.uint32(18).fork()).ldelim();
     }
-    if (message.doc !== undefined) {
+    if (message.doc !== "") {
       writer.uint32(26).string(message.doc);
     }
     return writer;
@@ -1944,11 +1982,11 @@ export const Decl_IdentDecl = {
     return message;
   },
   fromJSON(object: any): Decl_IdentDecl {
-    const obj = createBaseDecl_IdentDecl();
-    if (isSet(object.type)) obj.type = Type.fromJSON(object.type);
-    if (isSet(object.value)) obj.value = Constant.fromJSON(object.value);
-    if (isSet(object.doc)) obj.doc = String(object.doc);
-    return obj;
+    return {
+      type: isSet(object.type) ? Type.fromJSON(object.type) : undefined,
+      value: isSet(object.value) ? Constant.fromJSON(object.value) : undefined,
+      doc: isSet(object.doc) ? String(object.doc) : ""
+    };
   },
   toJSON(message: Decl_IdentDecl): JsonSafe<Decl_IdentDecl> {
     const obj: any = {};
@@ -1959,12 +1997,8 @@ export const Decl_IdentDecl = {
   },
   fromPartial(object: DeepPartial<Decl_IdentDecl>): Decl_IdentDecl {
     const message = createBaseDecl_IdentDecl();
-    if (object.type !== undefined && object.type !== null) {
-      message.type = Type.fromPartial(object.type);
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Constant.fromPartial(object.value);
-    }
+    message.type = object.type !== undefined && object.type !== null ? Type.fromPartial(object.type) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     message.doc = object.doc ?? "";
     return message;
   },
@@ -2056,9 +2090,9 @@ export const Decl_FunctionDecl = {
     return message;
   },
   fromJSON(object: any): Decl_FunctionDecl {
-    const obj = createBaseDecl_FunctionDecl();
-    if (Array.isArray(object?.overloads)) obj.overloads = object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e));
-    return obj;
+    return {
+      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e)) : []
+    };
   },
   toJSON(message: Decl_FunctionDecl): JsonSafe<Decl_FunctionDecl> {
     const obj: any = {};
@@ -2136,7 +2170,7 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
 export const Decl_FunctionDecl_Overload = {
   typeUrl: "/google.api.expr.v1alpha1.Overload",
   encode(message: Decl_FunctionDecl_Overload, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.overloadId !== undefined) {
+    if (message.overloadId !== "") {
       writer.uint32(10).string(message.overloadId);
     }
     for (const v of message.params) {
@@ -2148,10 +2182,10 @@ export const Decl_FunctionDecl_Overload = {
     if (message.resultType !== undefined) {
       Type.encode(message.resultType, writer.uint32(34).fork()).ldelim();
     }
-    if (message.isInstanceFunction !== undefined) {
+    if (message.isInstanceFunction === true) {
       writer.uint32(40).bool(message.isInstanceFunction);
     }
-    if (message.doc !== undefined) {
+    if (message.doc !== "") {
       writer.uint32(50).string(message.doc);
     }
     return writer;
@@ -2189,14 +2223,14 @@ export const Decl_FunctionDecl_Overload = {
     return message;
   },
   fromJSON(object: any): Decl_FunctionDecl_Overload {
-    const obj = createBaseDecl_FunctionDecl_Overload();
-    if (isSet(object.overloadId)) obj.overloadId = String(object.overloadId);
-    if (Array.isArray(object?.params)) obj.params = object.params.map((e: any) => Type.fromJSON(e));
-    if (Array.isArray(object?.typeParams)) obj.typeParams = object.typeParams.map((e: any) => String(e));
-    if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
-    if (isSet(object.isInstanceFunction)) obj.isInstanceFunction = Boolean(object.isInstanceFunction);
-    if (isSet(object.doc)) obj.doc = String(object.doc);
-    return obj;
+    return {
+      overloadId: isSet(object.overloadId) ? String(object.overloadId) : "",
+      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromJSON(e)) : [],
+      typeParams: Array.isArray(object?.typeParams) ? object.typeParams.map((e: any) => String(e)) : [],
+      resultType: isSet(object.resultType) ? Type.fromJSON(object.resultType) : undefined,
+      isInstanceFunction: isSet(object.isInstanceFunction) ? Boolean(object.isInstanceFunction) : false,
+      doc: isSet(object.doc) ? String(object.doc) : ""
+    };
   },
   toJSON(message: Decl_FunctionDecl_Overload): JsonSafe<Decl_FunctionDecl_Overload> {
     const obj: any = {};
@@ -2221,9 +2255,7 @@ export const Decl_FunctionDecl_Overload = {
     message.overloadId = object.overloadId ?? "";
     message.params = object.params?.map(e => Type.fromPartial(e)) || [];
     message.typeParams = object.typeParams?.map(e => e) || [];
-    if (object.resultType !== undefined && object.resultType !== null) {
-      message.resultType = Type.fromPartial(object.resultType);
-    }
+    message.resultType = object.resultType !== undefined && object.resultType !== null ? Type.fromPartial(object.resultType) : undefined;
     message.isInstanceFunction = object.isInstanceFunction ?? false;
     message.doc = object.doc ?? "";
     return message;
@@ -2328,7 +2360,7 @@ function createBaseReference(): Reference {
 export const Reference = {
   typeUrl: "/google.api.expr.v1alpha1.Reference",
   encode(message: Reference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.overloadId) {
@@ -2363,11 +2395,11 @@ export const Reference = {
     return message;
   },
   fromJSON(object: any): Reference {
-    const obj = createBaseReference();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.overloadId)) obj.overloadId = object.overloadId.map((e: any) => String(e));
-    if (isSet(object.value)) obj.value = Constant.fromJSON(object.value);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      overloadId: Array.isArray(object?.overloadId) ? object.overloadId.map((e: any) => String(e)) : [],
+      value: isSet(object.value) ? Constant.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: Reference): JsonSafe<Reference> {
     const obj: any = {};
@@ -2384,9 +2416,7 @@ export const Reference = {
     const message = createBaseReference();
     message.name = object.name ?? "";
     message.overloadId = object.overloadId?.map(e => e) || [];
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Constant.fromPartial(object.value);
-    }
+    message.value = object.value !== undefined && object.value !== null ? Constant.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: ReferenceSDKType): Reference {

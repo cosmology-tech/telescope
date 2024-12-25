@@ -1,8 +1,9 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
@@ -11,6 +12,12 @@ export interface Params {
   durationOfDecay: Duration;
   /** denom of claimable asset */
   claimDenom: string;
+}
+export interface ReactiveParams {
+  airdropStartTime: ComputedRef<Date>;
+  durationUntilDecay: ComputedRef<Duration>;
+  durationOfDecay: ComputedRef<Duration>;
+  claimDenom: ComputedRef<string>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.Params";
@@ -43,7 +50,7 @@ export const Params = {
     if (message.durationOfDecay !== undefined) {
       Duration.encode(message.durationOfDecay, writer.uint32(26).fork()).ldelim();
     }
-    if (message.claimDenom !== undefined) {
+    if (message.claimDenom !== "") {
       writer.uint32(34).string(message.claimDenom);
     }
     return writer;
@@ -75,12 +82,12 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.airdropStartTime)) obj.airdropStartTime = new Date(object.airdropStartTime);
-    if (isSet(object.durationUntilDecay)) obj.durationUntilDecay = Duration.fromJSON(object.durationUntilDecay);
-    if (isSet(object.durationOfDecay)) obj.durationOfDecay = Duration.fromJSON(object.durationOfDecay);
-    if (isSet(object.claimDenom)) obj.claimDenom = String(object.claimDenom);
-    return obj;
+    return {
+      airdropStartTime: isSet(object.airdropStartTime) ? new Date(object.airdropStartTime) : undefined,
+      durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
+      durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
+      claimDenom: isSet(object.claimDenom) ? String(object.claimDenom) : ""
+    };
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
@@ -93,12 +100,8 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
-      message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
-    }
-    if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
-      message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
-    }
+    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : undefined;
+    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : undefined;
     message.claimDenom = object.claimDenom ?? "";
     return message;
   },

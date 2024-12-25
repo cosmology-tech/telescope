@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial, isSet } from "../../helpers.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial, isSet } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * Billing related configuration of the service.
@@ -44,6 +45,9 @@ export interface Billing {
    * one consumer destination.
    */
   consumerDestinations: Billing_BillingDestination[];
+}
+export interface ReactiveBilling {
+  consumerDestinations: ComputedRef<Billing_BillingDestination[]>;
 }
 export interface BillingProtoMsg {
   typeUrl: "/google.api.Billing";
@@ -102,6 +106,10 @@ export interface Billing_BillingDestination {
    */
   metrics: string[];
 }
+export interface ReactiveBilling_BillingDestination {
+  monitoredResource: ComputedRef<string>;
+  metrics: ComputedRef<string[]>;
+}
 export interface Billing_BillingDestinationProtoMsg {
   typeUrl: "/google.api.BillingDestination";
   value: Uint8Array;
@@ -145,9 +153,9 @@ export const Billing = {
     return message;
   },
   fromJSON(object: any): Billing {
-    const obj = createBaseBilling();
-    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Billing_BillingDestination.fromJSON(e));
-    return obj;
+    return {
+      consumerDestinations: Array.isArray(object?.consumerDestinations) ? object.consumerDestinations.map((e: any) => Billing_BillingDestination.fromJSON(e)) : []
+    };
   },
   toJSON(message: Billing): JsonSafe<Billing> {
     const obj: any = {};
@@ -221,7 +229,7 @@ function createBaseBilling_BillingDestination(): Billing_BillingDestination {
 export const Billing_BillingDestination = {
   typeUrl: "/google.api.BillingDestination",
   encode(message: Billing_BillingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== undefined) {
+    if (message.monitoredResource !== "") {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -250,10 +258,10 @@ export const Billing_BillingDestination = {
     return message;
   },
   fromJSON(object: any): Billing_BillingDestination {
-    const obj = createBaseBilling_BillingDestination();
-    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
-    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => String(e));
-    return obj;
+    return {
+      monitoredResource: isSet(object.monitoredResource) ? String(object.monitoredResource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: Billing_BillingDestination): JsonSafe<Billing_BillingDestination> {
     const obj: any = {};

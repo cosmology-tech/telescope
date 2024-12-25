@@ -1,12 +1,18 @@
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposal {
   title: string;
   description: string;
   changes: ParamChange[];
+}
+export interface ReactiveParameterChangeProposal {
+  title: ComputedRef<string>;
+  description: ComputedRef<string>;
+  changes: ComputedRef<ParamChange[]>;
 }
 export interface ParameterChangeProposalProtoMsg {
   typeUrl: "/cosmos.params.v1beta1.ParameterChangeProposal";
@@ -26,6 +32,11 @@ export interface ParamChange {
   subspace: string;
   key: string;
   value: string;
+}
+export interface ReactiveParamChange {
+  subspace: ComputedRef<string>;
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface ParamChangeProtoMsg {
   typeUrl: "/cosmos.params.v1beta1.ParamChange";
@@ -50,10 +61,10 @@ function createBaseParameterChangeProposal(): ParameterChangeProposal {
 export const ParameterChangeProposal = {
   typeUrl: "/cosmos.params.v1beta1.ParameterChangeProposal",
   encode(message: ParameterChangeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.changes) {
@@ -85,11 +96,11 @@ export const ParameterChangeProposal = {
     return message;
   },
   fromJSON(object: any): ParameterChangeProposal {
-    const obj = createBaseParameterChangeProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.changes)) obj.changes = object.changes.map((e: any) => ParamChange.fromJSON(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromJSON(e)) : []
+    };
   },
   toJSON(message: ParameterChangeProposal): JsonSafe<ParameterChangeProposal> {
     const obj: any = {};
@@ -188,13 +199,13 @@ function createBaseParamChange(): ParamChange {
 export const ParamChange = {
   typeUrl: "/cosmos.params.v1beta1.ParamChange",
   encode(message: ParamChange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subspace !== undefined) {
+    if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
     }
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(18).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(26).string(message.value);
     }
     return writer;
@@ -223,11 +234,11 @@ export const ParamChange = {
     return message;
   },
   fromJSON(object: any): ParamChange {
-    const obj = createBaseParamChange();
-    if (isSet(object.subspace)) obj.subspace = String(object.subspace);
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: ParamChange): JsonSafe<ParamChange> {
     const obj: any = {};

@@ -1,8 +1,8 @@
-import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrade.js";
-import { Rpc } from "../../../helpers.js";
-import { BinaryReader } from "../../../binary.js";
+import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrade";
+import { Rpc } from "../../../helpers";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryCurrentPlanRequest, QueryCurrentPlanRequestSDKType, QueryCurrentPlanResponse, QueryCurrentPlanResponseSDKType, QueryAppliedPlanRequest, QueryAppliedPlanRequestSDKType, QueryAppliedPlanResponse, QueryAppliedPlanResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType, QueryModuleVersionsRequest, QueryModuleVersionsRequestSDKType, QueryModuleVersionsResponse, QueryModuleVersionsResponseSDKType, QueryAuthorityRequest, QueryAuthorityRequestSDKType, QueryAuthorityResponse, QueryAuthorityResponseSDKType } from "./query.js";
+import { QueryCurrentPlanRequest, QueryCurrentPlanRequestSDKType, QueryCurrentPlanResponse, QueryCurrentPlanResponseSDKType, QueryAppliedPlanRequest, QueryAppliedPlanRequestSDKType, QueryAppliedPlanResponse, QueryAppliedPlanResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType, QueryModuleVersionsRequest, QueryModuleVersionsRequestSDKType, QueryModuleVersionsResponse, QueryModuleVersionsResponseSDKType, QueryAuthorityRequest, QueryAuthorityRequestSDKType, QueryAuthorityResponse, QueryAuthorityResponseSDKType, ReactiveQueryCurrentPlanRequest, ReactiveQueryAppliedPlanRequest, ReactiveQueryUpgradedConsensusStateRequest, ReactiveQueryModuleVersionsRequest, ReactiveQueryAuthorityRequest } from "./query";
 /** Query defines the gRPC upgrade querier service. */
 export interface Query {
   /** CurrentPlan queries the current upgrade plan. */

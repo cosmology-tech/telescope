@@ -1,8 +1,8 @@
-import { PoolParams, PoolParamsSDKType } from "./stableswap_pool.js";
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin.js";
-import { Rpc } from "../../../../helpers.js";
-import { BinaryReader } from "../../../../binary.js";
-import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgCreateStableswapPoolResponse, MsgCreateStableswapPoolResponseSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType, MsgStableSwapAdjustScalingFactorsResponse, MsgStableSwapAdjustScalingFactorsResponseSDKType } from "./tx.js";
+import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { Rpc } from "../../../../helpers";
+import { BinaryReader } from "../../../../binary";
+import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgCreateStableswapPoolResponse, MsgCreateStableswapPoolResponseSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType, MsgStableSwapAdjustScalingFactorsResponse, MsgStableSwapAdjustScalingFactorsResponseSDKType } from "./tx";
 export interface Msg {
   createStableswapPool(request: MsgCreateStableswapPool): Promise<MsgCreateStableswapPoolResponse>;
   stableSwapAdjustScalingFactors(request: MsgStableSwapAdjustScalingFactors): Promise<MsgStableSwapAdjustScalingFactorsResponse>;

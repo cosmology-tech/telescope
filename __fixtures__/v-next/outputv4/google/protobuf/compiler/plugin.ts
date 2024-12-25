@@ -1,7 +1,8 @@
-import { FileDescriptorProto, FileDescriptorProtoSDKType } from "../descriptor.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { FileDescriptorProto, FileDescriptorProtoSDKType } from "../descriptor";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.protobuf.compiler";
 /** The version number of protocol compiler. */
 export interface Version {
@@ -13,6 +14,12 @@ export interface Version {
    * be empty for mainline stable releases.
    */
   suffix: string;
+}
+export interface ReactiveVersion {
+  major: ComputedRef<number>;
+  minor: ComputedRef<number>;
+  patch: ComputedRef<number>;
+  suffix: ComputedRef<string>;
 }
 export interface VersionProtoMsg {
   typeUrl: "/google.protobuf.compiler.Version";
@@ -55,6 +62,12 @@ export interface CodeGeneratorRequest {
   /** The version number of protocol compiler. */
   compilerVersion?: Version;
 }
+export interface ReactiveCodeGeneratorRequest {
+  fileToGenerate: ComputedRef<string[]>;
+  parameter: ComputedRef<string>;
+  protoFile: ComputedRef<FileDescriptorProto[]>;
+  compilerVersion?: ComputedRef<Version>;
+}
 export interface CodeGeneratorRequestProtoMsg {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorRequest";
   value: Uint8Array;
@@ -80,6 +93,10 @@ export interface CodeGeneratorResponse {
    */
   error: string;
   file: CodeGeneratorResponse_File[];
+}
+export interface ReactiveCodeGeneratorResponse {
+  error: ComputedRef<string>;
+  file: ComputedRef<CodeGeneratorResponse_File[]>;
 }
 export interface CodeGeneratorResponseProtoMsg {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse";
@@ -149,6 +166,11 @@ export interface CodeGeneratorResponse_File {
   /** The file contents. */
   content: string;
 }
+export interface ReactiveCodeGeneratorResponse_File {
+  name: ComputedRef<string>;
+  insertionPoint: ComputedRef<string>;
+  content: ComputedRef<string>;
+}
 export interface CodeGeneratorResponse_FileProtoMsg {
   typeUrl: "/google.protobuf.compiler.File";
   value: Uint8Array;
@@ -170,16 +192,16 @@ function createBaseVersion(): Version {
 export const Version = {
   typeUrl: "/google.protobuf.compiler.Version",
   encode(message: Version, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.major !== undefined) {
+    if (message.major !== 0) {
       writer.uint32(8).int32(message.major);
     }
-    if (message.minor !== undefined) {
+    if (message.minor !== 0) {
       writer.uint32(16).int32(message.minor);
     }
-    if (message.patch !== undefined) {
+    if (message.patch !== 0) {
       writer.uint32(24).int32(message.patch);
     }
-    if (message.suffix !== undefined) {
+    if (message.suffix !== "") {
       writer.uint32(34).string(message.suffix);
     }
     return writer;
@@ -211,12 +233,12 @@ export const Version = {
     return message;
   },
   fromJSON(object: any): Version {
-    const obj = createBaseVersion();
-    if (isSet(object.major)) obj.major = Number(object.major);
-    if (isSet(object.minor)) obj.minor = Number(object.minor);
-    if (isSet(object.patch)) obj.patch = Number(object.patch);
-    if (isSet(object.suffix)) obj.suffix = String(object.suffix);
-    return obj;
+    return {
+      major: isSet(object.major) ? Number(object.major) : 0,
+      minor: isSet(object.minor) ? Number(object.minor) : 0,
+      patch: isSet(object.patch) ? Number(object.patch) : 0,
+      suffix: isSet(object.suffix) ? String(object.suffix) : ""
+    };
   },
   toJSON(message: Version): JsonSafe<Version> {
     const obj: any = {};
@@ -312,7 +334,7 @@ export const CodeGeneratorRequest = {
     for (const v of message.fileToGenerate) {
       writer.uint32(10).string(v!);
     }
-    if (message.parameter !== undefined) {
+    if (message.parameter !== "") {
       writer.uint32(18).string(message.parameter);
     }
     for (const v of message.protoFile) {
@@ -350,12 +372,12 @@ export const CodeGeneratorRequest = {
     return message;
   },
   fromJSON(object: any): CodeGeneratorRequest {
-    const obj = createBaseCodeGeneratorRequest();
-    if (Array.isArray(object?.fileToGenerate)) obj.fileToGenerate = object.fileToGenerate.map((e: any) => String(e));
-    if (isSet(object.parameter)) obj.parameter = String(object.parameter);
-    if (Array.isArray(object?.protoFile)) obj.protoFile = object.protoFile.map((e: any) => FileDescriptorProto.fromJSON(e));
-    if (isSet(object.compilerVersion)) obj.compilerVersion = Version.fromJSON(object.compilerVersion);
-    return obj;
+    return {
+      fileToGenerate: Array.isArray(object?.fileToGenerate) ? object.fileToGenerate.map((e: any) => String(e)) : [],
+      parameter: isSet(object.parameter) ? String(object.parameter) : "",
+      protoFile: Array.isArray(object?.protoFile) ? object.protoFile.map((e: any) => FileDescriptorProto.fromJSON(e)) : [],
+      compilerVersion: isSet(object.compilerVersion) ? Version.fromJSON(object.compilerVersion) : undefined
+    };
   },
   toJSON(message: CodeGeneratorRequest): JsonSafe<CodeGeneratorRequest> {
     const obj: any = {};
@@ -378,9 +400,7 @@ export const CodeGeneratorRequest = {
     message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
     message.parameter = object.parameter ?? "";
     message.protoFile = object.protoFile?.map(e => FileDescriptorProto.fromPartial(e)) || [];
-    if (object.compilerVersion !== undefined && object.compilerVersion !== null) {
-      message.compilerVersion = Version.fromPartial(object.compilerVersion);
-    }
+    message.compilerVersion = object.compilerVersion !== undefined && object.compilerVersion !== null ? Version.fromPartial(object.compilerVersion) : undefined;
     return message;
   },
   fromSDK(object: CodeGeneratorRequestSDKType): CodeGeneratorRequest {
@@ -468,7 +488,7 @@ function createBaseCodeGeneratorResponse(): CodeGeneratorResponse {
 export const CodeGeneratorResponse = {
   typeUrl: "/google.protobuf.compiler.CodeGeneratorResponse",
   encode(message: CodeGeneratorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.error !== undefined) {
+    if (message.error !== "") {
       writer.uint32(10).string(message.error);
     }
     for (const v of message.file) {
@@ -497,10 +517,10 @@ export const CodeGeneratorResponse = {
     return message;
   },
   fromJSON(object: any): CodeGeneratorResponse {
-    const obj = createBaseCodeGeneratorResponse();
-    if (isSet(object.error)) obj.error = String(object.error);
-    if (Array.isArray(object?.file)) obj.file = object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e));
-    return obj;
+    return {
+      error: isSet(object.error) ? String(object.error) : "",
+      file: Array.isArray(object?.file) ? object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e)) : []
+    };
   },
   toJSON(message: CodeGeneratorResponse): JsonSafe<CodeGeneratorResponse> {
     const obj: any = {};
@@ -584,13 +604,13 @@ function createBaseCodeGeneratorResponse_File(): CodeGeneratorResponse_File {
 export const CodeGeneratorResponse_File = {
   typeUrl: "/google.protobuf.compiler.File",
   encode(message: CodeGeneratorResponse_File, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.insertionPoint !== undefined) {
+    if (message.insertionPoint !== "") {
       writer.uint32(18).string(message.insertionPoint);
     }
-    if (message.content !== undefined) {
+    if (message.content !== "") {
       writer.uint32(122).string(message.content);
     }
     return writer;
@@ -619,11 +639,11 @@ export const CodeGeneratorResponse_File = {
     return message;
   },
   fromJSON(object: any): CodeGeneratorResponse_File {
-    const obj = createBaseCodeGeneratorResponse_File();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.insertionPoint)) obj.insertionPoint = String(object.insertionPoint);
-    if (isSet(object.content)) obj.content = String(object.content);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      insertionPoint: isSet(object.insertionPoint) ? String(object.insertionPoint) : "",
+      content: isSet(object.content) ? String(object.content) : ""
+    };
   },
   toJSON(message: CodeGeneratorResponse_File): JsonSafe<CodeGeneratorResponse_File> {
     const obj: any = {};

@@ -1,6 +1,6 @@
-import { Rpc } from "../../../helpers.js";
-import { BinaryReader } from "../../../binary.js";
-import { MsgUnjail, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseSDKType } from "./tx.js";
+import { Rpc } from "../../../helpers";
+import { BinaryReader } from "../../../binary";
+import { MsgUnjail, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseSDKType } from "./tx";
 /** Msg defines the slashing Msg service. */
 export interface Msg {
   /**

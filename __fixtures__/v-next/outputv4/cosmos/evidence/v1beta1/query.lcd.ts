@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination.js";
-import { Any, AnySDKType } from "../../../google/protobuf/any.js";
-import { setPaginationParams } from "../../../helpers.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
-import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query.js";
+import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({
@@ -21,7 +21,7 @@ export class LCDQueryClient {
   }
   /* AllEvidence queries all evidence. */
   async allEvidence(params: QueryAllEvidenceRequest = {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   }): Promise<QueryAllEvidenceResponseSDKType> {
     const options: any = {
       params: {}

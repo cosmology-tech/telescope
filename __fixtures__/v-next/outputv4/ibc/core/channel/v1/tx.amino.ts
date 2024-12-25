@@ -1,8 +1,8 @@
-import { Channel, ChannelSDKType, Packet, PacketSDKType, Counterparty, CounterpartySDKType, stateFromJSON, orderFromJSON } from "./channel.js";
-import { Height, HeightSDKType } from "../../client/v1/client.js";
+import { Channel, ChannelSDKType, Packet, PacketSDKType, Counterparty, CounterpartySDKType, stateFromJSON, orderFromJSON } from "./channel";
+import { Height, HeightSDKType } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { AminoHeight, omitDefault } from "../../../../helpers.js";
-import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType } from "./tx.js";
+import { AminoHeight, omitDefault } from "../../../../helpers";
+import { MsgChannelOpenInit, MsgChannelOpenInitSDKType, MsgChannelOpenTry, MsgChannelOpenTrySDKType, MsgChannelOpenAck, MsgChannelOpenAckSDKType, MsgChannelOpenConfirm, MsgChannelOpenConfirmSDKType, MsgChannelCloseInit, MsgChannelCloseInitSDKType, MsgChannelCloseConfirm, MsgChannelCloseConfirmSDKType, MsgRecvPacket, MsgRecvPacketSDKType, MsgTimeout, MsgTimeoutSDKType, MsgTimeoutOnClose, MsgTimeoutOnCloseSDKType, MsgAcknowledgement, MsgAcknowledgementSDKType } from "./tx";
 export interface MsgChannelOpenInitAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgChannelOpenInit";
   value: {

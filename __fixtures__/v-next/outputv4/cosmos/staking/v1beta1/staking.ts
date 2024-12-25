@@ -1,13 +1,14 @@
-import { Header, HeaderSDKType } from "../../../tendermint/types/types.js";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
-import { Any, AnySDKType } from "../../../google/protobuf/any.js";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Header, HeaderSDKType } from "../../../tendermint/types/types";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** BondStatus is the status of a validator. */
 export enum BondStatus {
@@ -67,6 +68,10 @@ export interface HistoricalInfo {
   header: Header;
   valset: Validator[];
 }
+export interface ReactiveHistoricalInfo {
+  header: ComputedRef<Header>;
+  valset: ComputedRef<Validator[]>;
+}
 export interface HistoricalInfoProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.HistoricalInfo";
   value: Uint8Array;
@@ -93,6 +98,11 @@ export interface CommissionRates {
   /** max_change_rate defines the maximum daily increase of the validator commission, as a fraction. */
   maxChangeRate: string;
 }
+export interface ReactiveCommissionRates {
+  rate: ComputedRef<string>;
+  maxRate: ComputedRef<string>;
+  maxChangeRate: ComputedRef<string>;
+}
 export interface CommissionRatesProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.CommissionRates";
   value: Uint8Array;
@@ -112,6 +122,10 @@ export interface Commission {
   commissionRates: CommissionRates;
   /** update_time is the last time the commission rate was changed. */
   updateTime: Date;
+}
+export interface ReactiveCommission {
+  commissionRates: ComputedRef<CommissionRates>;
+  updateTime: ComputedRef<Date>;
 }
 export interface CommissionProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Commission";
@@ -134,6 +148,13 @@ export interface Description {
   securityContact: string;
   /** details define other optional details. */
   details: string;
+}
+export interface ReactiveDescription {
+  moniker: ComputedRef<string>;
+  identity: ComputedRef<string>;
+  website: ComputedRef<string>;
+  securityContact: ComputedRef<string>;
+  details: ComputedRef<string>;
 }
 export interface DescriptionProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Description";
@@ -181,6 +202,19 @@ export interface Validator {
   /** min_self_delegation is the validator's self declared minimum self delegation. */
   minSelfDelegation: string;
 }
+export interface ReactiveValidator {
+  operatorAddress: ComputedRef<string>;
+  consensusPubkey?: ComputedRef<Any>;
+  jailed: ComputedRef<boolean>;
+  status: ComputedRef<BondStatus>;
+  tokens: ComputedRef<string>;
+  delegatorShares: ComputedRef<string>;
+  description: ComputedRef<Description>;
+  unbondingHeight: ComputedRef<bigint>;
+  unbondingTime: ComputedRef<Date>;
+  commission: ComputedRef<Commission>;
+  minSelfDelegation: ComputedRef<string>;
+}
 export interface ValidatorProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Validator";
   value: Uint8Array;
@@ -212,6 +246,9 @@ export interface ValidatorSDKType {
 export interface ValAddresses {
   addresses: string[];
 }
+export interface ReactiveValAddresses {
+  addresses: ComputedRef<string[]>;
+}
 export interface ValAddressesProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.ValAddresses";
   value: Uint8Array;
@@ -229,6 +266,10 @@ export interface DVPair {
   delegatorAddress: string;
   validatorAddress: string;
 }
+export interface ReactiveDVPair {
+  delegatorAddress: ComputedRef<string>;
+  validatorAddress: ComputedRef<string>;
+}
 export interface DVPairProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DVPair";
   value: Uint8Array;
@@ -245,6 +286,9 @@ export interface DVPairSDKType {
 /** DVPairs defines an array of DVPair objects. */
 export interface DVPairs {
   pairs: DVPair[];
+}
+export interface ReactiveDVPairs {
+  pairs: ComputedRef<DVPair[]>;
 }
 export interface DVPairsProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DVPairs";
@@ -265,6 +309,11 @@ export interface DVVTriplet {
   validatorSrcAddress: string;
   validatorDstAddress: string;
 }
+export interface ReactiveDVVTriplet {
+  delegatorAddress: ComputedRef<string>;
+  validatorSrcAddress: ComputedRef<string>;
+  validatorDstAddress: ComputedRef<string>;
+}
 export interface DVVTripletProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DVVTriplet";
   value: Uint8Array;
@@ -283,6 +332,9 @@ export interface DVVTripletSDKType {
 /** DVVTriplets defines an array of DVVTriplet objects. */
 export interface DVVTriplets {
   triplets: DVVTriplet[];
+}
+export interface ReactiveDVVTriplets {
+  triplets: ComputedRef<DVVTriplet[]>;
 }
 export interface DVVTripletsProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DVVTriplets";
@@ -304,6 +356,11 @@ export interface Delegation {
   validatorAddress: string;
   /** shares define the delegation shares received. */
   shares: string;
+}
+export interface ReactiveDelegation {
+  delegatorAddress: ComputedRef<string>;
+  validatorAddress: ComputedRef<string>;
+  shares: ComputedRef<string>;
 }
 export interface DelegationProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Delegation";
@@ -331,6 +388,11 @@ export interface UnbondingDelegation {
   /** entries are the unbonding delegation entries. */
   entries: UnbondingDelegationEntry[];
 }
+export interface ReactiveUnbondingDelegation {
+  delegatorAddress: ComputedRef<string>;
+  validatorAddress: ComputedRef<string>;
+  entries: ComputedRef<UnbondingDelegationEntry[]>;
+}
 export interface UnbondingDelegationProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegation";
   value: Uint8Array;
@@ -355,6 +417,12 @@ export interface UnbondingDelegationEntry {
   /** balance defines the tokens to receive at completion. */
   balance: string;
 }
+export interface ReactiveUnbondingDelegationEntry {
+  creationHeight: ComputedRef<bigint>;
+  completionTime: ComputedRef<Date>;
+  initialBalance: ComputedRef<string>;
+  balance: ComputedRef<string>;
+}
 export interface UnbondingDelegationEntryProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegationEntry";
   value: Uint8Array;
@@ -376,6 +444,12 @@ export interface RedelegationEntry {
   initialBalance: string;
   /** shares_dst is the amount of destination-validator shares created by redelegation. */
   sharesDst: string;
+}
+export interface ReactiveRedelegationEntry {
+  creationHeight: ComputedRef<bigint>;
+  completionTime: ComputedRef<Date>;
+  initialBalance: ComputedRef<string>;
+  sharesDst: ComputedRef<string>;
 }
 export interface RedelegationEntryProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.RedelegationEntry";
@@ -401,6 +475,12 @@ export interface Redelegation {
   validatorDstAddress: string;
   /** entries are the redelegation entries. */
   entries: RedelegationEntry[];
+}
+export interface ReactiveRedelegation {
+  delegatorAddress: ComputedRef<string>;
+  validatorSrcAddress: ComputedRef<string>;
+  validatorDstAddress: ComputedRef<string>;
+  entries: ComputedRef<RedelegationEntry[]>;
 }
 export interface RedelegationProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Redelegation";
@@ -431,6 +511,14 @@ export interface Params {
   /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
   minCommissionRate: string;
 }
+export interface ReactiveParams {
+  unbondingTime: ComputedRef<Duration>;
+  maxValidators: ComputedRef<number>;
+  maxEntries: ComputedRef<number>;
+  historicalEntries: ComputedRef<number>;
+  bondDenom: ComputedRef<string>;
+  minCommissionRate: ComputedRef<string>;
+}
 export interface ParamsProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Params";
   value: Uint8Array;
@@ -452,6 +540,10 @@ export interface DelegationResponse {
   delegation: Delegation;
   balance: Coin;
 }
+export interface ReactiveDelegationResponse {
+  delegation: ComputedRef<Delegation>;
+  balance: ComputedRef<Coin>;
+}
 export interface DelegationResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.DelegationResponse";
   value: Uint8Array;
@@ -472,6 +564,10 @@ export interface DelegationResponseSDKType {
 export interface RedelegationEntryResponse {
   redelegationEntry: RedelegationEntry;
   balance: string;
+}
+export interface ReactiveRedelegationEntryResponse {
+  redelegationEntry: ComputedRef<RedelegationEntry>;
+  balance: ComputedRef<string>;
 }
 export interface RedelegationEntryResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.RedelegationEntryResponse";
@@ -495,6 +591,10 @@ export interface RedelegationResponse {
   redelegation: Redelegation;
   entries: RedelegationEntryResponse[];
 }
+export interface ReactiveRedelegationResponse {
+  redelegation: ComputedRef<Redelegation>;
+  entries: ComputedRef<RedelegationEntryResponse[]>;
+}
 export interface RedelegationResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.RedelegationResponse";
   value: Uint8Array;
@@ -515,6 +615,10 @@ export interface RedelegationResponseSDKType {
 export interface Pool {
   notBondedTokens: string;
   bondedTokens: string;
+}
+export interface ReactivePool {
+  notBondedTokens: ComputedRef<string>;
+  bondedTokens: ComputedRef<string>;
 }
 export interface PoolProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Pool";
@@ -566,10 +670,10 @@ export const HistoricalInfo = {
     return message;
   },
   fromJSON(object: any): HistoricalInfo {
-    const obj = createBaseHistoricalInfo();
-    if (isSet(object.header)) obj.header = Header.fromJSON(object.header);
-    if (Array.isArray(object?.valset)) obj.valset = object.valset.map((e: any) => Validator.fromJSON(e));
-    return obj;
+    return {
+      header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
+      valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromJSON(e)) : []
+    };
   },
   toJSON(message: HistoricalInfo): JsonSafe<HistoricalInfo> {
     const obj: any = {};
@@ -583,9 +687,7 @@ export const HistoricalInfo = {
   },
   fromPartial(object: DeepPartial<HistoricalInfo>): HistoricalInfo {
     const message = createBaseHistoricalInfo();
-    if (object.header !== undefined && object.header !== null) {
-      message.header = Header.fromPartial(object.header);
-    }
+    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
     message.valset = object.valset?.map(e => Validator.fromPartial(e)) || [];
     return message;
   },
@@ -661,13 +763,13 @@ function createBaseCommissionRates(): CommissionRates {
 export const CommissionRates = {
   typeUrl: "/cosmos.staking.v1beta1.CommissionRates",
   encode(message: CommissionRates, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.rate !== undefined) {
+    if (message.rate !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.rate, 18).atomics);
     }
-    if (message.maxRate !== undefined) {
+    if (message.maxRate !== "") {
       writer.uint32(18).string(Decimal.fromUserInput(message.maxRate, 18).atomics);
     }
-    if (message.maxChangeRate !== undefined) {
+    if (message.maxChangeRate !== "") {
       writer.uint32(26).string(Decimal.fromUserInput(message.maxChangeRate, 18).atomics);
     }
     return writer;
@@ -696,11 +798,11 @@ export const CommissionRates = {
     return message;
   },
   fromJSON(object: any): CommissionRates {
-    const obj = createBaseCommissionRates();
-    if (isSet(object.rate)) obj.rate = String(object.rate);
-    if (isSet(object.maxRate)) obj.maxRate = String(object.maxRate);
-    if (isSet(object.maxChangeRate)) obj.maxChangeRate = String(object.maxChangeRate);
-    return obj;
+    return {
+      rate: isSet(object.rate) ? String(object.rate) : "",
+      maxRate: isSet(object.maxRate) ? String(object.maxRate) : "",
+      maxChangeRate: isSet(object.maxChangeRate) ? String(object.maxChangeRate) : ""
+    };
   },
   toJSON(message: CommissionRates): JsonSafe<CommissionRates> {
     const obj: any = {};
@@ -817,10 +919,10 @@ export const Commission = {
     return message;
   },
   fromJSON(object: any): Commission {
-    const obj = createBaseCommission();
-    if (isSet(object.commissionRates)) obj.commissionRates = CommissionRates.fromJSON(object.commissionRates);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    return obj;
+    return {
+      commissionRates: isSet(object.commissionRates) ? CommissionRates.fromJSON(object.commissionRates) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
+    };
   },
   toJSON(message: Commission): JsonSafe<Commission> {
     const obj: any = {};
@@ -830,9 +932,7 @@ export const Commission = {
   },
   fromPartial(object: DeepPartial<Commission>): Commission {
     const message = createBaseCommission();
-    if (object.commissionRates !== undefined && object.commissionRates !== null) {
-      message.commissionRates = CommissionRates.fromPartial(object.commissionRates);
-    }
+    message.commissionRates = object.commissionRates !== undefined && object.commissionRates !== null ? CommissionRates.fromPartial(object.commissionRates) : undefined;
     message.updateTime = object.updateTime ?? undefined;
     return message;
   },
@@ -904,19 +1004,19 @@ function createBaseDescription(): Description {
 export const Description = {
   typeUrl: "/cosmos.staking.v1beta1.Description",
   encode(message: Description, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.moniker !== undefined) {
+    if (message.moniker !== "") {
       writer.uint32(10).string(message.moniker);
     }
-    if (message.identity !== undefined) {
+    if (message.identity !== "") {
       writer.uint32(18).string(message.identity);
     }
-    if (message.website !== undefined) {
+    if (message.website !== "") {
       writer.uint32(26).string(message.website);
     }
-    if (message.securityContact !== undefined) {
+    if (message.securityContact !== "") {
       writer.uint32(34).string(message.securityContact);
     }
-    if (message.details !== undefined) {
+    if (message.details !== "") {
       writer.uint32(42).string(message.details);
     }
     return writer;
@@ -951,13 +1051,13 @@ export const Description = {
     return message;
   },
   fromJSON(object: any): Description {
-    const obj = createBaseDescription();
-    if (isSet(object.moniker)) obj.moniker = String(object.moniker);
-    if (isSet(object.identity)) obj.identity = String(object.identity);
-    if (isSet(object.website)) obj.website = String(object.website);
-    if (isSet(object.securityContact)) obj.securityContact = String(object.securityContact);
-    if (isSet(object.details)) obj.details = String(object.details);
-    return obj;
+    return {
+      moniker: isSet(object.moniker) ? String(object.moniker) : "",
+      identity: isSet(object.identity) ? String(object.identity) : "",
+      website: isSet(object.website) ? String(object.website) : "",
+      securityContact: isSet(object.securityContact) ? String(object.securityContact) : "",
+      details: isSet(object.details) ? String(object.details) : ""
+    };
   },
   toJSON(message: Description): JsonSafe<Description> {
     const obj: any = {};
@@ -1072,28 +1172,28 @@ function createBaseValidator(): Validator {
 export const Validator = {
   typeUrl: "/cosmos.staking.v1beta1.Validator",
   encode(message: Validator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operatorAddress !== undefined) {
+    if (message.operatorAddress !== "") {
       writer.uint32(10).string(message.operatorAddress);
     }
     if (message.consensusPubkey !== undefined) {
       Any.encode(message.consensusPubkey, writer.uint32(18).fork()).ldelim();
     }
-    if (message.jailed !== undefined) {
+    if (message.jailed === true) {
       writer.uint32(24).bool(message.jailed);
     }
     if (message.status !== 0) {
       writer.uint32(32).int32(message.status);
     }
-    if (message.tokens !== undefined) {
+    if (message.tokens !== "") {
       writer.uint32(42).string(message.tokens);
     }
-    if (message.delegatorShares !== undefined) {
+    if (message.delegatorShares !== "") {
       writer.uint32(50).string(Decimal.fromUserInput(message.delegatorShares, 18).atomics);
     }
     if (message.description !== undefined) {
       Description.encode(message.description, writer.uint32(58).fork()).ldelim();
     }
-    if (message.unbondingHeight !== undefined) {
+    if (message.unbondingHeight !== BigInt(0)) {
       writer.uint32(64).int64(message.unbondingHeight);
     }
     if (message.unbondingTime !== undefined) {
@@ -1102,7 +1202,7 @@ export const Validator = {
     if (message.commission !== undefined) {
       Commission.encode(message.commission, writer.uint32(82).fork()).ldelim();
     }
-    if (message.minSelfDelegation !== undefined) {
+    if (message.minSelfDelegation !== "") {
       writer.uint32(90).string(message.minSelfDelegation);
     }
     return writer;
@@ -1155,19 +1255,19 @@ export const Validator = {
     return message;
   },
   fromJSON(object: any): Validator {
-    const obj = createBaseValidator();
-    if (isSet(object.operatorAddress)) obj.operatorAddress = String(object.operatorAddress);
-    if (isSet(object.consensusPubkey)) obj.consensusPubkey = Any.fromJSON(object.consensusPubkey);
-    if (isSet(object.jailed)) obj.jailed = Boolean(object.jailed);
-    if (isSet(object.status)) obj.status = bondStatusFromJSON(object.status);
-    if (isSet(object.tokens)) obj.tokens = String(object.tokens);
-    if (isSet(object.delegatorShares)) obj.delegatorShares = String(object.delegatorShares);
-    if (isSet(object.description)) obj.description = Description.fromJSON(object.description);
-    if (isSet(object.unbondingHeight)) obj.unbondingHeight = BigInt(object.unbondingHeight.toString());
-    if (isSet(object.unbondingTime)) obj.unbondingTime = new Date(object.unbondingTime);
-    if (isSet(object.commission)) obj.commission = Commission.fromJSON(object.commission);
-    if (isSet(object.minSelfDelegation)) obj.minSelfDelegation = String(object.minSelfDelegation);
-    return obj;
+    return {
+      operatorAddress: isSet(object.operatorAddress) ? String(object.operatorAddress) : "",
+      consensusPubkey: isSet(object.consensusPubkey) ? Any.fromJSON(object.consensusPubkey) : undefined,
+      jailed: isSet(object.jailed) ? Boolean(object.jailed) : false,
+      status: isSet(object.status) ? bondStatusFromJSON(object.status) : -1,
+      tokens: isSet(object.tokens) ? String(object.tokens) : "",
+      delegatorShares: isSet(object.delegatorShares) ? String(object.delegatorShares) : "",
+      description: isSet(object.description) ? Description.fromJSON(object.description) : undefined,
+      unbondingHeight: isSet(object.unbondingHeight) ? BigInt(object.unbondingHeight.toString()) : BigInt(0),
+      unbondingTime: isSet(object.unbondingTime) ? new Date(object.unbondingTime) : undefined,
+      commission: isSet(object.commission) ? Commission.fromJSON(object.commission) : undefined,
+      minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
+    };
   },
   toJSON(message: Validator): JsonSafe<Validator> {
     const obj: any = {};
@@ -1187,23 +1287,15 @@ export const Validator = {
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.operatorAddress = object.operatorAddress ?? "";
-    if (object.consensusPubkey !== undefined && object.consensusPubkey !== null) {
-      message.consensusPubkey = Any.fromPartial(object.consensusPubkey);
-    }
+    message.consensusPubkey = object.consensusPubkey !== undefined && object.consensusPubkey !== null ? Any.fromPartial(object.consensusPubkey) : undefined;
     message.jailed = object.jailed ?? false;
     message.status = object.status ?? 0;
     message.tokens = object.tokens ?? "";
     message.delegatorShares = object.delegatorShares ?? "";
-    if (object.description !== undefined && object.description !== null) {
-      message.description = Description.fromPartial(object.description);
-    }
-    if (object.unbondingHeight !== undefined && object.unbondingHeight !== null) {
-      message.unbondingHeight = BigInt(object.unbondingHeight.toString());
-    }
+    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
+    message.unbondingHeight = object.unbondingHeight !== undefined && object.unbondingHeight !== null ? BigInt(object.unbondingHeight.toString()) : BigInt(0);
     message.unbondingTime = object.unbondingTime ?? undefined;
-    if (object.commission !== undefined && object.commission !== null) {
-      message.commission = Commission.fromPartial(object.commission);
-    }
+    message.commission = object.commission !== undefined && object.commission !== null ? Commission.fromPartial(object.commission) : undefined;
     message.minSelfDelegation = object.minSelfDelegation ?? "";
     return message;
   },
@@ -1357,9 +1449,9 @@ export const ValAddresses = {
     return message;
   },
   fromJSON(object: any): ValAddresses {
-    const obj = createBaseValAddresses();
-    if (Array.isArray(object?.addresses)) obj.addresses = object.addresses.map((e: any) => String(e));
-    return obj;
+    return {
+      addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: ValAddresses): JsonSafe<ValAddresses> {
     const obj: any = {};
@@ -1439,10 +1531,10 @@ function createBaseDVPair(): DVPair {
 export const DVPair = {
   typeUrl: "/cosmos.staking.v1beta1.DVPair",
   encode(message: DVPair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(18).string(message.validatorAddress);
     }
     return writer;
@@ -1468,10 +1560,10 @@ export const DVPair = {
     return message;
   },
   fromJSON(object: any): DVPair {
-    const obj = createBaseDVPair();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    return obj;
+    return {
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : ""
+    };
   },
   toJSON(message: DVPair): JsonSafe<DVPair> {
     const obj: any = {};
@@ -1572,9 +1664,9 @@ export const DVPairs = {
     return message;
   },
   fromJSON(object: any): DVPairs {
-    const obj = createBaseDVPairs();
-    if (Array.isArray(object?.pairs)) obj.pairs = object.pairs.map((e: any) => DVPair.fromJSON(e));
-    return obj;
+    return {
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => DVPair.fromJSON(e)) : []
+    };
   },
   toJSON(message: DVPairs): JsonSafe<DVPairs> {
     const obj: any = {};
@@ -1655,13 +1747,13 @@ function createBaseDVVTriplet(): DVVTriplet {
 export const DVVTriplet = {
   typeUrl: "/cosmos.staking.v1beta1.DVVTriplet",
   encode(message: DVVTriplet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorSrcAddress !== undefined) {
+    if (message.validatorSrcAddress !== "") {
       writer.uint32(18).string(message.validatorSrcAddress);
     }
-    if (message.validatorDstAddress !== undefined) {
+    if (message.validatorDstAddress !== "") {
       writer.uint32(26).string(message.validatorDstAddress);
     }
     return writer;
@@ -1690,11 +1782,11 @@ export const DVVTriplet = {
     return message;
   },
   fromJSON(object: any): DVVTriplet {
-    const obj = createBaseDVVTriplet();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorSrcAddress)) obj.validatorSrcAddress = String(object.validatorSrcAddress);
-    if (isSet(object.validatorDstAddress)) obj.validatorDstAddress = String(object.validatorDstAddress);
-    return obj;
+    return {
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorSrcAddress: isSet(object.validatorSrcAddress) ? String(object.validatorSrcAddress) : "",
+      validatorDstAddress: isSet(object.validatorDstAddress) ? String(object.validatorDstAddress) : ""
+    };
   },
   toJSON(message: DVVTriplet): JsonSafe<DVVTriplet> {
     const obj: any = {};
@@ -1804,9 +1896,9 @@ export const DVVTriplets = {
     return message;
   },
   fromJSON(object: any): DVVTriplets {
-    const obj = createBaseDVVTriplets();
-    if (Array.isArray(object?.triplets)) obj.triplets = object.triplets.map((e: any) => DVVTriplet.fromJSON(e));
-    return obj;
+    return {
+      triplets: Array.isArray(object?.triplets) ? object.triplets.map((e: any) => DVVTriplet.fromJSON(e)) : []
+    };
   },
   toJSON(message: DVVTriplets): JsonSafe<DVVTriplets> {
     const obj: any = {};
@@ -1887,13 +1979,13 @@ function createBaseDelegation(): Delegation {
 export const Delegation = {
   typeUrl: "/cosmos.staking.v1beta1.Delegation",
   encode(message: Delegation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(18).string(message.validatorAddress);
     }
-    if (message.shares !== undefined) {
+    if (message.shares !== "") {
       writer.uint32(26).string(Decimal.fromUserInput(message.shares, 18).atomics);
     }
     return writer;
@@ -1922,11 +2014,11 @@ export const Delegation = {
     return message;
   },
   fromJSON(object: any): Delegation {
-    const obj = createBaseDelegation();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (isSet(object.shares)) obj.shares = String(object.shares);
-    return obj;
+    return {
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      shares: isSet(object.shares) ? String(object.shares) : ""
+    };
   },
   toJSON(message: Delegation): JsonSafe<Delegation> {
     const obj: any = {};
@@ -2015,10 +2107,10 @@ function createBaseUnbondingDelegation(): UnbondingDelegation {
 export const UnbondingDelegation = {
   typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegation",
   encode(message: UnbondingDelegation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorAddress !== undefined) {
+    if (message.validatorAddress !== "") {
       writer.uint32(18).string(message.validatorAddress);
     }
     for (const v of message.entries) {
@@ -2050,11 +2142,11 @@ export const UnbondingDelegation = {
     return message;
   },
   fromJSON(object: any): UnbondingDelegation {
-    const obj = createBaseUnbondingDelegation();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => UnbondingDelegationEntry.fromJSON(e));
-    return obj;
+    return {
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : "",
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromJSON(e)) : []
+    };
   },
   toJSON(message: UnbondingDelegation): JsonSafe<UnbondingDelegation> {
     const obj: any = {};
@@ -2154,16 +2246,16 @@ function createBaseUnbondingDelegationEntry(): UnbondingDelegationEntry {
 export const UnbondingDelegationEntry = {
   typeUrl: "/cosmos.staking.v1beta1.UnbondingDelegationEntry",
   encode(message: UnbondingDelegationEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.creationHeight !== undefined) {
+    if (message.creationHeight !== BigInt(0)) {
       writer.uint32(8).int64(message.creationHeight);
     }
     if (message.completionTime !== undefined) {
       Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(18).fork()).ldelim();
     }
-    if (message.initialBalance !== undefined) {
+    if (message.initialBalance !== "") {
       writer.uint32(26).string(message.initialBalance);
     }
-    if (message.balance !== undefined) {
+    if (message.balance !== "") {
       writer.uint32(34).string(message.balance);
     }
     return writer;
@@ -2195,12 +2287,12 @@ export const UnbondingDelegationEntry = {
     return message;
   },
   fromJSON(object: any): UnbondingDelegationEntry {
-    const obj = createBaseUnbondingDelegationEntry();
-    if (isSet(object.creationHeight)) obj.creationHeight = BigInt(object.creationHeight.toString());
-    if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
-    if (isSet(object.initialBalance)) obj.initialBalance = String(object.initialBalance);
-    if (isSet(object.balance)) obj.balance = String(object.balance);
-    return obj;
+    return {
+      creationHeight: isSet(object.creationHeight) ? BigInt(object.creationHeight.toString()) : BigInt(0),
+      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined,
+      initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
+      balance: isSet(object.balance) ? String(object.balance) : ""
+    };
   },
   toJSON(message: UnbondingDelegationEntry): JsonSafe<UnbondingDelegationEntry> {
     const obj: any = {};
@@ -2212,9 +2304,7 @@ export const UnbondingDelegationEntry = {
   },
   fromPartial(object: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry {
     const message = createBaseUnbondingDelegationEntry();
-    if (object.creationHeight !== undefined && object.creationHeight !== null) {
-      message.creationHeight = BigInt(object.creationHeight.toString());
-    }
+    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? BigInt(object.creationHeight.toString()) : BigInt(0);
     message.completionTime = object.completionTime ?? undefined;
     message.initialBalance = object.initialBalance ?? "";
     message.balance = object.balance ?? "";
@@ -2301,16 +2391,16 @@ function createBaseRedelegationEntry(): RedelegationEntry {
 export const RedelegationEntry = {
   typeUrl: "/cosmos.staking.v1beta1.RedelegationEntry",
   encode(message: RedelegationEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.creationHeight !== undefined) {
+    if (message.creationHeight !== BigInt(0)) {
       writer.uint32(8).int64(message.creationHeight);
     }
     if (message.completionTime !== undefined) {
       Timestamp.encode(toTimestamp(message.completionTime), writer.uint32(18).fork()).ldelim();
     }
-    if (message.initialBalance !== undefined) {
+    if (message.initialBalance !== "") {
       writer.uint32(26).string(message.initialBalance);
     }
-    if (message.sharesDst !== undefined) {
+    if (message.sharesDst !== "") {
       writer.uint32(34).string(Decimal.fromUserInput(message.sharesDst, 18).atomics);
     }
     return writer;
@@ -2342,12 +2432,12 @@ export const RedelegationEntry = {
     return message;
   },
   fromJSON(object: any): RedelegationEntry {
-    const obj = createBaseRedelegationEntry();
-    if (isSet(object.creationHeight)) obj.creationHeight = BigInt(object.creationHeight.toString());
-    if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
-    if (isSet(object.initialBalance)) obj.initialBalance = String(object.initialBalance);
-    if (isSet(object.sharesDst)) obj.sharesDst = String(object.sharesDst);
-    return obj;
+    return {
+      creationHeight: isSet(object.creationHeight) ? BigInt(object.creationHeight.toString()) : BigInt(0),
+      completionTime: isSet(object.completionTime) ? new Date(object.completionTime) : undefined,
+      initialBalance: isSet(object.initialBalance) ? String(object.initialBalance) : "",
+      sharesDst: isSet(object.sharesDst) ? String(object.sharesDst) : ""
+    };
   },
   toJSON(message: RedelegationEntry): JsonSafe<RedelegationEntry> {
     const obj: any = {};
@@ -2359,9 +2449,7 @@ export const RedelegationEntry = {
   },
   fromPartial(object: DeepPartial<RedelegationEntry>): RedelegationEntry {
     const message = createBaseRedelegationEntry();
-    if (object.creationHeight !== undefined && object.creationHeight !== null) {
-      message.creationHeight = BigInt(object.creationHeight.toString());
-    }
+    message.creationHeight = object.creationHeight !== undefined && object.creationHeight !== null ? BigInt(object.creationHeight.toString()) : BigInt(0);
     message.completionTime = object.completionTime ?? undefined;
     message.initialBalance = object.initialBalance ?? "";
     message.sharesDst = object.sharesDst ?? "";
@@ -2448,13 +2536,13 @@ function createBaseRedelegation(): Redelegation {
 export const Redelegation = {
   typeUrl: "/cosmos.staking.v1beta1.Redelegation",
   encode(message: Redelegation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.delegatorAddress !== undefined) {
+    if (message.delegatorAddress !== "") {
       writer.uint32(10).string(message.delegatorAddress);
     }
-    if (message.validatorSrcAddress !== undefined) {
+    if (message.validatorSrcAddress !== "") {
       writer.uint32(18).string(message.validatorSrcAddress);
     }
-    if (message.validatorDstAddress !== undefined) {
+    if (message.validatorDstAddress !== "") {
       writer.uint32(26).string(message.validatorDstAddress);
     }
     for (const v of message.entries) {
@@ -2489,12 +2577,12 @@ export const Redelegation = {
     return message;
   },
   fromJSON(object: any): Redelegation {
-    const obj = createBaseRedelegation();
-    if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
-    if (isSet(object.validatorSrcAddress)) obj.validatorSrcAddress = String(object.validatorSrcAddress);
-    if (isSet(object.validatorDstAddress)) obj.validatorDstAddress = String(object.validatorDstAddress);
-    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => RedelegationEntry.fromJSON(e));
-    return obj;
+    return {
+      delegatorAddress: isSet(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorSrcAddress: isSet(object.validatorSrcAddress) ? String(object.validatorSrcAddress) : "",
+      validatorDstAddress: isSet(object.validatorDstAddress) ? String(object.validatorDstAddress) : "",
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromJSON(e)) : []
+    };
   },
   toJSON(message: Redelegation): JsonSafe<Redelegation> {
     const obj: any = {};
@@ -2608,19 +2696,19 @@ export const Params = {
     if (message.unbondingTime !== undefined) {
       Duration.encode(message.unbondingTime, writer.uint32(10).fork()).ldelim();
     }
-    if (message.maxValidators !== undefined) {
+    if (message.maxValidators !== 0) {
       writer.uint32(16).uint32(message.maxValidators);
     }
-    if (message.maxEntries !== undefined) {
+    if (message.maxEntries !== 0) {
       writer.uint32(24).uint32(message.maxEntries);
     }
-    if (message.historicalEntries !== undefined) {
+    if (message.historicalEntries !== 0) {
       writer.uint32(32).uint32(message.historicalEntries);
     }
-    if (message.bondDenom !== undefined) {
+    if (message.bondDenom !== "") {
       writer.uint32(42).string(message.bondDenom);
     }
-    if (message.minCommissionRate !== undefined) {
+    if (message.minCommissionRate !== "") {
       writer.uint32(50).string(Decimal.fromUserInput(message.minCommissionRate, 18).atomics);
     }
     return writer;
@@ -2658,14 +2746,14 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.unbondingTime)) obj.unbondingTime = Duration.fromJSON(object.unbondingTime);
-    if (isSet(object.maxValidators)) obj.maxValidators = Number(object.maxValidators);
-    if (isSet(object.maxEntries)) obj.maxEntries = Number(object.maxEntries);
-    if (isSet(object.historicalEntries)) obj.historicalEntries = Number(object.historicalEntries);
-    if (isSet(object.bondDenom)) obj.bondDenom = String(object.bondDenom);
-    if (isSet(object.minCommissionRate)) obj.minCommissionRate = String(object.minCommissionRate);
-    return obj;
+    return {
+      unbondingTime: isSet(object.unbondingTime) ? Duration.fromJSON(object.unbondingTime) : undefined,
+      maxValidators: isSet(object.maxValidators) ? Number(object.maxValidators) : 0,
+      maxEntries: isSet(object.maxEntries) ? Number(object.maxEntries) : 0,
+      historicalEntries: isSet(object.historicalEntries) ? Number(object.historicalEntries) : 0,
+      bondDenom: isSet(object.bondDenom) ? String(object.bondDenom) : "",
+      minCommissionRate: isSet(object.minCommissionRate) ? String(object.minCommissionRate) : ""
+    };
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
@@ -2679,9 +2767,7 @@ export const Params = {
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    if (object.unbondingTime !== undefined && object.unbondingTime !== null) {
-      message.unbondingTime = Duration.fromPartial(object.unbondingTime);
-    }
+    message.unbondingTime = object.unbondingTime !== undefined && object.unbondingTime !== null ? Duration.fromPartial(object.unbondingTime) : undefined;
     message.maxValidators = object.maxValidators ?? 0;
     message.maxEntries = object.maxEntries ?? 0;
     message.historicalEntries = object.historicalEntries ?? 0;
@@ -2811,10 +2897,10 @@ export const DelegationResponse = {
     return message;
   },
   fromJSON(object: any): DelegationResponse {
-    const obj = createBaseDelegationResponse();
-    if (isSet(object.delegation)) obj.delegation = Delegation.fromJSON(object.delegation);
-    if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
-    return obj;
+    return {
+      delegation: isSet(object.delegation) ? Delegation.fromJSON(object.delegation) : undefined,
+      balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined
+    };
   },
   toJSON(message: DelegationResponse): JsonSafe<DelegationResponse> {
     const obj: any = {};
@@ -2824,12 +2910,8 @@ export const DelegationResponse = {
   },
   fromPartial(object: DeepPartial<DelegationResponse>): DelegationResponse {
     const message = createBaseDelegationResponse();
-    if (object.delegation !== undefined && object.delegation !== null) {
-      message.delegation = Delegation.fromPartial(object.delegation);
-    }
-    if (object.balance !== undefined && object.balance !== null) {
-      message.balance = Coin.fromPartial(object.balance);
-    }
+    message.delegation = object.delegation !== undefined && object.delegation !== null ? Delegation.fromPartial(object.delegation) : undefined;
+    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
     return message;
   },
   fromSDK(object: DelegationResponseSDKType): DelegationResponse {
@@ -2900,7 +2982,7 @@ export const RedelegationEntryResponse = {
     if (message.redelegationEntry !== undefined) {
       RedelegationEntry.encode(message.redelegationEntry, writer.uint32(10).fork()).ldelim();
     }
-    if (message.balance !== undefined) {
+    if (message.balance !== "") {
       writer.uint32(34).string(message.balance);
     }
     return writer;
@@ -2926,10 +3008,10 @@ export const RedelegationEntryResponse = {
     return message;
   },
   fromJSON(object: any): RedelegationEntryResponse {
-    const obj = createBaseRedelegationEntryResponse();
-    if (isSet(object.redelegationEntry)) obj.redelegationEntry = RedelegationEntry.fromJSON(object.redelegationEntry);
-    if (isSet(object.balance)) obj.balance = String(object.balance);
-    return obj;
+    return {
+      redelegationEntry: isSet(object.redelegationEntry) ? RedelegationEntry.fromJSON(object.redelegationEntry) : undefined,
+      balance: isSet(object.balance) ? String(object.balance) : ""
+    };
   },
   toJSON(message: RedelegationEntryResponse): JsonSafe<RedelegationEntryResponse> {
     const obj: any = {};
@@ -2939,9 +3021,7 @@ export const RedelegationEntryResponse = {
   },
   fromPartial(object: DeepPartial<RedelegationEntryResponse>): RedelegationEntryResponse {
     const message = createBaseRedelegationEntryResponse();
-    if (object.redelegationEntry !== undefined && object.redelegationEntry !== null) {
-      message.redelegationEntry = RedelegationEntry.fromPartial(object.redelegationEntry);
-    }
+    message.redelegationEntry = object.redelegationEntry !== undefined && object.redelegationEntry !== null ? RedelegationEntry.fromPartial(object.redelegationEntry) : undefined;
     message.balance = object.balance ?? "";
     return message;
   },
@@ -3039,10 +3119,10 @@ export const RedelegationResponse = {
     return message;
   },
   fromJSON(object: any): RedelegationResponse {
-    const obj = createBaseRedelegationResponse();
-    if (isSet(object.redelegation)) obj.redelegation = Redelegation.fromJSON(object.redelegation);
-    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => RedelegationEntryResponse.fromJSON(e));
-    return obj;
+    return {
+      redelegation: isSet(object.redelegation) ? Redelegation.fromJSON(object.redelegation) : undefined,
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromJSON(e)) : []
+    };
   },
   toJSON(message: RedelegationResponse): JsonSafe<RedelegationResponse> {
     const obj: any = {};
@@ -3056,9 +3136,7 @@ export const RedelegationResponse = {
   },
   fromPartial(object: DeepPartial<RedelegationResponse>): RedelegationResponse {
     const message = createBaseRedelegationResponse();
-    if (object.redelegation !== undefined && object.redelegation !== null) {
-      message.redelegation = Redelegation.fromPartial(object.redelegation);
-    }
+    message.redelegation = object.redelegation !== undefined && object.redelegation !== null ? Redelegation.fromPartial(object.redelegation) : undefined;
     message.entries = object.entries?.map(e => RedelegationEntryResponse.fromPartial(e)) || [];
     return message;
   },
@@ -3133,10 +3211,10 @@ function createBasePool(): Pool {
 export const Pool = {
   typeUrl: "/cosmos.staking.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.notBondedTokens !== undefined) {
+    if (message.notBondedTokens !== "") {
       writer.uint32(10).string(message.notBondedTokens);
     }
-    if (message.bondedTokens !== undefined) {
+    if (message.bondedTokens !== "") {
       writer.uint32(18).string(message.bondedTokens);
     }
     return writer;
@@ -3162,10 +3240,10 @@ export const Pool = {
     return message;
   },
   fromJSON(object: any): Pool {
-    const obj = createBasePool();
-    if (isSet(object.notBondedTokens)) obj.notBondedTokens = String(object.notBondedTokens);
-    if (isSet(object.bondedTokens)) obj.bondedTokens = String(object.bondedTokens);
-    return obj;
+    return {
+      notBondedTokens: isSet(object.notBondedTokens) ? String(object.notBondedTokens) : "",
+      bondedTokens: isSet(object.bondedTokens) ? String(object.bondedTokens) : ""
+    };
   },
   toJSON(message: Pool): JsonSafe<Pool> {
     const obj: any = {};

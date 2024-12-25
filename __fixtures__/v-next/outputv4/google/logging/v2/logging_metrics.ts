@@ -1,9 +1,10 @@
-import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric.js";
-import { Distribution_BucketOptions, Distribution_BucketOptionsSDKType } from "../../api/distribution.js";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric";
+import { Distribution_BucketOptions, Distribution_BucketOptionsSDKType } from "../../api/distribution";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -42,6 +43,10 @@ export function logMetric_ApiVersionToJSON(object: LogMetric_ApiVersion): string
 export interface LogMetric_LabelExtractorsEntry {
   key: string;
   value: string;
+}
+export interface ReactiveLogMetric_LabelExtractorsEntry {
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface LogMetric_LabelExtractorsEntryProtoMsg {
   typeUrl: string;
@@ -187,6 +192,21 @@ export interface LogMetric {
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
+export interface ReactiveLogMetric {
+  name: ComputedRef<string>;
+  description: ComputedRef<string>;
+  filter: ComputedRef<string>;
+  disabled: ComputedRef<boolean>;
+  metricDescriptor?: ComputedRef<MetricDescriptor>;
+  valueExtractor: ComputedRef<string>;
+  labelExtractors: ComputedRef<{
+    [key: string]: string;
+  }>;
+  bucketOptions?: ComputedRef<Distribution_BucketOptions>;
+  createTime?: ComputedRef<Date>;
+  updateTime?: ComputedRef<Date>;
+  version: ComputedRef<LogMetric_ApiVersion>;
+}
 export interface LogMetricProtoMsg {
   typeUrl: "/google.logging.v2.LogMetric";
   value: Uint8Array;
@@ -238,6 +258,11 @@ export interface ListLogMetricsRequest {
    */
   pageSize: number;
 }
+export interface ReactiveListLogMetricsRequest {
+  parent: ComputedRef<string>;
+  pageToken: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+}
 export interface ListLogMetricsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListLogMetricsRequest";
   value: Uint8Array;
@@ -259,6 +284,10 @@ export interface ListLogMetricsResponse {
    */
   nextPageToken: string;
 }
+export interface ReactiveListLogMetricsResponse {
+  metrics: ComputedRef<LogMetric[]>;
+  nextPageToken: ComputedRef<string>;
+}
 export interface ListLogMetricsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogMetricsResponse";
   value: Uint8Array;
@@ -276,6 +305,9 @@ export interface GetLogMetricRequest {
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
   metricName: string;
+}
+export interface ReactiveGetLogMetricRequest {
+  metricName: ComputedRef<string>;
 }
 export interface GetLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetLogMetricRequest";
@@ -301,6 +333,10 @@ export interface CreateLogMetricRequest {
    */
   metric?: LogMetric;
 }
+export interface ReactiveCreateLogMetricRequest {
+  parent: ComputedRef<string>;
+  metric?: ComputedRef<LogMetric>;
+}
 export interface CreateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateLogMetricRequest";
   value: Uint8Array;
@@ -325,6 +361,10 @@ export interface UpdateLogMetricRequest {
   /** Required. The updated metric. */
   metric?: LogMetric;
 }
+export interface ReactiveUpdateLogMetricRequest {
+  metricName: ComputedRef<string>;
+  metric?: ComputedRef<LogMetric>;
+}
 export interface UpdateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
   value: Uint8Array;
@@ -343,6 +383,9 @@ export interface DeleteLogMetricRequest {
    */
   metricName: string;
 }
+export interface ReactiveDeleteLogMetricRequest {
+  metricName: ComputedRef<string>;
+}
 export interface DeleteLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteLogMetricRequest";
   value: Uint8Array;
@@ -359,10 +402,10 @@ function createBaseLogMetric_LabelExtractorsEntry(): LogMetric_LabelExtractorsEn
 }
 export const LogMetric_LabelExtractorsEntry = {
   encode(message: LogMetric_LabelExtractorsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -388,10 +431,10 @@ export const LogMetric_LabelExtractorsEntry = {
     return message;
   },
   fromJSON(object: any): LogMetric_LabelExtractorsEntry {
-    const obj = createBaseLogMetric_LabelExtractorsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: LogMetric_LabelExtractorsEntry): JsonSafe<LogMetric_LabelExtractorsEntry> {
     const obj: any = {};
@@ -467,22 +510,22 @@ function createBaseLogMetric(): LogMetric {
 export const LogMetric = {
   typeUrl: "/google.logging.v2.LogMetric",
   encode(message: LogMetric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(26).string(message.filter);
     }
-    if (message.disabled !== undefined) {
+    if (message.disabled === true) {
       writer.uint32(96).bool(message.disabled);
     }
     if (message.metricDescriptor !== undefined) {
       MetricDescriptor.encode(message.metricDescriptor, writer.uint32(42).fork()).ldelim();
     }
-    if (message.valueExtractor !== undefined) {
+    if (message.valueExtractor !== "") {
       writer.uint32(50).string(message.valueExtractor);
     }
     Object.entries(message.labelExtractors).forEach(([key, value]) => {
@@ -556,24 +599,24 @@ export const LogMetric = {
     return message;
   },
   fromJSON(object: any): LogMetric {
-    const obj = createBaseLogMetric();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
-    if (isSet(object.metricDescriptor)) obj.metricDescriptor = MetricDescriptor.fromJSON(object.metricDescriptor);
-    if (isSet(object.valueExtractor)) obj.valueExtractor = String(object.valueExtractor);
-    if (isObject(object.labelExtractors)) obj.labelExtractors = Object.entries(object.labelExtractors).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.bucketOptions)) obj.bucketOptions = Distribution_BucketOptions.fromJSON(object.bucketOptions);
-    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
-    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    if (isSet(object.version)) obj.version = logMetric_ApiVersionFromJSON(object.version);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      filter: isSet(object.filter) ? String(object.filter) : "",
+      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
+      metricDescriptor: isSet(object.metricDescriptor) ? MetricDescriptor.fromJSON(object.metricDescriptor) : undefined,
+      valueExtractor: isSet(object.valueExtractor) ? String(object.valueExtractor) : "",
+      labelExtractors: isObject(object.labelExtractors) ? Object.entries(object.labelExtractors).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
+      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
+      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
+      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
+    };
   },
   toJSON(message: LogMetric): JsonSafe<LogMetric> {
     const obj: any = {};
@@ -601,9 +644,7 @@ export const LogMetric = {
     message.description = object.description ?? "";
     message.filter = object.filter ?? "";
     message.disabled = object.disabled ?? false;
-    if (object.metricDescriptor !== undefined && object.metricDescriptor !== null) {
-      message.metricDescriptor = MetricDescriptor.fromPartial(object.metricDescriptor);
-    }
+    message.metricDescriptor = object.metricDescriptor !== undefined && object.metricDescriptor !== null ? MetricDescriptor.fromPartial(object.metricDescriptor) : undefined;
     message.valueExtractor = object.valueExtractor ?? "";
     message.labelExtractors = Object.entries(object.labelExtractors ?? {}).reduce<{
       [key: string]: string;
@@ -613,9 +654,7 @@ export const LogMetric = {
       }
       return acc;
     }, {});
-    if (object.bucketOptions !== undefined && object.bucketOptions !== null) {
-      message.bucketOptions = Distribution_BucketOptions.fromPartial(object.bucketOptions);
-    }
+    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : undefined;
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     message.version = object.version ?? 0;
@@ -769,13 +808,13 @@ function createBaseListLogMetricsRequest(): ListLogMetricsRequest {
 export const ListLogMetricsRequest = {
   typeUrl: "/google.logging.v2.ListLogMetricsRequest",
   encode(message: ListLogMetricsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -804,11 +843,11 @@ export const ListLogMetricsRequest = {
     return message;
   },
   fromJSON(object: any): ListLogMetricsRequest {
-    const obj = createBaseListLogMetricsRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
+    };
   },
   toJSON(message: ListLogMetricsRequest): JsonSafe<ListLogMetricsRequest> {
     const obj: any = {};
@@ -893,7 +932,7 @@ export const ListLogMetricsResponse = {
     for (const v of message.metrics) {
       LogMetric.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -919,10 +958,10 @@ export const ListLogMetricsResponse = {
     return message;
   },
   fromJSON(object: any): ListLogMetricsResponse {
-    const obj = createBaseListLogMetricsResponse();
-    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => LogMetric.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListLogMetricsResponse): JsonSafe<ListLogMetricsResponse> {
     const obj: any = {};
@@ -1004,7 +1043,7 @@ function createBaseGetLogMetricRequest(): GetLogMetricRequest {
 export const GetLogMetricRequest = {
   typeUrl: "/google.logging.v2.GetLogMetricRequest",
   encode(message: GetLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== undefined) {
+    if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     return writer;
@@ -1027,9 +1066,9 @@ export const GetLogMetricRequest = {
     return message;
   },
   fromJSON(object: any): GetLogMetricRequest {
-    const obj = createBaseGetLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    return obj;
+    return {
+      metricName: isSet(object.metricName) ? String(object.metricName) : ""
+    };
   },
   toJSON(message: GetLogMetricRequest): JsonSafe<GetLogMetricRequest> {
     const obj: any = {};
@@ -1093,7 +1132,7 @@ function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
 export const CreateLogMetricRequest = {
   typeUrl: "/google.logging.v2.CreateLogMetricRequest",
   encode(message: CreateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     if (message.metric !== undefined) {
@@ -1122,10 +1161,10 @@ export const CreateLogMetricRequest = {
     return message;
   },
   fromJSON(object: any): CreateLogMetricRequest {
-    const obj = createBaseCreateLogMetricRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      metric: isSet(object.metric) ? LogMetric.fromJSON(object.metric) : undefined
+    };
   },
   toJSON(message: CreateLogMetricRequest): JsonSafe<CreateLogMetricRequest> {
     const obj: any = {};
@@ -1136,9 +1175,7 @@ export const CreateLogMetricRequest = {
   fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
     const message = createBaseCreateLogMetricRequest();
     message.parent = object.parent ?? "";
-    if (object.metric !== undefined && object.metric !== null) {
-      message.metric = LogMetric.fromPartial(object.metric);
-    }
+    message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : undefined;
     return message;
   },
   fromSDK(object: CreateLogMetricRequestSDKType): CreateLogMetricRequest {
@@ -1200,7 +1237,7 @@ function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
 export const UpdateLogMetricRequest = {
   typeUrl: "/google.logging.v2.UpdateLogMetricRequest",
   encode(message: UpdateLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== undefined) {
+    if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     if (message.metric !== undefined) {
@@ -1229,10 +1266,10 @@ export const UpdateLogMetricRequest = {
     return message;
   },
   fromJSON(object: any): UpdateLogMetricRequest {
-    const obj = createBaseUpdateLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
-    return obj;
+    return {
+      metricName: isSet(object.metricName) ? String(object.metricName) : "",
+      metric: isSet(object.metric) ? LogMetric.fromJSON(object.metric) : undefined
+    };
   },
   toJSON(message: UpdateLogMetricRequest): JsonSafe<UpdateLogMetricRequest> {
     const obj: any = {};
@@ -1243,9 +1280,7 @@ export const UpdateLogMetricRequest = {
   fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
     const message = createBaseUpdateLogMetricRequest();
     message.metricName = object.metricName ?? "";
-    if (object.metric !== undefined && object.metric !== null) {
-      message.metric = LogMetric.fromPartial(object.metric);
-    }
+    message.metric = object.metric !== undefined && object.metric !== null ? LogMetric.fromPartial(object.metric) : undefined;
     return message;
   },
   fromSDK(object: UpdateLogMetricRequestSDKType): UpdateLogMetricRequest {
@@ -1306,7 +1341,7 @@ function createBaseDeleteLogMetricRequest(): DeleteLogMetricRequest {
 export const DeleteLogMetricRequest = {
   typeUrl: "/google.logging.v2.DeleteLogMetricRequest",
   encode(message: DeleteLogMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== undefined) {
+    if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     return writer;
@@ -1329,9 +1364,9 @@ export const DeleteLogMetricRequest = {
     return message;
   },
   fromJSON(object: any): DeleteLogMetricRequest {
-    const obj = createBaseDeleteLogMetricRequest();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    return obj;
+    return {
+      metricName: isSet(object.metricName) ? String(object.metricName) : ""
+    };
   },
   toJSON(message: DeleteLogMetricRequest): JsonSafe<DeleteLogMetricRequest> {
     const obj: any = {};

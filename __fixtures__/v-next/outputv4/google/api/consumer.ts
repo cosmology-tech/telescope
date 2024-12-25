@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial, isSet } from "../../helpers.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial, isSet } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /** Supported data type of the property values */
 export enum Property_PropertyType {
@@ -79,6 +80,9 @@ export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
   properties: Property[];
 }
+export interface ReactiveProjectProperties {
+  properties: ComputedRef<Property[]>;
+}
 export interface ProjectPropertiesProtoMsg {
   typeUrl: "/google.api.ProjectProperties";
   value: Uint8Array;
@@ -123,6 +127,11 @@ export interface Property {
   type: Property_PropertyType;
   /** The description of the property */
   description: string;
+}
+export interface ReactiveProperty {
+  name: ComputedRef<string>;
+  type: ComputedRef<Property_PropertyType>;
+  description: ComputedRef<string>;
 }
 export interface PropertyProtoMsg {
   typeUrl: "/google.api.Property";
@@ -176,9 +185,9 @@ export const ProjectProperties = {
     return message;
   },
   fromJSON(object: any): ProjectProperties {
-    const obj = createBaseProjectProperties();
-    if (Array.isArray(object?.properties)) obj.properties = object.properties.map((e: any) => Property.fromJSON(e));
-    return obj;
+    return {
+      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromJSON(e)) : []
+    };
   },
   toJSON(message: ProjectProperties): JsonSafe<ProjectProperties> {
     const obj: any = {};
@@ -253,13 +262,13 @@ function createBaseProperty(): Property {
 export const Property = {
   typeUrl: "/google.api.Property",
   encode(message: Property, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -288,11 +297,11 @@ export const Property = {
     return message;
   },
   fromJSON(object: any): Property {
-    const obj = createBaseProperty();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = property_PropertyTypeFromJSON(object.type);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: Property): JsonSafe<Property> {
     const obj: any = {};

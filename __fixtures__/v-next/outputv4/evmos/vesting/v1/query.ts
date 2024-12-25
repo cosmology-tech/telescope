@@ -1,12 +1,16 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.vesting.v1";
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
   /** address of the clawback vesting account */
   address: string;
+}
+export interface ReactiveQueryBalancesRequest {
+  address: ComputedRef<string>;
 }
 export interface QueryBalancesRequestProtoMsg {
   typeUrl: "/evmos.vesting.v1.QueryBalancesRequest";
@@ -27,6 +31,11 @@ export interface QueryBalancesResponse {
   unvested: Coin[];
   /** current amount of vested tokens */
   vested: Coin[];
+}
+export interface ReactiveQueryBalancesResponse {
+  locked: ComputedRef<Coin[]>;
+  unvested: ComputedRef<Coin[]>;
+  vested: ComputedRef<Coin[]>;
 }
 export interface QueryBalancesResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.QueryBalancesResponse";
@@ -49,7 +58,7 @@ function createBaseQueryBalancesRequest(): QueryBalancesRequest {
 export const QueryBalancesRequest = {
   typeUrl: "/evmos.vesting.v1.QueryBalancesRequest",
   encode(message: QueryBalancesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -72,9 +81,9 @@ export const QueryBalancesRequest = {
     return message;
   },
   fromJSON(object: any): QueryBalancesRequest {
-    const obj = createBaseQueryBalancesRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: QueryBalancesRequest): JsonSafe<QueryBalancesRequest> {
     const obj: any = {};
@@ -174,11 +183,11 @@ export const QueryBalancesResponse = {
     return message;
   },
   fromJSON(object: any): QueryBalancesResponse {
-    const obj = createBaseQueryBalancesResponse();
-    if (Array.isArray(object?.locked)) obj.locked = object.locked.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.unvested)) obj.unvested = object.unvested.map((e: any) => Coin.fromJSON(e));
-    if (Array.isArray(object?.vested)) obj.vested = object.vested.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromJSON(e)) : [],
+      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromJSON(e)) : [],
+      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryBalancesResponse): JsonSafe<QueryBalancesResponse> {
     const obj: any = {};

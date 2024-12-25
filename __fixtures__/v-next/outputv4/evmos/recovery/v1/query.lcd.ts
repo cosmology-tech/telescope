@@ -1,6 +1,6 @@
-import { Params, ParamsSDKType } from "./genesis.js";
+import { Params, ParamsSDKType } from "./genesis";
 import { LCDClient } from "@cosmology/lcd";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query.js";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

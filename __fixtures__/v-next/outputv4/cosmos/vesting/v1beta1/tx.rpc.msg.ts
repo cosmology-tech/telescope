@@ -1,8 +1,8 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
-import { Period, PeriodSDKType } from "./vesting.js";
-import { Rpc } from "../../../helpers.js";
-import { BinaryReader } from "../../../binary.js";
-import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreateVestingAccountResponse, MsgCreateVestingAccountResponseSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePermanentLockedAccountResponse, MsgCreatePermanentLockedAccountResponseSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType, MsgCreatePeriodicVestingAccountResponse, MsgCreatePeriodicVestingAccountResponseSDKType } from "./tx.js";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Period, PeriodSDKType } from "./vesting";
+import { Rpc } from "../../../helpers";
+import { BinaryReader } from "../../../binary";
+import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreateVestingAccountResponse, MsgCreateVestingAccountResponseSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePermanentLockedAccountResponse, MsgCreatePermanentLockedAccountResponseSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType, MsgCreatePeriodicVestingAccountResponse, MsgCreatePeriodicVestingAccountResponseSDKType } from "./tx";
 /** Msg defines the bank Msg service. */
 export interface Msg {
   /**

@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial, isSet } from "../../helpers.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial, isSet } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * Specifies the routing information that should be sent along with the request
@@ -373,6 +374,9 @@ export interface RoutingRule {
    * See the examples for more details.
    */
   routingParameters: RoutingParameter[];
+}
+export interface ReactiveRoutingRule {
+  routingParameters: ComputedRef<RoutingParameter[]>;
 }
 export interface RoutingRuleProtoMsg {
   typeUrl: "/google.api.RoutingRule";
@@ -804,6 +808,10 @@ export interface RoutingParameter {
    */
   pathTemplate: string;
 }
+export interface ReactiveRoutingParameter {
+  field: ComputedRef<string>;
+  pathTemplate: ComputedRef<string>;
+}
 export interface RoutingParameterProtoMsg {
   typeUrl: "/google.api.RoutingParameter";
   value: Uint8Array;
@@ -844,9 +852,9 @@ export const RoutingRule = {
     return message;
   },
   fromJSON(object: any): RoutingRule {
-    const obj = createBaseRoutingRule();
-    if (Array.isArray(object?.routingParameters)) obj.routingParameters = object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e));
-    return obj;
+    return {
+      routingParameters: Array.isArray(object?.routingParameters) ? object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e)) : []
+    };
   },
   toJSON(message: RoutingRule): JsonSafe<RoutingRule> {
     const obj: any = {};
@@ -920,10 +928,10 @@ function createBaseRoutingParameter(): RoutingParameter {
 export const RoutingParameter = {
   typeUrl: "/google.api.RoutingParameter",
   encode(message: RoutingParameter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.field !== undefined) {
+    if (message.field !== "") {
       writer.uint32(10).string(message.field);
     }
-    if (message.pathTemplate !== undefined) {
+    if (message.pathTemplate !== "") {
       writer.uint32(18).string(message.pathTemplate);
     }
     return writer;
@@ -949,10 +957,10 @@ export const RoutingParameter = {
     return message;
   },
   fromJSON(object: any): RoutingParameter {
-    const obj = createBaseRoutingParameter();
-    if (isSet(object.field)) obj.field = String(object.field);
-    if (isSet(object.pathTemplate)) obj.pathTemplate = String(object.pathTemplate);
-    return obj;
+    return {
+      field: isSet(object.field) ? String(object.field) : "",
+      pathTemplate: isSet(object.pathTemplate) ? String(object.pathTemplate) : ""
+    };
   },
   toJSON(message: RoutingParameter): JsonSafe<RoutingParameter> {
     const obj: any = {};

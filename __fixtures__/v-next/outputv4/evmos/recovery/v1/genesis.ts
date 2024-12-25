@@ -1,12 +1,16 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.recovery.v1";
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of the module. */
   params: Params;
+}
+export interface ReactiveGenesisState {
+  params: ComputedRef<Params>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.recovery.v1.GenesisState";
@@ -22,6 +26,10 @@ export interface Params {
   enableRecovery: boolean;
   /** duration added to timeout timestamp for balances recovered via IBC packets */
   packetTimeoutDuration: Duration;
+}
+export interface ReactiveParams {
+  enableRecovery: ComputedRef<boolean>;
+  packetTimeoutDuration: ComputedRef<Duration>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.recovery.v1.Params";
@@ -63,9 +71,9 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -74,9 +82,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
@@ -131,7 +137,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.recovery.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableRecovery !== undefined) {
+    if (message.enableRecovery === true) {
       writer.uint32(8).bool(message.enableRecovery);
     }
     if (message.packetTimeoutDuration !== undefined) {
@@ -160,10 +166,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.enableRecovery)) obj.enableRecovery = Boolean(object.enableRecovery);
-    if (isSet(object.packetTimeoutDuration)) obj.packetTimeoutDuration = Duration.fromJSON(object.packetTimeoutDuration);
-    return obj;
+    return {
+      enableRecovery: isSet(object.enableRecovery) ? Boolean(object.enableRecovery) : false,
+      packetTimeoutDuration: isSet(object.packetTimeoutDuration) ? Duration.fromJSON(object.packetTimeoutDuration) : undefined
+    };
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
@@ -174,9 +180,7 @@ export const Params = {
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.enableRecovery = object.enableRecovery ?? false;
-    if (object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null) {
-      message.packetTimeoutDuration = Duration.fromPartial(object.packetTimeoutDuration);
-    }
+    message.packetTimeoutDuration = object.packetTimeoutDuration !== undefined && object.packetTimeoutDuration !== null ? Duration.fromPartial(object.packetTimeoutDuration) : undefined;
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {

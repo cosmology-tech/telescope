@@ -1,8 +1,8 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
-import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting.js";
-import { Rpc } from "../../../helpers.js";
-import { BinaryReader } from "../../../binary.js";
-import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgCreateClawbackVestingAccountResponse, MsgCreateClawbackVestingAccountResponseSDKType, MsgClawback, MsgClawbackSDKType, MsgClawbackResponse, MsgClawbackResponseSDKType } from "./tx.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Rpc } from "../../../helpers";
+import { BinaryReader } from "../../../binary";
+import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgCreateClawbackVestingAccountResponse, MsgCreateClawbackVestingAccountResponseSDKType, MsgClawback, MsgClawbackSDKType, MsgClawbackResponse, MsgClawbackResponseSDKType } from "./tx";
 /** Msg defines the vesting Msg service. */
 export interface Msg {
   /**

@@ -1,0 +1,3 @@
+import { TelescopeGeneratedType } from "../../../../types";
+import { MsgCreateStableswapPool, MsgStableSwapAdjustScalingFactors } from "./tx";
+export const registry: ReadonlyArray<[string, TelescopeGeneratedType<any, any, any>]> = [["/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool", MsgCreateStableswapPool], ["/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors", MsgStableSwapAdjustScalingFactors]];

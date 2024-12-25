@@ -1,9 +1,10 @@
-import { LabelDescriptor, LabelDescriptorSDKType } from "./label.js";
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage.js";
-import { Struct, StructSDKType } from "../protobuf/struct.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial, isObject } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
+import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { Struct, StructSDKType } from "../protobuf/struct";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, isObject } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -52,6 +53,14 @@ export interface MonitoredResourceDescriptor {
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
+export interface ReactiveMonitoredResourceDescriptor {
+  name: ComputedRef<string>;
+  type: ComputedRef<string>;
+  displayName: ComputedRef<string>;
+  description: ComputedRef<string>;
+  labels: ComputedRef<LabelDescriptor[]>;
+  launchStage: ComputedRef<LaunchStage>;
+}
 export interface MonitoredResourceDescriptorProtoMsg {
   typeUrl: "/google.api.MonitoredResourceDescriptor";
   value: Uint8Array;
@@ -78,6 +87,10 @@ export interface MonitoredResourceDescriptorSDKType {
 export interface MonitoredResource_LabelsEntry {
   key: string;
   value: string;
+}
+export interface ReactiveMonitoredResource_LabelsEntry {
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface MonitoredResource_LabelsEntryProtoMsg {
   typeUrl: string;
@@ -118,6 +131,12 @@ export interface MonitoredResource {
     [key: string]: string;
   };
 }
+export interface ReactiveMonitoredResource {
+  type: ComputedRef<string>;
+  labels: ComputedRef<{
+    [key: string]: string;
+  }>;
+}
 export interface MonitoredResourceProtoMsg {
   typeUrl: "/google.api.MonitoredResource";
   value: Uint8Array;
@@ -146,6 +165,10 @@ export interface MonitoredResourceSDKType {
 export interface MonitoredResourceMetadata_UserLabelsEntry {
   key: string;
   value: string;
+}
+export interface ReactiveMonitoredResourceMetadata_UserLabelsEntry {
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
   typeUrl: string;
@@ -182,6 +205,12 @@ export interface MonitoredResourceMetadata {
     [key: string]: string;
   };
 }
+export interface ReactiveMonitoredResourceMetadata {
+  systemLabels?: ComputedRef<Struct>;
+  userLabels: ComputedRef<{
+    [key: string]: string;
+  }>;
+}
 export interface MonitoredResourceMetadataProtoMsg {
   typeUrl: "/google.api.MonitoredResourceMetadata";
   value: Uint8Array;
@@ -213,16 +242,16 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
 export const MonitoredResourceDescriptor = {
   typeUrl: "/google.api.MonitoredResourceDescriptor",
   encode(message: MonitoredResourceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(42).string(message.name);
     }
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-    if (message.displayName !== undefined) {
+    if (message.displayName !== "") {
       writer.uint32(18).string(message.displayName);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     for (const v of message.labels) {
@@ -266,14 +295,14 @@ export const MonitoredResourceDescriptor = {
     return message;
   },
   fromJSON(object: any): MonitoredResourceDescriptor {
-    const obj = createBaseMonitoredResourceDescriptor();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
-    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      displayName: isSet(object.displayName) ? String(object.displayName) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1
+    };
   },
   toJSON(message: MonitoredResourceDescriptor): JsonSafe<MonitoredResourceDescriptor> {
     const obj: any = {};
@@ -391,10 +420,10 @@ function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntr
 }
 export const MonitoredResource_LabelsEntry = {
   encode(message: MonitoredResource_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -420,10 +449,10 @@ export const MonitoredResource_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): MonitoredResource_LabelsEntry {
-    const obj = createBaseMonitoredResource_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: MonitoredResource_LabelsEntry): JsonSafe<MonitoredResource_LabelsEntry> {
     const obj: any = {};
@@ -490,7 +519,7 @@ function createBaseMonitoredResource(): MonitoredResource {
 export const MonitoredResource = {
   typeUrl: "/google.api.MonitoredResource",
   encode(message: MonitoredResource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -525,15 +554,15 @@ export const MonitoredResource = {
     return message;
   },
   fromJSON(object: any): MonitoredResource {
-    const obj = createBaseMonitoredResource();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: MonitoredResource): JsonSafe<MonitoredResource> {
     const obj: any = {};
@@ -642,10 +671,10 @@ function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourc
 }
 export const MonitoredResourceMetadata_UserLabelsEntry = {
   encode(message: MonitoredResourceMetadata_UserLabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -671,10 +700,10 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     return message;
   },
   fromJSON(object: any): MonitoredResourceMetadata_UserLabelsEntry {
-    const obj = createBaseMonitoredResourceMetadata_UserLabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: MonitoredResourceMetadata_UserLabelsEntry): JsonSafe<MonitoredResourceMetadata_UserLabelsEntry> {
     const obj: any = {};
@@ -776,15 +805,15 @@ export const MonitoredResourceMetadata = {
     return message;
   },
   fromJSON(object: any): MonitoredResourceMetadata {
-    const obj = createBaseMonitoredResourceMetadata();
-    if (isSet(object.systemLabels)) obj.systemLabels = Struct.fromJSON(object.systemLabels);
-    if (isObject(object.userLabels)) obj.userLabels = Object.entries(object.userLabels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      systemLabels: isSet(object.systemLabels) ? Struct.fromJSON(object.systemLabels) : undefined,
+      userLabels: isObject(object.userLabels) ? Object.entries(object.userLabels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: MonitoredResourceMetadata): JsonSafe<MonitoredResourceMetadata> {
     const obj: any = {};
@@ -799,9 +828,7 @@ export const MonitoredResourceMetadata = {
   },
   fromPartial(object: DeepPartial<MonitoredResourceMetadata>): MonitoredResourceMetadata {
     const message = createBaseMonitoredResourceMetadata();
-    if (object.systemLabels !== undefined && object.systemLabels !== null) {
-      message.systemLabels = Struct.fromPartial(object.systemLabels);
-    }
+    message.systemLabels = object.systemLabels !== undefined && object.systemLabels !== null ? Struct.fromPartial(object.systemLabels) : undefined;
     message.userLabels = Object.entries(object.userLabels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {

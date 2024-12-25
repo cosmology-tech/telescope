@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -14,6 +15,10 @@ export interface DenomTrace {
   path: string;
   /** base denomination of the relayed fungible token. */
   baseDenom: string;
+}
+export interface ReactiveDenomTrace {
+  path: ComputedRef<string>;
+  baseDenom: ComputedRef<string>;
 }
 export interface DenomTraceProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.DenomTrace";
@@ -45,6 +50,10 @@ export interface Params {
    */
   receiveEnabled: boolean;
 }
+export interface ReactiveParams {
+  sendEnabled: ComputedRef<boolean>;
+  receiveEnabled: ComputedRef<boolean>;
+}
 export interface ParamsProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.Params";
   value: Uint8Array;
@@ -68,10 +77,10 @@ function createBaseDenomTrace(): DenomTrace {
 export const DenomTrace = {
   typeUrl: "/ibc.applications.transfer.v1.DenomTrace",
   encode(message: DenomTrace, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.path !== undefined) {
+    if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }
-    if (message.baseDenom !== undefined) {
+    if (message.baseDenom !== "") {
       writer.uint32(18).string(message.baseDenom);
     }
     return writer;
@@ -97,10 +106,10 @@ export const DenomTrace = {
     return message;
   },
   fromJSON(object: any): DenomTrace {
-    const obj = createBaseDenomTrace();
-    if (isSet(object.path)) obj.path = String(object.path);
-    if (isSet(object.baseDenom)) obj.baseDenom = String(object.baseDenom);
-    return obj;
+    return {
+      path: isSet(object.path) ? String(object.path) : "",
+      baseDenom: isSet(object.baseDenom) ? String(object.baseDenom) : ""
+    };
   },
   toJSON(message: DenomTrace): JsonSafe<DenomTrace> {
     const obj: any = {};
@@ -179,10 +188,10 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/ibc.applications.transfer.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sendEnabled !== undefined) {
+    if (message.sendEnabled === true) {
       writer.uint32(8).bool(message.sendEnabled);
     }
-    if (message.receiveEnabled !== undefined) {
+    if (message.receiveEnabled === true) {
       writer.uint32(16).bool(message.receiveEnabled);
     }
     return writer;
@@ -208,10 +217,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.sendEnabled)) obj.sendEnabled = Boolean(object.sendEnabled);
-    if (isSet(object.receiveEnabled)) obj.receiveEnabled = Boolean(object.receiveEnabled);
-    return obj;
+    return {
+      sendEnabled: isSet(object.sendEnabled) ? Boolean(object.sendEnabled) : false,
+      receiveEnabled: isSet(object.receiveEnabled) ? Boolean(object.receiveEnabled) : false
+    };
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};

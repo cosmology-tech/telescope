@@ -1,6 +1,6 @@
-import { Rpc } from "../../../helpers.js";
-import { BinaryReader } from "../../../binary.js";
-import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType } from "./tx.js";
+import { Rpc } from "../../../helpers";
+import { BinaryReader } from "../../../binary";
+import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType } from "./tx";
 /** Msg defines the nft Msg service. */
 export interface Msg {
   /** Send defines a method to send a nft from one account to another account. */

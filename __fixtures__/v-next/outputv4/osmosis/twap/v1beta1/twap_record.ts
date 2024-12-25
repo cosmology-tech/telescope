@@ -1,8 +1,9 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
-import { JsonSafe } from "../../../json-safe.js";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -40,6 +41,18 @@ export interface TwapRecord {
    * TWAP, due to an unforeseen underlying error.
    */
   lastErrorTime: Date;
+}
+export interface ReactiveTwapRecord {
+  poolId: ComputedRef<bigint>;
+  asset0Denom: ComputedRef<string>;
+  asset1Denom: ComputedRef<string>;
+  height: ComputedRef<bigint>;
+  time: ComputedRef<Date>;
+  p0LastSpotPrice: ComputedRef<string>;
+  p1LastSpotPrice: ComputedRef<string>;
+  p0ArithmeticTwapAccumulator: ComputedRef<string>;
+  p1ArithmeticTwapAccumulator: ComputedRef<string>;
+  lastErrorTime: ComputedRef<Date>;
 }
 export interface TwapRecordProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.TwapRecord";
@@ -83,31 +96,31 @@ function createBaseTwapRecord(): TwapRecord {
 export const TwapRecord = {
   typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
   encode(message: TwapRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== undefined) {
+    if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.asset0Denom !== undefined) {
+    if (message.asset0Denom !== "") {
       writer.uint32(18).string(message.asset0Denom);
     }
-    if (message.asset1Denom !== undefined) {
+    if (message.asset1Denom !== "") {
       writer.uint32(26).string(message.asset1Denom);
     }
-    if (message.height !== undefined) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(32).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(42).fork()).ldelim();
     }
-    if (message.p0LastSpotPrice !== undefined) {
+    if (message.p0LastSpotPrice !== "") {
       writer.uint32(50).string(Decimal.fromUserInput(message.p0LastSpotPrice, 18).atomics);
     }
-    if (message.p1LastSpotPrice !== undefined) {
+    if (message.p1LastSpotPrice !== "") {
       writer.uint32(58).string(Decimal.fromUserInput(message.p1LastSpotPrice, 18).atomics);
     }
-    if (message.p0ArithmeticTwapAccumulator !== undefined) {
+    if (message.p0ArithmeticTwapAccumulator !== "") {
       writer.uint32(66).string(Decimal.fromUserInput(message.p0ArithmeticTwapAccumulator, 18).atomics);
     }
-    if (message.p1ArithmeticTwapAccumulator !== undefined) {
+    if (message.p1ArithmeticTwapAccumulator !== "") {
       writer.uint32(74).string(Decimal.fromUserInput(message.p1ArithmeticTwapAccumulator, 18).atomics);
     }
     if (message.lastErrorTime !== undefined) {
@@ -160,18 +173,18 @@ export const TwapRecord = {
     return message;
   },
   fromJSON(object: any): TwapRecord {
-    const obj = createBaseTwapRecord();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.asset0Denom)) obj.asset0Denom = String(object.asset0Denom);
-    if (isSet(object.asset1Denom)) obj.asset1Denom = String(object.asset1Denom);
-    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
-    if (isSet(object.time)) obj.time = new Date(object.time);
-    if (isSet(object.p0LastSpotPrice)) obj.p0LastSpotPrice = String(object.p0LastSpotPrice);
-    if (isSet(object.p1LastSpotPrice)) obj.p1LastSpotPrice = String(object.p1LastSpotPrice);
-    if (isSet(object.p0ArithmeticTwapAccumulator)) obj.p0ArithmeticTwapAccumulator = String(object.p0ArithmeticTwapAccumulator);
-    if (isSet(object.p1ArithmeticTwapAccumulator)) obj.p1ArithmeticTwapAccumulator = String(object.p1ArithmeticTwapAccumulator);
-    if (isSet(object.lastErrorTime)) obj.lastErrorTime = new Date(object.lastErrorTime);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      asset0Denom: isSet(object.asset0Denom) ? String(object.asset0Denom) : "",
+      asset1Denom: isSet(object.asset1Denom) ? String(object.asset1Denom) : "",
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      p0LastSpotPrice: isSet(object.p0LastSpotPrice) ? String(object.p0LastSpotPrice) : "",
+      p1LastSpotPrice: isSet(object.p1LastSpotPrice) ? String(object.p1LastSpotPrice) : "",
+      p0ArithmeticTwapAccumulator: isSet(object.p0ArithmeticTwapAccumulator) ? String(object.p0ArithmeticTwapAccumulator) : "",
+      p1ArithmeticTwapAccumulator: isSet(object.p1ArithmeticTwapAccumulator) ? String(object.p1ArithmeticTwapAccumulator) : "",
+      lastErrorTime: isSet(object.lastErrorTime) ? new Date(object.lastErrorTime) : undefined
+    };
   },
   toJSON(message: TwapRecord): JsonSafe<TwapRecord> {
     const obj: any = {};
@@ -189,14 +202,10 @@ export const TwapRecord = {
   },
   fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {
     const message = createBaseTwapRecord();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.asset0Denom = object.asset0Denom ?? "";
     message.asset1Denom = object.asset1Denom ?? "";
-    if (object.height !== undefined && object.height !== null) {
-      message.height = BigInt(object.height.toString());
-    }
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     message.time = object.time ?? undefined;
     message.p0LastSpotPrice = object.p0LastSpotPrice ?? "";
     message.p1LastSpotPrice = object.p1LastSpotPrice ?? "";

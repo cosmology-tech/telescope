@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * Classifies set of possible modifications to an object in the service
@@ -101,6 +102,13 @@ export interface ConfigChange {
    */
   advices: Advice[];
 }
+export interface ReactiveConfigChange {
+  element: ComputedRef<string>;
+  oldValue: ComputedRef<string>;
+  newValue: ComputedRef<string>;
+  changeType: ComputedRef<ChangeType>;
+  advices: ComputedRef<Advice[]>;
+}
 export interface ConfigChangeProtoMsg {
   typeUrl: "/google.api.ConfigChange";
   value: Uint8Array;
@@ -131,6 +139,9 @@ export interface Advice {
    */
   description: string;
 }
+export interface ReactiveAdvice {
+  description: ComputedRef<string>;
+}
 export interface AdviceProtoMsg {
   typeUrl: "/google.api.Advice";
   value: Uint8Array;
@@ -154,13 +165,13 @@ function createBaseConfigChange(): ConfigChange {
 export const ConfigChange = {
   typeUrl: "/google.api.ConfigChange",
   encode(message: ConfigChange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.element !== undefined) {
+    if (message.element !== "") {
       writer.uint32(10).string(message.element);
     }
-    if (message.oldValue !== undefined) {
+    if (message.oldValue !== "") {
       writer.uint32(18).string(message.oldValue);
     }
-    if (message.newValue !== undefined) {
+    if (message.newValue !== "") {
       writer.uint32(26).string(message.newValue);
     }
     if (message.changeType !== 0) {
@@ -201,13 +212,13 @@ export const ConfigChange = {
     return message;
   },
   fromJSON(object: any): ConfigChange {
-    const obj = createBaseConfigChange();
-    if (isSet(object.element)) obj.element = String(object.element);
-    if (isSet(object.oldValue)) obj.oldValue = String(object.oldValue);
-    if (isSet(object.newValue)) obj.newValue = String(object.newValue);
-    if (isSet(object.changeType)) obj.changeType = changeTypeFromJSON(object.changeType);
-    if (Array.isArray(object?.advices)) obj.advices = object.advices.map((e: any) => Advice.fromJSON(e));
-    return obj;
+    return {
+      element: isSet(object.element) ? String(object.element) : "",
+      oldValue: isSet(object.oldValue) ? String(object.oldValue) : "",
+      newValue: isSet(object.newValue) ? String(object.newValue) : "",
+      changeType: isSet(object.changeType) ? changeTypeFromJSON(object.changeType) : -1,
+      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromJSON(e)) : []
+    };
   },
   toJSON(message: ConfigChange): JsonSafe<ConfigChange> {
     const obj: any = {};
@@ -316,7 +327,7 @@ function createBaseAdvice(): Advice {
 export const Advice = {
   typeUrl: "/google.api.Advice",
   encode(message: Advice, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -339,9 +350,9 @@ export const Advice = {
     return message;
   },
   fromJSON(object: any): Advice {
-    const obj = createBaseAdvice();
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: Advice): JsonSafe<Advice> {
     const obj: any = {};

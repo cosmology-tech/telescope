@@ -1,12 +1,17 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp.js";
-import { Distribution, DistributionSDKType } from "./distribution.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Distribution, DistributionSDKType } from "./distribution";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
   value: string;
+}
+export interface ReactiveMetricValue_LabelsEntry {
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface MetricValue_LabelsEntryProtoMsg {
   typeUrl: string;
@@ -52,6 +57,18 @@ export interface MetricValue {
   /** A distribution value. */
   distributionValue?: Distribution;
 }
+export interface ReactiveMetricValue {
+  labels: ComputedRef<{
+    [key: string]: string;
+  }>;
+  startTime?: ComputedRef<Date>;
+  endTime?: ComputedRef<Date>;
+  boolValue?: ComputedRef<boolean>;
+  int64Value?: ComputedRef<bigint>;
+  doubleValue?: ComputedRef<number>;
+  stringValue?: ComputedRef<string>;
+  distributionValue?: ComputedRef<Distribution>;
+}
 export interface MetricValueProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.MetricValue";
   value: Uint8Array;
@@ -80,6 +97,10 @@ export interface MetricValueSet {
   /** The values in this metric. */
   metricValues: MetricValue[];
 }
+export interface ReactiveMetricValueSet {
+  metricName: ComputedRef<string>;
+  metricValues: ComputedRef<MetricValue[]>;
+}
 export interface MetricValueSetProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet";
   value: Uint8Array;
@@ -101,10 +122,10 @@ function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
 }
 export const MetricValue_LabelsEntry = {
   encode(message: MetricValue_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -130,10 +151,10 @@ export const MetricValue_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): MetricValue_LabelsEntry {
-    const obj = createBaseMetricValue_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: MetricValue_LabelsEntry): JsonSafe<MetricValue_LabelsEntry> {
     const obj: any = {};
@@ -277,21 +298,21 @@ export const MetricValue = {
     return message;
   },
   fromJSON(object: any): MetricValue {
-    const obj = createBaseMetricValue();
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
-    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
-    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
-    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
-    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
-    if (isSet(object.distributionValue)) obj.distributionValue = Distribution.fromJSON(object.distributionValue);
-    return obj;
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
+      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
+      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
+      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
+      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
+      distributionValue: isSet(object.distributionValue) ? Distribution.fromJSON(object.distributionValue) : undefined
+    };
   },
   toJSON(message: MetricValue): JsonSafe<MetricValue> {
     const obj: any = {};
@@ -325,14 +346,10 @@ export const MetricValue = {
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    if (object.int64Value !== undefined && object.int64Value !== null) {
-      message.int64Value = BigInt(object.int64Value.toString());
-    }
+    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
-    if (object.distributionValue !== undefined && object.distributionValue !== null) {
-      message.distributionValue = Distribution.fromPartial(object.distributionValue);
-    }
+    message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : undefined;
     return message;
   },
   fromSDK(object: MetricValueSDKType): MetricValue {
@@ -461,7 +478,7 @@ function createBaseMetricValueSet(): MetricValueSet {
 export const MetricValueSet = {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
   encode(message: MetricValueSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== undefined) {
+    if (message.metricName !== "") {
       writer.uint32(10).string(message.metricName);
     }
     for (const v of message.metricValues) {
@@ -490,10 +507,10 @@ export const MetricValueSet = {
     return message;
   },
   fromJSON(object: any): MetricValueSet {
-    const obj = createBaseMetricValueSet();
-    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    if (Array.isArray(object?.metricValues)) obj.metricValues = object.metricValues.map((e: any) => MetricValue.fromJSON(e));
-    return obj;
+    return {
+      metricName: isSet(object.metricName) ? String(object.metricName) : "",
+      metricValues: Array.isArray(object?.metricValues) ? object.metricValues.map((e: any) => MetricValue.fromJSON(e)) : []
+    };
   },
   toJSON(message: MetricValueSet): JsonSafe<MetricValueSet> {
     const obj: any = {};

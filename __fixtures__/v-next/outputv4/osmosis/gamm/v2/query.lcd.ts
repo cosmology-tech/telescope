@@ -1,5 +1,5 @@
 import { LCDClient } from "@cosmology/lcd";
-import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType } from "./query.js";
+import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

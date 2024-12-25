@@ -1,12 +1,17 @@
-import { FeeToken, FeeTokenSDKType } from "./feetoken.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { FeeToken, FeeTokenSDKType } from "./feetoken";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
   basedenom: string;
   feetokens: FeeToken[];
+}
+export interface ReactiveGenesisState {
+  basedenom: ComputedRef<string>;
+  feetokens: ComputedRef<FeeToken[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState";
@@ -26,7 +31,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.basedenom !== undefined) {
+    if (message.basedenom !== "") {
       writer.uint32(10).string(message.basedenom);
     }
     for (const v of message.feetokens) {
@@ -55,10 +60,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.basedenom)) obj.basedenom = String(object.basedenom);
-    if (Array.isArray(object?.feetokens)) obj.feetokens = object.feetokens.map((e: any) => FeeToken.fromJSON(e));
-    return obj;
+    return {
+      basedenom: isSet(object.basedenom) ? String(object.basedenom) : "",
+      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};

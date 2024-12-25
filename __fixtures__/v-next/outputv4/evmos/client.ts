@@ -1,12 +1,12 @@
 import { GeneratedType, Registry, OfflineSigner } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
 import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
-import * as evmosErc20V1TxRegistry from "./erc20/v1/tx.registry.js";
-import * as evmosFeesV1TxRegistry from "./fees/v1/tx.registry.js";
-import * as evmosVestingV1TxRegistry from "./vesting/v1/tx.registry.js";
-import * as evmosErc20V1TxAmino from "./erc20/v1/tx.amino.js";
-import * as evmosFeesV1TxAmino from "./fees/v1/tx.amino.js";
-import * as evmosVestingV1TxAmino from "./vesting/v1/tx.amino.js";
+import * as evmosErc20V1TxRegistry from "./erc20/v1/tx.registry";
+import * as evmosFeesV1TxRegistry from "./fees/v1/tx.registry";
+import * as evmosVestingV1TxRegistry from "./vesting/v1/tx.registry";
+import * as evmosErc20V1TxAmino from "./erc20/v1/tx.amino";
+import * as evmosFeesV1TxAmino from "./fees/v1/tx.amino";
+import * as evmosVestingV1TxAmino from "./vesting/v1/tx.amino";
 export const evmosAminoConverters = {
   ...evmosErc20V1TxAmino.AminoConverter,
   ...evmosFeesV1TxAmino.AminoConverter,

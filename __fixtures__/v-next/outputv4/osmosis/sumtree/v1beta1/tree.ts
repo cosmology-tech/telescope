@@ -1,9 +1,13 @@
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { JsonSafe } from "../../../json-safe.js";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
+}
+export interface ReactiveNode {
+  children: ComputedRef<Child[]>;
 }
 export interface NodeProtoMsg {
   typeUrl: "/osmosis.store.v1beta1.Node";
@@ -16,6 +20,10 @@ export interface Child {
   index: Uint8Array;
   accumulation: string;
 }
+export interface ReactiveChild {
+  index: ComputedRef<Uint8Array>;
+  accumulation: ComputedRef<string>;
+}
 export interface ChildProtoMsg {
   typeUrl: "/osmosis.store.v1beta1.Child";
   value: Uint8Array;
@@ -26,6 +34,9 @@ export interface ChildSDKType {
 }
 export interface Leaf {
   leaf?: Child;
+}
+export interface ReactiveLeaf {
+  leaf?: ComputedRef<Child>;
 }
 export interface LeafProtoMsg {
   typeUrl: "/osmosis.store.v1beta1.Leaf";
@@ -65,9 +76,9 @@ export const Node = {
     return message;
   },
   fromJSON(object: any): Node {
-    const obj = createBaseNode();
-    if (Array.isArray(object?.children)) obj.children = object.children.map((e: any) => Child.fromJSON(e));
-    return obj;
+    return {
+      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromJSON(e)) : []
+    };
   },
   toJSON(message: Node): JsonSafe<Node> {
     const obj: any = {};
@@ -150,7 +161,7 @@ export const Child = {
     if (message.index.length !== 0) {
       writer.uint32(10).bytes(message.index);
     }
-    if (message.accumulation !== undefined) {
+    if (message.accumulation !== "") {
       writer.uint32(18).string(message.accumulation);
     }
     return writer;
@@ -176,10 +187,10 @@ export const Child = {
     return message;
   },
   fromJSON(object: any): Child {
-    const obj = createBaseChild();
-    if (isSet(object.index)) obj.index = bytesFromBase64(object.index);
-    if (isSet(object.accumulation)) obj.accumulation = String(object.accumulation);
-    return obj;
+    return {
+      index: isSet(object.index) ? bytesFromBase64(object.index) : new Uint8Array(),
+      accumulation: isSet(object.accumulation) ? String(object.accumulation) : ""
+    };
   },
   toJSON(message: Child): JsonSafe<Child> {
     const obj: any = {};
@@ -280,9 +291,9 @@ export const Leaf = {
     return message;
   },
   fromJSON(object: any): Leaf {
-    const obj = createBaseLeaf();
-    if (isSet(object.leaf)) obj.leaf = Child.fromJSON(object.leaf);
-    return obj;
+    return {
+      leaf: isSet(object.leaf) ? Child.fromJSON(object.leaf) : undefined
+    };
   },
   toJSON(message: Leaf): JsonSafe<Leaf> {
     const obj: any = {};
@@ -291,9 +302,7 @@ export const Leaf = {
   },
   fromPartial(object: DeepPartial<Leaf>): Leaf {
     const message = createBaseLeaf();
-    if (object.leaf !== undefined && object.leaf !== null) {
-      message.leaf = Child.fromPartial(object.leaf);
-    }
+    message.leaf = object.leaf !== undefined && object.leaf !== null ? Child.fromPartial(object.leaf) : undefined;
     return message;
   },
   fromSDK(object: LeafSDKType): Leaf {

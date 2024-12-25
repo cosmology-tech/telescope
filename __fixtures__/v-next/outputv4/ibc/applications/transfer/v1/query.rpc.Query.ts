@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination.js";
-import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer.js";
-import { Rpc } from "../../../../helpers.js";
-import { BinaryReader } from "../../../../binary.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
+import { Rpc } from "../../../../helpers";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query.js";
+import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, ReactiveQueryDenomTraceRequest, ReactiveQueryDenomTracesRequest, ReactiveQueryParamsRequest } from "./query";
 /** Query provides defines the gRPC querier service. */
 export interface Query {
   /** DenomTrace queries a denomination trace information. */
@@ -27,7 +27,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryDenomTraceResponse.decode(new BinaryReader(data)));
   }
   denomTraces(request: QueryDenomTracesRequest = {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   }): Promise<QueryDenomTracesResponse> {
     const data = QueryDenomTracesRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.applications.transfer.v1.Query", "DenomTraces", data);

@@ -1,0 +1,3 @@
+import { TelescopeGeneratedType } from "../../../types";
+import { MsgRegisterDevFeeInfo, MsgCancelDevFeeInfo, MsgUpdateDevFeeInfo } from "./tx";
+export const registry: ReadonlyArray<[string, TelescopeGeneratedType<any, any, any>]> = [["/evmos.fees.v1.MsgRegisterDevFeeInfo", MsgRegisterDevFeeInfo], ["/evmos.fees.v1.MsgCancelDevFeeInfo", MsgCancelDevFeeInfo], ["/evmos.fees.v1.MsgUpdateDevFeeInfo", MsgUpdateDevFeeInfo]];

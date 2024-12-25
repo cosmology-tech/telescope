@@ -1,9 +1,9 @@
-import { Params, ParamsSDKType } from "./params.js";
-import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata.js";
-import { Rpc } from "../../../helpers.js";
-import { BinaryReader } from "../../../binary.js";
+import { Params, ParamsSDKType } from "./params";
+import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
+import { Rpc } from "../../../helpers";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataRequestSDKType, QueryDenomAuthorityMetadataResponse, QueryDenomAuthorityMetadataResponseSDKType, QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorRequestSDKType, QueryDenomsFromCreatorResponse, QueryDenomsFromCreatorResponseSDKType } from "./query.js";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataRequestSDKType, QueryDenomAuthorityMetadataResponse, QueryDenomAuthorityMetadataResponseSDKType, QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorRequestSDKType, QueryDenomsFromCreatorResponse, QueryDenomsFromCreatorResponseSDKType, ReactiveQueryParamsRequest, ReactiveQueryDenomAuthorityMetadataRequest, ReactiveQueryDenomsFromCreatorRequest } from "./query";
 /** Query defines the gRPC querier service. */
 export interface Query {
   /**

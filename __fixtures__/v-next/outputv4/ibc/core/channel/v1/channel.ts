@@ -1,7 +1,8 @@
-import { Height, HeightSDKType } from "../../client/v1/client.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { Height, HeightSDKType } from "../../client/v1/client";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * State defines if a channel is in one of the following states:
@@ -131,6 +132,13 @@ export interface Channel {
   /** opaque channel version, which is agreed upon during the handshake */
   version: string;
 }
+export interface ReactiveChannel {
+  state: ComputedRef<State>;
+  ordering: ComputedRef<Order>;
+  counterparty: ComputedRef<Counterparty>;
+  connectionHops: ComputedRef<string[]>;
+  version: ComputedRef<string>;
+}
 export interface ChannelProtoMsg {
   typeUrl: "/ibc.core.channel.v1.Channel";
   value: Uint8Array;
@@ -170,6 +178,15 @@ export interface IdentifiedChannel {
   /** channel identifier */
   channelId: string;
 }
+export interface ReactiveIdentifiedChannel {
+  state: ComputedRef<State>;
+  ordering: ComputedRef<Order>;
+  counterparty: ComputedRef<Counterparty>;
+  connectionHops: ComputedRef<string[]>;
+  version: ComputedRef<string>;
+  portId: ComputedRef<string>;
+  channelId: ComputedRef<string>;
+}
 export interface IdentifiedChannelProtoMsg {
   typeUrl: "/ibc.core.channel.v1.IdentifiedChannel";
   value: Uint8Array;
@@ -193,6 +210,10 @@ export interface Counterparty {
   portId: string;
   /** channel end on the counterparty chain */
   channelId: string;
+}
+export interface ReactiveCounterparty {
+  portId: ComputedRef<string>;
+  channelId: ComputedRef<string>;
 }
 export interface CounterpartyProtoMsg {
   typeUrl: "/ibc.core.channel.v1.Counterparty";
@@ -226,6 +247,16 @@ export interface Packet {
   /** block timestamp (in nanoseconds) after which the packet times out */
   timeoutTimestamp: bigint;
 }
+export interface ReactivePacket {
+  sequence: ComputedRef<bigint>;
+  sourcePort: ComputedRef<string>;
+  sourceChannel: ComputedRef<string>;
+  destinationPort: ComputedRef<string>;
+  destinationChannel: ComputedRef<string>;
+  data: ComputedRef<Uint8Array>;
+  timeoutHeight: ComputedRef<Height>;
+  timeoutTimestamp: ComputedRef<bigint>;
+}
 export interface PacketProtoMsg {
   typeUrl: "/ibc.core.channel.v1.Packet";
   value: Uint8Array;
@@ -257,6 +288,12 @@ export interface PacketState {
   /** embedded data that represents packet state. */
   data: Uint8Array;
 }
+export interface ReactivePacketState {
+  portId: ComputedRef<string>;
+  channelId: ComputedRef<string>;
+  sequence: ComputedRef<bigint>;
+  data: ComputedRef<Uint8Array>;
+}
 export interface PacketStateProtoMsg {
   typeUrl: "/ibc.core.channel.v1.PacketState";
   value: Uint8Array;
@@ -285,6 +322,10 @@ export interface PacketStateSDKType {
 export interface Acknowledgement {
   result?: Uint8Array;
   error?: string;
+}
+export interface ReactiveAcknowledgement {
+  result?: ComputedRef<Uint8Array>;
+  error?: ComputedRef<string>;
 }
 export interface AcknowledgementProtoMsg {
   typeUrl: "/ibc.core.channel.v1.Acknowledgement";
@@ -327,7 +368,7 @@ export const Channel = {
     for (const v of message.connectionHops) {
       writer.uint32(34).string(v!);
     }
-    if (message.version !== undefined) {
+    if (message.version !== "") {
       writer.uint32(42).string(message.version);
     }
     return writer;
@@ -362,13 +403,13 @@ export const Channel = {
     return message;
   },
   fromJSON(object: any): Channel {
-    const obj = createBaseChannel();
-    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
-    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
-    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
-    if (Array.isArray(object?.connectionHops)) obj.connectionHops = object.connectionHops.map((e: any) => String(e));
-    if (isSet(object.version)) obj.version = String(object.version);
-    return obj;
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
+      connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
+      version: isSet(object.version) ? String(object.version) : ""
+    };
   },
   toJSON(message: Channel): JsonSafe<Channel> {
     const obj: any = {};
@@ -387,9 +428,7 @@ export const Channel = {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    if (object.counterparty !== undefined && object.counterparty !== null) {
-      message.counterparty = Counterparty.fromPartial(object.counterparty);
-    }
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     return message;
@@ -503,13 +542,13 @@ export const IdentifiedChannel = {
     for (const v of message.connectionHops) {
       writer.uint32(34).string(v!);
     }
-    if (message.version !== undefined) {
+    if (message.version !== "") {
       writer.uint32(42).string(message.version);
     }
-    if (message.portId !== undefined) {
+    if (message.portId !== "") {
       writer.uint32(50).string(message.portId);
     }
-    if (message.channelId !== undefined) {
+    if (message.channelId !== "") {
       writer.uint32(58).string(message.channelId);
     }
     return writer;
@@ -550,15 +589,15 @@ export const IdentifiedChannel = {
     return message;
   },
   fromJSON(object: any): IdentifiedChannel {
-    const obj = createBaseIdentifiedChannel();
-    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
-    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
-    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
-    if (Array.isArray(object?.connectionHops)) obj.connectionHops = object.connectionHops.map((e: any) => String(e));
-    if (isSet(object.version)) obj.version = String(object.version);
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    return obj;
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
+      connectionHops: Array.isArray(object?.connectionHops) ? object.connectionHops.map((e: any) => String(e)) : [],
+      version: isSet(object.version) ? String(object.version) : "",
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      channelId: isSet(object.channelId) ? String(object.channelId) : ""
+    };
   },
   toJSON(message: IdentifiedChannel): JsonSafe<IdentifiedChannel> {
     const obj: any = {};
@@ -579,9 +618,7 @@ export const IdentifiedChannel = {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    if (object.counterparty !== undefined && object.counterparty !== null) {
-      message.counterparty = Counterparty.fromPartial(object.counterparty);
-    }
+    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     message.portId = object.portId ?? "";
@@ -694,10 +731,10 @@ function createBaseCounterparty(): Counterparty {
 export const Counterparty = {
   typeUrl: "/ibc.core.channel.v1.Counterparty",
   encode(message: Counterparty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== undefined) {
+    if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-    if (message.channelId !== undefined) {
+    if (message.channelId !== "") {
       writer.uint32(18).string(message.channelId);
     }
     return writer;
@@ -723,10 +760,10 @@ export const Counterparty = {
     return message;
   },
   fromJSON(object: any): Counterparty {
-    const obj = createBaseCounterparty();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    return obj;
+    return {
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      channelId: isSet(object.channelId) ? String(object.channelId) : ""
+    };
   },
   toJSON(message: Counterparty): JsonSafe<Counterparty> {
     const obj: any = {};
@@ -811,19 +848,19 @@ function createBasePacket(): Packet {
 export const Packet = {
   typeUrl: "/ibc.core.channel.v1.Packet",
   encode(message: Packet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sequence !== undefined) {
+    if (message.sequence !== BigInt(0)) {
       writer.uint32(8).uint64(message.sequence);
     }
-    if (message.sourcePort !== undefined) {
+    if (message.sourcePort !== "") {
       writer.uint32(18).string(message.sourcePort);
     }
-    if (message.sourceChannel !== undefined) {
+    if (message.sourceChannel !== "") {
       writer.uint32(26).string(message.sourceChannel);
     }
-    if (message.destinationPort !== undefined) {
+    if (message.destinationPort !== "") {
       writer.uint32(34).string(message.destinationPort);
     }
-    if (message.destinationChannel !== undefined) {
+    if (message.destinationChannel !== "") {
       writer.uint32(42).string(message.destinationChannel);
     }
     if (message.data.length !== 0) {
@@ -832,7 +869,7 @@ export const Packet = {
     if (message.timeoutHeight !== undefined) {
       Height.encode(message.timeoutHeight, writer.uint32(58).fork()).ldelim();
     }
-    if (message.timeoutTimestamp !== undefined) {
+    if (message.timeoutTimestamp !== BigInt(0)) {
       writer.uint32(64).uint64(message.timeoutTimestamp);
     }
     return writer;
@@ -876,16 +913,16 @@ export const Packet = {
     return message;
   },
   fromJSON(object: any): Packet {
-    const obj = createBasePacket();
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    if (isSet(object.sourcePort)) obj.sourcePort = String(object.sourcePort);
-    if (isSet(object.sourceChannel)) obj.sourceChannel = String(object.sourceChannel);
-    if (isSet(object.destinationPort)) obj.destinationPort = String(object.destinationPort);
-    if (isSet(object.destinationChannel)) obj.destinationChannel = String(object.destinationChannel);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Height.fromJSON(object.timeoutHeight);
-    if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
-    return obj;
+    return {
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
+      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
+      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
+      destinationPort: isSet(object.destinationPort) ? String(object.destinationPort) : "",
+      destinationChannel: isSet(object.destinationChannel) ? String(object.destinationChannel) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
+    };
   },
   toJSON(message: Packet): JsonSafe<Packet> {
     const obj: any = {};
@@ -901,20 +938,14 @@ export const Packet = {
   },
   fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
     message.destinationPort = object.destinationPort ?? "";
     message.destinationChannel = object.destinationChannel ?? "";
     message.data = object.data ?? new Uint8Array();
-    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
-    }
-    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
-      message.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
-    }
+    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
+    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: PacketSDKType): Packet {
@@ -1026,13 +1057,13 @@ function createBasePacketState(): PacketState {
 export const PacketState = {
   typeUrl: "/ibc.core.channel.v1.PacketState",
   encode(message: PacketState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== undefined) {
+    if (message.portId !== "") {
       writer.uint32(10).string(message.portId);
     }
-    if (message.channelId !== undefined) {
+    if (message.channelId !== "") {
       writer.uint32(18).string(message.channelId);
     }
-    if (message.sequence !== undefined) {
+    if (message.sequence !== BigInt(0)) {
       writer.uint32(24).uint64(message.sequence);
     }
     if (message.data.length !== 0) {
@@ -1067,12 +1098,12 @@ export const PacketState = {
     return message;
   },
   fromJSON(object: any): PacketState {
-    const obj = createBasePacketState();
-    if (isSet(object.portId)) obj.portId = String(object.portId);
-    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    return obj;
+    return {
+      portId: isSet(object.portId) ? String(object.portId) : "",
+      channelId: isSet(object.channelId) ? String(object.channelId) : "",
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
   },
   toJSON(message: PacketState): JsonSafe<PacketState> {
     const obj: any = {};
@@ -1086,9 +1117,7 @@ export const PacketState = {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = BigInt(object.sequence.toString());
-    }
+    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
     message.data = object.data ?? new Uint8Array();
     return message;
   },
@@ -1200,10 +1229,10 @@ export const Acknowledgement = {
     return message;
   },
   fromJSON(object: any): Acknowledgement {
-    const obj = createBaseAcknowledgement();
-    if (isSet(object.result)) obj.result = bytesFromBase64(object.result);
-    if (isSet(object.error)) obj.error = String(object.error);
-    return obj;
+    return {
+      result: isSet(object.result) ? bytesFromBase64(object.result) : undefined,
+      error: isSet(object.error) ? String(object.error) : undefined
+    };
   },
   toJSON(message: Acknowledgement): JsonSafe<Acknowledgement> {
     const obj: any = {};

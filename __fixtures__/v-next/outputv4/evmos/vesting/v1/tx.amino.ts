@@ -1,8 +1,8 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
-import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { AminoMsg } from "@cosmjs/amino";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
-import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgClawback, MsgClawbackSDKType } from "./tx.js";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgClawback, MsgClawbackSDKType } from "./tx";
 export interface MsgCreateClawbackVestingAccountAminoType extends AminoMsg {
   type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
   value: {

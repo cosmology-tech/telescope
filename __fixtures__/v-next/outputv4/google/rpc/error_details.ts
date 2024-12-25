@@ -1,7 +1,8 @@
-import { Duration, DurationSDKType } from "../protobuf/duration.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial, isObject } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { Duration, DurationSDKType } from "../protobuf/duration";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, isObject } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.rpc";
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -21,6 +22,9 @@ export const protobufPackage = "google.rpc";
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
   retryDelay?: Duration;
+}
+export interface ReactiveRetryInfo {
+  retryDelay?: ComputedRef<Duration>;
 }
 export interface RetryInfoProtoMsg {
   typeUrl: "/google.rpc.RetryInfo";
@@ -51,6 +55,10 @@ export interface DebugInfo {
   /** Additional debugging information provided by the server. */
   detail: string;
 }
+export interface ReactiveDebugInfo {
+  stackEntries: ComputedRef<string[]>;
+  detail: ComputedRef<string>;
+}
 export interface DebugInfoProtoMsg {
   typeUrl: "/google.rpc.DebugInfo";
   value: Uint8Array;
@@ -76,6 +84,9 @@ export interface DebugInfoSDKType {
 export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
+}
+export interface ReactiveQuotaFailure {
+  violations: ComputedRef<QuotaFailure_Violation[]>;
 }
 export interface QuotaFailureProtoMsg {
   typeUrl: "/google.rpc.QuotaFailure";
@@ -119,6 +130,10 @@ export interface QuotaFailure_Violation {
    */
   description: string;
 }
+export interface ReactiveQuotaFailure_Violation {
+  subject: ComputedRef<string>;
+  description: ComputedRef<string>;
+}
 export interface QuotaFailure_ViolationProtoMsg {
   typeUrl: "/google.rpc.Violation";
   value: Uint8Array;
@@ -134,6 +149,10 @@ export interface QuotaFailure_ViolationSDKType {
 export interface ErrorInfo_MetadataEntry {
   key: string;
   value: string;
+}
+export interface ReactiveErrorInfo_MetadataEntry {
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface ErrorInfo_MetadataEntryProtoMsg {
   typeUrl: string;
@@ -200,6 +219,13 @@ export interface ErrorInfo {
     [key: string]: string;
   };
 }
+export interface ReactiveErrorInfo {
+  reason: ComputedRef<string>;
+  domain: ComputedRef<string>;
+  metadata: ComputedRef<{
+    [key: string]: string;
+  }>;
+}
 export interface ErrorInfoProtoMsg {
   typeUrl: "/google.rpc.ErrorInfo";
   value: Uint8Array;
@@ -248,6 +274,9 @@ export interface PreconditionFailure {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_Violation[];
 }
+export interface ReactivePreconditionFailure {
+  violations: ComputedRef<PreconditionFailure_Violation[]>;
+}
 export interface PreconditionFailureProtoMsg {
   typeUrl: "/google.rpc.PreconditionFailure";
   value: Uint8Array;
@@ -284,6 +313,11 @@ export interface PreconditionFailure_Violation {
    */
   description: string;
 }
+export interface ReactivePreconditionFailure_Violation {
+  type: ComputedRef<string>;
+  subject: ComputedRef<string>;
+  description: ComputedRef<string>;
+}
 export interface PreconditionFailure_ViolationProtoMsg {
   typeUrl: "/google.rpc.Violation";
   value: Uint8Array;
@@ -301,6 +335,9 @@ export interface PreconditionFailure_ViolationSDKType {
 export interface BadRequest {
   /** Describes all violations in a client request. */
   fieldViolations: BadRequest_FieldViolation[];
+}
+export interface ReactiveBadRequest {
+  fieldViolations: ComputedRef<BadRequest_FieldViolation[]>;
 }
 export interface BadRequestProtoMsg {
   typeUrl: "/google.rpc.BadRequest";
@@ -323,6 +360,10 @@ export interface BadRequest_FieldViolation {
   field: string;
   /** A description of why the request element is bad. */
   description: string;
+}
+export interface ReactiveBadRequest_FieldViolation {
+  field: ComputedRef<string>;
+  description: ComputedRef<string>;
 }
 export interface BadRequest_FieldViolationProtoMsg {
   typeUrl: "/google.rpc.FieldViolation";
@@ -348,6 +389,10 @@ export interface RequestInfo {
    * stack trace that can be sent back to the service provider for debugging.
    */
   servingData: string;
+}
+export interface ReactiveRequestInfo {
+  requestId: ComputedRef<string>;
+  servingData: ComputedRef<string>;
 }
 export interface RequestInfoProtoMsg {
   typeUrl: "/google.rpc.RequestInfo";
@@ -388,6 +433,12 @@ export interface ResourceInfo {
    */
   description: string;
 }
+export interface ReactiveResourceInfo {
+  resourceType: ComputedRef<string>;
+  resourceName: ComputedRef<string>;
+  owner: ComputedRef<string>;
+  description: ComputedRef<string>;
+}
 export interface ResourceInfoProtoMsg {
   typeUrl: "/google.rpc.ResourceInfo";
   value: Uint8Array;
@@ -410,6 +461,9 @@ export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_Link[];
 }
+export interface ReactiveHelp {
+  links: ComputedRef<Help_Link[]>;
+}
 export interface HelpProtoMsg {
   typeUrl: "/google.rpc.Help";
   value: Uint8Array;
@@ -430,6 +484,10 @@ export interface Help_Link {
   description: string;
   /** The URL of the link. */
   url: string;
+}
+export interface ReactiveHelp_Link {
+  description: ComputedRef<string>;
+  url: ComputedRef<string>;
 }
 export interface Help_LinkProtoMsg {
   typeUrl: "/google.rpc.Link";
@@ -453,6 +511,10 @@ export interface LocalizedMessage {
   locale: string;
   /** The localized error message in the above locale. */
   message: string;
+}
+export interface ReactiveLocalizedMessage {
+  locale: ComputedRef<string>;
+  message: ComputedRef<string>;
 }
 export interface LocalizedMessageProtoMsg {
   typeUrl: "/google.rpc.LocalizedMessage";
@@ -497,9 +559,9 @@ export const RetryInfo = {
     return message;
   },
   fromJSON(object: any): RetryInfo {
-    const obj = createBaseRetryInfo();
-    if (isSet(object.retryDelay)) obj.retryDelay = Duration.fromJSON(object.retryDelay);
-    return obj;
+    return {
+      retryDelay: isSet(object.retryDelay) ? Duration.fromJSON(object.retryDelay) : undefined
+    };
   },
   toJSON(message: RetryInfo): JsonSafe<RetryInfo> {
     const obj: any = {};
@@ -508,9 +570,7 @@ export const RetryInfo = {
   },
   fromPartial(object: DeepPartial<RetryInfo>): RetryInfo {
     const message = createBaseRetryInfo();
-    if (object.retryDelay !== undefined && object.retryDelay !== null) {
-      message.retryDelay = Duration.fromPartial(object.retryDelay);
-    }
+    message.retryDelay = object.retryDelay !== undefined && object.retryDelay !== null ? Duration.fromPartial(object.retryDelay) : undefined;
     return message;
   },
   fromSDK(object: RetryInfoSDKType): RetryInfo {
@@ -568,7 +628,7 @@ export const DebugInfo = {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
     }
-    if (message.detail !== undefined) {
+    if (message.detail !== "") {
       writer.uint32(18).string(message.detail);
     }
     return writer;
@@ -594,10 +654,10 @@ export const DebugInfo = {
     return message;
   },
   fromJSON(object: any): DebugInfo {
-    const obj = createBaseDebugInfo();
-    if (Array.isArray(object?.stackEntries)) obj.stackEntries = object.stackEntries.map((e: any) => String(e));
-    if (isSet(object.detail)) obj.detail = String(object.detail);
-    return obj;
+    return {
+      stackEntries: Array.isArray(object?.stackEntries) ? object.stackEntries.map((e: any) => String(e)) : [],
+      detail: isSet(object.detail) ? String(object.detail) : ""
+    };
   },
   toJSON(message: DebugInfo): JsonSafe<DebugInfo> {
     const obj: any = {};
@@ -702,9 +762,9 @@ export const QuotaFailure = {
     return message;
   },
   fromJSON(object: any): QuotaFailure {
-    const obj = createBaseQuotaFailure();
-    if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e));
-    return obj;
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e)) : []
+    };
   },
   toJSON(message: QuotaFailure): JsonSafe<QuotaFailure> {
     const obj: any = {};
@@ -778,10 +838,10 @@ function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
 export const QuotaFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
   encode(message: QuotaFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subject !== undefined) {
+    if (message.subject !== "") {
       writer.uint32(10).string(message.subject);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -807,10 +867,10 @@ export const QuotaFailure_Violation = {
     return message;
   },
   fromJSON(object: any): QuotaFailure_Violation {
-    const obj = createBaseQuotaFailure_Violation();
-    if (isSet(object.subject)) obj.subject = String(object.subject);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: QuotaFailure_Violation): JsonSafe<QuotaFailure_Violation> {
     const obj: any = {};
@@ -882,10 +942,10 @@ function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
 }
 export const ErrorInfo_MetadataEntry = {
   encode(message: ErrorInfo_MetadataEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -911,10 +971,10 @@ export const ErrorInfo_MetadataEntry = {
     return message;
   },
   fromJSON(object: any): ErrorInfo_MetadataEntry {
-    const obj = createBaseErrorInfo_MetadataEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: ErrorInfo_MetadataEntry): JsonSafe<ErrorInfo_MetadataEntry> {
     const obj: any = {};
@@ -982,10 +1042,10 @@ function createBaseErrorInfo(): ErrorInfo {
 export const ErrorInfo = {
   typeUrl: "/google.rpc.ErrorInfo",
   encode(message: ErrorInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.reason !== undefined) {
+    if (message.reason !== "") {
       writer.uint32(10).string(message.reason);
     }
-    if (message.domain !== undefined) {
+    if (message.domain !== "") {
       writer.uint32(18).string(message.domain);
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
@@ -1023,16 +1083,16 @@ export const ErrorInfo = {
     return message;
   },
   fromJSON(object: any): ErrorInfo {
-    const obj = createBaseErrorInfo();
-    if (isSet(object.reason)) obj.reason = String(object.reason);
-    if (isSet(object.domain)) obj.domain = String(object.domain);
-    if (isObject(object.metadata)) obj.metadata = Object.entries(object.metadata).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      reason: isSet(object.reason) ? String(object.reason) : "",
+      domain: isSet(object.domain) ? String(object.domain) : "",
+      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: ErrorInfo): JsonSafe<ErrorInfo> {
     const obj: any = {};
@@ -1173,9 +1233,9 @@ export const PreconditionFailure = {
     return message;
   },
   fromJSON(object: any): PreconditionFailure {
-    const obj = createBasePreconditionFailure();
-    if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e));
-    return obj;
+    return {
+      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e)) : []
+    };
   },
   toJSON(message: PreconditionFailure): JsonSafe<PreconditionFailure> {
     const obj: any = {};
@@ -1250,13 +1310,13 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
 export const PreconditionFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
   encode(message: PreconditionFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
-    if (message.subject !== undefined) {
+    if (message.subject !== "") {
       writer.uint32(18).string(message.subject);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -1285,11 +1345,11 @@ export const PreconditionFailure_Violation = {
     return message;
   },
   fromJSON(object: any): PreconditionFailure_Violation {
-    const obj = createBasePreconditionFailure_Violation();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.subject)) obj.subject = String(object.subject);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: PreconditionFailure_Violation): JsonSafe<PreconditionFailure_Violation> {
     const obj: any = {};
@@ -1393,9 +1453,9 @@ export const BadRequest = {
     return message;
   },
   fromJSON(object: any): BadRequest {
-    const obj = createBaseBadRequest();
-    if (Array.isArray(object?.fieldViolations)) obj.fieldViolations = object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e));
-    return obj;
+    return {
+      fieldViolations: Array.isArray(object?.fieldViolations) ? object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e)) : []
+    };
   },
   toJSON(message: BadRequest): JsonSafe<BadRequest> {
     const obj: any = {};
@@ -1469,10 +1529,10 @@ function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
 export const BadRequest_FieldViolation = {
   typeUrl: "/google.rpc.FieldViolation",
   encode(message: BadRequest_FieldViolation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.field !== undefined) {
+    if (message.field !== "") {
       writer.uint32(10).string(message.field);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -1498,10 +1558,10 @@ export const BadRequest_FieldViolation = {
     return message;
   },
   fromJSON(object: any): BadRequest_FieldViolation {
-    const obj = createBaseBadRequest_FieldViolation();
-    if (isSet(object.field)) obj.field = String(object.field);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      field: isSet(object.field) ? String(object.field) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: BadRequest_FieldViolation): JsonSafe<BadRequest_FieldViolation> {
     const obj: any = {};
@@ -1574,10 +1634,10 @@ function createBaseRequestInfo(): RequestInfo {
 export const RequestInfo = {
   typeUrl: "/google.rpc.RequestInfo",
   encode(message: RequestInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.requestId !== undefined) {
+    if (message.requestId !== "") {
       writer.uint32(10).string(message.requestId);
     }
-    if (message.servingData !== undefined) {
+    if (message.servingData !== "") {
       writer.uint32(18).string(message.servingData);
     }
     return writer;
@@ -1603,10 +1663,10 @@ export const RequestInfo = {
     return message;
   },
   fromJSON(object: any): RequestInfo {
-    const obj = createBaseRequestInfo();
-    if (isSet(object.requestId)) obj.requestId = String(object.requestId);
-    if (isSet(object.servingData)) obj.servingData = String(object.servingData);
-    return obj;
+    return {
+      requestId: isSet(object.requestId) ? String(object.requestId) : "",
+      servingData: isSet(object.servingData) ? String(object.servingData) : ""
+    };
   },
   toJSON(message: RequestInfo): JsonSafe<RequestInfo> {
     const obj: any = {};
@@ -1681,16 +1741,16 @@ function createBaseResourceInfo(): ResourceInfo {
 export const ResourceInfo = {
   typeUrl: "/google.rpc.ResourceInfo",
   encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.resourceType !== undefined) {
+    if (message.resourceType !== "") {
       writer.uint32(10).string(message.resourceType);
     }
-    if (message.resourceName !== undefined) {
+    if (message.resourceName !== "") {
       writer.uint32(18).string(message.resourceName);
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(26).string(message.owner);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(34).string(message.description);
     }
     return writer;
@@ -1722,12 +1782,12 @@ export const ResourceInfo = {
     return message;
   },
   fromJSON(object: any): ResourceInfo {
-    const obj = createBaseResourceInfo();
-    if (isSet(object.resourceType)) obj.resourceType = String(object.resourceType);
-    if (isSet(object.resourceName)) obj.resourceName = String(object.resourceName);
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      resourceType: isSet(object.resourceType) ? String(object.resourceType) : "",
+      resourceName: isSet(object.resourceName) ? String(object.resourceName) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: ResourceInfo): JsonSafe<ResourceInfo> {
     const obj: any = {};
@@ -1840,9 +1900,9 @@ export const Help = {
     return message;
   },
   fromJSON(object: any): Help {
-    const obj = createBaseHelp();
-    if (Array.isArray(object?.links)) obj.links = object.links.map((e: any) => Help_Link.fromJSON(e));
-    return obj;
+    return {
+      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromJSON(e)) : []
+    };
   },
   toJSON(message: Help): JsonSafe<Help> {
     const obj: any = {};
@@ -1916,10 +1976,10 @@ function createBaseHelp_Link(): Help_Link {
 export const Help_Link = {
   typeUrl: "/google.rpc.Link",
   encode(message: Help_Link, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
-    if (message.url !== undefined) {
+    if (message.url !== "") {
       writer.uint32(18).string(message.url);
     }
     return writer;
@@ -1945,10 +2005,10 @@ export const Help_Link = {
     return message;
   },
   fromJSON(object: any): Help_Link {
-    const obj = createBaseHelp_Link();
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.url)) obj.url = String(object.url);
-    return obj;
+    return {
+      description: isSet(object.description) ? String(object.description) : "",
+      url: isSet(object.url) ? String(object.url) : ""
+    };
   },
   toJSON(message: Help_Link): JsonSafe<Help_Link> {
     const obj: any = {};
@@ -2021,10 +2081,10 @@ function createBaseLocalizedMessage(): LocalizedMessage {
 export const LocalizedMessage = {
   typeUrl: "/google.rpc.LocalizedMessage",
   encode(message: LocalizedMessage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.locale !== undefined) {
+    if (message.locale !== "") {
       writer.uint32(10).string(message.locale);
     }
-    if (message.message !== undefined) {
+    if (message.message !== "") {
       writer.uint32(18).string(message.message);
     }
     return writer;
@@ -2050,10 +2110,10 @@ export const LocalizedMessage = {
     return message;
   },
   fromJSON(object: any): LocalizedMessage {
-    const obj = createBaseLocalizedMessage();
-    if (isSet(object.locale)) obj.locale = String(object.locale);
-    if (isSet(object.message)) obj.message = String(object.message);
-    return obj;
+    return {
+      locale: isSet(object.locale) ? String(object.locale) : "",
+      message: isSet(object.message) ? String(object.message) : ""
+    };
   },
   toJSON(message: LocalizedMessage): JsonSafe<LocalizedMessage> {
     const obj: any = {};

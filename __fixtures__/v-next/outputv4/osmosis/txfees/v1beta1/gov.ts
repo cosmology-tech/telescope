@@ -1,7 +1,8 @@
-import { FeeToken, FeeTokenSDKType } from "./feetoken.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { FeeToken, FeeTokenSDKType } from "./feetoken";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
@@ -14,6 +15,11 @@ export interface UpdateFeeTokenProposal {
   title: string;
   description: string;
   feetoken: FeeToken;
+}
+export interface ReactiveUpdateFeeTokenProposal {
+  title: ComputedRef<string>;
+  description: ComputedRef<string>;
+  feetoken: ComputedRef<FeeToken>;
 }
 export interface UpdateFeeTokenProposalProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
@@ -41,10 +47,10 @@ function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
 export const UpdateFeeTokenProposal = {
   typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
   encode(message: UpdateFeeTokenProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     if (message.feetoken !== undefined) {
@@ -76,11 +82,11 @@ export const UpdateFeeTokenProposal = {
     return message;
   },
   fromJSON(object: any): UpdateFeeTokenProposal {
-    const obj = createBaseUpdateFeeTokenProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.feetoken)) obj.feetoken = FeeToken.fromJSON(object.feetoken);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      feetoken: isSet(object.feetoken) ? FeeToken.fromJSON(object.feetoken) : undefined
+    };
   },
   toJSON(message: UpdateFeeTokenProposal): JsonSafe<UpdateFeeTokenProposal> {
     const obj: any = {};
@@ -93,9 +99,7 @@ export const UpdateFeeTokenProposal = {
     const message = createBaseUpdateFeeTokenProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    if (object.feetoken !== undefined && object.feetoken !== null) {
-      message.feetoken = FeeToken.fromPartial(object.feetoken);
-    }
+    message.feetoken = object.feetoken !== undefined && object.feetoken !== null ? FeeToken.fromPartial(object.feetoken) : undefined;
     return message;
   },
   fromSDK(object: UpdateFeeTokenProposalSDKType): UpdateFeeTokenProposal {

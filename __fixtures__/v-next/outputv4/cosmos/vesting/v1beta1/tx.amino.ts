@@ -1,7 +1,7 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
-import { Period, PeriodSDKType } from "./vesting.js";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Period, PeriodSDKType } from "./vesting";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType } from "./tx.js";
+import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType } from "./tx";
 export interface MsgCreateVestingAccountAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateVestingAccount";
   value: {

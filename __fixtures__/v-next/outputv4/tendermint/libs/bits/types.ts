@@ -1,10 +1,15 @@
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
   bits: bigint;
   elems: bigint[];
+}
+export interface ReactiveBitArray {
+  bits: ComputedRef<bigint>;
+  elems: ComputedRef<bigint[]>;
 }
 export interface BitArrayProtoMsg {
   typeUrl: "/tendermint.libs.bits.BitArray";
@@ -23,7 +28,7 @@ function createBaseBitArray(): BitArray {
 export const BitArray = {
   typeUrl: "/tendermint.libs.bits.BitArray",
   encode(message: BitArray, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.bits !== undefined) {
+    if (message.bits !== BigInt(0)) {
       writer.uint32(8).int64(message.bits);
     }
     writer.uint32(18).fork();
@@ -61,10 +66,10 @@ export const BitArray = {
     return message;
   },
   fromJSON(object: any): BitArray {
-    const obj = createBaseBitArray();
-    if (isSet(object.bits)) obj.bits = BigInt(object.bits.toString());
-    if (Array.isArray(object?.elems)) obj.elems = object.elems.map((e: any) => BigInt(e.toString()));
-    return obj;
+    return {
+      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt(0),
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
+    };
   },
   toJSON(message: BitArray): JsonSafe<BitArray> {
     const obj: any = {};
@@ -78,9 +83,7 @@ export const BitArray = {
   },
   fromPartial(object: DeepPartial<BitArray>): BitArray {
     const message = createBaseBitArray();
-    if (object.bits !== undefined && object.bits !== null) {
-      message.bits = BigInt(object.bits.toString());
-    }
+    message.bits = object.bits !== undefined && object.bits !== null ? BigInt(object.bits.toString()) : BigInt(0);
     message.elems = object.elems?.map(e => BigInt(e.toString())) || [];
     return message;
   },

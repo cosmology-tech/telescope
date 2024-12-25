@@ -1,6 +1,6 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceSDKType } from "./tx.js";
+import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceSDKType } from "./tx";
 export interface MsgGrantAllowanceAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgGrantAllowance";
   value: {

@@ -1,26 +1,27 @@
-import { Api, ApiSDKType } from "../protobuf/api.js";
-import { Type, TypeSDKType, Enum, EnumSDKType } from "../protobuf/type.js";
-import { Documentation, DocumentationSDKType } from "./documentation.js";
-import { Backend, BackendSDKType } from "./backend.js";
-import { Http, HttpSDKType } from "./http.js";
-import { Quota, QuotaSDKType } from "./quota.js";
-import { Authentication, AuthenticationSDKType } from "./auth.js";
-import { Context, ContextSDKType } from "./context.js";
-import { Usage, UsageSDKType } from "./usage.js";
-import { Endpoint, EndpointSDKType } from "./endpoint.js";
-import { Control, ControlSDKType } from "./control.js";
-import { LogDescriptor, LogDescriptorSDKType } from "./log.js";
-import { MetricDescriptor, MetricDescriptorSDKType } from "./metric.js";
-import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "./monitored_resource.js";
-import { Billing, BillingSDKType } from "./billing.js";
-import { Logging, LoggingSDKType } from "./logging.js";
-import { Monitoring, MonitoringSDKType } from "./monitoring.js";
-import { SystemParameters, SystemParametersSDKType } from "./system_parameter.js";
-import { SourceInfo, SourceInfoSDKType } from "./source_info.js";
-import { UInt32Value, UInt32ValueSDKType } from "../protobuf/wrappers.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { Api, ApiSDKType } from "../protobuf/api";
+import { Type, TypeSDKType, Enum, EnumSDKType } from "../protobuf/type";
+import { Documentation, DocumentationSDKType } from "./documentation";
+import { Backend, BackendSDKType } from "./backend";
+import { Http, HttpSDKType } from "./http";
+import { Quota, QuotaSDKType } from "./quota";
+import { Authentication, AuthenticationSDKType } from "./auth";
+import { Context, ContextSDKType } from "./context";
+import { Usage, UsageSDKType } from "./usage";
+import { Endpoint, EndpointSDKType } from "./endpoint";
+import { Control, ControlSDKType } from "./control";
+import { LogDescriptor, LogDescriptorSDKType } from "./log";
+import { MetricDescriptor, MetricDescriptorSDKType } from "./metric";
+import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "./monitored_resource";
+import { Billing, BillingSDKType } from "./billing";
+import { Logging, LoggingSDKType } from "./logging";
+import { Monitoring, MonitoringSDKType } from "./monitoring";
+import { SystemParameters, SystemParametersSDKType } from "./system_parameter";
+import { SourceInfo, SourceInfoSDKType } from "./source_info";
+import { UInt32Value, UInt32ValueSDKType } from "../protobuf/wrappers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -144,6 +145,33 @@ export interface Service {
   /** @deprecated */
   configVersion?: UInt32Value;
 }
+export interface ReactiveService {
+  name: ComputedRef<string>;
+  title: ComputedRef<string>;
+  producerProjectId: ComputedRef<string>;
+  id: ComputedRef<string>;
+  apis: ComputedRef<Api[]>;
+  types: ComputedRef<Type[]>;
+  enums: ComputedRef<Enum[]>;
+  documentation?: ComputedRef<Documentation>;
+  backend?: ComputedRef<Backend>;
+  http?: ComputedRef<Http>;
+  quota?: ComputedRef<Quota>;
+  authentication?: ComputedRef<Authentication>;
+  context?: ComputedRef<Context>;
+  usage?: ComputedRef<Usage>;
+  endpoints: ComputedRef<Endpoint[]>;
+  control?: ComputedRef<Control>;
+  logs: ComputedRef<LogDescriptor[]>;
+  metrics: ComputedRef<MetricDescriptor[]>;
+  monitoredResources: ComputedRef<MonitoredResourceDescriptor[]>;
+  billing?: ComputedRef<Billing>;
+  logging?: ComputedRef<Logging>;
+  monitoring?: ComputedRef<Monitoring>;
+  systemParameters?: ComputedRef<SystemParameters>;
+  sourceInfo?: ComputedRef<SourceInfo>;
+  configVersion?: ComputedRef<UInt32Value>;
+}
 export interface ServiceProtoMsg {
   typeUrl: "/google.api.Service";
   value: Uint8Array;
@@ -232,16 +260,16 @@ function createBaseService(): Service {
 export const Service = {
   typeUrl: "/google.api.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(18).string(message.title);
     }
-    if (message.producerProjectId !== undefined) {
+    if (message.producerProjectId !== "") {
       writer.uint32(178).string(message.producerProjectId);
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(266).string(message.id);
     }
     for (const v of message.apis) {
@@ -399,33 +427,33 @@ export const Service = {
     return message;
   },
   fromJSON(object: any): Service {
-    const obj = createBaseService();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.apis)) obj.apis = object.apis.map((e: any) => Api.fromJSON(e));
-    if (Array.isArray(object?.types)) obj.types = object.types.map((e: any) => Type.fromJSON(e));
-    if (Array.isArray(object?.enums)) obj.enums = object.enums.map((e: any) => Enum.fromJSON(e));
-    if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
-    if (isSet(object.backend)) obj.backend = Backend.fromJSON(object.backend);
-    if (isSet(object.http)) obj.http = Http.fromJSON(object.http);
-    if (isSet(object.quota)) obj.quota = Quota.fromJSON(object.quota);
-    if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
-    if (isSet(object.context)) obj.context = Context.fromJSON(object.context);
-    if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
-    if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
-    if (isSet(object.control)) obj.control = Control.fromJSON(object.control);
-    if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => LogDescriptor.fromJSON(e));
-    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => MetricDescriptor.fromJSON(e));
-    if (Array.isArray(object?.monitoredResources)) obj.monitoredResources = object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
-    if (isSet(object.billing)) obj.billing = Billing.fromJSON(object.billing);
-    if (isSet(object.logging)) obj.logging = Logging.fromJSON(object.logging);
-    if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
-    if (isSet(object.systemParameters)) obj.systemParameters = SystemParameters.fromJSON(object.systemParameters);
-    if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
-    if (isSet(object.configVersion)) obj.configVersion = UInt32Value.fromJSON(object.configVersion);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      title: isSet(object.title) ? String(object.title) : "",
+      producerProjectId: isSet(object.producerProjectId) ? String(object.producerProjectId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromJSON(e)) : [],
+      types: Array.isArray(object?.types) ? object.types.map((e: any) => Type.fromJSON(e)) : [],
+      enums: Array.isArray(object?.enums) ? object.enums.map((e: any) => Enum.fromJSON(e)) : [],
+      documentation: isSet(object.documentation) ? Documentation.fromJSON(object.documentation) : undefined,
+      backend: isSet(object.backend) ? Backend.fromJSON(object.backend) : undefined,
+      http: isSet(object.http) ? Http.fromJSON(object.http) : undefined,
+      quota: isSet(object.quota) ? Quota.fromJSON(object.quota) : undefined,
+      authentication: isSet(object.authentication) ? Authentication.fromJSON(object.authentication) : undefined,
+      context: isSet(object.context) ? Context.fromJSON(object.context) : undefined,
+      usage: isSet(object.usage) ? Usage.fromJSON(object.usage) : undefined,
+      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromJSON(e)) : [],
+      control: isSet(object.control) ? Control.fromJSON(object.control) : undefined,
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => LogDescriptor.fromJSON(e)) : [],
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => MetricDescriptor.fromJSON(e)) : [],
+      monitoredResources: Array.isArray(object?.monitoredResources) ? object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e)) : [],
+      billing: isSet(object.billing) ? Billing.fromJSON(object.billing) : undefined,
+      logging: isSet(object.logging) ? Logging.fromJSON(object.logging) : undefined,
+      monitoring: isSet(object.monitoring) ? Monitoring.fromJSON(object.monitoring) : undefined,
+      systemParameters: isSet(object.systemParameters) ? SystemParameters.fromJSON(object.systemParameters) : undefined,
+      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
+      configVersion: isSet(object.configVersion) ? UInt32Value.fromJSON(object.configVersion) : undefined
+    };
   },
   toJSON(message: Service): JsonSafe<Service> {
     const obj: any = {};
@@ -493,52 +521,24 @@ export const Service = {
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
     message.types = object.types?.map(e => Type.fromPartial(e)) || [];
     message.enums = object.enums?.map(e => Enum.fromPartial(e)) || [];
-    if (object.documentation !== undefined && object.documentation !== null) {
-      message.documentation = Documentation.fromPartial(object.documentation);
-    }
-    if (object.backend !== undefined && object.backend !== null) {
-      message.backend = Backend.fromPartial(object.backend);
-    }
-    if (object.http !== undefined && object.http !== null) {
-      message.http = Http.fromPartial(object.http);
-    }
-    if (object.quota !== undefined && object.quota !== null) {
-      message.quota = Quota.fromPartial(object.quota);
-    }
-    if (object.authentication !== undefined && object.authentication !== null) {
-      message.authentication = Authentication.fromPartial(object.authentication);
-    }
-    if (object.context !== undefined && object.context !== null) {
-      message.context = Context.fromPartial(object.context);
-    }
-    if (object.usage !== undefined && object.usage !== null) {
-      message.usage = Usage.fromPartial(object.usage);
-    }
+    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : undefined;
+    message.backend = object.backend !== undefined && object.backend !== null ? Backend.fromPartial(object.backend) : undefined;
+    message.http = object.http !== undefined && object.http !== null ? Http.fromPartial(object.http) : undefined;
+    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : undefined;
+    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : undefined;
+    message.context = object.context !== undefined && object.context !== null ? Context.fromPartial(object.context) : undefined;
+    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : undefined;
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
-    if (object.control !== undefined && object.control !== null) {
-      message.control = Control.fromPartial(object.control);
-    }
+    message.control = object.control !== undefined && object.control !== null ? Control.fromPartial(object.control) : undefined;
     message.logs = object.logs?.map(e => LogDescriptor.fromPartial(e)) || [];
     message.metrics = object.metrics?.map(e => MetricDescriptor.fromPartial(e)) || [];
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    if (object.billing !== undefined && object.billing !== null) {
-      message.billing = Billing.fromPartial(object.billing);
-    }
-    if (object.logging !== undefined && object.logging !== null) {
-      message.logging = Logging.fromPartial(object.logging);
-    }
-    if (object.monitoring !== undefined && object.monitoring !== null) {
-      message.monitoring = Monitoring.fromPartial(object.monitoring);
-    }
-    if (object.systemParameters !== undefined && object.systemParameters !== null) {
-      message.systemParameters = SystemParameters.fromPartial(object.systemParameters);
-    }
-    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
-      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
-    }
-    if (object.configVersion !== undefined && object.configVersion !== null) {
-      message.configVersion = UInt32Value.fromPartial(object.configVersion);
-    }
+    message.billing = object.billing !== undefined && object.billing !== null ? Billing.fromPartial(object.billing) : undefined;
+    message.logging = object.logging !== undefined && object.logging !== null ? Logging.fromPartial(object.logging) : undefined;
+    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : undefined;
+    message.systemParameters = object.systemParameters !== undefined && object.systemParameters !== null ? SystemParameters.fromPartial(object.systemParameters) : undefined;
+    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
+    message.configVersion = object.configVersion !== undefined && object.configVersion !== null ? UInt32Value.fromPartial(object.configVersion) : undefined;
     return message;
   },
   fromSDK(object: ServiceSDKType): Service {

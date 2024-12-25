@@ -1,6 +1,6 @@
-import { EpochInfo, EpochInfoSDKType } from "./genesis.js";
+import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { LCDClient } from "@cosmology/lcd";
-import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query.js";
+import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

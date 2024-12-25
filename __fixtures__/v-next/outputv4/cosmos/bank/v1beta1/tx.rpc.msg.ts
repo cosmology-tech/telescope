@@ -1,8 +1,8 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
-import { Input, InputSDKType, Output, OutputSDKType } from "./bank.js";
-import { Rpc } from "../../../helpers.js";
-import { BinaryReader } from "../../../binary.js";
-import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseSDKType } from "./tx.js";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
+import { Rpc } from "../../../helpers";
+import { BinaryReader } from "../../../binary";
+import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseSDKType } from "./tx";
 /** Msg defines the bank Msg service. */
 export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */

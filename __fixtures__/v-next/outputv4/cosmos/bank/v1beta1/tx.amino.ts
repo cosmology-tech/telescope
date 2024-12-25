@@ -1,7 +1,7 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
-import { Input, InputSDKType, Output, OutputSDKType } from "./bank.js";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgSend, MsgSendSDKType, MsgMultiSend, MsgMultiSendSDKType } from "./tx.js";
+import { MsgSend, MsgSendSDKType, MsgMultiSend, MsgMultiSendSDKType } from "./tx";
 export interface MsgSendAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSend";
   value: {

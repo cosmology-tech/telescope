@@ -1,7 +1,8 @@
-import { Service, ServiceSDKType } from "./resources.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { Service, ServiceSDKType } from "./resources";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api.serviceusage.v1";
 /**
  * Enum to determine if service usage should be checked when disabling a
@@ -68,6 +69,9 @@ export interface EnableServiceRequest {
    */
   name: string;
 }
+export interface ReactiveEnableServiceRequest {
+  name: ComputedRef<string>;
+}
 export interface EnableServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest";
   value: Uint8Array;
@@ -84,6 +88,9 @@ export interface EnableServiceRequestSDKType {
 export interface EnableServiceResponse {
   /** The new state of the service after enabling. */
   service?: Service;
+}
+export interface ReactiveEnableServiceResponse {
+  service?: ComputedRef<Service>;
 }
 export interface EnableServiceResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceResponse";
@@ -120,6 +127,11 @@ export interface DisableServiceRequest {
   /** Defines the behavior for checking service usage when disabling a service. */
   checkIfServiceHasUsage: DisableServiceRequest_CheckIfServiceHasUsage;
 }
+export interface ReactiveDisableServiceRequest {
+  name: ComputedRef<string>;
+  disableDependentServices: ComputedRef<boolean>;
+  checkIfServiceHasUsage: ComputedRef<DisableServiceRequest_CheckIfServiceHasUsage>;
+}
 export interface DisableServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest";
   value: Uint8Array;
@@ -138,6 +150,9 @@ export interface DisableServiceRequestSDKType {
 export interface DisableServiceResponse {
   /** The new state of the service after disabling. */
   service?: Service;
+}
+export interface ReactiveDisableServiceResponse {
+  service?: ComputedRef<Service>;
 }
 export interface DisableServiceResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceResponse";
@@ -161,6 +176,9 @@ export interface GetServiceRequest {
    * project number.
    */
   name: string;
+}
+export interface ReactiveGetServiceRequest {
+  name: ComputedRef<string>;
 }
 export interface GetServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.GetServiceRequest";
@@ -196,6 +214,12 @@ export interface ListServicesRequest {
    */
   filter: string;
 }
+export interface ReactiveListServicesRequest {
+  parent: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+  pageToken: ComputedRef<string>;
+  filter: ComputedRef<string>;
+}
 export interface ListServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.ListServicesRequest";
   value: Uint8Array;
@@ -216,6 +240,10 @@ export interface ListServicesResponse {
    * query.
    */
   nextPageToken: string;
+}
+export interface ReactiveListServicesResponse {
+  services: ComputedRef<Service[]>;
+  nextPageToken: ComputedRef<string>;
 }
 export interface ListServicesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.ListServicesResponse";
@@ -252,6 +280,10 @@ export interface BatchEnableServicesRequest {
    */
   serviceIds: string[];
 }
+export interface ReactiveBatchEnableServicesRequest {
+  parent: ComputedRef<string>;
+  serviceIds: ComputedRef<string[]>;
+}
 export interface BatchEnableServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest";
   value: Uint8Array;
@@ -275,6 +307,10 @@ export interface BatchEnableServicesResponse {
    */
   failures: BatchEnableServicesResponse_EnableFailure[];
 }
+export interface ReactiveBatchEnableServicesResponse {
+  services: ComputedRef<Service[]>;
+  failures: ComputedRef<BatchEnableServicesResponse_EnableFailure[]>;
+}
 export interface BatchEnableServicesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesResponse";
   value: Uint8Array;
@@ -294,6 +330,10 @@ export interface BatchEnableServicesResponse_EnableFailure {
   serviceId: string;
   /** An error message describing why the service could not be enabled. */
   errorMessage: string;
+}
+export interface ReactiveBatchEnableServicesResponse_EnableFailure {
+  serviceId: ComputedRef<string>;
+  errorMessage: ComputedRef<string>;
 }
 export interface BatchEnableServicesResponse_EnableFailureProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.EnableFailure";
@@ -324,6 +364,10 @@ export interface BatchGetServicesRequest {
    */
   names: string[];
 }
+export interface ReactiveBatchGetServicesRequest {
+  parent: ComputedRef<string>;
+  names: ComputedRef<string[]>;
+}
 export interface BatchGetServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest";
   value: Uint8Array;
@@ -337,6 +381,9 @@ export interface BatchGetServicesRequestSDKType {
 export interface BatchGetServicesResponse {
   /** The requested Service states. */
   services: Service[];
+}
+export interface ReactiveBatchGetServicesResponse {
+  services: ComputedRef<Service[]>;
 }
 export interface BatchGetServicesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.BatchGetServicesResponse";
@@ -354,7 +401,7 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 export const EnableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest",
   encode(message: EnableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -377,9 +424,9 @@ export const EnableServiceRequest = {
     return message;
   },
   fromJSON(object: any): EnableServiceRequest {
-    const obj = createBaseEnableServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: EnableServiceRequest): JsonSafe<EnableServiceRequest> {
     const obj: any = {};
@@ -465,9 +512,9 @@ export const EnableServiceResponse = {
     return message;
   },
   fromJSON(object: any): EnableServiceResponse {
-    const obj = createBaseEnableServiceResponse();
-    if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
-    return obj;
+    return {
+      service: isSet(object.service) ? Service.fromJSON(object.service) : undefined
+    };
   },
   toJSON(message: EnableServiceResponse): JsonSafe<EnableServiceResponse> {
     const obj: any = {};
@@ -476,9 +523,7 @@ export const EnableServiceResponse = {
   },
   fromPartial(object: DeepPartial<EnableServiceResponse>): EnableServiceResponse {
     const message = createBaseEnableServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = Service.fromPartial(object.service);
-    }
+    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : undefined;
     return message;
   },
   fromSDK(object: EnableServiceResponseSDKType): EnableServiceResponse {
@@ -534,10 +579,10 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 export const DisableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest",
   encode(message: DisableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.disableDependentServices !== undefined) {
+    if (message.disableDependentServices === true) {
       writer.uint32(16).bool(message.disableDependentServices);
     }
     if (message.checkIfServiceHasUsage !== 0) {
@@ -569,11 +614,11 @@ export const DisableServiceRequest = {
     return message;
   },
   fromJSON(object: any): DisableServiceRequest {
-    const obj = createBaseDisableServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.disableDependentServices)) obj.disableDependentServices = Boolean(object.disableDependentServices);
-    if (isSet(object.checkIfServiceHasUsage)) obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      disableDependentServices: isSet(object.disableDependentServices) ? Boolean(object.disableDependentServices) : false,
+      checkIfServiceHasUsage: isSet(object.checkIfServiceHasUsage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage) : -1
+    };
   },
   toJSON(message: DisableServiceRequest): JsonSafe<DisableServiceRequest> {
     const obj: any = {};
@@ -677,9 +722,9 @@ export const DisableServiceResponse = {
     return message;
   },
   fromJSON(object: any): DisableServiceResponse {
-    const obj = createBaseDisableServiceResponse();
-    if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
-    return obj;
+    return {
+      service: isSet(object.service) ? Service.fromJSON(object.service) : undefined
+    };
   },
   toJSON(message: DisableServiceResponse): JsonSafe<DisableServiceResponse> {
     const obj: any = {};
@@ -688,9 +733,7 @@ export const DisableServiceResponse = {
   },
   fromPartial(object: DeepPartial<DisableServiceResponse>): DisableServiceResponse {
     const message = createBaseDisableServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = Service.fromPartial(object.service);
-    }
+    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : undefined;
     return message;
   },
   fromSDK(object: DisableServiceResponseSDKType): DisableServiceResponse {
@@ -744,7 +787,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 export const GetServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -767,9 +810,9 @@ export const GetServiceRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceRequest {
-    const obj = createBaseGetServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
     const obj: any = {};
@@ -835,16 +878,16 @@ function createBaseListServicesRequest(): ListServicesRequest {
 export const ListServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(26).string(message.pageToken);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(34).string(message.filter);
     }
     return writer;
@@ -876,12 +919,12 @@ export const ListServicesRequest = {
     return message;
   },
   fromJSON(object: any): ListServicesRequest {
-    const obj = createBaseListServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   },
   toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
     const obj: any = {};
@@ -975,7 +1018,7 @@ export const ListServicesResponse = {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1001,10 +1044,10 @@ export const ListServicesResponse = {
     return message;
   },
   fromJSON(object: any): ListServicesResponse {
-    const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
     const obj: any = {};
@@ -1087,7 +1130,7 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 export const BatchEnableServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest",
   encode(message: BatchEnableServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.serviceIds) {
@@ -1116,10 +1159,10 @@ export const BatchEnableServicesRequest = {
     return message;
   },
   fromJSON(object: any): BatchEnableServicesRequest {
-    const obj = createBaseBatchEnableServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      serviceIds: Array.isArray(object?.serviceIds) ? object.serviceIds.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: BatchEnableServicesRequest): JsonSafe<BatchEnableServicesRequest> {
     const obj: any = {};
@@ -1231,10 +1274,10 @@ export const BatchEnableServicesResponse = {
     return message;
   },
   fromJSON(object: any): BatchEnableServicesResponse {
-    const obj = createBaseBatchEnableServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
-    if (Array.isArray(object?.failures)) obj.failures = object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e));
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromJSON(e)) : [],
+      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e)) : []
+    };
   },
   toJSON(message: BatchEnableServicesResponse): JsonSafe<BatchEnableServicesResponse> {
     const obj: any = {};
@@ -1327,10 +1370,10 @@ function createBaseBatchEnableServicesResponse_EnableFailure(): BatchEnableServi
 export const BatchEnableServicesResponse_EnableFailure = {
   typeUrl: "/google.api.serviceusage.v1.EnableFailure",
   encode(message: BatchEnableServicesResponse_EnableFailure, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceId !== undefined) {
+    if (message.serviceId !== "") {
       writer.uint32(10).string(message.serviceId);
     }
-    if (message.errorMessage !== undefined) {
+    if (message.errorMessage !== "") {
       writer.uint32(18).string(message.errorMessage);
     }
     return writer;
@@ -1356,10 +1399,10 @@ export const BatchEnableServicesResponse_EnableFailure = {
     return message;
   },
   fromJSON(object: any): BatchEnableServicesResponse_EnableFailure {
-    const obj = createBaseBatchEnableServicesResponse_EnableFailure();
-    if (isSet(object.serviceId)) obj.serviceId = String(object.serviceId);
-    if (isSet(object.errorMessage)) obj.errorMessage = String(object.errorMessage);
-    return obj;
+    return {
+      serviceId: isSet(object.serviceId) ? String(object.serviceId) : "",
+      errorMessage: isSet(object.errorMessage) ? String(object.errorMessage) : ""
+    };
   },
   toJSON(message: BatchEnableServicesResponse_EnableFailure): JsonSafe<BatchEnableServicesResponse_EnableFailure> {
     const obj: any = {};
@@ -1432,7 +1475,7 @@ function createBaseBatchGetServicesRequest(): BatchGetServicesRequest {
 export const BatchGetServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest",
   encode(message: BatchGetServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.names) {
@@ -1461,10 +1504,10 @@ export const BatchGetServicesRequest = {
     return message;
   },
   fromJSON(object: any): BatchGetServicesRequest {
-    const obj = createBaseBatchGetServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.names)) obj.names = object.names.map((e: any) => String(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      names: Array.isArray(object?.names) ? object.names.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: BatchGetServicesRequest): JsonSafe<BatchGetServicesRequest> {
     const obj: any = {};
@@ -1569,9 +1612,9 @@ export const BatchGetServicesResponse = {
     return message;
   },
   fromJSON(object: any): BatchGetServicesResponse {
-    const obj = createBaseBatchGetServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromJSON(e)) : []
+    };
   },
   toJSON(message: BatchGetServicesResponse): JsonSafe<BatchGetServicesResponse> {
     const obj: any = {};

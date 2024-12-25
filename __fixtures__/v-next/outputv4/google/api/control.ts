@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * Selects and configures the service controller used by the service.  The
@@ -13,6 +14,9 @@ export interface Control {
    * feature (like quota and billing) will be enabled.
    */
   environment: string;
+}
+export interface ReactiveControl {
+  environment: ComputedRef<string>;
 }
 export interface ControlProtoMsg {
   typeUrl: "/google.api.Control";
@@ -34,7 +38,7 @@ function createBaseControl(): Control {
 export const Control = {
   typeUrl: "/google.api.Control",
   encode(message: Control, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.environment !== undefined) {
+    if (message.environment !== "") {
       writer.uint32(10).string(message.environment);
     }
     return writer;
@@ -57,9 +61,9 @@ export const Control = {
     return message;
   },
   fromJSON(object: any): Control {
-    const obj = createBaseControl();
-    if (isSet(object.environment)) obj.environment = String(object.environment);
-    return obj;
+    return {
+      environment: isSet(object.environment) ? String(object.environment) : ""
+    };
   },
   toJSON(message: Control): JsonSafe<Control> {
     const obj: any = {};

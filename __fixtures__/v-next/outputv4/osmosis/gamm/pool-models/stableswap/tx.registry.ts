@@ -1,7 +1,7 @@
-import { PoolParams, PoolParamsSDKType } from "./stableswap_pool.js";
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin.js";
+import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx.js";
+import { MsgCreateStableswapPool, MsgCreateStableswapPoolSDKType, MsgStableSwapAdjustScalingFactors, MsgStableSwapAdjustScalingFactorsSDKType } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool", MsgCreateStableswapPool], ["/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors", MsgStableSwapAdjustScalingFactors]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {

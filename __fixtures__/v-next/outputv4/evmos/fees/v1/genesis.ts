@@ -1,8 +1,9 @@
-import { DevFeeInfo, DevFeeInfoSDKType } from "./fees.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -10,6 +11,10 @@ export interface GenesisState {
   params: Params;
   /** active registered contracts */
   devFeeInfos: DevFeeInfo[];
+}
+export interface ReactiveGenesisState {
+  params: ComputedRef<Params>;
+  devFeeInfos: ComputedRef<DevFeeInfo[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.fees.v1.GenesisState";
@@ -41,6 +46,13 @@ export interface Params {
   addrDerivationCostCreate: bigint;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
+}
+export interface ReactiveParams {
+  enableFees: ComputedRef<boolean>;
+  developerShares: ComputedRef<string>;
+  validatorShares: ComputedRef<string>;
+  addrDerivationCostCreate: ComputedRef<bigint>;
+  minGasPrice: ComputedRef<string>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.fees.v1.Params";
@@ -92,10 +104,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.devFeeInfos)) obj.devFeeInfos = object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e));
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      devFeeInfos: Array.isArray(object?.devFeeInfos) ? object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -109,9 +121,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
     return message;
   },
@@ -183,19 +193,19 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.fees.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableFees !== undefined) {
+    if (message.enableFees === true) {
       writer.uint32(8).bool(message.enableFees);
     }
-    if (message.developerShares !== undefined) {
+    if (message.developerShares !== "") {
       writer.uint32(18).string(Decimal.fromUserInput(message.developerShares, 18).atomics);
     }
-    if (message.validatorShares !== undefined) {
+    if (message.validatorShares !== "") {
       writer.uint32(26).string(Decimal.fromUserInput(message.validatorShares, 18).atomics);
     }
-    if (message.addrDerivationCostCreate !== undefined) {
+    if (message.addrDerivationCostCreate !== BigInt(0)) {
       writer.uint32(32).uint64(message.addrDerivationCostCreate);
     }
-    if (message.minGasPrice !== undefined) {
+    if (message.minGasPrice !== "") {
       writer.uint32(42).string(Decimal.fromUserInput(message.minGasPrice, 18).atomics);
     }
     return writer;
@@ -230,13 +240,13 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    const obj = createBaseParams();
-    if (isSet(object.enableFees)) obj.enableFees = Boolean(object.enableFees);
-    if (isSet(object.developerShares)) obj.developerShares = String(object.developerShares);
-    if (isSet(object.validatorShares)) obj.validatorShares = String(object.validatorShares);
-    if (isSet(object.addrDerivationCostCreate)) obj.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
-    if (isSet(object.minGasPrice)) obj.minGasPrice = String(object.minGasPrice);
-    return obj;
+    return {
+      enableFees: isSet(object.enableFees) ? Boolean(object.enableFees) : false,
+      developerShares: isSet(object.developerShares) ? String(object.developerShares) : "",
+      validatorShares: isSet(object.validatorShares) ? String(object.validatorShares) : "",
+      addrDerivationCostCreate: isSet(object.addrDerivationCostCreate) ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0),
+      minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
+    };
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
@@ -252,9 +262,7 @@ export const Params = {
     message.enableFees = object.enableFees ?? false;
     message.developerShares = object.developerShares ?? "";
     message.validatorShares = object.validatorShares ?? "";
-    if (object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null) {
-      message.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
-    }
+    message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0);
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
   },

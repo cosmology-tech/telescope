@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.gamm.v2";
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -10,6 +11,11 @@ export interface QuerySpotPriceRequest {
   poolId: bigint;
   baseAssetDenom: string;
   quoteAssetDenom: string;
+}
+export interface ReactiveQuerySpotPriceRequest {
+  poolId: ComputedRef<bigint>;
+  baseAssetDenom: ComputedRef<string>;
+  quoteAssetDenom: ComputedRef<string>;
 }
 export interface QuerySpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest";
@@ -32,6 +38,9 @@ export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
 }
+export interface ReactiveQuerySpotPriceResponse {
+  spotPrice: ComputedRef<string>;
+}
 export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse";
   value: Uint8Array;
@@ -53,13 +62,13 @@ function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
 export const QuerySpotPriceRequest = {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest",
   encode(message: QuerySpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== undefined) {
+    if (message.poolId !== BigInt(0)) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.baseAssetDenom !== undefined) {
+    if (message.baseAssetDenom !== "") {
       writer.uint32(18).string(message.baseAssetDenom);
     }
-    if (message.quoteAssetDenom !== undefined) {
+    if (message.quoteAssetDenom !== "") {
       writer.uint32(26).string(message.quoteAssetDenom);
     }
     return writer;
@@ -88,11 +97,11 @@ export const QuerySpotPriceRequest = {
     return message;
   },
   fromJSON(object: any): QuerySpotPriceRequest {
-    const obj = createBaseQuerySpotPriceRequest();
-    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    if (isSet(object.baseAssetDenom)) obj.baseAssetDenom = String(object.baseAssetDenom);
-    if (isSet(object.quoteAssetDenom)) obj.quoteAssetDenom = String(object.quoteAssetDenom);
-    return obj;
+    return {
+      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
+      baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
+      quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
+    };
   },
   toJSON(message: QuerySpotPriceRequest): JsonSafe<QuerySpotPriceRequest> {
     const obj: any = {};
@@ -103,9 +112,7 @@ export const QuerySpotPriceRequest = {
   },
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
-    if (object.poolId !== undefined && object.poolId !== null) {
-      message.poolId = BigInt(object.poolId.toString());
-    }
+    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
@@ -181,7 +188,7 @@ function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
 export const QuerySpotPriceResponse = {
   typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse",
   encode(message: QuerySpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.spotPrice !== undefined) {
+    if (message.spotPrice !== "") {
       writer.uint32(10).string(message.spotPrice);
     }
     return writer;
@@ -204,9 +211,9 @@ export const QuerySpotPriceResponse = {
     return message;
   },
   fromJSON(object: any): QuerySpotPriceResponse {
-    const obj = createBaseQuerySpotPriceResponse();
-    if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
-    return obj;
+    return {
+      spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
+    };
   },
   toJSON(message: QuerySpotPriceResponse): JsonSafe<QuerySpotPriceResponse> {
     const obj: any = {};

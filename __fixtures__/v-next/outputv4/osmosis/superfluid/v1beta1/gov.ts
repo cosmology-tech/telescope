@@ -1,7 +1,8 @@
-import { SuperfluidAsset, SuperfluidAssetSDKType } from "../superfluid.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { SuperfluidAsset, SuperfluidAssetSDKType } from "../superfluid";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -11,6 +12,11 @@ export interface SetSuperfluidAssetsProposal {
   title: string;
   description: string;
   assets: SuperfluidAsset[];
+}
+export interface ReactiveSetSuperfluidAssetsProposal {
+  title: ComputedRef<string>;
+  description: ComputedRef<string>;
+  assets: ComputedRef<SuperfluidAsset[]>;
 }
 export interface SetSuperfluidAssetsProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
@@ -34,6 +40,11 @@ export interface RemoveSuperfluidAssetsProposal {
   description: string;
   superfluidAssetDenoms: string[];
 }
+export interface ReactiveRemoveSuperfluidAssetsProposal {
+  title: ComputedRef<string>;
+  description: ComputedRef<string>;
+  superfluidAssetDenoms: ComputedRef<string[]>;
+}
 export interface RemoveSuperfluidAssetsProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
   value: Uint8Array;
@@ -56,6 +67,12 @@ export interface UpdateUnpoolWhiteListProposal {
   description: string;
   ids: bigint[];
   isOverwrite: boolean;
+}
+export interface ReactiveUpdateUnpoolWhiteListProposal {
+  title: ComputedRef<string>;
+  description: ComputedRef<string>;
+  ids: ComputedRef<bigint[]>;
+  isOverwrite: ComputedRef<boolean>;
 }
 export interface UpdateUnpoolWhiteListProposalProtoMsg {
   typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
@@ -81,10 +98,10 @@ function createBaseSetSuperfluidAssetsProposal(): SetSuperfluidAssetsProposal {
 export const SetSuperfluidAssetsProposal = {
   typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal",
   encode(message: SetSuperfluidAssetsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.assets) {
@@ -116,11 +133,11 @@ export const SetSuperfluidAssetsProposal = {
     return message;
   },
   fromJSON(object: any): SetSuperfluidAssetsProposal {
-    const obj = createBaseSetSuperfluidAssetsProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromJSON(e)) : []
+    };
   },
   toJSON(message: SetSuperfluidAssetsProposal): JsonSafe<SetSuperfluidAssetsProposal> {
     const obj: any = {};
@@ -219,10 +236,10 @@ function createBaseRemoveSuperfluidAssetsProposal(): RemoveSuperfluidAssetsPropo
 export const RemoveSuperfluidAssetsProposal = {
   typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal",
   encode(message: RemoveSuperfluidAssetsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.superfluidAssetDenoms) {
@@ -254,11 +271,11 @@ export const RemoveSuperfluidAssetsProposal = {
     return message;
   },
   fromJSON(object: any): RemoveSuperfluidAssetsProposal {
-    const obj = createBaseRemoveSuperfluidAssetsProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.superfluidAssetDenoms)) obj.superfluidAssetDenoms = object.superfluidAssetDenoms.map((e: any) => String(e));
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      superfluidAssetDenoms: Array.isArray(object?.superfluidAssetDenoms) ? object.superfluidAssetDenoms.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: RemoveSuperfluidAssetsProposal): JsonSafe<RemoveSuperfluidAssetsProposal> {
     const obj: any = {};
@@ -358,10 +375,10 @@ function createBaseUpdateUnpoolWhiteListProposal(): UpdateUnpoolWhiteListProposa
 export const UpdateUnpoolWhiteListProposal = {
   typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal",
   encode(message: UpdateUnpoolWhiteListProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     writer.uint32(26).fork();
@@ -369,7 +386,7 @@ export const UpdateUnpoolWhiteListProposal = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.isOverwrite !== undefined) {
+    if (message.isOverwrite === true) {
       writer.uint32(32).bool(message.isOverwrite);
     }
     return writer;
@@ -408,12 +425,12 @@ export const UpdateUnpoolWhiteListProposal = {
     return message;
   },
   fromJSON(object: any): UpdateUnpoolWhiteListProposal {
-    const obj = createBaseUpdateUnpoolWhiteListProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (Array.isArray(object?.ids)) obj.ids = object.ids.map((e: any) => BigInt(e.toString()));
-    if (isSet(object.isOverwrite)) obj.isOverwrite = Boolean(object.isOverwrite);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e.toString())) : [],
+      isOverwrite: isSet(object.isOverwrite) ? Boolean(object.isOverwrite) : false
+    };
   },
   toJSON(message: UpdateUnpoolWhiteListProposal): JsonSafe<UpdateUnpoolWhiteListProposal> {
     const obj: any = {};

@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial, isSet } from "../../helpers.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial, isSet } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -33,6 +34,9 @@ export interface Visibility {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: VisibilityRule[];
+}
+export interface ReactiveVisibility {
+  rules: ComputedRef<VisibilityRule[]>;
 }
 export interface VisibilityProtoMsg {
   typeUrl: "/google.api.Visibility";
@@ -95,6 +99,10 @@ export interface VisibilityRule {
    */
   restriction: string;
 }
+export interface ReactiveVisibilityRule {
+  selector: ComputedRef<string>;
+  restriction: ComputedRef<string>;
+}
 export interface VisibilityRuleProtoMsg {
   typeUrl: "/google.api.VisibilityRule";
   value: Uint8Array;
@@ -138,9 +146,9 @@ export const Visibility = {
     return message;
   },
   fromJSON(object: any): Visibility {
-    const obj = createBaseVisibility();
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => VisibilityRule.fromJSON(e));
-    return obj;
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromJSON(e)) : []
+    };
   },
   toJSON(message: Visibility): JsonSafe<Visibility> {
     const obj: any = {};
@@ -214,10 +222,10 @@ function createBaseVisibilityRule(): VisibilityRule {
 export const VisibilityRule = {
   typeUrl: "/google.api.VisibilityRule",
   encode(message: VisibilityRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-    if (message.restriction !== undefined) {
+    if (message.restriction !== "") {
       writer.uint32(18).string(message.restriction);
     }
     return writer;
@@ -243,10 +251,10 @@ export const VisibilityRule = {
     return message;
   },
   fromJSON(object: any): VisibilityRule {
-    const obj = createBaseVisibilityRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.restriction)) obj.restriction = String(object.restriction);
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      restriction: isSet(object.restriction) ? String(object.restriction) : ""
+    };
   },
   toJSON(message: VisibilityRule): JsonSafe<VisibilityRule> {
     const obj: any = {};

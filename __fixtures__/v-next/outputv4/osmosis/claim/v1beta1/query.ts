@@ -1,12 +1,14 @@
-import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim.js";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
-import { Params, ParamsSDKType } from "./params.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { JsonSafe } from "../../../json-safe.js";
-import { DeepPartial, isSet } from "../../../helpers.js";
+import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./params";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
+import { DeepPartial, isSet } from "../../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
+export interface ReactiveQueryModuleAccountBalanceRequest {}
 export interface QueryModuleAccountBalanceRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest";
   value: Uint8Array;
@@ -18,6 +20,9 @@ export interface QueryModuleAccountBalanceResponse {
   /** params defines the parameters of the module. */
   moduleAccountBalance: Coin[];
 }
+export interface ReactiveQueryModuleAccountBalanceResponse {
+  moduleAccountBalance: ComputedRef<Coin[]>;
+}
 export interface QueryModuleAccountBalanceResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse";
   value: Uint8Array;
@@ -28,6 +33,7 @@ export interface QueryModuleAccountBalanceResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest";
   value: Uint8Array;
@@ -38,6 +44,9 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface ReactiveQueryParamsResponse {
+  params: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse";
@@ -50,6 +59,9 @@ export interface QueryParamsResponseSDKType {
 export interface QueryClaimRecordRequest {
   address: string;
 }
+export interface ReactiveQueryClaimRecordRequest {
+  address: ComputedRef<string>;
+}
 export interface QueryClaimRecordRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest";
   value: Uint8Array;
@@ -59,6 +71,9 @@ export interface QueryClaimRecordRequestSDKType {
 }
 export interface QueryClaimRecordResponse {
   claimRecord: ClaimRecord;
+}
+export interface ReactiveQueryClaimRecordResponse {
+  claimRecord: ComputedRef<ClaimRecord>;
 }
 export interface QueryClaimRecordResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse";
@@ -71,6 +86,10 @@ export interface QueryClaimableForActionRequest {
   address: string;
   action: Action;
 }
+export interface ReactiveQueryClaimableForActionRequest {
+  address: ComputedRef<string>;
+  action: ComputedRef<Action>;
+}
 export interface QueryClaimableForActionRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest";
   value: Uint8Array;
@@ -82,6 +101,9 @@ export interface QueryClaimableForActionRequestSDKType {
 export interface QueryClaimableForActionResponse {
   coins: Coin[];
 }
+export interface ReactiveQueryClaimableForActionResponse {
+  coins: ComputedRef<Coin[]>;
+}
 export interface QueryClaimableForActionResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse";
   value: Uint8Array;
@@ -92,6 +114,9 @@ export interface QueryClaimableForActionResponseSDKType {
 export interface QueryTotalClaimableRequest {
   address: string;
 }
+export interface ReactiveQueryTotalClaimableRequest {
+  address: ComputedRef<string>;
+}
 export interface QueryTotalClaimableRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest";
   value: Uint8Array;
@@ -101,6 +126,9 @@ export interface QueryTotalClaimableRequestSDKType {
 }
 export interface QueryTotalClaimableResponse {
   coins: Coin[];
+}
+export interface ReactiveQueryTotalClaimableResponse {
+  coins: ComputedRef<Coin[]>;
 }
 export interface QueryTotalClaimableResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse";
@@ -132,8 +160,7 @@ export const QueryModuleAccountBalanceRequest = {
     return message;
   },
   fromJSON(_: any): QueryModuleAccountBalanceRequest {
-    const obj = createBaseQueryModuleAccountBalanceRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryModuleAccountBalanceRequest): JsonSafe<QueryModuleAccountBalanceRequest> {
     const obj: any = {};
@@ -214,9 +241,9 @@ export const QueryModuleAccountBalanceResponse = {
     return message;
   },
   fromJSON(object: any): QueryModuleAccountBalanceResponse {
-    const obj = createBaseQueryModuleAccountBalanceResponse();
-    if (Array.isArray(object?.moduleAccountBalance)) obj.moduleAccountBalance = object.moduleAccountBalance.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      moduleAccountBalance: Array.isArray(object?.moduleAccountBalance) ? object.moduleAccountBalance.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryModuleAccountBalanceResponse): JsonSafe<QueryModuleAccountBalanceResponse> {
     const obj: any = {};
@@ -310,8 +337,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -392,9 +418,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -403,9 +429,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -465,7 +489,7 @@ function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
 export const QueryClaimRecordRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
   encode(message: QueryClaimRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -488,9 +512,9 @@ export const QueryClaimRecordRequest = {
     return message;
   },
   fromJSON(object: any): QueryClaimRecordRequest {
-    const obj = createBaseQueryClaimRecordRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: QueryClaimRecordRequest): JsonSafe<QueryClaimRecordRequest> {
     const obj: any = {};
@@ -582,9 +606,9 @@ export const QueryClaimRecordResponse = {
     return message;
   },
   fromJSON(object: any): QueryClaimRecordResponse {
-    const obj = createBaseQueryClaimRecordResponse();
-    if (isSet(object.claimRecord)) obj.claimRecord = ClaimRecord.fromJSON(object.claimRecord);
-    return obj;
+    return {
+      claimRecord: isSet(object.claimRecord) ? ClaimRecord.fromJSON(object.claimRecord) : undefined
+    };
   },
   toJSON(message: QueryClaimRecordResponse): JsonSafe<QueryClaimRecordResponse> {
     const obj: any = {};
@@ -593,9 +617,7 @@ export const QueryClaimRecordResponse = {
   },
   fromPartial(object: DeepPartial<QueryClaimRecordResponse>): QueryClaimRecordResponse {
     const message = createBaseQueryClaimRecordResponse();
-    if (object.claimRecord !== undefined && object.claimRecord !== null) {
-      message.claimRecord = ClaimRecord.fromPartial(object.claimRecord);
-    }
+    message.claimRecord = object.claimRecord !== undefined && object.claimRecord !== null ? ClaimRecord.fromPartial(object.claimRecord) : undefined;
     return message;
   },
   fromSDK(object: QueryClaimRecordResponseSDKType): QueryClaimRecordResponse {
@@ -656,7 +678,7 @@ function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequ
 export const QueryClaimableForActionRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
   encode(message: QueryClaimableForActionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.action !== 0) {
@@ -685,10 +707,10 @@ export const QueryClaimableForActionRequest = {
     return message;
   },
   fromJSON(object: any): QueryClaimableForActionRequest {
-    const obj = createBaseQueryClaimableForActionRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.action)) obj.action = actionFromJSON(object.action);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1
+    };
   },
   toJSON(message: QueryClaimableForActionRequest): JsonSafe<QueryClaimableForActionRequest> {
     const obj: any = {};
@@ -789,9 +811,9 @@ export const QueryClaimableForActionResponse = {
     return message;
   },
   fromJSON(object: any): QueryClaimableForActionResponse {
-    const obj = createBaseQueryClaimableForActionResponse();
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryClaimableForActionResponse): JsonSafe<QueryClaimableForActionResponse> {
     const obj: any = {};
@@ -870,7 +892,7 @@ function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
 export const QueryTotalClaimableRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
   encode(message: QueryTotalClaimableRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -893,9 +915,9 @@ export const QueryTotalClaimableRequest = {
     return message;
   },
   fromJSON(object: any): QueryTotalClaimableRequest {
-    const obj = createBaseQueryTotalClaimableRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: QueryTotalClaimableRequest): JsonSafe<QueryTotalClaimableRequest> {
     const obj: any = {};
@@ -987,9 +1009,9 @@ export const QueryTotalClaimableResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalClaimableResponse {
-    const obj = createBaseQueryTotalClaimableResponse();
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryTotalClaimableResponse): JsonSafe<QueryTotalClaimableResponse> {
     const obj: any = {};

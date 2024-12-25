@@ -1,6 +1,6 @@
-import { ParamChange, ParamChangeSDKType } from "./params.js";
+import { ParamChange, ParamChangeSDKType } from "./params";
 import { LCDClient } from "@cosmology/lcd";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseSDKType } from "./query.js";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

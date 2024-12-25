@@ -1,6 +1,6 @@
-import { Params, ParamsSDKType } from "./mint.js";
+import { Params, ParamsSDKType } from "./mint";
 import { LCDClient } from "@cosmology/lcd";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query.js";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryEpochProvisionsRequest, QueryEpochProvisionsRequestSDKType, QueryEpochProvisionsResponse, QueryEpochProvisionsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

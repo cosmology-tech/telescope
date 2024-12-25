@@ -1,9 +1,10 @@
-import { ManagedService, ManagedServiceSDKType, ConfigSource, ConfigSourceSDKType, Rollout, RolloutSDKType, ChangeReport, ChangeReportSDKType, Diagnostic, DiagnosticSDKType } from "./resources.js";
-import { Service, ServiceSDKType } from "../../service.js";
-import { Any, AnySDKType } from "../../../protobuf/any.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { ManagedService, ManagedServiceSDKType, ConfigSource, ConfigSourceSDKType, Rollout, RolloutSDKType, ChangeReport, ChangeReportSDKType, Diagnostic, DiagnosticSDKType } from "./resources";
+import { Service, ServiceSDKType } from "../../service";
+import { Any, AnySDKType } from "../../../protobuf/any";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api.servicemanagement.v1";
 export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */
@@ -67,6 +68,12 @@ export interface ListServicesRequest {
   /** @deprecated */
   consumerId: string;
 }
+export interface ReactiveListServicesRequest {
+  producerProjectId: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+  pageToken: ComputedRef<string>;
+  consumerId: ComputedRef<string>;
+}
 export interface ListServicesRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest";
   value: Uint8Array;
@@ -86,6 +93,10 @@ export interface ListServicesResponse {
   /** Token that can be passed to `ListServices` to resume a paginated query. */
   nextPageToken: string;
 }
+export interface ReactiveListServicesResponse {
+  services: ComputedRef<ManagedService[]>;
+  nextPageToken: ComputedRef<string>;
+}
 export interface ListServicesResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse";
   value: Uint8Array;
@@ -103,6 +114,9 @@ export interface GetServiceRequest {
    */
   serviceName: string;
 }
+export interface ReactiveGetServiceRequest {
+  serviceName: ComputedRef<string>;
+}
 export interface GetServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest";
   value: Uint8Array;
@@ -115,6 +129,9 @@ export interface GetServiceRequestSDKType {
 export interface CreateServiceRequest {
   /** Required. Initial values for the service resource. */
   service?: ManagedService;
+}
+export interface ReactiveCreateServiceRequest {
+  service?: ComputedRef<ManagedService>;
 }
 export interface CreateServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest";
@@ -132,6 +149,9 @@ export interface DeleteServiceRequest {
    */
   serviceName: string;
 }
+export interface ReactiveDeleteServiceRequest {
+  serviceName: ComputedRef<string>;
+}
 export interface DeleteServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest";
   value: Uint8Array;
@@ -148,6 +168,9 @@ export interface UndeleteServiceRequest {
    */
   serviceName: string;
 }
+export interface ReactiveUndeleteServiceRequest {
+  serviceName: ComputedRef<string>;
+}
 export interface UndeleteServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
   value: Uint8Array;
@@ -160,6 +183,9 @@ export interface UndeleteServiceRequestSDKType {
 export interface UndeleteServiceResponse {
   /** Revived service resource. */
   service?: ManagedService;
+}
+export interface ReactiveUndeleteServiceResponse {
+  service?: ComputedRef<ManagedService>;
 }
 export interface UndeleteServiceResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
@@ -189,6 +215,11 @@ export interface GetServiceConfigRequest {
    */
   view: GetServiceConfigRequest_ConfigView;
 }
+export interface ReactiveGetServiceConfigRequest {
+  serviceName: ComputedRef<string>;
+  configId: ComputedRef<string>;
+  view: ComputedRef<GetServiceConfigRequest_ConfigView>;
+}
 export interface GetServiceConfigRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
   value: Uint8Array;
@@ -214,6 +245,11 @@ export interface ListServiceConfigsRequest {
    */
   pageSize: number;
 }
+export interface ReactiveListServiceConfigsRequest {
+  serviceName: ComputedRef<string>;
+  pageToken: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+}
 export interface ListServiceConfigsRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
   value: Uint8Array;
@@ -230,6 +266,10 @@ export interface ListServiceConfigsResponse {
   serviceConfigs: Service[];
   /** The token of the next page of results. */
   nextPageToken: string;
+}
+export interface ReactiveListServiceConfigsResponse {
+  serviceConfigs: ComputedRef<Service[]>;
+  nextPageToken: ComputedRef<string>;
 }
 export interface ListServiceConfigsResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
@@ -249,6 +289,10 @@ export interface CreateServiceConfigRequest {
   serviceName: string;
   /** Required. The service configuration resource. */
   serviceConfig?: Service;
+}
+export interface ReactiveCreateServiceConfigRequest {
+  serviceName: ComputedRef<string>;
+  serviceConfig?: ComputedRef<Service>;
 }
 export interface CreateServiceConfigRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
@@ -275,6 +319,11 @@ export interface SubmitConfigSourceRequest {
    */
   validateOnly: boolean;
 }
+export interface ReactiveSubmitConfigSourceRequest {
+  serviceName: ComputedRef<string>;
+  configSource?: ComputedRef<ConfigSource>;
+  validateOnly: ComputedRef<boolean>;
+}
 export interface SubmitConfigSourceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
   value: Uint8Array;
@@ -289,6 +338,9 @@ export interface SubmitConfigSourceRequestSDKType {
 export interface SubmitConfigSourceResponse {
   /** The generated service configuration. */
   serviceConfig?: Service;
+}
+export interface ReactiveSubmitConfigSourceResponse {
+  serviceConfig?: ComputedRef<Service>;
 }
 export interface SubmitConfigSourceResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
@@ -307,6 +359,10 @@ export interface CreateServiceRolloutRequest {
   serviceName: string;
   /** Required. The rollout resource. The `service_name` field is output only. */
   rollout?: Rollout;
+}
+export interface ReactiveCreateServiceRolloutRequest {
+  serviceName: ComputedRef<string>;
+  rollout?: ComputedRef<Rollout>;
 }
 export interface CreateServiceRolloutRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
@@ -343,6 +399,12 @@ export interface ListServiceRolloutsRequest {
    */
   filter: string;
 }
+export interface ReactiveListServiceRolloutsRequest {
+  serviceName: ComputedRef<string>;
+  pageToken: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+  filter: ComputedRef<string>;
+}
 export interface ListServiceRolloutsRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
   value: Uint8Array;
@@ -360,6 +422,10 @@ export interface ListServiceRolloutsResponse {
   rollouts: Rollout[];
   /** The token of the next page of results. */
   nextPageToken: string;
+}
+export interface ReactiveListServiceRolloutsResponse {
+  rollouts: ComputedRef<Rollout[]>;
+  nextPageToken: ComputedRef<string>;
 }
 export interface ListServiceRolloutsResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
@@ -379,6 +445,10 @@ export interface GetServiceRolloutRequest {
   serviceName: string;
   /** Required. The id of the rollout resource. */
   rolloutId: string;
+}
+export interface ReactiveGetServiceRolloutRequest {
+  serviceName: ComputedRef<string>;
+  rolloutId: ComputedRef<string>;
 }
 export interface GetServiceRolloutRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
@@ -408,6 +478,10 @@ export interface GenerateConfigReportRequest {
    */
   oldConfig?: Any;
 }
+export interface ReactiveGenerateConfigReportRequest {
+  newConfig?: ComputedRef<Any>;
+  oldConfig?: ComputedRef<Any>;
+}
 export interface GenerateConfigReportRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
   value: Uint8Array;
@@ -435,6 +509,12 @@ export interface GenerateConfigReportResponse {
    */
   diagnostics: Diagnostic[];
 }
+export interface ReactiveGenerateConfigReportResponse {
+  serviceName: ComputedRef<string>;
+  id: ComputedRef<string>;
+  changeReports: ComputedRef<ChangeReport[]>;
+  diagnostics: ComputedRef<Diagnostic[]>;
+}
 export interface GenerateConfigReportResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
   value: Uint8Array;
@@ -457,16 +537,16 @@ function createBaseListServicesRequest(): ListServicesRequest {
 export const ListServicesRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.producerProjectId !== undefined) {
+    if (message.producerProjectId !== "") {
       writer.uint32(10).string(message.producerProjectId);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(40).int32(message.pageSize);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(50).string(message.pageToken);
     }
-    if (message.consumerId !== undefined) {
+    if (message.consumerId !== "") {
       writer.uint32(58).string(message.consumerId);
     }
     return writer;
@@ -498,12 +578,12 @@ export const ListServicesRequest = {
     return message;
   },
   fromJSON(object: any): ListServicesRequest {
-    const obj = createBaseListServicesRequest();
-    if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
-    return obj;
+    return {
+      producerProjectId: isSet(object.producerProjectId) ? String(object.producerProjectId) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      consumerId: isSet(object.consumerId) ? String(object.consumerId) : ""
+    };
   },
   toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
     const obj: any = {};
@@ -597,7 +677,7 @@ export const ListServicesResponse = {
     for (const v of message.services) {
       ManagedService.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -623,10 +703,10 @@ export const ListServicesResponse = {
     return message;
   },
   fromJSON(object: any): ListServicesResponse {
-    const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => ManagedService.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => ManagedService.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
     const obj: any = {};
@@ -708,7 +788,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 export const GetServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
     return writer;
@@ -731,9 +811,9 @@ export const GetServiceRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceRequest {
-    const obj = createBaseGetServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
+    };
   },
   toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
     const obj: any = {};
@@ -819,9 +899,9 @@ export const CreateServiceRequest = {
     return message;
   },
   fromJSON(object: any): CreateServiceRequest {
-    const obj = createBaseCreateServiceRequest();
-    if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
-    return obj;
+    return {
+      service: isSet(object.service) ? ManagedService.fromJSON(object.service) : undefined
+    };
   },
   toJSON(message: CreateServiceRequest): JsonSafe<CreateServiceRequest> {
     const obj: any = {};
@@ -830,9 +910,7 @@ export const CreateServiceRequest = {
   },
   fromPartial(object: DeepPartial<CreateServiceRequest>): CreateServiceRequest {
     const message = createBaseCreateServiceRequest();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = ManagedService.fromPartial(object.service);
-    }
+    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
   },
   fromSDK(object: CreateServiceRequestSDKType): CreateServiceRequest {
@@ -886,7 +964,7 @@ function createBaseDeleteServiceRequest(): DeleteServiceRequest {
 export const DeleteServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest",
   encode(message: DeleteServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
     return writer;
@@ -909,9 +987,9 @@ export const DeleteServiceRequest = {
     return message;
   },
   fromJSON(object: any): DeleteServiceRequest {
-    const obj = createBaseDeleteServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
+    };
   },
   toJSON(message: DeleteServiceRequest): JsonSafe<DeleteServiceRequest> {
     const obj: any = {};
@@ -974,7 +1052,7 @@ function createBaseUndeleteServiceRequest(): UndeleteServiceRequest {
 export const UndeleteServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest",
   encode(message: UndeleteServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
     return writer;
@@ -997,9 +1075,9 @@ export const UndeleteServiceRequest = {
     return message;
   },
   fromJSON(object: any): UndeleteServiceRequest {
-    const obj = createBaseUndeleteServiceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
+    };
   },
   toJSON(message: UndeleteServiceRequest): JsonSafe<UndeleteServiceRequest> {
     const obj: any = {};
@@ -1085,9 +1163,9 @@ export const UndeleteServiceResponse = {
     return message;
   },
   fromJSON(object: any): UndeleteServiceResponse {
-    const obj = createBaseUndeleteServiceResponse();
-    if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
-    return obj;
+    return {
+      service: isSet(object.service) ? ManagedService.fromJSON(object.service) : undefined
+    };
   },
   toJSON(message: UndeleteServiceResponse): JsonSafe<UndeleteServiceResponse> {
     const obj: any = {};
@@ -1096,9 +1174,7 @@ export const UndeleteServiceResponse = {
   },
   fromPartial(object: DeepPartial<UndeleteServiceResponse>): UndeleteServiceResponse {
     const message = createBaseUndeleteServiceResponse();
-    if (object.service !== undefined && object.service !== null) {
-      message.service = ManagedService.fromPartial(object.service);
-    }
+    message.service = object.service !== undefined && object.service !== null ? ManagedService.fromPartial(object.service) : undefined;
     return message;
   },
   fromSDK(object: UndeleteServiceResponseSDKType): UndeleteServiceResponse {
@@ -1154,10 +1230,10 @@ function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
 export const GetServiceConfigRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest",
   encode(message: GetServiceConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.configId !== undefined) {
+    if (message.configId !== "") {
       writer.uint32(18).string(message.configId);
     }
     if (message.view !== 0) {
@@ -1189,11 +1265,11 @@ export const GetServiceConfigRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceConfigRequest {
-    const obj = createBaseGetServiceConfigRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.configId)) obj.configId = String(object.configId);
-    if (isSet(object.view)) obj.view = getServiceConfigRequest_ConfigViewFromJSON(object.view);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      configId: isSet(object.configId) ? String(object.configId) : "",
+      view: isSet(object.view) ? getServiceConfigRequest_ConfigViewFromJSON(object.view) : -1
+    };
   },
   toJSON(message: GetServiceConfigRequest): JsonSafe<GetServiceConfigRequest> {
     const obj: any = {};
@@ -1276,13 +1352,13 @@ function createBaseListServiceConfigsRequest(): ListServiceConfigsRequest {
 export const ListServiceConfigsRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest",
   encode(message: ListServiceConfigsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -1311,11 +1387,11 @@ export const ListServiceConfigsRequest = {
     return message;
   },
   fromJSON(object: any): ListServiceConfigsRequest {
-    const obj = createBaseListServiceConfigsRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
+    };
   },
   toJSON(message: ListServiceConfigsRequest): JsonSafe<ListServiceConfigsRequest> {
     const obj: any = {};
@@ -1400,7 +1476,7 @@ export const ListServiceConfigsResponse = {
     for (const v of message.serviceConfigs) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1426,10 +1502,10 @@ export const ListServiceConfigsResponse = {
     return message;
   },
   fromJSON(object: any): ListServiceConfigsResponse {
-    const obj = createBaseListServiceConfigsResponse();
-    if (Array.isArray(object?.serviceConfigs)) obj.serviceConfigs = object.serviceConfigs.map((e: any) => Service.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      serviceConfigs: Array.isArray(object?.serviceConfigs) ? object.serviceConfigs.map((e: any) => Service.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServiceConfigsResponse): JsonSafe<ListServiceConfigsResponse> {
     const obj: any = {};
@@ -1512,7 +1588,7 @@ function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
 export const CreateServiceConfigRequest = {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest",
   encode(message: CreateServiceConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.serviceConfig !== undefined) {
@@ -1541,10 +1617,10 @@ export const CreateServiceConfigRequest = {
     return message;
   },
   fromJSON(object: any): CreateServiceConfigRequest {
-    const obj = createBaseCreateServiceConfigRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      serviceConfig: isSet(object.serviceConfig) ? Service.fromJSON(object.serviceConfig) : undefined
+    };
   },
   toJSON(message: CreateServiceConfigRequest): JsonSafe<CreateServiceConfigRequest> {
     const obj: any = {};
@@ -1555,9 +1631,7 @@ export const CreateServiceConfigRequest = {
   fromPartial(object: DeepPartial<CreateServiceConfigRequest>): CreateServiceConfigRequest {
     const message = createBaseCreateServiceConfigRequest();
     message.serviceName = object.serviceName ?? "";
-    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
-      message.serviceConfig = Service.fromPartial(object.serviceConfig);
-    }
+    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
   },
   fromSDK(object: CreateServiceConfigRequestSDKType): CreateServiceConfigRequest {
@@ -1620,13 +1694,13 @@ function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
 export const SubmitConfigSourceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest",
   encode(message: SubmitConfigSourceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.configSource !== undefined) {
       ConfigSource.encode(message.configSource, writer.uint32(18).fork()).ldelim();
     }
-    if (message.validateOnly !== undefined) {
+    if (message.validateOnly === true) {
       writer.uint32(24).bool(message.validateOnly);
     }
     return writer;
@@ -1655,11 +1729,11 @@ export const SubmitConfigSourceRequest = {
     return message;
   },
   fromJSON(object: any): SubmitConfigSourceRequest {
-    const obj = createBaseSubmitConfigSourceRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.configSource)) obj.configSource = ConfigSource.fromJSON(object.configSource);
-    if (isSet(object.validateOnly)) obj.validateOnly = Boolean(object.validateOnly);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      configSource: isSet(object.configSource) ? ConfigSource.fromJSON(object.configSource) : undefined,
+      validateOnly: isSet(object.validateOnly) ? Boolean(object.validateOnly) : false
+    };
   },
   toJSON(message: SubmitConfigSourceRequest): JsonSafe<SubmitConfigSourceRequest> {
     const obj: any = {};
@@ -1671,9 +1745,7 @@ export const SubmitConfigSourceRequest = {
   fromPartial(object: DeepPartial<SubmitConfigSourceRequest>): SubmitConfigSourceRequest {
     const message = createBaseSubmitConfigSourceRequest();
     message.serviceName = object.serviceName ?? "";
-    if (object.configSource !== undefined && object.configSource !== null) {
-      message.configSource = ConfigSource.fromPartial(object.configSource);
-    }
+    message.configSource = object.configSource !== undefined && object.configSource !== null ? ConfigSource.fromPartial(object.configSource) : undefined;
     message.validateOnly = object.validateOnly ?? false;
     return message;
   },
@@ -1765,9 +1837,9 @@ export const SubmitConfigSourceResponse = {
     return message;
   },
   fromJSON(object: any): SubmitConfigSourceResponse {
-    const obj = createBaseSubmitConfigSourceResponse();
-    if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
-    return obj;
+    return {
+      serviceConfig: isSet(object.serviceConfig) ? Service.fromJSON(object.serviceConfig) : undefined
+    };
   },
   toJSON(message: SubmitConfigSourceResponse): JsonSafe<SubmitConfigSourceResponse> {
     const obj: any = {};
@@ -1776,9 +1848,7 @@ export const SubmitConfigSourceResponse = {
   },
   fromPartial(object: DeepPartial<SubmitConfigSourceResponse>): SubmitConfigSourceResponse {
     const message = createBaseSubmitConfigSourceResponse();
-    if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
-      message.serviceConfig = Service.fromPartial(object.serviceConfig);
-    }
+    message.serviceConfig = object.serviceConfig !== undefined && object.serviceConfig !== null ? Service.fromPartial(object.serviceConfig) : undefined;
     return message;
   },
   fromSDK(object: SubmitConfigSourceResponseSDKType): SubmitConfigSourceResponse {
@@ -1833,7 +1903,7 @@ function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
 export const CreateServiceRolloutRequest = {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest",
   encode(message: CreateServiceRolloutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.rollout !== undefined) {
@@ -1862,10 +1932,10 @@ export const CreateServiceRolloutRequest = {
     return message;
   },
   fromJSON(object: any): CreateServiceRolloutRequest {
-    const obj = createBaseCreateServiceRolloutRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.rollout)) obj.rollout = Rollout.fromJSON(object.rollout);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      rollout: isSet(object.rollout) ? Rollout.fromJSON(object.rollout) : undefined
+    };
   },
   toJSON(message: CreateServiceRolloutRequest): JsonSafe<CreateServiceRolloutRequest> {
     const obj: any = {};
@@ -1876,9 +1946,7 @@ export const CreateServiceRolloutRequest = {
   fromPartial(object: DeepPartial<CreateServiceRolloutRequest>): CreateServiceRolloutRequest {
     const message = createBaseCreateServiceRolloutRequest();
     message.serviceName = object.serviceName ?? "";
-    if (object.rollout !== undefined && object.rollout !== null) {
-      message.rollout = Rollout.fromPartial(object.rollout);
-    }
+    message.rollout = object.rollout !== undefined && object.rollout !== null ? Rollout.fromPartial(object.rollout) : undefined;
     return message;
   },
   fromSDK(object: CreateServiceRolloutRequestSDKType): CreateServiceRolloutRequest {
@@ -1942,16 +2010,16 @@ function createBaseListServiceRolloutsRequest(): ListServiceRolloutsRequest {
 export const ListServiceRolloutsRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest",
   encode(message: ListServiceRolloutsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(24).int32(message.pageSize);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(34).string(message.filter);
     }
     return writer;
@@ -1983,12 +2051,12 @@ export const ListServiceRolloutsRequest = {
     return message;
   },
   fromJSON(object: any): ListServiceRolloutsRequest {
-    const obj = createBaseListServiceRolloutsRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   },
   toJSON(message: ListServiceRolloutsRequest): JsonSafe<ListServiceRolloutsRequest> {
     const obj: any = {};
@@ -2082,7 +2150,7 @@ export const ListServiceRolloutsResponse = {
     for (const v of message.rollouts) {
       Rollout.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -2108,10 +2176,10 @@ export const ListServiceRolloutsResponse = {
     return message;
   },
   fromJSON(object: any): ListServiceRolloutsResponse {
-    const obj = createBaseListServiceRolloutsResponse();
-    if (Array.isArray(object?.rollouts)) obj.rollouts = object.rollouts.map((e: any) => Rollout.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      rollouts: Array.isArray(object?.rollouts) ? object.rollouts.map((e: any) => Rollout.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServiceRolloutsResponse): JsonSafe<ListServiceRolloutsResponse> {
     const obj: any = {};
@@ -2194,10 +2262,10 @@ function createBaseGetServiceRolloutRequest(): GetServiceRolloutRequest {
 export const GetServiceRolloutRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest",
   encode(message: GetServiceRolloutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.rolloutId !== undefined) {
+    if (message.rolloutId !== "") {
       writer.uint32(18).string(message.rolloutId);
     }
     return writer;
@@ -2223,10 +2291,10 @@ export const GetServiceRolloutRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceRolloutRequest {
-    const obj = createBaseGetServiceRolloutRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.rolloutId)) obj.rolloutId = String(object.rolloutId);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : ""
+    };
   },
   toJSON(message: GetServiceRolloutRequest): JsonSafe<GetServiceRolloutRequest> {
     const obj: any = {};
@@ -2328,10 +2396,10 @@ export const GenerateConfigReportRequest = {
     return message;
   },
   fromJSON(object: any): GenerateConfigReportRequest {
-    const obj = createBaseGenerateConfigReportRequest();
-    if (isSet(object.newConfig)) obj.newConfig = Any.fromJSON(object.newConfig);
-    if (isSet(object.oldConfig)) obj.oldConfig = Any.fromJSON(object.oldConfig);
-    return obj;
+    return {
+      newConfig: isSet(object.newConfig) ? Any.fromJSON(object.newConfig) : undefined,
+      oldConfig: isSet(object.oldConfig) ? Any.fromJSON(object.oldConfig) : undefined
+    };
   },
   toJSON(message: GenerateConfigReportRequest): JsonSafe<GenerateConfigReportRequest> {
     const obj: any = {};
@@ -2341,12 +2409,8 @@ export const GenerateConfigReportRequest = {
   },
   fromPartial(object: DeepPartial<GenerateConfigReportRequest>): GenerateConfigReportRequest {
     const message = createBaseGenerateConfigReportRequest();
-    if (object.newConfig !== undefined && object.newConfig !== null) {
-      message.newConfig = Any.fromPartial(object.newConfig);
-    }
-    if (object.oldConfig !== undefined && object.oldConfig !== null) {
-      message.oldConfig = Any.fromPartial(object.oldConfig);
-    }
+    message.newConfig = object.newConfig !== undefined && object.newConfig !== null ? Any.fromPartial(object.newConfig) : undefined;
+    message.oldConfig = object.oldConfig !== undefined && object.oldConfig !== null ? Any.fromPartial(object.oldConfig) : undefined;
     return message;
   },
   fromSDK(object: GenerateConfigReportRequestSDKType): GenerateConfigReportRequest {
@@ -2410,10 +2474,10 @@ function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse 
 export const GenerateConfigReportResponse = {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse",
   encode(message: GenerateConfigReportResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
     for (const v of message.changeReports) {
@@ -2451,12 +2515,12 @@ export const GenerateConfigReportResponse = {
     return message;
   },
   fromJSON(object: any): GenerateConfigReportResponse {
-    const obj = createBaseGenerateConfigReportResponse();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (Array.isArray(object?.changeReports)) obj.changeReports = object.changeReports.map((e: any) => ChangeReport.fromJSON(e));
-    if (Array.isArray(object?.diagnostics)) obj.diagnostics = object.diagnostics.map((e: any) => Diagnostic.fromJSON(e));
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      changeReports: Array.isArray(object?.changeReports) ? object.changeReports.map((e: any) => ChangeReport.fromJSON(e)) : [],
+      diagnostics: Array.isArray(object?.diagnostics) ? object.diagnostics.map((e: any) => Diagnostic.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenerateConfigReportResponse): JsonSafe<GenerateConfigReportResponse> {
     const obj: any = {};

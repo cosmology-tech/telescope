@@ -1,7 +1,7 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
-import { Params, ParamsSDKType } from "./genesis.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Params, ParamsSDKType } from "./genesis";
 import { LCDClient } from "@cosmology/lcd";
-import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query.js";
+import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({

@@ -1,12 +1,13 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination.js";
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
-import { Params, ParamsSDKType, Metadata, MetadataSDKType } from "./bank.js";
-import { Rpc } from "../../../helpers.js";
-import { BinaryReader } from "../../../binary.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Params, ParamsSDKType, Metadata, MetadataSDKType } from "./bank";
+import { Rpc } from "../../../helpers";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
-import { ReactQueryParams } from "../../../react-query.js";
-import { useQuery } from "@tanstack/react-query";
-import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, QueryBalanceResponseSDKType, QueryAllBalancesRequest, QueryAllBalancesRequestSDKType, QueryAllBalancesResponse, QueryAllBalancesResponseSDKType, QuerySpendableBalancesRequest, QuerySpendableBalancesRequestSDKType, QuerySpendableBalancesResponse, QuerySpendableBalancesResponseSDKType, QueryTotalSupplyRequest, QueryTotalSupplyRequestSDKType, QueryTotalSupplyResponse, QueryTotalSupplyResponseSDKType, QuerySupplyOfRequest, QuerySupplyOfRequestSDKType, QuerySupplyOfResponse, QuerySupplyOfResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDenomMetadataRequest, QueryDenomMetadataRequestSDKType, QueryDenomMetadataResponse, QueryDenomMetadataResponseSDKType, QueryDenomsMetadataRequest, QueryDenomsMetadataRequestSDKType, QueryDenomsMetadataResponse, QueryDenomsMetadataResponseSDKType, QueryDenomOwnersRequest, QueryDenomOwnersRequestSDKType, QueryDenomOwnersResponse, QueryDenomOwnersResponseSDKType } from "./query.js";
+import { VueQueryParams } from "../../../vue-query";
+import { ComputedRef, computed, Ref } from "vue";
+import { useQuery } from "@tanstack/vue-query";
+import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, QueryBalanceResponseSDKType, QueryAllBalancesRequest, QueryAllBalancesRequestSDKType, QueryAllBalancesResponse, QueryAllBalancesResponseSDKType, QuerySpendableBalancesRequest, QuerySpendableBalancesRequestSDKType, QuerySpendableBalancesResponse, QuerySpendableBalancesResponseSDKType, QueryTotalSupplyRequest, QueryTotalSupplyRequestSDKType, QueryTotalSupplyResponse, QueryTotalSupplyResponseSDKType, QuerySupplyOfRequest, QuerySupplyOfRequestSDKType, QuerySupplyOfResponse, QuerySupplyOfResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDenomMetadataRequest, QueryDenomMetadataRequestSDKType, QueryDenomMetadataResponse, QueryDenomMetadataResponseSDKType, QueryDenomsMetadataRequest, QueryDenomsMetadataRequestSDKType, QueryDenomsMetadataResponse, QueryDenomsMetadataResponseSDKType, QueryDenomOwnersRequest, QueryDenomOwnersRequestSDKType, QueryDenomOwnersResponse, QueryDenomOwnersResponseSDKType, ReactiveQueryBalanceRequest, ReactiveQueryAllBalancesRequest, ReactiveQuerySpendableBalancesRequest, ReactiveQueryTotalSupplyRequest, ReactiveQuerySupplyOfRequest, ReactiveQueryParamsRequest, ReactiveQueryDenomMetadataRequest, ReactiveQueryDenomsMetadataRequest, ReactiveQueryDenomOwnersRequest } from "./query";
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Balance queries the balance of a single coin for a single account. */
@@ -67,7 +68,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QuerySpendableBalancesResponse.decode(new BinaryReader(data)));
   }
   totalSupply(request: QueryTotalSupplyRequest = {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   }): Promise<QueryTotalSupplyResponse> {
     const data = QueryTotalSupplyRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.bank.v1beta1.Query", "TotalSupply", data);
@@ -89,7 +90,7 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryDenomMetadataResponse.decode(new BinaryReader(data)));
   }
   denomsMetadata(request: QueryDenomsMetadataRequest = {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   }): Promise<QueryDenomsMetadataResponse> {
     const data = QueryDenomsMetadataRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.bank.v1beta1.Query", "DenomsMetadata", data);
@@ -134,125 +135,272 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     }
   };
 };
-export interface UseBalanceQuery<TData> extends ReactQueryParams<QueryBalanceResponse, TData> {
-  request: QueryBalanceRequest;
+export interface UseBalanceQuery<TData> extends VueQueryParams<QueryBalanceResponse, TData> {
+  request: ReactiveQueryBalanceRequest;
 }
-export interface UseAllBalancesQuery<TData> extends ReactQueryParams<QueryAllBalancesResponse, TData> {
-  request: QueryAllBalancesRequest;
+export interface UseAllBalancesQuery<TData> extends VueQueryParams<QueryAllBalancesResponse, TData> {
+  request: ReactiveQueryAllBalancesRequest;
 }
-export interface UseSpendableBalancesQuery<TData> extends ReactQueryParams<QuerySpendableBalancesResponse, TData> {
-  request: QuerySpendableBalancesRequest;
+export interface UseSpendableBalancesQuery<TData> extends VueQueryParams<QuerySpendableBalancesResponse, TData> {
+  request: ReactiveQuerySpendableBalancesRequest;
 }
-export interface UseTotalSupplyQuery<TData> extends ReactQueryParams<QueryTotalSupplyResponse, TData> {
-  request?: QueryTotalSupplyRequest;
+export interface UseTotalSupplyQuery<TData> extends VueQueryParams<QueryTotalSupplyResponse, TData> {
+  request?: ReactiveQueryTotalSupplyRequest;
 }
-export interface UseSupplyOfQuery<TData> extends ReactQueryParams<QuerySupplyOfResponse, TData> {
-  request: QuerySupplyOfRequest;
+export interface UseSupplyOfQuery<TData> extends VueQueryParams<QuerySupplyOfResponse, TData> {
+  request: ReactiveQuerySupplyOfRequest;
 }
-export interface UseParamsQuery<TData> extends ReactQueryParams<QueryParamsResponse, TData> {
-  request?: QueryParamsRequest;
+export interface UseParamsQuery<TData> extends VueQueryParams<QueryParamsResponse, TData> {
+  request?: ReactiveQueryParamsRequest;
 }
-export interface UseDenomMetadataQuery<TData> extends ReactQueryParams<QueryDenomMetadataResponse, TData> {
-  request: QueryDenomMetadataRequest;
+export interface UseDenomMetadataQuery<TData> extends VueQueryParams<QueryDenomMetadataResponse, TData> {
+  request: ReactiveQueryDenomMetadataRequest;
 }
-export interface UseDenomsMetadataQuery<TData> extends ReactQueryParams<QueryDenomsMetadataResponse, TData> {
-  request?: QueryDenomsMetadataRequest;
+export interface UseDenomsMetadataQuery<TData> extends VueQueryParams<QueryDenomsMetadataResponse, TData> {
+  request?: ReactiveQueryDenomsMetadataRequest;
 }
-export interface UseDenomOwnersQuery<TData> extends ReactQueryParams<QueryDenomOwnersResponse, TData> {
-  request: QueryDenomOwnersRequest;
+export interface UseDenomOwnersQuery<TData> extends VueQueryParams<QueryDenomOwnersResponse, TData> {
+  request: ReactiveQueryDenomOwnersRequest;
 }
-const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
-const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
-  if (!rpc) return;
-  if (_queryClients.has(rpc)) {
-    return _queryClients.get(rpc);
-  }
-  const queryService = new QueryClientImpl(rpc);
-  _queryClients.set(rpc, queryService);
-  return queryService;
+export const useQueryService = (rpc: Ref<ProtobufRpcClient | undefined>): ComputedRef<QueryClientImpl | undefined> => {
+  const _queryClients = new WeakMap();
+  return computed(() => {
+    if (rpc.value) {
+      if (_queryClients.has(rpc.value)) {
+        return _queryClients.get(rpc.value);
+      }
+      const queryService = new QueryClientImpl(rpc.value);
+      _queryClients.set(rpc.value, queryService);
+      return queryService;
+    }
+  });
 };
-export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
-  const queryService = getQueryService(rpc);
+export const createRpcQueryHooks = (rpc: Ref<ProtobufRpcClient | undefined>) => {
+  const queryService = useQueryService(rpc);
   const useBalance = <TData = QueryBalanceResponse,>({
     request,
     options
   }: UseBalanceQuery<TData>) => {
-    return useQuery<QueryBalanceResponse, Error, TData>(["balanceQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.balance(request);
-    }, options);
+    const queryKey = ["balanceQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QueryBalanceResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.balance(params);
+      },
+      ...options
+    });
   };
   const useAllBalances = <TData = QueryAllBalancesResponse,>({
     request,
     options
   }: UseAllBalancesQuery<TData>) => {
-    return useQuery<QueryAllBalancesResponse, Error, TData>(["allBalancesQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.allBalances(request);
-    }, options);
+    const queryKey = ["allBalancesQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QueryAllBalancesResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.allBalances(params);
+      },
+      ...options
+    });
   };
   const useSpendableBalances = <TData = QuerySpendableBalancesResponse,>({
     request,
     options
   }: UseSpendableBalancesQuery<TData>) => {
-    return useQuery<QuerySpendableBalancesResponse, Error, TData>(["spendableBalancesQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.spendableBalances(request);
-    }, options);
+    const queryKey = ["spendableBalancesQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QuerySpendableBalancesResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.spendableBalances(params);
+      },
+      ...options
+    });
   };
   const useTotalSupply = <TData = QueryTotalSupplyResponse,>({
     request,
     options
   }: UseTotalSupplyQuery<TData>) => {
-    return useQuery<QueryTotalSupplyResponse, Error, TData>(["totalSupplyQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.totalSupply(request);
-    }, options);
+    const queryKey = ["totalSupplyQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QueryTotalSupplyResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.totalSupply(params);
+      },
+      ...options
+    });
   };
   const useSupplyOf = <TData = QuerySupplyOfResponse,>({
     request,
     options
   }: UseSupplyOfQuery<TData>) => {
-    return useQuery<QuerySupplyOfResponse, Error, TData>(["supplyOfQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.supplyOf(request);
-    }, options);
+    const queryKey = ["supplyOfQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QuerySupplyOfResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.supplyOf(params);
+      },
+      ...options
+    });
   };
   const useParams = <TData = QueryParamsResponse,>({
     request,
     options
   }: UseParamsQuery<TData>) => {
-    return useQuery<QueryParamsResponse, Error, TData>(["paramsQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.params(request);
-    }, options);
+    const queryKey = ["paramsQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QueryParamsResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.params(params);
+      },
+      ...options
+    });
   };
   const useDenomMetadata = <TData = QueryDenomMetadataResponse,>({
     request,
     options
   }: UseDenomMetadataQuery<TData>) => {
-    return useQuery<QueryDenomMetadataResponse, Error, TData>(["denomMetadataQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.denomMetadata(request);
-    }, options);
+    const queryKey = ["denomMetadataQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QueryDenomMetadataResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.denomMetadata(params);
+      },
+      ...options
+    });
   };
   const useDenomsMetadata = <TData = QueryDenomsMetadataResponse,>({
     request,
     options
   }: UseDenomsMetadataQuery<TData>) => {
-    return useQuery<QueryDenomsMetadataResponse, Error, TData>(["denomsMetadataQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.denomsMetadata(request);
-    }, options);
+    const queryKey = ["denomsMetadataQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QueryDenomsMetadataResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.denomsMetadata(params);
+      },
+      ...options
+    });
   };
   const useDenomOwners = <TData = QueryDenomOwnersResponse,>({
     request,
     options
   }: UseDenomOwnersQuery<TData>) => {
-    return useQuery<QueryDenomOwnersResponse, Error, TData>(["denomOwnersQuery", request], () => {
-      if (!queryService) throw new Error("Query Service not initialized");
-      return queryService.denomOwners(request);
-    }, options);
+    const queryKey = ["denomOwnersQuery", queryService];
+    if (request) {
+      Object.values(request).forEach((val: any) => {
+        queryKey.push(val);
+      });
+    }
+    return useQuery<QueryDenomOwnersResponse, Error, TData>({
+      queryKey,
+      queryFn: () => {
+        if (!queryService.value) throw new Error("Query Service not initialized");
+        let params = ({} as any);
+        if (request) {
+          Object.entries(request).forEach(([key, val]) => {
+            params[key] = val.value;
+          });
+        }
+        return queryService.value.denomOwners(params);
+      },
+      ...options
+    });
   };
   return {
     /** Balance queries the balance of a single coin for a single account. */useBalance,

@@ -1,8 +1,9 @@
-import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceSDKType, Service, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentitySDKType, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "./resources.js";
-import { FieldMask, FieldMaskSDKType } from "../../../protobuf/field_mask.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceSDKType, Service, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentitySDKType, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "./resources";
+import { FieldMask, FieldMaskSDKType } from "../../../protobuf/field_mask";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Enum for service identity state. */
 export enum GetServiceIdentityResponse_IdentityState {
@@ -58,6 +59,9 @@ export interface EnableServiceRequest {
    */
   name: string;
 }
+export interface ReactiveEnableServiceRequest {
+  name: ComputedRef<string>;
+}
 export interface EnableServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest";
   value: Uint8Array;
@@ -79,6 +83,9 @@ export interface DisableServiceRequest {
    */
   name: string;
 }
+export interface ReactiveDisableServiceRequest {
+  name: ComputedRef<string>;
+}
 export interface DisableServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest";
   value: Uint8Array;
@@ -97,6 +104,9 @@ export interface GetServiceRequest {
    * where `123` is the project number (not project ID).
    */
   name: string;
+}
+export interface ReactiveGetServiceRequest {
+  name: ComputedRef<string>;
 }
 export interface GetServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest";
@@ -133,6 +143,12 @@ export interface ListServicesRequest {
    */
   filter: string;
 }
+export interface ReactiveListServicesRequest {
+  parent: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+  pageToken: ComputedRef<string>;
+  filter: ComputedRef<string>;
+}
 export interface ListServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest";
   value: Uint8Array;
@@ -153,6 +169,10 @@ export interface ListServicesResponse {
    * query.
    */
   nextPageToken: string;
+}
+export interface ReactiveListServicesResponse {
+  services: ComputedRef<Service[]>;
+  nextPageToken: ComputedRef<string>;
 }
 export interface ListServicesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListServicesResponse";
@@ -193,6 +213,10 @@ export interface BatchEnableServicesRequest {
    */
   serviceIds: string[];
 }
+export interface ReactiveBatchEnableServicesRequest {
+  parent: ComputedRef<string>;
+  serviceIds: ComputedRef<string[]>;
+}
 export interface BatchEnableServicesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest";
   value: Uint8Array;
@@ -223,6 +247,12 @@ export interface ListConsumerQuotaMetricsRequest {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
+export interface ReactiveListConsumerQuotaMetricsRequest {
+  parent: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+  pageToken: ComputedRef<string>;
+  view: ComputedRef<QuotaView>;
+}
 export interface ListConsumerQuotaMetricsRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest";
   value: Uint8Array;
@@ -243,6 +273,10 @@ export interface ListConsumerQuotaMetricsResponse {
    * call.
    */
   nextPageToken: string;
+}
+export interface ReactiveListConsumerQuotaMetricsResponse {
+  metrics: ComputedRef<ConsumerQuotaMetric[]>;
+  nextPageToken: ComputedRef<string>;
 }
 export interface ListConsumerQuotaMetricsResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse";
@@ -265,6 +299,10 @@ export interface GetConsumerQuotaMetricRequest {
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
 }
+export interface ReactiveGetConsumerQuotaMetricRequest {
+  name: ComputedRef<string>;
+  view: ComputedRef<QuotaView>;
+}
 export interface GetConsumerQuotaMetricRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest";
   value: Uint8Array;
@@ -285,6 +323,10 @@ export interface GetConsumerQuotaLimitRequest {
   name: string;
   /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
+}
+export interface ReactiveGetConsumerQuotaLimitRequest {
+  name: ComputedRef<string>;
+  view: ComputedRef<QuotaView>;
 }
 export interface GetConsumerQuotaLimitRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest";
@@ -320,6 +362,12 @@ export interface CreateAdminOverrideRequest {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   forceOnly: QuotaSafetyCheck[];
+}
+export interface ReactiveCreateAdminOverrideRequest {
+  parent: ComputedRef<string>;
+  override?: ComputedRef<QuotaOverride>;
+  force: ComputedRef<boolean>;
+  forceOnly: ComputedRef<QuotaSafetyCheck[]>;
 }
 export interface CreateAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest";
@@ -365,6 +413,13 @@ export interface UpdateAdminOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
+export interface ReactiveUpdateAdminOverrideRequest {
+  name: ComputedRef<string>;
+  override?: ComputedRef<QuotaOverride>;
+  force: ComputedRef<boolean>;
+  updateMask?: ComputedRef<FieldMask>;
+  forceOnly: ComputedRef<QuotaSafetyCheck[]>;
+}
 export interface UpdateAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest";
   value: Uint8Array;
@@ -400,6 +455,11 @@ export interface DeleteAdminOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
+export interface ReactiveDeleteAdminOverrideRequest {
+  name: ComputedRef<string>;
+  force: ComputedRef<boolean>;
+  forceOnly: ComputedRef<QuotaSafetyCheck[]>;
+}
 export interface DeleteAdminOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest";
   value: Uint8Array;
@@ -428,6 +488,11 @@ export interface ListAdminOverridesRequest {
    */
   pageToken: string;
 }
+export interface ReactiveListAdminOverridesRequest {
+  parent: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+  pageToken: ComputedRef<string>;
+}
 export interface ListAdminOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest";
   value: Uint8Array;
@@ -448,6 +513,10 @@ export interface ListAdminOverridesResponse {
    */
   nextPageToken: string;
 }
+export interface ReactiveListAdminOverridesResponse {
+  overrides: ComputedRef<QuotaOverride[]>;
+  nextPageToken: ComputedRef<string>;
+}
 export interface ListAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse";
   value: Uint8Array;
@@ -461,6 +530,9 @@ export interface ListAdminOverridesResponseSDKType {
 export interface BatchCreateAdminOverridesResponse {
   /** The overrides that were created. */
   overrides: QuotaOverride[];
+}
+export interface ReactiveBatchCreateAdminOverridesResponse {
+  overrides: ComputedRef<QuotaOverride[]>;
 }
 export interface BatchCreateAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse";
@@ -495,6 +567,12 @@ export interface ImportAdminOverridesRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
+export interface ReactiveImportAdminOverridesRequest {
+  parent: ComputedRef<string>;
+  inlineSource?: ComputedRef<OverrideInlineSource>;
+  force: ComputedRef<boolean>;
+  forceOnly: ComputedRef<QuotaSafetyCheck[]>;
+}
 export interface ImportAdminOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest";
   value: Uint8Array;
@@ -511,6 +589,9 @@ export interface ImportAdminOverridesResponse {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverride[];
 }
+export interface ReactiveImportAdminOverridesResponse {
+  overrides: ComputedRef<QuotaOverride[]>;
+}
 export interface ImportAdminOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse";
   value: Uint8Array;
@@ -525,6 +606,7 @@ export interface ImportAdminOverridesResponseSDKType {
  * of LRO returned by ImportAdminOverrides.
  */
 export interface ImportAdminOverridesMetadata {}
+export interface ReactiveImportAdminOverridesMetadata {}
 export interface ImportAdminOverridesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata";
   value: Uint8Array;
@@ -560,6 +642,12 @@ export interface CreateConsumerOverrideRequest {
    * still enforced. The 'force' and 'force_only' fields cannot both be set.
    */
   forceOnly: QuotaSafetyCheck[];
+}
+export interface ReactiveCreateConsumerOverrideRequest {
+  parent: ComputedRef<string>;
+  override?: ComputedRef<QuotaOverride>;
+  force: ComputedRef<boolean>;
+  forceOnly: ComputedRef<QuotaSafetyCheck[]>;
 }
 export interface CreateConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest";
@@ -605,6 +693,13 @@ export interface UpdateConsumerOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
+export interface ReactiveUpdateConsumerOverrideRequest {
+  name: ComputedRef<string>;
+  override?: ComputedRef<QuotaOverride>;
+  force: ComputedRef<boolean>;
+  updateMask?: ComputedRef<FieldMask>;
+  forceOnly: ComputedRef<QuotaSafetyCheck[]>;
+}
 export interface UpdateConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest";
   value: Uint8Array;
@@ -640,6 +735,11 @@ export interface DeleteConsumerOverrideRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
+export interface ReactiveDeleteConsumerOverrideRequest {
+  name: ComputedRef<string>;
+  force: ComputedRef<boolean>;
+  forceOnly: ComputedRef<QuotaSafetyCheck[]>;
+}
 export interface DeleteConsumerOverrideRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest";
   value: Uint8Array;
@@ -668,6 +768,11 @@ export interface ListConsumerOverridesRequest {
    */
   pageToken: string;
 }
+export interface ReactiveListConsumerOverridesRequest {
+  parent: ComputedRef<string>;
+  pageSize: ComputedRef<number>;
+  pageToken: ComputedRef<string>;
+}
 export interface ListConsumerOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest";
   value: Uint8Array;
@@ -688,6 +793,10 @@ export interface ListConsumerOverridesResponse {
    */
   nextPageToken: string;
 }
+export interface ReactiveListConsumerOverridesResponse {
+  overrides: ComputedRef<QuotaOverride[]>;
+  nextPageToken: ComputedRef<string>;
+}
 export interface ListConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse";
   value: Uint8Array;
@@ -701,6 +810,9 @@ export interface ListConsumerOverridesResponseSDKType {
 export interface BatchCreateConsumerOverridesResponse {
   /** The overrides that were created. */
   overrides: QuotaOverride[];
+}
+export interface ReactiveBatchCreateConsumerOverridesResponse {
+  overrides: ComputedRef<QuotaOverride[]>;
 }
 export interface BatchCreateConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse";
@@ -735,6 +847,12 @@ export interface ImportConsumerOverridesRequest {
    */
   forceOnly: QuotaSafetyCheck[];
 }
+export interface ReactiveImportConsumerOverridesRequest {
+  parent: ComputedRef<string>;
+  inlineSource?: ComputedRef<OverrideInlineSource>;
+  force: ComputedRef<boolean>;
+  forceOnly: ComputedRef<QuotaSafetyCheck[]>;
+}
 export interface ImportConsumerOverridesRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest";
   value: Uint8Array;
@@ -751,6 +869,9 @@ export interface ImportConsumerOverridesResponse {
   /** The overrides that were created from the imported data. */
   overrides: QuotaOverride[];
 }
+export interface ReactiveImportConsumerOverridesResponse {
+  overrides: ComputedRef<QuotaOverride[]>;
+}
 export interface ImportConsumerOverridesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse";
   value: Uint8Array;
@@ -765,6 +886,7 @@ export interface ImportConsumerOverridesResponseSDKType {
  * of LRO returned by ImportConsumerOverrides.
  */
 export interface ImportConsumerOverridesMetadata {}
+export interface ReactiveImportConsumerOverridesMetadata {}
 export interface ImportConsumerOverridesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata";
   value: Uint8Array;
@@ -780,6 +902,9 @@ export interface ImportAdminQuotaPoliciesResponse {
   /** The policies that were created from the imported data. */
   policies: AdminQuotaPolicy[];
 }
+export interface ReactiveImportAdminQuotaPoliciesResponse {
+  policies: ComputedRef<AdminQuotaPolicy[]>;
+}
 export interface ImportAdminQuotaPoliciesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse";
   value: Uint8Array;
@@ -794,6 +919,7 @@ export interface ImportAdminQuotaPoliciesResponseSDKType {
  * of LRO returned by ImportAdminQuotaPolicies.
  */
 export interface ImportAdminQuotaPoliciesMetadata {}
+export interface ReactiveImportAdminQuotaPoliciesMetadata {}
 export interface ImportAdminQuotaPoliciesMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata";
   value: Uint8Array;
@@ -810,6 +936,7 @@ export interface ImportAdminQuotaPoliciesMetadataSDKType {}
  * of LRO returned by CreateAdminQuotaPolicy.
  */
 export interface CreateAdminQuotaPolicyMetadata {}
+export interface ReactiveCreateAdminQuotaPolicyMetadata {}
 export interface CreateAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata";
   value: Uint8Array;
@@ -826,6 +953,7 @@ export interface CreateAdminQuotaPolicyMetadataSDKType {}
  * of LRO returned by UpdateAdminQuotaPolicy.
  */
 export interface UpdateAdminQuotaPolicyMetadata {}
+export interface ReactiveUpdateAdminQuotaPolicyMetadata {}
 export interface UpdateAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata";
   value: Uint8Array;
@@ -842,6 +970,7 @@ export interface UpdateAdminQuotaPolicyMetadataSDKType {}
  * of LRO returned by DeleteAdminQuotaPolicy.
  */
 export interface DeleteAdminQuotaPolicyMetadata {}
+export interface ReactiveDeleteAdminQuotaPolicyMetadata {}
 export interface DeleteAdminQuotaPolicyMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata";
   value: Uint8Array;
@@ -865,6 +994,9 @@ export interface GenerateServiceIdentityRequest {
    */
   parent: string;
 }
+export interface ReactiveGenerateServiceIdentityRequest {
+  parent: ComputedRef<string>;
+}
 export interface GenerateServiceIdentityRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest";
   value: Uint8Array;
@@ -884,6 +1016,10 @@ export interface GetServiceIdentityResponse {
   /** Service identity state. */
   state: GetServiceIdentityResponse_IdentityState;
 }
+export interface ReactiveGetServiceIdentityResponse {
+  identity?: ComputedRef<ServiceIdentity>;
+  state: ComputedRef<GetServiceIdentityResponse_IdentityState>;
+}
 export interface GetServiceIdentityResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse";
   value: Uint8Array;
@@ -895,6 +1031,7 @@ export interface GetServiceIdentityResponseSDKType {
 }
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadata {}
+export interface ReactiveGetServiceIdentityMetadata {}
 export interface GetServiceIdentityMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata";
   value: Uint8Array;
@@ -909,7 +1046,7 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 export const EnableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest",
   encode(message: EnableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -932,9 +1069,9 @@ export const EnableServiceRequest = {
     return message;
   },
   fromJSON(object: any): EnableServiceRequest {
-    const obj = createBaseEnableServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: EnableServiceRequest): JsonSafe<EnableServiceRequest> {
     const obj: any = {};
@@ -997,7 +1134,7 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 export const DisableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest",
   encode(message: DisableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -1020,9 +1157,9 @@ export const DisableServiceRequest = {
     return message;
   },
   fromJSON(object: any): DisableServiceRequest {
-    const obj = createBaseDisableServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: DisableServiceRequest): JsonSafe<DisableServiceRequest> {
     const obj: any = {};
@@ -1085,7 +1222,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 export const GetServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -1108,9 +1245,9 @@ export const GetServiceRequest = {
     return message;
   },
   fromJSON(object: any): GetServiceRequest {
-    const obj = createBaseGetServiceRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
   },
   toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
     const obj: any = {};
@@ -1176,16 +1313,16 @@ function createBaseListServicesRequest(): ListServicesRequest {
 export const ListServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(26).string(message.pageToken);
     }
-    if (message.filter !== undefined) {
+    if (message.filter !== "") {
       writer.uint32(34).string(message.filter);
     }
     return writer;
@@ -1217,12 +1354,12 @@ export const ListServicesRequest = {
     return message;
   },
   fromJSON(object: any): ListServicesRequest {
-    const obj = createBaseListServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
   },
   toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
     const obj: any = {};
@@ -1316,7 +1453,7 @@ export const ListServicesResponse = {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1342,10 +1479,10 @@ export const ListServicesResponse = {
     return message;
   },
   fromJSON(object: any): ListServicesResponse {
-    const obj = createBaseListServicesResponse();
-    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
     const obj: any = {};
@@ -1428,7 +1565,7 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 export const BatchEnableServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest",
   encode(message: BatchEnableServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.serviceIds) {
@@ -1457,10 +1594,10 @@ export const BatchEnableServicesRequest = {
     return message;
   },
   fromJSON(object: any): BatchEnableServicesRequest {
-    const obj = createBaseBatchEnableServicesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      serviceIds: Array.isArray(object?.serviceIds) ? object.serviceIds.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: BatchEnableServicesRequest): JsonSafe<BatchEnableServicesRequest> {
     const obj: any = {};
@@ -1545,13 +1682,13 @@ function createBaseListConsumerQuotaMetricsRequest(): ListConsumerQuotaMetricsRe
 export const ListConsumerQuotaMetricsRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest",
   encode(message: ListConsumerQuotaMetricsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(26).string(message.pageToken);
     }
     if (message.view !== 0) {
@@ -1586,12 +1723,12 @@ export const ListConsumerQuotaMetricsRequest = {
     return message;
   },
   fromJSON(object: any): ListConsumerQuotaMetricsRequest {
-    const obj = createBaseListConsumerQuotaMetricsRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
   },
   toJSON(message: ListConsumerQuotaMetricsRequest): JsonSafe<ListConsumerQuotaMetricsRequest> {
     const obj: any = {};
@@ -1685,7 +1822,7 @@ export const ListConsumerQuotaMetricsResponse = {
     for (const v of message.metrics) {
       ConsumerQuotaMetric.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1711,10 +1848,10 @@ export const ListConsumerQuotaMetricsResponse = {
     return message;
   },
   fromJSON(object: any): ListConsumerQuotaMetricsResponse {
-    const obj = createBaseListConsumerQuotaMetricsResponse();
-    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => ConsumerQuotaMetric.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListConsumerQuotaMetricsResponse): JsonSafe<ListConsumerQuotaMetricsResponse> {
     const obj: any = {};
@@ -1797,7 +1934,7 @@ function createBaseGetConsumerQuotaMetricRequest(): GetConsumerQuotaMetricReques
 export const GetConsumerQuotaMetricRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest",
   encode(message: GetConsumerQuotaMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.view !== 0) {
@@ -1826,10 +1963,10 @@ export const GetConsumerQuotaMetricRequest = {
     return message;
   },
   fromJSON(object: any): GetConsumerQuotaMetricRequest {
-    const obj = createBaseGetConsumerQuotaMetricRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
   },
   toJSON(message: GetConsumerQuotaMetricRequest): JsonSafe<GetConsumerQuotaMetricRequest> {
     const obj: any = {};
@@ -1902,7 +2039,7 @@ function createBaseGetConsumerQuotaLimitRequest(): GetConsumerQuotaLimitRequest 
 export const GetConsumerQuotaLimitRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest",
   encode(message: GetConsumerQuotaLimitRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.view !== 0) {
@@ -1931,10 +2068,10 @@ export const GetConsumerQuotaLimitRequest = {
     return message;
   },
   fromJSON(object: any): GetConsumerQuotaLimitRequest {
-    const obj = createBaseGetConsumerQuotaLimitRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
   },
   toJSON(message: GetConsumerQuotaLimitRequest): JsonSafe<GetConsumerQuotaLimitRequest> {
     const obj: any = {};
@@ -2009,13 +2146,13 @@ function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
 export const CreateAdminOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest",
   encode(message: CreateAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     if (message.override !== undefined) {
       QuotaOverride.encode(message.override, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force !== undefined) {
+    if (message.force === true) {
       writer.uint32(24).bool(message.force);
     }
     writer.uint32(34).fork();
@@ -2059,12 +2196,12 @@ export const CreateAdminOverrideRequest = {
     return message;
   },
   fromJSON(object: any): CreateAdminOverrideRequest {
-    const obj = createBaseCreateAdminOverrideRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
-    if (isSet(object.force)) obj.force = Boolean(object.force);
-    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      override: isSet(object.override) ? QuotaOverride.fromJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   },
   toJSON(message: CreateAdminOverrideRequest): JsonSafe<CreateAdminOverrideRequest> {
     const obj: any = {};
@@ -2081,9 +2218,7 @@ export const CreateAdminOverrideRequest = {
   fromPartial(object: DeepPartial<CreateAdminOverrideRequest>): CreateAdminOverrideRequest {
     const message = createBaseCreateAdminOverrideRequest();
     message.parent = object.parent ?? "";
-    if (object.override !== undefined && object.override !== null) {
-      message.override = QuotaOverride.fromPartial(object.override);
-    }
+    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
@@ -2170,13 +2305,13 @@ function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
 export const UpdateAdminOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest",
   encode(message: UpdateAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.override !== undefined) {
       QuotaOverride.encode(message.override, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force !== undefined) {
+    if (message.force === true) {
       writer.uint32(24).bool(message.force);
     }
     if (message.updateMask !== undefined) {
@@ -2226,13 +2361,13 @@ export const UpdateAdminOverrideRequest = {
     return message;
   },
   fromJSON(object: any): UpdateAdminOverrideRequest {
-    const obj = createBaseUpdateAdminOverrideRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
-    if (isSet(object.force)) obj.force = Boolean(object.force);
-    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override: isSet(object.override) ? QuotaOverride.fromJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined,
+      forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   },
   toJSON(message: UpdateAdminOverrideRequest): JsonSafe<UpdateAdminOverrideRequest> {
     const obj: any = {};
@@ -2250,13 +2385,9 @@ export const UpdateAdminOverrideRequest = {
   fromPartial(object: DeepPartial<UpdateAdminOverrideRequest>): UpdateAdminOverrideRequest {
     const message = createBaseUpdateAdminOverrideRequest();
     message.name = object.name ?? "";
-    if (object.override !== undefined && object.override !== null) {
-      message.override = QuotaOverride.fromPartial(object.override);
-    }
+    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
-    if (object.updateMask !== undefined && object.updateMask !== null) {
-      message.updateMask = FieldMask.fromPartial(object.updateMask);
-    }
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
   },
@@ -2347,10 +2478,10 @@ function createBaseDeleteAdminOverrideRequest(): DeleteAdminOverrideRequest {
 export const DeleteAdminOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest",
   encode(message: DeleteAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.force !== undefined) {
+    if (message.force === true) {
       writer.uint32(16).bool(message.force);
     }
     writer.uint32(26).fork();
@@ -2391,11 +2522,11 @@ export const DeleteAdminOverrideRequest = {
     return message;
   },
   fromJSON(object: any): DeleteAdminOverrideRequest {
-    const obj = createBaseDeleteAdminOverrideRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.force)) obj.force = Boolean(object.force);
-    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   },
   toJSON(message: DeleteAdminOverrideRequest): JsonSafe<DeleteAdminOverrideRequest> {
     const obj: any = {};
@@ -2488,13 +2619,13 @@ function createBaseListAdminOverridesRequest(): ListAdminOverridesRequest {
 export const ListAdminOverridesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest",
   encode(message: ListAdminOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(26).string(message.pageToken);
     }
     return writer;
@@ -2523,11 +2654,11 @@ export const ListAdminOverridesRequest = {
     return message;
   },
   fromJSON(object: any): ListAdminOverridesRequest {
-    const obj = createBaseListAdminOverridesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : ""
+    };
   },
   toJSON(message: ListAdminOverridesRequest): JsonSafe<ListAdminOverridesRequest> {
     const obj: any = {};
@@ -2612,7 +2743,7 @@ export const ListAdminOverridesResponse = {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -2638,10 +2769,10 @@ export const ListAdminOverridesResponse = {
     return message;
   },
   fromJSON(object: any): ListAdminOverridesResponse {
-    const obj = createBaseListAdminOverridesResponse();
-    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListAdminOverridesResponse): JsonSafe<ListAdminOverridesResponse> {
     const obj: any = {};
@@ -2746,9 +2877,9 @@ export const BatchCreateAdminOverridesResponse = {
     return message;
   },
   fromJSON(object: any): BatchCreateAdminOverridesResponse {
-    const obj = createBaseBatchCreateAdminOverridesResponse();
-    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    return obj;
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromJSON(e)) : []
+    };
   },
   toJSON(message: BatchCreateAdminOverridesResponse): JsonSafe<BatchCreateAdminOverridesResponse> {
     const obj: any = {};
@@ -2824,13 +2955,13 @@ function createBaseImportAdminOverridesRequest(): ImportAdminOverridesRequest {
 export const ImportAdminOverridesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest",
   encode(message: ImportAdminOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     if (message.inlineSource !== undefined) {
       OverrideInlineSource.encode(message.inlineSource, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force !== undefined) {
+    if (message.force === true) {
       writer.uint32(24).bool(message.force);
     }
     writer.uint32(34).fork();
@@ -2874,12 +3005,12 @@ export const ImportAdminOverridesRequest = {
     return message;
   },
   fromJSON(object: any): ImportAdminOverridesRequest {
-    const obj = createBaseImportAdminOverridesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.inlineSource)) obj.inlineSource = OverrideInlineSource.fromJSON(object.inlineSource);
-    if (isSet(object.force)) obj.force = Boolean(object.force);
-    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      inlineSource: isSet(object.inlineSource) ? OverrideInlineSource.fromJSON(object.inlineSource) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   },
   toJSON(message: ImportAdminOverridesRequest): JsonSafe<ImportAdminOverridesRequest> {
     const obj: any = {};
@@ -2896,9 +3027,7 @@ export const ImportAdminOverridesRequest = {
   fromPartial(object: DeepPartial<ImportAdminOverridesRequest>): ImportAdminOverridesRequest {
     const message = createBaseImportAdminOverridesRequest();
     message.parent = object.parent ?? "";
-    if (object.inlineSource !== undefined && object.inlineSource !== null) {
-      message.inlineSource = OverrideInlineSource.fromPartial(object.inlineSource);
-    }
+    message.inlineSource = object.inlineSource !== undefined && object.inlineSource !== null ? OverrideInlineSource.fromPartial(object.inlineSource) : undefined;
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
@@ -3004,9 +3133,9 @@ export const ImportAdminOverridesResponse = {
     return message;
   },
   fromJSON(object: any): ImportAdminOverridesResponse {
-    const obj = createBaseImportAdminOverridesResponse();
-    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    return obj;
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromJSON(e)) : []
+    };
   },
   toJSON(message: ImportAdminOverridesResponse): JsonSafe<ImportAdminOverridesResponse> {
     const obj: any = {};
@@ -3094,8 +3223,7 @@ export const ImportAdminOverridesMetadata = {
     return message;
   },
   fromJSON(_: any): ImportAdminOverridesMetadata {
-    const obj = createBaseImportAdminOverridesMetadata();
-    return obj;
+    return {};
   },
   toJSON(_: ImportAdminOverridesMetadata): JsonSafe<ImportAdminOverridesMetadata> {
     const obj: any = {};
@@ -3150,13 +3278,13 @@ function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideReques
 export const CreateConsumerOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest",
   encode(message: CreateConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     if (message.override !== undefined) {
       QuotaOverride.encode(message.override, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force !== undefined) {
+    if (message.force === true) {
       writer.uint32(24).bool(message.force);
     }
     writer.uint32(34).fork();
@@ -3200,12 +3328,12 @@ export const CreateConsumerOverrideRequest = {
     return message;
   },
   fromJSON(object: any): CreateConsumerOverrideRequest {
-    const obj = createBaseCreateConsumerOverrideRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
-    if (isSet(object.force)) obj.force = Boolean(object.force);
-    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      override: isSet(object.override) ? QuotaOverride.fromJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   },
   toJSON(message: CreateConsumerOverrideRequest): JsonSafe<CreateConsumerOverrideRequest> {
     const obj: any = {};
@@ -3222,9 +3350,7 @@ export const CreateConsumerOverrideRequest = {
   fromPartial(object: DeepPartial<CreateConsumerOverrideRequest>): CreateConsumerOverrideRequest {
     const message = createBaseCreateConsumerOverrideRequest();
     message.parent = object.parent ?? "";
-    if (object.override !== undefined && object.override !== null) {
-      message.override = QuotaOverride.fromPartial(object.override);
-    }
+    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
@@ -3311,13 +3437,13 @@ function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideReques
 export const UpdateConsumerOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest",
   encode(message: UpdateConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.override !== undefined) {
       QuotaOverride.encode(message.override, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force !== undefined) {
+    if (message.force === true) {
       writer.uint32(24).bool(message.force);
     }
     if (message.updateMask !== undefined) {
@@ -3367,13 +3493,13 @@ export const UpdateConsumerOverrideRequest = {
     return message;
   },
   fromJSON(object: any): UpdateConsumerOverrideRequest {
-    const obj = createBaseUpdateConsumerOverrideRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
-    if (isSet(object.force)) obj.force = Boolean(object.force);
-    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override: isSet(object.override) ? QuotaOverride.fromJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined,
+      forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   },
   toJSON(message: UpdateConsumerOverrideRequest): JsonSafe<UpdateConsumerOverrideRequest> {
     const obj: any = {};
@@ -3391,13 +3517,9 @@ export const UpdateConsumerOverrideRequest = {
   fromPartial(object: DeepPartial<UpdateConsumerOverrideRequest>): UpdateConsumerOverrideRequest {
     const message = createBaseUpdateConsumerOverrideRequest();
     message.name = object.name ?? "";
-    if (object.override !== undefined && object.override !== null) {
-      message.override = QuotaOverride.fromPartial(object.override);
-    }
+    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
     message.force = object.force ?? false;
-    if (object.updateMask !== undefined && object.updateMask !== null) {
-      message.updateMask = FieldMask.fromPartial(object.updateMask);
-    }
+    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
   },
@@ -3488,10 +3610,10 @@ function createBaseDeleteConsumerOverrideRequest(): DeleteConsumerOverrideReques
 export const DeleteConsumerOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest",
   encode(message: DeleteConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.force !== undefined) {
+    if (message.force === true) {
       writer.uint32(16).bool(message.force);
     }
     writer.uint32(26).fork();
@@ -3532,11 +3654,11 @@ export const DeleteConsumerOverrideRequest = {
     return message;
   },
   fromJSON(object: any): DeleteConsumerOverrideRequest {
-    const obj = createBaseDeleteConsumerOverrideRequest();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.force)) obj.force = Boolean(object.force);
-    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   },
   toJSON(message: DeleteConsumerOverrideRequest): JsonSafe<DeleteConsumerOverrideRequest> {
     const obj: any = {};
@@ -3629,13 +3751,13 @@ function createBaseListConsumerOverridesRequest(): ListConsumerOverridesRequest 
 export const ListConsumerOverridesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest",
   encode(message: ListConsumerOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== undefined) {
+    if (message.pageSize !== 0) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== undefined) {
+    if (message.pageToken !== "") {
       writer.uint32(26).string(message.pageToken);
     }
     return writer;
@@ -3664,11 +3786,11 @@ export const ListConsumerOverridesRequest = {
     return message;
   },
   fromJSON(object: any): ListConsumerOverridesRequest {
-    const obj = createBaseListConsumerOverridesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
+      pageToken: isSet(object.pageToken) ? String(object.pageToken) : ""
+    };
   },
   toJSON(message: ListConsumerOverridesRequest): JsonSafe<ListConsumerOverridesRequest> {
     const obj: any = {};
@@ -3753,7 +3875,7 @@ export const ListConsumerOverridesResponse = {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== undefined) {
+    if (message.nextPageToken !== "") {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -3779,10 +3901,10 @@ export const ListConsumerOverridesResponse = {
     return message;
   },
   fromJSON(object: any): ListConsumerOverridesResponse {
-    const obj = createBaseListConsumerOverridesResponse();
-    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromJSON(e)) : [],
+      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
+    };
   },
   toJSON(message: ListConsumerOverridesResponse): JsonSafe<ListConsumerOverridesResponse> {
     const obj: any = {};
@@ -3887,9 +4009,9 @@ export const BatchCreateConsumerOverridesResponse = {
     return message;
   },
   fromJSON(object: any): BatchCreateConsumerOverridesResponse {
-    const obj = createBaseBatchCreateConsumerOverridesResponse();
-    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    return obj;
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromJSON(e)) : []
+    };
   },
   toJSON(message: BatchCreateConsumerOverridesResponse): JsonSafe<BatchCreateConsumerOverridesResponse> {
     const obj: any = {};
@@ -3965,13 +4087,13 @@ function createBaseImportConsumerOverridesRequest(): ImportConsumerOverridesRequ
 export const ImportConsumerOverridesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest",
   encode(message: ImportConsumerOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     if (message.inlineSource !== undefined) {
       OverrideInlineSource.encode(message.inlineSource, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force !== undefined) {
+    if (message.force === true) {
       writer.uint32(24).bool(message.force);
     }
     writer.uint32(34).fork();
@@ -4015,12 +4137,12 @@ export const ImportConsumerOverridesRequest = {
     return message;
   },
   fromJSON(object: any): ImportConsumerOverridesRequest {
-    const obj = createBaseImportConsumerOverridesRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    if (isSet(object.inlineSource)) obj.inlineSource = OverrideInlineSource.fromJSON(object.inlineSource);
-    if (isSet(object.force)) obj.force = Boolean(object.force);
-    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      inlineSource: isSet(object.inlineSource) ? OverrideInlineSource.fromJSON(object.inlineSource) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      forceOnly: Array.isArray(object?.forceOnly) ? object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
   },
   toJSON(message: ImportConsumerOverridesRequest): JsonSafe<ImportConsumerOverridesRequest> {
     const obj: any = {};
@@ -4037,9 +4159,7 @@ export const ImportConsumerOverridesRequest = {
   fromPartial(object: DeepPartial<ImportConsumerOverridesRequest>): ImportConsumerOverridesRequest {
     const message = createBaseImportConsumerOverridesRequest();
     message.parent = object.parent ?? "";
-    if (object.inlineSource !== undefined && object.inlineSource !== null) {
-      message.inlineSource = OverrideInlineSource.fromPartial(object.inlineSource);
-    }
+    message.inlineSource = object.inlineSource !== undefined && object.inlineSource !== null ? OverrideInlineSource.fromPartial(object.inlineSource) : undefined;
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
@@ -4145,9 +4265,9 @@ export const ImportConsumerOverridesResponse = {
     return message;
   },
   fromJSON(object: any): ImportConsumerOverridesResponse {
-    const obj = createBaseImportConsumerOverridesResponse();
-    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    return obj;
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromJSON(e)) : []
+    };
   },
   toJSON(message: ImportConsumerOverridesResponse): JsonSafe<ImportConsumerOverridesResponse> {
     const obj: any = {};
@@ -4235,8 +4355,7 @@ export const ImportConsumerOverridesMetadata = {
     return message;
   },
   fromJSON(_: any): ImportConsumerOverridesMetadata {
-    const obj = createBaseImportConsumerOverridesMetadata();
-    return obj;
+    return {};
   },
   toJSON(_: ImportConsumerOverridesMetadata): JsonSafe<ImportConsumerOverridesMetadata> {
     const obj: any = {};
@@ -4311,9 +4430,9 @@ export const ImportAdminQuotaPoliciesResponse = {
     return message;
   },
   fromJSON(object: any): ImportAdminQuotaPoliciesResponse {
-    const obj = createBaseImportAdminQuotaPoliciesResponse();
-    if (Array.isArray(object?.policies)) obj.policies = object.policies.map((e: any) => AdminQuotaPolicy.fromJSON(e));
-    return obj;
+    return {
+      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromJSON(e)) : []
+    };
   },
   toJSON(message: ImportAdminQuotaPoliciesResponse): JsonSafe<ImportAdminQuotaPoliciesResponse> {
     const obj: any = {};
@@ -4401,8 +4520,7 @@ export const ImportAdminQuotaPoliciesMetadata = {
     return message;
   },
   fromJSON(_: any): ImportAdminQuotaPoliciesMetadata {
-    const obj = createBaseImportAdminQuotaPoliciesMetadata();
-    return obj;
+    return {};
   },
   toJSON(_: ImportAdminQuotaPoliciesMetadata): JsonSafe<ImportAdminQuotaPoliciesMetadata> {
     const obj: any = {};
@@ -4469,8 +4587,7 @@ export const CreateAdminQuotaPolicyMetadata = {
     return message;
   },
   fromJSON(_: any): CreateAdminQuotaPolicyMetadata {
-    const obj = createBaseCreateAdminQuotaPolicyMetadata();
-    return obj;
+    return {};
   },
   toJSON(_: CreateAdminQuotaPolicyMetadata): JsonSafe<CreateAdminQuotaPolicyMetadata> {
     const obj: any = {};
@@ -4537,8 +4654,7 @@ export const UpdateAdminQuotaPolicyMetadata = {
     return message;
   },
   fromJSON(_: any): UpdateAdminQuotaPolicyMetadata {
-    const obj = createBaseUpdateAdminQuotaPolicyMetadata();
-    return obj;
+    return {};
   },
   toJSON(_: UpdateAdminQuotaPolicyMetadata): JsonSafe<UpdateAdminQuotaPolicyMetadata> {
     const obj: any = {};
@@ -4605,8 +4721,7 @@ export const DeleteAdminQuotaPolicyMetadata = {
     return message;
   },
   fromJSON(_: any): DeleteAdminQuotaPolicyMetadata {
-    const obj = createBaseDeleteAdminQuotaPolicyMetadata();
-    return obj;
+    return {};
   },
   toJSON(_: DeleteAdminQuotaPolicyMetadata): JsonSafe<DeleteAdminQuotaPolicyMetadata> {
     const obj: any = {};
@@ -4658,7 +4773,7 @@ function createBaseGenerateServiceIdentityRequest(): GenerateServiceIdentityRequ
 export const GenerateServiceIdentityRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest",
   encode(message: GenerateServiceIdentityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== undefined) {
+    if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
     return writer;
@@ -4681,9 +4796,9 @@ export const GenerateServiceIdentityRequest = {
     return message;
   },
   fromJSON(object: any): GenerateServiceIdentityRequest {
-    const obj = createBaseGenerateServiceIdentityRequest();
-    if (isSet(object.parent)) obj.parent = String(object.parent);
-    return obj;
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : ""
+    };
   },
   toJSON(message: GenerateServiceIdentityRequest): JsonSafe<GenerateServiceIdentityRequest> {
     const obj: any = {};
@@ -4776,10 +4891,10 @@ export const GetServiceIdentityResponse = {
     return message;
   },
   fromJSON(object: any): GetServiceIdentityResponse {
-    const obj = createBaseGetServiceIdentityResponse();
-    if (isSet(object.identity)) obj.identity = ServiceIdentity.fromJSON(object.identity);
-    if (isSet(object.state)) obj.state = getServiceIdentityResponse_IdentityStateFromJSON(object.state);
-    return obj;
+    return {
+      identity: isSet(object.identity) ? ServiceIdentity.fromJSON(object.identity) : undefined,
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
+    };
   },
   toJSON(message: GetServiceIdentityResponse): JsonSafe<GetServiceIdentityResponse> {
     const obj: any = {};
@@ -4789,9 +4904,7 @@ export const GetServiceIdentityResponse = {
   },
   fromPartial(object: DeepPartial<GetServiceIdentityResponse>): GetServiceIdentityResponse {
     const message = createBaseGetServiceIdentityResponse();
-    if (object.identity !== undefined && object.identity !== null) {
-      message.identity = ServiceIdentity.fromPartial(object.identity);
-    }
+    message.identity = object.identity !== undefined && object.identity !== null ? ServiceIdentity.fromPartial(object.identity) : undefined;
     message.state = object.state ?? 0;
     return message;
   },
@@ -4868,8 +4981,7 @@ export const GetServiceIdentityMetadata = {
     return message;
   },
   fromJSON(_: any): GetServiceIdentityMetadata {
-    const obj = createBaseGetServiceIdentityMetadata();
-    return obj;
+    return {};
   },
   toJSON(_: GetServiceIdentityMetadata): JsonSafe<GetServiceIdentityMetadata> {
     const obj: any = {};
