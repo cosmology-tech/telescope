@@ -33,7 +33,8 @@ const options: TelescopeOptions = {
   },
 
   interfaces: {
-    enabled: false,
+    enabled: true,
+    useGlobalDecoderRegistry: true,
     useUnionTypes: false,
   },
 
@@ -333,7 +334,7 @@ const options: TelescopeOptions = {
         }
       }
     },
-    useLegacyInlineEncoding: true,
+    useLegacyInlineEncoding: false,
   },
   packages: {
     akash: {

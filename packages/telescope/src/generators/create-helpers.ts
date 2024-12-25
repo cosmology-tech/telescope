@@ -23,6 +23,7 @@ import {
   jsonSafe,
   decimal,
   getHelperFuncTypes,
+  getHelperFuncTypesForInterface,
   getReactQueryHelperHooks,
   getReactQueryHelperHooksIcJs,
 } from "../helpers";
@@ -83,7 +84,11 @@ export const plugin = (builder: TelescopeBuilder) => {
 
   if (builder.options.helperFuncCreators?.enabled) {
     builder.files.push("helper-func-types.ts");
-    write(builder, "helper-func-types.ts", getHelperFuncTypes(builder.options));
+    if(builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry) {
+      write(builder, "helper-func-types.ts", getHelperFuncTypesForInterface(builder.options));
+    } else {
+      write(builder, "helper-func-types.ts", getHelperFuncTypes(builder.options));
+    }
   }
 
   if (
