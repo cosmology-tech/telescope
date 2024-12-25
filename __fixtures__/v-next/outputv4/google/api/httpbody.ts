@@ -1,7 +1,8 @@
-import { Any, AnySDKType } from "../protobuf/any.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { Any, AnySDKType } from "../protobuf/any";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -58,6 +59,11 @@ export interface HttpBody {
    * for streaming APIs.
    */
   extensions: Any[];
+}
+export interface ReactiveHttpBody {
+  contentType: ComputedRef<string>;
+  data: ComputedRef<Uint8Array>;
+  extensions: ComputedRef<Any[]>;
 }
 export interface HttpBodyProtoMsg {
   typeUrl: "/google.api.HttpBody";
@@ -123,7 +129,7 @@ function createBaseHttpBody(): HttpBody {
 export const HttpBody = {
   typeUrl: "/google.api.HttpBody",
   encode(message: HttpBody, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contentType !== undefined) {
+    if (message.contentType !== "") {
       writer.uint32(10).string(message.contentType);
     }
     if (message.data.length !== 0) {
@@ -158,11 +164,11 @@ export const HttpBody = {
     return message;
   },
   fromJSON(object: any): HttpBody {
-    const obj = createBaseHttpBody();
-    if (isSet(object.contentType)) obj.contentType = String(object.contentType);
-    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      contentType: isSet(object.contentType) ? String(object.contentType) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: HttpBody): JsonSafe<HttpBody> {
     const obj: any = {};

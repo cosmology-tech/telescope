@@ -1,9 +1,10 @@
-import { QueryCondition, QueryConditionSDKType } from "../lockup/lock.js";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin.js";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.incentives";
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGauge {
@@ -32,6 +33,14 @@ export interface MsgCreateGauge {
    */
   numEpochsPaidOver: bigint;
 }
+export interface ReactiveMsgCreateGauge {
+  isPerpetual: ComputedRef<boolean>;
+  owner: ComputedRef<string>;
+  distributeTo: ComputedRef<QueryCondition>;
+  coins: ComputedRef<Coin[]>;
+  startTime: ComputedRef<Date>;
+  numEpochsPaidOver: ComputedRef<bigint>;
+}
 export interface MsgCreateGaugeProtoMsg {
   typeUrl: "/osmosis.incentives.MsgCreateGauge";
   value: Uint8Array;
@@ -46,6 +55,7 @@ export interface MsgCreateGaugeSDKType {
   num_epochs_paid_over: bigint;
 }
 export interface MsgCreateGaugeResponse {}
+export interface ReactiveMsgCreateGaugeResponse {}
 export interface MsgCreateGaugeResponseProtoMsg {
   typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse";
   value: Uint8Array;
@@ -60,6 +70,11 @@ export interface MsgAddToGauge {
   /** rewards are the coin(s) to add to gauge */
   rewards: Coin[];
 }
+export interface ReactiveMsgAddToGauge {
+  owner: ComputedRef<string>;
+  gaugeId: ComputedRef<bigint>;
+  rewards: ComputedRef<Coin[]>;
+}
 export interface MsgAddToGaugeProtoMsg {
   typeUrl: "/osmosis.incentives.MsgAddToGauge";
   value: Uint8Array;
@@ -71,6 +86,7 @@ export interface MsgAddToGaugeSDKType {
   rewards: CoinSDKType[];
 }
 export interface MsgAddToGaugeResponse {}
+export interface ReactiveMsgAddToGaugeResponse {}
 export interface MsgAddToGaugeResponseProtoMsg {
   typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse";
   value: Uint8Array;
@@ -89,10 +105,10 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
 export const MsgCreateGauge = {
   typeUrl: "/osmosis.incentives.MsgCreateGauge",
   encode(message: MsgCreateGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.isPerpetual !== undefined) {
+    if (message.isPerpetual === true) {
       writer.uint32(8).bool(message.isPerpetual);
     }
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
     }
     if (message.distributeTo !== undefined) {
@@ -104,7 +120,7 @@ export const MsgCreateGauge = {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.numEpochsPaidOver !== undefined) {
+    if (message.numEpochsPaidOver !== BigInt(0)) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
     }
     return writer;
@@ -142,14 +158,14 @@ export const MsgCreateGauge = {
     return message;
   },
   fromJSON(object: any): MsgCreateGauge {
-    const obj = createBaseMsgCreateGauge();
-    if (isSet(object.isPerpetual)) obj.isPerpetual = Boolean(object.isPerpetual);
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.distributeTo)) obj.distributeTo = QueryCondition.fromJSON(object.distributeTo);
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
-    return obj;
+    return {
+      isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgCreateGauge): JsonSafe<MsgCreateGauge> {
     const obj: any = {};
@@ -169,14 +185,10 @@ export const MsgCreateGauge = {
     const message = createBaseMsgCreateGauge();
     message.isPerpetual = object.isPerpetual ?? false;
     message.owner = object.owner ?? "";
-    if (object.distributeTo !== undefined && object.distributeTo !== null) {
-      message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
-    }
+    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    if (object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null) {
-      message.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
-    }
+    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgCreateGaugeSDKType): MsgCreateGauge {
@@ -292,8 +304,7 @@ export const MsgCreateGaugeResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateGaugeResponse {
-    const obj = createBaseMsgCreateGaugeResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgCreateGaugeResponse): JsonSafe<MsgCreateGaugeResponse> {
     const obj: any = {};
@@ -353,10 +364,10 @@ function createBaseMsgAddToGauge(): MsgAddToGauge {
 export const MsgAddToGauge = {
   typeUrl: "/osmosis.incentives.MsgAddToGauge",
   encode(message: MsgAddToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.gaugeId !== undefined) {
+    if (message.gaugeId !== BigInt(0)) {
       writer.uint32(16).uint64(message.gaugeId);
     }
     for (const v of message.rewards) {
@@ -388,11 +399,11 @@ export const MsgAddToGauge = {
     return message;
   },
   fromJSON(object: any): MsgAddToGauge {
-    const obj = createBaseMsgAddToGauge();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
-    if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
+      rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgAddToGauge): JsonSafe<MsgAddToGauge> {
     const obj: any = {};
@@ -408,9 +419,7 @@ export const MsgAddToGauge = {
   fromPartial(object: DeepPartial<MsgAddToGauge>): MsgAddToGauge {
     const message = createBaseMsgAddToGauge();
     message.owner = object.owner ?? "";
-    if (object.gaugeId !== undefined && object.gaugeId !== null) {
-      message.gaugeId = BigInt(object.gaugeId.toString());
-    }
+    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
     message.rewards = object.rewards?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -506,8 +515,7 @@ export const MsgAddToGaugeResponse = {
     return message;
   },
   fromJSON(_: any): MsgAddToGaugeResponse {
-    const obj = createBaseMsgAddToGaugeResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgAddToGaugeResponse): JsonSafe<MsgAddToGaugeResponse> {
     const obj: any = {};

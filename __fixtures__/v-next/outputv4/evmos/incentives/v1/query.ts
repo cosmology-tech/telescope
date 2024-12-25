@@ -1,10 +1,11 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
-import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives.js";
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
-import { Params, ParamsSDKType } from "./genesis.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
+import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./genesis";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
@@ -13,6 +14,9 @@ export const protobufPackage = "evmos.incentives.v1";
 export interface QueryIncentivesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface ReactiveQueryIncentivesRequest {
+  pagination?: ComputedRef<PageRequest>;
 }
 export interface QueryIncentivesRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest";
@@ -34,6 +38,10 @@ export interface QueryIncentivesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface ReactiveQueryIncentivesResponse {
+  incentives: ComputedRef<Incentive[]>;
+  pagination?: ComputedRef<PageResponse>;
+}
 export interface QueryIncentivesResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse";
   value: Uint8Array;
@@ -51,6 +59,9 @@ export interface QueryIncentiveRequest {
   /** contract identifier is the hex contract address of a contract */
   contract: string;
 }
+export interface ReactiveQueryIncentiveRequest {
+  contract: ComputedRef<string>;
+}
 export interface QueryIncentiveRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest";
   value: Uint8Array;
@@ -65,6 +76,9 @@ export interface QueryIncentiveRequestSDKType {
  */
 export interface QueryIncentiveResponse {
   incentive: Incentive;
+}
+export interface ReactiveQueryIncentiveResponse {
+  incentive: ComputedRef<Incentive>;
 }
 export interface QueryIncentiveResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveResponse";
@@ -87,6 +101,10 @@ export interface QueryGasMetersRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface ReactiveQueryGasMetersRequest {
+  contract: ComputedRef<string>;
+  pagination?: ComputedRef<PageRequest>;
+}
 export interface QueryGasMetersRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest";
   value: Uint8Array;
@@ -108,6 +126,10 @@ export interface QueryGasMetersResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface ReactiveQueryGasMetersResponse {
+  gasMeters: ComputedRef<GasMeter[]>;
+  pagination?: ComputedRef<PageResponse>;
+}
 export interface QueryGasMetersResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse";
   value: Uint8Array;
@@ -127,6 +149,10 @@ export interface QueryGasMeterRequest {
   /** participant identifier is the hex address of a user */
   participant: string;
 }
+export interface ReactiveQueryGasMeterRequest {
+  contract: ComputedRef<string>;
+  participant: ComputedRef<string>;
+}
 export interface QueryGasMeterRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest";
   value: Uint8Array;
@@ -142,6 +168,9 @@ export interface QueryGasMeterRequestSDKType {
  */
 export interface QueryGasMeterResponse {
   gasMeter: bigint;
+}
+export interface ReactiveQueryGasMeterResponse {
+  gasMeter: ComputedRef<bigint>;
 }
 export interface QueryGasMeterResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse";
@@ -161,6 +190,9 @@ export interface QueryGasMeterResponseSDKType {
 export interface QueryAllocationMetersRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface ReactiveQueryAllocationMetersRequest {
+  pagination?: ComputedRef<PageRequest>;
 }
 export interface QueryAllocationMetersRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest";
@@ -182,6 +214,10 @@ export interface QueryAllocationMetersResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface ReactiveQueryAllocationMetersResponse {
+  allocationMeters: ComputedRef<DecCoin[]>;
+  pagination?: ComputedRef<PageResponse>;
+}
 export interface QueryAllocationMetersResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse";
   value: Uint8Array;
@@ -202,6 +238,9 @@ export interface QueryAllocationMeterRequest {
   /** denom is the coin denom to query an allocation meter for. */
   denom: string;
 }
+export interface ReactiveQueryAllocationMeterRequest {
+  denom: ComputedRef<string>;
+}
 export interface QueryAllocationMeterRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest";
   value: Uint8Array;
@@ -220,6 +259,9 @@ export interface QueryAllocationMeterRequestSDKType {
 export interface QueryAllocationMeterResponse {
   allocationMeter: DecCoin;
 }
+export interface ReactiveQueryAllocationMeterResponse {
+  allocationMeter: ComputedRef<DecCoin>;
+}
 export interface QueryAllocationMeterResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterResponse";
   value: Uint8Array;
@@ -233,6 +275,7 @@ export interface QueryAllocationMeterResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryParamsRequest";
   value: Uint8Array;
@@ -245,6 +288,9 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params: Params;
+}
+export interface ReactiveQueryParamsResponse {
+  params: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryParamsResponse";
@@ -288,9 +334,9 @@ export const QueryIncentivesRequest = {
     return message;
   },
   fromJSON(object: any): QueryIncentivesRequest {
-    const obj = createBaseQueryIncentivesRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryIncentivesRequest): JsonSafe<QueryIncentivesRequest> {
     const obj: any = {};
@@ -299,9 +345,7 @@ export const QueryIncentivesRequest = {
   },
   fromPartial(object: DeepPartial<QueryIncentivesRequest>): QueryIncentivesRequest {
     const message = createBaseQueryIncentivesRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryIncentivesRequestSDKType): QueryIncentivesRequest {
@@ -385,10 +429,10 @@ export const QueryIncentivesResponse = {
     return message;
   },
   fromJSON(object: any): QueryIncentivesResponse {
-    const obj = createBaseQueryIncentivesResponse();
-    if (Array.isArray(object?.incentives)) obj.incentives = object.incentives.map((e: any) => Incentive.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryIncentivesResponse): JsonSafe<QueryIncentivesResponse> {
     const obj: any = {};
@@ -403,9 +447,7 @@ export const QueryIncentivesResponse = {
   fromPartial(object: DeepPartial<QueryIncentivesResponse>): QueryIncentivesResponse {
     const message = createBaseQueryIncentivesResponse();
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryIncentivesResponseSDKType): QueryIncentivesResponse {
@@ -472,7 +514,7 @@ function createBaseQueryIncentiveRequest(): QueryIncentiveRequest {
 export const QueryIncentiveRequest = {
   typeUrl: "/evmos.incentives.v1.QueryIncentiveRequest",
   encode(message: QueryIncentiveRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== undefined) {
+    if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
     return writer;
@@ -495,9 +537,9 @@ export const QueryIncentiveRequest = {
     return message;
   },
   fromJSON(object: any): QueryIncentiveRequest {
-    const obj = createBaseQueryIncentiveRequest();
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    return obj;
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
   },
   toJSON(message: QueryIncentiveRequest): JsonSafe<QueryIncentiveRequest> {
     const obj: any = {};
@@ -583,9 +625,9 @@ export const QueryIncentiveResponse = {
     return message;
   },
   fromJSON(object: any): QueryIncentiveResponse {
-    const obj = createBaseQueryIncentiveResponse();
-    if (isSet(object.incentive)) obj.incentive = Incentive.fromJSON(object.incentive);
-    return obj;
+    return {
+      incentive: isSet(object.incentive) ? Incentive.fromJSON(object.incentive) : undefined
+    };
   },
   toJSON(message: QueryIncentiveResponse): JsonSafe<QueryIncentiveResponse> {
     const obj: any = {};
@@ -594,9 +636,7 @@ export const QueryIncentiveResponse = {
   },
   fromPartial(object: DeepPartial<QueryIncentiveResponse>): QueryIncentiveResponse {
     const message = createBaseQueryIncentiveResponse();
-    if (object.incentive !== undefined && object.incentive !== null) {
-      message.incentive = Incentive.fromPartial(object.incentive);
-    }
+    message.incentive = object.incentive !== undefined && object.incentive !== null ? Incentive.fromPartial(object.incentive) : undefined;
     return message;
   },
   fromSDK(object: QueryIncentiveResponseSDKType): QueryIncentiveResponse {
@@ -651,7 +691,7 @@ function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
 export const QueryGasMetersRequest = {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest",
   encode(message: QueryGasMetersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== undefined) {
+    if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
     if (message.pagination !== undefined) {
@@ -680,10 +720,10 @@ export const QueryGasMetersRequest = {
     return message;
   },
   fromJSON(object: any): QueryGasMetersRequest {
-    const obj = createBaseQueryGasMetersRequest();
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryGasMetersRequest): JsonSafe<QueryGasMetersRequest> {
     const obj: any = {};
@@ -694,9 +734,7 @@ export const QueryGasMetersRequest = {
   fromPartial(object: DeepPartial<QueryGasMetersRequest>): QueryGasMetersRequest {
     const message = createBaseQueryGasMetersRequest();
     message.contract = object.contract ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryGasMetersRequestSDKType): QueryGasMetersRequest {
@@ -787,10 +825,10 @@ export const QueryGasMetersResponse = {
     return message;
   },
   fromJSON(object: any): QueryGasMetersResponse {
-    const obj = createBaseQueryGasMetersResponse();
-    if (Array.isArray(object?.gasMeters)) obj.gasMeters = object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      gasMeters: Array.isArray(object?.gasMeters) ? object.gasMeters.map((e: any) => GasMeter.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryGasMetersResponse): JsonSafe<QueryGasMetersResponse> {
     const obj: any = {};
@@ -805,9 +843,7 @@ export const QueryGasMetersResponse = {
   fromPartial(object: DeepPartial<QueryGasMetersResponse>): QueryGasMetersResponse {
     const message = createBaseQueryGasMetersResponse();
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryGasMetersResponseSDKType): QueryGasMetersResponse {
@@ -875,10 +911,10 @@ function createBaseQueryGasMeterRequest(): QueryGasMeterRequest {
 export const QueryGasMeterRequest = {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterRequest",
   encode(message: QueryGasMeterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== undefined) {
+    if (message.contract !== "") {
       writer.uint32(10).string(message.contract);
     }
-    if (message.participant !== undefined) {
+    if (message.participant !== "") {
       writer.uint32(18).string(message.participant);
     }
     return writer;
@@ -904,10 +940,10 @@ export const QueryGasMeterRequest = {
     return message;
   },
   fromJSON(object: any): QueryGasMeterRequest {
-    const obj = createBaseQueryGasMeterRequest();
-    if (isSet(object.contract)) obj.contract = String(object.contract);
-    if (isSet(object.participant)) obj.participant = String(object.participant);
-    return obj;
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      participant: isSet(object.participant) ? String(object.participant) : ""
+    };
   },
   toJSON(message: QueryGasMeterRequest): JsonSafe<QueryGasMeterRequest> {
     const obj: any = {};
@@ -979,7 +1015,7 @@ function createBaseQueryGasMeterResponse(): QueryGasMeterResponse {
 export const QueryGasMeterResponse = {
   typeUrl: "/evmos.incentives.v1.QueryGasMeterResponse",
   encode(message: QueryGasMeterResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gasMeter !== undefined) {
+    if (message.gasMeter !== BigInt(0)) {
       writer.uint32(8).uint64(message.gasMeter);
     }
     return writer;
@@ -1002,9 +1038,9 @@ export const QueryGasMeterResponse = {
     return message;
   },
   fromJSON(object: any): QueryGasMeterResponse {
-    const obj = createBaseQueryGasMeterResponse();
-    if (isSet(object.gasMeter)) obj.gasMeter = BigInt(object.gasMeter.toString());
-    return obj;
+    return {
+      gasMeter: isSet(object.gasMeter) ? BigInt(object.gasMeter.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryGasMeterResponse): JsonSafe<QueryGasMeterResponse> {
     const obj: any = {};
@@ -1013,9 +1049,7 @@ export const QueryGasMeterResponse = {
   },
   fromPartial(object: DeepPartial<QueryGasMeterResponse>): QueryGasMeterResponse {
     const message = createBaseQueryGasMeterResponse();
-    if (object.gasMeter !== undefined && object.gasMeter !== null) {
-      message.gasMeter = BigInt(object.gasMeter.toString());
-    }
+    message.gasMeter = object.gasMeter !== undefined && object.gasMeter !== null ? BigInt(object.gasMeter.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryGasMeterResponseSDKType): QueryGasMeterResponse {
@@ -1092,9 +1126,9 @@ export const QueryAllocationMetersRequest = {
     return message;
   },
   fromJSON(object: any): QueryAllocationMetersRequest {
-    const obj = createBaseQueryAllocationMetersRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryAllocationMetersRequest): JsonSafe<QueryAllocationMetersRequest> {
     const obj: any = {};
@@ -1103,9 +1137,7 @@ export const QueryAllocationMetersRequest = {
   },
   fromPartial(object: DeepPartial<QueryAllocationMetersRequest>): QueryAllocationMetersRequest {
     const message = createBaseQueryAllocationMetersRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryAllocationMetersRequestSDKType): QueryAllocationMetersRequest {
@@ -1189,10 +1221,10 @@ export const QueryAllocationMetersResponse = {
     return message;
   },
   fromJSON(object: any): QueryAllocationMetersResponse {
-    const obj = createBaseQueryAllocationMetersResponse();
-    if (Array.isArray(object?.allocationMeters)) obj.allocationMeters = object.allocationMeters.map((e: any) => DecCoin.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      allocationMeters: Array.isArray(object?.allocationMeters) ? object.allocationMeters.map((e: any) => DecCoin.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryAllocationMetersResponse): JsonSafe<QueryAllocationMetersResponse> {
     const obj: any = {};
@@ -1207,9 +1239,7 @@ export const QueryAllocationMetersResponse = {
   fromPartial(object: DeepPartial<QueryAllocationMetersResponse>): QueryAllocationMetersResponse {
     const message = createBaseQueryAllocationMetersResponse();
     message.allocationMeters = object.allocationMeters?.map(e => DecCoin.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryAllocationMetersResponseSDKType): QueryAllocationMetersResponse {
@@ -1276,7 +1306,7 @@ function createBaseQueryAllocationMeterRequest(): QueryAllocationMeterRequest {
 export const QueryAllocationMeterRequest = {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMeterRequest",
   encode(message: QueryAllocationMeterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
@@ -1299,9 +1329,9 @@ export const QueryAllocationMeterRequest = {
     return message;
   },
   fromJSON(object: any): QueryAllocationMeterRequest {
-    const obj = createBaseQueryAllocationMeterRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   },
   toJSON(message: QueryAllocationMeterRequest): JsonSafe<QueryAllocationMeterRequest> {
     const obj: any = {};
@@ -1387,9 +1417,9 @@ export const QueryAllocationMeterResponse = {
     return message;
   },
   fromJSON(object: any): QueryAllocationMeterResponse {
-    const obj = createBaseQueryAllocationMeterResponse();
-    if (isSet(object.allocationMeter)) obj.allocationMeter = DecCoin.fromJSON(object.allocationMeter);
-    return obj;
+    return {
+      allocationMeter: isSet(object.allocationMeter) ? DecCoin.fromJSON(object.allocationMeter) : undefined
+    };
   },
   toJSON(message: QueryAllocationMeterResponse): JsonSafe<QueryAllocationMeterResponse> {
     const obj: any = {};
@@ -1398,9 +1428,7 @@ export const QueryAllocationMeterResponse = {
   },
   fromPartial(object: DeepPartial<QueryAllocationMeterResponse>): QueryAllocationMeterResponse {
     const message = createBaseQueryAllocationMeterResponse();
-    if (object.allocationMeter !== undefined && object.allocationMeter !== null) {
-      message.allocationMeter = DecCoin.fromPartial(object.allocationMeter);
-    }
+    message.allocationMeter = object.allocationMeter !== undefined && object.allocationMeter !== null ? DecCoin.fromPartial(object.allocationMeter) : undefined;
     return message;
   },
   fromSDK(object: QueryAllocationMeterResponseSDKType): QueryAllocationMeterResponse {
@@ -1469,8 +1497,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -1545,9 +1572,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -1556,9 +1583,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

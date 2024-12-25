@@ -1,14 +1,19 @@
-import { Params, ParamsSDKType } from "./params.js";
-import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Params, ParamsSDKType } from "./params";
+import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisState {
   /** params defines the paramaters of the module. */
   params: Params;
   factoryDenoms: GenesisDenom[];
+}
+export interface ReactiveGenesisState {
+  params: ComputedRef<Params>;
+  factoryDenoms: ComputedRef<GenesisDenom[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisState";
@@ -27,6 +32,10 @@ export interface GenesisStateSDKType {
 export interface GenesisDenom {
   denom: string;
   authorityMetadata: DenomAuthorityMetadata;
+}
+export interface ReactiveGenesisDenom {
+  denom: ComputedRef<string>;
+  authorityMetadata: ComputedRef<DenomAuthorityMetadata>;
 }
 export interface GenesisDenomProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisDenom";
@@ -79,10 +88,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    if (Array.isArray(object?.factoryDenoms)) obj.factoryDenoms = object.factoryDenoms.map((e: any) => GenesisDenom.fromJSON(e));
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      factoryDenoms: Array.isArray(object?.factoryDenoms) ? object.factoryDenoms.map((e: any) => GenesisDenom.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -96,9 +105,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.factoryDenoms = object.factoryDenoms?.map(e => GenesisDenom.fromPartial(e)) || [];
     return message;
   },
@@ -173,7 +180,7 @@ function createBaseGenesisDenom(): GenesisDenom {
 export const GenesisDenom = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.GenesisDenom",
   encode(message: GenesisDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     if (message.authorityMetadata !== undefined) {
@@ -202,10 +209,10 @@ export const GenesisDenom = {
     return message;
   },
   fromJSON(object: any): GenesisDenom {
-    const obj = createBaseGenesisDenom();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.authorityMetadata)) obj.authorityMetadata = DenomAuthorityMetadata.fromJSON(object.authorityMetadata);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      authorityMetadata: isSet(object.authorityMetadata) ? DenomAuthorityMetadata.fromJSON(object.authorityMetadata) : undefined
+    };
   },
   toJSON(message: GenesisDenom): JsonSafe<GenesisDenom> {
     const obj: any = {};
@@ -216,9 +223,7 @@ export const GenesisDenom = {
   fromPartial(object: DeepPartial<GenesisDenom>): GenesisDenom {
     const message = createBaseGenesisDenom();
     message.denom = object.denom ?? "";
-    if (object.authorityMetadata !== undefined && object.authorityMetadata !== null) {
-      message.authorityMetadata = DenomAuthorityMetadata.fromPartial(object.authorityMetadata);
-    }
+    message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
     return message;
   },
   fromSDK(object: GenesisDenomSDKType): GenesisDenom {

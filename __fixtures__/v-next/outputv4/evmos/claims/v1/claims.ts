@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {
@@ -69,6 +70,11 @@ export interface Claim {
   /** claimable token amount for the action. Zero if completed */
   claimableAmount: string;
 }
+export interface ReactiveClaim {
+  action: ComputedRef<Action>;
+  completed: ComputedRef<boolean>;
+  claimableAmount: ComputedRef<string>;
+}
 export interface ClaimProtoMsg {
   typeUrl: "/evmos.claims.v1.Claim";
   value: Uint8Array;
@@ -91,6 +97,11 @@ export interface ClaimsRecordAddress {
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
 }
+export interface ReactiveClaimsRecordAddress {
+  address: ComputedRef<string>;
+  initialClaimableAmount: ComputedRef<string>;
+  actionsCompleted: ComputedRef<boolean[]>;
+}
 export interface ClaimsRecordAddressProtoMsg {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress";
   value: Uint8Array;
@@ -110,6 +121,10 @@ export interface ClaimsRecord {
   initialClaimableAmount: string;
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
+}
+export interface ReactiveClaimsRecord {
+  initialClaimableAmount: ComputedRef<string>;
+  actionsCompleted: ComputedRef<boolean[]>;
 }
 export interface ClaimsRecordProtoMsg {
   typeUrl: "/evmos.claims.v1.ClaimsRecord";
@@ -136,10 +151,10 @@ export const Claim = {
     if (message.action !== 0) {
       writer.uint32(8).int32(message.action);
     }
-    if (message.completed !== undefined) {
+    if (message.completed === true) {
       writer.uint32(16).bool(message.completed);
     }
-    if (message.claimableAmount !== undefined) {
+    if (message.claimableAmount !== "") {
       writer.uint32(26).string(message.claimableAmount);
     }
     return writer;
@@ -168,11 +183,11 @@ export const Claim = {
     return message;
   },
   fromJSON(object: any): Claim {
-    const obj = createBaseClaim();
-    if (isSet(object.action)) obj.action = actionFromJSON(object.action);
-    if (isSet(object.completed)) obj.completed = Boolean(object.completed);
-    if (isSet(object.claimableAmount)) obj.claimableAmount = String(object.claimableAmount);
-    return obj;
+    return {
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
+      completed: isSet(object.completed) ? Boolean(object.completed) : false,
+      claimableAmount: isSet(object.claimableAmount) ? String(object.claimableAmount) : ""
+    };
   },
   toJSON(message: Claim): JsonSafe<Claim> {
     const obj: any = {};
@@ -255,10 +270,10 @@ function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
 export const ClaimsRecordAddress = {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
   encode(message: ClaimsRecordAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.initialClaimableAmount !== undefined) {
+    if (message.initialClaimableAmount !== "") {
       writer.uint32(18).string(message.initialClaimableAmount);
     }
     writer.uint32(26).fork();
@@ -299,11 +314,11 @@ export const ClaimsRecordAddress = {
     return message;
   },
   fromJSON(object: any): ClaimsRecordAddress {
-    const obj = createBaseClaimsRecordAddress();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
-    if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      initialClaimableAmount: isSet(object.initialClaimableAmount) ? String(object.initialClaimableAmount) : "",
+      actionsCompleted: Array.isArray(object?.actionsCompleted) ? object.actionsCompleted.map((e: any) => Boolean(e)) : []
+    };
   },
   toJSON(message: ClaimsRecordAddress): JsonSafe<ClaimsRecordAddress> {
     const obj: any = {};
@@ -395,7 +410,7 @@ function createBaseClaimsRecord(): ClaimsRecord {
 export const ClaimsRecord = {
   typeUrl: "/evmos.claims.v1.ClaimsRecord",
   encode(message: ClaimsRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.initialClaimableAmount !== undefined) {
+    if (message.initialClaimableAmount !== "") {
       writer.uint32(10).string(message.initialClaimableAmount);
     }
     writer.uint32(18).fork();
@@ -433,10 +448,10 @@ export const ClaimsRecord = {
     return message;
   },
   fromJSON(object: any): ClaimsRecord {
-    const obj = createBaseClaimsRecord();
-    if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
-    if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
-    return obj;
+    return {
+      initialClaimableAmount: isSet(object.initialClaimableAmount) ? String(object.initialClaimableAmount) : "",
+      actionsCompleted: Array.isArray(object?.actionsCompleted) ? object.actionsCompleted.map((e: any) => Boolean(e)) : []
+    };
   },
   toJSON(message: ClaimsRecord): JsonSafe<ClaimsRecord> {
     const obj: any = {};

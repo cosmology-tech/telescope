@@ -1,7 +1,8 @@
-import { LabelDescriptor, LabelDescriptorSDKType } from "./label.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * A description of a log type. Example in YAML format:
@@ -38,6 +39,12 @@ export interface LogDescriptor {
    */
   displayName: string;
 }
+export interface ReactiveLogDescriptor {
+  name: ComputedRef<string>;
+  labels: ComputedRef<LabelDescriptor[]>;
+  description: ComputedRef<string>;
+  displayName: ComputedRef<string>;
+}
 export interface LogDescriptorProtoMsg {
   typeUrl: "/google.api.LogDescriptor";
   value: Uint8Array;
@@ -69,16 +76,16 @@ function createBaseLogDescriptor(): LogDescriptor {
 export const LogDescriptor = {
   typeUrl: "/google.api.LogDescriptor",
   encode(message: LogDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.labels) {
       LabelDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
-    if (message.displayName !== undefined) {
+    if (message.displayName !== "") {
       writer.uint32(34).string(message.displayName);
     }
     return writer;
@@ -110,12 +117,12 @@ export const LogDescriptor = {
     return message;
   },
   fromJSON(object: any): LogDescriptor {
-    const obj = createBaseLogDescriptor();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
+      description: isSet(object.description) ? String(object.description) : "",
+      displayName: isSet(object.displayName) ? String(object.displayName) : ""
+    };
   },
   toJSON(message: LogDescriptor): JsonSafe<LogDescriptor> {
     const obj: any = {};

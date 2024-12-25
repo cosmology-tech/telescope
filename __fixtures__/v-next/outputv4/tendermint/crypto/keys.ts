@@ -1,11 +1,16 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "tendermint.crypto";
 /** PublicKey defines the keys available for use with Tendermint Validators */
 export interface PublicKey {
   ed25519?: Uint8Array;
   secp256k1?: Uint8Array;
+}
+export interface ReactivePublicKey {
+  ed25519?: ComputedRef<Uint8Array>;
+  secp256k1?: ComputedRef<Uint8Array>;
 }
 export interface PublicKeyProtoMsg {
   typeUrl: "/tendermint.crypto.PublicKey";
@@ -54,10 +59,10 @@ export const PublicKey = {
     return message;
   },
   fromJSON(object: any): PublicKey {
-    const obj = createBasePublicKey();
-    if (isSet(object.ed25519)) obj.ed25519 = bytesFromBase64(object.ed25519);
-    if (isSet(object.secp256k1)) obj.secp256k1 = bytesFromBase64(object.secp256k1);
-    return obj;
+    return {
+      ed25519: isSet(object.ed25519) ? bytesFromBase64(object.ed25519) : undefined,
+      secp256k1: isSet(object.secp256k1) ? bytesFromBase64(object.secp256k1) : undefined
+    };
   },
   toJSON(message: PublicKey): JsonSafe<PublicKey> {
     const obj: any = {};

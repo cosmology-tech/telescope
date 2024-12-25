@@ -1,7 +1,7 @@
-import { Plan, PlanSDKType } from "./upgrade.js";
+import { Plan, PlanSDKType } from "./upgrade";
 import { AminoMsg } from "@cosmjs/amino";
-import { Any, AnySDKType } from "../../../google/protobuf/any.js";
-import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType } from "./tx.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType } from "./tx";
 export interface MsgSoftwareUpgradeAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSoftwareUpgrade";
   value: {

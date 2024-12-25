@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
@@ -12,6 +13,12 @@ export interface MsgSend {
   sender: string;
   /** receiver is the receiver address of nft */
   receiver: string;
+}
+export interface ReactiveMsgSend {
+  classId: ComputedRef<string>;
+  id: ComputedRef<string>;
+  sender: ComputedRef<string>;
+  receiver: ComputedRef<string>;
 }
 export interface MsgSendProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.MsgSend";
@@ -26,6 +33,7 @@ export interface MsgSendSDKType {
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
+export interface ReactiveMsgSendResponse {}
 export interface MsgSendResponseProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse";
   value: Uint8Array;
@@ -43,16 +51,16 @@ function createBaseMsgSend(): MsgSend {
 export const MsgSend = {
   typeUrl: "/cosmos.nft.v1beta1.MsgSend",
   encode(message: MsgSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== undefined) {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== undefined) {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.sender !== undefined) {
+    if (message.sender !== "") {
       writer.uint32(26).string(message.sender);
     }
-    if (message.receiver !== undefined) {
+    if (message.receiver !== "") {
       writer.uint32(34).string(message.receiver);
     }
     return writer;
@@ -84,12 +92,12 @@ export const MsgSend = {
     return message;
   },
   fromJSON(object: any): MsgSend {
-    const obj = createBaseMsgSend();
-    if (isSet(object.classId)) obj.classId = String(object.classId);
-    if (isSet(object.id)) obj.id = String(object.id);
-    if (isSet(object.sender)) obj.sender = String(object.sender);
-    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    return obj;
+    return {
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
+    };
   },
   toJSON(message: MsgSend): JsonSafe<MsgSend> {
     const obj: any = {};
@@ -200,8 +208,7 @@ export const MsgSendResponse = {
     return message;
   },
   fromJSON(_: any): MsgSendResponse {
-    const obj = createBaseMsgSendResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgSendResponse): JsonSafe<MsgSendResponse> {
     const obj: any = {};

@@ -1,9 +1,9 @@
-import { QueryCondition, QueryConditionSDKType } from "../lockup/lock.js";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin.js";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
-import { Rpc } from "../../helpers.js";
-import { BinaryReader } from "../../binary.js";
-import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx.js";
+import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Rpc } from "../../helpers";
+import { BinaryReader } from "../../binary";
+import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
 export interface Msg {
   createGauge(request: MsgCreateGauge): Promise<MsgCreateGaugeResponse>;
   addToGauge(request: MsgAddToGauge): Promise<MsgAddToGaugeResponse>;

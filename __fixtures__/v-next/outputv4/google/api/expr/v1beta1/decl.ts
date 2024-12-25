@@ -1,7 +1,8 @@
-import { Expr, ExprSDKType } from "./expr.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { Expr, ExprSDKType } from "./expr";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -15,6 +16,13 @@ export interface Decl {
   ident?: IdentDecl;
   /** A function declaration. */
   function?: FunctionDecl;
+}
+export interface ReactiveDecl {
+  id: ComputedRef<number>;
+  name: ComputedRef<string>;
+  doc: ComputedRef<string>;
+  ident?: ComputedRef<IdentDecl>;
+  function?: ComputedRef<FunctionDecl>;
 }
 export interface DeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Decl";
@@ -45,6 +53,11 @@ export interface DeclType {
    */
   typeParams: DeclType[];
 }
+export interface ReactiveDeclType {
+  id: ComputedRef<number>;
+  type: ComputedRef<string>;
+  typeParams: ComputedRef<DeclType[]>;
+}
 export interface DeclTypeProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.DeclType";
   value: Uint8Array;
@@ -67,6 +80,10 @@ export interface IdentDecl {
   /** Optional value of the identifier. */
   value?: Expr;
 }
+export interface ReactiveIdentDecl {
+  type?: ComputedRef<DeclType>;
+  value?: ComputedRef<Expr>;
+}
 export interface IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.IdentDecl";
   value: Uint8Array;
@@ -84,6 +101,11 @@ export interface FunctionDecl {
   returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
+}
+export interface ReactiveFunctionDecl {
+  args: ComputedRef<IdentDecl[]>;
+  returnType?: ComputedRef<DeclType>;
+  receiverFunction: ComputedRef<boolean>;
 }
 export interface FunctionDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.FunctionDecl";
@@ -107,13 +129,13 @@ function createBaseDecl(): Decl {
 export const Decl = {
   typeUrl: "/google.api.expr.v1beta1.Decl",
   encode(message: Decl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.doc !== undefined) {
+    if (message.doc !== "") {
       writer.uint32(26).string(message.doc);
     }
     if (message.ident !== undefined) {
@@ -154,13 +176,13 @@ export const Decl = {
     return message;
   },
   fromJSON(object: any): Decl {
-    const obj = createBaseDecl();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.doc)) obj.doc = String(object.doc);
-    if (isSet(object.ident)) obj.ident = IdentDecl.fromJSON(object.ident);
-    if (isSet(object.function)) obj.function = FunctionDecl.fromJSON(object.function);
-    return obj;
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0,
+      name: isSet(object.name) ? String(object.name) : "",
+      doc: isSet(object.doc) ? String(object.doc) : "",
+      ident: isSet(object.ident) ? IdentDecl.fromJSON(object.ident) : undefined,
+      function: isSet(object.function) ? FunctionDecl.fromJSON(object.function) : undefined
+    };
   },
   toJSON(message: Decl): JsonSafe<Decl> {
     const obj: any = {};
@@ -176,12 +198,8 @@ export const Decl = {
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
     message.doc = object.doc ?? "";
-    if (object.ident !== undefined && object.ident !== null) {
-      message.ident = IdentDecl.fromPartial(object.ident);
-    }
-    if (object.function !== undefined && object.function !== null) {
-      message.function = FunctionDecl.fromPartial(object.function);
-    }
+    message.ident = object.ident !== undefined && object.ident !== null ? IdentDecl.fromPartial(object.ident) : undefined;
+    message.function = object.function !== undefined && object.function !== null ? FunctionDecl.fromPartial(object.function) : undefined;
     return message;
   },
   fromSDK(object: DeclSDKType): Decl {
@@ -265,10 +283,10 @@ function createBaseDeclType(): DeclType {
 export const DeclType = {
   typeUrl: "/google.api.expr.v1beta1.DeclType",
   encode(message: DeclType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(18).string(message.type);
     }
     for (const v of message.typeParams) {
@@ -300,11 +318,11 @@ export const DeclType = {
     return message;
   },
   fromJSON(object: any): DeclType {
-    const obj = createBaseDeclType();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.typeParams)) obj.typeParams = object.typeParams.map((e: any) => DeclType.fromJSON(e));
-    return obj;
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0,
+      type: isSet(object.type) ? String(object.type) : "",
+      typeParams: Array.isArray(object?.typeParams) ? object.typeParams.map((e: any) => DeclType.fromJSON(e)) : []
+    };
   },
   toJSON(message: DeclType): JsonSafe<DeclType> {
     const obj: any = {};
@@ -425,10 +443,10 @@ export const IdentDecl = {
     return message;
   },
   fromJSON(object: any): IdentDecl {
-    const obj = createBaseIdentDecl();
-    if (isSet(object.type)) obj.type = DeclType.fromJSON(object.type);
-    if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
-    return obj;
+    return {
+      type: isSet(object.type) ? DeclType.fromJSON(object.type) : undefined,
+      value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
+    };
   },
   toJSON(message: IdentDecl): JsonSafe<IdentDecl> {
     const obj: any = {};
@@ -438,12 +456,8 @@ export const IdentDecl = {
   },
   fromPartial(object: DeepPartial<IdentDecl>): IdentDecl {
     const message = createBaseIdentDecl();
-    if (object.type !== undefined && object.type !== null) {
-      message.type = DeclType.fromPartial(object.type);
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = Expr.fromPartial(object.value);
-    }
+    message.type = object.type !== undefined && object.type !== null ? DeclType.fromPartial(object.type) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
     return message;
   },
   fromSDK(object: IdentDeclSDKType): IdentDecl {
@@ -512,7 +526,7 @@ export const FunctionDecl = {
     if (message.returnType !== undefined) {
       DeclType.encode(message.returnType, writer.uint32(18).fork()).ldelim();
     }
-    if (message.receiverFunction !== undefined) {
+    if (message.receiverFunction === true) {
       writer.uint32(24).bool(message.receiverFunction);
     }
     return writer;
@@ -541,11 +555,11 @@ export const FunctionDecl = {
     return message;
   },
   fromJSON(object: any): FunctionDecl {
-    const obj = createBaseFunctionDecl();
-    if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => IdentDecl.fromJSON(e));
-    if (isSet(object.returnType)) obj.returnType = DeclType.fromJSON(object.returnType);
-    if (isSet(object.receiverFunction)) obj.receiverFunction = Boolean(object.receiverFunction);
-    return obj;
+    return {
+      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromJSON(e)) : [],
+      returnType: isSet(object.returnType) ? DeclType.fromJSON(object.returnType) : undefined,
+      receiverFunction: isSet(object.receiverFunction) ? Boolean(object.receiverFunction) : false
+    };
   },
   toJSON(message: FunctionDecl): JsonSafe<FunctionDecl> {
     const obj: any = {};
@@ -561,9 +575,7 @@ export const FunctionDecl = {
   fromPartial(object: DeepPartial<FunctionDecl>): FunctionDecl {
     const message = createBaseFunctionDecl();
     message.args = object.args?.map(e => IdentDecl.fromPartial(e)) || [];
-    if (object.returnType !== undefined && object.returnType !== null) {
-      message.returnType = DeclType.fromPartial(object.returnType);
-    }
+    message.returnType = object.returnType !== undefined && object.returnType !== null ? DeclType.fromPartial(object.returnType) : undefined;
     message.receiverFunction = object.receiverFunction ?? false;
     return message;
   },

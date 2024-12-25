@@ -1,11 +1,15 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
-import { EpochInfo, EpochInfoSDKType } from "./genesis.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { EpochInfo, EpochInfoSDKType } from "./genesis";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
+}
+export interface ReactiveQueryEpochsInfoRequest {
+  pagination?: ComputedRef<PageRequest>;
 }
 export interface QueryEpochsInfoRequestProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
@@ -18,6 +22,10 @@ export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
   pagination?: PageResponse;
 }
+export interface ReactiveQueryEpochsInfoResponse {
+  epochs: ComputedRef<EpochInfo[]>;
+  pagination?: ComputedRef<PageResponse>;
+}
 export interface QueryEpochsInfoResponseProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
   value: Uint8Array;
@@ -29,6 +37,9 @@ export interface QueryEpochsInfoResponseSDKType {
 export interface QueryCurrentEpochRequest {
   identifier: string;
 }
+export interface ReactiveQueryCurrentEpochRequest {
+  identifier: ComputedRef<string>;
+}
 export interface QueryCurrentEpochRequestProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest";
   value: Uint8Array;
@@ -38,6 +49,9 @@ export interface QueryCurrentEpochRequestSDKType {
 }
 export interface QueryCurrentEpochResponse {
   currentEpoch: bigint;
+}
+export interface ReactiveQueryCurrentEpochResponse {
+  currentEpoch: ComputedRef<bigint>;
 }
 export interface QueryCurrentEpochResponseProtoMsg {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse";
@@ -77,9 +91,9 @@ export const QueryEpochsInfoRequest = {
     return message;
   },
   fromJSON(object: any): QueryEpochsInfoRequest {
-    const obj = createBaseQueryEpochsInfoRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryEpochsInfoRequest): JsonSafe<QueryEpochsInfoRequest> {
     const obj: any = {};
@@ -88,9 +102,7 @@ export const QueryEpochsInfoRequest = {
   },
   fromPartial(object: DeepPartial<QueryEpochsInfoRequest>): QueryEpochsInfoRequest {
     const message = createBaseQueryEpochsInfoRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryEpochsInfoRequestSDKType): QueryEpochsInfoRequest {
@@ -174,10 +186,10 @@ export const QueryEpochsInfoResponse = {
     return message;
   },
   fromJSON(object: any): QueryEpochsInfoResponse {
-    const obj = createBaseQueryEpochsInfoResponse();
-    if (Array.isArray(object?.epochs)) obj.epochs = object.epochs.map((e: any) => EpochInfo.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryEpochsInfoResponse): JsonSafe<QueryEpochsInfoResponse> {
     const obj: any = {};
@@ -192,9 +204,7 @@ export const QueryEpochsInfoResponse = {
   fromPartial(object: DeepPartial<QueryEpochsInfoResponse>): QueryEpochsInfoResponse {
     const message = createBaseQueryEpochsInfoResponse();
     message.epochs = object.epochs?.map(e => EpochInfo.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryEpochsInfoResponseSDKType): QueryEpochsInfoResponse {
@@ -261,7 +271,7 @@ function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
 export const QueryCurrentEpochRequest = {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest",
   encode(message: QueryCurrentEpochRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.identifier !== undefined) {
+    if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
     }
     return writer;
@@ -284,9 +294,9 @@ export const QueryCurrentEpochRequest = {
     return message;
   },
   fromJSON(object: any): QueryCurrentEpochRequest {
-    const obj = createBaseQueryCurrentEpochRequest();
-    if (isSet(object.identifier)) obj.identifier = String(object.identifier);
-    return obj;
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : ""
+    };
   },
   toJSON(message: QueryCurrentEpochRequest): JsonSafe<QueryCurrentEpochRequest> {
     const obj: any = {};
@@ -349,7 +359,7 @@ function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
 export const QueryCurrentEpochResponse = {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse",
   encode(message: QueryCurrentEpochResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.currentEpoch !== undefined) {
+    if (message.currentEpoch !== BigInt(0)) {
       writer.uint32(8).int64(message.currentEpoch);
     }
     return writer;
@@ -372,9 +382,9 @@ export const QueryCurrentEpochResponse = {
     return message;
   },
   fromJSON(object: any): QueryCurrentEpochResponse {
-    const obj = createBaseQueryCurrentEpochResponse();
-    if (isSet(object.currentEpoch)) obj.currentEpoch = BigInt(object.currentEpoch.toString());
-    return obj;
+    return {
+      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryCurrentEpochResponse): JsonSafe<QueryCurrentEpochResponse> {
     const obj: any = {};
@@ -383,9 +393,7 @@ export const QueryCurrentEpochResponse = {
   },
   fromPartial(object: DeepPartial<QueryCurrentEpochResponse>): QueryCurrentEpochResponse {
     const message = createBaseQueryCurrentEpochResponse();
-    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
-      message.currentEpoch = BigInt(object.currentEpoch.toString());
-    }
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryCurrentEpochResponseSDKType): QueryCurrentEpochResponse {

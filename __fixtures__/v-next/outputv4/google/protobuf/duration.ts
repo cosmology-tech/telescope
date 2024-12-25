@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.protobuf";
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -79,6 +80,10 @@ export interface Duration {
    */
   nanos: number;
 }
+export interface ReactiveDuration {
+  seconds: ComputedRef<bigint>;
+  nanos: ComputedRef<number>;
+}
 export interface DurationProtoMsg {
   typeUrl: "/google.protobuf.Duration";
   value: Uint8Array;
@@ -156,10 +161,10 @@ function createBaseDuration(): Duration {
 export const Duration = {
   typeUrl: "/google.protobuf.Duration",
   encode(message: Duration, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.seconds !== undefined) {
+    if (message.seconds !== BigInt(0)) {
       writer.uint32(8).int64(message.seconds);
     }
-    if (message.nanos !== undefined) {
+    if (message.nanos !== 0) {
       writer.uint32(16).int32(message.nanos);
     }
     return writer;
@@ -185,10 +190,10 @@ export const Duration = {
     return message;
   },
   fromJSON(object: any): Duration {
-    const obj = createBaseDuration();
-    if (isSet(object.seconds)) obj.seconds = BigInt(object.seconds.toString());
-    if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
-    return obj;
+    return {
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
   },
   toJSON(message: Duration): JsonSafe<Duration> {
     const obj: any = {};
@@ -198,9 +203,7 @@ export const Duration = {
   },
   fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
-    if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = BigInt(object.seconds.toString());
-    }
+    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
     message.nanos = object.nanos ?? 0;
     return message;
   },

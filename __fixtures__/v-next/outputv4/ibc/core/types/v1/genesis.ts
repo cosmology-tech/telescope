@@ -1,12 +1,13 @@
-import { GenesisState as GenesisState1 } from "../../client/v1/genesis.js";
-import { GenesisStateSDKType as GenesisState1SDKType } from "../../client/v1/genesis.js";
-import { GenesisState as GenesisState2 } from "../../connection/v1/genesis.js";
-import { GenesisStateSDKType as GenesisState2SDKType } from "../../connection/v1/genesis.js";
-import { GenesisState as GenesisState3 } from "../../channel/v1/genesis.js";
-import { GenesisStateSDKType as GenesisState3SDKType } from "../../channel/v1/genesis.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { GenesisState as GenesisState1 } from "../../client/v1/genesis";
+import { GenesisStateSDKType as GenesisState1SDKType } from "../../client/v1/genesis";
+import { GenesisState as GenesisState2 } from "../../connection/v1/genesis";
+import { GenesisStateSDKType as GenesisState2SDKType } from "../../connection/v1/genesis";
+import { GenesisState as GenesisState3 } from "../../channel/v1/genesis";
+import { GenesisStateSDKType as GenesisState3SDKType } from "../../channel/v1/genesis";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "ibc.core.types.v1";
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisState {
@@ -16,6 +17,11 @@ export interface GenesisState {
   connectionGenesis: GenesisState2;
   /** ICS004 - Channel genesis state */
   channelGenesis: GenesisState3;
+}
+export interface ReactiveGenesisState {
+  clientGenesis: ComputedRef<GenesisState1>;
+  connectionGenesis: ComputedRef<GenesisState2>;
+  channelGenesis: ComputedRef<GenesisState3>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.core.types.v1.GenesisState";
@@ -72,11 +78,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (isSet(object.clientGenesis)) obj.clientGenesis = GenesisState1.fromJSON(object.clientGenesis);
-    if (isSet(object.connectionGenesis)) obj.connectionGenesis = GenesisState2.fromJSON(object.connectionGenesis);
-    if (isSet(object.channelGenesis)) obj.channelGenesis = GenesisState3.fromJSON(object.channelGenesis);
-    return obj;
+    return {
+      clientGenesis: isSet(object.clientGenesis) ? GenesisState1.fromJSON(object.clientGenesis) : undefined,
+      connectionGenesis: isSet(object.connectionGenesis) ? GenesisState2.fromJSON(object.connectionGenesis) : undefined,
+      channelGenesis: isSet(object.channelGenesis) ? GenesisState3.fromJSON(object.channelGenesis) : undefined
+    };
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -87,15 +93,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    if (object.clientGenesis !== undefined && object.clientGenesis !== null) {
-      message.clientGenesis = GenesisState1.fromPartial(object.clientGenesis);
-    }
-    if (object.connectionGenesis !== undefined && object.connectionGenesis !== null) {
-      message.connectionGenesis = GenesisState2.fromPartial(object.connectionGenesis);
-    }
-    if (object.channelGenesis !== undefined && object.channelGenesis !== null) {
-      message.channelGenesis = GenesisState3.fromPartial(object.channelGenesis);
-    }
+    message.clientGenesis = object.clientGenesis !== undefined && object.clientGenesis !== null ? GenesisState1.fromPartial(object.clientGenesis) : undefined;
+    message.connectionGenesis = object.connectionGenesis !== undefined && object.connectionGenesis !== null ? GenesisState2.fromPartial(object.connectionGenesis) : undefined;
+    message.channelGenesis = object.channelGenesis !== undefined && object.channelGenesis !== null ? GenesisState3.fromPartial(object.channelGenesis) : undefined;
     return message;
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {

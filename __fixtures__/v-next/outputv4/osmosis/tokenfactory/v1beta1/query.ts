@@ -1,11 +1,13 @@
-import { Params, ParamsSDKType } from "./params.js";
-import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { JsonSafe } from "../../../json-safe.js";
-import { DeepPartial, isSet } from "../../../helpers.js";
+import { Params, ParamsSDKType } from "./params";
+import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
+import { DeepPartial, isSet } from "../../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryParamsRequest";
   value: Uint8Array;
@@ -16,6 +18,9 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface ReactiveQueryParamsResponse {
+  params: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryParamsResponse";
@@ -31,6 +36,9 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QueryDenomAuthorityMetadataRequest {
   denom: string;
+}
+export interface ReactiveQueryDenomAuthorityMetadataRequest {
+  denom: ComputedRef<string>;
 }
 export interface QueryDenomAuthorityMetadataRequestProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataRequest";
@@ -50,6 +58,9 @@ export interface QueryDenomAuthorityMetadataRequestSDKType {
 export interface QueryDenomAuthorityMetadataResponse {
   authorityMetadata: DenomAuthorityMetadata;
 }
+export interface ReactiveQueryDenomAuthorityMetadataResponse {
+  authorityMetadata: ComputedRef<DenomAuthorityMetadata>;
+}
 export interface QueryDenomAuthorityMetadataResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataResponse";
   value: Uint8Array;
@@ -68,6 +79,9 @@ export interface QueryDenomAuthorityMetadataResponseSDKType {
 export interface QueryDenomsFromCreatorRequest {
   creator: string;
 }
+export interface ReactiveQueryDenomsFromCreatorRequest {
+  creator: ComputedRef<string>;
+}
 export interface QueryDenomsFromCreatorRequestProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorRequest";
   value: Uint8Array;
@@ -85,6 +99,9 @@ export interface QueryDenomsFromCreatorRequestSDKType {
  */
 export interface QueryDenomsFromCreatorResponse {
   denoms: string[];
+}
+export interface ReactiveQueryDenomsFromCreatorResponse {
+  denoms: ComputedRef<string[]>;
 }
 export interface QueryDenomsFromCreatorResponseProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorResponse";
@@ -120,8 +137,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -202,9 +218,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -213,9 +229,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -275,7 +289,7 @@ function createBaseQueryDenomAuthorityMetadataRequest(): QueryDenomAuthorityMeta
 export const QueryDenomAuthorityMetadataRequest = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomAuthorityMetadataRequest",
   encode(message: QueryDenomAuthorityMetadataRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
@@ -298,9 +312,9 @@ export const QueryDenomAuthorityMetadataRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomAuthorityMetadataRequest {
-    const obj = createBaseQueryDenomAuthorityMetadataRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
   },
   toJSON(message: QueryDenomAuthorityMetadataRequest): JsonSafe<QueryDenomAuthorityMetadataRequest> {
     const obj: any = {};
@@ -392,9 +406,9 @@ export const QueryDenomAuthorityMetadataResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomAuthorityMetadataResponse {
-    const obj = createBaseQueryDenomAuthorityMetadataResponse();
-    if (isSet(object.authorityMetadata)) obj.authorityMetadata = DenomAuthorityMetadata.fromJSON(object.authorityMetadata);
-    return obj;
+    return {
+      authorityMetadata: isSet(object.authorityMetadata) ? DenomAuthorityMetadata.fromJSON(object.authorityMetadata) : undefined
+    };
   },
   toJSON(message: QueryDenomAuthorityMetadataResponse): JsonSafe<QueryDenomAuthorityMetadataResponse> {
     const obj: any = {};
@@ -403,9 +417,7 @@ export const QueryDenomAuthorityMetadataResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomAuthorityMetadataResponse>): QueryDenomAuthorityMetadataResponse {
     const message = createBaseQueryDenomAuthorityMetadataResponse();
-    if (object.authorityMetadata !== undefined && object.authorityMetadata !== null) {
-      message.authorityMetadata = DenomAuthorityMetadata.fromPartial(object.authorityMetadata);
-    }
+    message.authorityMetadata = object.authorityMetadata !== undefined && object.authorityMetadata !== null ? DenomAuthorityMetadata.fromPartial(object.authorityMetadata) : undefined;
     return message;
   },
   fromSDK(object: QueryDenomAuthorityMetadataResponseSDKType): QueryDenomAuthorityMetadataResponse {
@@ -465,7 +477,7 @@ function createBaseQueryDenomsFromCreatorRequest(): QueryDenomsFromCreatorReques
 export const QueryDenomsFromCreatorRequest = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.QueryDenomsFromCreatorRequest",
   encode(message: QueryDenomsFromCreatorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.creator !== undefined) {
+    if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
     return writer;
@@ -488,9 +500,9 @@ export const QueryDenomsFromCreatorRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomsFromCreatorRequest {
-    const obj = createBaseQueryDenomsFromCreatorRequest();
-    if (isSet(object.creator)) obj.creator = String(object.creator);
-    return obj;
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : ""
+    };
   },
   toJSON(message: QueryDenomsFromCreatorRequest): JsonSafe<QueryDenomsFromCreatorRequest> {
     const obj: any = {};
@@ -582,9 +594,9 @@ export const QueryDenomsFromCreatorResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomsFromCreatorResponse {
-    const obj = createBaseQueryDenomsFromCreatorResponse();
-    if (Array.isArray(object?.denoms)) obj.denoms = object.denoms.map((e: any) => String(e));
-    return obj;
+    return {
+      denoms: Array.isArray(object?.denoms) ? object.denoms.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: QueryDenomsFromCreatorResponse): JsonSafe<QueryDenomsFromCreatorResponse> {
     const obj: any = {};

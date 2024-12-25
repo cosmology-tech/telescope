@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.orm.v1";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
@@ -14,6 +15,11 @@ export interface TableDescriptor {
    * can be auto-generated.
    */
   id: number;
+}
+export interface ReactiveTableDescriptor {
+  primaryKey?: ComputedRef<PrimaryKeyDescriptor>;
+  index: ComputedRef<SecondaryIndexDescriptor[]>;
+  id: ComputedRef<number>;
 }
 export interface TableDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1.TableDescriptor";
@@ -67,6 +73,10 @@ export interface PrimaryKeyDescriptor {
    */
   autoIncrement: boolean;
 }
+export interface ReactivePrimaryKeyDescriptor {
+  fields: ComputedRef<string>;
+  autoIncrement: ComputedRef<boolean>;
+}
 export interface PrimaryKeyDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor";
   value: Uint8Array;
@@ -99,6 +109,11 @@ export interface SecondaryIndexDescriptor {
   /** unique specifies that this an unique index. */
   unique: boolean;
 }
+export interface ReactiveSecondaryIndexDescriptor {
+  fields: ComputedRef<string>;
+  id: ComputedRef<number>;
+  unique: ComputedRef<boolean>;
+}
 export interface SecondaryIndexDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor";
   value: Uint8Array;
@@ -117,6 +132,9 @@ export interface SingletonDescriptor {
    * can be auto-generated.
    */
   id: number;
+}
+export interface ReactiveSingletonDescriptor {
+  id: ComputedRef<number>;
 }
 export interface SingletonDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1.SingletonDescriptor";
@@ -142,7 +160,7 @@ export const TableDescriptor = {
     for (const v of message.index) {
       SecondaryIndexDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(24).uint32(message.id);
     }
     return writer;
@@ -171,11 +189,11 @@ export const TableDescriptor = {
     return message;
   },
   fromJSON(object: any): TableDescriptor {
-    const obj = createBaseTableDescriptor();
-    if (isSet(object.primaryKey)) obj.primaryKey = PrimaryKeyDescriptor.fromJSON(object.primaryKey);
-    if (Array.isArray(object?.index)) obj.index = object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e));
-    if (isSet(object.id)) obj.id = Number(object.id);
-    return obj;
+    return {
+      primaryKey: isSet(object.primaryKey) ? PrimaryKeyDescriptor.fromJSON(object.primaryKey) : undefined,
+      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e)) : [],
+      id: isSet(object.id) ? Number(object.id) : 0
+    };
   },
   toJSON(message: TableDescriptor): JsonSafe<TableDescriptor> {
     const obj: any = {};
@@ -190,9 +208,7 @@ export const TableDescriptor = {
   },
   fromPartial(object: DeepPartial<TableDescriptor>): TableDescriptor {
     const message = createBaseTableDescriptor();
-    if (object.primaryKey !== undefined && object.primaryKey !== null) {
-      message.primaryKey = PrimaryKeyDescriptor.fromPartial(object.primaryKey);
-    }
+    message.primaryKey = object.primaryKey !== undefined && object.primaryKey !== null ? PrimaryKeyDescriptor.fromPartial(object.primaryKey) : undefined;
     message.index = object.index?.map(e => SecondaryIndexDescriptor.fromPartial(e)) || [];
     message.id = object.id ?? 0;
     return message;
@@ -275,10 +291,10 @@ function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
 export const PrimaryKeyDescriptor = {
   typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor",
   encode(message: PrimaryKeyDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fields !== undefined) {
+    if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
     }
-    if (message.autoIncrement !== undefined) {
+    if (message.autoIncrement === true) {
       writer.uint32(16).bool(message.autoIncrement);
     }
     return writer;
@@ -304,10 +320,10 @@ export const PrimaryKeyDescriptor = {
     return message;
   },
   fromJSON(object: any): PrimaryKeyDescriptor {
-    const obj = createBasePrimaryKeyDescriptor();
-    if (isSet(object.fields)) obj.fields = String(object.fields);
-    if (isSet(object.autoIncrement)) obj.autoIncrement = Boolean(object.autoIncrement);
-    return obj;
+    return {
+      fields: isSet(object.fields) ? String(object.fields) : "",
+      autoIncrement: isSet(object.autoIncrement) ? Boolean(object.autoIncrement) : false
+    };
   },
   toJSON(message: PrimaryKeyDescriptor): JsonSafe<PrimaryKeyDescriptor> {
     const obj: any = {};
@@ -387,13 +403,13 @@ function createBaseSecondaryIndexDescriptor(): SecondaryIndexDescriptor {
 export const SecondaryIndexDescriptor = {
   typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor",
   encode(message: SecondaryIndexDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fields !== undefined) {
+    if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
     }
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(16).uint32(message.id);
     }
-    if (message.unique !== undefined) {
+    if (message.unique === true) {
       writer.uint32(24).bool(message.unique);
     }
     return writer;
@@ -422,11 +438,11 @@ export const SecondaryIndexDescriptor = {
     return message;
   },
   fromJSON(object: any): SecondaryIndexDescriptor {
-    const obj = createBaseSecondaryIndexDescriptor();
-    if (isSet(object.fields)) obj.fields = String(object.fields);
-    if (isSet(object.id)) obj.id = Number(object.id);
-    if (isSet(object.unique)) obj.unique = Boolean(object.unique);
-    return obj;
+    return {
+      fields: isSet(object.fields) ? String(object.fields) : "",
+      id: isSet(object.id) ? Number(object.id) : 0,
+      unique: isSet(object.unique) ? Boolean(object.unique) : false
+    };
   },
   toJSON(message: SecondaryIndexDescriptor): JsonSafe<SecondaryIndexDescriptor> {
     const obj: any = {};
@@ -513,7 +529,7 @@ function createBaseSingletonDescriptor(): SingletonDescriptor {
 export const SingletonDescriptor = {
   typeUrl: "/cosmos.orm.v1.SingletonDescriptor",
   encode(message: SingletonDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);
     }
     return writer;
@@ -536,9 +552,9 @@ export const SingletonDescriptor = {
     return message;
   },
   fromJSON(object: any): SingletonDescriptor {
-    const obj = createBaseSingletonDescriptor();
-    if (isSet(object.id)) obj.id = Number(object.id);
-    return obj;
+    return {
+      id: isSet(object.id) ? Number(object.id) : 0
+    };
   },
   toJSON(message: SingletonDescriptor): JsonSafe<SingletonDescriptor> {
     const obj: any = {};

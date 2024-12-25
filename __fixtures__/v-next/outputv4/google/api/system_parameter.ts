@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial, isSet } from "../../helpers.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial, isSet } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * ### System parameter configuration
@@ -44,6 +45,9 @@ export interface SystemParameters {
    */
   rules: SystemParameterRule[];
 }
+export interface ReactiveSystemParameters {
+  rules: ComputedRef<SystemParameterRule[]>;
+}
 export interface SystemParametersProtoMsg {
   typeUrl: "/google.api.SystemParameters";
   value: Uint8Array;
@@ -80,6 +84,10 @@ export interface SystemParameterRule {
    */
   parameters: SystemParameter[];
 }
+export interface ReactiveSystemParameterRule {
+  selector: ComputedRef<string>;
+  parameters: ComputedRef<SystemParameter[]>;
+}
 export interface SystemParameterRuleProtoMsg {
   typeUrl: "/google.api.SystemParameterRule";
   value: Uint8Array;
@@ -110,6 +118,11 @@ export interface SystemParameter {
    * sensitive.
    */
   urlQueryParameter: string;
+}
+export interface ReactiveSystemParameter {
+  name: ComputedRef<string>;
+  httpHeader: ComputedRef<string>;
+  urlQueryParameter: ComputedRef<string>;
 }
 export interface SystemParameterProtoMsg {
   typeUrl: "/google.api.SystemParameter";
@@ -156,9 +169,9 @@ export const SystemParameters = {
     return message;
   },
   fromJSON(object: any): SystemParameters {
-    const obj = createBaseSystemParameters();
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => SystemParameterRule.fromJSON(e));
-    return obj;
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromJSON(e)) : []
+    };
   },
   toJSON(message: SystemParameters): JsonSafe<SystemParameters> {
     const obj: any = {};
@@ -232,7 +245,7 @@ function createBaseSystemParameterRule(): SystemParameterRule {
 export const SystemParameterRule = {
   typeUrl: "/google.api.SystemParameterRule",
   encode(message: SystemParameterRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
     for (const v of message.parameters) {
@@ -261,10 +274,10 @@ export const SystemParameterRule = {
     return message;
   },
   fromJSON(object: any): SystemParameterRule {
-    const obj = createBaseSystemParameterRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (Array.isArray(object?.parameters)) obj.parameters = object.parameters.map((e: any) => SystemParameter.fromJSON(e));
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromJSON(e)) : []
+    };
   },
   toJSON(message: SystemParameterRule): JsonSafe<SystemParameterRule> {
     const obj: any = {};
@@ -348,13 +361,13 @@ function createBaseSystemParameter(): SystemParameter {
 export const SystemParameter = {
   typeUrl: "/google.api.SystemParameter",
   encode(message: SystemParameter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.httpHeader !== undefined) {
+    if (message.httpHeader !== "") {
       writer.uint32(18).string(message.httpHeader);
     }
-    if (message.urlQueryParameter !== undefined) {
+    if (message.urlQueryParameter !== "") {
       writer.uint32(26).string(message.urlQueryParameter);
     }
     return writer;
@@ -383,11 +396,11 @@ export const SystemParameter = {
     return message;
   },
   fromJSON(object: any): SystemParameter {
-    const obj = createBaseSystemParameter();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.httpHeader)) obj.httpHeader = String(object.httpHeader);
-    if (isSet(object.urlQueryParameter)) obj.urlQueryParameter = String(object.urlQueryParameter);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      httpHeader: isSet(object.httpHeader) ? String(object.httpHeader) : "",
+      urlQueryParameter: isSet(object.urlQueryParameter) ? String(object.urlQueryParameter) : ""
+    };
   },
   toJSON(message: SystemParameter): JsonSafe<SystemParameter> {
     const obj: any = {};

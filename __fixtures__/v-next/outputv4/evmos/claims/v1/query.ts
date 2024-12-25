@@ -1,16 +1,18 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
-import { Params, ParamsSDKType } from "./genesis.js";
-import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { JsonSafe } from "../../../json-safe.js";
-import { DeepPartial, isSet } from "../../../helpers.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./genesis";
+import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
+import { DeepPartial, isSet } from "../../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.claims.v1";
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
  * RPC method.
  */
 export interface QueryTotalUnclaimedRequest {}
+export interface ReactiveQueryTotalUnclaimedRequest {}
 export interface QueryTotalUnclaimedRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
   value: Uint8Array;
@@ -28,6 +30,9 @@ export interface QueryTotalUnclaimedResponse {
   /** coins defines the unclaimed coins */
   coins: Coin[];
 }
+export interface ReactiveQueryTotalUnclaimedResponse {
+  coins: ComputedRef<Coin[]>;
+}
 export interface QueryTotalUnclaimedResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
   value: Uint8Array;
@@ -41,6 +46,7 @@ export interface QueryTotalUnclaimedResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryParamsRequest";
   value: Uint8Array;
@@ -51,6 +57,9 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface ReactiveQueryParamsResponse {
+  params: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryParamsResponse";
@@ -67,6 +76,9 @@ export interface QueryParamsResponseSDKType {
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface ReactiveQueryClaimsRecordsRequest {
+  pagination?: ComputedRef<PageRequest>;
 }
 export interface QueryClaimsRecordsRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest";
@@ -89,6 +101,10 @@ export interface QueryClaimsRecordsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface ReactiveQueryClaimsRecordsResponse {
+  claims: ComputedRef<ClaimsRecordAddress[]>;
+  pagination?: ComputedRef<PageResponse>;
+}
 export interface QueryClaimsRecordsResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse";
   value: Uint8Array;
@@ -108,6 +124,9 @@ export interface QueryClaimsRecordsResponseSDKType {
 export interface QueryClaimsRecordRequest {
   /** address defines the user to query claims record for */
   address: string;
+}
+export interface ReactiveQueryClaimsRecordRequest {
+  address: ComputedRef<string>;
 }
 export interface QueryClaimsRecordRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest";
@@ -129,6 +148,10 @@ export interface QueryClaimsRecordResponse {
   initialClaimableAmount: string;
   /** the claims of the user */
   claims: Claim[];
+}
+export interface ReactiveQueryClaimsRecordResponse {
+  initialClaimableAmount: ComputedRef<string>;
+  claims: ComputedRef<Claim[]>;
 }
 export interface QueryClaimsRecordResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse";
@@ -165,8 +188,7 @@ export const QueryTotalUnclaimedRequest = {
     return message;
   },
   fromJSON(_: any): QueryTotalUnclaimedRequest {
-    const obj = createBaseQueryTotalUnclaimedRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryTotalUnclaimedRequest): JsonSafe<QueryTotalUnclaimedRequest> {
     const obj: any = {};
@@ -241,9 +263,9 @@ export const QueryTotalUnclaimedResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalUnclaimedResponse {
-    const obj = createBaseQueryTotalUnclaimedResponse();
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryTotalUnclaimedResponse): JsonSafe<QueryTotalUnclaimedResponse> {
     const obj: any = {};
@@ -331,8 +353,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -407,9 +428,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -418,9 +439,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -497,9 +516,9 @@ export const QueryClaimsRecordsRequest = {
     return message;
   },
   fromJSON(object: any): QueryClaimsRecordsRequest {
-    const obj = createBaseQueryClaimsRecordsRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryClaimsRecordsRequest): JsonSafe<QueryClaimsRecordsRequest> {
     const obj: any = {};
@@ -508,9 +527,7 @@ export const QueryClaimsRecordsRequest = {
   },
   fromPartial(object: DeepPartial<QueryClaimsRecordsRequest>): QueryClaimsRecordsRequest {
     const message = createBaseQueryClaimsRecordsRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryClaimsRecordsRequestSDKType): QueryClaimsRecordsRequest {
@@ -594,10 +611,10 @@ export const QueryClaimsRecordsResponse = {
     return message;
   },
   fromJSON(object: any): QueryClaimsRecordsResponse {
-    const obj = createBaseQueryClaimsRecordsResponse();
-    if (Array.isArray(object?.claims)) obj.claims = object.claims.map((e: any) => ClaimsRecordAddress.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryClaimsRecordsResponse): JsonSafe<QueryClaimsRecordsResponse> {
     const obj: any = {};
@@ -612,9 +629,7 @@ export const QueryClaimsRecordsResponse = {
   fromPartial(object: DeepPartial<QueryClaimsRecordsResponse>): QueryClaimsRecordsResponse {
     const message = createBaseQueryClaimsRecordsResponse();
     message.claims = object.claims?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryClaimsRecordsResponseSDKType): QueryClaimsRecordsResponse {
@@ -681,7 +696,7 @@ function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
 export const QueryClaimsRecordRequest = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
   encode(message: QueryClaimsRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -704,9 +719,9 @@ export const QueryClaimsRecordRequest = {
     return message;
   },
   fromJSON(object: any): QueryClaimsRecordRequest {
-    const obj = createBaseQueryClaimsRecordRequest();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: QueryClaimsRecordRequest): JsonSafe<QueryClaimsRecordRequest> {
     const obj: any = {};
@@ -770,7 +785,7 @@ function createBaseQueryClaimsRecordResponse(): QueryClaimsRecordResponse {
 export const QueryClaimsRecordResponse = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
   encode(message: QueryClaimsRecordResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.initialClaimableAmount !== undefined) {
+    if (message.initialClaimableAmount !== "") {
       writer.uint32(10).string(message.initialClaimableAmount);
     }
     for (const v of message.claims) {
@@ -799,10 +814,10 @@ export const QueryClaimsRecordResponse = {
     return message;
   },
   fromJSON(object: any): QueryClaimsRecordResponse {
-    const obj = createBaseQueryClaimsRecordResponse();
-    if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
-    if (Array.isArray(object?.claims)) obj.claims = object.claims.map((e: any) => Claim.fromJSON(e));
-    return obj;
+    return {
+      initialClaimableAmount: isSet(object.initialClaimableAmount) ? String(object.initialClaimableAmount) : "",
+      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryClaimsRecordResponse): JsonSafe<QueryClaimsRecordResponse> {
     const obj: any = {};

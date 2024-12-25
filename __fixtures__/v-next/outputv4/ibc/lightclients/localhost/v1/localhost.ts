@@ -1,7 +1,8 @@
-import { Height, HeightSDKType } from "../../../core/client/v1/client.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { Height, HeightSDKType } from "../../../core/client/v1/client";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "ibc.lightclients.localhost.v1";
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
@@ -12,6 +13,10 @@ export interface ClientState {
   chainId: string;
   /** self latest block height */
   height: Height;
+}
+export interface ReactiveClientState {
+  chainId: ComputedRef<string>;
+  height: ComputedRef<Height>;
 }
 export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState";
@@ -34,7 +39,7 @@ function createBaseClientState(): ClientState {
 export const ClientState = {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState",
   encode(message: ClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.chainId !== undefined) {
+    if (message.chainId !== "") {
       writer.uint32(10).string(message.chainId);
     }
     if (message.height !== undefined) {
@@ -63,10 +68,10 @@ export const ClientState = {
     return message;
   },
   fromJSON(object: any): ClientState {
-    const obj = createBaseClientState();
-    if (isSet(object.chainId)) obj.chainId = String(object.chainId);
-    if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
-    return obj;
+    return {
+      chainId: isSet(object.chainId) ? String(object.chainId) : "",
+      height: isSet(object.height) ? Height.fromJSON(object.height) : undefined
+    };
   },
   toJSON(message: ClientState): JsonSafe<ClientState> {
     const obj: any = {};
@@ -77,9 +82,7 @@ export const ClientState = {
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
-    if (object.height !== undefined && object.height !== null) {
-      message.height = Height.fromPartial(object.height);
-    }
+    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
     return message;
   },
   fromSDK(object: ClientStateSDKType): ClientState {

@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial } from "../../helpers.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.protobuf";
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
@@ -206,6 +207,9 @@ export const protobufPackage = "google.protobuf";
 export interface FieldMask {
   /** The set of field mask paths. */
   paths: string[];
+}
+export interface ReactiveFieldMask {
+  paths: ComputedRef<string[]>;
 }
 export interface FieldMaskProtoMsg {
   typeUrl: "/google.protobuf.FieldMask";
@@ -446,9 +450,9 @@ export const FieldMask = {
     return message;
   },
   fromJSON(object: any): FieldMask {
-    const obj = createBaseFieldMask();
-    if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
-    return obj;
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: FieldMask): JsonSafe<FieldMask> {
     const obj: any = {};

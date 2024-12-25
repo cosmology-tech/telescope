@@ -1,10 +1,12 @@
-import { Params, ParamsSDKType } from "./mint.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { JsonSafe } from "../../../json-safe.js";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
+import { Params, ParamsSDKType } from "./mint";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryParamsRequest";
   value: Uint8Array;
@@ -16,6 +18,9 @@ export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
 }
+export interface ReactiveQueryParamsResponse {
+  params: ComputedRef<Params>;
+}
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryParamsResponse";
   value: Uint8Array;
@@ -26,6 +31,7 @@ export interface QueryParamsResponseSDKType {
 }
 /** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequest {}
+export interface ReactiveQueryInflationRequest {}
 export interface QueryInflationRequestProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryInflationRequest";
   value: Uint8Array;
@@ -39,6 +45,9 @@ export interface QueryInflationRequestSDKType {}
 export interface QueryInflationResponse {
   /** inflation is the current minting inflation value. */
   inflation: Uint8Array;
+}
+export interface ReactiveQueryInflationResponse {
+  inflation: ComputedRef<Uint8Array>;
 }
 export interface QueryInflationResponseProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryInflationResponse";
@@ -56,6 +65,7 @@ export interface QueryInflationResponseSDKType {
  * Query/AnnualProvisions RPC method.
  */
 export interface QueryAnnualProvisionsRequest {}
+export interface ReactiveQueryAnnualProvisionsRequest {}
 export interface QueryAnnualProvisionsRequestProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsRequest";
   value: Uint8Array;
@@ -72,6 +82,9 @@ export interface QueryAnnualProvisionsRequestSDKType {}
 export interface QueryAnnualProvisionsResponse {
   /** annual_provisions is the current minting annual provisions value. */
   annualProvisions: Uint8Array;
+}
+export interface ReactiveQueryAnnualProvisionsResponse {
+  annualProvisions: ComputedRef<Uint8Array>;
 }
 export interface QueryAnnualProvisionsResponseProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsResponse";
@@ -107,8 +120,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -189,9 +201,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -200,9 +212,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -277,8 +287,7 @@ export const QueryInflationRequest = {
     return message;
   },
   fromJSON(_: any): QueryInflationRequest {
-    const obj = createBaseQueryInflationRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryInflationRequest): JsonSafe<QueryInflationRequest> {
     const obj: any = {};
@@ -359,9 +368,9 @@ export const QueryInflationResponse = {
     return message;
   },
   fromJSON(object: any): QueryInflationResponse {
-    const obj = createBaseQueryInflationResponse();
-    if (isSet(object.inflation)) obj.inflation = bytesFromBase64(object.inflation);
-    return obj;
+    return {
+      inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
+    };
   },
   toJSON(message: QueryInflationResponse): JsonSafe<QueryInflationResponse> {
     const obj: any = {};
@@ -445,8 +454,7 @@ export const QueryAnnualProvisionsRequest = {
     return message;
   },
   fromJSON(_: any): QueryAnnualProvisionsRequest {
-    const obj = createBaseQueryAnnualProvisionsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryAnnualProvisionsRequest): JsonSafe<QueryAnnualProvisionsRequest> {
     const obj: any = {};
@@ -527,9 +535,9 @@ export const QueryAnnualProvisionsResponse = {
     return message;
   },
   fromJSON(object: any): QueryAnnualProvisionsResponse {
-    const obj = createBaseQueryAnnualProvisionsResponse();
-    if (isSet(object.annualProvisions)) obj.annualProvisions = bytesFromBase64(object.annualProvisions);
-    return obj;
+    return {
+      annualProvisions: isSet(object.annualProvisions) ? bytesFromBase64(object.annualProvisions) : new Uint8Array()
+    };
   },
   toJSON(message: QueryAnnualProvisionsResponse): JsonSafe<QueryAnnualProvisionsResponse> {
     const obj: any = {};

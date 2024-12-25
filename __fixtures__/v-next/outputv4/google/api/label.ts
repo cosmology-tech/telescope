@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -52,6 +53,11 @@ export interface LabelDescriptor {
   /** A human-readable description for the label. */
   description: string;
 }
+export interface ReactiveLabelDescriptor {
+  key: ComputedRef<string>;
+  valueType: ComputedRef<LabelDescriptor_ValueType>;
+  description: ComputedRef<string>;
+}
 export interface LabelDescriptorProtoMsg {
   typeUrl: "/google.api.LabelDescriptor";
   value: Uint8Array;
@@ -72,13 +78,13 @@ function createBaseLabelDescriptor(): LabelDescriptor {
 export const LabelDescriptor = {
   typeUrl: "/google.api.LabelDescriptor",
   encode(message: LabelDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.valueType !== 0) {
       writer.uint32(16).int32(message.valueType);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -107,11 +113,11 @@ export const LabelDescriptor = {
     return message;
   },
   fromJSON(object: any): LabelDescriptor {
-    const obj = createBaseLabelDescriptor();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.valueType)) obj.valueType = labelDescriptor_ValueTypeFromJSON(object.valueType);
-    if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      valueType: isSet(object.valueType) ? labelDescriptor_ValueTypeFromJSON(object.valueType) : -1,
+      description: isSet(object.description) ? String(object.description) : ""
+    };
   },
   toJSON(message: LabelDescriptor): JsonSafe<LabelDescriptor> {
     const obj: any = {};

@@ -1,12 +1,16 @@
-import { Any, AnySDKType } from "../protobuf/any.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial } from "../../helpers.js";
+import { Any, AnySDKType } from "../protobuf/any";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
 export interface SourceInfo {
   /** All files used during config generation. */
   sourceFiles: Any[];
+}
+export interface ReactiveSourceInfo {
+  sourceFiles: ComputedRef<Any[]>;
 }
 export interface SourceInfoProtoMsg {
   typeUrl: "/google.api.SourceInfo";
@@ -47,9 +51,9 @@ export const SourceInfo = {
     return message;
   },
   fromJSON(object: any): SourceInfo {
-    const obj = createBaseSourceInfo();
-    if (Array.isArray(object?.sourceFiles)) obj.sourceFiles = object.sourceFiles.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      sourceFiles: Array.isArray(object?.sourceFiles) ? object.sourceFiles.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
     const obj: any = {};

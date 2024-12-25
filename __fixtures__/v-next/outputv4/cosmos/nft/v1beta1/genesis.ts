@@ -1,13 +1,18 @@
-import { Class, ClassSDKType, NFT, NFTSDKType } from "./nft.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { JsonSafe } from "../../../json-safe.js";
-import { DeepPartial, isSet } from "../../../helpers.js";
+import { Class, ClassSDKType, NFT, NFTSDKType } from "./nft";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
+import { DeepPartial, isSet } from "../../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
   /** class defines the class of the nft type. */
   classes: Class[];
   entries: Entry[];
+}
+export interface ReactiveGenesisState {
+  classes: ComputedRef<Class[]>;
+  entries: ComputedRef<Entry[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.GenesisState";
@@ -24,6 +29,10 @@ export interface Entry {
   owner: string;
   /** nfts is a group of nfts of the same owner */
   nfts: NFT[];
+}
+export interface ReactiveEntry {
+  owner: ComputedRef<string>;
+  nfts: ComputedRef<NFT[]>;
 }
 export interface EntryProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.Entry";
@@ -72,10 +81,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.classes)) obj.classes = object.classes.map((e: any) => Class.fromJSON(e));
-    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Entry.fromJSON(e));
-    return obj;
+    return {
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromJSON(e)) : [],
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -174,7 +183,7 @@ function createBaseEntry(): Entry {
 export const Entry = {
   typeUrl: "/cosmos.nft.v1beta1.Entry",
   encode(message: Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     for (const v of message.nfts) {
@@ -203,10 +212,10 @@ export const Entry = {
     return message;
   },
   fromJSON(object: any): Entry {
-    const obj = createBaseEntry();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (Array.isArray(object?.nfts)) obj.nfts = object.nfts.map((e: any) => NFT.fromJSON(e));
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : []
+    };
   },
   toJSON(message: Entry): JsonSafe<Entry> {
     const obj: any = {};

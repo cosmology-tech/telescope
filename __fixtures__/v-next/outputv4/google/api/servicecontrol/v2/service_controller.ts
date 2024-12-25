@@ -1,8 +1,9 @@
-import { AttributeContext, AttributeContextSDKType } from "../../../rpc/context/attribute_context.js";
-import { Status, StatusSDKType } from "../../../rpc/status.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { AttributeContext, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
+import { Status, StatusSDKType } from "../../../rpc/status";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api.servicecontrol.v2";
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -27,6 +28,13 @@ export interface CheckRequest {
   resources: ResourceInfo[];
   /** Optional. Contains a comma-separated list of flags. */
   flags: string;
+}
+export interface ReactiveCheckRequest {
+  serviceName: ComputedRef<string>;
+  serviceConfigId: ComputedRef<string>;
+  attributes?: ComputedRef<AttributeContext>;
+  resources: ComputedRef<ResourceInfo[]>;
+  flags: ComputedRef<string>;
 }
 export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
@@ -69,6 +77,13 @@ export interface ResourceInfo {
    */
   location: string;
 }
+export interface ReactiveResourceInfo {
+  name: ComputedRef<string>;
+  type: ComputedRef<string>;
+  permission: ComputedRef<string>;
+  container: ComputedRef<string>;
+  location: ComputedRef<string>;
+}
 export interface ResourceInfoProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ResourceInfo";
   value: Uint8Array;
@@ -84,6 +99,10 @@ export interface ResourceInfoSDKType {
 export interface CheckResponse_HeadersEntry {
   key: string;
   value: string;
+}
+export interface ReactiveCheckResponse_HeadersEntry {
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface CheckResponse_HeadersEntryProtoMsg {
   typeUrl: string;
@@ -105,6 +124,12 @@ export interface CheckResponse {
   headers: {
     [key: string]: string;
   };
+}
+export interface ReactiveCheckResponse {
+  status?: ComputedRef<Status>;
+  headers: ComputedRef<{
+    [key: string]: string;
+  }>;
 }
 export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
@@ -141,6 +166,11 @@ export interface ReportRequest {
    */
   operations: AttributeContext[];
 }
+export interface ReactiveReportRequest {
+  serviceName: ComputedRef<string>;
+  serviceConfigId: ComputedRef<string>;
+  operations: ComputedRef<AttributeContext[]>;
+}
 export interface ReportRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ReportRequest";
   value: Uint8Array;
@@ -156,6 +186,7 @@ export interface ReportRequestSDKType {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponse {}
+export interface ReactiveReportResponse {}
 export interface ReportResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.ReportResponse";
   value: Uint8Array;
@@ -177,10 +208,10 @@ function createBaseCheckRequest(): CheckRequest {
 export const CheckRequest = {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
   encode(message: CheckRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.serviceConfigId !== undefined) {
+    if (message.serviceConfigId !== "") {
       writer.uint32(18).string(message.serviceConfigId);
     }
     if (message.attributes !== undefined) {
@@ -189,7 +220,7 @@ export const CheckRequest = {
     for (const v of message.resources) {
       ResourceInfo.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.flags !== undefined) {
+    if (message.flags !== "") {
       writer.uint32(42).string(message.flags);
     }
     return writer;
@@ -224,13 +255,13 @@ export const CheckRequest = {
     return message;
   },
   fromJSON(object: any): CheckRequest {
-    const obj = createBaseCheckRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (isSet(object.attributes)) obj.attributes = AttributeContext.fromJSON(object.attributes);
-    if (Array.isArray(object?.resources)) obj.resources = object.resources.map((e: any) => ResourceInfo.fromJSON(e));
-    if (isSet(object.flags)) obj.flags = String(object.flags);
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : "",
+      attributes: isSet(object.attributes) ? AttributeContext.fromJSON(object.attributes) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromJSON(e)) : [],
+      flags: isSet(object.flags) ? String(object.flags) : ""
+    };
   },
   toJSON(message: CheckRequest): JsonSafe<CheckRequest> {
     const obj: any = {};
@@ -249,9 +280,7 @@ export const CheckRequest = {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
     message.serviceConfigId = object.serviceConfigId ?? "";
-    if (object.attributes !== undefined && object.attributes !== null) {
-      message.attributes = AttributeContext.fromPartial(object.attributes);
-    }
+    message.attributes = object.attributes !== undefined && object.attributes !== null ? AttributeContext.fromPartial(object.attributes) : undefined;
     message.resources = object.resources?.map(e => ResourceInfo.fromPartial(e)) || [];
     message.flags = object.flags ?? "";
     return message;
@@ -345,19 +374,19 @@ function createBaseResourceInfo(): ResourceInfo {
 export const ResourceInfo = {
   typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
   encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(18).string(message.type);
     }
-    if (message.permission !== undefined) {
+    if (message.permission !== "") {
       writer.uint32(26).string(message.permission);
     }
-    if (message.container !== undefined) {
+    if (message.container !== "") {
       writer.uint32(34).string(message.container);
     }
-    if (message.location !== undefined) {
+    if (message.location !== "") {
       writer.uint32(42).string(message.location);
     }
     return writer;
@@ -392,13 +421,13 @@ export const ResourceInfo = {
     return message;
   },
   fromJSON(object: any): ResourceInfo {
-    const obj = createBaseResourceInfo();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isSet(object.permission)) obj.permission = String(object.permission);
-    if (isSet(object.container)) obj.container = String(object.container);
-    if (isSet(object.location)) obj.location = String(object.location);
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      permission: isSet(object.permission) ? String(object.permission) : "",
+      container: isSet(object.container) ? String(object.container) : "",
+      location: isSet(object.location) ? String(object.location) : ""
+    };
   },
   toJSON(message: ResourceInfo): JsonSafe<ResourceInfo> {
     const obj: any = {};
@@ -497,10 +526,10 @@ function createBaseCheckResponse_HeadersEntry(): CheckResponse_HeadersEntry {
 }
 export const CheckResponse_HeadersEntry = {
   encode(message: CheckResponse_HeadersEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -526,10 +555,10 @@ export const CheckResponse_HeadersEntry = {
     return message;
   },
   fromJSON(object: any): CheckResponse_HeadersEntry {
-    const obj = createBaseCheckResponse_HeadersEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: CheckResponse_HeadersEntry): JsonSafe<CheckResponse_HeadersEntry> {
     const obj: any = {};
@@ -631,15 +660,15 @@ export const CheckResponse = {
     return message;
   },
   fromJSON(object: any): CheckResponse {
-    const obj = createBaseCheckResponse();
-    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined,
+      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: CheckResponse): JsonSafe<CheckResponse> {
     const obj: any = {};
@@ -654,9 +683,7 @@ export const CheckResponse = {
   },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
-    if (object.status !== undefined && object.status !== null) {
-      message.status = Status.fromPartial(object.status);
-    }
+    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     message.headers = Object.entries(object.headers ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -752,10 +779,10 @@ function createBaseReportRequest(): ReportRequest {
 export const ReportRequest = {
   typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
   encode(message: ReportRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== undefined) {
+    if (message.serviceName !== "") {
       writer.uint32(10).string(message.serviceName);
     }
-    if (message.serviceConfigId !== undefined) {
+    if (message.serviceConfigId !== "") {
       writer.uint32(18).string(message.serviceConfigId);
     }
     for (const v of message.operations) {
@@ -787,11 +814,11 @@ export const ReportRequest = {
     return message;
   },
   fromJSON(object: any): ReportRequest {
-    const obj = createBaseReportRequest();
-    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
-    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => AttributeContext.fromJSON(e));
-    return obj;
+    return {
+      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
+      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : "",
+      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromJSON(e)) : []
+    };
   },
   toJSON(message: ReportRequest): JsonSafe<ReportRequest> {
     const obj: any = {};
@@ -897,8 +924,7 @@ export const ReportResponse = {
     return message;
   },
   fromJSON(_: any): ReportResponse {
-    const obj = createBaseReportResponse();
-    return obj;
+    return {};
   },
   toJSON(_: ReportResponse): JsonSafe<ReportResponse> {
     const obj: any = {};

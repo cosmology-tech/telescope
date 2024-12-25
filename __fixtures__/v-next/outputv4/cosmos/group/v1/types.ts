@@ -1,9 +1,10 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
-import { Any, AnySDKType } from "../../../google/protobuf/any.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.group.v1";
 /** VoteOption enumerates the valid vote options for a given proposal. */
 export enum VoteOption {
@@ -228,6 +229,12 @@ export interface Member {
   /** added_at is a timestamp specifying when a member was added. */
   addedAt: Date;
 }
+export interface ReactiveMember {
+  address: ComputedRef<string>;
+  weight: ComputedRef<string>;
+  metadata: ComputedRef<string>;
+  addedAt: ComputedRef<Date>;
+}
 export interface MemberProtoMsg {
   typeUrl: "/cosmos.group.v1.Member";
   value: Uint8Array;
@@ -247,6 +254,9 @@ export interface Members {
   /** members is the list of members. */
   members: Member[];
 }
+export interface ReactiveMembers {
+  members: ComputedRef<Member[]>;
+}
 export interface MembersProtoMsg {
   typeUrl: "/cosmos.group.v1.Members";
   value: Uint8Array;
@@ -261,6 +271,10 @@ export interface ThresholdDecisionPolicy {
   threshold: string;
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindows;
+}
+export interface ReactiveThresholdDecisionPolicy {
+  threshold: ComputedRef<string>;
+  windows?: ComputedRef<DecisionPolicyWindows>;
 }
 export interface ThresholdDecisionPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy";
@@ -277,6 +291,10 @@ export interface PercentageDecisionPolicy {
   percentage: string;
   /** windows defines the different windows for voting and execution. */
   windows?: DecisionPolicyWindows;
+}
+export interface ReactivePercentageDecisionPolicy {
+  percentage: ComputedRef<string>;
+  windows?: ComputedRef<DecisionPolicyWindows>;
 }
 export interface PercentageDecisionPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy";
@@ -309,6 +327,10 @@ export interface DecisionPolicyWindows {
    */
   minExecutionPeriod: Duration;
 }
+export interface ReactiveDecisionPolicyWindows {
+  votingPeriod: ComputedRef<Duration>;
+  minExecutionPeriod: ComputedRef<Duration>;
+}
 export interface DecisionPolicyWindowsProtoMsg {
   typeUrl: "/cosmos.group.v1.DecisionPolicyWindows";
   value: Uint8Array;
@@ -338,6 +360,14 @@ export interface GroupInfo {
   /** created_at is a timestamp specifying when a group was created. */
   createdAt: Date;
 }
+export interface ReactiveGroupInfo {
+  id: ComputedRef<bigint>;
+  admin: ComputedRef<string>;
+  metadata: ComputedRef<string>;
+  version: ComputedRef<bigint>;
+  totalWeight: ComputedRef<string>;
+  createdAt: ComputedRef<Date>;
+}
 export interface GroupInfoProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupInfo";
   value: Uint8Array;
@@ -357,6 +387,10 @@ export interface GroupMember {
   groupId: bigint;
   /** member is the member data. */
   member?: Member;
+}
+export interface ReactiveGroupMember {
+  groupId: ComputedRef<bigint>;
+  member?: ComputedRef<Member>;
 }
 export interface GroupMemberProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupMember";
@@ -386,6 +420,15 @@ export interface GroupPolicyInfo {
   decisionPolicy?: Any;
   /** created_at is a timestamp specifying when a group policy was created. */
   createdAt: Date;
+}
+export interface ReactiveGroupPolicyInfo {
+  address: ComputedRef<string>;
+  groupId: ComputedRef<bigint>;
+  admin: ComputedRef<string>;
+  metadata: ComputedRef<string>;
+  version: ComputedRef<bigint>;
+  decisionPolicy?: ComputedRef<Any>;
+  createdAt: ComputedRef<Date>;
 }
 export interface GroupPolicyInfoProtoMsg {
   typeUrl: "/cosmos.group.v1.GroupPolicyInfo";
@@ -455,6 +498,21 @@ export interface Proposal {
   /** messages is a list of Msgs that will be executed if the proposal passes. */
   messages: Any[];
 }
+export interface ReactiveProposal {
+  id: ComputedRef<bigint>;
+  address: ComputedRef<string>;
+  metadata: ComputedRef<string>;
+  proposers: ComputedRef<string[]>;
+  submitTime: ComputedRef<Date>;
+  groupVersion: ComputedRef<bigint>;
+  groupPolicyVersion: ComputedRef<bigint>;
+  status: ComputedRef<ProposalStatus>;
+  result: ComputedRef<ProposalResult>;
+  finalTallyResult: ComputedRef<TallyResult>;
+  votingPeriodEnd: ComputedRef<Date>;
+  executorResult: ComputedRef<ProposalExecutorResult>;
+  messages: ComputedRef<Any[]>;
+}
 export interface ProposalProtoMsg {
   typeUrl: "/cosmos.group.v1.Proposal";
   value: Uint8Array;
@@ -491,6 +549,12 @@ export interface TallyResult {
   /** no_with_veto_count is the weighted sum of veto. */
   noWithVetoCount: string;
 }
+export interface ReactiveTallyResult {
+  yesCount: ComputedRef<string>;
+  abstainCount: ComputedRef<string>;
+  noCount: ComputedRef<string>;
+  noWithVetoCount: ComputedRef<string>;
+}
 export interface TallyResultProtoMsg {
   typeUrl: "/cosmos.group.v1.TallyResult";
   value: Uint8Array;
@@ -515,6 +579,13 @@ export interface Vote {
   /** submit_time is the timestamp when the vote was submitted. */
   submitTime: Date;
 }
+export interface ReactiveVote {
+  proposalId: ComputedRef<bigint>;
+  voter: ComputedRef<string>;
+  option: ComputedRef<VoteOption>;
+  metadata: ComputedRef<string>;
+  submitTime: ComputedRef<Date>;
+}
 export interface VoteProtoMsg {
   typeUrl: "/cosmos.group.v1.Vote";
   value: Uint8Array;
@@ -538,13 +609,13 @@ function createBaseMember(): Member {
 export const Member = {
   typeUrl: "/cosmos.group.v1.Member",
   encode(message: Member, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.weight !== undefined) {
+    if (message.weight !== "") {
       writer.uint32(18).string(message.weight);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     if (message.addedAt !== undefined) {
@@ -579,12 +650,12 @@ export const Member = {
     return message;
   },
   fromJSON(object: any): Member {
-    const obj = createBaseMember();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.weight)) obj.weight = String(object.weight);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (isSet(object.addedAt)) obj.addedAt = new Date(object.addedAt);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      weight: isSet(object.weight) ? String(object.weight) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      addedAt: isSet(object.addedAt) ? new Date(object.addedAt) : undefined
+    };
   },
   toJSON(message: Member): JsonSafe<Member> {
     const obj: any = {};
@@ -703,9 +774,9 @@ export const Members = {
     return message;
   },
   fromJSON(object: any): Members {
-    const obj = createBaseMembers();
-    if (Array.isArray(object?.members)) obj.members = object.members.map((e: any) => Member.fromJSON(e));
-    return obj;
+    return {
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromJSON(e)) : []
+    };
   },
   toJSON(message: Members): JsonSafe<Members> {
     const obj: any = {};
@@ -785,7 +856,7 @@ function createBaseThresholdDecisionPolicy(): ThresholdDecisionPolicy {
 export const ThresholdDecisionPolicy = {
   typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy",
   encode(message: ThresholdDecisionPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.threshold !== undefined) {
+    if (message.threshold !== "") {
       writer.uint32(10).string(message.threshold);
     }
     if (message.windows !== undefined) {
@@ -814,10 +885,10 @@ export const ThresholdDecisionPolicy = {
     return message;
   },
   fromJSON(object: any): ThresholdDecisionPolicy {
-    const obj = createBaseThresholdDecisionPolicy();
-    if (isSet(object.threshold)) obj.threshold = String(object.threshold);
-    if (isSet(object.windows)) obj.windows = DecisionPolicyWindows.fromJSON(object.windows);
-    return obj;
+    return {
+      threshold: isSet(object.threshold) ? String(object.threshold) : "",
+      windows: isSet(object.windows) ? DecisionPolicyWindows.fromJSON(object.windows) : undefined
+    };
   },
   toJSON(message: ThresholdDecisionPolicy): JsonSafe<ThresholdDecisionPolicy> {
     const obj: any = {};
@@ -828,9 +899,7 @@ export const ThresholdDecisionPolicy = {
   fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
     const message = createBaseThresholdDecisionPolicy();
     message.threshold = object.threshold ?? "";
-    if (object.windows !== undefined && object.windows !== null) {
-      message.windows = DecisionPolicyWindows.fromPartial(object.windows);
-    }
+    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
     return message;
   },
   fromSDK(object: ThresholdDecisionPolicySDKType): ThresholdDecisionPolicy {
@@ -898,7 +967,7 @@ function createBasePercentageDecisionPolicy(): PercentageDecisionPolicy {
 export const PercentageDecisionPolicy = {
   typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy",
   encode(message: PercentageDecisionPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.percentage !== undefined) {
+    if (message.percentage !== "") {
       writer.uint32(10).string(message.percentage);
     }
     if (message.windows !== undefined) {
@@ -927,10 +996,10 @@ export const PercentageDecisionPolicy = {
     return message;
   },
   fromJSON(object: any): PercentageDecisionPolicy {
-    const obj = createBasePercentageDecisionPolicy();
-    if (isSet(object.percentage)) obj.percentage = String(object.percentage);
-    if (isSet(object.windows)) obj.windows = DecisionPolicyWindows.fromJSON(object.windows);
-    return obj;
+    return {
+      percentage: isSet(object.percentage) ? String(object.percentage) : "",
+      windows: isSet(object.windows) ? DecisionPolicyWindows.fromJSON(object.windows) : undefined
+    };
   },
   toJSON(message: PercentageDecisionPolicy): JsonSafe<PercentageDecisionPolicy> {
     const obj: any = {};
@@ -941,9 +1010,7 @@ export const PercentageDecisionPolicy = {
   fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
-    if (object.windows !== undefined && object.windows !== null) {
-      message.windows = DecisionPolicyWindows.fromPartial(object.windows);
-    }
+    message.windows = object.windows !== undefined && object.windows !== null ? DecisionPolicyWindows.fromPartial(object.windows) : undefined;
     return message;
   },
   fromSDK(object: PercentageDecisionPolicySDKType): PercentageDecisionPolicy {
@@ -1040,10 +1107,10 @@ export const DecisionPolicyWindows = {
     return message;
   },
   fromJSON(object: any): DecisionPolicyWindows {
-    const obj = createBaseDecisionPolicyWindows();
-    if (isSet(object.votingPeriod)) obj.votingPeriod = Duration.fromJSON(object.votingPeriod);
-    if (isSet(object.minExecutionPeriod)) obj.minExecutionPeriod = Duration.fromJSON(object.minExecutionPeriod);
-    return obj;
+    return {
+      votingPeriod: isSet(object.votingPeriod) ? Duration.fromJSON(object.votingPeriod) : undefined,
+      minExecutionPeriod: isSet(object.minExecutionPeriod) ? Duration.fromJSON(object.minExecutionPeriod) : undefined
+    };
   },
   toJSON(message: DecisionPolicyWindows): JsonSafe<DecisionPolicyWindows> {
     const obj: any = {};
@@ -1053,12 +1120,8 @@ export const DecisionPolicyWindows = {
   },
   fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
     const message = createBaseDecisionPolicyWindows();
-    if (object.votingPeriod !== undefined && object.votingPeriod !== null) {
-      message.votingPeriod = Duration.fromPartial(object.votingPeriod);
-    }
-    if (object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null) {
-      message.minExecutionPeriod = Duration.fromPartial(object.minExecutionPeriod);
-    }
+    message.votingPeriod = object.votingPeriod !== undefined && object.votingPeriod !== null ? Duration.fromPartial(object.votingPeriod) : undefined;
+    message.minExecutionPeriod = object.minExecutionPeriod !== undefined && object.minExecutionPeriod !== null ? Duration.fromPartial(object.minExecutionPeriod) : undefined;
     return message;
   },
   fromSDK(object: DecisionPolicyWindowsSDKType): DecisionPolicyWindows {
@@ -1130,19 +1193,19 @@ function createBaseGroupInfo(): GroupInfo {
 export const GroupInfo = {
   typeUrl: "/cosmos.group.v1.GroupInfo",
   encode(message: GroupInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(18).string(message.admin);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
-    if (message.version !== undefined) {
+    if (message.version !== BigInt(0)) {
       writer.uint32(32).uint64(message.version);
     }
-    if (message.totalWeight !== undefined) {
+    if (message.totalWeight !== "") {
       writer.uint32(42).string(message.totalWeight);
     }
     if (message.createdAt !== undefined) {
@@ -1183,14 +1246,14 @@ export const GroupInfo = {
     return message;
   },
   fromJSON(object: any): GroupInfo {
-    const obj = createBaseGroupInfo();
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (isSet(object.version)) obj.version = BigInt(object.version.toString());
-    if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
-    if (isSet(object.createdAt)) obj.createdAt = new Date(object.createdAt);
-    return obj;
+    return {
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt(0),
+      totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
+      createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
+    };
   },
   toJSON(message: GroupInfo): JsonSafe<GroupInfo> {
     const obj: any = {};
@@ -1204,14 +1267,10 @@ export const GroupInfo = {
   },
   fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    if (object.version !== undefined && object.version !== null) {
-      message.version = BigInt(object.version.toString());
-    }
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt(0);
     message.totalWeight = object.totalWeight ?? "";
     message.createdAt = object.createdAt ?? undefined;
     return message;
@@ -1309,7 +1368,7 @@ function createBaseGroupMember(): GroupMember {
 export const GroupMember = {
   typeUrl: "/cosmos.group.v1.GroupMember",
   encode(message: GroupMember, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(8).uint64(message.groupId);
     }
     if (message.member !== undefined) {
@@ -1338,10 +1397,10 @@ export const GroupMember = {
     return message;
   },
   fromJSON(object: any): GroupMember {
-    const obj = createBaseGroupMember();
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    if (isSet(object.member)) obj.member = Member.fromJSON(object.member);
-    return obj;
+    return {
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
+      member: isSet(object.member) ? Member.fromJSON(object.member) : undefined
+    };
   },
   toJSON(message: GroupMember): JsonSafe<GroupMember> {
     const obj: any = {};
@@ -1351,12 +1410,8 @@ export const GroupMember = {
   },
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
     const message = createBaseGroupMember();
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
-    if (object.member !== undefined && object.member !== null) {
-      message.member = Member.fromPartial(object.member);
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
+    message.member = object.member !== undefined && object.member !== null ? Member.fromPartial(object.member) : undefined;
     return message;
   },
   fromSDK(object: GroupMemberSDKType): GroupMember {
@@ -1429,19 +1484,19 @@ function createBaseGroupPolicyInfo(): GroupPolicyInfo {
 export const GroupPolicyInfo = {
   typeUrl: "/cosmos.group.v1.GroupPolicyInfo",
   encode(message: GroupPolicyInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(16).uint64(message.groupId);
     }
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(26).string(message.admin);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(34).string(message.metadata);
     }
-    if (message.version !== undefined) {
+    if (message.version !== BigInt(0)) {
       writer.uint32(40).uint64(message.version);
     }
     if (message.decisionPolicy !== undefined) {
@@ -1488,15 +1543,15 @@ export const GroupPolicyInfo = {
     return message;
   },
   fromJSON(object: any): GroupPolicyInfo {
-    const obj = createBaseGroupPolicyInfo();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (isSet(object.version)) obj.version = BigInt(object.version.toString());
-    if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
-    if (isSet(object.createdAt)) obj.createdAt = new Date(object.createdAt);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      version: isSet(object.version) ? BigInt(object.version.toString()) : BigInt(0),
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
+      createdAt: isSet(object.createdAt) ? new Date(object.createdAt) : undefined
+    };
   },
   toJSON(message: GroupPolicyInfo): JsonSafe<GroupPolicyInfo> {
     const obj: any = {};
@@ -1512,17 +1567,11 @@ export const GroupPolicyInfo = {
   fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
     const message = createBaseGroupPolicyInfo();
     message.address = object.address ?? "";
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
-    if (object.version !== undefined && object.version !== null) {
-      message.version = BigInt(object.version.toString());
-    }
-    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
-      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
-    }
+    message.version = object.version !== undefined && object.version !== null ? BigInt(object.version.toString()) : BigInt(0);
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     message.createdAt = object.createdAt ?? undefined;
     return message;
   },
@@ -1637,13 +1686,13 @@ function createBaseProposal(): Proposal {
 export const Proposal = {
   typeUrl: "/cosmos.group.v1.Proposal",
   encode(message: Proposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     for (const v of message.proposers) {
@@ -1652,10 +1701,10 @@ export const Proposal = {
     if (message.submitTime !== undefined) {
       Timestamp.encode(toTimestamp(message.submitTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.groupVersion !== undefined) {
+    if (message.groupVersion !== BigInt(0)) {
       writer.uint32(48).uint64(message.groupVersion);
     }
-    if (message.groupPolicyVersion !== undefined) {
+    if (message.groupPolicyVersion !== BigInt(0)) {
       writer.uint32(56).uint64(message.groupPolicyVersion);
     }
     if (message.status !== 0) {
@@ -1732,21 +1781,21 @@ export const Proposal = {
     return message;
   },
   fromJSON(object: any): Proposal {
-    const obj = createBaseProposal();
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (Array.isArray(object?.proposers)) obj.proposers = object.proposers.map((e: any) => String(e));
-    if (isSet(object.submitTime)) obj.submitTime = new Date(object.submitTime);
-    if (isSet(object.groupVersion)) obj.groupVersion = BigInt(object.groupVersion.toString());
-    if (isSet(object.groupPolicyVersion)) obj.groupPolicyVersion = BigInt(object.groupPolicyVersion.toString());
-    if (isSet(object.status)) obj.status = proposalStatusFromJSON(object.status);
-    if (isSet(object.result)) obj.result = proposalResultFromJSON(object.result);
-    if (isSet(object.finalTallyResult)) obj.finalTallyResult = TallyResult.fromJSON(object.finalTallyResult);
-    if (isSet(object.votingPeriodEnd)) obj.votingPeriodEnd = new Date(object.votingPeriodEnd);
-    if (isSet(object.executorResult)) obj.executorResult = proposalExecutorResultFromJSON(object.executorResult);
-    if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
+      address: isSet(object.address) ? String(object.address) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
+      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined,
+      groupVersion: isSet(object.groupVersion) ? BigInt(object.groupVersion.toString()) : BigInt(0),
+      groupPolicyVersion: isSet(object.groupPolicyVersion) ? BigInt(object.groupPolicyVersion.toString()) : BigInt(0),
+      status: isSet(object.status) ? proposalStatusFromJSON(object.status) : -1,
+      result: isSet(object.result) ? proposalResultFromJSON(object.result) : -1,
+      finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
+      votingPeriodEnd: isSet(object.votingPeriodEnd) ? new Date(object.votingPeriodEnd) : undefined,
+      executorResult: isSet(object.executorResult) ? proposalExecutorResultFromJSON(object.executorResult) : -1,
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: Proposal): JsonSafe<Proposal> {
     const obj: any = {};
@@ -1775,24 +1824,16 @@ export const Proposal = {
   },
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.address = object.address ?? "";
     message.metadata = object.metadata ?? "";
     message.proposers = object.proposers?.map(e => e) || [];
     message.submitTime = object.submitTime ?? undefined;
-    if (object.groupVersion !== undefined && object.groupVersion !== null) {
-      message.groupVersion = BigInt(object.groupVersion.toString());
-    }
-    if (object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null) {
-      message.groupPolicyVersion = BigInt(object.groupPolicyVersion.toString());
-    }
+    message.groupVersion = object.groupVersion !== undefined && object.groupVersion !== null ? BigInt(object.groupVersion.toString()) : BigInt(0);
+    message.groupPolicyVersion = object.groupPolicyVersion !== undefined && object.groupPolicyVersion !== null ? BigInt(object.groupPolicyVersion.toString()) : BigInt(0);
     message.status = object.status ?? 0;
     message.result = object.result ?? 0;
-    if (object.finalTallyResult !== undefined && object.finalTallyResult !== null) {
-      message.finalTallyResult = TallyResult.fromPartial(object.finalTallyResult);
-    }
+    message.finalTallyResult = object.finalTallyResult !== undefined && object.finalTallyResult !== null ? TallyResult.fromPartial(object.finalTallyResult) : undefined;
     message.votingPeriodEnd = object.votingPeriodEnd ?? undefined;
     message.executorResult = object.executorResult ?? 0;
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
@@ -1954,16 +1995,16 @@ function createBaseTallyResult(): TallyResult {
 export const TallyResult = {
   typeUrl: "/cosmos.group.v1.TallyResult",
   encode(message: TallyResult, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.yesCount !== undefined) {
+    if (message.yesCount !== "") {
       writer.uint32(10).string(message.yesCount);
     }
-    if (message.abstainCount !== undefined) {
+    if (message.abstainCount !== "") {
       writer.uint32(18).string(message.abstainCount);
     }
-    if (message.noCount !== undefined) {
+    if (message.noCount !== "") {
       writer.uint32(26).string(message.noCount);
     }
-    if (message.noWithVetoCount !== undefined) {
+    if (message.noWithVetoCount !== "") {
       writer.uint32(34).string(message.noWithVetoCount);
     }
     return writer;
@@ -1995,12 +2036,12 @@ export const TallyResult = {
     return message;
   },
   fromJSON(object: any): TallyResult {
-    const obj = createBaseTallyResult();
-    if (isSet(object.yesCount)) obj.yesCount = String(object.yesCount);
-    if (isSet(object.abstainCount)) obj.abstainCount = String(object.abstainCount);
-    if (isSet(object.noCount)) obj.noCount = String(object.noCount);
-    if (isSet(object.noWithVetoCount)) obj.noWithVetoCount = String(object.noWithVetoCount);
-    return obj;
+    return {
+      yesCount: isSet(object.yesCount) ? String(object.yesCount) : "",
+      abstainCount: isSet(object.abstainCount) ? String(object.abstainCount) : "",
+      noCount: isSet(object.noCount) ? String(object.noCount) : "",
+      noWithVetoCount: isSet(object.noWithVetoCount) ? String(object.noWithVetoCount) : ""
+    };
   },
   toJSON(message: TallyResult): JsonSafe<TallyResult> {
     const obj: any = {};
@@ -2100,16 +2141,16 @@ function createBaseVote(): Vote {
 export const Vote = {
   typeUrl: "/cosmos.group.v1.Vote",
   encode(message: Vote, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     if (message.option !== 0) {
       writer.uint32(24).int32(message.option);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(34).string(message.metadata);
     }
     if (message.submitTime !== undefined) {
@@ -2147,13 +2188,13 @@ export const Vote = {
     return message;
   },
   fromJSON(object: any): Vote {
-    const obj = createBaseVote();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (isSet(object.submitTime)) obj.submitTime = new Date(object.submitTime);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      submitTime: isSet(object.submitTime) ? new Date(object.submitTime) : undefined
+    };
   },
   toJSON(message: Vote): JsonSafe<Vote> {
     const obj: any = {};
@@ -2166,9 +2207,7 @@ export const Vote = {
   },
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";

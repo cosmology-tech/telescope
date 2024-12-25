@@ -1,7 +1,8 @@
-import { Duration, DurationSDKType } from "../../protobuf/duration.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Duration, DurationSDKType } from "../../protobuf/duration";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.logging.type";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -82,6 +83,23 @@ export interface HttpRequest {
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
 }
+export interface ReactiveHttpRequest {
+  requestMethod: ComputedRef<string>;
+  requestUrl: ComputedRef<string>;
+  requestSize: ComputedRef<bigint>;
+  status: ComputedRef<number>;
+  responseSize: ComputedRef<bigint>;
+  userAgent: ComputedRef<string>;
+  remoteIp: ComputedRef<string>;
+  serverIp: ComputedRef<string>;
+  referer: ComputedRef<string>;
+  latency?: ComputedRef<Duration>;
+  cacheLookup: ComputedRef<boolean>;
+  cacheHit: ComputedRef<boolean>;
+  cacheValidatedWithOriginServer: ComputedRef<boolean>;
+  cacheFillBytes: ComputedRef<bigint>;
+  protocol: ComputedRef<string>;
+}
 export interface HttpRequestProtoMsg {
   typeUrl: "/google.logging.type.HttpRequest";
   value: Uint8Array;
@@ -130,49 +148,49 @@ function createBaseHttpRequest(): HttpRequest {
 export const HttpRequest = {
   typeUrl: "/google.logging.type.HttpRequest",
   encode(message: HttpRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.requestMethod !== undefined) {
+    if (message.requestMethod !== "") {
       writer.uint32(10).string(message.requestMethod);
     }
-    if (message.requestUrl !== undefined) {
+    if (message.requestUrl !== "") {
       writer.uint32(18).string(message.requestUrl);
     }
-    if (message.requestSize !== undefined) {
+    if (message.requestSize !== BigInt(0)) {
       writer.uint32(24).int64(message.requestSize);
     }
-    if (message.status !== undefined) {
+    if (message.status !== 0) {
       writer.uint32(32).int32(message.status);
     }
-    if (message.responseSize !== undefined) {
+    if (message.responseSize !== BigInt(0)) {
       writer.uint32(40).int64(message.responseSize);
     }
-    if (message.userAgent !== undefined) {
+    if (message.userAgent !== "") {
       writer.uint32(50).string(message.userAgent);
     }
-    if (message.remoteIp !== undefined) {
+    if (message.remoteIp !== "") {
       writer.uint32(58).string(message.remoteIp);
     }
-    if (message.serverIp !== undefined) {
+    if (message.serverIp !== "") {
       writer.uint32(106).string(message.serverIp);
     }
-    if (message.referer !== undefined) {
+    if (message.referer !== "") {
       writer.uint32(66).string(message.referer);
     }
     if (message.latency !== undefined) {
       Duration.encode(message.latency, writer.uint32(114).fork()).ldelim();
     }
-    if (message.cacheLookup !== undefined) {
+    if (message.cacheLookup === true) {
       writer.uint32(88).bool(message.cacheLookup);
     }
-    if (message.cacheHit !== undefined) {
+    if (message.cacheHit === true) {
       writer.uint32(72).bool(message.cacheHit);
     }
-    if (message.cacheValidatedWithOriginServer !== undefined) {
+    if (message.cacheValidatedWithOriginServer === true) {
       writer.uint32(80).bool(message.cacheValidatedWithOriginServer);
     }
-    if (message.cacheFillBytes !== undefined) {
+    if (message.cacheFillBytes !== BigInt(0)) {
       writer.uint32(96).int64(message.cacheFillBytes);
     }
-    if (message.protocol !== undefined) {
+    if (message.protocol !== "") {
       writer.uint32(122).string(message.protocol);
     }
     return writer;
@@ -237,23 +255,23 @@ export const HttpRequest = {
     return message;
   },
   fromJSON(object: any): HttpRequest {
-    const obj = createBaseHttpRequest();
-    if (isSet(object.requestMethod)) obj.requestMethod = String(object.requestMethod);
-    if (isSet(object.requestUrl)) obj.requestUrl = String(object.requestUrl);
-    if (isSet(object.requestSize)) obj.requestSize = BigInt(object.requestSize.toString());
-    if (isSet(object.status)) obj.status = Number(object.status);
-    if (isSet(object.responseSize)) obj.responseSize = BigInt(object.responseSize.toString());
-    if (isSet(object.userAgent)) obj.userAgent = String(object.userAgent);
-    if (isSet(object.remoteIp)) obj.remoteIp = String(object.remoteIp);
-    if (isSet(object.serverIp)) obj.serverIp = String(object.serverIp);
-    if (isSet(object.referer)) obj.referer = String(object.referer);
-    if (isSet(object.latency)) obj.latency = Duration.fromJSON(object.latency);
-    if (isSet(object.cacheLookup)) obj.cacheLookup = Boolean(object.cacheLookup);
-    if (isSet(object.cacheHit)) obj.cacheHit = Boolean(object.cacheHit);
-    if (isSet(object.cacheValidatedWithOriginServer)) obj.cacheValidatedWithOriginServer = Boolean(object.cacheValidatedWithOriginServer);
-    if (isSet(object.cacheFillBytes)) obj.cacheFillBytes = BigInt(object.cacheFillBytes.toString());
-    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    return obj;
+    return {
+      requestMethod: isSet(object.requestMethod) ? String(object.requestMethod) : "",
+      requestUrl: isSet(object.requestUrl) ? String(object.requestUrl) : "",
+      requestSize: isSet(object.requestSize) ? BigInt(object.requestSize.toString()) : BigInt(0),
+      status: isSet(object.status) ? Number(object.status) : 0,
+      responseSize: isSet(object.responseSize) ? BigInt(object.responseSize.toString()) : BigInt(0),
+      userAgent: isSet(object.userAgent) ? String(object.userAgent) : "",
+      remoteIp: isSet(object.remoteIp) ? String(object.remoteIp) : "",
+      serverIp: isSet(object.serverIp) ? String(object.serverIp) : "",
+      referer: isSet(object.referer) ? String(object.referer) : "",
+      latency: isSet(object.latency) ? Duration.fromJSON(object.latency) : undefined,
+      cacheLookup: isSet(object.cacheLookup) ? Boolean(object.cacheLookup) : false,
+      cacheHit: isSet(object.cacheHit) ? Boolean(object.cacheHit) : false,
+      cacheValidatedWithOriginServer: isSet(object.cacheValidatedWithOriginServer) ? Boolean(object.cacheValidatedWithOriginServer) : false,
+      cacheFillBytes: isSet(object.cacheFillBytes) ? BigInt(object.cacheFillBytes.toString()) : BigInt(0),
+      protocol: isSet(object.protocol) ? String(object.protocol) : ""
+    };
   },
   toJSON(message: HttpRequest): JsonSafe<HttpRequest> {
     const obj: any = {};
@@ -278,26 +296,18 @@ export const HttpRequest = {
     const message = createBaseHttpRequest();
     message.requestMethod = object.requestMethod ?? "";
     message.requestUrl = object.requestUrl ?? "";
-    if (object.requestSize !== undefined && object.requestSize !== null) {
-      message.requestSize = BigInt(object.requestSize.toString());
-    }
+    message.requestSize = object.requestSize !== undefined && object.requestSize !== null ? BigInt(object.requestSize.toString()) : BigInt(0);
     message.status = object.status ?? 0;
-    if (object.responseSize !== undefined && object.responseSize !== null) {
-      message.responseSize = BigInt(object.responseSize.toString());
-    }
+    message.responseSize = object.responseSize !== undefined && object.responseSize !== null ? BigInt(object.responseSize.toString()) : BigInt(0);
     message.userAgent = object.userAgent ?? "";
     message.remoteIp = object.remoteIp ?? "";
     message.serverIp = object.serverIp ?? "";
     message.referer = object.referer ?? "";
-    if (object.latency !== undefined && object.latency !== null) {
-      message.latency = Duration.fromPartial(object.latency);
-    }
+    message.latency = object.latency !== undefined && object.latency !== null ? Duration.fromPartial(object.latency) : undefined;
     message.cacheLookup = object.cacheLookup ?? false;
     message.cacheHit = object.cacheHit ?? false;
     message.cacheValidatedWithOriginServer = object.cacheValidatedWithOriginServer ?? false;
-    if (object.cacheFillBytes !== undefined && object.cacheFillBytes !== null) {
-      message.cacheFillBytes = BigInt(object.cacheFillBytes.toString());
-    }
+    message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? BigInt(object.cacheFillBytes.toString()) : BigInt(0);
     message.protocol = object.protocol ?? "";
     return message;
   },

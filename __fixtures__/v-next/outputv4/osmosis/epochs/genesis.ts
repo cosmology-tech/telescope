@@ -1,8 +1,9 @@
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
-import { Duration, DurationSDKType } from "../../google/protobuf/duration.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 /**
  * EpochInfo is a struct that describes the data going into
@@ -62,6 +63,15 @@ export interface EpochInfo {
    */
   currentEpochStartHeight: bigint;
 }
+export interface ReactiveEpochInfo {
+  identifier: ComputedRef<string>;
+  startTime: ComputedRef<Date>;
+  duration: ComputedRef<Duration>;
+  currentEpoch: ComputedRef<bigint>;
+  currentEpochStartTime: ComputedRef<Date>;
+  epochCountingStarted: ComputedRef<boolean>;
+  currentEpochStartHeight: ComputedRef<bigint>;
+}
 export interface EpochInfoProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.EpochInfo";
   value: Uint8Array;
@@ -82,6 +92,9 @@ export interface EpochInfoSDKType {
 /** GenesisState defines the epochs module's genesis state. */
 export interface GenesisState {
   epochs: EpochInfo[];
+}
+export interface ReactiveGenesisState {
+  epochs: ComputedRef<EpochInfo[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.GenesisState";
@@ -105,7 +118,7 @@ function createBaseEpochInfo(): EpochInfo {
 export const EpochInfo = {
   typeUrl: "/osmosis.epochs.v1beta1.EpochInfo",
   encode(message: EpochInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.identifier !== undefined) {
+    if (message.identifier !== "") {
       writer.uint32(10).string(message.identifier);
     }
     if (message.startTime !== undefined) {
@@ -114,16 +127,16 @@ export const EpochInfo = {
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(26).fork()).ldelim();
     }
-    if (message.currentEpoch !== undefined) {
+    if (message.currentEpoch !== BigInt(0)) {
       writer.uint32(32).int64(message.currentEpoch);
     }
     if (message.currentEpochStartTime !== undefined) {
       Timestamp.encode(toTimestamp(message.currentEpochStartTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.epochCountingStarted !== undefined) {
+    if (message.epochCountingStarted === true) {
       writer.uint32(48).bool(message.epochCountingStarted);
     }
-    if (message.currentEpochStartHeight !== undefined) {
+    if (message.currentEpochStartHeight !== BigInt(0)) {
       writer.uint32(64).int64(message.currentEpochStartHeight);
     }
     return writer;
@@ -164,15 +177,15 @@ export const EpochInfo = {
     return message;
   },
   fromJSON(object: any): EpochInfo {
-    const obj = createBaseEpochInfo();
-    if (isSet(object.identifier)) obj.identifier = String(object.identifier);
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    if (isSet(object.currentEpoch)) obj.currentEpoch = BigInt(object.currentEpoch.toString());
-    if (isSet(object.currentEpochStartTime)) obj.currentEpochStartTime = new Date(object.currentEpochStartTime);
-    if (isSet(object.epochCountingStarted)) obj.epochCountingStarted = Boolean(object.epochCountingStarted);
-    if (isSet(object.currentEpochStartHeight)) obj.currentEpochStartHeight = BigInt(object.currentEpochStartHeight.toString());
-    return obj;
+    return {
+      identifier: isSet(object.identifier) ? String(object.identifier) : "",
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
+      currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt(0),
+      currentEpochStartTime: isSet(object.currentEpochStartTime) ? new Date(object.currentEpochStartTime) : undefined,
+      epochCountingStarted: isSet(object.epochCountingStarted) ? Boolean(object.epochCountingStarted) : false,
+      currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? BigInt(object.currentEpochStartHeight.toString()) : BigInt(0)
+    };
   },
   toJSON(message: EpochInfo): JsonSafe<EpochInfo> {
     const obj: any = {};
@@ -189,17 +202,11 @@ export const EpochInfo = {
     const message = createBaseEpochInfo();
     message.identifier = object.identifier ?? "";
     message.startTime = object.startTime ?? undefined;
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
-    if (object.currentEpoch !== undefined && object.currentEpoch !== null) {
-      message.currentEpoch = BigInt(object.currentEpoch.toString());
-    }
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    message.currentEpoch = object.currentEpoch !== undefined && object.currentEpoch !== null ? BigInt(object.currentEpoch.toString()) : BigInt(0);
     message.currentEpochStartTime = object.currentEpochStartTime ?? undefined;
     message.epochCountingStarted = object.epochCountingStarted ?? false;
-    if (object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null) {
-      message.currentEpochStartHeight = BigInt(object.currentEpochStartHeight.toString());
-    }
+    message.currentEpochStartHeight = object.currentEpochStartHeight !== undefined && object.currentEpochStartHeight !== null ? BigInt(object.currentEpochStartHeight.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: EpochInfoSDKType): EpochInfo {
@@ -324,9 +331,9 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    const obj = createBaseGenesisState();
-    if (Array.isArray(object?.epochs)) obj.epochs = object.epochs.map((e: any) => EpochInfo.fromJSON(e));
-    return obj;
+    return {
+      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : []
+    };
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};

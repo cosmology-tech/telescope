@@ -1,14 +1,21 @@
-import { Header, HeaderSDKType, Data, DataSDKType, Commit, CommitSDKType } from "./types.js";
-import { EvidenceList, EvidenceListSDKType } from "./evidence.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { Header, HeaderSDKType, Data, DataSDKType, Commit, CommitSDKType } from "./types";
+import { EvidenceList, EvidenceListSDKType } from "./evidence";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "tendermint.types";
 export interface Block {
   header: Header;
   data: Data;
   evidence: EvidenceList;
   lastCommit?: Commit;
+}
+export interface ReactiveBlock {
+  header: ComputedRef<Header>;
+  data: ComputedRef<Data>;
+  evidence: ComputedRef<EvidenceList>;
+  lastCommit?: ComputedRef<Commit>;
 }
 export interface BlockProtoMsg {
   typeUrl: "/tendermint.types.Block";
@@ -72,12 +79,12 @@ export const Block = {
     return message;
   },
   fromJSON(object: any): Block {
-    const obj = createBaseBlock();
-    if (isSet(object.header)) obj.header = Header.fromJSON(object.header);
-    if (isSet(object.data)) obj.data = Data.fromJSON(object.data);
-    if (isSet(object.evidence)) obj.evidence = EvidenceList.fromJSON(object.evidence);
-    if (isSet(object.lastCommit)) obj.lastCommit = Commit.fromJSON(object.lastCommit);
-    return obj;
+    return {
+      header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
+      data: isSet(object.data) ? Data.fromJSON(object.data) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceList.fromJSON(object.evidence) : undefined,
+      lastCommit: isSet(object.lastCommit) ? Commit.fromJSON(object.lastCommit) : undefined
+    };
   },
   toJSON(message: Block): JsonSafe<Block> {
     const obj: any = {};
@@ -89,18 +96,10 @@ export const Block = {
   },
   fromPartial(object: DeepPartial<Block>): Block {
     const message = createBaseBlock();
-    if (object.header !== undefined && object.header !== null) {
-      message.header = Header.fromPartial(object.header);
-    }
-    if (object.data !== undefined && object.data !== null) {
-      message.data = Data.fromPartial(object.data);
-    }
-    if (object.evidence !== undefined && object.evidence !== null) {
-      message.evidence = EvidenceList.fromPartial(object.evidence);
-    }
-    if (object.lastCommit !== undefined && object.lastCommit !== null) {
-      message.lastCommit = Commit.fromPartial(object.lastCommit);
-    }
+    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
+    message.data = object.data !== undefined && object.data !== null ? Data.fromPartial(object.data) : undefined;
+    message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceList.fromPartial(object.evidence) : undefined;
+    message.lastCommit = object.lastCommit !== undefined && object.lastCommit !== null ? Commit.fromPartial(object.lastCommit) : undefined;
     return message;
   },
   fromSDK(object: BlockSDKType): Block {

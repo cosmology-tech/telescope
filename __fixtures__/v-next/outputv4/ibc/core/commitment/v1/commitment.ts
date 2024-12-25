@@ -1,7 +1,8 @@
-import { CommitmentProof, CommitmentProofSDKType } from "../../../../confio/proofs.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { CommitmentProof, CommitmentProofSDKType } from "../../../../confio/proofs";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "ibc.core.commitment.v1";
 /**
  * MerkleRoot defines a merkle root hash.
@@ -9,6 +10,9 @@ export const protobufPackage = "ibc.core.commitment.v1";
  */
 export interface MerkleRoot {
   hash: Uint8Array;
+}
+export interface ReactiveMerkleRoot {
+  hash: ComputedRef<Uint8Array>;
 }
 export interface MerkleRootProtoMsg {
   typeUrl: "/ibc.core.commitment.v1.MerkleRoot";
@@ -29,6 +33,9 @@ export interface MerkleRootSDKType {
 export interface MerklePrefix {
   keyPrefix: Uint8Array;
 }
+export interface ReactiveMerklePrefix {
+  keyPrefix: ComputedRef<Uint8Array>;
+}
 export interface MerklePrefixProtoMsg {
   typeUrl: "/ibc.core.commitment.v1.MerklePrefix";
   value: Uint8Array;
@@ -48,6 +55,9 @@ export interface MerklePrefixSDKType {
  */
 export interface MerklePath {
   keyPath: string[];
+}
+export interface ReactiveMerklePath {
+  keyPath: ComputedRef<string[]>;
 }
 export interface MerklePathProtoMsg {
   typeUrl: "/ibc.core.commitment.v1.MerklePath";
@@ -70,6 +80,9 @@ export interface MerklePathSDKType {
  */
 export interface MerkleProof {
   proofs: CommitmentProof[];
+}
+export interface ReactiveMerkleProof {
+  proofs: ComputedRef<CommitmentProof[]>;
 }
 export interface MerkleProofProtoMsg {
   typeUrl: "/ibc.core.commitment.v1.MerkleProof";
@@ -116,9 +129,9 @@ export const MerkleRoot = {
     return message;
   },
   fromJSON(object: any): MerkleRoot {
-    const obj = createBaseMerkleRoot();
-    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
-    return obj;
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
+    };
   },
   toJSON(message: MerkleRoot): JsonSafe<MerkleRoot> {
     const obj: any = {};
@@ -210,9 +223,9 @@ export const MerklePrefix = {
     return message;
   },
   fromJSON(object: any): MerklePrefix {
-    const obj = createBaseMerklePrefix();
-    if (isSet(object.keyPrefix)) obj.keyPrefix = bytesFromBase64(object.keyPrefix);
-    return obj;
+    return {
+      keyPrefix: isSet(object.keyPrefix) ? bytesFromBase64(object.keyPrefix) : new Uint8Array()
+    };
   },
   toJSON(message: MerklePrefix): JsonSafe<MerklePrefix> {
     const obj: any = {};
@@ -304,9 +317,9 @@ export const MerklePath = {
     return message;
   },
   fromJSON(object: any): MerklePath {
-    const obj = createBaseMerklePath();
-    if (Array.isArray(object?.keyPath)) obj.keyPath = object.keyPath.map((e: any) => String(e));
-    return obj;
+    return {
+      keyPath: Array.isArray(object?.keyPath) ? object.keyPath.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: MerklePath): JsonSafe<MerklePath> {
     const obj: any = {};
@@ -408,9 +421,9 @@ export const MerkleProof = {
     return message;
   },
   fromJSON(object: any): MerkleProof {
-    const obj = createBaseMerkleProof();
-    if (Array.isArray(object?.proofs)) obj.proofs = object.proofs.map((e: any) => CommitmentProof.fromJSON(e));
-    return obj;
+    return {
+      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromJSON(e)) : []
+    };
   },
   toJSON(message: MerkleProof): JsonSafe<MerkleProof> {
     const obj: any = {};

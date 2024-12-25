@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * `Documentation` provides the information for describing a service.
@@ -99,6 +100,14 @@ export interface Documentation {
    */
   overview: string;
 }
+export interface ReactiveDocumentation {
+  summary: ComputedRef<string>;
+  pages: ComputedRef<Page[]>;
+  rules: ComputedRef<DocumentationRule[]>;
+  documentationRootUrl: ComputedRef<string>;
+  serviceRootUrl: ComputedRef<string>;
+  overview: ComputedRef<string>;
+}
 export interface DocumentationProtoMsg {
   typeUrl: "/google.api.Documentation";
   value: Uint8Array;
@@ -187,6 +196,11 @@ export interface DocumentationRule {
    */
   deprecationDescription: string;
 }
+export interface ReactiveDocumentationRule {
+  selector: ComputedRef<string>;
+  description: ComputedRef<string>;
+  deprecationDescription: ComputedRef<string>;
+}
 export interface DocumentationRuleProtoMsg {
   typeUrl: "/google.api.DocumentationRule";
   value: Uint8Array;
@@ -230,6 +244,11 @@ export interface Page {
    */
   subpages: Page[];
 }
+export interface ReactivePage {
+  name: ComputedRef<string>;
+  content: ComputedRef<string>;
+  subpages: ComputedRef<Page[]>;
+}
 export interface PageProtoMsg {
   typeUrl: "/google.api.Page";
   value: Uint8Array;
@@ -256,7 +275,7 @@ function createBaseDocumentation(): Documentation {
 export const Documentation = {
   typeUrl: "/google.api.Documentation",
   encode(message: Documentation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.summary !== undefined) {
+    if (message.summary !== "") {
       writer.uint32(10).string(message.summary);
     }
     for (const v of message.pages) {
@@ -265,13 +284,13 @@ export const Documentation = {
     for (const v of message.rules) {
       DocumentationRule.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.documentationRootUrl !== undefined) {
+    if (message.documentationRootUrl !== "") {
       writer.uint32(34).string(message.documentationRootUrl);
     }
-    if (message.serviceRootUrl !== undefined) {
+    if (message.serviceRootUrl !== "") {
       writer.uint32(50).string(message.serviceRootUrl);
     }
-    if (message.overview !== undefined) {
+    if (message.overview !== "") {
       writer.uint32(18).string(message.overview);
     }
     return writer;
@@ -309,14 +328,14 @@ export const Documentation = {
     return message;
   },
   fromJSON(object: any): Documentation {
-    const obj = createBaseDocumentation();
-    if (isSet(object.summary)) obj.summary = String(object.summary);
-    if (Array.isArray(object?.pages)) obj.pages = object.pages.map((e: any) => Page.fromJSON(e));
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => DocumentationRule.fromJSON(e));
-    if (isSet(object.documentationRootUrl)) obj.documentationRootUrl = String(object.documentationRootUrl);
-    if (isSet(object.serviceRootUrl)) obj.serviceRootUrl = String(object.serviceRootUrl);
-    if (isSet(object.overview)) obj.overview = String(object.overview);
-    return obj;
+    return {
+      summary: isSet(object.summary) ? String(object.summary) : "",
+      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromJSON(e)) : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromJSON(e)) : [],
+      documentationRootUrl: isSet(object.documentationRootUrl) ? String(object.documentationRootUrl) : "",
+      serviceRootUrl: isSet(object.serviceRootUrl) ? String(object.serviceRootUrl) : "",
+      overview: isSet(object.overview) ? String(object.overview) : ""
+    };
   },
   toJSON(message: Documentation): JsonSafe<Documentation> {
     const obj: any = {};
@@ -446,13 +465,13 @@ function createBaseDocumentationRule(): DocumentationRule {
 export const DocumentationRule = {
   typeUrl: "/google.api.DocumentationRule",
   encode(message: DocumentationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.deprecationDescription !== undefined) {
+    if (message.deprecationDescription !== "") {
       writer.uint32(26).string(message.deprecationDescription);
     }
     return writer;
@@ -481,11 +500,11 @@ export const DocumentationRule = {
     return message;
   },
   fromJSON(object: any): DocumentationRule {
-    const obj = createBaseDocumentationRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.deprecationDescription)) obj.deprecationDescription = String(object.deprecationDescription);
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      deprecationDescription: isSet(object.deprecationDescription) ? String(object.deprecationDescription) : ""
+    };
   },
   toJSON(message: DocumentationRule): JsonSafe<DocumentationRule> {
     const obj: any = {};
@@ -568,10 +587,10 @@ function createBasePage(): Page {
 export const Page = {
   typeUrl: "/google.api.Page",
   encode(message: Page, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.content !== undefined) {
+    if (message.content !== "") {
       writer.uint32(18).string(message.content);
     }
     for (const v of message.subpages) {
@@ -603,11 +622,11 @@ export const Page = {
     return message;
   },
   fromJSON(object: any): Page {
-    const obj = createBasePage();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.content)) obj.content = String(object.content);
-    if (Array.isArray(object?.subpages)) obj.subpages = object.subpages.map((e: any) => Page.fromJSON(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      content: isSet(object.content) ? String(object.content) : "",
+      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromJSON(e)) : []
+    };
   },
   toJSON(message: Page): JsonSafe<Page> {
     const obj: any = {};

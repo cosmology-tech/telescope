@@ -1,10 +1,11 @@
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp.js";
-import { Duration, DurationSDKType } from "../../../../google/protobuf/duration.js";
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 import { Decimal } from "@cosmjs/math";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
@@ -44,6 +45,12 @@ export interface SmoothWeightChangeParams {
    */
   targetPoolWeights: PoolAsset[];
 }
+export interface ReactiveSmoothWeightChangeParams {
+  startTime: ComputedRef<Date>;
+  duration: ComputedRef<Duration>;
+  initialPoolWeights: ComputedRef<PoolAsset[]>;
+  targetPoolWeights: ComputedRef<PoolAsset[]>;
+}
 export interface SmoothWeightChangeParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams";
   value: Uint8Array;
@@ -78,6 +85,11 @@ export interface PoolParams {
   exitFee: string;
   smoothWeightChangeParams?: SmoothWeightChangeParams;
 }
+export interface ReactivePoolParams {
+  swapFee: ComputedRef<string>;
+  exitFee: ComputedRef<string>;
+  smoothWeightChangeParams?: ComputedRef<SmoothWeightChangeParams>;
+}
 export interface PoolParamsProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.PoolParams";
   value: Uint8Array;
@@ -107,6 +119,10 @@ export interface PoolAsset {
   token: Coin;
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
+}
+export interface ReactivePoolAsset {
+  token: ComputedRef<Coin>;
+  weight: ComputedRef<string>;
 }
 export interface PoolAssetProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.PoolAsset";
@@ -147,6 +163,15 @@ export interface Pool {
   poolAssets: PoolAsset[];
   /** sum of all non-normalized pool weights */
   totalWeight: string;
+}
+export interface ReactivePool {
+  address: ComputedRef<string>;
+  id: ComputedRef<bigint>;
+  poolParams: ComputedRef<PoolParams>;
+  futurePoolGovernor: ComputedRef<string>;
+  totalShares: ComputedRef<Coin>;
+  poolAssets: ComputedRef<PoolAsset[]>;
+  totalWeight: ComputedRef<string>;
 }
 export interface PoolProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.Pool";
@@ -213,12 +238,12 @@ export const SmoothWeightChangeParams = {
     return message;
   },
   fromJSON(object: any): SmoothWeightChangeParams {
-    const obj = createBaseSmoothWeightChangeParams();
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    if (Array.isArray(object?.initialPoolWeights)) obj.initialPoolWeights = object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
-    if (Array.isArray(object?.targetPoolWeights)) obj.targetPoolWeights = object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
-    return obj;
+    return {
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
+      initialPoolWeights: Array.isArray(object?.initialPoolWeights) ? object.initialPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : [],
+      targetPoolWeights: Array.isArray(object?.targetPoolWeights) ? object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e)) : []
+    };
   },
   toJSON(message: SmoothWeightChangeParams): JsonSafe<SmoothWeightChangeParams> {
     const obj: any = {};
@@ -239,9 +264,7 @@ export const SmoothWeightChangeParams = {
   fromPartial(object: DeepPartial<SmoothWeightChangeParams>): SmoothWeightChangeParams {
     const message = createBaseSmoothWeightChangeParams();
     message.startTime = object.startTime ?? undefined;
-    if (object.duration !== undefined && object.duration !== null) {
-      message.duration = Duration.fromPartial(object.duration);
-    }
+    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.initialPoolWeights = object.initialPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     message.targetPoolWeights = object.targetPoolWeights?.map(e => PoolAsset.fromPartial(e)) || [];
     return message;
@@ -338,10 +361,10 @@ function createBasePoolParams(): PoolParams {
 export const PoolParams = {
   typeUrl: "/osmosis.gamm.v1beta1.PoolParams",
   encode(message: PoolParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.swapFee !== undefined) {
+    if (message.swapFee !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
     }
-    if (message.exitFee !== undefined) {
+    if (message.exitFee !== "") {
       writer.uint32(18).string(Decimal.fromUserInput(message.exitFee, 18).atomics);
     }
     if (message.smoothWeightChangeParams !== undefined) {
@@ -373,11 +396,11 @@ export const PoolParams = {
     return message;
   },
   fromJSON(object: any): PoolParams {
-    const obj = createBasePoolParams();
-    if (isSet(object.swapFee)) obj.swapFee = String(object.swapFee);
-    if (isSet(object.exitFee)) obj.exitFee = String(object.exitFee);
-    if (isSet(object.smoothWeightChangeParams)) obj.smoothWeightChangeParams = SmoothWeightChangeParams.fromJSON(object.smoothWeightChangeParams);
-    return obj;
+    return {
+      swapFee: isSet(object.swapFee) ? String(object.swapFee) : "",
+      exitFee: isSet(object.exitFee) ? String(object.exitFee) : "",
+      smoothWeightChangeParams: isSet(object.smoothWeightChangeParams) ? SmoothWeightChangeParams.fromJSON(object.smoothWeightChangeParams) : undefined
+    };
   },
   toJSON(message: PoolParams): JsonSafe<PoolParams> {
     const obj: any = {};
@@ -390,9 +413,7 @@ export const PoolParams = {
     const message = createBasePoolParams();
     message.swapFee = object.swapFee ?? "";
     message.exitFee = object.exitFee ?? "";
-    if (object.smoothWeightChangeParams !== undefined && object.smoothWeightChangeParams !== null) {
-      message.smoothWeightChangeParams = SmoothWeightChangeParams.fromPartial(object.smoothWeightChangeParams);
-    }
+    message.smoothWeightChangeParams = object.smoothWeightChangeParams !== undefined && object.smoothWeightChangeParams !== null ? SmoothWeightChangeParams.fromPartial(object.smoothWeightChangeParams) : undefined;
     return message;
   },
   fromSDK(object: PoolParamsSDKType): PoolParams {
@@ -470,7 +491,7 @@ export const PoolAsset = {
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(10).fork()).ldelim();
     }
-    if (message.weight !== undefined) {
+    if (message.weight !== "") {
       writer.uint32(18).string(message.weight);
     }
     return writer;
@@ -496,10 +517,10 @@ export const PoolAsset = {
     return message;
   },
   fromJSON(object: any): PoolAsset {
-    const obj = createBasePoolAsset();
-    if (isSet(object.token)) obj.token = Coin.fromJSON(object.token);
-    if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
+    return {
+      token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
   },
   toJSON(message: PoolAsset): JsonSafe<PoolAsset> {
     const obj: any = {};
@@ -509,9 +530,7 @@ export const PoolAsset = {
   },
   fromPartial(object: DeepPartial<PoolAsset>): PoolAsset {
     const message = createBasePoolAsset();
-    if (object.token !== undefined && object.token !== null) {
-      message.token = Coin.fromPartial(object.token);
-    }
+    message.token = object.token !== undefined && object.token !== null ? Coin.fromPartial(object.token) : undefined;
     message.weight = object.weight ?? "";
     return message;
   },
@@ -585,16 +604,16 @@ function createBasePool(): Pool {
 export const Pool = {
   typeUrl: "/osmosis.gamm.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(16).uint64(message.id);
     }
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
     }
-    if (message.futurePoolGovernor !== undefined) {
+    if (message.futurePoolGovernor !== "") {
       writer.uint32(34).string(message.futurePoolGovernor);
     }
     if (message.totalShares !== undefined) {
@@ -603,7 +622,7 @@ export const Pool = {
     for (const v of message.poolAssets) {
       PoolAsset.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    if (message.totalWeight !== undefined) {
+    if (message.totalWeight !== "") {
       writer.uint32(58).string(message.totalWeight);
     }
     return writer;
@@ -644,15 +663,15 @@ export const Pool = {
     return message;
   },
   fromJSON(object: any): Pool {
-    const obj = createBasePool();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
-    if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
-    if (isSet(object.totalShares)) obj.totalShares = Coin.fromJSON(object.totalShares);
-    if (Array.isArray(object?.poolAssets)) obj.poolAssets = object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
-    if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
+      poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
+      futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
+      totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
+      poolAssets: Array.isArray(object?.poolAssets) ? object.poolAssets.map((e: any) => PoolAsset.fromJSON(e)) : [],
+      totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : ""
+    };
   },
   toJSON(message: Pool): JsonSafe<Pool> {
     const obj: any = {};
@@ -672,16 +691,10 @@ export const Pool = {
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
-    if (object.poolParams !== undefined && object.poolParams !== null) {
-      message.poolParams = PoolParams.fromPartial(object.poolParams);
-    }
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
-    if (object.totalShares !== undefined && object.totalShares !== null) {
-      message.totalShares = Coin.fromPartial(object.totalShares);
-    }
+    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.totalWeight = object.totalWeight ?? "";
     return message;

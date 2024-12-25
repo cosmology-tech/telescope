@@ -1,7 +1,8 @@
-import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {
@@ -58,6 +59,12 @@ export interface TokenPair {
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
   contractOwner: Owner;
 }
+export interface ReactiveTokenPair {
+  erc20Address: ComputedRef<string>;
+  denom: ComputedRef<string>;
+  enabled: ComputedRef<boolean>;
+  contractOwner: ComputedRef<Owner>;
+}
 export interface TokenPairProtoMsg {
   typeUrl: "/evmos.erc20.v1.TokenPair";
   value: Uint8Array;
@@ -84,6 +91,11 @@ export interface RegisterCoinProposal {
   /** metadata of the native Cosmos coin */
   metadata: Metadata;
 }
+export interface ReactiveRegisterCoinProposal {
+  title: ComputedRef<string>;
+  description: ComputedRef<string>;
+  metadata: ComputedRef<Metadata>;
+}
 export interface RegisterCoinProposalProtoMsg {
   typeUrl: "/evmos.erc20.v1.RegisterCoinProposal";
   value: Uint8Array;
@@ -108,6 +120,11 @@ export interface RegisterERC20Proposal {
   description: string;
   /** contract address of ERC20 token */
   erc20address: string;
+}
+export interface ReactiveRegisterERC20Proposal {
+  title: ComputedRef<string>;
+  description: ComputedRef<string>;
+  erc20address: ComputedRef<string>;
 }
 export interface RegisterERC20ProposalProtoMsg {
   typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal";
@@ -137,6 +154,11 @@ export interface ToggleTokenConversionProposal {
    */
   token: string;
 }
+export interface ReactiveToggleTokenConversionProposal {
+  title: ComputedRef<string>;
+  description: ComputedRef<string>;
+  token: ComputedRef<string>;
+}
 export interface ToggleTokenConversionProposalProtoMsg {
   typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal";
   value: Uint8Array;
@@ -161,13 +183,13 @@ function createBaseTokenPair(): TokenPair {
 export const TokenPair = {
   typeUrl: "/evmos.erc20.v1.TokenPair",
   encode(message: TokenPair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.erc20Address !== undefined) {
+    if (message.erc20Address !== "") {
       writer.uint32(10).string(message.erc20Address);
     }
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(18).string(message.denom);
     }
-    if (message.enabled !== undefined) {
+    if (message.enabled === true) {
       writer.uint32(24).bool(message.enabled);
     }
     if (message.contractOwner !== 0) {
@@ -202,12 +224,12 @@ export const TokenPair = {
     return message;
   },
   fromJSON(object: any): TokenPair {
-    const obj = createBaseTokenPair();
-    if (isSet(object.erc20Address)) obj.erc20Address = String(object.erc20Address);
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
-    if (isSet(object.contractOwner)) obj.contractOwner = ownerFromJSON(object.contractOwner);
-    return obj;
+    return {
+      erc20Address: isSet(object.erc20Address) ? String(object.erc20Address) : "",
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      contractOwner: isSet(object.contractOwner) ? ownerFromJSON(object.contractOwner) : -1
+    };
   },
   toJSON(message: TokenPair): JsonSafe<TokenPair> {
     const obj: any = {};
@@ -299,10 +321,10 @@ function createBaseRegisterCoinProposal(): RegisterCoinProposal {
 export const RegisterCoinProposal = {
   typeUrl: "/evmos.erc20.v1.RegisterCoinProposal",
   encode(message: RegisterCoinProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     if (message.metadata !== undefined) {
@@ -334,11 +356,11 @@ export const RegisterCoinProposal = {
     return message;
   },
   fromJSON(object: any): RegisterCoinProposal {
-    const obj = createBaseRegisterCoinProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined
+    };
   },
   toJSON(message: RegisterCoinProposal): JsonSafe<RegisterCoinProposal> {
     const obj: any = {};
@@ -351,9 +373,7 @@ export const RegisterCoinProposal = {
     const message = createBaseRegisterCoinProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    if (object.metadata !== undefined && object.metadata !== null) {
-      message.metadata = Metadata.fromPartial(object.metadata);
-    }
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? Metadata.fromPartial(object.metadata) : undefined;
     return message;
   },
   fromSDK(object: RegisterCoinProposalSDKType): RegisterCoinProposal {
@@ -423,13 +443,13 @@ function createBaseRegisterERC20Proposal(): RegisterERC20Proposal {
 export const RegisterERC20Proposal = {
   typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal",
   encode(message: RegisterERC20Proposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.erc20address !== undefined) {
+    if (message.erc20address !== "") {
       writer.uint32(26).string(message.erc20address);
     }
     return writer;
@@ -458,11 +478,11 @@ export const RegisterERC20Proposal = {
     return message;
   },
   fromJSON(object: any): RegisterERC20Proposal {
-    const obj = createBaseRegisterERC20Proposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.erc20address)) obj.erc20address = String(object.erc20address);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      erc20address: isSet(object.erc20address) ? String(object.erc20address) : ""
+    };
   },
   toJSON(message: RegisterERC20Proposal): JsonSafe<RegisterERC20Proposal> {
     const obj: any = {};
@@ -545,13 +565,13 @@ function createBaseToggleTokenConversionProposal(): ToggleTokenConversionProposa
 export const ToggleTokenConversionProposal = {
   typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal",
   encode(message: ToggleTokenConversionProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== undefined) {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-    if (message.token !== undefined) {
+    if (message.token !== "") {
       writer.uint32(26).string(message.token);
     }
     return writer;
@@ -580,11 +600,11 @@ export const ToggleTokenConversionProposal = {
     return message;
   },
   fromJSON(object: any): ToggleTokenConversionProposal {
-    const obj = createBaseToggleTokenConversionProposal();
-    if (isSet(object.title)) obj.title = String(object.title);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.token)) obj.token = String(object.token);
-    return obj;
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      token: isSet(object.token) ? String(object.token) : ""
+    };
   },
   toJSON(message: ToggleTokenConversionProposal): JsonSafe<ToggleTokenConversionProposal> {
     const obj: any = {};

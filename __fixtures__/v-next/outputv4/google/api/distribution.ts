@@ -1,8 +1,9 @@
-import { Timestamp, TimestampSDKType } from "../protobuf/timestamp.js";
-import { Any, AnySDKType } from "../protobuf/any.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { Timestamp, TimestampSDKType } from "../protobuf/timestamp";
+import { Any, AnySDKType } from "../protobuf/any";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -75,6 +76,15 @@ export interface Distribution {
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
+export interface ReactiveDistribution {
+  count: ComputedRef<bigint>;
+  mean: ComputedRef<number>;
+  sumOfSquaredDeviation: ComputedRef<number>;
+  range?: ComputedRef<Distribution_Range>;
+  bucketOptions?: ComputedRef<Distribution_BucketOptions>;
+  bucketCounts: ComputedRef<bigint[]>;
+  exemplars: ComputedRef<Distribution_Exemplar[]>;
+}
 export interface DistributionProtoMsg {
   typeUrl: "/google.api.Distribution";
   value: Uint8Array;
@@ -111,6 +121,10 @@ export interface Distribution_Range {
   /** The maximum of the population values. */
   max: number;
 }
+export interface ReactiveDistribution_Range {
+  min: ComputedRef<number>;
+  max: ComputedRef<number>;
+}
 export interface Distribution_RangeProtoMsg {
   typeUrl: "/google.api.Range";
   value: Uint8Array;
@@ -144,6 +158,11 @@ export interface Distribution_BucketOptions {
   exponentialBuckets?: Distribution_BucketOptions_Exponential;
   /** The explicit buckets. */
   explicitBuckets?: Distribution_BucketOptions_Explicit;
+}
+export interface ReactiveDistribution_BucketOptions {
+  linearBuckets?: ComputedRef<Distribution_BucketOptions_Linear>;
+  exponentialBuckets?: ComputedRef<Distribution_BucketOptions_Exponential>;
+  explicitBuckets?: ComputedRef<Distribution_BucketOptions_Explicit>;
 }
 export interface Distribution_BucketOptionsProtoMsg {
   typeUrl: "/google.api.BucketOptions";
@@ -190,6 +209,11 @@ export interface Distribution_BucketOptions_Linear {
   /** Lower bound of the first bucket. */
   offset: number;
 }
+export interface ReactiveDistribution_BucketOptions_Linear {
+  numFiniteBuckets: ComputedRef<number>;
+  width: ComputedRef<number>;
+  offset: ComputedRef<number>;
+}
 export interface Distribution_BucketOptions_LinearProtoMsg {
   typeUrl: "/google.api.Linear";
   value: Uint8Array;
@@ -229,6 +253,11 @@ export interface Distribution_BucketOptions_Exponential {
   /** Must be greater than 0. */
   scale: number;
 }
+export interface ReactiveDistribution_BucketOptions_Exponential {
+  numFiniteBuckets: ComputedRef<number>;
+  growthFactor: ComputedRef<number>;
+  scale: ComputedRef<number>;
+}
 export interface Distribution_BucketOptions_ExponentialProtoMsg {
   typeUrl: "/google.api.Exponential";
   value: Uint8Array;
@@ -265,6 +294,9 @@ export interface Distribution_BucketOptions_ExponentialSDKType {
 export interface Distribution_BucketOptions_Explicit {
   /** The values must be monotonically increasing. */
   bounds: number[];
+}
+export interface ReactiveDistribution_BucketOptions_Explicit {
+  bounds: ComputedRef<number[]>;
 }
 export interface Distribution_BucketOptions_ExplicitProtoMsg {
   typeUrl: "/google.api.Explicit";
@@ -316,6 +348,11 @@ export interface Distribution_Exemplar {
    */
   attachments: Any[];
 }
+export interface ReactiveDistribution_Exemplar {
+  value: ComputedRef<number>;
+  timestamp?: ComputedRef<Date>;
+  attachments: ComputedRef<Any[]>;
+}
 export interface Distribution_ExemplarProtoMsg {
   typeUrl: "/google.api.Exemplar";
   value: Uint8Array;
@@ -346,13 +383,13 @@ function createBaseDistribution(): Distribution {
 export const Distribution = {
   typeUrl: "/google.api.Distribution",
   encode(message: Distribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.count !== undefined) {
+    if (message.count !== BigInt(0)) {
       writer.uint32(8).int64(message.count);
     }
-    if (message.mean !== undefined) {
+    if (message.mean !== 0) {
       writer.uint32(17).double(message.mean);
     }
-    if (message.sumOfSquaredDeviation !== undefined) {
+    if (message.sumOfSquaredDeviation !== 0) {
       writer.uint32(25).double(message.sumOfSquaredDeviation);
     }
     if (message.range !== undefined) {
@@ -414,15 +451,15 @@ export const Distribution = {
     return message;
   },
   fromJSON(object: any): Distribution {
-    const obj = createBaseDistribution();
-    if (isSet(object.count)) obj.count = BigInt(object.count.toString());
-    if (isSet(object.mean)) obj.mean = Number(object.mean);
-    if (isSet(object.sumOfSquaredDeviation)) obj.sumOfSquaredDeviation = Number(object.sumOfSquaredDeviation);
-    if (isSet(object.range)) obj.range = Distribution_Range.fromJSON(object.range);
-    if (isSet(object.bucketOptions)) obj.bucketOptions = Distribution_BucketOptions.fromJSON(object.bucketOptions);
-    if (Array.isArray(object?.bucketCounts)) obj.bucketCounts = object.bucketCounts.map((e: any) => BigInt(e.toString()));
-    if (Array.isArray(object?.exemplars)) obj.exemplars = object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
-    return obj;
+    return {
+      count: isSet(object.count) ? BigInt(object.count.toString()) : BigInt(0),
+      mean: isSet(object.mean) ? Number(object.mean) : 0,
+      sumOfSquaredDeviation: isSet(object.sumOfSquaredDeviation) ? Number(object.sumOfSquaredDeviation) : 0,
+      range: isSet(object.range) ? Distribution_Range.fromJSON(object.range) : undefined,
+      bucketOptions: isSet(object.bucketOptions) ? Distribution_BucketOptions.fromJSON(object.bucketOptions) : undefined,
+      bucketCounts: Array.isArray(object?.bucketCounts) ? object.bucketCounts.map((e: any) => BigInt(e.toString())) : [],
+      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
+    };
   },
   toJSON(message: Distribution): JsonSafe<Distribution> {
     const obj: any = {};
@@ -445,17 +482,11 @@ export const Distribution = {
   },
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
-    if (object.count !== undefined && object.count !== null) {
-      message.count = BigInt(object.count.toString());
-    }
+    message.count = object.count !== undefined && object.count !== null ? BigInt(object.count.toString()) : BigInt(0);
     message.mean = object.mean ?? 0;
     message.sumOfSquaredDeviation = object.sumOfSquaredDeviation ?? 0;
-    if (object.range !== undefined && object.range !== null) {
-      message.range = Distribution_Range.fromPartial(object.range);
-    }
-    if (object.bucketOptions !== undefined && object.bucketOptions !== null) {
-      message.bucketOptions = Distribution_BucketOptions.fromPartial(object.bucketOptions);
-    }
+    message.range = object.range !== undefined && object.range !== null ? Distribution_Range.fromPartial(object.range) : undefined;
+    message.bucketOptions = object.bucketOptions !== undefined && object.bucketOptions !== null ? Distribution_BucketOptions.fromPartial(object.bucketOptions) : undefined;
     message.bucketCounts = object.bucketCounts?.map(e => BigInt(e.toString())) || [];
     message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromPartial(e)) || [];
     return message;
@@ -566,10 +597,10 @@ function createBaseDistribution_Range(): Distribution_Range {
 export const Distribution_Range = {
   typeUrl: "/google.api.Range",
   encode(message: Distribution_Range, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.min !== undefined) {
+    if (message.min !== 0) {
       writer.uint32(9).double(message.min);
     }
-    if (message.max !== undefined) {
+    if (message.max !== 0) {
       writer.uint32(17).double(message.max);
     }
     return writer;
@@ -595,10 +626,10 @@ export const Distribution_Range = {
     return message;
   },
   fromJSON(object: any): Distribution_Range {
-    const obj = createBaseDistribution_Range();
-    if (isSet(object.min)) obj.min = Number(object.min);
-    if (isSet(object.max)) obj.max = Number(object.max);
-    return obj;
+    return {
+      min: isSet(object.min) ? Number(object.min) : 0,
+      max: isSet(object.max) ? Number(object.max) : 0
+    };
   },
   toJSON(message: Distribution_Range): JsonSafe<Distribution_Range> {
     const obj: any = {};
@@ -707,11 +738,11 @@ export const Distribution_BucketOptions = {
     return message;
   },
   fromJSON(object: any): Distribution_BucketOptions {
-    const obj = createBaseDistribution_BucketOptions();
-    if (isSet(object.linearBuckets)) obj.linearBuckets = Distribution_BucketOptions_Linear.fromJSON(object.linearBuckets);
-    if (isSet(object.exponentialBuckets)) obj.exponentialBuckets = Distribution_BucketOptions_Exponential.fromJSON(object.exponentialBuckets);
-    if (isSet(object.explicitBuckets)) obj.explicitBuckets = Distribution_BucketOptions_Explicit.fromJSON(object.explicitBuckets);
-    return obj;
+    return {
+      linearBuckets: isSet(object.linearBuckets) ? Distribution_BucketOptions_Linear.fromJSON(object.linearBuckets) : undefined,
+      exponentialBuckets: isSet(object.exponentialBuckets) ? Distribution_BucketOptions_Exponential.fromJSON(object.exponentialBuckets) : undefined,
+      explicitBuckets: isSet(object.explicitBuckets) ? Distribution_BucketOptions_Explicit.fromJSON(object.explicitBuckets) : undefined
+    };
   },
   toJSON(message: Distribution_BucketOptions): JsonSafe<Distribution_BucketOptions> {
     const obj: any = {};
@@ -722,15 +753,9 @@ export const Distribution_BucketOptions = {
   },
   fromPartial(object: DeepPartial<Distribution_BucketOptions>): Distribution_BucketOptions {
     const message = createBaseDistribution_BucketOptions();
-    if (object.linearBuckets !== undefined && object.linearBuckets !== null) {
-      message.linearBuckets = Distribution_BucketOptions_Linear.fromPartial(object.linearBuckets);
-    }
-    if (object.exponentialBuckets !== undefined && object.exponentialBuckets !== null) {
-      message.exponentialBuckets = Distribution_BucketOptions_Exponential.fromPartial(object.exponentialBuckets);
-    }
-    if (object.explicitBuckets !== undefined && object.explicitBuckets !== null) {
-      message.explicitBuckets = Distribution_BucketOptions_Explicit.fromPartial(object.explicitBuckets);
-    }
+    message.linearBuckets = object.linearBuckets !== undefined && object.linearBuckets !== null ? Distribution_BucketOptions_Linear.fromPartial(object.linearBuckets) : undefined;
+    message.exponentialBuckets = object.exponentialBuckets !== undefined && object.exponentialBuckets !== null ? Distribution_BucketOptions_Exponential.fromPartial(object.exponentialBuckets) : undefined;
+    message.explicitBuckets = object.explicitBuckets !== undefined && object.explicitBuckets !== null ? Distribution_BucketOptions_Explicit.fromPartial(object.explicitBuckets) : undefined;
     return message;
   },
   fromSDK(object: Distribution_BucketOptionsSDKType): Distribution_BucketOptions {
@@ -800,13 +825,13 @@ function createBaseDistribution_BucketOptions_Linear(): Distribution_BucketOptio
 export const Distribution_BucketOptions_Linear = {
   typeUrl: "/google.api.Linear",
   encode(message: Distribution_BucketOptions_Linear, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numFiniteBuckets !== undefined) {
+    if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-    if (message.width !== undefined) {
+    if (message.width !== 0) {
       writer.uint32(17).double(message.width);
     }
-    if (message.offset !== undefined) {
+    if (message.offset !== 0) {
       writer.uint32(25).double(message.offset);
     }
     return writer;
@@ -835,11 +860,11 @@ export const Distribution_BucketOptions_Linear = {
     return message;
   },
   fromJSON(object: any): Distribution_BucketOptions_Linear {
-    const obj = createBaseDistribution_BucketOptions_Linear();
-    if (isSet(object.numFiniteBuckets)) obj.numFiniteBuckets = Number(object.numFiniteBuckets);
-    if (isSet(object.width)) obj.width = Number(object.width);
-    if (isSet(object.offset)) obj.offset = Number(object.offset);
-    return obj;
+    return {
+      numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
+      width: isSet(object.width) ? Number(object.width) : 0,
+      offset: isSet(object.offset) ? Number(object.offset) : 0
+    };
   },
   toJSON(message: Distribution_BucketOptions_Linear): JsonSafe<Distribution_BucketOptions_Linear> {
     const obj: any = {};
@@ -922,13 +947,13 @@ function createBaseDistribution_BucketOptions_Exponential(): Distribution_Bucket
 export const Distribution_BucketOptions_Exponential = {
   typeUrl: "/google.api.Exponential",
   encode(message: Distribution_BucketOptions_Exponential, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numFiniteBuckets !== undefined) {
+    if (message.numFiniteBuckets !== 0) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-    if (message.growthFactor !== undefined) {
+    if (message.growthFactor !== 0) {
       writer.uint32(17).double(message.growthFactor);
     }
-    if (message.scale !== undefined) {
+    if (message.scale !== 0) {
       writer.uint32(25).double(message.scale);
     }
     return writer;
@@ -957,11 +982,11 @@ export const Distribution_BucketOptions_Exponential = {
     return message;
   },
   fromJSON(object: any): Distribution_BucketOptions_Exponential {
-    const obj = createBaseDistribution_BucketOptions_Exponential();
-    if (isSet(object.numFiniteBuckets)) obj.numFiniteBuckets = Number(object.numFiniteBuckets);
-    if (isSet(object.growthFactor)) obj.growthFactor = Number(object.growthFactor);
-    if (isSet(object.scale)) obj.scale = Number(object.scale);
-    return obj;
+    return {
+      numFiniteBuckets: isSet(object.numFiniteBuckets) ? Number(object.numFiniteBuckets) : 0,
+      growthFactor: isSet(object.growthFactor) ? Number(object.growthFactor) : 0,
+      scale: isSet(object.scale) ? Number(object.scale) : 0
+    };
   },
   toJSON(message: Distribution_BucketOptions_Exponential): JsonSafe<Distribution_BucketOptions_Exponential> {
     const obj: any = {};
@@ -1074,9 +1099,9 @@ export const Distribution_BucketOptions_Explicit = {
     return message;
   },
   fromJSON(object: any): Distribution_BucketOptions_Explicit {
-    const obj = createBaseDistribution_BucketOptions_Explicit();
-    if (Array.isArray(object?.bounds)) obj.bounds = object.bounds.map((e: any) => Number(e));
-    return obj;
+    return {
+      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
+    };
   },
   toJSON(message: Distribution_BucketOptions_Explicit): JsonSafe<Distribution_BucketOptions_Explicit> {
     const obj: any = {};
@@ -1151,7 +1176,7 @@ function createBaseDistribution_Exemplar(): Distribution_Exemplar {
 export const Distribution_Exemplar = {
   typeUrl: "/google.api.Exemplar",
   encode(message: Distribution_Exemplar, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== undefined) {
+    if (message.value !== 0) {
       writer.uint32(9).double(message.value);
     }
     if (message.timestamp !== undefined) {
@@ -1186,11 +1211,11 @@ export const Distribution_Exemplar = {
     return message;
   },
   fromJSON(object: any): Distribution_Exemplar {
-    const obj = createBaseDistribution_Exemplar();
-    if (isSet(object.value)) obj.value = Number(object.value);
-    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
-    if (Array.isArray(object?.attachments)) obj.attachments = object.attachments.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      value: isSet(object.value) ? Number(object.value) : 0,
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
+      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: Distribution_Exemplar): JsonSafe<Distribution_Exemplar> {
     const obj: any = {};

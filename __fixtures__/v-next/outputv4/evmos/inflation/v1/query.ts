@@ -1,12 +1,14 @@
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
-import { Params, ParamsSDKType } from "./genesis.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { JsonSafe } from "../../../json-safe.js";
-import { DeepPartial, isSet } from "../../../helpers.js";
+import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsSDKType } from "./genesis";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
+import { DeepPartial, isSet } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.inflation.v1";
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequest {}
+export interface ReactiveQueryPeriodRequest {}
 export interface QueryPeriodRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryPeriodRequest";
   value: Uint8Array;
@@ -17,6 +19,9 @@ export interface QueryPeriodRequestSDKType {}
 export interface QueryPeriodResponse {
   /** period is the current minting per epoch provision value. */
   period: bigint;
+}
+export interface ReactiveQueryPeriodResponse {
+  period: ComputedRef<bigint>;
 }
 export interface QueryPeriodResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryPeriodResponse";
@@ -31,6 +36,7 @@ export interface QueryPeriodResponseSDKType {
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequest {}
+export interface ReactiveQueryEpochMintProvisionRequest {}
 export interface QueryEpochMintProvisionRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
   value: Uint8Array;
@@ -48,6 +54,9 @@ export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
   epochMintProvision: DecCoin;
 }
+export interface ReactiveQueryEpochMintProvisionResponse {
+  epochMintProvision: ComputedRef<DecCoin>;
+}
 export interface QueryEpochMintProvisionResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
   value: Uint8Array;
@@ -64,6 +73,7 @@ export interface QueryEpochMintProvisionResponseSDKType {
  * method.
  */
 export interface QuerySkippedEpochsRequest {}
+export interface ReactiveQuerySkippedEpochsRequest {}
 export interface QuerySkippedEpochsRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
   value: Uint8Array;
@@ -81,6 +91,9 @@ export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
   skippedEpochs: bigint;
 }
+export interface ReactiveQuerySkippedEpochsResponse {
+  skippedEpochs: ComputedRef<bigint>;
+}
 export interface QuerySkippedEpochsResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
   value: Uint8Array;
@@ -97,6 +110,7 @@ export interface QuerySkippedEpochsResponseSDKType {
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequest {}
+export interface ReactiveQueryCirculatingSupplyRequest {}
 export interface QueryCirculatingSupplyRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
   value: Uint8Array;
@@ -114,6 +128,9 @@ export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
   circulatingSupply: DecCoin;
 }
+export interface ReactiveQueryCirculatingSupplyResponse {
+  circulatingSupply: ComputedRef<DecCoin>;
+}
 export interface QueryCirculatingSupplyResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
   value: Uint8Array;
@@ -130,6 +147,7 @@ export interface QueryCirculatingSupplyResponseSDKType {
  * method.
  */
 export interface QueryInflationRateRequest {}
+export interface ReactiveQueryInflationRateRequest {}
 export interface QueryInflationRateRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest";
   value: Uint8Array;
@@ -147,6 +165,9 @@ export interface QueryInflationRateResponse {
   /** rate by which the total supply increases within one period */
   inflationRate: string;
 }
+export interface ReactiveQueryInflationRateResponse {
+  inflationRate: ComputedRef<string>;
+}
 export interface QueryInflationRateResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse";
   value: Uint8Array;
@@ -160,6 +181,7 @@ export interface QueryInflationRateResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryParamsRequest";
   value: Uint8Array;
@@ -170,6 +192,9 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface ReactiveQueryParamsResponse {
+  params: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.inflation.v1.QueryParamsResponse";
@@ -202,8 +227,7 @@ export const QueryPeriodRequest = {
     return message;
   },
   fromJSON(_: any): QueryPeriodRequest {
-    const obj = createBaseQueryPeriodRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryPeriodRequest): JsonSafe<QueryPeriodRequest> {
     const obj: any = {};
@@ -255,7 +279,7 @@ function createBaseQueryPeriodResponse(): QueryPeriodResponse {
 export const QueryPeriodResponse = {
   typeUrl: "/evmos.inflation.v1.QueryPeriodResponse",
   encode(message: QueryPeriodResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.period !== undefined) {
+    if (message.period !== BigInt(0)) {
       writer.uint32(8).uint64(message.period);
     }
     return writer;
@@ -278,9 +302,9 @@ export const QueryPeriodResponse = {
     return message;
   },
   fromJSON(object: any): QueryPeriodResponse {
-    const obj = createBaseQueryPeriodResponse();
-    if (isSet(object.period)) obj.period = BigInt(object.period.toString());
-    return obj;
+    return {
+      period: isSet(object.period) ? BigInt(object.period.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QueryPeriodResponse): JsonSafe<QueryPeriodResponse> {
     const obj: any = {};
@@ -289,9 +313,7 @@ export const QueryPeriodResponse = {
   },
   fromPartial(object: DeepPartial<QueryPeriodResponse>): QueryPeriodResponse {
     const message = createBaseQueryPeriodResponse();
-    if (object.period !== undefined && object.period !== null) {
-      message.period = BigInt(object.period.toString());
-    }
+    message.period = object.period !== undefined && object.period !== null ? BigInt(object.period.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QueryPeriodResponseSDKType): QueryPeriodResponse {
@@ -360,8 +382,7 @@ export const QueryEpochMintProvisionRequest = {
     return message;
   },
   fromJSON(_: any): QueryEpochMintProvisionRequest {
-    const obj = createBaseQueryEpochMintProvisionRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryEpochMintProvisionRequest): JsonSafe<QueryEpochMintProvisionRequest> {
     const obj: any = {};
@@ -436,9 +457,9 @@ export const QueryEpochMintProvisionResponse = {
     return message;
   },
   fromJSON(object: any): QueryEpochMintProvisionResponse {
-    const obj = createBaseQueryEpochMintProvisionResponse();
-    if (isSet(object.epochMintProvision)) obj.epochMintProvision = DecCoin.fromJSON(object.epochMintProvision);
-    return obj;
+    return {
+      epochMintProvision: isSet(object.epochMintProvision) ? DecCoin.fromJSON(object.epochMintProvision) : undefined
+    };
   },
   toJSON(message: QueryEpochMintProvisionResponse): JsonSafe<QueryEpochMintProvisionResponse> {
     const obj: any = {};
@@ -447,9 +468,7 @@ export const QueryEpochMintProvisionResponse = {
   },
   fromPartial(object: DeepPartial<QueryEpochMintProvisionResponse>): QueryEpochMintProvisionResponse {
     const message = createBaseQueryEpochMintProvisionResponse();
-    if (object.epochMintProvision !== undefined && object.epochMintProvision !== null) {
-      message.epochMintProvision = DecCoin.fromPartial(object.epochMintProvision);
-    }
+    message.epochMintProvision = object.epochMintProvision !== undefined && object.epochMintProvision !== null ? DecCoin.fromPartial(object.epochMintProvision) : undefined;
     return message;
   },
   fromSDK(object: QueryEpochMintProvisionResponseSDKType): QueryEpochMintProvisionResponse {
@@ -518,8 +537,7 @@ export const QuerySkippedEpochsRequest = {
     return message;
   },
   fromJSON(_: any): QuerySkippedEpochsRequest {
-    const obj = createBaseQuerySkippedEpochsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QuerySkippedEpochsRequest): JsonSafe<QuerySkippedEpochsRequest> {
     const obj: any = {};
@@ -571,7 +589,7 @@ function createBaseQuerySkippedEpochsResponse(): QuerySkippedEpochsResponse {
 export const QuerySkippedEpochsResponse = {
   typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse",
   encode(message: QuerySkippedEpochsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.skippedEpochs !== undefined) {
+    if (message.skippedEpochs !== BigInt(0)) {
       writer.uint32(8).uint64(message.skippedEpochs);
     }
     return writer;
@@ -594,9 +612,9 @@ export const QuerySkippedEpochsResponse = {
     return message;
   },
   fromJSON(object: any): QuerySkippedEpochsResponse {
-    const obj = createBaseQuerySkippedEpochsResponse();
-    if (isSet(object.skippedEpochs)) obj.skippedEpochs = BigInt(object.skippedEpochs.toString());
-    return obj;
+    return {
+      skippedEpochs: isSet(object.skippedEpochs) ? BigInt(object.skippedEpochs.toString()) : BigInt(0)
+    };
   },
   toJSON(message: QuerySkippedEpochsResponse): JsonSafe<QuerySkippedEpochsResponse> {
     const obj: any = {};
@@ -605,9 +623,7 @@ export const QuerySkippedEpochsResponse = {
   },
   fromPartial(object: DeepPartial<QuerySkippedEpochsResponse>): QuerySkippedEpochsResponse {
     const message = createBaseQuerySkippedEpochsResponse();
-    if (object.skippedEpochs !== undefined && object.skippedEpochs !== null) {
-      message.skippedEpochs = BigInt(object.skippedEpochs.toString());
-    }
+    message.skippedEpochs = object.skippedEpochs !== undefined && object.skippedEpochs !== null ? BigInt(object.skippedEpochs.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: QuerySkippedEpochsResponseSDKType): QuerySkippedEpochsResponse {
@@ -676,8 +692,7 @@ export const QueryCirculatingSupplyRequest = {
     return message;
   },
   fromJSON(_: any): QueryCirculatingSupplyRequest {
-    const obj = createBaseQueryCirculatingSupplyRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryCirculatingSupplyRequest): JsonSafe<QueryCirculatingSupplyRequest> {
     const obj: any = {};
@@ -752,9 +767,9 @@ export const QueryCirculatingSupplyResponse = {
     return message;
   },
   fromJSON(object: any): QueryCirculatingSupplyResponse {
-    const obj = createBaseQueryCirculatingSupplyResponse();
-    if (isSet(object.circulatingSupply)) obj.circulatingSupply = DecCoin.fromJSON(object.circulatingSupply);
-    return obj;
+    return {
+      circulatingSupply: isSet(object.circulatingSupply) ? DecCoin.fromJSON(object.circulatingSupply) : undefined
+    };
   },
   toJSON(message: QueryCirculatingSupplyResponse): JsonSafe<QueryCirculatingSupplyResponse> {
     const obj: any = {};
@@ -763,9 +778,7 @@ export const QueryCirculatingSupplyResponse = {
   },
   fromPartial(object: DeepPartial<QueryCirculatingSupplyResponse>): QueryCirculatingSupplyResponse {
     const message = createBaseQueryCirculatingSupplyResponse();
-    if (object.circulatingSupply !== undefined && object.circulatingSupply !== null) {
-      message.circulatingSupply = DecCoin.fromPartial(object.circulatingSupply);
-    }
+    message.circulatingSupply = object.circulatingSupply !== undefined && object.circulatingSupply !== null ? DecCoin.fromPartial(object.circulatingSupply) : undefined;
     return message;
   },
   fromSDK(object: QueryCirculatingSupplyResponseSDKType): QueryCirculatingSupplyResponse {
@@ -834,8 +847,7 @@ export const QueryInflationRateRequest = {
     return message;
   },
   fromJSON(_: any): QueryInflationRateRequest {
-    const obj = createBaseQueryInflationRateRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryInflationRateRequest): JsonSafe<QueryInflationRateRequest> {
     const obj: any = {};
@@ -887,7 +899,7 @@ function createBaseQueryInflationRateResponse(): QueryInflationRateResponse {
 export const QueryInflationRateResponse = {
   typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse",
   encode(message: QueryInflationRateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.inflationRate !== undefined) {
+    if (message.inflationRate !== "") {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflationRate, 18).atomics);
     }
     return writer;
@@ -910,9 +922,9 @@ export const QueryInflationRateResponse = {
     return message;
   },
   fromJSON(object: any): QueryInflationRateResponse {
-    const obj = createBaseQueryInflationRateResponse();
-    if (isSet(object.inflationRate)) obj.inflationRate = String(object.inflationRate);
-    return obj;
+    return {
+      inflationRate: isSet(object.inflationRate) ? String(object.inflationRate) : ""
+    };
   },
   toJSON(message: QueryInflationRateResponse): JsonSafe<QueryInflationRateResponse> {
     const obj: any = {};
@@ -990,8 +1002,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -1066,9 +1077,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -1077,9 +1088,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

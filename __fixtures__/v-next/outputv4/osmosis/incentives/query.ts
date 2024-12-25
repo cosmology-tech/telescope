@@ -1,12 +1,14 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../cosmos/base/query/v1beta1/pagination.js";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin.js";
-import { Gauge, GaugeSDKType } from "./gauge.js";
-import { Duration, DurationSDKType } from "../../google/protobuf/duration.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial, isSet } from "../../helpers.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Gauge, GaugeSDKType } from "./gauge";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial, isSet } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
+export interface ReactiveModuleToDistributeCoinsRequest {}
 export interface ModuleToDistributeCoinsRequestProtoMsg {
   typeUrl: "/osmosis.incentives.ModuleToDistributeCoinsRequest";
   value: Uint8Array;
@@ -15,6 +17,9 @@ export interface ModuleToDistributeCoinsRequestSDKType {}
 export interface ModuleToDistributeCoinsResponse {
   /** Coins that have yet to be distributed */
   coins: Coin[];
+}
+export interface ReactiveModuleToDistributeCoinsResponse {
+  coins: ComputedRef<Coin[]>;
 }
 export interface ModuleToDistributeCoinsResponseProtoMsg {
   typeUrl: "/osmosis.incentives.ModuleToDistributeCoinsResponse";
@@ -27,6 +32,9 @@ export interface GaugeByIDRequest {
   /** Gague ID being queried */
   id: bigint;
 }
+export interface ReactiveGaugeByIDRequest {
+  id: ComputedRef<bigint>;
+}
 export interface GaugeByIDRequestProtoMsg {
   typeUrl: "/osmosis.incentives.GaugeByIDRequest";
   value: Uint8Array;
@@ -38,6 +46,9 @@ export interface GaugeByIDResponse {
   /** Gauge that corresponds to provided gague ID */
   gauge?: Gauge;
 }
+export interface ReactiveGaugeByIDResponse {
+  gauge?: ComputedRef<Gauge>;
+}
 export interface GaugeByIDResponseProtoMsg {
   typeUrl: "/osmosis.incentives.GaugeByIDResponse";
   value: Uint8Array;
@@ -48,6 +59,9 @@ export interface GaugeByIDResponseSDKType {
 export interface GaugesRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
+}
+export interface ReactiveGaugesRequest {
+  pagination?: ComputedRef<PageRequest>;
 }
 export interface GaugesRequestProtoMsg {
   typeUrl: "/osmosis.incentives.GaugesRequest";
@@ -62,6 +76,10 @@ export interface GaugesResponse {
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
 }
+export interface ReactiveGaugesResponse {
+  data: ComputedRef<Gauge[]>;
+  pagination?: ComputedRef<PageResponse>;
+}
 export interface GaugesResponseProtoMsg {
   typeUrl: "/osmosis.incentives.GaugesResponse";
   value: Uint8Array;
@@ -73,6 +91,9 @@ export interface GaugesResponseSDKType {
 export interface ActiveGaugesRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
+}
+export interface ReactiveActiveGaugesRequest {
+  pagination?: ComputedRef<PageRequest>;
 }
 export interface ActiveGaugesRequestProtoMsg {
   typeUrl: "/osmosis.incentives.ActiveGaugesRequest";
@@ -86,6 +107,10 @@ export interface ActiveGaugesResponse {
   data: Gauge[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
+}
+export interface ReactiveActiveGaugesResponse {
+  data: ComputedRef<Gauge[]>;
+  pagination?: ComputedRef<PageResponse>;
 }
 export interface ActiveGaugesResponseProtoMsg {
   typeUrl: "/osmosis.incentives.ActiveGaugesResponse";
@@ -101,6 +126,10 @@ export interface ActiveGaugesPerDenomRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
+export interface ReactiveActiveGaugesPerDenomRequest {
+  denom: ComputedRef<string>;
+  pagination?: ComputedRef<PageRequest>;
+}
 export interface ActiveGaugesPerDenomRequestProtoMsg {
   typeUrl: "/osmosis.incentives.ActiveGaugesPerDenomRequest";
   value: Uint8Array;
@@ -115,6 +144,10 @@ export interface ActiveGaugesPerDenomResponse {
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
 }
+export interface ReactiveActiveGaugesPerDenomResponse {
+  data: ComputedRef<Gauge[]>;
+  pagination?: ComputedRef<PageResponse>;
+}
 export interface ActiveGaugesPerDenomResponseProtoMsg {
   typeUrl: "/osmosis.incentives.ActiveGaugesPerDenomResponse";
   value: Uint8Array;
@@ -126,6 +159,9 @@ export interface ActiveGaugesPerDenomResponseSDKType {
 export interface UpcomingGaugesRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
+}
+export interface ReactiveUpcomingGaugesRequest {
+  pagination?: ComputedRef<PageRequest>;
 }
 export interface UpcomingGaugesRequestProtoMsg {
   typeUrl: "/osmosis.incentives.UpcomingGaugesRequest";
@@ -139,6 +175,10 @@ export interface UpcomingGaugesResponse {
   data: Gauge[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
+}
+export interface ReactiveUpcomingGaugesResponse {
+  data: ComputedRef<Gauge[]>;
+  pagination?: ComputedRef<PageResponse>;
 }
 export interface UpcomingGaugesResponseProtoMsg {
   typeUrl: "/osmosis.incentives.UpcomingGaugesResponse";
@@ -154,6 +194,10 @@ export interface UpcomingGaugesPerDenomRequest {
   /** Pagination defines pagination for the request */
   pagination?: PageRequest;
 }
+export interface ReactiveUpcomingGaugesPerDenomRequest {
+  denom: ComputedRef<string>;
+  pagination?: ComputedRef<PageRequest>;
+}
 export interface UpcomingGaugesPerDenomRequestProtoMsg {
   typeUrl: "/osmosis.incentives.UpcomingGaugesPerDenomRequest";
   value: Uint8Array;
@@ -167,6 +211,10 @@ export interface UpcomingGaugesPerDenomResponse {
   upcomingGauges: Gauge[];
   /** Pagination defines pagination for the response */
   pagination?: PageResponse;
+}
+export interface ReactiveUpcomingGaugesPerDenomResponse {
+  upcomingGauges: ComputedRef<Gauge[]>;
+  pagination?: ComputedRef<PageResponse>;
 }
 export interface UpcomingGaugesPerDenomResponseProtoMsg {
   typeUrl: "/osmosis.incentives.UpcomingGaugesPerDenomResponse";
@@ -187,6 +235,11 @@ export interface RewardsEstRequest {
    */
   endEpoch: bigint;
 }
+export interface ReactiveRewardsEstRequest {
+  owner: ComputedRef<string>;
+  lockIds: ComputedRef<bigint[]>;
+  endEpoch: ComputedRef<bigint>;
+}
 export interface RewardsEstRequestProtoMsg {
   typeUrl: "/osmosis.incentives.RewardsEstRequest";
   value: Uint8Array;
@@ -203,6 +256,9 @@ export interface RewardsEstResponse {
    */
   coins: Coin[];
 }
+export interface ReactiveRewardsEstResponse {
+  coins: ComputedRef<Coin[]>;
+}
 export interface RewardsEstResponseProtoMsg {
   typeUrl: "/osmosis.incentives.RewardsEstResponse";
   value: Uint8Array;
@@ -211,6 +267,7 @@ export interface RewardsEstResponseSDKType {
   coins: CoinSDKType[];
 }
 export interface QueryLockableDurationsRequest {}
+export interface ReactiveQueryLockableDurationsRequest {}
 export interface QueryLockableDurationsRequestProtoMsg {
   typeUrl: "/osmosis.incentives.QueryLockableDurationsRequest";
   value: Uint8Array;
@@ -219,6 +276,9 @@ export interface QueryLockableDurationsRequestSDKType {}
 export interface QueryLockableDurationsResponse {
   /** Time durations that users can lock coins for in order to recieve rewards */
   lockableDurations: Duration[];
+}
+export interface ReactiveQueryLockableDurationsResponse {
+  lockableDurations: ComputedRef<Duration[]>;
 }
 export interface QueryLockableDurationsResponseProtoMsg {
   typeUrl: "/osmosis.incentives.QueryLockableDurationsResponse";
@@ -250,8 +310,7 @@ export const ModuleToDistributeCoinsRequest = {
     return message;
   },
   fromJSON(_: any): ModuleToDistributeCoinsRequest {
-    const obj = createBaseModuleToDistributeCoinsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: ModuleToDistributeCoinsRequest): JsonSafe<ModuleToDistributeCoinsRequest> {
     const obj: any = {};
@@ -332,9 +391,9 @@ export const ModuleToDistributeCoinsResponse = {
     return message;
   },
   fromJSON(object: any): ModuleToDistributeCoinsResponse {
-    const obj = createBaseModuleToDistributeCoinsResponse();
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: ModuleToDistributeCoinsResponse): JsonSafe<ModuleToDistributeCoinsResponse> {
     const obj: any = {};
@@ -413,7 +472,7 @@ function createBaseGaugeByIDRequest(): GaugeByIDRequest {
 export const GaugeByIDRequest = {
   typeUrl: "/osmosis.incentives.GaugeByIDRequest",
   encode(message: GaugeByIDRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     return writer;
@@ -436,9 +495,9 @@ export const GaugeByIDRequest = {
     return message;
   },
   fromJSON(object: any): GaugeByIDRequest {
-    const obj = createBaseGaugeByIDRequest();
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    return obj;
+    return {
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
+    };
   },
   toJSON(message: GaugeByIDRequest): JsonSafe<GaugeByIDRequest> {
     const obj: any = {};
@@ -447,9 +506,7 @@ export const GaugeByIDRequest = {
   },
   fromPartial(object: DeepPartial<GaugeByIDRequest>): GaugeByIDRequest {
     const message = createBaseGaugeByIDRequest();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: GaugeByIDRequestSDKType): GaugeByIDRequest {
@@ -532,9 +589,9 @@ export const GaugeByIDResponse = {
     return message;
   },
   fromJSON(object: any): GaugeByIDResponse {
-    const obj = createBaseGaugeByIDResponse();
-    if (isSet(object.gauge)) obj.gauge = Gauge.fromJSON(object.gauge);
-    return obj;
+    return {
+      gauge: isSet(object.gauge) ? Gauge.fromJSON(object.gauge) : undefined
+    };
   },
   toJSON(message: GaugeByIDResponse): JsonSafe<GaugeByIDResponse> {
     const obj: any = {};
@@ -543,9 +600,7 @@ export const GaugeByIDResponse = {
   },
   fromPartial(object: DeepPartial<GaugeByIDResponse>): GaugeByIDResponse {
     const message = createBaseGaugeByIDResponse();
-    if (object.gauge !== undefined && object.gauge !== null) {
-      message.gauge = Gauge.fromPartial(object.gauge);
-    }
+    message.gauge = object.gauge !== undefined && object.gauge !== null ? Gauge.fromPartial(object.gauge) : undefined;
     return message;
   },
   fromSDK(object: GaugeByIDResponseSDKType): GaugeByIDResponse {
@@ -628,9 +683,9 @@ export const GaugesRequest = {
     return message;
   },
   fromJSON(object: any): GaugesRequest {
-    const obj = createBaseGaugesRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: GaugesRequest): JsonSafe<GaugesRequest> {
     const obj: any = {};
@@ -639,9 +694,7 @@ export const GaugesRequest = {
   },
   fromPartial(object: DeepPartial<GaugesRequest>): GaugesRequest {
     const message = createBaseGaugesRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: GaugesRequestSDKType): GaugesRequest {
@@ -731,10 +784,10 @@ export const GaugesResponse = {
     return message;
   },
   fromJSON(object: any): GaugesResponse {
-    const obj = createBaseGaugesResponse();
-    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: GaugesResponse): JsonSafe<GaugesResponse> {
     const obj: any = {};
@@ -749,9 +802,7 @@ export const GaugesResponse = {
   fromPartial(object: DeepPartial<GaugesResponse>): GaugesResponse {
     const message = createBaseGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: GaugesResponseSDKType): GaugesResponse {
@@ -847,9 +898,9 @@ export const ActiveGaugesRequest = {
     return message;
   },
   fromJSON(object: any): ActiveGaugesRequest {
-    const obj = createBaseActiveGaugesRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: ActiveGaugesRequest): JsonSafe<ActiveGaugesRequest> {
     const obj: any = {};
@@ -858,9 +909,7 @@ export const ActiveGaugesRequest = {
   },
   fromPartial(object: DeepPartial<ActiveGaugesRequest>): ActiveGaugesRequest {
     const message = createBaseActiveGaugesRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: ActiveGaugesRequestSDKType): ActiveGaugesRequest {
@@ -950,10 +999,10 @@ export const ActiveGaugesResponse = {
     return message;
   },
   fromJSON(object: any): ActiveGaugesResponse {
-    const obj = createBaseActiveGaugesResponse();
-    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: ActiveGaugesResponse): JsonSafe<ActiveGaugesResponse> {
     const obj: any = {};
@@ -968,9 +1017,7 @@ export const ActiveGaugesResponse = {
   fromPartial(object: DeepPartial<ActiveGaugesResponse>): ActiveGaugesResponse {
     const message = createBaseActiveGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: ActiveGaugesResponseSDKType): ActiveGaugesResponse {
@@ -1044,7 +1091,7 @@ function createBaseActiveGaugesPerDenomRequest(): ActiveGaugesPerDenomRequest {
 export const ActiveGaugesPerDenomRequest = {
   typeUrl: "/osmosis.incentives.ActiveGaugesPerDenomRequest",
   encode(message: ActiveGaugesPerDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     if (message.pagination !== undefined) {
@@ -1073,10 +1120,10 @@ export const ActiveGaugesPerDenomRequest = {
     return message;
   },
   fromJSON(object: any): ActiveGaugesPerDenomRequest {
-    const obj = createBaseActiveGaugesPerDenomRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: ActiveGaugesPerDenomRequest): JsonSafe<ActiveGaugesPerDenomRequest> {
     const obj: any = {};
@@ -1087,9 +1134,7 @@ export const ActiveGaugesPerDenomRequest = {
   fromPartial(object: DeepPartial<ActiveGaugesPerDenomRequest>): ActiveGaugesPerDenomRequest {
     const message = createBaseActiveGaugesPerDenomRequest();
     message.denom = object.denom ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: ActiveGaugesPerDenomRequestSDKType): ActiveGaugesPerDenomRequest {
@@ -1186,10 +1231,10 @@ export const ActiveGaugesPerDenomResponse = {
     return message;
   },
   fromJSON(object: any): ActiveGaugesPerDenomResponse {
-    const obj = createBaseActiveGaugesPerDenomResponse();
-    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: ActiveGaugesPerDenomResponse): JsonSafe<ActiveGaugesPerDenomResponse> {
     const obj: any = {};
@@ -1204,9 +1249,7 @@ export const ActiveGaugesPerDenomResponse = {
   fromPartial(object: DeepPartial<ActiveGaugesPerDenomResponse>): ActiveGaugesPerDenomResponse {
     const message = createBaseActiveGaugesPerDenomResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: ActiveGaugesPerDenomResponseSDKType): ActiveGaugesPerDenomResponse {
@@ -1302,9 +1345,9 @@ export const UpcomingGaugesRequest = {
     return message;
   },
   fromJSON(object: any): UpcomingGaugesRequest {
-    const obj = createBaseUpcomingGaugesRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: UpcomingGaugesRequest): JsonSafe<UpcomingGaugesRequest> {
     const obj: any = {};
@@ -1313,9 +1356,7 @@ export const UpcomingGaugesRequest = {
   },
   fromPartial(object: DeepPartial<UpcomingGaugesRequest>): UpcomingGaugesRequest {
     const message = createBaseUpcomingGaugesRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: UpcomingGaugesRequestSDKType): UpcomingGaugesRequest {
@@ -1405,10 +1446,10 @@ export const UpcomingGaugesResponse = {
     return message;
   },
   fromJSON(object: any): UpcomingGaugesResponse {
-    const obj = createBaseUpcomingGaugesResponse();
-    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: UpcomingGaugesResponse): JsonSafe<UpcomingGaugesResponse> {
     const obj: any = {};
@@ -1423,9 +1464,7 @@ export const UpcomingGaugesResponse = {
   fromPartial(object: DeepPartial<UpcomingGaugesResponse>): UpcomingGaugesResponse {
     const message = createBaseUpcomingGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: UpcomingGaugesResponseSDKType): UpcomingGaugesResponse {
@@ -1499,7 +1538,7 @@ function createBaseUpcomingGaugesPerDenomRequest(): UpcomingGaugesPerDenomReques
 export const UpcomingGaugesPerDenomRequest = {
   typeUrl: "/osmosis.incentives.UpcomingGaugesPerDenomRequest",
   encode(message: UpcomingGaugesPerDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== undefined) {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     if (message.pagination !== undefined) {
@@ -1528,10 +1567,10 @@ export const UpcomingGaugesPerDenomRequest = {
     return message;
   },
   fromJSON(object: any): UpcomingGaugesPerDenomRequest {
-    const obj = createBaseUpcomingGaugesPerDenomRequest();
-    if (isSet(object.denom)) obj.denom = String(object.denom);
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: UpcomingGaugesPerDenomRequest): JsonSafe<UpcomingGaugesPerDenomRequest> {
     const obj: any = {};
@@ -1542,9 +1581,7 @@ export const UpcomingGaugesPerDenomRequest = {
   fromPartial(object: DeepPartial<UpcomingGaugesPerDenomRequest>): UpcomingGaugesPerDenomRequest {
     const message = createBaseUpcomingGaugesPerDenomRequest();
     message.denom = object.denom ?? "";
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: UpcomingGaugesPerDenomRequestSDKType): UpcomingGaugesPerDenomRequest {
@@ -1641,10 +1678,10 @@ export const UpcomingGaugesPerDenomResponse = {
     return message;
   },
   fromJSON(object: any): UpcomingGaugesPerDenomResponse {
-    const obj = createBaseUpcomingGaugesPerDenomResponse();
-    if (Array.isArray(object?.upcomingGauges)) obj.upcomingGauges = object.upcomingGauges.map((e: any) => Gauge.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      upcomingGauges: Array.isArray(object?.upcomingGauges) ? object.upcomingGauges.map((e: any) => Gauge.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: UpcomingGaugesPerDenomResponse): JsonSafe<UpcomingGaugesPerDenomResponse> {
     const obj: any = {};
@@ -1659,9 +1696,7 @@ export const UpcomingGaugesPerDenomResponse = {
   fromPartial(object: DeepPartial<UpcomingGaugesPerDenomResponse>): UpcomingGaugesPerDenomResponse {
     const message = createBaseUpcomingGaugesPerDenomResponse();
     message.upcomingGauges = object.upcomingGauges?.map(e => Gauge.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: UpcomingGaugesPerDenomResponseSDKType): UpcomingGaugesPerDenomResponse {
@@ -1736,7 +1771,7 @@ function createBaseRewardsEstRequest(): RewardsEstRequest {
 export const RewardsEstRequest = {
   typeUrl: "/osmosis.incentives.RewardsEstRequest",
   encode(message: RewardsEstRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== undefined) {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
     writer.uint32(18).fork();
@@ -1744,7 +1779,7 @@ export const RewardsEstRequest = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.endEpoch !== undefined) {
+    if (message.endEpoch !== BigInt(0)) {
       writer.uint32(24).int64(message.endEpoch);
     }
     return writer;
@@ -1780,11 +1815,11 @@ export const RewardsEstRequest = {
     return message;
   },
   fromJSON(object: any): RewardsEstRequest {
-    const obj = createBaseRewardsEstRequest();
-    if (isSet(object.owner)) obj.owner = String(object.owner);
-    if (Array.isArray(object?.lockIds)) obj.lockIds = object.lockIds.map((e: any) => BigInt(e.toString()));
-    if (isSet(object.endEpoch)) obj.endEpoch = BigInt(object.endEpoch.toString());
-    return obj;
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      lockIds: Array.isArray(object?.lockIds) ? object.lockIds.map((e: any) => BigInt(e.toString())) : [],
+      endEpoch: isSet(object.endEpoch) ? BigInt(object.endEpoch.toString()) : BigInt(0)
+    };
   },
   toJSON(message: RewardsEstRequest): JsonSafe<RewardsEstRequest> {
     const obj: any = {};
@@ -1801,9 +1836,7 @@ export const RewardsEstRequest = {
     const message = createBaseRewardsEstRequest();
     message.owner = object.owner ?? "";
     message.lockIds = object.lockIds?.map(e => BigInt(e.toString())) || [];
-    if (object.endEpoch !== undefined && object.endEpoch !== null) {
-      message.endEpoch = BigInt(object.endEpoch.toString());
-    }
+    message.endEpoch = object.endEpoch !== undefined && object.endEpoch !== null ? BigInt(object.endEpoch.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: RewardsEstRequestSDKType): RewardsEstRequest {
@@ -1906,9 +1939,9 @@ export const RewardsEstResponse = {
     return message;
   },
   fromJSON(object: any): RewardsEstResponse {
-    const obj = createBaseRewardsEstResponse();
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: RewardsEstResponse): JsonSafe<RewardsEstResponse> {
     const obj: any = {};
@@ -2002,8 +2035,7 @@ export const QueryLockableDurationsRequest = {
     return message;
   },
   fromJSON(_: any): QueryLockableDurationsRequest {
-    const obj = createBaseQueryLockableDurationsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryLockableDurationsRequest): JsonSafe<QueryLockableDurationsRequest> {
     const obj: any = {};
@@ -2084,9 +2116,9 @@ export const QueryLockableDurationsResponse = {
     return message;
   },
   fromJSON(object: any): QueryLockableDurationsResponse {
-    const obj = createBaseQueryLockableDurationsResponse();
-    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    return obj;
+    return {
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
+    };
   },
   toJSON(message: QueryLockableDurationsResponse): JsonSafe<QueryLockableDurationsResponse> {
     const obj: any = {};

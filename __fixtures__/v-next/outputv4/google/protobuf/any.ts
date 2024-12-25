@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.protobuf";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -118,6 +119,11 @@ export interface Any {
   /** Must be a valid serialized protocol buffer of the above specified type. */
   value: Uint8Array;
 }
+export interface ReactiveAny {
+  $typeUrl?: ComputedRef<"/google.protobuf.Any" | string>;
+  typeUrl: ComputedRef<string>;
+  value: ComputedRef<Uint8Array>;
+}
 export interface AnyProtoMsg {
   typeUrl: "/google.protobuf.Any";
   value: Uint8Array;
@@ -218,7 +224,7 @@ function createBaseAny(): Any {
 export const Any = {
   typeUrl: "/google.protobuf.Any",
   encode(message: Any, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.typeUrl !== undefined) {
+    if (message.typeUrl !== "") {
       writer.uint32(10).string(message.typeUrl);
     }
     if (message.value.length !== 0) {
@@ -247,10 +253,10 @@ export const Any = {
     return message;
   },
   fromJSON(object: any): Any {
-    const obj = createBaseAny();
-    if (isSet(object.typeUrl)) obj.typeUrl = String(object.typeUrl);
-    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
+    return {
+      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
+    };
   },
   toJSON(message: Any): JsonSafe<Any> {
     const obj: any = {};

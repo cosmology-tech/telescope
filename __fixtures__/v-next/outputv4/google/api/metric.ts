@@ -1,9 +1,10 @@
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage.js";
-import { Duration, DurationSDKType } from "../protobuf/duration.js";
-import { LabelDescriptor, LabelDescriptorSDKType } from "./label.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial, isObject } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
+import { Duration, DurationSDKType } from "../protobuf/duration";
+import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, isObject } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -303,6 +304,19 @@ export interface MetricDescriptor {
    */
   monitoredResourceTypes: string[];
 }
+export interface ReactiveMetricDescriptor {
+  name: ComputedRef<string>;
+  type: ComputedRef<string>;
+  labels: ComputedRef<LabelDescriptor[]>;
+  metricKind: ComputedRef<MetricDescriptor_MetricKind>;
+  valueType: ComputedRef<MetricDescriptor_ValueType>;
+  unit: ComputedRef<string>;
+  description: ComputedRef<string>;
+  displayName: ComputedRef<string>;
+  metadata?: ComputedRef<MetricDescriptor_MetricDescriptorMetadata>;
+  launchStage: ComputedRef<LaunchStage>;
+  monitoredResourceTypes: ComputedRef<string[]>;
+}
 export interface MetricDescriptorProtoMsg {
   typeUrl: "/google.api.MetricDescriptor";
   value: Uint8Array;
@@ -344,6 +358,11 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    */
   ingestDelay?: Duration;
 }
+export interface ReactiveMetricDescriptor_MetricDescriptorMetadata {
+  launchStage: ComputedRef<LaunchStage>;
+  samplePeriod?: ComputedRef<Duration>;
+  ingestDelay?: ComputedRef<Duration>;
+}
 export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
   typeUrl: "/google.api.MetricDescriptorMetadata";
   value: Uint8Array;
@@ -358,6 +377,10 @@ export interface MetricDescriptor_MetricDescriptorMetadataSDKType {
 export interface Metric_LabelsEntry {
   key: string;
   value: string;
+}
+export interface ReactiveMetric_LabelsEntry {
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface Metric_LabelsEntryProtoMsg {
   typeUrl: string;
@@ -384,6 +407,12 @@ export interface Metric {
   labels: {
     [key: string]: string;
   };
+}
+export interface ReactiveMetric {
+  type: ComputedRef<string>;
+  labels: ComputedRef<{
+    [key: string]: string;
+  }>;
 }
 export interface MetricProtoMsg {
   typeUrl: "/google.api.Metric";
@@ -417,10 +446,10 @@ function createBaseMetricDescriptor(): MetricDescriptor {
 export const MetricDescriptor = {
   typeUrl: "/google.api.MetricDescriptor",
   encode(message: MetricDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== undefined) {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(66).string(message.type);
     }
     for (const v of message.labels) {
@@ -432,13 +461,13 @@ export const MetricDescriptor = {
     if (message.valueType !== 0) {
       writer.uint32(32).int32(message.valueType);
     }
-    if (message.unit !== undefined) {
+    if (message.unit !== "") {
       writer.uint32(42).string(message.unit);
     }
-    if (message.description !== undefined) {
+    if (message.description !== "") {
       writer.uint32(50).string(message.description);
     }
-    if (message.displayName !== undefined) {
+    if (message.displayName !== "") {
       writer.uint32(58).string(message.displayName);
     }
     if (message.metadata !== undefined) {
@@ -500,19 +529,19 @@ export const MetricDescriptor = {
     return message;
   },
   fromJSON(object: any): MetricDescriptor {
-    const obj = createBaseMetricDescriptor();
-    if (isSet(object.name)) obj.name = String(object.name);
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
-    if (isSet(object.metricKind)) obj.metricKind = metricDescriptor_MetricKindFromJSON(object.metricKind);
-    if (isSet(object.valueType)) obj.valueType = metricDescriptor_ValueTypeFromJSON(object.valueType);
-    if (isSet(object.unit)) obj.unit = String(object.unit);
-    if (isSet(object.description)) obj.description = String(object.description);
-    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    if (isSet(object.metadata)) obj.metadata = MetricDescriptor_MetricDescriptorMetadata.fromJSON(object.metadata);
-    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    if (Array.isArray(object?.monitoredResourceTypes)) obj.monitoredResourceTypes = object.monitoredResourceTypes.map((e: any) => String(e));
-    return obj;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromJSON(e)) : [],
+      metricKind: isSet(object.metricKind) ? metricDescriptor_MetricKindFromJSON(object.metricKind) : -1,
+      valueType: isSet(object.valueType) ? metricDescriptor_ValueTypeFromJSON(object.valueType) : -1,
+      unit: isSet(object.unit) ? String(object.unit) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      displayName: isSet(object.displayName) ? String(object.displayName) : "",
+      metadata: isSet(object.metadata) ? MetricDescriptor_MetricDescriptorMetadata.fromJSON(object.metadata) : undefined,
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1,
+      monitoredResourceTypes: Array.isArray(object?.monitoredResourceTypes) ? object.monitoredResourceTypes.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: MetricDescriptor): JsonSafe<MetricDescriptor> {
     const obj: any = {};
@@ -547,9 +576,7 @@ export const MetricDescriptor = {
     message.unit = object.unit ?? "";
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
-    if (object.metadata !== undefined && object.metadata !== null) {
-      message.metadata = MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata);
-    }
+    message.metadata = object.metadata !== undefined && object.metadata !== null ? MetricDescriptor_MetricDescriptorMetadata.fromPartial(object.metadata) : undefined;
     message.launchStage = object.launchStage ?? 0;
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
@@ -724,11 +751,11 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     return message;
   },
   fromJSON(object: any): MetricDescriptor_MetricDescriptorMetadata {
-    const obj = createBaseMetricDescriptor_MetricDescriptorMetadata();
-    if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
-    if (isSet(object.samplePeriod)) obj.samplePeriod = Duration.fromJSON(object.samplePeriod);
-    if (isSet(object.ingestDelay)) obj.ingestDelay = Duration.fromJSON(object.ingestDelay);
-    return obj;
+    return {
+      launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1,
+      samplePeriod: isSet(object.samplePeriod) ? Duration.fromJSON(object.samplePeriod) : undefined,
+      ingestDelay: isSet(object.ingestDelay) ? Duration.fromJSON(object.ingestDelay) : undefined
+    };
   },
   toJSON(message: MetricDescriptor_MetricDescriptorMetadata): JsonSafe<MetricDescriptor_MetricDescriptorMetadata> {
     const obj: any = {};
@@ -740,12 +767,8 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
-    if (object.samplePeriod !== undefined && object.samplePeriod !== null) {
-      message.samplePeriod = Duration.fromPartial(object.samplePeriod);
-    }
-    if (object.ingestDelay !== undefined && object.ingestDelay !== null) {
-      message.ingestDelay = Duration.fromPartial(object.ingestDelay);
-    }
+    message.samplePeriod = object.samplePeriod !== undefined && object.samplePeriod !== null ? Duration.fromPartial(object.samplePeriod) : undefined;
+    message.ingestDelay = object.ingestDelay !== undefined && object.ingestDelay !== null ? Duration.fromPartial(object.ingestDelay) : undefined;
     return message;
   },
   fromSDK(object: MetricDescriptor_MetricDescriptorMetadataSDKType): MetricDescriptor_MetricDescriptorMetadata {
@@ -813,10 +836,10 @@ function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
 }
 export const Metric_LabelsEntry = {
   encode(message: Metric_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -842,10 +865,10 @@ export const Metric_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): Metric_LabelsEntry {
-    const obj = createBaseMetric_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: Metric_LabelsEntry): JsonSafe<Metric_LabelsEntry> {
     const obj: any = {};
@@ -912,7 +935,7 @@ function createBaseMetric(): Metric {
 export const Metric = {
   typeUrl: "/google.api.Metric",
   encode(message: Metric, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== undefined) {
+    if (message.type !== "") {
       writer.uint32(26).string(message.type);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -947,15 +970,15 @@ export const Metric = {
     return message;
   },
   fromJSON(object: any): Metric {
-    const obj = createBaseMetric();
-    if (isSet(object.type)) obj.type = String(object.type);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    return obj;
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {}
+    };
   },
   toJSON(message: Metric): JsonSafe<Metric> {
     const obj: any = {};

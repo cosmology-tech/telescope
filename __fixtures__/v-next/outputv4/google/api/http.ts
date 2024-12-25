@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
@@ -23,6 +24,10 @@ export interface Http {
    * segment matches.
    */
   fullyDecodeReservedExpansion: boolean;
+}
+export interface ReactiveHttp {
+  rules: ComputedRef<HttpRule[]>;
+  fullyDecodeReservedExpansion: ComputedRef<boolean>;
 }
 export interface HttpProtoMsg {
   typeUrl: "/google.api.Http";
@@ -360,6 +365,18 @@ export interface HttpRule {
    */
   additionalBindings: HttpRule[];
 }
+export interface ReactiveHttpRule {
+  selector: ComputedRef<string>;
+  get?: ComputedRef<string>;
+  put?: ComputedRef<string>;
+  post?: ComputedRef<string>;
+  delete?: ComputedRef<string>;
+  patch?: ComputedRef<string>;
+  custom?: ComputedRef<CustomHttpPattern>;
+  body: ComputedRef<string>;
+  responseBody: ComputedRef<string>;
+  additionalBindings: ComputedRef<HttpRule[]>;
+}
 export interface HttpRuleProtoMsg {
   typeUrl: "/google.api.HttpRule";
   value: Uint8Array;
@@ -654,6 +671,10 @@ export interface CustomHttpPattern {
   /** The path matched by this custom verb. */
   path: string;
 }
+export interface ReactiveCustomHttpPattern {
+  kind: ComputedRef<string>;
+  path: ComputedRef<string>;
+}
 export interface CustomHttpPatternProtoMsg {
   typeUrl: "/google.api.CustomHttpPattern";
   value: Uint8Array;
@@ -675,7 +696,7 @@ export const Http = {
     for (const v of message.rules) {
       HttpRule.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.fullyDecodeReservedExpansion !== undefined) {
+    if (message.fullyDecodeReservedExpansion === true) {
       writer.uint32(16).bool(message.fullyDecodeReservedExpansion);
     }
     return writer;
@@ -701,10 +722,10 @@ export const Http = {
     return message;
   },
   fromJSON(object: any): Http {
-    const obj = createBaseHttp();
-    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => HttpRule.fromJSON(e));
-    if (isSet(object.fullyDecodeReservedExpansion)) obj.fullyDecodeReservedExpansion = Boolean(object.fullyDecodeReservedExpansion);
-    return obj;
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => HttpRule.fromJSON(e)) : [],
+      fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion) ? Boolean(object.fullyDecodeReservedExpansion) : false
+    };
   },
   toJSON(message: Http): JsonSafe<Http> {
     const obj: any = {};
@@ -795,7 +816,7 @@ function createBaseHttpRule(): HttpRule {
 export const HttpRule = {
   typeUrl: "/google.api.HttpRule",
   encode(message: HttpRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== undefined) {
+    if (message.selector !== "") {
       writer.uint32(10).string(message.selector);
     }
     if (message.get !== undefined) {
@@ -816,10 +837,10 @@ export const HttpRule = {
     if (message.custom !== undefined) {
       CustomHttpPattern.encode(message.custom, writer.uint32(66).fork()).ldelim();
     }
-    if (message.body !== undefined) {
+    if (message.body !== "") {
       writer.uint32(58).string(message.body);
     }
-    if (message.responseBody !== undefined) {
+    if (message.responseBody !== "") {
       writer.uint32(98).string(message.responseBody);
     }
     for (const v of message.additionalBindings) {
@@ -872,18 +893,18 @@ export const HttpRule = {
     return message;
   },
   fromJSON(object: any): HttpRule {
-    const obj = createBaseHttpRule();
-    if (isSet(object.selector)) obj.selector = String(object.selector);
-    if (isSet(object.get)) obj.get = String(object.get);
-    if (isSet(object.put)) obj.put = String(object.put);
-    if (isSet(object.post)) obj.post = String(object.post);
-    if (isSet(object.delete)) obj.delete = String(object.delete);
-    if (isSet(object.patch)) obj.patch = String(object.patch);
-    if (isSet(object.custom)) obj.custom = CustomHttpPattern.fromJSON(object.custom);
-    if (isSet(object.body)) obj.body = String(object.body);
-    if (isSet(object.responseBody)) obj.responseBody = String(object.responseBody);
-    if (Array.isArray(object?.additionalBindings)) obj.additionalBindings = object.additionalBindings.map((e: any) => HttpRule.fromJSON(e));
-    return obj;
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      get: isSet(object.get) ? String(object.get) : undefined,
+      put: isSet(object.put) ? String(object.put) : undefined,
+      post: isSet(object.post) ? String(object.post) : undefined,
+      delete: isSet(object.delete) ? String(object.delete) : undefined,
+      patch: isSet(object.patch) ? String(object.patch) : undefined,
+      custom: isSet(object.custom) ? CustomHttpPattern.fromJSON(object.custom) : undefined,
+      body: isSet(object.body) ? String(object.body) : "",
+      responseBody: isSet(object.responseBody) ? String(object.responseBody) : "",
+      additionalBindings: Array.isArray(object?.additionalBindings) ? object.additionalBindings.map((e: any) => HttpRule.fromJSON(e)) : []
+    };
   },
   toJSON(message: HttpRule): JsonSafe<HttpRule> {
     const obj: any = {};
@@ -911,9 +932,7 @@ export const HttpRule = {
     message.post = object.post ?? undefined;
     message.delete = object.delete ?? undefined;
     message.patch = object.patch ?? undefined;
-    if (object.custom !== undefined && object.custom !== null) {
-      message.custom = CustomHttpPattern.fromPartial(object.custom);
-    }
+    message.custom = object.custom !== undefined && object.custom !== null ? CustomHttpPattern.fromPartial(object.custom) : undefined;
     message.body = object.body ?? "";
     message.responseBody = object.responseBody ?? "";
     message.additionalBindings = object.additionalBindings?.map(e => HttpRule.fromPartial(e)) || [];
@@ -1040,10 +1059,10 @@ function createBaseCustomHttpPattern(): CustomHttpPattern {
 export const CustomHttpPattern = {
   typeUrl: "/google.api.CustomHttpPattern",
   encode(message: CustomHttpPattern, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.kind !== undefined) {
+    if (message.kind !== "") {
       writer.uint32(10).string(message.kind);
     }
-    if (message.path !== undefined) {
+    if (message.path !== "") {
       writer.uint32(18).string(message.path);
     }
     return writer;
@@ -1069,10 +1088,10 @@ export const CustomHttpPattern = {
     return message;
   },
   fromJSON(object: any): CustomHttpPattern {
-    const obj = createBaseCustomHttpPattern();
-    if (isSet(object.kind)) obj.kind = String(object.kind);
-    if (isSet(object.path)) obj.path = String(object.path);
-    return obj;
+    return {
+      kind: isSet(object.kind) ? String(object.kind) : "",
+      path: isSet(object.path) ? String(object.path) : ""
+    };
   },
   toJSON(message: CustomHttpPattern): JsonSafe<CustomHttpPattern> {
     const obj: any = {};

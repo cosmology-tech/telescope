@@ -1,6 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { JsonSafe } from "../../json-safe.js";
-import { DeepPartial, isSet } from "../../helpers.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
+import { DeepPartial, isSet } from "../../helpers";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * Monitoring configuration of the service.
@@ -75,6 +76,10 @@ export interface Monitoring {
    * in the Monitoring configuration.
    */
   consumerDestinations: Monitoring_MonitoringDestination[];
+}
+export interface ReactiveMonitoring {
+  producerDestinations: ComputedRef<Monitoring_MonitoringDestination[]>;
+  consumerDestinations: ComputedRef<Monitoring_MonitoringDestination[]>;
 }
 export interface MonitoringProtoMsg {
   typeUrl: "/google.api.Monitoring";
@@ -154,6 +159,10 @@ export interface Monitoring_MonitoringDestination {
    */
   metrics: string[];
 }
+export interface ReactiveMonitoring_MonitoringDestination {
+  monitoredResource: ComputedRef<string>;
+  metrics: ComputedRef<string[]>;
+}
 export interface Monitoring_MonitoringDestinationProtoMsg {
   typeUrl: "/google.api.MonitoringDestination";
   value: Uint8Array;
@@ -204,10 +213,10 @@ export const Monitoring = {
     return message;
   },
   fromJSON(object: any): Monitoring {
-    const obj = createBaseMonitoring();
-    if (Array.isArray(object?.producerDestinations)) obj.producerDestinations = object.producerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
-    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
-    return obj;
+    return {
+      producerDestinations: Array.isArray(object?.producerDestinations) ? object.producerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e)) : [],
+      consumerDestinations: Array.isArray(object?.consumerDestinations) ? object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e)) : []
+    };
   },
   toJSON(message: Monitoring): JsonSafe<Monitoring> {
     const obj: any = {};
@@ -300,7 +309,7 @@ function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDest
 export const Monitoring_MonitoringDestination = {
   typeUrl: "/google.api.MonitoringDestination",
   encode(message: Monitoring_MonitoringDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== undefined) {
+    if (message.monitoredResource !== "") {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -329,10 +338,10 @@ export const Monitoring_MonitoringDestination = {
     return message;
   },
   fromJSON(object: any): Monitoring_MonitoringDestination {
-    const obj = createBaseMonitoring_MonitoringDestination();
-    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
-    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => String(e));
-    return obj;
+    return {
+      monitoredResource: isSet(object.monitoredResource) ? String(object.monitoredResource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
+    };
   },
   toJSON(message: Monitoring_MonitoringDestination): JsonSafe<Monitoring_MonitoringDestination> {
     const obj: any = {};

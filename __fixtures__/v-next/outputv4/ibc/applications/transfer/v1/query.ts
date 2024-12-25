@@ -1,8 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination.js";
-import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
@@ -11,6 +12,9 @@ export const protobufPackage = "ibc.applications.transfer.v1";
 export interface QueryDenomTraceRequest {
   /** hash (in hex format) of the denomination trace information. */
   hash: string;
+}
+export interface ReactiveQueryDenomTraceRequest {
+  hash: ComputedRef<string>;
 }
 export interface QueryDenomTraceRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest";
@@ -31,6 +35,9 @@ export interface QueryDenomTraceResponse {
   /** denom_trace returns the requested denomination trace information. */
   denomTrace?: DenomTrace;
 }
+export interface ReactiveQueryDenomTraceResponse {
+  denomTrace?: ComputedRef<DenomTrace>;
+}
 export interface QueryDenomTraceResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse";
   value: Uint8Array;
@@ -49,6 +56,9 @@ export interface QueryDenomTraceResponseSDKType {
 export interface QueryDenomTracesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface ReactiveQueryDenomTracesRequest {
+  pagination?: ComputedRef<PageRequest>;
 }
 export interface QueryDenomTracesRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest";
@@ -71,6 +81,10 @@ export interface QueryDenomTracesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
+export interface ReactiveQueryDenomTracesResponse {
+  denomTraces: ComputedRef<DenomTrace[]>;
+  pagination?: ComputedRef<PageResponse>;
+}
 export interface QueryDenomTracesResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse";
   value: Uint8Array;
@@ -85,6 +99,7 @@ export interface QueryDenomTracesResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest";
   value: Uint8Array;
@@ -95,6 +110,9 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params?: Params;
+}
+export interface ReactiveQueryParamsResponse {
+  params?: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse";
@@ -112,7 +130,7 @@ function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
 export const QueryDenomTraceRequest = {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest",
   encode(message: QueryDenomTraceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.hash !== undefined) {
+    if (message.hash !== "") {
       writer.uint32(10).string(message.hash);
     }
     return writer;
@@ -135,9 +153,9 @@ export const QueryDenomTraceRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomTraceRequest {
-    const obj = createBaseQueryDenomTraceRequest();
-    if (isSet(object.hash)) obj.hash = String(object.hash);
-    return obj;
+    return {
+      hash: isSet(object.hash) ? String(object.hash) : ""
+    };
   },
   toJSON(message: QueryDenomTraceRequest): JsonSafe<QueryDenomTraceRequest> {
     const obj: any = {};
@@ -229,9 +247,9 @@ export const QueryDenomTraceResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomTraceResponse {
-    const obj = createBaseQueryDenomTraceResponse();
-    if (isSet(object.denomTrace)) obj.denomTrace = DenomTrace.fromJSON(object.denomTrace);
-    return obj;
+    return {
+      denomTrace: isSet(object.denomTrace) ? DenomTrace.fromJSON(object.denomTrace) : undefined
+    };
   },
   toJSON(message: QueryDenomTraceResponse): JsonSafe<QueryDenomTraceResponse> {
     const obj: any = {};
@@ -240,9 +258,7 @@ export const QueryDenomTraceResponse = {
   },
   fromPartial(object: DeepPartial<QueryDenomTraceResponse>): QueryDenomTraceResponse {
     const message = createBaseQueryDenomTraceResponse();
-    if (object.denomTrace !== undefined && object.denomTrace !== null) {
-      message.denomTrace = DenomTrace.fromPartial(object.denomTrace);
-    }
+    message.denomTrace = object.denomTrace !== undefined && object.denomTrace !== null ? DenomTrace.fromPartial(object.denomTrace) : undefined;
     return message;
   },
   fromSDK(object: QueryDenomTraceResponseSDKType): QueryDenomTraceResponse {
@@ -325,9 +341,9 @@ export const QueryDenomTracesRequest = {
     return message;
   },
   fromJSON(object: any): QueryDenomTracesRequest {
-    const obj = createBaseQueryDenomTracesRequest();
-    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDenomTracesRequest): JsonSafe<QueryDenomTracesRequest> {
     const obj: any = {};
@@ -336,9 +352,7 @@ export const QueryDenomTracesRequest = {
   },
   fromPartial(object: DeepPartial<QueryDenomTracesRequest>): QueryDenomTracesRequest {
     const message = createBaseQueryDenomTracesRequest();
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryDenomTracesRequestSDKType): QueryDenomTracesRequest {
@@ -428,10 +442,10 @@ export const QueryDenomTracesResponse = {
     return message;
   },
   fromJSON(object: any): QueryDenomTracesResponse {
-    const obj = createBaseQueryDenomTracesResponse();
-    if (Array.isArray(object?.denomTraces)) obj.denomTraces = object.denomTraces.map((e: any) => DenomTrace.fromJSON(e));
-    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
+    return {
+      denomTraces: Array.isArray(object?.denomTraces) ? object.denomTraces.map((e: any) => DenomTrace.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
+    };
   },
   toJSON(message: QueryDenomTracesResponse): JsonSafe<QueryDenomTracesResponse> {
     const obj: any = {};
@@ -446,9 +460,7 @@ export const QueryDenomTracesResponse = {
   fromPartial(object: DeepPartial<QueryDenomTracesResponse>): QueryDenomTracesResponse {
     const message = createBaseQueryDenomTracesResponse();
     message.denomTraces = object.denomTraces?.map(e => DenomTrace.fromPartial(e)) || [];
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    }
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromSDK(object: QueryDenomTracesResponseSDKType): QueryDenomTracesResponse {
@@ -536,8 +548,7 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    const obj = createBaseQueryParamsRequest();
-    return obj;
+    return {};
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -618,9 +629,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    const obj = createBaseQueryParamsResponse();
-    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
+    return {
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
+    };
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -629,9 +640,7 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    }
+    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

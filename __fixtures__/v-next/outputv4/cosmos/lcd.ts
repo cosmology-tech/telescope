@@ -37,6 +37,11 @@ export const createLCDClient = async ({
           v1beta1: new (await import("./base/tendermint/v1beta1/query.lcd")).LCDQueryClient({
             requestClient
           })
+        },
+        node: {
+          v1beta1: new (await import("./base/node/v1beta1/query.lcd")).LCDQueryClient({
+            requestClient
+          })
         }
       },
       distribution: {

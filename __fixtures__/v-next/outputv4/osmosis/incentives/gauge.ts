@@ -1,10 +1,11 @@
-import { QueryCondition, QueryConditionSDKType } from "../lockup/lock.js";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin.js";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
-import { Duration, DurationSDKType } from "../../google/protobuf/duration.js";
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers.js";
-import { JsonSafe } from "../../json-safe.js";
+import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.incentives";
 /**
  * Gauge is an object that stores and distributes yields to recipients who
@@ -47,6 +48,16 @@ export interface Gauge {
   /** distributed_coins are coins that have been distributed already */
   distributedCoins: Coin[];
 }
+export interface ReactiveGauge {
+  id: ComputedRef<bigint>;
+  isPerpetual: ComputedRef<boolean>;
+  distributeTo: ComputedRef<QueryCondition>;
+  coins: ComputedRef<Coin[]>;
+  startTime: ComputedRef<Date>;
+  numEpochsPaidOver: ComputedRef<bigint>;
+  filledEpochs: ComputedRef<bigint>;
+  distributedCoins: ComputedRef<Coin[]>;
+}
 export interface GaugeProtoMsg {
   typeUrl: "/osmosis.incentives.Gauge";
   value: Uint8Array;
@@ -70,6 +81,9 @@ export interface LockableDurationsInfo {
   /** List of incentivised durations that gauges will pay out to */
   lockableDurations: Duration[];
 }
+export interface ReactiveLockableDurationsInfo {
+  lockableDurations: ComputedRef<Duration[]>;
+}
 export interface LockableDurationsInfoProtoMsg {
   typeUrl: "/osmosis.incentives.LockableDurationsInfo";
   value: Uint8Array;
@@ -92,10 +106,10 @@ function createBaseGauge(): Gauge {
 export const Gauge = {
   typeUrl: "/osmosis.incentives.Gauge",
   encode(message: Gauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== undefined) {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
-    if (message.isPerpetual !== undefined) {
+    if (message.isPerpetual === true) {
       writer.uint32(16).bool(message.isPerpetual);
     }
     if (message.distributeTo !== undefined) {
@@ -107,10 +121,10 @@ export const Gauge = {
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.numEpochsPaidOver !== undefined) {
+    if (message.numEpochsPaidOver !== BigInt(0)) {
       writer.uint32(48).uint64(message.numEpochsPaidOver);
     }
-    if (message.filledEpochs !== undefined) {
+    if (message.filledEpochs !== BigInt(0)) {
       writer.uint32(56).uint64(message.filledEpochs);
     }
     for (const v of message.distributedCoins) {
@@ -157,16 +171,16 @@ export const Gauge = {
     return message;
   },
   fromJSON(object: any): Gauge {
-    const obj = createBaseGauge();
-    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    if (isSet(object.isPerpetual)) obj.isPerpetual = Boolean(object.isPerpetual);
-    if (isSet(object.distributeTo)) obj.distributeTo = QueryCondition.fromJSON(object.distributeTo);
-    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
-    if (isSet(object.filledEpochs)) obj.filledEpochs = BigInt(object.filledEpochs.toString());
-    if (Array.isArray(object?.distributedCoins)) obj.distributedCoins = object.distributedCoins.map((e: any) => Coin.fromJSON(e));
-    return obj;
+    return {
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
+      isPerpetual: isSet(object.isPerpetual) ? Boolean(object.isPerpetual) : false,
+      distributeTo: isSet(object.distributeTo) ? QueryCondition.fromJSON(object.distributeTo) : undefined,
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : [],
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0),
+      filledEpochs: isSet(object.filledEpochs) ? BigInt(object.filledEpochs.toString()) : BigInt(0),
+      distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
+    };
   },
   toJSON(message: Gauge): JsonSafe<Gauge> {
     const obj: any = {};
@@ -190,21 +204,13 @@ export const Gauge = {
   },
   fromPartial(object: DeepPartial<Gauge>): Gauge {
     const message = createBaseGauge();
-    if (object.id !== undefined && object.id !== null) {
-      message.id = BigInt(object.id.toString());
-    }
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.isPerpetual = object.isPerpetual ?? false;
-    if (object.distributeTo !== undefined && object.distributeTo !== null) {
-      message.distributeTo = QueryCondition.fromPartial(object.distributeTo);
-    }
+    message.distributeTo = object.distributeTo !== undefined && object.distributeTo !== null ? QueryCondition.fromPartial(object.distributeTo) : undefined;
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     message.startTime = object.startTime ?? undefined;
-    if (object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null) {
-      message.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
-    }
-    if (object.filledEpochs !== undefined && object.filledEpochs !== null) {
-      message.filledEpochs = BigInt(object.filledEpochs.toString());
-    }
+    message.numEpochsPaidOver = object.numEpochsPaidOver !== undefined && object.numEpochsPaidOver !== null ? BigInt(object.numEpochsPaidOver.toString()) : BigInt(0);
+    message.filledEpochs = object.filledEpochs !== undefined && object.filledEpochs !== null ? BigInt(object.filledEpochs.toString()) : BigInt(0);
     message.distributedCoins = object.distributedCoins?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -349,9 +355,9 @@ export const LockableDurationsInfo = {
     return message;
   },
   fromJSON(object: any): LockableDurationsInfo {
-    const obj = createBaseLockableDurationsInfo();
-    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    return obj;
+    return {
+      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
+    };
   },
   toJSON(message: LockableDurationsInfo): JsonSafe<LockableDurationsInfo> {
     const obj: any = {};

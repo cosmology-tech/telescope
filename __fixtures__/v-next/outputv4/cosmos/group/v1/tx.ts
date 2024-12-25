@@ -1,8 +1,9 @@
-import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, voteOptionFromJSON, voteOptionToJSON } from "./types.js";
-import { Any, AnySDKType } from "../../../google/protobuf/any.js";
-import { BinaryReader, BinaryWriter } from "../../../binary.js";
-import { isSet, DeepPartial } from "../../../helpers.js";
-import { JsonSafe } from "../../../json-safe.js";
+import { Member, MemberSDKType, VoteOption, VoteOptionSDKType, voteOptionFromJSON, voteOptionToJSON } from "./types";
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.group.v1";
 /** Exec defines modes of execution of a proposal on creation or on new vote. */
 export enum Exec {
@@ -55,6 +56,11 @@ export interface MsgCreateGroup {
   /** metadata is any arbitrary metadata to attached to the group. */
   metadata: string;
 }
+export interface ReactiveMsgCreateGroup {
+  admin: ComputedRef<string>;
+  members: ComputedRef<Member[]>;
+  metadata: ComputedRef<string>;
+}
 export interface MsgCreateGroupProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgCreateGroup";
   value: Uint8Array;
@@ -69,6 +75,9 @@ export interface MsgCreateGroupSDKType {
 export interface MsgCreateGroupResponse {
   /** group_id is the unique ID of the newly created group. */
   groupId: bigint;
+}
+export interface ReactiveMsgCreateGroupResponse {
+  groupId: ComputedRef<bigint>;
 }
 export interface MsgCreateGroupResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupResponse";
@@ -90,6 +99,11 @@ export interface MsgUpdateGroupMembers {
    */
   memberUpdates: Member[];
 }
+export interface ReactiveMsgUpdateGroupMembers {
+  admin: ComputedRef<string>;
+  groupId: ComputedRef<bigint>;
+  memberUpdates: ComputedRef<Member[]>;
+}
 export interface MsgUpdateGroupMembersProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupMembers";
   value: Uint8Array;
@@ -102,6 +116,7 @@ export interface MsgUpdateGroupMembersSDKType {
 }
 /** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
 export interface MsgUpdateGroupMembersResponse {}
+export interface ReactiveMsgUpdateGroupMembersResponse {}
 export interface MsgUpdateGroupMembersResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupMembersResponse";
   value: Uint8Array;
@@ -117,6 +132,11 @@ export interface MsgUpdateGroupAdmin {
   /** new_admin is the group new admin account address. */
   newAdmin: string;
 }
+export interface ReactiveMsgUpdateGroupAdmin {
+  admin: ComputedRef<string>;
+  groupId: ComputedRef<bigint>;
+  newAdmin: ComputedRef<string>;
+}
 export interface MsgUpdateGroupAdminProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupAdmin";
   value: Uint8Array;
@@ -129,6 +149,7 @@ export interface MsgUpdateGroupAdminSDKType {
 }
 /** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
 export interface MsgUpdateGroupAdminResponse {}
+export interface ReactiveMsgUpdateGroupAdminResponse {}
 export interface MsgUpdateGroupAdminResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupAdminResponse";
   value: Uint8Array;
@@ -144,6 +165,11 @@ export interface MsgUpdateGroupMetadata {
   /** metadata is the updated group's metadata. */
   metadata: string;
 }
+export interface ReactiveMsgUpdateGroupMetadata {
+  admin: ComputedRef<string>;
+  groupId: ComputedRef<bigint>;
+  metadata: ComputedRef<string>;
+}
 export interface MsgUpdateGroupMetadataProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupMetadata";
   value: Uint8Array;
@@ -156,6 +182,7 @@ export interface MsgUpdateGroupMetadataSDKType {
 }
 /** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
 export interface MsgUpdateGroupMetadataResponse {}
+export interface ReactiveMsgUpdateGroupMetadataResponse {}
 export interface MsgUpdateGroupMetadataResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupMetadataResponse";
   value: Uint8Array;
@@ -173,6 +200,12 @@ export interface MsgCreateGroupPolicy {
   /** decision_policy specifies the group policy's decision policy. */
   decisionPolicy?: Any;
 }
+export interface ReactiveMsgCreateGroupPolicy {
+  admin: ComputedRef<string>;
+  groupId: ComputedRef<bigint>;
+  metadata: ComputedRef<string>;
+  decisionPolicy?: ComputedRef<Any>;
+}
 export interface MsgCreateGroupPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicy";
   value: Uint8Array;
@@ -188,6 +221,9 @@ export interface MsgCreateGroupPolicySDKType {
 export interface MsgCreateGroupPolicyResponse {
   /** address is the account address of the newly created group policy. */
   address: string;
+}
+export interface ReactiveMsgCreateGroupPolicyResponse {
+  address: ComputedRef<string>;
 }
 export interface MsgCreateGroupPolicyResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicyResponse";
@@ -205,6 +241,11 @@ export interface MsgUpdateGroupPolicyAdmin {
   address: string;
   /** new_admin is the new group policy admin. */
   newAdmin: string;
+}
+export interface ReactiveMsgUpdateGroupPolicyAdmin {
+  admin: ComputedRef<string>;
+  address: ComputedRef<string>;
+  newAdmin: ComputedRef<string>;
 }
 export interface MsgUpdateGroupPolicyAdminProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyAdmin";
@@ -231,6 +272,14 @@ export interface MsgCreateGroupWithPolicy {
   /** decision_policy specifies the group policy's decision policy. */
   decisionPolicy?: Any;
 }
+export interface ReactiveMsgCreateGroupWithPolicy {
+  admin: ComputedRef<string>;
+  members: ComputedRef<Member[]>;
+  groupMetadata: ComputedRef<string>;
+  groupPolicyMetadata: ComputedRef<string>;
+  groupPolicyAsAdmin: ComputedRef<boolean>;
+  decisionPolicy?: ComputedRef<Any>;
+}
 export interface MsgCreateGroupWithPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicy";
   value: Uint8Array;
@@ -251,6 +300,10 @@ export interface MsgCreateGroupWithPolicyResponse {
   /** group_policy_address is the account address of the newly created group policy. */
   groupPolicyAddress: string;
 }
+export interface ReactiveMsgCreateGroupWithPolicyResponse {
+  groupId: ComputedRef<bigint>;
+  groupPolicyAddress: ComputedRef<string>;
+}
 export interface MsgCreateGroupWithPolicyResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicyResponse";
   value: Uint8Array;
@@ -262,6 +315,7 @@ export interface MsgCreateGroupWithPolicyResponseSDKType {
 }
 /** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
 export interface MsgUpdateGroupPolicyAdminResponse {}
+export interface ReactiveMsgUpdateGroupPolicyAdminResponse {}
 export interface MsgUpdateGroupPolicyAdminResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse";
   value: Uint8Array;
@@ -277,6 +331,11 @@ export interface MsgUpdateGroupPolicyDecisionPolicy {
   /** decision_policy is the updated group policy's decision policy. */
   decisionPolicy?: Any;
 }
+export interface ReactiveMsgUpdateGroupPolicyDecisionPolicy {
+  admin: ComputedRef<string>;
+  address: ComputedRef<string>;
+  decisionPolicy?: ComputedRef<Any>;
+}
 export interface MsgUpdateGroupPolicyDecisionPolicyProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy";
   value: Uint8Array;
@@ -289,6 +348,7 @@ export interface MsgUpdateGroupPolicyDecisionPolicySDKType {
 }
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
 export interface MsgUpdateGroupPolicyDecisionPolicyResponse {}
+export interface ReactiveMsgUpdateGroupPolicyDecisionPolicyResponse {}
 export interface MsgUpdateGroupPolicyDecisionPolicyResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse";
   value: Uint8Array;
@@ -304,6 +364,11 @@ export interface MsgUpdateGroupPolicyMetadata {
   /** metadata is the updated group policy metadata. */
   metadata: string;
 }
+export interface ReactiveMsgUpdateGroupPolicyMetadata {
+  admin: ComputedRef<string>;
+  address: ComputedRef<string>;
+  metadata: ComputedRef<string>;
+}
 export interface MsgUpdateGroupPolicyMetadataProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyMetadata";
   value: Uint8Array;
@@ -316,6 +381,7 @@ export interface MsgUpdateGroupPolicyMetadataSDKType {
 }
 /** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
 export interface MsgUpdateGroupPolicyMetadataResponse {}
+export interface ReactiveMsgUpdateGroupPolicyMetadataResponse {}
 export interface MsgUpdateGroupPolicyMetadataResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse";
   value: Uint8Array;
@@ -342,6 +408,13 @@ export interface MsgSubmitProposal {
    */
   exec: Exec;
 }
+export interface ReactiveMsgSubmitProposal {
+  address: ComputedRef<string>;
+  proposers: ComputedRef<string[]>;
+  metadata: ComputedRef<string>;
+  messages: ComputedRef<Any[]>;
+  exec: ComputedRef<Exec>;
+}
 export interface MsgSubmitProposalProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgSubmitProposal";
   value: Uint8Array;
@@ -359,6 +432,9 @@ export interface MsgSubmitProposalResponse {
   /** proposal is the unique ID of the proposal. */
   proposalId: bigint;
 }
+export interface ReactiveMsgSubmitProposalResponse {
+  proposalId: ComputedRef<bigint>;
+}
 export interface MsgSubmitProposalResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgSubmitProposalResponse";
   value: Uint8Array;
@@ -374,6 +450,10 @@ export interface MsgWithdrawProposal {
   /** address is the admin of the group policy or one of the proposer of the proposal. */
   address: string;
 }
+export interface ReactiveMsgWithdrawProposal {
+  proposalId: ComputedRef<bigint>;
+  address: ComputedRef<string>;
+}
 export interface MsgWithdrawProposalProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgWithdrawProposal";
   value: Uint8Array;
@@ -385,6 +465,7 @@ export interface MsgWithdrawProposalSDKType {
 }
 /** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
 export interface MsgWithdrawProposalResponse {}
+export interface ReactiveMsgWithdrawProposalResponse {}
 export interface MsgWithdrawProposalResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgWithdrawProposalResponse";
   value: Uint8Array;
@@ -407,6 +488,13 @@ export interface MsgVote {
    */
   exec: Exec;
 }
+export interface ReactiveMsgVote {
+  proposalId: ComputedRef<bigint>;
+  voter: ComputedRef<string>;
+  option: ComputedRef<VoteOption>;
+  metadata: ComputedRef<string>;
+  exec: ComputedRef<Exec>;
+}
 export interface MsgVoteProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgVote";
   value: Uint8Array;
@@ -421,6 +509,7 @@ export interface MsgVoteSDKType {
 }
 /** MsgVoteResponse is the Msg/Vote response type. */
 export interface MsgVoteResponse {}
+export interface ReactiveMsgVoteResponse {}
 export interface MsgVoteResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgVoteResponse";
   value: Uint8Array;
@@ -434,6 +523,10 @@ export interface MsgExec {
   /** signer is the account address used to execute the proposal. */
   signer: string;
 }
+export interface ReactiveMsgExec {
+  proposalId: ComputedRef<bigint>;
+  signer: ComputedRef<string>;
+}
 export interface MsgExecProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgExec";
   value: Uint8Array;
@@ -445,6 +538,7 @@ export interface MsgExecSDKType {
 }
 /** MsgExecResponse is the Msg/Exec request type. */
 export interface MsgExecResponse {}
+export interface ReactiveMsgExecResponse {}
 export interface MsgExecResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgExecResponse";
   value: Uint8Array;
@@ -458,6 +552,10 @@ export interface MsgLeaveGroup {
   /** group_id is the unique ID of the group. */
   groupId: bigint;
 }
+export interface ReactiveMsgLeaveGroup {
+  address: ComputedRef<string>;
+  groupId: ComputedRef<bigint>;
+}
 export interface MsgLeaveGroupProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgLeaveGroup";
   value: Uint8Array;
@@ -469,6 +567,7 @@ export interface MsgLeaveGroupSDKType {
 }
 /** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
 export interface MsgLeaveGroupResponse {}
+export interface ReactiveMsgLeaveGroupResponse {}
 export interface MsgLeaveGroupResponseProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgLeaveGroupResponse";
   value: Uint8Array;
@@ -485,13 +584,13 @@ function createBaseMsgCreateGroup(): MsgCreateGroup {
 export const MsgCreateGroup = {
   typeUrl: "/cosmos.group.v1.MsgCreateGroup",
   encode(message: MsgCreateGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     for (const v of message.members) {
       Member.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     return writer;
@@ -520,11 +619,11 @@ export const MsgCreateGroup = {
     return message;
   },
   fromJSON(object: any): MsgCreateGroup {
-    const obj = createBaseMsgCreateGroup();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (Array.isArray(object?.members)) obj.members = object.members.map((e: any) => Member.fromJSON(e));
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromJSON(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   },
   toJSON(message: MsgCreateGroup): JsonSafe<MsgCreateGroup> {
     const obj: any = {};
@@ -621,7 +720,7 @@ function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
 export const MsgCreateGroupResponse = {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupResponse",
   encode(message: MsgCreateGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(8).uint64(message.groupId);
     }
     return writer;
@@ -644,9 +743,9 @@ export const MsgCreateGroupResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateGroupResponse {
-    const obj = createBaseMsgCreateGroupResponse();
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    return obj;
+    return {
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgCreateGroupResponse): JsonSafe<MsgCreateGroupResponse> {
     const obj: any = {};
@@ -655,9 +754,7 @@ export const MsgCreateGroupResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
     const message = createBaseMsgCreateGroupResponse();
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgCreateGroupResponseSDKType): MsgCreateGroupResponse {
@@ -719,10 +816,10 @@ function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
 export const MsgUpdateGroupMembers = {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupMembers",
   encode(message: MsgUpdateGroupMembers, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(16).uint64(message.groupId);
     }
     for (const v of message.memberUpdates) {
@@ -754,11 +851,11 @@ export const MsgUpdateGroupMembers = {
     return message;
   },
   fromJSON(object: any): MsgUpdateGroupMembers {
-    const obj = createBaseMsgUpdateGroupMembers();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    if (Array.isArray(object?.memberUpdates)) obj.memberUpdates = object.memberUpdates.map((e: any) => Member.fromJSON(e));
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
+      memberUpdates: Array.isArray(object?.memberUpdates) ? object.memberUpdates.map((e: any) => Member.fromJSON(e)) : []
+    };
   },
   toJSON(message: MsgUpdateGroupMembers): JsonSafe<MsgUpdateGroupMembers> {
     const obj: any = {};
@@ -774,9 +871,7 @@ export const MsgUpdateGroupMembers = {
   fromPartial(object: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
     const message = createBaseMsgUpdateGroupMembers();
     message.admin = object.admin ?? "";
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     message.memberUpdates = object.memberUpdates?.map(e => Member.fromPartial(e)) || [];
     return message;
   },
@@ -872,8 +967,7 @@ export const MsgUpdateGroupMembersResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateGroupMembersResponse {
-    const obj = createBaseMsgUpdateGroupMembersResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUpdateGroupMembersResponse): JsonSafe<MsgUpdateGroupMembersResponse> {
     const obj: any = {};
@@ -933,13 +1027,13 @@ function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
 export const MsgUpdateGroupAdmin = {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupAdmin",
   encode(message: MsgUpdateGroupAdmin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(16).uint64(message.groupId);
     }
-    if (message.newAdmin !== undefined) {
+    if (message.newAdmin !== "") {
       writer.uint32(26).string(message.newAdmin);
     }
     return writer;
@@ -968,11 +1062,11 @@ export const MsgUpdateGroupAdmin = {
     return message;
   },
   fromJSON(object: any): MsgUpdateGroupAdmin {
-    const obj = createBaseMsgUpdateGroupAdmin();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : ""
+    };
   },
   toJSON(message: MsgUpdateGroupAdmin): JsonSafe<MsgUpdateGroupAdmin> {
     const obj: any = {};
@@ -984,9 +1078,7 @@ export const MsgUpdateGroupAdmin = {
   fromPartial(object: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
     const message = createBaseMsgUpdateGroupAdmin();
     message.admin = object.admin ?? "";
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     message.newAdmin = object.newAdmin ?? "";
     return message;
   },
@@ -1076,8 +1168,7 @@ export const MsgUpdateGroupAdminResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateGroupAdminResponse {
-    const obj = createBaseMsgUpdateGroupAdminResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUpdateGroupAdminResponse): JsonSafe<MsgUpdateGroupAdminResponse> {
     const obj: any = {};
@@ -1137,13 +1228,13 @@ function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
 export const MsgUpdateGroupMetadata = {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupMetadata",
   encode(message: MsgUpdateGroupMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(16).uint64(message.groupId);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     return writer;
@@ -1172,11 +1263,11 @@ export const MsgUpdateGroupMetadata = {
     return message;
   },
   fromJSON(object: any): MsgUpdateGroupMetadata {
-    const obj = createBaseMsgUpdateGroupMetadata();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   },
   toJSON(message: MsgUpdateGroupMetadata): JsonSafe<MsgUpdateGroupMetadata> {
     const obj: any = {};
@@ -1188,9 +1279,7 @@ export const MsgUpdateGroupMetadata = {
   fromPartial(object: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
     const message = createBaseMsgUpdateGroupMetadata();
     message.admin = object.admin ?? "";
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     message.metadata = object.metadata ?? "";
     return message;
   },
@@ -1280,8 +1369,7 @@ export const MsgUpdateGroupMetadataResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateGroupMetadataResponse {
-    const obj = createBaseMsgUpdateGroupMetadataResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUpdateGroupMetadataResponse): JsonSafe<MsgUpdateGroupMetadataResponse> {
     const obj: any = {};
@@ -1342,13 +1430,13 @@ function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
 export const MsgCreateGroupPolicy = {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicy",
   encode(message: MsgCreateGroupPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(16).uint64(message.groupId);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     if (message.decisionPolicy !== undefined) {
@@ -1383,12 +1471,12 @@ export const MsgCreateGroupPolicy = {
     return message;
   },
   fromJSON(object: any): MsgCreateGroupPolicy {
-    const obj = createBaseMsgCreateGroupPolicy();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
+    };
   },
   toJSON(message: MsgCreateGroupPolicy): JsonSafe<MsgCreateGroupPolicy> {
     const obj: any = {};
@@ -1401,13 +1489,9 @@ export const MsgCreateGroupPolicy = {
   fromPartial(object: DeepPartial<MsgCreateGroupPolicy>): MsgCreateGroupPolicy {
     const message = createBaseMsgCreateGroupPolicy();
     message.admin = object.admin ?? "";
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     message.metadata = object.metadata ?? "";
-    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
-      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
-    }
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateGroupPolicySDKType): MsgCreateGroupPolicy {
@@ -1488,7 +1572,7 @@ function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse 
 export const MsgCreateGroupPolicyResponse = {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicyResponse",
   encode(message: MsgCreateGroupPolicyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -1511,9 +1595,9 @@ export const MsgCreateGroupPolicyResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateGroupPolicyResponse {
-    const obj = createBaseMsgCreateGroupPolicyResponse();
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: MsgCreateGroupPolicyResponse): JsonSafe<MsgCreateGroupPolicyResponse> {
     const obj: any = {};
@@ -1584,13 +1668,13 @@ function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
 export const MsgUpdateGroupPolicyAdmin = {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
   encode(message: MsgUpdateGroupPolicyAdmin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
-    if (message.newAdmin !== undefined) {
+    if (message.newAdmin !== "") {
       writer.uint32(26).string(message.newAdmin);
     }
     return writer;
@@ -1619,11 +1703,11 @@ export const MsgUpdateGroupPolicyAdmin = {
     return message;
   },
   fromJSON(object: any): MsgUpdateGroupPolicyAdmin {
-    const obj = createBaseMsgUpdateGroupPolicyAdmin();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : ""
+    };
   },
   toJSON(message: MsgUpdateGroupPolicyAdmin): JsonSafe<MsgUpdateGroupPolicyAdmin> {
     const obj: any = {};
@@ -1715,19 +1799,19 @@ function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
 export const MsgCreateGroupWithPolicy = {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicy",
   encode(message: MsgCreateGroupWithPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     for (const v of message.members) {
       Member.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.groupMetadata !== undefined) {
+    if (message.groupMetadata !== "") {
       writer.uint32(26).string(message.groupMetadata);
     }
-    if (message.groupPolicyMetadata !== undefined) {
+    if (message.groupPolicyMetadata !== "") {
       writer.uint32(34).string(message.groupPolicyMetadata);
     }
-    if (message.groupPolicyAsAdmin !== undefined) {
+    if (message.groupPolicyAsAdmin === true) {
       writer.uint32(40).bool(message.groupPolicyAsAdmin);
     }
     if (message.decisionPolicy !== undefined) {
@@ -1768,14 +1852,14 @@ export const MsgCreateGroupWithPolicy = {
     return message;
   },
   fromJSON(object: any): MsgCreateGroupWithPolicy {
-    const obj = createBaseMsgCreateGroupWithPolicy();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (Array.isArray(object?.members)) obj.members = object.members.map((e: any) => Member.fromJSON(e));
-    if (isSet(object.groupMetadata)) obj.groupMetadata = String(object.groupMetadata);
-    if (isSet(object.groupPolicyMetadata)) obj.groupPolicyMetadata = String(object.groupPolicyMetadata);
-    if (isSet(object.groupPolicyAsAdmin)) obj.groupPolicyAsAdmin = Boolean(object.groupPolicyAsAdmin);
-    if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromJSON(e)) : [],
+      groupMetadata: isSet(object.groupMetadata) ? String(object.groupMetadata) : "",
+      groupPolicyMetadata: isSet(object.groupPolicyMetadata) ? String(object.groupPolicyMetadata) : "",
+      groupPolicyAsAdmin: isSet(object.groupPolicyAsAdmin) ? Boolean(object.groupPolicyAsAdmin) : false,
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
+    };
   },
   toJSON(message: MsgCreateGroupWithPolicy): JsonSafe<MsgCreateGroupWithPolicy> {
     const obj: any = {};
@@ -1798,9 +1882,7 @@ export const MsgCreateGroupWithPolicy = {
     message.groupMetadata = object.groupMetadata ?? "";
     message.groupPolicyMetadata = object.groupPolicyMetadata ?? "";
     message.groupPolicyAsAdmin = object.groupPolicyAsAdmin ?? false;
-    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
-      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
-    }
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
   },
   fromSDK(object: MsgCreateGroupWithPolicySDKType): MsgCreateGroupWithPolicy {
@@ -1902,10 +1984,10 @@ function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyR
 export const MsgCreateGroupWithPolicyResponse = {
   typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicyResponse",
   encode(message: MsgCreateGroupWithPolicyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(8).uint64(message.groupId);
     }
-    if (message.groupPolicyAddress !== undefined) {
+    if (message.groupPolicyAddress !== "") {
       writer.uint32(18).string(message.groupPolicyAddress);
     }
     return writer;
@@ -1931,10 +2013,10 @@ export const MsgCreateGroupWithPolicyResponse = {
     return message;
   },
   fromJSON(object: any): MsgCreateGroupWithPolicyResponse {
-    const obj = createBaseMsgCreateGroupWithPolicyResponse();
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    if (isSet(object.groupPolicyAddress)) obj.groupPolicyAddress = String(object.groupPolicyAddress);
-    return obj;
+    return {
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0),
+      groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : ""
+    };
   },
   toJSON(message: MsgCreateGroupWithPolicyResponse): JsonSafe<MsgCreateGroupWithPolicyResponse> {
     const obj: any = {};
@@ -1944,9 +2026,7 @@ export const MsgCreateGroupWithPolicyResponse = {
   },
   fromPartial(object: DeepPartial<MsgCreateGroupWithPolicyResponse>): MsgCreateGroupWithPolicyResponse {
     const message = createBaseMsgCreateGroupWithPolicyResponse();
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     message.groupPolicyAddress = object.groupPolicyAddress ?? "";
     return message;
   },
@@ -2029,8 +2109,7 @@ export const MsgUpdateGroupPolicyAdminResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateGroupPolicyAdminResponse {
-    const obj = createBaseMsgUpdateGroupPolicyAdminResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUpdateGroupPolicyAdminResponse): JsonSafe<MsgUpdateGroupPolicyAdminResponse> {
     const obj: any = {};
@@ -2090,10 +2169,10 @@ function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDec
 export const MsgUpdateGroupPolicyDecisionPolicy = {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy",
   encode(message: MsgUpdateGroupPolicyDecisionPolicy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
     if (message.decisionPolicy !== undefined) {
@@ -2125,11 +2204,11 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     return message;
   },
   fromJSON(object: any): MsgUpdateGroupPolicyDecisionPolicy {
-    const obj = createBaseMsgUpdateGroupPolicyDecisionPolicy();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
+    };
   },
   toJSON(message: MsgUpdateGroupPolicyDecisionPolicy): JsonSafe<MsgUpdateGroupPolicyDecisionPolicy> {
     const obj: any = {};
@@ -2142,9 +2221,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
     message.admin = object.admin ?? "";
     message.address = object.address ?? "";
-    if (object.decisionPolicy !== undefined && object.decisionPolicy !== null) {
-      message.decisionPolicy = Any.fromPartial(object.decisionPolicy);
-    }
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
     return message;
   },
   fromSDK(object: MsgUpdateGroupPolicyDecisionPolicySDKType): MsgUpdateGroupPolicyDecisionPolicy {
@@ -2233,8 +2310,7 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateGroupPolicyDecisionPolicyResponse {
-    const obj = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUpdateGroupPolicyDecisionPolicyResponse): JsonSafe<MsgUpdateGroupPolicyDecisionPolicyResponse> {
     const obj: any = {};
@@ -2294,13 +2370,13 @@ function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata 
 export const MsgUpdateGroupPolicyMetadata = {
   typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
   encode(message: MsgUpdateGroupPolicyMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== undefined) {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     return writer;
@@ -2329,11 +2405,11 @@ export const MsgUpdateGroupPolicyMetadata = {
     return message;
   },
   fromJSON(object: any): MsgUpdateGroupPolicyMetadata {
-    const obj = createBaseMsgUpdateGroupPolicyMetadata();
-    if (isSet(object.admin)) obj.admin = String(object.admin);
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    return obj;
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : ""
+    };
   },
   toJSON(message: MsgUpdateGroupPolicyMetadata): JsonSafe<MsgUpdateGroupPolicyMetadata> {
     const obj: any = {};
@@ -2435,8 +2511,7 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateGroupPolicyMetadataResponse {
-    const obj = createBaseMsgUpdateGroupPolicyMetadataResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgUpdateGroupPolicyMetadataResponse): JsonSafe<MsgUpdateGroupPolicyMetadataResponse> {
     const obj: any = {};
@@ -2498,13 +2573,13 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 export const MsgSubmitProposal = {
   typeUrl: "/cosmos.group.v1.MsgSubmitProposal",
   encode(message: MsgSubmitProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.proposers) {
       writer.uint32(18).string(v!);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     for (const v of message.messages) {
@@ -2545,13 +2620,13 @@ export const MsgSubmitProposal = {
     return message;
   },
   fromJSON(object: any): MsgSubmitProposal {
-    const obj = createBaseMsgSubmitProposal();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (Array.isArray(object?.proposers)) obj.proposers = object.proposers.map((e: any) => String(e));
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
-    if (isSet(object.exec)) obj.exec = execFromJSON(object.exec);
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
+    };
   },
   toJSON(message: MsgSubmitProposal): JsonSafe<MsgSubmitProposal> {
     const obj: any = {};
@@ -2676,7 +2751,7 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 export const MsgSubmitProposalResponse = {
   typeUrl: "/cosmos.group.v1.MsgSubmitProposalResponse",
   encode(message: MsgSubmitProposalResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
@@ -2699,9 +2774,9 @@ export const MsgSubmitProposalResponse = {
     return message;
   },
   fromJSON(object: any): MsgSubmitProposalResponse {
-    const obj = createBaseMsgSubmitProposalResponse();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgSubmitProposalResponse): JsonSafe<MsgSubmitProposalResponse> {
     const obj: any = {};
@@ -2710,9 +2785,7 @@ export const MsgSubmitProposalResponse = {
   },
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgSubmitProposalResponseSDKType): MsgSubmitProposalResponse {
@@ -2773,10 +2846,10 @@ function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
 export const MsgWithdrawProposal = {
   typeUrl: "/cosmos.group.v1.MsgWithdrawProposal",
   encode(message: MsgWithdrawProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
     return writer;
@@ -2802,10 +2875,10 @@ export const MsgWithdrawProposal = {
     return message;
   },
   fromJSON(object: any): MsgWithdrawProposal {
-    const obj = createBaseMsgWithdrawProposal();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
+      address: isSet(object.address) ? String(object.address) : ""
+    };
   },
   toJSON(message: MsgWithdrawProposal): JsonSafe<MsgWithdrawProposal> {
     const obj: any = {};
@@ -2815,9 +2888,7 @@ export const MsgWithdrawProposal = {
   },
   fromPartial(object: DeepPartial<MsgWithdrawProposal>): MsgWithdrawProposal {
     const message = createBaseMsgWithdrawProposal();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.address = object.address ?? "";
     return message;
   },
@@ -2900,8 +2971,7 @@ export const MsgWithdrawProposalResponse = {
     return message;
   },
   fromJSON(_: any): MsgWithdrawProposalResponse {
-    const obj = createBaseMsgWithdrawProposalResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgWithdrawProposalResponse): JsonSafe<MsgWithdrawProposalResponse> {
     const obj: any = {};
@@ -2963,16 +3033,16 @@ function createBaseMsgVote(): MsgVote {
 export const MsgVote = {
   typeUrl: "/cosmos.group.v1.MsgVote",
   encode(message: MsgVote, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== undefined) {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     if (message.option !== 0) {
       writer.uint32(24).int32(message.option);
     }
-    if (message.metadata !== undefined) {
+    if (message.metadata !== "") {
       writer.uint32(34).string(message.metadata);
     }
     if (message.exec !== 0) {
@@ -3010,13 +3080,13 @@ export const MsgVote = {
     return message;
   },
   fromJSON(object: any): MsgVote {
-    const obj = createBaseMsgVote();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.voter)) obj.voter = String(object.voter);
-    if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
-    if (isSet(object.metadata)) obj.metadata = String(object.metadata);
-    if (isSet(object.exec)) obj.exec = execFromJSON(object.exec);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      exec: isSet(object.exec) ? execFromJSON(object.exec) : -1
+    };
   },
   toJSON(message: MsgVote): JsonSafe<MsgVote> {
     const obj: any = {};
@@ -3029,9 +3099,7 @@ export const MsgVote = {
   },
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     message.metadata = object.metadata ?? "";
@@ -3138,8 +3206,7 @@ export const MsgVoteResponse = {
     return message;
   },
   fromJSON(_: any): MsgVoteResponse {
-    const obj = createBaseMsgVoteResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgVoteResponse): JsonSafe<MsgVoteResponse> {
     const obj: any = {};
@@ -3198,10 +3265,10 @@ function createBaseMsgExec(): MsgExec {
 export const MsgExec = {
   typeUrl: "/cosmos.group.v1.MsgExec",
   encode(message: MsgExec, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.proposalId !== undefined) {
+    if (message.proposalId !== BigInt(0)) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.signer !== undefined) {
+    if (message.signer !== "") {
       writer.uint32(18).string(message.signer);
     }
     return writer;
@@ -3227,10 +3294,10 @@ export const MsgExec = {
     return message;
   },
   fromJSON(object: any): MsgExec {
-    const obj = createBaseMsgExec();
-    if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    if (isSet(object.signer)) obj.signer = String(object.signer);
-    return obj;
+    return {
+      proposalId: isSet(object.proposalId) ? BigInt(object.proposalId.toString()) : BigInt(0),
+      signer: isSet(object.signer) ? String(object.signer) : ""
+    };
   },
   toJSON(message: MsgExec): JsonSafe<MsgExec> {
     const obj: any = {};
@@ -3240,9 +3307,7 @@ export const MsgExec = {
   },
   fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
-    if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = BigInt(object.proposalId.toString());
-    }
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
     message.signer = object.signer ?? "";
     return message;
   },
@@ -3325,8 +3390,7 @@ export const MsgExecResponse = {
     return message;
   },
   fromJSON(_: any): MsgExecResponse {
-    const obj = createBaseMsgExecResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgExecResponse): JsonSafe<MsgExecResponse> {
     const obj: any = {};
@@ -3385,10 +3449,10 @@ function createBaseMsgLeaveGroup(): MsgLeaveGroup {
 export const MsgLeaveGroup = {
   typeUrl: "/cosmos.group.v1.MsgLeaveGroup",
   encode(message: MsgLeaveGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== undefined) {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.groupId !== undefined) {
+    if (message.groupId !== BigInt(0)) {
       writer.uint32(16).uint64(message.groupId);
     }
     return writer;
@@ -3414,10 +3478,10 @@ export const MsgLeaveGroup = {
     return message;
   },
   fromJSON(object: any): MsgLeaveGroup {
-    const obj = createBaseMsgLeaveGroup();
-    if (isSet(object.address)) obj.address = String(object.address);
-    if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    return obj;
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      groupId: isSet(object.groupId) ? BigInt(object.groupId.toString()) : BigInt(0)
+    };
   },
   toJSON(message: MsgLeaveGroup): JsonSafe<MsgLeaveGroup> {
     const obj: any = {};
@@ -3428,9 +3492,7 @@ export const MsgLeaveGroup = {
   fromPartial(object: DeepPartial<MsgLeaveGroup>): MsgLeaveGroup {
     const message = createBaseMsgLeaveGroup();
     message.address = object.address ?? "";
-    if (object.groupId !== undefined && object.groupId !== null) {
-      message.groupId = BigInt(object.groupId.toString());
-    }
+    message.groupId = object.groupId !== undefined && object.groupId !== null ? BigInt(object.groupId.toString()) : BigInt(0);
     return message;
   },
   fromSDK(object: MsgLeaveGroupSDKType): MsgLeaveGroup {
@@ -3512,8 +3574,7 @@ export const MsgLeaveGroupResponse = {
     return message;
   },
   fromJSON(_: any): MsgLeaveGroupResponse {
-    const obj = createBaseMsgLeaveGroupResponse();
-    return obj;
+    return {};
   },
   toJSON(_: MsgLeaveGroupResponse): JsonSafe<MsgLeaveGroupResponse> {
     const obj: any = {};

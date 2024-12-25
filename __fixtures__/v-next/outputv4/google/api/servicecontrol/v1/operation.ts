@@ -1,10 +1,11 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp.js";
-import { MetricValueSet, MetricValueSetSDKType } from "./metric_value.js";
-import { LogEntry, LogEntrySDKType } from "./log_entry.js";
-import { Any, AnySDKType } from "../../../protobuf/any.js";
-import { BinaryReader, BinaryWriter } from "../../../../binary.js";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers.js";
-import { JsonSafe } from "../../../../json-safe.js";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
+import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
+import { LogEntry, LogEntrySDKType } from "./log_entry";
+import { Any, AnySDKType } from "../../../protobuf/any";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Defines the importance of the data contained in the operation. */
 export enum Operation_Importance {
@@ -50,6 +51,10 @@ export function operation_ImportanceToJSON(object: Operation_Importance): string
 export interface Operation_LabelsEntry {
   key: string;
   value: string;
+}
+export interface ReactiveOperation_LabelsEntry {
+  key: ComputedRef<string>;
+  value: ComputedRef<string>;
 }
 export interface Operation_LabelsEntryProtoMsg {
   typeUrl: string;
@@ -141,6 +146,20 @@ export interface Operation {
   /** Unimplemented. */
   extensions: Any[];
 }
+export interface ReactiveOperation {
+  operationId: ComputedRef<string>;
+  operationName: ComputedRef<string>;
+  consumerId: ComputedRef<string>;
+  startTime?: ComputedRef<Date>;
+  endTime?: ComputedRef<Date>;
+  labels: ComputedRef<{
+    [key: string]: string;
+  }>;
+  metricValueSets: ComputedRef<MetricValueSet[]>;
+  logEntries: ComputedRef<LogEntry[]>;
+  importance: ComputedRef<Operation_Importance>;
+  extensions: ComputedRef<Any[]>;
+}
 export interface OperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.Operation";
   value: Uint8Array;
@@ -168,10 +187,10 @@ function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
 }
 export const Operation_LabelsEntry = {
   encode(message: Operation_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== undefined) {
+    if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined) {
+    if (message.value !== "") {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -197,10 +216,10 @@ export const Operation_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): Operation_LabelsEntry {
-    const obj = createBaseOperation_LabelsEntry();
-    if (isSet(object.key)) obj.key = String(object.key);
-    if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
   },
   toJSON(message: Operation_LabelsEntry): JsonSafe<Operation_LabelsEntry> {
     const obj: any = {};
@@ -275,13 +294,13 @@ function createBaseOperation(): Operation {
 export const Operation = {
   typeUrl: "/google.api.servicecontrol.v1.Operation",
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== undefined) {
+    if (message.operationId !== "") {
       writer.uint32(10).string(message.operationId);
     }
-    if (message.operationName !== undefined) {
+    if (message.operationName !== "") {
       writer.uint32(18).string(message.operationName);
     }
-    if (message.consumerId !== undefined) {
+    if (message.consumerId !== "") {
       writer.uint32(26).string(message.consumerId);
     }
     if (message.startTime !== undefined) {
@@ -358,23 +377,23 @@ export const Operation = {
     return message;
   },
   fromJSON(object: any): Operation {
-    const obj = createBaseOperation();
-    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
-    if (isSet(object.operationName)) obj.operationName = String(object.operationName);
-    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
-    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
-    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
-      [key: string]: string;
-    }>((acc, [key, value]) => {
-      acc[key] = String(value);
-      return acc;
-    }, {});
-    if (Array.isArray(object?.metricValueSets)) obj.metricValueSets = object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e));
-    if (Array.isArray(object?.logEntries)) obj.logEntries = object.logEntries.map((e: any) => LogEntry.fromJSON(e));
-    if (isSet(object.importance)) obj.importance = operation_ImportanceFromJSON(object.importance);
-    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
-    return obj;
+    return {
+      operationId: isSet(object.operationId) ? String(object.operationId) : "",
+      operationName: isSet(object.operationName) ? String(object.operationName) : "",
+      consumerId: isSet(object.consumerId) ? String(object.consumerId) : "",
+      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
+      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metricValueSets: Array.isArray(object?.metricValueSets) ? object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e)) : [],
+      logEntries: Array.isArray(object?.logEntries) ? object.logEntries.map((e: any) => LogEntry.fromJSON(e)) : [],
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
+    };
   },
   toJSON(message: Operation): JsonSafe<Operation> {
     const obj: any = {};
