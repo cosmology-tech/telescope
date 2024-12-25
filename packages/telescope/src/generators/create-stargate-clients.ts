@@ -19,16 +19,6 @@ export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
-
-    if (!bundler.registries || !bundler.registries.length) {
-        return;
-    }
-
-    const registryImports = [];
-    const converterImports = [];
-    const clientFile = join(`${bundler.bundle.base}`, 'client.ts');
-    bundler.files.push(clientFile);
-
     const ctxRef: ProtoRef = {
         absolute: '/',
         filename: '/',
@@ -38,7 +28,20 @@ export const plugin = (
             root: {},
         }
     };
+
     const ctx = new GenericParseContext(ctxRef, null, builder.options);
+
+    const stargateClientsEnabled = ctx.pluginValue("stargateClients.enabled");
+
+    if ( !stargateClientsEnabled || !bundler.registries || !bundler.registries.length) {
+        return;
+    }
+
+    const registryImports = [];
+    const converterImports = [];
+    const clientFile = join(`${bundler.bundle.base}`, 'client.ts');
+    bundler.files.push(clientFile);
+
 
     const registryVariables = [];
     const converterVariables = [];

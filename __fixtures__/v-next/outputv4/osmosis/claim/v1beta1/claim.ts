@@ -1,8 +1,7 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.claim.v1beta1";
 export enum Action {
   ActionAddLiquidity = 0,
@@ -59,11 +58,6 @@ export interface ClaimRecord {
    */
   actionCompleted: boolean[];
 }
-export interface ReactiveClaimRecord {
-  address: ComputedRef<string>;
-  initialClaimableAmount: ComputedRef<Coin[]>;
-  actionCompleted: ComputedRef<boolean[]>;
-}
 export interface ClaimRecordProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";
   value: Uint8Array;
@@ -84,7 +78,7 @@ function createBaseClaimRecord(): ClaimRecord {
 export const ClaimRecord = {
   typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
   encode(message: ClaimRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.initialClaimableAmount) {
@@ -128,11 +122,11 @@ export const ClaimRecord = {
     return message;
   },
   fromJSON(object: any): ClaimRecord {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      initialClaimableAmount: Array.isArray(object?.initialClaimableAmount) ? object.initialClaimableAmount.map((e: any) => Coin.fromJSON(e)) : [],
-      actionCompleted: Array.isArray(object?.actionCompleted) ? object.actionCompleted.map((e: any) => Boolean(e)) : []
-    };
+    const obj = createBaseClaimRecord();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (Array.isArray(object?.initialClaimableAmount)) obj.initialClaimableAmount = object.initialClaimableAmount.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.actionCompleted)) obj.actionCompleted = object.actionCompleted.map((e: any) => Boolean(e));
+    return obj;
   },
   toJSON(message: ClaimRecord): JsonSafe<ClaimRecord> {
     const obj: any = {};

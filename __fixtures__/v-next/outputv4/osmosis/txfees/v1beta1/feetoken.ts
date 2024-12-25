@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -12,10 +11,6 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface FeeToken {
   denom: string;
   poolID: bigint;
-}
-export interface ReactiveFeeToken {
-  denom: ComputedRef<string>;
-  poolID: ComputedRef<bigint>;
 }
 export interface FeeTokenProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.FeeToken";
@@ -40,10 +35,10 @@ function createBaseFeeToken(): FeeToken {
 export const FeeToken = {
   typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
   encode(message: FeeToken, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
-    if (message.poolID !== BigInt(0)) {
+    if (message.poolID !== undefined) {
       writer.uint32(16).uint64(message.poolID);
     }
     return writer;
@@ -69,10 +64,10 @@ export const FeeToken = {
     return message;
   },
   fromJSON(object: any): FeeToken {
-    return {
-      denom: isSet(object.denom) ? String(object.denom) : "",
-      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
-    };
+    const obj = createBaseFeeToken();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    return obj;
   },
   toJSON(message: FeeToken): JsonSafe<FeeToken> {
     const obj: any = {};
@@ -83,7 +78,9 @@ export const FeeToken = {
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     return message;
   },
   fromSDK(object: FeeTokenSDKType): FeeToken {

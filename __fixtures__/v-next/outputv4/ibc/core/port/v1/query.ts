@@ -1,8 +1,7 @@
-import { Order, OrderSDKType, Counterparty, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { Order, OrderSDKType, Counterparty, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "ibc.core.port.v1";
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequest {
@@ -16,13 +15,6 @@ export interface QueryAppVersionRequest {
   counterparty?: Counterparty;
   /** proposed version */
   proposedVersion: string;
-}
-export interface ReactiveQueryAppVersionRequest {
-  portId: ComputedRef<string>;
-  connectionId: ComputedRef<string>;
-  ordering: ComputedRef<Order>;
-  counterparty?: ComputedRef<Counterparty>;
-  proposedVersion: ComputedRef<string>;
 }
 export interface QueryAppVersionRequestProtoMsg {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest";
@@ -42,10 +34,6 @@ export interface QueryAppVersionResponse {
   portId: string;
   /** supported app version */
   version: string;
-}
-export interface ReactiveQueryAppVersionResponse {
-  portId: ComputedRef<string>;
-  version: ComputedRef<string>;
 }
 export interface QueryAppVersionResponseProtoMsg {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse";
@@ -68,10 +56,10 @@ function createBaseQueryAppVersionRequest(): QueryAppVersionRequest {
 export const QueryAppVersionRequest = {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionRequest",
   encode(message: QueryAppVersionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.connectionId !== "") {
+    if (message.connectionId !== undefined) {
       writer.uint32(18).string(message.connectionId);
     }
     if (message.ordering !== 0) {
@@ -80,7 +68,7 @@ export const QueryAppVersionRequest = {
     if (message.counterparty !== undefined) {
       Counterparty.encode(message.counterparty, writer.uint32(34).fork()).ldelim();
     }
-    if (message.proposedVersion !== "") {
+    if (message.proposedVersion !== undefined) {
       writer.uint32(42).string(message.proposedVersion);
     }
     return writer;
@@ -115,13 +103,13 @@ export const QueryAppVersionRequest = {
     return message;
   },
   fromJSON(object: any): QueryAppVersionRequest {
-    return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      connectionId: isSet(object.connectionId) ? String(object.connectionId) : "",
-      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
-      counterparty: isSet(object.counterparty) ? Counterparty.fromJSON(object.counterparty) : undefined,
-      proposedVersion: isSet(object.proposedVersion) ? String(object.proposedVersion) : ""
-    };
+    const obj = createBaseQueryAppVersionRequest();
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
+    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
+    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
+    if (isSet(object.proposedVersion)) obj.proposedVersion = String(object.proposedVersion);
+    return obj;
   },
   toJSON(message: QueryAppVersionRequest): JsonSafe<QueryAppVersionRequest> {
     const obj: any = {};
@@ -137,7 +125,9 @@ export const QueryAppVersionRequest = {
     message.portId = object.portId ?? "";
     message.connectionId = object.connectionId ?? "";
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromPartial(object.counterparty);
+    }
     message.proposedVersion = object.proposedVersion ?? "";
     return message;
   },
@@ -227,10 +217,10 @@ function createBaseQueryAppVersionResponse(): QueryAppVersionResponse {
 export const QueryAppVersionResponse = {
   typeUrl: "/ibc.core.port.v1.QueryAppVersionResponse",
   encode(message: QueryAppVersionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(18).string(message.version);
     }
     return writer;
@@ -256,10 +246,10 @@ export const QueryAppVersionResponse = {
     return message;
   },
   fromJSON(object: any): QueryAppVersionResponse {
-    return {
-      portId: isSet(object.portId) ? String(object.portId) : "",
-      version: isSet(object.version) ? String(object.version) : ""
-    };
+    const obj = createBaseQueryAppVersionResponse();
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.version)) obj.version = String(object.version);
+    return obj;
   },
   toJSON(message: QueryAppVersionResponse): JsonSafe<QueryAppVersionResponse> {
     const obj: any = {};

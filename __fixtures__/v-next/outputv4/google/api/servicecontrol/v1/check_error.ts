@@ -1,8 +1,7 @@
-import { Status, StatusSDKType } from "../../../rpc/status";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { Status, StatusSDKType } from "../../../rpc/status.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -217,12 +216,6 @@ export interface CheckError {
    */
   status?: Status;
 }
-export interface ReactiveCheckError {
-  code: ComputedRef<CheckError_Code>;
-  subject: ComputedRef<string>;
-  detail: ComputedRef<string>;
-  status?: ComputedRef<Status>;
-}
 export interface CheckErrorProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckError";
   value: Uint8Array;
@@ -251,10 +244,10 @@ export const CheckError = {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(34).string(message.subject);
     }
-    if (message.detail !== "") {
+    if (message.detail !== undefined) {
       writer.uint32(18).string(message.detail);
     }
     if (message.status !== undefined) {
@@ -289,12 +282,12 @@ export const CheckError = {
     return message;
   },
   fromJSON(object: any): CheckError {
-    return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      detail: isSet(object.detail) ? String(object.detail) : "",
-      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
-    };
+    const obj = createBaseCheckError();
+    if (isSet(object.code)) obj.code = checkError_CodeFromJSON(object.code);
+    if (isSet(object.subject)) obj.subject = String(object.subject);
+    if (isSet(object.detail)) obj.detail = String(object.detail);
+    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
+    return obj;
   },
   toJSON(message: CheckError): JsonSafe<CheckError> {
     const obj: any = {};
@@ -309,7 +302,9 @@ export const CheckError = {
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.detail = object.detail ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromPartial(object.status);
+    }
     return message;
   },
   fromSDK(object: CheckErrorSDKType): CheckError {

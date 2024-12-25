@@ -1,8 +1,7 @@
-import { TokenPair, TokenPairSDKType } from "./erc20";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { TokenPair, TokenPairSDKType } from "./erc20.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.erc20.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -10,10 +9,6 @@ export interface GenesisState {
   params: Params;
   /** registered token pairs */
   tokenPairs: TokenPair[];
-}
-export interface ReactiveGenesisState {
-  params: ComputedRef<Params>;
-  tokenPairs: ComputedRef<TokenPair[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.erc20.v1.GenesisState";
@@ -34,10 +29,6 @@ export interface Params {
    * ModuleAddress Ethereum address.
    */
   enableEvmHook: boolean;
-}
-export interface ReactiveParams {
-  enableErc20: ComputedRef<boolean>;
-  enableEvmHook: ComputedRef<boolean>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.erc20.v1.Params";
@@ -86,10 +77,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      tokenPairs: Array.isArray(object?.tokenPairs) ? object.tokenPairs.map((e: any) => TokenPair.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.tokenPairs)) obj.tokenPairs = object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -103,7 +94,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
     return message;
   },
@@ -172,10 +165,10 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.erc20.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableErc20 === true) {
+    if (message.enableErc20 !== undefined) {
       writer.uint32(8).bool(message.enableErc20);
     }
-    if (message.enableEvmHook === true) {
+    if (message.enableEvmHook !== undefined) {
       writer.uint32(16).bool(message.enableEvmHook);
     }
     return writer;
@@ -201,10 +194,10 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      enableErc20: isSet(object.enableErc20) ? Boolean(object.enableErc20) : false,
-      enableEvmHook: isSet(object.enableEvmHook) ? Boolean(object.enableEvmHook) : false
-    };
+    const obj = createBaseParams();
+    if (isSet(object.enableErc20)) obj.enableErc20 = Boolean(object.enableErc20);
+    if (isSet(object.enableEvmHook)) obj.enableEvmHook = Boolean(object.enableEvmHook);
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};

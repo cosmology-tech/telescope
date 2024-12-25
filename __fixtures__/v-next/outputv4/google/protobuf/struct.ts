@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, isObject } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.protobuf";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
@@ -39,10 +38,6 @@ export interface Struct_FieldsEntry {
   key: string;
   value?: Value;
 }
-export interface ReactiveStruct_FieldsEntry {
-  key: ComputedRef<string>;
-  value?: ComputedRef<Value>;
-}
 export interface Struct_FieldsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
@@ -66,11 +61,6 @@ export interface Struct {
   fields: {
     [key: string]: Value;
   };
-}
-export interface ReactiveStruct {
-  fields: ComputedRef<{
-    [key: string]: Value;
-  }>;
 }
 export interface StructProtoMsg {
   typeUrl: "/google.protobuf.Struct";
@@ -113,14 +103,6 @@ export interface Value {
   /** Represents a repeated `Value`. */
   listValue?: ListValue;
 }
-export interface ReactiveValue {
-  nullValue?: ComputedRef<NullValue>;
-  numberValue?: ComputedRef<number>;
-  stringValue?: ComputedRef<string>;
-  boolValue?: ComputedRef<boolean>;
-  structValue?: ComputedRef<Struct>;
-  listValue?: ComputedRef<ListValue>;
-}
 export interface ValueProtoMsg {
   typeUrl: "/google.protobuf.Value";
   value: Uint8Array;
@@ -150,9 +132,6 @@ export interface ListValue {
   /** Repeated field of dynamically typed values. */
   values: Value[];
 }
-export interface ReactiveListValue {
-  values: ComputedRef<Value[]>;
-}
 export interface ListValueProtoMsg {
   typeUrl: "/google.protobuf.ListValue";
   value: Uint8Array;
@@ -173,7 +152,7 @@ function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
 }
 export const Struct_FieldsEntry = {
   encode(message: Struct_FieldsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
@@ -202,10 +181,10 @@ export const Struct_FieldsEntry = {
     return message;
   },
   fromJSON(object: any): Struct_FieldsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseStruct_FieldsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: Struct_FieldsEntry): JsonSafe<Struct_FieldsEntry> {
     const obj: any = {};
@@ -216,7 +195,9 @@ export const Struct_FieldsEntry = {
   fromPartial(object: DeepPartial<Struct_FieldsEntry>): Struct_FieldsEntry {
     const message = createBaseStruct_FieldsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: Struct_FieldsEntrySDKType): Struct_FieldsEntry {
@@ -300,14 +281,14 @@ export const Struct = {
     return message;
   },
   fromJSON(object: any): Struct {
-    return {
-      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
-        [key: string]: Value;
-      }>((acc, [key, value]) => {
-        acc[key] = Value.fromJSON(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseStruct();
+    if (isObject(object.fields)) obj.fields = Object.entries(object.fields).reduce<{
+      [key: string]: Value;
+    }>((acc, [key, value]) => {
+      acc[key] = Value.fromJSON(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: Struct): JsonSafe<Struct> {
     const obj: any = {};
@@ -465,14 +446,14 @@ export const Value = {
     return message;
   },
   fromJSON(object: any): Value {
-    return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
-      numberValue: isSet(object.numberValue) ? Number(object.numberValue) : undefined,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      structValue: isSet(object.structValue) ? Struct.fromJSON(object.structValue) : undefined,
-      listValue: isSet(object.listValue) ? ListValue.fromJSON(object.listValue) : undefined
-    };
+    const obj = createBaseValue();
+    if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
+    if (isSet(object.numberValue)) obj.numberValue = Number(object.numberValue);
+    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
+    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
+    if (isSet(object.structValue)) obj.structValue = Struct.fromJSON(object.structValue);
+    if (isSet(object.listValue)) obj.listValue = ListValue.fromJSON(object.listValue);
+    return obj;
   },
   toJSON(message: Value): JsonSafe<Value> {
     const obj: any = {};
@@ -490,8 +471,12 @@ export const Value = {
     message.numberValue = object.numberValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.structValue = object.structValue !== undefined && object.structValue !== null ? Struct.fromPartial(object.structValue) : undefined;
-    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
+    if (object.structValue !== undefined && object.structValue !== null) {
+      message.structValue = Struct.fromPartial(object.structValue);
+    }
+    if (object.listValue !== undefined && object.listValue !== null) {
+      message.listValue = ListValue.fromPartial(object.listValue);
+    }
     return message;
   },
   fromSDK(object: ValueSDKType): Value {
@@ -603,9 +588,9 @@ export const ListValue = {
     return message;
   },
   fromJSON(object: any): ListValue {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromJSON(e)) : []
-    };
+    const obj = createBaseListValue();
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
+    return obj;
   },
   toJSON(message: ListValue): JsonSafe<ListValue> {
     const obj: any = {};

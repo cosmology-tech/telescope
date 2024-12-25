@@ -1,10 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { TokenPair, TokenPairSDKType } from "./erc20";
-import { Params, ParamsSDKType } from "./genesis";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { TokenPair, TokenPairSDKType } from "./erc20.js";
+import { Params, ParamsSDKType } from "./genesis.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.erc20.v1";
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -13,9 +12,6 @@ export const protobufPackage = "evmos.erc20.v1";
 export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface ReactiveQueryTokenPairsRequest {
-  pagination?: ComputedRef<PageRequest>;
 }
 export interface QueryTokenPairsRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest";
@@ -37,10 +33,6 @@ export interface QueryTokenPairsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface ReactiveQueryTokenPairsResponse {
-  tokenPairs: ComputedRef<TokenPair[]>;
-  pagination?: ComputedRef<PageResponse>;
-}
 export interface QueryTokenPairsResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse";
   value: Uint8Array;
@@ -61,9 +53,6 @@ export interface QueryTokenPairRequest {
    */
   token: string;
 }
-export interface ReactiveQueryTokenPairRequest {
-  token: ComputedRef<string>;
-}
 export interface QueryTokenPairRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest";
   value: Uint8Array;
@@ -79,9 +68,6 @@ export interface QueryTokenPairRequestSDKType {
 export interface QueryTokenPairResponse {
   tokenPair: TokenPair;
 }
-export interface ReactiveQueryTokenPairResponse {
-  tokenPair: ComputedRef<TokenPair>;
-}
 export interface QueryTokenPairResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse";
   value: Uint8Array;
@@ -95,7 +81,6 @@ export interface QueryTokenPairResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
-export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryParamsRequest";
   value: Uint8Array;
@@ -108,9 +93,6 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params: Params;
-}
-export interface ReactiveQueryParamsResponse {
-  params: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryParamsResponse";
@@ -154,9 +136,9 @@ export const QueryTokenPairsRequest = {
     return message;
   },
   fromJSON(object: any): QueryTokenPairsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryTokenPairsRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryTokenPairsRequest): JsonSafe<QueryTokenPairsRequest> {
     const obj: any = {};
@@ -165,7 +147,9 @@ export const QueryTokenPairsRequest = {
   },
   fromPartial(object: DeepPartial<QueryTokenPairsRequest>): QueryTokenPairsRequest {
     const message = createBaseQueryTokenPairsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryTokenPairsRequestSDKType): QueryTokenPairsRequest {
@@ -249,10 +233,10 @@ export const QueryTokenPairsResponse = {
     return message;
   },
   fromJSON(object: any): QueryTokenPairsResponse {
-    return {
-      tokenPairs: Array.isArray(object?.tokenPairs) ? object.tokenPairs.map((e: any) => TokenPair.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryTokenPairsResponse();
+    if (Array.isArray(object?.tokenPairs)) obj.tokenPairs = object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryTokenPairsResponse): JsonSafe<QueryTokenPairsResponse> {
     const obj: any = {};
@@ -267,7 +251,9 @@ export const QueryTokenPairsResponse = {
   fromPartial(object: DeepPartial<QueryTokenPairsResponse>): QueryTokenPairsResponse {
     const message = createBaseQueryTokenPairsResponse();
     message.tokenPairs = object.tokenPairs?.map(e => TokenPair.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryTokenPairsResponseSDKType): QueryTokenPairsResponse {
@@ -334,7 +320,7 @@ function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
 export const QueryTokenPairRequest = {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
   encode(message: QueryTokenPairRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.token !== "") {
+    if (message.token !== undefined) {
       writer.uint32(10).string(message.token);
     }
     return writer;
@@ -357,9 +343,9 @@ export const QueryTokenPairRequest = {
     return message;
   },
   fromJSON(object: any): QueryTokenPairRequest {
-    return {
-      token: isSet(object.token) ? String(object.token) : ""
-    };
+    const obj = createBaseQueryTokenPairRequest();
+    if (isSet(object.token)) obj.token = String(object.token);
+    return obj;
   },
   toJSON(message: QueryTokenPairRequest): JsonSafe<QueryTokenPairRequest> {
     const obj: any = {};
@@ -445,9 +431,9 @@ export const QueryTokenPairResponse = {
     return message;
   },
   fromJSON(object: any): QueryTokenPairResponse {
-    return {
-      tokenPair: isSet(object.tokenPair) ? TokenPair.fromJSON(object.tokenPair) : undefined
-    };
+    const obj = createBaseQueryTokenPairResponse();
+    if (isSet(object.tokenPair)) obj.tokenPair = TokenPair.fromJSON(object.tokenPair);
+    return obj;
   },
   toJSON(message: QueryTokenPairResponse): JsonSafe<QueryTokenPairResponse> {
     const obj: any = {};
@@ -456,7 +442,9 @@ export const QueryTokenPairResponse = {
   },
   fromPartial(object: DeepPartial<QueryTokenPairResponse>): QueryTokenPairResponse {
     const message = createBaseQueryTokenPairResponse();
-    message.tokenPair = object.tokenPair !== undefined && object.tokenPair !== null ? TokenPair.fromPartial(object.tokenPair) : undefined;
+    if (object.tokenPair !== undefined && object.tokenPair !== null) {
+      message.tokenPair = TokenPair.fromPartial(object.tokenPair);
+    }
     return message;
   },
   fromSDK(object: QueryTokenPairResponseSDKType): QueryTokenPairResponse {
@@ -525,7 +513,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    const obj = createBaseQueryParamsRequest();
+    return obj;
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -600,9 +589,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -611,7 +600,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {

@@ -1,8 +1,7 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /**
  * AuthorizationType defines the type of staking module authorization type
@@ -77,12 +76,6 @@ export interface StakeAuthorization {
   /** authorization_type defines one of AuthorizationType. */
   authorizationType: AuthorizationType;
 }
-export interface ReactiveStakeAuthorization {
-  maxTokens?: ComputedRef<Coin>;
-  allowList?: ComputedRef<StakeAuthorization_Validators>;
-  denyList?: ComputedRef<StakeAuthorization_Validators>;
-  authorizationType: ComputedRef<AuthorizationType>;
-}
 export interface StakeAuthorizationProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization";
   value: Uint8Array;
@@ -101,9 +94,6 @@ export interface StakeAuthorizationSDKType {
 /** Validators defines list of validator addresses. */
 export interface StakeAuthorization_Validators {
   address: string[];
-}
-export interface ReactiveStakeAuthorization_Validators {
-  address: ComputedRef<string[]>;
 }
 export interface StakeAuthorization_ValidatorsProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.Validators";
@@ -165,12 +155,12 @@ export const StakeAuthorization = {
     return message;
   },
   fromJSON(object: any): StakeAuthorization {
-    return {
-      maxTokens: isSet(object.maxTokens) ? Coin.fromJSON(object.maxTokens) : undefined,
-      allowList: isSet(object.allowList) ? StakeAuthorization_Validators.fromJSON(object.allowList) : undefined,
-      denyList: isSet(object.denyList) ? StakeAuthorization_Validators.fromJSON(object.denyList) : undefined,
-      authorizationType: isSet(object.authorizationType) ? authorizationTypeFromJSON(object.authorizationType) : -1
-    };
+    const obj = createBaseStakeAuthorization();
+    if (isSet(object.maxTokens)) obj.maxTokens = Coin.fromJSON(object.maxTokens);
+    if (isSet(object.allowList)) obj.allowList = StakeAuthorization_Validators.fromJSON(object.allowList);
+    if (isSet(object.denyList)) obj.denyList = StakeAuthorization_Validators.fromJSON(object.denyList);
+    if (isSet(object.authorizationType)) obj.authorizationType = authorizationTypeFromJSON(object.authorizationType);
+    return obj;
   },
   toJSON(message: StakeAuthorization): JsonSafe<StakeAuthorization> {
     const obj: any = {};
@@ -182,9 +172,15 @@ export const StakeAuthorization = {
   },
   fromPartial(object: DeepPartial<StakeAuthorization>): StakeAuthorization {
     const message = createBaseStakeAuthorization();
-    message.maxTokens = object.maxTokens !== undefined && object.maxTokens !== null ? Coin.fromPartial(object.maxTokens) : undefined;
-    message.allowList = object.allowList !== undefined && object.allowList !== null ? StakeAuthorization_Validators.fromPartial(object.allowList) : undefined;
-    message.denyList = object.denyList !== undefined && object.denyList !== null ? StakeAuthorization_Validators.fromPartial(object.denyList) : undefined;
+    if (object.maxTokens !== undefined && object.maxTokens !== null) {
+      message.maxTokens = Coin.fromPartial(object.maxTokens);
+    }
+    if (object.allowList !== undefined && object.allowList !== null) {
+      message.allowList = StakeAuthorization_Validators.fromPartial(object.allowList);
+    }
+    if (object.denyList !== undefined && object.denyList !== null) {
+      message.denyList = StakeAuthorization_Validators.fromPartial(object.denyList);
+    }
     message.authorizationType = object.authorizationType ?? 0;
     return message;
   },
@@ -289,9 +285,9 @@ export const StakeAuthorization_Validators = {
     return message;
   },
   fromJSON(object: any): StakeAuthorization_Validators {
-    return {
-      address: Array.isArray(object?.address) ? object.address.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseStakeAuthorization_Validators();
+    if (Array.isArray(object?.address)) obj.address = object.address.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: StakeAuthorization_Validators): JsonSafe<StakeAuthorization_Validators> {
     const obj: any = {};

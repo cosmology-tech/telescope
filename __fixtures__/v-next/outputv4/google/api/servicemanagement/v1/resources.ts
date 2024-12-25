@@ -1,9 +1,8 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
-import { ConfigChange, ConfigChangeSDKType } from "../../config_change";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp.js";
+import { ConfigChange, ConfigChangeSDKType } from "../../config_change.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
@@ -267,10 +266,6 @@ export interface ManagedService {
   /** ID of the project that produces and owns this service. */
   producerProjectId: string;
 }
-export interface ReactiveManagedService {
-  serviceName: ComputedRef<string>;
-  producerProjectId: ComputedRef<string>;
-}
 export interface ManagedServiceProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ManagedService";
   value: Uint8Array;
@@ -297,12 +292,6 @@ export interface OperationMetadata {
   /** The start time of the operation. */
   startTime?: Date;
 }
-export interface ReactiveOperationMetadata {
-  resourceNames: ComputedRef<string[]>;
-  steps: ComputedRef<OperationMetadata_Step[]>;
-  progressPercentage: ComputedRef<number>;
-  startTime?: ComputedRef<Date>;
-}
 export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.OperationMetadata";
   value: Uint8Array;
@@ -321,10 +310,6 @@ export interface OperationMetadata_Step {
   /** The status code. */
   status: OperationMetadata_Status;
 }
-export interface ReactiveOperationMetadata_Step {
-  description: ComputedRef<string>;
-  status: ComputedRef<OperationMetadata_Status>;
-}
 export interface OperationMetadata_StepProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Step";
   value: Uint8Array;
@@ -342,11 +327,6 @@ export interface Diagnostic {
   kind: Diagnostic_Kind;
   /** Message describing the error or warning. */
   message: string;
-}
-export interface ReactiveDiagnostic {
-  location: ComputedRef<string>;
-  kind: ComputedRef<Diagnostic_Kind>;
-  message: ComputedRef<string>;
 }
 export interface DiagnosticProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Diagnostic";
@@ -375,10 +355,6 @@ export interface ConfigSource {
    */
   files: ConfigFile[];
 }
-export interface ReactiveConfigSource {
-  id: ComputedRef<string>;
-  files: ComputedRef<ConfigFile[]>;
-}
 export interface ConfigSourceProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigSource";
   value: Uint8Array;
@@ -400,11 +376,6 @@ export interface ConfigFile {
   /** The type of configuration file this represents. */
   fileType: ConfigFile_FileType;
 }
-export interface ReactiveConfigFile {
-  filePath: ComputedRef<string>;
-  fileContents: ComputedRef<Uint8Array>;
-  fileType: ComputedRef<ConfigFile_FileType>;
-}
 export interface ConfigFileProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigFile";
   value: Uint8Array;
@@ -422,9 +393,6 @@ export interface ConfigRef {
    * format: "services/{service name}/configs/{config id}".
    */
   name: string;
-}
-export interface ReactiveConfigRef {
-  name: ComputedRef<string>;
 }
 export interface ConfigRefProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ConfigRef";
@@ -449,9 +417,6 @@ export interface ChangeReport {
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   configChanges: ConfigChange[];
-}
-export interface ReactiveChangeReport {
-  configChanges: ComputedRef<ConfigChange[]>;
 }
 export interface ChangeReportProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ChangeReport";
@@ -506,15 +471,6 @@ export interface Rollout {
   /** The name of the service associated with this Rollout. */
   serviceName: string;
 }
-export interface ReactiveRollout {
-  rolloutId: ComputedRef<string>;
-  createTime?: ComputedRef<Date>;
-  createdBy: ComputedRef<string>;
-  status: ComputedRef<Rollout_RolloutStatus>;
-  trafficPercentStrategy?: ComputedRef<Rollout_TrafficPercentStrategy>;
-  deleteServiceStrategy?: ComputedRef<Rollout_DeleteServiceStrategy>;
-  serviceName: ComputedRef<string>;
-}
 export interface RolloutProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.Rollout";
   value: Uint8Array;
@@ -536,10 +492,6 @@ export interface RolloutSDKType {
 export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
   key: string;
   value: number;
-}
-export interface ReactiveRollout_TrafficPercentStrategy_PercentagesEntry {
-  key: ComputedRef<string>;
-  value: ComputedRef<number>;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg {
   typeUrl: string;
@@ -591,11 +543,6 @@ export interface Rollout_TrafficPercentStrategy {
     [key: string]: number;
   };
 }
-export interface ReactiveRollout_TrafficPercentStrategy {
-  percentages: ComputedRef<{
-    [key: string]: number;
-  }>;
-}
 export interface Rollout_TrafficPercentStrategyProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
   value: Uint8Array;
@@ -642,7 +589,6 @@ export interface Rollout_TrafficPercentStrategySDKType {
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategy {}
-export interface ReactiveRollout_DeleteServiceStrategy {}
 export interface Rollout_DeleteServiceStrategyProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
   value: Uint8Array;
@@ -661,10 +607,10 @@ function createBaseManagedService(): ManagedService {
 export const ManagedService = {
   typeUrl: "/google.api.servicemanagement.v1.ManagedService",
   encode(message: ManagedService, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(18).string(message.serviceName);
     }
-    if (message.producerProjectId !== "") {
+    if (message.producerProjectId !== undefined) {
       writer.uint32(26).string(message.producerProjectId);
     }
     return writer;
@@ -690,10 +636,10 @@ export const ManagedService = {
     return message;
   },
   fromJSON(object: any): ManagedService {
-    return {
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
-      producerProjectId: isSet(object.producerProjectId) ? String(object.producerProjectId) : ""
-    };
+    const obj = createBaseManagedService();
+    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
+    if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
+    return obj;
   },
   toJSON(message: ManagedService): JsonSafe<ManagedService> {
     const obj: any = {};
@@ -774,7 +720,7 @@ export const OperationMetadata = {
     for (const v of message.steps) {
       OperationMetadata_Step.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.progressPercentage !== 0) {
+    if (message.progressPercentage !== undefined) {
       writer.uint32(24).int32(message.progressPercentage);
     }
     if (message.startTime !== undefined) {
@@ -809,12 +755,12 @@ export const OperationMetadata = {
     return message;
   },
   fromJSON(object: any): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : [],
-      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e)) : [],
-      progressPercentage: isSet(object.progressPercentage) ? Number(object.progressPercentage) : 0,
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined
-    };
+    const obj = createBaseOperationMetadata();
+    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
+    if (Array.isArray(object?.steps)) obj.steps = object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e));
+    if (isSet(object.progressPercentage)) obj.progressPercentage = Number(object.progressPercentage);
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    return obj;
   },
   toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
     const obj: any = {};
@@ -925,7 +871,7 @@ function createBaseOperationMetadata_Step(): OperationMetadata_Step {
 export const OperationMetadata_Step = {
   typeUrl: "/google.api.servicemanagement.v1.Step",
   encode(message: OperationMetadata_Step, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     if (message.status !== 0) {
@@ -954,10 +900,10 @@ export const OperationMetadata_Step = {
     return message;
   },
   fromJSON(object: any): OperationMetadata_Step {
-    return {
-      description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
-    };
+    const obj = createBaseOperationMetadata_Step();
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.status)) obj.status = operationMetadata_StatusFromJSON(object.status);
+    return obj;
   },
   toJSON(message: OperationMetadata_Step): JsonSafe<OperationMetadata_Step> {
     const obj: any = {};
@@ -1031,13 +977,13 @@ function createBaseDiagnostic(): Diagnostic {
 export const Diagnostic = {
   typeUrl: "/google.api.servicemanagement.v1.Diagnostic",
   encode(message: Diagnostic, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(10).string(message.location);
     }
     if (message.kind !== 0) {
       writer.uint32(16).int32(message.kind);
     }
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(26).string(message.message);
     }
     return writer;
@@ -1066,11 +1012,11 @@ export const Diagnostic = {
     return message;
   },
   fromJSON(object: any): Diagnostic {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
-      message: isSet(object.message) ? String(object.message) : ""
-    };
+    const obj = createBaseDiagnostic();
+    if (isSet(object.location)) obj.location = String(object.location);
+    if (isSet(object.kind)) obj.kind = diagnostic_KindFromJSON(object.kind);
+    if (isSet(object.message)) obj.message = String(object.message);
+    return obj;
   },
   toJSON(message: Diagnostic): JsonSafe<Diagnostic> {
     const obj: any = {};
@@ -1152,7 +1098,7 @@ function createBaseConfigSource(): ConfigSource {
 export const ConfigSource = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigSource",
   encode(message: ConfigSource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(42).string(message.id);
     }
     for (const v of message.files) {
@@ -1181,10 +1127,10 @@ export const ConfigSource = {
     return message;
   },
   fromJSON(object: any): ConfigSource {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromJSON(e)) : []
-    };
+    const obj = createBaseConfigSource();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (Array.isArray(object?.files)) obj.files = object.files.map((e: any) => ConfigFile.fromJSON(e));
+    return obj;
   },
   toJSON(message: ConfigSource): JsonSafe<ConfigSource> {
     const obj: any = {};
@@ -1268,7 +1214,7 @@ function createBaseConfigFile(): ConfigFile {
 export const ConfigFile = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigFile",
   encode(message: ConfigFile, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.filePath !== "") {
+    if (message.filePath !== undefined) {
       writer.uint32(10).string(message.filePath);
     }
     if (message.fileContents.length !== 0) {
@@ -1303,11 +1249,11 @@ export const ConfigFile = {
     return message;
   },
   fromJSON(object: any): ConfigFile {
-    return {
-      filePath: isSet(object.filePath) ? String(object.filePath) : "",
-      fileContents: isSet(object.fileContents) ? bytesFromBase64(object.fileContents) : new Uint8Array(),
-      fileType: isSet(object.fileType) ? configFile_FileTypeFromJSON(object.fileType) : -1
-    };
+    const obj = createBaseConfigFile();
+    if (isSet(object.filePath)) obj.filePath = String(object.filePath);
+    if (isSet(object.fileContents)) obj.fileContents = bytesFromBase64(object.fileContents);
+    if (isSet(object.fileType)) obj.fileType = configFile_FileTypeFromJSON(object.fileType);
+    return obj;
   },
   toJSON(message: ConfigFile): JsonSafe<ConfigFile> {
     const obj: any = {};
@@ -1388,7 +1334,7 @@ function createBaseConfigRef(): ConfigRef {
 export const ConfigRef = {
   typeUrl: "/google.api.servicemanagement.v1.ConfigRef",
   encode(message: ConfigRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -1411,9 +1357,9 @@ export const ConfigRef = {
     return message;
   },
   fromJSON(object: any): ConfigRef {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseConfigRef();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: ConfigRef): JsonSafe<ConfigRef> {
     const obj: any = {};
@@ -1499,9 +1445,9 @@ export const ChangeReport = {
     return message;
   },
   fromJSON(object: any): ChangeReport {
-    return {
-      configChanges: Array.isArray(object?.configChanges) ? object.configChanges.map((e: any) => ConfigChange.fromJSON(e)) : []
-    };
+    const obj = createBaseChangeReport();
+    if (Array.isArray(object?.configChanges)) obj.configChanges = object.configChanges.map((e: any) => ConfigChange.fromJSON(e));
+    return obj;
   },
   toJSON(message: ChangeReport): JsonSafe<ChangeReport> {
     const obj: any = {};
@@ -1580,13 +1526,13 @@ function createBaseRollout(): Rollout {
 export const Rollout = {
   typeUrl: "/google.api.servicemanagement.v1.Rollout",
   encode(message: Rollout, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.rolloutId !== "") {
+    if (message.rolloutId !== undefined) {
       writer.uint32(10).string(message.rolloutId);
     }
     if (message.createTime !== undefined) {
       Timestamp.encode(toTimestamp(message.createTime), writer.uint32(18).fork()).ldelim();
     }
-    if (message.createdBy !== "") {
+    if (message.createdBy !== undefined) {
       writer.uint32(26).string(message.createdBy);
     }
     if (message.status !== 0) {
@@ -1598,7 +1544,7 @@ export const Rollout = {
     if (message.deleteServiceStrategy !== undefined) {
       Rollout_DeleteServiceStrategy.encode(message.deleteServiceStrategy, writer.uint32(1602).fork()).ldelim();
     }
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(66).string(message.serviceName);
     }
     return writer;
@@ -1639,15 +1585,15 @@ export const Rollout = {
     return message;
   },
   fromJSON(object: any): Rollout {
-    return {
-      rolloutId: isSet(object.rolloutId) ? String(object.rolloutId) : "",
-      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
-      createdBy: isSet(object.createdBy) ? String(object.createdBy) : "",
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
-      trafficPercentStrategy: isSet(object.trafficPercentStrategy) ? Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy) : undefined,
-      deleteServiceStrategy: isSet(object.deleteServiceStrategy) ? Rollout_DeleteServiceStrategy.fromJSON(object.deleteServiceStrategy) : undefined,
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : ""
-    };
+    const obj = createBaseRollout();
+    if (isSet(object.rolloutId)) obj.rolloutId = String(object.rolloutId);
+    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
+    if (isSet(object.createdBy)) obj.createdBy = String(object.createdBy);
+    if (isSet(object.status)) obj.status = rollout_RolloutStatusFromJSON(object.status);
+    if (isSet(object.trafficPercentStrategy)) obj.trafficPercentStrategy = Rollout_TrafficPercentStrategy.fromJSON(object.trafficPercentStrategy);
+    if (isSet(object.deleteServiceStrategy)) obj.deleteServiceStrategy = Rollout_DeleteServiceStrategy.fromJSON(object.deleteServiceStrategy);
+    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
+    return obj;
   },
   toJSON(message: Rollout): JsonSafe<Rollout> {
     const obj: any = {};
@@ -1666,8 +1612,12 @@ export const Rollout = {
     message.createTime = object.createTime ?? undefined;
     message.createdBy = object.createdBy ?? "";
     message.status = object.status ?? 0;
-    message.trafficPercentStrategy = object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null ? Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy) : undefined;
-    message.deleteServiceStrategy = object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null ? Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy) : undefined;
+    if (object.trafficPercentStrategy !== undefined && object.trafficPercentStrategy !== null) {
+      message.trafficPercentStrategy = Rollout_TrafficPercentStrategy.fromPartial(object.trafficPercentStrategy);
+    }
+    if (object.deleteServiceStrategy !== undefined && object.deleteServiceStrategy !== null) {
+      message.deleteServiceStrategy = Rollout_DeleteServiceStrategy.fromPartial(object.deleteServiceStrategy);
+    }
     message.serviceName = object.serviceName ?? "";
     return message;
   },
@@ -1764,10 +1714,10 @@ function createBaseRollout_TrafficPercentStrategy_PercentagesEntry(): Rollout_Tr
 }
 export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
   encode(message: Rollout_TrafficPercentStrategy_PercentagesEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(17).double(message.value);
     }
     return writer;
@@ -1793,10 +1743,10 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     return message;
   },
   fromJSON(object: any): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseRollout_TrafficPercentStrategy_PercentagesEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: Rollout_TrafficPercentStrategy_PercentagesEntry): JsonSafe<Rollout_TrafficPercentStrategy_PercentagesEntry> {
     const obj: any = {};
@@ -1891,14 +1841,14 @@ export const Rollout_TrafficPercentStrategy = {
     return message;
   },
   fromJSON(object: any): Rollout_TrafficPercentStrategy {
-    return {
-      percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
-        [key: string]: double;
-      }>((acc, [key, value]) => {
-        acc[key] = double.fromJSON(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseRollout_TrafficPercentStrategy();
+    if (isObject(object.percentages)) obj.percentages = Object.entries(object.percentages).reduce<{
+      [key: string]: double;
+    }>((acc, [key, value]) => {
+      acc[key] = double.fromJSON(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: Rollout_TrafficPercentStrategy): JsonSafe<Rollout_TrafficPercentStrategy> {
     const obj: any = {};
@@ -2013,7 +1963,8 @@ export const Rollout_DeleteServiceStrategy = {
     return message;
   },
   fromJSON(_: any): Rollout_DeleteServiceStrategy {
-    return {};
+    const obj = createBaseRollout_DeleteServiceStrategy();
+    return obj;
   },
   toJSON(_: Rollout_DeleteServiceStrategy): JsonSafe<Rollout_DeleteServiceStrategy> {
     const obj: any = {};

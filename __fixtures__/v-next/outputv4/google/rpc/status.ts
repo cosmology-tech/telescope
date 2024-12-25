@@ -1,8 +1,7 @@
-import { Any, AnySDKType } from "../protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { Any, AnySDKType } from "../protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.rpc";
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -27,11 +26,6 @@ export interface Status {
    * message types for APIs to use.
    */
   details: Any[];
-}
-export interface ReactiveStatus {
-  code: ComputedRef<number>;
-  message: ComputedRef<string>;
-  details: ComputedRef<Any[]>;
 }
 export interface StatusProtoMsg {
   typeUrl: "/google.rpc.Status";
@@ -61,10 +55,10 @@ function createBaseStatus(): Status {
 export const Status = {
   typeUrl: "/google.rpc.Status",
   encode(message: Status, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(18).string(message.message);
     }
     for (const v of message.details) {
@@ -96,11 +90,11 @@ export const Status = {
     return message;
   },
   fromJSON(object: any): Status {
-    return {
-      code: isSet(object.code) ? Number(object.code) : 0,
-      message: isSet(object.message) ? String(object.message) : "",
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromJSON(e)) : []
-    };
+    const obj = createBaseStatus();
+    if (isSet(object.code)) obj.code = Number(object.code);
+    if (isSet(object.message)) obj.message = String(object.message);
+    if (Array.isArray(object?.details)) obj.details = object.details.map((e: any) => Any.fromJSON(e));
+    return obj;
   },
   toJSON(message: Status): JsonSafe<Status> {
     const obj: any = {};

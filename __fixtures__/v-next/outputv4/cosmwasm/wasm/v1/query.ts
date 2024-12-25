@@ -1,10 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { ContractInfo, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntrySDKType, Model, ModelSDKType } from "./types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { ContractInfo, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntrySDKType, Model, ModelSDKType } from "./types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
-import { ComputedRef } from "vue";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
@@ -13,9 +12,6 @@ export const protobufPackage = "cosmwasm.wasm.v1";
 export interface QueryContractInfoRequest {
   /** address is the address of the contract to query */
   address: string;
-}
-export interface ReactiveQueryContractInfoRequest {
-  address: ComputedRef<string>;
 }
 export interface QueryContractInfoRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoRequest";
@@ -36,10 +32,6 @@ export interface QueryContractInfoResponse {
   /** address is the address of the contract */
   address: string;
   contractInfo: ContractInfo;
-}
-export interface ReactiveQueryContractInfoResponse {
-  address: ComputedRef<string>;
-  contractInfo: ComputedRef<ContractInfo>;
 }
 export interface QueryContractInfoResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoResponse";
@@ -63,10 +55,6 @@ export interface QueryContractHistoryRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface ReactiveQueryContractHistoryRequest {
-  address: ComputedRef<string>;
-  pagination?: ComputedRef<PageRequest>;
-}
 export interface QueryContractHistoryRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryRequest";
   value: Uint8Array;
@@ -87,10 +75,6 @@ export interface QueryContractHistoryResponse {
   entries: ContractCodeHistoryEntry[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
-}
-export interface ReactiveQueryContractHistoryResponse {
-  entries: ComputedRef<ContractCodeHistoryEntry[]>;
-  pagination?: ComputedRef<PageResponse>;
 }
 export interface QueryContractHistoryResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryResponse";
@@ -114,10 +98,6 @@ export interface QueryContractsByCodeRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface ReactiveQueryContractsByCodeRequest {
-  codeId: ComputedRef<bigint>;
-  pagination?: ComputedRef<PageRequest>;
-}
 export interface QueryContractsByCodeRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeRequest";
   value: Uint8Array;
@@ -139,10 +119,6 @@ export interface QueryContractsByCodeResponse {
   contracts: string[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
-}
-export interface ReactiveQueryContractsByCodeResponse {
-  contracts: ComputedRef<string[]>;
-  pagination?: ComputedRef<PageResponse>;
 }
 export interface QueryContractsByCodeResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeResponse";
@@ -166,10 +142,6 @@ export interface QueryAllContractStateRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface ReactiveQueryAllContractStateRequest {
-  address: ComputedRef<string>;
-  pagination?: ComputedRef<PageRequest>;
-}
 export interface QueryAllContractStateRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateRequest";
   value: Uint8Array;
@@ -190,10 +162,6 @@ export interface QueryAllContractStateResponse {
   models: Model[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
-}
-export interface ReactiveQueryAllContractStateResponse {
-  models: ComputedRef<Model[]>;
-  pagination?: ComputedRef<PageResponse>;
 }
 export interface QueryAllContractStateResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateResponse";
@@ -216,10 +184,6 @@ export interface QueryRawContractStateRequest {
   address: string;
   queryData: Uint8Array;
 }
-export interface ReactiveQueryRawContractStateRequest {
-  address: ComputedRef<string>;
-  queryData: ComputedRef<Uint8Array>;
-}
 export interface QueryRawContractStateRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest";
   value: Uint8Array;
@@ -239,9 +203,6 @@ export interface QueryRawContractStateRequestSDKType {
 export interface QueryRawContractStateResponse {
   /** Data contains the raw store data */
   data: Uint8Array;
-}
-export interface ReactiveQueryRawContractStateResponse {
-  data: ComputedRef<Uint8Array>;
 }
 export interface QueryRawContractStateResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateResponse";
@@ -264,10 +225,6 @@ export interface QuerySmartContractStateRequest {
   /** QueryData contains the query data passed to the contract */
   queryData: Uint8Array;
 }
-export interface ReactiveQuerySmartContractStateRequest {
-  address: ComputedRef<string>;
-  queryData: ComputedRef<Uint8Array>;
-}
 export interface QuerySmartContractStateRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateRequest";
   value: Uint8Array;
@@ -288,9 +245,6 @@ export interface QuerySmartContractStateResponse {
   /** Data contains the json data returned from the smart contract */
   data: Uint8Array;
 }
-export interface ReactiveQuerySmartContractStateResponse {
-  data: ComputedRef<Uint8Array>;
-}
 export interface QuerySmartContractStateResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateResponse";
   value: Uint8Array;
@@ -307,9 +261,6 @@ export interface QueryCodeRequest {
   /** grpc-gateway_out does not support Go style CodID */
   codeId: bigint;
 }
-export interface ReactiveQueryCodeRequest {
-  codeId: ComputedRef<bigint>;
-}
 export interface QueryCodeRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodeRequest";
   value: Uint8Array;
@@ -323,11 +274,6 @@ export interface CodeInfoResponse {
   codeId: bigint;
   creator: string;
   dataHash: Uint8Array;
-}
-export interface ReactiveCodeInfoResponse {
-  codeId: ComputedRef<bigint>;
-  creator: ComputedRef<string>;
-  dataHash: ComputedRef<Uint8Array>;
 }
 export interface CodeInfoResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.CodeInfoResponse";
@@ -344,10 +290,6 @@ export interface QueryCodeResponse {
   codeInfo?: CodeInfoResponse;
   data: Uint8Array;
 }
-export interface ReactiveQueryCodeResponse {
-  codeInfo?: ComputedRef<CodeInfoResponse>;
-  data: ComputedRef<Uint8Array>;
-}
 export interface QueryCodeResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodeResponse";
   value: Uint8Array;
@@ -362,9 +304,6 @@ export interface QueryCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
-export interface ReactiveQueryCodesRequest {
-  pagination?: ComputedRef<PageRequest>;
-}
 export interface QueryCodesRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodesRequest";
   value: Uint8Array;
@@ -378,10 +317,6 @@ export interface QueryCodesResponse {
   codeInfos: CodeInfoResponse[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
-}
-export interface ReactiveQueryCodesResponse {
-  codeInfos: ComputedRef<CodeInfoResponse[]>;
-  pagination?: ComputedRef<PageResponse>;
 }
 export interface QueryCodesResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodesResponse";
@@ -399,9 +334,6 @@ export interface QueryCodesResponseSDKType {
 export interface QueryPinnedCodesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface ReactiveQueryPinnedCodesRequest {
-  pagination?: ComputedRef<PageRequest>;
 }
 export interface QueryPinnedCodesRequestProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesRequest";
@@ -423,10 +355,6 @@ export interface QueryPinnedCodesResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface ReactiveQueryPinnedCodesResponse {
-  codeIds: ComputedRef<bigint[]>;
-  pagination?: ComputedRef<PageResponse>;
-}
 export interface QueryPinnedCodesResponseProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesResponse";
   value: Uint8Array;
@@ -447,7 +375,7 @@ function createBaseQueryContractInfoRequest(): QueryContractInfoRequest {
 export const QueryContractInfoRequest = {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoRequest",
   encode(message: QueryContractInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -470,9 +398,9 @@ export const QueryContractInfoRequest = {
     return message;
   },
   fromJSON(object: any): QueryContractInfoRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : ""
-    };
+    const obj = createBaseQueryContractInfoRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
   },
   toJSON(message: QueryContractInfoRequest): JsonSafe<QueryContractInfoRequest> {
     const obj: any = {};
@@ -542,7 +470,7 @@ function createBaseQueryContractInfoResponse(): QueryContractInfoResponse {
 export const QueryContractInfoResponse = {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractInfoResponse",
   encode(message: QueryContractInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.contractInfo !== undefined) {
@@ -571,10 +499,10 @@ export const QueryContractInfoResponse = {
     return message;
   },
   fromJSON(object: any): QueryContractInfoResponse {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      contractInfo: isSet(object.contractInfo) ? ContractInfo.fromJSON(object.contractInfo) : undefined
-    };
+    const obj = createBaseQueryContractInfoResponse();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.contractInfo)) obj.contractInfo = ContractInfo.fromJSON(object.contractInfo);
+    return obj;
   },
   toJSON(message: QueryContractInfoResponse): JsonSafe<QueryContractInfoResponse> {
     const obj: any = {};
@@ -585,7 +513,9 @@ export const QueryContractInfoResponse = {
   fromPartial(object: DeepPartial<QueryContractInfoResponse>): QueryContractInfoResponse {
     const message = createBaseQueryContractInfoResponse();
     message.address = object.address ?? "";
-    message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : undefined;
+    if (object.contractInfo !== undefined && object.contractInfo !== null) {
+      message.contractInfo = ContractInfo.fromPartial(object.contractInfo);
+    }
     return message;
   },
   fromSDK(object: QueryContractInfoResponseSDKType): QueryContractInfoResponse {
@@ -653,7 +583,7 @@ function createBaseQueryContractHistoryRequest(): QueryContractHistoryRequest {
 export const QueryContractHistoryRequest = {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractHistoryRequest",
   encode(message: QueryContractHistoryRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.pagination !== undefined) {
@@ -682,10 +612,10 @@ export const QueryContractHistoryRequest = {
     return message;
   },
   fromJSON(object: any): QueryContractHistoryRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryContractHistoryRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryContractHistoryRequest): JsonSafe<QueryContractHistoryRequest> {
     const obj: any = {};
@@ -696,7 +626,9 @@ export const QueryContractHistoryRequest = {
   fromPartial(object: DeepPartial<QueryContractHistoryRequest>): QueryContractHistoryRequest {
     const message = createBaseQueryContractHistoryRequest();
     message.address = object.address ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryContractHistoryRequestSDKType): QueryContractHistoryRequest {
@@ -793,10 +725,10 @@ export const QueryContractHistoryResponse = {
     return message;
   },
   fromJSON(object: any): QueryContractHistoryResponse {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => ContractCodeHistoryEntry.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryContractHistoryResponse();
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => ContractCodeHistoryEntry.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryContractHistoryResponse): JsonSafe<QueryContractHistoryResponse> {
     const obj: any = {};
@@ -811,7 +743,9 @@ export const QueryContractHistoryResponse = {
   fromPartial(object: DeepPartial<QueryContractHistoryResponse>): QueryContractHistoryResponse {
     const message = createBaseQueryContractHistoryResponse();
     message.entries = object.entries?.map(e => ContractCodeHistoryEntry.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryContractHistoryResponseSDKType): QueryContractHistoryResponse {
@@ -885,7 +819,7 @@ function createBaseQueryContractsByCodeRequest(): QueryContractsByCodeRequest {
 export const QueryContractsByCodeRequest = {
   typeUrl: "/cosmwasm.wasm.v1.QueryContractsByCodeRequest",
   encode(message: QueryContractsByCodeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.codeId !== BigInt(0)) {
+    if (message.codeId !== undefined) {
       writer.uint32(8).uint64(message.codeId);
     }
     if (message.pagination !== undefined) {
@@ -914,10 +848,10 @@ export const QueryContractsByCodeRequest = {
     return message;
   },
   fromJSON(object: any): QueryContractsByCodeRequest {
-    return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryContractsByCodeRequest();
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryContractsByCodeRequest): JsonSafe<QueryContractsByCodeRequest> {
     const obj: any = {};
@@ -927,8 +861,12 @@ export const QueryContractsByCodeRequest = {
   },
   fromPartial(object: DeepPartial<QueryContractsByCodeRequest>): QueryContractsByCodeRequest {
     const message = createBaseQueryContractsByCodeRequest();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryContractsByCodeRequestSDKType): QueryContractsByCodeRequest {
@@ -1025,10 +963,10 @@ export const QueryContractsByCodeResponse = {
     return message;
   },
   fromJSON(object: any): QueryContractsByCodeResponse {
-    return {
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => String(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryContractsByCodeResponse();
+    if (Array.isArray(object?.contracts)) obj.contracts = object.contracts.map((e: any) => String(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryContractsByCodeResponse): JsonSafe<QueryContractsByCodeResponse> {
     const obj: any = {};
@@ -1043,7 +981,9 @@ export const QueryContractsByCodeResponse = {
   fromPartial(object: DeepPartial<QueryContractsByCodeResponse>): QueryContractsByCodeResponse {
     const message = createBaseQueryContractsByCodeResponse();
     message.contracts = object.contracts?.map(e => e) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryContractsByCodeResponseSDKType): QueryContractsByCodeResponse {
@@ -1117,7 +1057,7 @@ function createBaseQueryAllContractStateRequest(): QueryAllContractStateRequest 
 export const QueryAllContractStateRequest = {
   typeUrl: "/cosmwasm.wasm.v1.QueryAllContractStateRequest",
   encode(message: QueryAllContractStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.pagination !== undefined) {
@@ -1146,10 +1086,10 @@ export const QueryAllContractStateRequest = {
     return message;
   },
   fromJSON(object: any): QueryAllContractStateRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAllContractStateRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAllContractStateRequest): JsonSafe<QueryAllContractStateRequest> {
     const obj: any = {};
@@ -1160,7 +1100,9 @@ export const QueryAllContractStateRequest = {
   fromPartial(object: DeepPartial<QueryAllContractStateRequest>): QueryAllContractStateRequest {
     const message = createBaseQueryAllContractStateRequest();
     message.address = object.address ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryAllContractStateRequestSDKType): QueryAllContractStateRequest {
@@ -1257,10 +1199,10 @@ export const QueryAllContractStateResponse = {
     return message;
   },
   fromJSON(object: any): QueryAllContractStateResponse {
-    return {
-      models: Array.isArray(object?.models) ? object.models.map((e: any) => Model.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryAllContractStateResponse();
+    if (Array.isArray(object?.models)) obj.models = object.models.map((e: any) => Model.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryAllContractStateResponse): JsonSafe<QueryAllContractStateResponse> {
     const obj: any = {};
@@ -1275,7 +1217,9 @@ export const QueryAllContractStateResponse = {
   fromPartial(object: DeepPartial<QueryAllContractStateResponse>): QueryAllContractStateResponse {
     const message = createBaseQueryAllContractStateResponse();
     message.models = object.models?.map(e => Model.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryAllContractStateResponseSDKType): QueryAllContractStateResponse {
@@ -1349,7 +1293,7 @@ function createBaseQueryRawContractStateRequest(): QueryRawContractStateRequest 
 export const QueryRawContractStateRequest = {
   typeUrl: "/cosmwasm.wasm.v1.QueryRawContractStateRequest",
   encode(message: QueryRawContractStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.queryData.length !== 0) {
@@ -1378,10 +1322,10 @@ export const QueryRawContractStateRequest = {
     return message;
   },
   fromJSON(object: any): QueryRawContractStateRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
-    };
+    const obj = createBaseQueryRawContractStateRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.queryData)) obj.queryData = bytesFromBase64(object.queryData);
+    return obj;
   },
   toJSON(message: QueryRawContractStateRequest): JsonSafe<QueryRawContractStateRequest> {
     const obj: any = {};
@@ -1482,9 +1426,9 @@ export const QueryRawContractStateResponse = {
     return message;
   },
   fromJSON(object: any): QueryRawContractStateResponse {
-    return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
+    const obj = createBaseQueryRawContractStateResponse();
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    return obj;
   },
   toJSON(message: QueryRawContractStateResponse): JsonSafe<QueryRawContractStateResponse> {
     const obj: any = {};
@@ -1554,7 +1498,7 @@ function createBaseQuerySmartContractStateRequest(): QuerySmartContractStateRequ
 export const QuerySmartContractStateRequest = {
   typeUrl: "/cosmwasm.wasm.v1.QuerySmartContractStateRequest",
   encode(message: QuerySmartContractStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.queryData.length !== 0) {
@@ -1583,10 +1527,10 @@ export const QuerySmartContractStateRequest = {
     return message;
   },
   fromJSON(object: any): QuerySmartContractStateRequest {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
-    };
+    const obj = createBaseQuerySmartContractStateRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.queryData)) obj.queryData = bytesFromBase64(object.queryData);
+    return obj;
   },
   toJSON(message: QuerySmartContractStateRequest): JsonSafe<QuerySmartContractStateRequest> {
     const obj: any = {};
@@ -1687,9 +1631,9 @@ export const QuerySmartContractStateResponse = {
     return message;
   },
   fromJSON(object: any): QuerySmartContractStateResponse {
-    return {
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
+    const obj = createBaseQuerySmartContractStateResponse();
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    return obj;
   },
   toJSON(message: QuerySmartContractStateResponse): JsonSafe<QuerySmartContractStateResponse> {
     const obj: any = {};
@@ -1758,7 +1702,7 @@ function createBaseQueryCodeRequest(): QueryCodeRequest {
 export const QueryCodeRequest = {
   typeUrl: "/cosmwasm.wasm.v1.QueryCodeRequest",
   encode(message: QueryCodeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.codeId !== BigInt(0)) {
+    if (message.codeId !== undefined) {
       writer.uint32(8).uint64(message.codeId);
     }
     return writer;
@@ -1781,9 +1725,9 @@ export const QueryCodeRequest = {
     return message;
   },
   fromJSON(object: any): QueryCodeRequest {
-    return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryCodeRequest();
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    return obj;
   },
   toJSON(message: QueryCodeRequest): JsonSafe<QueryCodeRequest> {
     const obj: any = {};
@@ -1792,7 +1736,9 @@ export const QueryCodeRequest = {
   },
   fromPartial(object: DeepPartial<QueryCodeRequest>): QueryCodeRequest {
     const message = createBaseQueryCodeRequest();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryCodeRequestSDKType): QueryCodeRequest {
@@ -1854,10 +1800,10 @@ function createBaseCodeInfoResponse(): CodeInfoResponse {
 export const CodeInfoResponse = {
   typeUrl: "/cosmwasm.wasm.v1.CodeInfoResponse",
   encode(message: CodeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.codeId !== BigInt(0)) {
+    if (message.codeId !== undefined) {
       writer.uint32(8).uint64(message.codeId);
     }
-    if (message.creator !== "") {
+    if (message.creator !== undefined) {
       writer.uint32(18).string(message.creator);
     }
     if (message.dataHash.length !== 0) {
@@ -1889,11 +1835,11 @@ export const CodeInfoResponse = {
     return message;
   },
   fromJSON(object: any): CodeInfoResponse {
-    return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
-      creator: isSet(object.creator) ? String(object.creator) : "",
-      dataHash: isSet(object.dataHash) ? bytesFromBase64(object.dataHash) : new Uint8Array()
-    };
+    const obj = createBaseCodeInfoResponse();
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.creator)) obj.creator = String(object.creator);
+    if (isSet(object.dataHash)) obj.dataHash = bytesFromBase64(object.dataHash);
+    return obj;
   },
   toJSON(message: CodeInfoResponse): JsonSafe<CodeInfoResponse> {
     const obj: any = {};
@@ -1904,7 +1850,9 @@ export const CodeInfoResponse = {
   },
   fromPartial(object: DeepPartial<CodeInfoResponse>): CodeInfoResponse {
     const message = createBaseCodeInfoResponse();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
     message.creator = object.creator ?? "";
     message.dataHash = object.dataHash ?? new Uint8Array();
     return message;
@@ -2010,10 +1958,10 @@ export const QueryCodeResponse = {
     return message;
   },
   fromJSON(object: any): QueryCodeResponse {
-    return {
-      codeInfo: isSet(object.codeInfo) ? CodeInfoResponse.fromJSON(object.codeInfo) : undefined,
-      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
-    };
+    const obj = createBaseQueryCodeResponse();
+    if (isSet(object.codeInfo)) obj.codeInfo = CodeInfoResponse.fromJSON(object.codeInfo);
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    return obj;
   },
   toJSON(message: QueryCodeResponse): JsonSafe<QueryCodeResponse> {
     const obj: any = {};
@@ -2023,7 +1971,9 @@ export const QueryCodeResponse = {
   },
   fromPartial(object: DeepPartial<QueryCodeResponse>): QueryCodeResponse {
     const message = createBaseQueryCodeResponse();
-    message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfoResponse.fromPartial(object.codeInfo) : undefined;
+    if (object.codeInfo !== undefined && object.codeInfo !== null) {
+      message.codeInfo = CodeInfoResponse.fromPartial(object.codeInfo);
+    }
     message.data = object.data ?? new Uint8Array();
     return message;
   },
@@ -2114,9 +2064,9 @@ export const QueryCodesRequest = {
     return message;
   },
   fromJSON(object: any): QueryCodesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryCodesRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryCodesRequest): JsonSafe<QueryCodesRequest> {
     const obj: any = {};
@@ -2125,7 +2075,9 @@ export const QueryCodesRequest = {
   },
   fromPartial(object: DeepPartial<QueryCodesRequest>): QueryCodesRequest {
     const message = createBaseQueryCodesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryCodesRequestSDKType): QueryCodesRequest {
@@ -2215,10 +2167,10 @@ export const QueryCodesResponse = {
     return message;
   },
   fromJSON(object: any): QueryCodesResponse {
-    return {
-      codeInfos: Array.isArray(object?.codeInfos) ? object.codeInfos.map((e: any) => CodeInfoResponse.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryCodesResponse();
+    if (Array.isArray(object?.codeInfos)) obj.codeInfos = object.codeInfos.map((e: any) => CodeInfoResponse.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryCodesResponse): JsonSafe<QueryCodesResponse> {
     const obj: any = {};
@@ -2233,7 +2185,9 @@ export const QueryCodesResponse = {
   fromPartial(object: DeepPartial<QueryCodesResponse>): QueryCodesResponse {
     const message = createBaseQueryCodesResponse();
     message.codeInfos = object.codeInfos?.map(e => CodeInfoResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryCodesResponseSDKType): QueryCodesResponse {
@@ -2329,9 +2283,9 @@ export const QueryPinnedCodesRequest = {
     return message;
   },
   fromJSON(object: any): QueryPinnedCodesRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryPinnedCodesRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryPinnedCodesRequest): JsonSafe<QueryPinnedCodesRequest> {
     const obj: any = {};
@@ -2340,7 +2294,9 @@ export const QueryPinnedCodesRequest = {
   },
   fromPartial(object: DeepPartial<QueryPinnedCodesRequest>): QueryPinnedCodesRequest {
     const message = createBaseQueryPinnedCodesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPinnedCodesRequestSDKType): QueryPinnedCodesRequest {
@@ -2439,10 +2395,10 @@ export const QueryPinnedCodesResponse = {
     return message;
   },
   fromJSON(object: any): QueryPinnedCodesResponse {
-    return {
-      codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryPinnedCodesResponse();
+    if (Array.isArray(object?.codeIds)) obj.codeIds = object.codeIds.map((e: any) => BigInt(e.toString()));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryPinnedCodesResponse): JsonSafe<QueryPinnedCodesResponse> {
     const obj: any = {};
@@ -2457,7 +2413,9 @@ export const QueryPinnedCodesResponse = {
   fromPartial(object: DeepPartial<QueryPinnedCodesResponse>): QueryPinnedCodesResponse {
     const message = createBaseQueryPinnedCodesResponse();
     message.codeIds = object.codeIds?.map(e => BigInt(e.toString())) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPinnedCodesResponseSDKType): QueryPinnedCodesResponse {

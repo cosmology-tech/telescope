@@ -1,10 +1,9 @@
-import { ClaimsRecordAddress, ClaimsRecordAddressSDKType } from "./claims";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { ClaimsRecordAddress, ClaimsRecordAddressSDKType } from "./claims.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.claims.v1";
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisState {
@@ -12,10 +11,6 @@ export interface GenesisState {
   params: Params;
   /** list of claim records with the corresponding airdrop recipient */
   claimsRecords: ClaimsRecordAddress[];
-}
-export interface ReactiveGenesisState {
-  params: ComputedRef<Params>;
-  claimsRecords: ComputedRef<ClaimsRecordAddress[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.claims.v1.GenesisState";
@@ -45,15 +40,6 @@ export interface Params {
   authorizedChannels: string[];
   /** list of channel identifiers from EVM compatible chains */
   evmChannels: string[];
-}
-export interface ReactiveParams {
-  enableClaims: ComputedRef<boolean>;
-  airdropStartTime: ComputedRef<Date>;
-  durationUntilDecay: ComputedRef<Duration>;
-  durationOfDecay: ComputedRef<Duration>;
-  claimsDenom: ComputedRef<string>;
-  authorizedChannels: ComputedRef<string[]>;
-  evmChannels: ComputedRef<string[]>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.claims.v1.Params";
@@ -107,10 +93,10 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      claimsRecords: Array.isArray(object?.claimsRecords) ? object.claimsRecords.map((e: any) => ClaimsRecordAddress.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.claimsRecords)) obj.claimsRecords = object.claimsRecords.map((e: any) => ClaimsRecordAddress.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -124,7 +110,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.claimsRecords = object.claimsRecords?.map(e => ClaimsRecordAddress.fromPartial(e)) || [];
     return message;
   },
@@ -198,7 +186,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.claims.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableClaims === true) {
+    if (message.enableClaims !== undefined) {
       writer.uint32(8).bool(message.enableClaims);
     }
     if (message.airdropStartTime !== undefined) {
@@ -210,7 +198,7 @@ export const Params = {
     if (message.durationOfDecay !== undefined) {
       Duration.encode(message.durationOfDecay, writer.uint32(34).fork()).ldelim();
     }
-    if (message.claimsDenom !== "") {
+    if (message.claimsDenom !== undefined) {
       writer.uint32(42).string(message.claimsDenom);
     }
     for (const v of message.authorizedChannels) {
@@ -257,15 +245,15 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      enableClaims: isSet(object.enableClaims) ? Boolean(object.enableClaims) : false,
-      airdropStartTime: isSet(object.airdropStartTime) ? new Date(object.airdropStartTime) : undefined,
-      durationUntilDecay: isSet(object.durationUntilDecay) ? Duration.fromJSON(object.durationUntilDecay) : undefined,
-      durationOfDecay: isSet(object.durationOfDecay) ? Duration.fromJSON(object.durationOfDecay) : undefined,
-      claimsDenom: isSet(object.claimsDenom) ? String(object.claimsDenom) : "",
-      authorizedChannels: Array.isArray(object?.authorizedChannels) ? object.authorizedChannels.map((e: any) => String(e)) : [],
-      evmChannels: Array.isArray(object?.evmChannels) ? object.evmChannels.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseParams();
+    if (isSet(object.enableClaims)) obj.enableClaims = Boolean(object.enableClaims);
+    if (isSet(object.airdropStartTime)) obj.airdropStartTime = new Date(object.airdropStartTime);
+    if (isSet(object.durationUntilDecay)) obj.durationUntilDecay = Duration.fromJSON(object.durationUntilDecay);
+    if (isSet(object.durationOfDecay)) obj.durationOfDecay = Duration.fromJSON(object.durationOfDecay);
+    if (isSet(object.claimsDenom)) obj.claimsDenom = String(object.claimsDenom);
+    if (Array.isArray(object?.authorizedChannels)) obj.authorizedChannels = object.authorizedChannels.map((e: any) => String(e));
+    if (Array.isArray(object?.evmChannels)) obj.evmChannels = object.evmChannels.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
@@ -290,8 +278,12 @@ export const Params = {
     const message = createBaseParams();
     message.enableClaims = object.enableClaims ?? false;
     message.airdropStartTime = object.airdropStartTime ?? undefined;
-    message.durationUntilDecay = object.durationUntilDecay !== undefined && object.durationUntilDecay !== null ? Duration.fromPartial(object.durationUntilDecay) : undefined;
-    message.durationOfDecay = object.durationOfDecay !== undefined && object.durationOfDecay !== null ? Duration.fromPartial(object.durationOfDecay) : undefined;
+    if (object.durationUntilDecay !== undefined && object.durationUntilDecay !== null) {
+      message.durationUntilDecay = Duration.fromPartial(object.durationUntilDecay);
+    }
+    if (object.durationOfDecay !== undefined && object.durationOfDecay !== null) {
+      message.durationOfDecay = Duration.fromPartial(object.durationOfDecay);
+    }
     message.claimsDenom = object.claimsDenom ?? "";
     message.authorizedChannels = object.authorizedChannels?.map(e => e) || [];
     message.evmChannels = object.evmChannels?.map(e => e) || [];

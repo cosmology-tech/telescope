@@ -1,14 +1,10 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
   validatorAddr: string;
-}
-export interface ReactiveMsgUnjail {
-  validatorAddr: ComputedRef<string>;
 }
 export interface MsgUnjailProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail";
@@ -20,7 +16,6 @@ export interface MsgUnjailSDKType {
 }
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {}
-export interface ReactiveMsgUnjailResponse {}
 export interface MsgUnjailResponseProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse";
   value: Uint8Array;
@@ -35,7 +30,7 @@ function createBaseMsgUnjail(): MsgUnjail {
 export const MsgUnjail = {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
   encode(message: MsgUnjail, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
     }
     return writer;
@@ -58,9 +53,9 @@ export const MsgUnjail = {
     return message;
   },
   fromJSON(object: any): MsgUnjail {
-    return {
-      validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : ""
-    };
+    const obj = createBaseMsgUnjail();
+    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
+    return obj;
   },
   toJSON(message: MsgUnjail): JsonSafe<MsgUnjail> {
     const obj: any = {};
@@ -144,7 +139,8 @@ export const MsgUnjailResponse = {
     return message;
   },
   fromJSON(_: any): MsgUnjailResponse {
-    return {};
+    const obj = createBaseMsgUnjailResponse();
+    return obj;
   },
   toJSON(_: MsgUnjailResponse): JsonSafe<MsgUnjailResponse> {
     const obj: any = {};

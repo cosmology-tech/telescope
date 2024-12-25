@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
@@ -17,11 +16,6 @@ export interface DevFeeInfo {
    * it defaults to deployer_address
    */
   withdrawAddress: string;
-}
-export interface ReactiveDevFeeInfo {
-  contractAddress: ComputedRef<string>;
-  deployerAddress: ComputedRef<string>;
-  withdrawAddress: ComputedRef<string>;
 }
 export interface DevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.DevFeeInfo";
@@ -46,13 +40,13 @@ function createBaseDevFeeInfo(): DevFeeInfo {
 export const DevFeeInfo = {
   typeUrl: "/evmos.fees.v1.DevFeeInfo",
   encode(message: DevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
-    if (message.deployerAddress !== "") {
+    if (message.deployerAddress !== undefined) {
       writer.uint32(18).string(message.deployerAddress);
     }
-    if (message.withdrawAddress !== "") {
+    if (message.withdrawAddress !== undefined) {
       writer.uint32(26).string(message.withdrawAddress);
     }
     return writer;
@@ -81,11 +75,11 @@ export const DevFeeInfo = {
     return message;
   },
   fromJSON(object: any): DevFeeInfo {
-    return {
-      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
-      deployerAddress: isSet(object.deployerAddress) ? String(object.deployerAddress) : "",
-      withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : ""
-    };
+    const obj = createBaseDevFeeInfo();
+    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
+    if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
+    if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
+    return obj;
   },
   toJSON(message: DevFeeInfo): JsonSafe<DevFeeInfo> {
     const obj: any = {};

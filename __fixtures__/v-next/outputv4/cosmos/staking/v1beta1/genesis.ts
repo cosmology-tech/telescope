@@ -1,8 +1,7 @@
-import { Params, ParamsSDKType, Validator, ValidatorSDKType, Delegation, DelegationSDKType, UnbondingDelegation, UnbondingDelegationSDKType, Redelegation, RedelegationSDKType } from "./staking";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { Params, ParamsSDKType, Validator, ValidatorSDKType, Delegation, DelegationSDKType, UnbondingDelegation, UnbondingDelegationSDKType, Redelegation, RedelegationSDKType } from "./staking.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisState {
@@ -28,16 +27,6 @@ export interface GenesisState {
   redelegations: Redelegation[];
   exported: boolean;
 }
-export interface ReactiveGenesisState {
-  params: ComputedRef<Params>;
-  lastTotalPower: ComputedRef<Uint8Array>;
-  lastValidatorPowers: ComputedRef<LastValidatorPower[]>;
-  validators: ComputedRef<Validator[]>;
-  delegations: ComputedRef<Delegation[]>;
-  unbondingDelegations: ComputedRef<UnbondingDelegation[]>;
-  redelegations: ComputedRef<Redelegation[]>;
-  exported: ComputedRef<boolean>;
-}
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.GenesisState";
   value: Uint8Array;
@@ -59,10 +48,6 @@ export interface LastValidatorPower {
   address: string;
   /** power defines the power of the validator. */
   power: bigint;
-}
-export interface ReactiveLastValidatorPower {
-  address: ComputedRef<string>;
-  power: ComputedRef<bigint>;
 }
 export interface LastValidatorPowerProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.LastValidatorPower";
@@ -109,7 +94,7 @@ export const GenesisState = {
     for (const v of message.redelegations) {
       Redelegation.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.exported === true) {
+    if (message.exported !== undefined) {
       writer.uint32(64).bool(message.exported);
     }
     return writer;
@@ -153,16 +138,16 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      lastTotalPower: isSet(object.lastTotalPower) ? bytesFromBase64(object.lastTotalPower) : new Uint8Array(),
-      lastValidatorPowers: Array.isArray(object?.lastValidatorPowers) ? object.lastValidatorPowers.map((e: any) => LastValidatorPower.fromJSON(e)) : [],
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
-      delegations: Array.isArray(object?.delegations) ? object.delegations.map((e: any) => Delegation.fromJSON(e)) : [],
-      unbondingDelegations: Array.isArray(object?.unbondingDelegations) ? object.unbondingDelegations.map((e: any) => UnbondingDelegation.fromJSON(e)) : [],
-      redelegations: Array.isArray(object?.redelegations) ? object.redelegations.map((e: any) => Redelegation.fromJSON(e)) : [],
-      exported: isSet(object.exported) ? Boolean(object.exported) : false
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (isSet(object.lastTotalPower)) obj.lastTotalPower = bytesFromBase64(object.lastTotalPower);
+    if (Array.isArray(object?.lastValidatorPowers)) obj.lastValidatorPowers = object.lastValidatorPowers.map((e: any) => LastValidatorPower.fromJSON(e));
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
+    if (Array.isArray(object?.delegations)) obj.delegations = object.delegations.map((e: any) => Delegation.fromJSON(e));
+    if (Array.isArray(object?.unbondingDelegations)) obj.unbondingDelegations = object.unbondingDelegations.map((e: any) => UnbondingDelegation.fromJSON(e));
+    if (Array.isArray(object?.redelegations)) obj.redelegations = object.redelegations.map((e: any) => Redelegation.fromJSON(e));
+    if (isSet(object.exported)) obj.exported = Boolean(object.exported);
+    return obj;
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -198,7 +183,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.lastTotalPower = object.lastTotalPower ?? new Uint8Array();
     message.lastValidatorPowers = object.lastValidatorPowers?.map(e => LastValidatorPower.fromPartial(e)) || [];
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
@@ -345,10 +332,10 @@ function createBaseLastValidatorPower(): LastValidatorPower {
 export const LastValidatorPower = {
   typeUrl: "/cosmos.staking.v1beta1.LastValidatorPower",
   encode(message: LastValidatorPower, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.power !== BigInt(0)) {
+    if (message.power !== undefined) {
       writer.uint32(16).int64(message.power);
     }
     return writer;
@@ -374,10 +361,10 @@ export const LastValidatorPower = {
     return message;
   },
   fromJSON(object: any): LastValidatorPower {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
-    };
+    const obj = createBaseLastValidatorPower();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.power)) obj.power = BigInt(object.power.toString());
+    return obj;
   },
   toJSON(message: LastValidatorPower): JsonSafe<LastValidatorPower> {
     const obj: any = {};
@@ -388,7 +375,9 @@ export const LastValidatorPower = {
   fromPartial(object: DeepPartial<LastValidatorPower>): LastValidatorPower {
     const message = createBaseLastValidatorPower();
     message.address = object.address ?? "";
-    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power.toString());
+    }
     return message;
   },
   fromSDK(object: LastValidatorPowerSDKType): LastValidatorPower {

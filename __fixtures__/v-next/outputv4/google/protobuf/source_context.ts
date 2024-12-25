@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.protobuf";
 /**
  * `SourceContext` represents information about the source of a
@@ -13,9 +12,6 @@ export interface SourceContext {
    * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
    */
   fileName: string;
-}
-export interface ReactiveSourceContext {
-  fileName: ComputedRef<string>;
 }
 export interface SourceContextProtoMsg {
   typeUrl: "/google.protobuf.SourceContext";
@@ -36,7 +32,7 @@ function createBaseSourceContext(): SourceContext {
 export const SourceContext = {
   typeUrl: "/google.protobuf.SourceContext",
   encode(message: SourceContext, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fileName !== "") {
+    if (message.fileName !== undefined) {
       writer.uint32(10).string(message.fileName);
     }
     return writer;
@@ -59,9 +55,9 @@ export const SourceContext = {
     return message;
   },
   fromJSON(object: any): SourceContext {
-    return {
-      fileName: isSet(object.fileName) ? String(object.fileName) : ""
-    };
+    const obj = createBaseSourceContext();
+    if (isSet(object.fileName)) obj.fileName = String(object.fileName);
+    return obj;
   },
   toJSON(message: SourceContext): JsonSafe<SourceContext> {
     const obj: any = {};

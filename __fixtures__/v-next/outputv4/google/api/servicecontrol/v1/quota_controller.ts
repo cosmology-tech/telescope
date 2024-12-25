@@ -1,9 +1,8 @@
-import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
-import { Status, StatusSDKType } from "../../../rpc/status";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { MetricValueSet, MetricValueSetSDKType } from "./metric_value.js";
+import { Status, StatusSDKType } from "../../../rpc/status.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {
@@ -191,11 +190,6 @@ export interface AllocateQuotaRequest {
    */
   serviceConfigId: string;
 }
-export interface ReactiveAllocateQuotaRequest {
-  serviceName: ComputedRef<string>;
-  allocateOperation?: ComputedRef<QuotaOperation>;
-  serviceConfigId: ComputedRef<string>;
-}
 export interface AllocateQuotaRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
   value: Uint8Array;
@@ -209,10 +203,6 @@ export interface AllocateQuotaRequestSDKType {
 export interface QuotaOperation_LabelsEntry {
   key: string;
   value: string;
-}
-export interface ReactiveQuotaOperation_LabelsEntry {
-  key: ComputedRef<string>;
-  value: ComputedRef<string>;
 }
 export interface QuotaOperation_LabelsEntryProtoMsg {
   typeUrl: string;
@@ -281,16 +271,6 @@ export interface QuotaOperation {
   /** Quota mode for this operation. */
   quotaMode: QuotaOperation_QuotaMode;
 }
-export interface ReactiveQuotaOperation {
-  operationId: ComputedRef<string>;
-  methodName: ComputedRef<string>;
-  consumerId: ComputedRef<string>;
-  labels: ComputedRef<{
-    [key: string]: string;
-  }>;
-  quotaMetrics: ComputedRef<MetricValueSet[]>;
-  quotaMode: ComputedRef<QuotaOperation_QuotaMode>;
-}
 export interface QuotaOperationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.QuotaOperation";
   value: Uint8Array;
@@ -331,12 +311,6 @@ export interface AllocateQuotaResponse {
   /** ID of the actual config used to process the request. */
   serviceConfigId: string;
 }
-export interface ReactiveAllocateQuotaResponse {
-  operationId: ComputedRef<string>;
-  allocateErrors: ComputedRef<QuotaError[]>;
-  quotaMetrics: ComputedRef<MetricValueSet[]>;
-  serviceConfigId: ComputedRef<string>;
-}
 export interface AllocateQuotaResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
   value: Uint8Array;
@@ -366,12 +340,6 @@ export interface QuotaError {
    */
   status?: Status;
 }
-export interface ReactiveQuotaError {
-  code: ComputedRef<QuotaError_Code>;
-  subject: ComputedRef<string>;
-  description: ComputedRef<string>;
-  status?: ComputedRef<Status>;
-}
 export interface QuotaErrorProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.QuotaError";
   value: Uint8Array;
@@ -393,13 +361,13 @@ function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
 export const AllocateQuotaRequest = {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest",
   encode(message: AllocateQuotaRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceName !== "") {
+    if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
     }
     if (message.allocateOperation !== undefined) {
       QuotaOperation.encode(message.allocateOperation, writer.uint32(18).fork()).ldelim();
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(34).string(message.serviceConfigId);
     }
     return writer;
@@ -428,11 +396,11 @@ export const AllocateQuotaRequest = {
     return message;
   },
   fromJSON(object: any): AllocateQuotaRequest {
-    return {
-      serviceName: isSet(object.serviceName) ? String(object.serviceName) : "",
-      allocateOperation: isSet(object.allocateOperation) ? QuotaOperation.fromJSON(object.allocateOperation) : undefined,
-      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : ""
-    };
+    const obj = createBaseAllocateQuotaRequest();
+    if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
+    if (isSet(object.allocateOperation)) obj.allocateOperation = QuotaOperation.fromJSON(object.allocateOperation);
+    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
+    return obj;
   },
   toJSON(message: AllocateQuotaRequest): JsonSafe<AllocateQuotaRequest> {
     const obj: any = {};
@@ -444,7 +412,9 @@ export const AllocateQuotaRequest = {
   fromPartial(object: DeepPartial<AllocateQuotaRequest>): AllocateQuotaRequest {
     const message = createBaseAllocateQuotaRequest();
     message.serviceName = object.serviceName ?? "";
-    message.allocateOperation = object.allocateOperation !== undefined && object.allocateOperation !== null ? QuotaOperation.fromPartial(object.allocateOperation) : undefined;
+    if (object.allocateOperation !== undefined && object.allocateOperation !== null) {
+      message.allocateOperation = QuotaOperation.fromPartial(object.allocateOperation);
+    }
     message.serviceConfigId = object.serviceConfigId ?? "";
     return message;
   },
@@ -513,10 +483,10 @@ function createBaseQuotaOperation_LabelsEntry(): QuotaOperation_LabelsEntry {
 }
 export const QuotaOperation_LabelsEntry = {
   encode(message: QuotaOperation_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -542,10 +512,10 @@ export const QuotaOperation_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): QuotaOperation_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseQuotaOperation_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: QuotaOperation_LabelsEntry): JsonSafe<QuotaOperation_LabelsEntry> {
     const obj: any = {};
@@ -616,13 +586,13 @@ function createBaseQuotaOperation(): QuotaOperation {
 export const QuotaOperation = {
   typeUrl: "/google.api.servicecontrol.v1.QuotaOperation",
   encode(message: QuotaOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
-    if (message.methodName !== "") {
+    if (message.methodName !== undefined) {
       writer.uint32(18).string(message.methodName);
     }
-    if (message.consumerId !== "") {
+    if (message.consumerId !== undefined) {
       writer.uint32(26).string(message.consumerId);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -675,19 +645,19 @@ export const QuotaOperation = {
     return message;
   },
   fromJSON(object: any): QuotaOperation {
-    return {
-      operationId: isSet(object.operationId) ? String(object.operationId) : "",
-      methodName: isSet(object.methodName) ? String(object.methodName) : "",
-      consumerId: isSet(object.consumerId) ? String(object.consumerId) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      quotaMetrics: Array.isArray(object?.quotaMetrics) ? object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e)) : [],
-      quotaMode: isSet(object.quotaMode) ? quotaOperation_QuotaModeFromJSON(object.quotaMode) : -1
-    };
+    const obj = createBaseQuotaOperation();
+    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
+    if (isSet(object.methodName)) obj.methodName = String(object.methodName);
+    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (Array.isArray(object?.quotaMetrics)) obj.quotaMetrics = object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
+    if (isSet(object.quotaMode)) obj.quotaMode = quotaOperation_QuotaModeFromJSON(object.quotaMode);
+    return obj;
   },
   toJSON(message: QuotaOperation): JsonSafe<QuotaOperation> {
     const obj: any = {};
@@ -845,7 +815,7 @@ function createBaseAllocateQuotaResponse(): AllocateQuotaResponse {
 export const AllocateQuotaResponse = {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse",
   encode(message: AllocateQuotaResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
     for (const v of message.allocateErrors) {
@@ -854,7 +824,7 @@ export const AllocateQuotaResponse = {
     for (const v of message.quotaMetrics) {
       MetricValueSet.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.serviceConfigId !== "") {
+    if (message.serviceConfigId !== undefined) {
       writer.uint32(34).string(message.serviceConfigId);
     }
     return writer;
@@ -886,12 +856,12 @@ export const AllocateQuotaResponse = {
     return message;
   },
   fromJSON(object: any): AllocateQuotaResponse {
-    return {
-      operationId: isSet(object.operationId) ? String(object.operationId) : "",
-      allocateErrors: Array.isArray(object?.allocateErrors) ? object.allocateErrors.map((e: any) => QuotaError.fromJSON(e)) : [],
-      quotaMetrics: Array.isArray(object?.quotaMetrics) ? object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e)) : [],
-      serviceConfigId: isSet(object.serviceConfigId) ? String(object.serviceConfigId) : ""
-    };
+    const obj = createBaseAllocateQuotaResponse();
+    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
+    if (Array.isArray(object?.allocateErrors)) obj.allocateErrors = object.allocateErrors.map((e: any) => QuotaError.fromJSON(e));
+    if (Array.isArray(object?.quotaMetrics)) obj.quotaMetrics = object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
+    if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
+    return obj;
   },
   toJSON(message: AllocateQuotaResponse): JsonSafe<AllocateQuotaResponse> {
     const obj: any = {};
@@ -1007,10 +977,10 @@ export const QuotaError = {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(18).string(message.subject);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     if (message.status !== undefined) {
@@ -1045,12 +1015,12 @@ export const QuotaError = {
     return message;
   },
   fromJSON(object: any): QuotaError {
-    return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
-      subject: isSet(object.subject) ? String(object.subject) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      status: isSet(object.status) ? Status.fromJSON(object.status) : undefined
-    };
+    const obj = createBaseQuotaError();
+    if (isSet(object.code)) obj.code = quotaError_CodeFromJSON(object.code);
+    if (isSet(object.subject)) obj.subject = String(object.subject);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
+    return obj;
   },
   toJSON(message: QuotaError): JsonSafe<QuotaError> {
     const obj: any = {};
@@ -1065,7 +1035,9 @@ export const QuotaError = {
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.description = object.description ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromPartial(object.status);
+    }
     return message;
   },
   fromSDK(object: QuotaErrorSDKType): QuotaError {

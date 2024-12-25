@@ -1,8 +1,7 @@
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { Any, AnySDKType } from "../../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "ibc.core.client.v1";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
@@ -16,11 +15,6 @@ export interface MsgCreateClient {
   /** signer address */
   signer: string;
 }
-export interface ReactiveMsgCreateClient {
-  clientState?: ComputedRef<Any>;
-  consensusState?: ComputedRef<Any>;
-  signer: ComputedRef<string>;
-}
 export interface MsgCreateClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgCreateClient";
   value: Uint8Array;
@@ -33,7 +27,6 @@ export interface MsgCreateClientSDKType {
 }
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
 export interface MsgCreateClientResponse {}
-export interface ReactiveMsgCreateClientResponse {}
 export interface MsgCreateClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse";
   value: Uint8Array;
@@ -52,11 +45,6 @@ export interface MsgUpdateClient {
   /** signer address */
   signer: string;
 }
-export interface ReactiveMsgUpdateClient {
-  clientId: ComputedRef<string>;
-  header?: ComputedRef<Any>;
-  signer: ComputedRef<string>;
-}
 export interface MsgUpdateClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpdateClient";
   value: Uint8Array;
@@ -72,7 +60,6 @@ export interface MsgUpdateClientSDKType {
 }
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
 export interface MsgUpdateClientResponse {}
-export interface ReactiveMsgUpdateClientResponse {}
 export interface MsgUpdateClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse";
   value: Uint8Array;
@@ -100,14 +87,6 @@ export interface MsgUpgradeClient {
   /** signer address */
   signer: string;
 }
-export interface ReactiveMsgUpgradeClient {
-  clientId: ComputedRef<string>;
-  clientState?: ComputedRef<Any>;
-  consensusState?: ComputedRef<Any>;
-  proofUpgradeClient: ComputedRef<Uint8Array>;
-  proofUpgradeConsensusState: ComputedRef<Uint8Array>;
-  signer: ComputedRef<string>;
-}
 export interface MsgUpgradeClientProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpgradeClient";
   value: Uint8Array;
@@ -126,7 +105,6 @@ export interface MsgUpgradeClientSDKType {
 }
 /** MsgUpgradeClientResponse defines the Msg/UpgradeClient response type. */
 export interface MsgUpgradeClientResponse {}
-export interface ReactiveMsgUpgradeClientResponse {}
 export interface MsgUpgradeClientResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse";
   value: Uint8Array;
@@ -144,11 +122,6 @@ export interface MsgSubmitMisbehaviour {
   misbehaviour?: Any;
   /** signer address */
   signer: string;
-}
-export interface ReactiveMsgSubmitMisbehaviour {
-  clientId: ComputedRef<string>;
-  misbehaviour?: ComputedRef<Any>;
-  signer: ComputedRef<string>;
 }
 export interface MsgSubmitMisbehaviourProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour";
@@ -168,7 +141,6 @@ export interface MsgSubmitMisbehaviourSDKType {
  * type.
  */
 export interface MsgSubmitMisbehaviourResponse {}
-export interface ReactiveMsgSubmitMisbehaviourResponse {}
 export interface MsgSubmitMisbehaviourResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse";
   value: Uint8Array;
@@ -194,7 +166,7 @@ export const MsgCreateClient = {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(18).fork()).ldelim();
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       writer.uint32(26).string(message.signer);
     }
     return writer;
@@ -223,11 +195,11 @@ export const MsgCreateClient = {
     return message;
   },
   fromJSON(object: any): MsgCreateClient {
-    return {
-      clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
-      consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
+    const obj = createBaseMsgCreateClient();
+    if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
+    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
+    if (isSet(object.signer)) obj.signer = String(object.signer);
+    return obj;
   },
   toJSON(message: MsgCreateClient): JsonSafe<MsgCreateClient> {
     const obj: any = {};
@@ -238,8 +210,12 @@ export const MsgCreateClient = {
   },
   fromPartial(object: DeepPartial<MsgCreateClient>): MsgCreateClient {
     const message = createBaseMsgCreateClient();
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     message.signer = object.signer ?? "";
     return message;
   },
@@ -329,7 +305,8 @@ export const MsgCreateClientResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateClientResponse {
-    return {};
+    const obj = createBaseMsgCreateClientResponse();
+    return obj;
   },
   toJSON(_: MsgCreateClientResponse): JsonSafe<MsgCreateClientResponse> {
     const obj: any = {};
@@ -389,13 +366,13 @@ function createBaseMsgUpdateClient(): MsgUpdateClient {
 export const MsgUpdateClient = {
   typeUrl: "/ibc.core.client.v1.MsgUpdateClient",
   encode(message: MsgUpdateClient, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.header !== undefined) {
       Any.encode(message.header, writer.uint32(18).fork()).ldelim();
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       writer.uint32(26).string(message.signer);
     }
     return writer;
@@ -424,11 +401,11 @@ export const MsgUpdateClient = {
     return message;
   },
   fromJSON(object: any): MsgUpdateClient {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      header: isSet(object.header) ? Any.fromJSON(object.header) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
+    const obj = createBaseMsgUpdateClient();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (isSet(object.header)) obj.header = Any.fromJSON(object.header);
+    if (isSet(object.signer)) obj.signer = String(object.signer);
+    return obj;
   },
   toJSON(message: MsgUpdateClient): JsonSafe<MsgUpdateClient> {
     const obj: any = {};
@@ -440,7 +417,9 @@ export const MsgUpdateClient = {
   fromPartial(object: DeepPartial<MsgUpdateClient>): MsgUpdateClient {
     const message = createBaseMsgUpdateClient();
     message.clientId = object.clientId ?? "";
-    message.header = object.header !== undefined && object.header !== null ? Any.fromPartial(object.header) : undefined;
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Any.fromPartial(object.header);
+    }
     message.signer = object.signer ?? "";
     return message;
   },
@@ -530,7 +509,8 @@ export const MsgUpdateClientResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpdateClientResponse {
-    return {};
+    const obj = createBaseMsgUpdateClientResponse();
+    return obj;
   },
   toJSON(_: MsgUpdateClientResponse): JsonSafe<MsgUpdateClientResponse> {
     const obj: any = {};
@@ -593,7 +573,7 @@ function createBaseMsgUpgradeClient(): MsgUpgradeClient {
 export const MsgUpgradeClient = {
   typeUrl: "/ibc.core.client.v1.MsgUpgradeClient",
   encode(message: MsgUpgradeClient, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.clientState !== undefined) {
@@ -608,7 +588,7 @@ export const MsgUpgradeClient = {
     if (message.proofUpgradeConsensusState.length !== 0) {
       writer.uint32(42).bytes(message.proofUpgradeConsensusState);
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       writer.uint32(50).string(message.signer);
     }
     return writer;
@@ -646,14 +626,14 @@ export const MsgUpgradeClient = {
     return message;
   },
   fromJSON(object: any): MsgUpgradeClient {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined,
-      consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined,
-      proofUpgradeClient: isSet(object.proofUpgradeClient) ? bytesFromBase64(object.proofUpgradeClient) : new Uint8Array(),
-      proofUpgradeConsensusState: isSet(object.proofUpgradeConsensusState) ? bytesFromBase64(object.proofUpgradeConsensusState) : new Uint8Array(),
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
+    const obj = createBaseMsgUpgradeClient();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
+    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
+    if (isSet(object.proofUpgradeClient)) obj.proofUpgradeClient = bytesFromBase64(object.proofUpgradeClient);
+    if (isSet(object.proofUpgradeConsensusState)) obj.proofUpgradeConsensusState = bytesFromBase64(object.proofUpgradeConsensusState);
+    if (isSet(object.signer)) obj.signer = String(object.signer);
+    return obj;
   },
   toJSON(message: MsgUpgradeClient): JsonSafe<MsgUpgradeClient> {
     const obj: any = {};
@@ -668,8 +648,12 @@ export const MsgUpgradeClient = {
   fromPartial(object: DeepPartial<MsgUpgradeClient>): MsgUpgradeClient {
     const message = createBaseMsgUpgradeClient();
     message.clientId = object.clientId ?? "";
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     message.proofUpgradeClient = object.proofUpgradeClient ?? new Uint8Array();
     message.proofUpgradeConsensusState = object.proofUpgradeConsensusState ?? new Uint8Array();
     message.signer = object.signer ?? "";
@@ -782,7 +766,8 @@ export const MsgUpgradeClientResponse = {
     return message;
   },
   fromJSON(_: any): MsgUpgradeClientResponse {
-    return {};
+    const obj = createBaseMsgUpgradeClientResponse();
+    return obj;
   },
   toJSON(_: MsgUpgradeClientResponse): JsonSafe<MsgUpgradeClientResponse> {
     const obj: any = {};
@@ -842,13 +827,13 @@ function createBaseMsgSubmitMisbehaviour(): MsgSubmitMisbehaviour {
 export const MsgSubmitMisbehaviour = {
   typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour",
   encode(message: MsgSubmitMisbehaviour, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.misbehaviour !== undefined) {
       Any.encode(message.misbehaviour, writer.uint32(18).fork()).ldelim();
     }
-    if (message.signer !== "") {
+    if (message.signer !== undefined) {
       writer.uint32(26).string(message.signer);
     }
     return writer;
@@ -877,11 +862,11 @@ export const MsgSubmitMisbehaviour = {
     return message;
   },
   fromJSON(object: any): MsgSubmitMisbehaviour {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-      misbehaviour: isSet(object.misbehaviour) ? Any.fromJSON(object.misbehaviour) : undefined,
-      signer: isSet(object.signer) ? String(object.signer) : ""
-    };
+    const obj = createBaseMsgSubmitMisbehaviour();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (isSet(object.misbehaviour)) obj.misbehaviour = Any.fromJSON(object.misbehaviour);
+    if (isSet(object.signer)) obj.signer = String(object.signer);
+    return obj;
   },
   toJSON(message: MsgSubmitMisbehaviour): JsonSafe<MsgSubmitMisbehaviour> {
     const obj: any = {};
@@ -893,7 +878,9 @@ export const MsgSubmitMisbehaviour = {
   fromPartial(object: DeepPartial<MsgSubmitMisbehaviour>): MsgSubmitMisbehaviour {
     const message = createBaseMsgSubmitMisbehaviour();
     message.clientId = object.clientId ?? "";
-    message.misbehaviour = object.misbehaviour !== undefined && object.misbehaviour !== null ? Any.fromPartial(object.misbehaviour) : undefined;
+    if (object.misbehaviour !== undefined && object.misbehaviour !== null) {
+      message.misbehaviour = Any.fromPartial(object.misbehaviour);
+    }
     message.signer = object.signer ?? "";
     return message;
   },
@@ -983,7 +970,8 @@ export const MsgSubmitMisbehaviourResponse = {
     return message;
   },
   fromJSON(_: any): MsgSubmitMisbehaviourResponse {
-    return {};
+    const obj = createBaseMsgSubmitMisbehaviourResponse();
+    return obj;
   },
   toJSON(_: MsgSubmitMisbehaviourResponse): JsonSafe<MsgSubmitMisbehaviourResponse> {
     const obj: any = {};

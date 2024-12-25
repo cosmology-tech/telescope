@@ -1,8 +1,7 @@
-import { ParamChange, ParamChangeSDKType } from "./params";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { ParamChange, ParamChangeSDKType } from "./params.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -10,10 +9,6 @@ export interface QueryParamsRequest {
   subspace: string;
   /** key defines the key of the parameter in the subspace. */
   key: string;
-}
-export interface ReactiveQueryParamsRequest {
-  subspace: ComputedRef<string>;
-  key: ComputedRef<string>;
 }
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/cosmos.params.v1beta1.QueryParamsRequest";
@@ -29,9 +24,6 @@ export interface QueryParamsResponse {
   /** param defines the queried parameter. */
   param: ParamChange;
 }
-export interface ReactiveQueryParamsResponse {
-  param: ComputedRef<ParamChange>;
-}
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/cosmos.params.v1beta1.QueryParamsResponse";
   value: Uint8Array;
@@ -45,7 +37,6 @@ export interface QueryParamsResponseSDKType {
  * subspaces and all keys for a subspace.
  */
 export interface QuerySubspacesRequest {}
-export interface ReactiveQuerySubspacesRequest {}
 export interface QuerySubspacesRequestProtoMsg {
   typeUrl: "/cosmos.params.v1beta1.QuerySubspacesRequest";
   value: Uint8Array;
@@ -61,9 +52,6 @@ export interface QuerySubspacesRequestSDKType {}
  */
 export interface QuerySubspacesResponse {
   subspaces: Subspace[];
-}
-export interface ReactiveQuerySubspacesResponse {
-  subspaces: ComputedRef<Subspace[]>;
 }
 export interface QuerySubspacesResponseProtoMsg {
   typeUrl: "/cosmos.params.v1beta1.QuerySubspacesResponse";
@@ -83,10 +71,6 @@ export interface QuerySubspacesResponseSDKType {
 export interface Subspace {
   subspace: string;
   keys: string[];
-}
-export interface ReactiveSubspace {
-  subspace: ComputedRef<string>;
-  keys: ComputedRef<string[]>;
 }
 export interface SubspaceProtoMsg {
   typeUrl: "/cosmos.params.v1beta1.Subspace";
@@ -109,10 +93,10 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 export const QueryParamsRequest = {
   typeUrl: "/cosmos.params.v1beta1.QueryParamsRequest",
   encode(message: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subspace !== "") {
+    if (message.subspace !== undefined) {
       writer.uint32(10).string(message.subspace);
     }
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(18).string(message.key);
     }
     return writer;
@@ -138,10 +122,10 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(object: any): QueryParamsRequest {
-    return {
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
-      key: isSet(object.key) ? String(object.key) : ""
-    };
+    const obj = createBaseQueryParamsRequest();
+    if (isSet(object.subspace)) obj.subspace = String(object.subspace);
+    if (isSet(object.key)) obj.key = String(object.key);
+    return obj;
   },
   toJSON(message: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -242,9 +226,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      param: isSet(object.param) ? ParamChange.fromJSON(object.param) : undefined
-    };
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.param)) obj.param = ParamChange.fromJSON(object.param);
+    return obj;
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -253,7 +237,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : undefined;
+    if (object.param !== undefined && object.param !== null) {
+      message.param = ParamChange.fromPartial(object.param);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -328,7 +314,8 @@ export const QuerySubspacesRequest = {
     return message;
   },
   fromJSON(_: any): QuerySubspacesRequest {
-    return {};
+    const obj = createBaseQuerySubspacesRequest();
+    return obj;
   },
   toJSON(_: QuerySubspacesRequest): JsonSafe<QuerySubspacesRequest> {
     const obj: any = {};
@@ -409,9 +396,9 @@ export const QuerySubspacesResponse = {
     return message;
   },
   fromJSON(object: any): QuerySubspacesResponse {
-    return {
-      subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromJSON(e)) : []
-    };
+    const obj = createBaseQuerySubspacesResponse();
+    if (Array.isArray(object?.subspaces)) obj.subspaces = object.subspaces.map((e: any) => Subspace.fromJSON(e));
+    return obj;
   },
   toJSON(message: QuerySubspacesResponse): JsonSafe<QuerySubspacesResponse> {
     const obj: any = {};
@@ -491,7 +478,7 @@ function createBaseSubspace(): Subspace {
 export const Subspace = {
   typeUrl: "/cosmos.params.v1beta1.Subspace",
   encode(message: Subspace, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subspace !== "") {
+    if (message.subspace !== undefined) {
       writer.uint32(10).string(message.subspace);
     }
     for (const v of message.keys) {
@@ -520,10 +507,10 @@ export const Subspace = {
     return message;
   },
   fromJSON(object: any): Subspace {
-    return {
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
-      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseSubspace();
+    if (isSet(object.subspace)) obj.subspace = String(object.subspace);
+    if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Subspace): JsonSafe<Subspace> {
     const obj: any = {};

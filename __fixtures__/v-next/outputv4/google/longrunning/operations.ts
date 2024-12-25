@@ -1,10 +1,9 @@
-import { Duration, DurationSDKType } from "../protobuf/duration";
-import { Any, AnySDKType } from "../protobuf/any";
-import { Status, StatusSDKType } from "../rpc/status";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { Duration, DurationSDKType } from "../protobuf/duration.js";
+import { Any, AnySDKType } from "../protobuf/any.js";
+import { Status, StatusSDKType } from "../rpc/status.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.longrunning";
 /**
  * This resource represents a long-running operation that is the result of a
@@ -44,13 +43,6 @@ export interface Operation {
    */
   response?: Any;
 }
-export interface ReactiveOperation {
-  name: ComputedRef<string>;
-  metadata?: ComputedRef<Any>;
-  done: ComputedRef<boolean>;
-  error?: ComputedRef<Status>;
-  response?: ComputedRef<Any>;
-}
 export interface OperationProtoMsg {
   typeUrl: "/google.longrunning.Operation";
   value: Uint8Array;
@@ -71,9 +63,6 @@ export interface GetOperationRequest {
   /** The name of the operation resource. */
   name: string;
 }
-export interface ReactiveGetOperationRequest {
-  name: ComputedRef<string>;
-}
 export interface GetOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.GetOperationRequest";
   value: Uint8Array;
@@ -93,12 +82,6 @@ export interface ListOperationsRequest {
   /** The standard list page token. */
   pageToken: string;
 }
-export interface ReactiveListOperationsRequest {
-  name: ComputedRef<string>;
-  filter: ComputedRef<string>;
-  pageSize: ComputedRef<number>;
-  pageToken: ComputedRef<string>;
-}
 export interface ListOperationsRequestProtoMsg {
   typeUrl: "/google.longrunning.ListOperationsRequest";
   value: Uint8Array;
@@ -117,10 +100,6 @@ export interface ListOperationsResponse {
   /** The standard List next-page token. */
   nextPageToken: string;
 }
-export interface ReactiveListOperationsResponse {
-  operations: ComputedRef<Operation[]>;
-  nextPageToken: ComputedRef<string>;
-}
 export interface ListOperationsResponseProtoMsg {
   typeUrl: "/google.longrunning.ListOperationsResponse";
   value: Uint8Array;
@@ -135,9 +114,6 @@ export interface CancelOperationRequest {
   /** The name of the operation resource to be cancelled. */
   name: string;
 }
-export interface ReactiveCancelOperationRequest {
-  name: ComputedRef<string>;
-}
 export interface CancelOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.CancelOperationRequest";
   value: Uint8Array;
@@ -150,9 +126,6 @@ export interface CancelOperationRequestSDKType {
 export interface DeleteOperationRequest {
   /** The name of the operation resource to be deleted. */
   name: string;
-}
-export interface ReactiveDeleteOperationRequest {
-  name: ComputedRef<string>;
 }
 export interface DeleteOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.DeleteOperationRequest";
@@ -172,10 +145,6 @@ export interface WaitOperationRequest {
    * If RPC context deadline is also specified, the shorter one will be used.
    */
   timeout?: Duration;
-}
-export interface ReactiveWaitOperationRequest {
-  name: ComputedRef<string>;
-  timeout?: ComputedRef<Duration>;
 }
 export interface WaitOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.WaitOperationRequest";
@@ -222,10 +191,6 @@ export interface OperationInfo {
    */
   metadataType: string;
 }
-export interface ReactiveOperationInfo {
-  responseType: ComputedRef<string>;
-  metadataType: ComputedRef<string>;
-}
 export interface OperationInfoProtoMsg {
   typeUrl: "/google.longrunning.OperationInfo";
   value: Uint8Array;
@@ -259,13 +224,13 @@ function createBaseOperation(): Operation {
 export const Operation = {
   typeUrl: "/google.longrunning.Operation",
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.metadata !== undefined) {
       Any.encode(message.metadata, writer.uint32(18).fork()).ldelim();
     }
-    if (message.done === true) {
+    if (message.done !== undefined) {
       writer.uint32(24).bool(message.done);
     }
     if (message.error !== undefined) {
@@ -306,13 +271,13 @@ export const Operation = {
     return message;
   },
   fromJSON(object: any): Operation {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      metadata: isSet(object.metadata) ? Any.fromJSON(object.metadata) : undefined,
-      done: isSet(object.done) ? Boolean(object.done) : false,
-      error: isSet(object.error) ? Status.fromJSON(object.error) : undefined,
-      response: isSet(object.response) ? Any.fromJSON(object.response) : undefined
-    };
+    const obj = createBaseOperation();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.metadata)) obj.metadata = Any.fromJSON(object.metadata);
+    if (isSet(object.done)) obj.done = Boolean(object.done);
+    if (isSet(object.error)) obj.error = Status.fromJSON(object.error);
+    if (isSet(object.response)) obj.response = Any.fromJSON(object.response);
+    return obj;
   },
   toJSON(message: Operation): JsonSafe<Operation> {
     const obj: any = {};
@@ -326,10 +291,16 @@ export const Operation = {
   fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
     message.name = object.name ?? "";
-    message.metadata = object.metadata !== undefined && object.metadata !== null ? Any.fromPartial(object.metadata) : undefined;
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Any.fromPartial(object.metadata);
+    }
     message.done = object.done ?? false;
-    message.error = object.error !== undefined && object.error !== null ? Status.fromPartial(object.error) : undefined;
-    message.response = object.response !== undefined && object.response !== null ? Any.fromPartial(object.response) : undefined;
+    if (object.error !== undefined && object.error !== null) {
+      message.error = Status.fromPartial(object.error);
+    }
+    if (object.response !== undefined && object.response !== null) {
+      message.response = Any.fromPartial(object.response);
+    }
     return message;
   },
   fromSDK(object: OperationSDKType): Operation {
@@ -411,7 +382,7 @@ function createBaseGetOperationRequest(): GetOperationRequest {
 export const GetOperationRequest = {
   typeUrl: "/google.longrunning.GetOperationRequest",
   encode(message: GetOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -434,9 +405,9 @@ export const GetOperationRequest = {
     return message;
   },
   fromJSON(object: any): GetOperationRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseGetOperationRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: GetOperationRequest): JsonSafe<GetOperationRequest> {
     const obj: any = {};
@@ -502,16 +473,16 @@ function createBaseListOperationsRequest(): ListOperationsRequest {
 export const ListOperationsRequest = {
   typeUrl: "/google.longrunning.ListOperationsRequest",
   encode(message: ListOperationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(34).string(message.name);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(10).string(message.filter);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
     return writer;
@@ -543,12 +514,12 @@ export const ListOperationsRequest = {
     return message;
   },
   fromJSON(object: any): ListOperationsRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? String(object.pageToken) : ""
-    };
+    const obj = createBaseListOperationsRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.filter)) obj.filter = String(object.filter);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    return obj;
   },
   toJSON(message: ListOperationsRequest): JsonSafe<ListOperationsRequest> {
     const obj: any = {};
@@ -642,7 +613,7 @@ export const ListOperationsResponse = {
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -668,10 +639,10 @@ export const ListOperationsResponse = {
     return message;
   },
   fromJSON(object: any): ListOperationsResponse {
-    return {
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => Operation.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
-    };
+    const obj = createBaseListOperationsResponse();
+    if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => Operation.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
   },
   toJSON(message: ListOperationsResponse): JsonSafe<ListOperationsResponse> {
     const obj: any = {};
@@ -753,7 +724,7 @@ function createBaseCancelOperationRequest(): CancelOperationRequest {
 export const CancelOperationRequest = {
   typeUrl: "/google.longrunning.CancelOperationRequest",
   encode(message: CancelOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -776,9 +747,9 @@ export const CancelOperationRequest = {
     return message;
   },
   fromJSON(object: any): CancelOperationRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseCancelOperationRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: CancelOperationRequest): JsonSafe<CancelOperationRequest> {
     const obj: any = {};
@@ -841,7 +812,7 @@ function createBaseDeleteOperationRequest(): DeleteOperationRequest {
 export const DeleteOperationRequest = {
   typeUrl: "/google.longrunning.DeleteOperationRequest",
   encode(message: DeleteOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -864,9 +835,9 @@ export const DeleteOperationRequest = {
     return message;
   },
   fromJSON(object: any): DeleteOperationRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseDeleteOperationRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: DeleteOperationRequest): JsonSafe<DeleteOperationRequest> {
     const obj: any = {};
@@ -930,7 +901,7 @@ function createBaseWaitOperationRequest(): WaitOperationRequest {
 export const WaitOperationRequest = {
   typeUrl: "/google.longrunning.WaitOperationRequest",
   encode(message: WaitOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.timeout !== undefined) {
@@ -959,10 +930,10 @@ export const WaitOperationRequest = {
     return message;
   },
   fromJSON(object: any): WaitOperationRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      timeout: isSet(object.timeout) ? Duration.fromJSON(object.timeout) : undefined
-    };
+    const obj = createBaseWaitOperationRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.timeout)) obj.timeout = Duration.fromJSON(object.timeout);
+    return obj;
   },
   toJSON(message: WaitOperationRequest): JsonSafe<WaitOperationRequest> {
     const obj: any = {};
@@ -973,7 +944,9 @@ export const WaitOperationRequest = {
   fromPartial(object: DeepPartial<WaitOperationRequest>): WaitOperationRequest {
     const message = createBaseWaitOperationRequest();
     message.name = object.name ?? "";
-    message.timeout = object.timeout !== undefined && object.timeout !== null ? Duration.fromPartial(object.timeout) : undefined;
+    if (object.timeout !== undefined && object.timeout !== null) {
+      message.timeout = Duration.fromPartial(object.timeout);
+    }
     return message;
   },
   fromSDK(object: WaitOperationRequestSDKType): WaitOperationRequest {
@@ -1035,10 +1008,10 @@ function createBaseOperationInfo(): OperationInfo {
 export const OperationInfo = {
   typeUrl: "/google.longrunning.OperationInfo",
   encode(message: OperationInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.responseType !== "") {
+    if (message.responseType !== undefined) {
       writer.uint32(10).string(message.responseType);
     }
-    if (message.metadataType !== "") {
+    if (message.metadataType !== undefined) {
       writer.uint32(18).string(message.metadataType);
     }
     return writer;
@@ -1064,10 +1037,10 @@ export const OperationInfo = {
     return message;
   },
   fromJSON(object: any): OperationInfo {
-    return {
-      responseType: isSet(object.responseType) ? String(object.responseType) : "",
-      metadataType: isSet(object.metadataType) ? String(object.metadataType) : ""
-    };
+    const obj = createBaseOperationInfo();
+    if (isSet(object.responseType)) obj.responseType = String(object.responseType);
+    if (isSet(object.metadataType)) obj.metadataType = String(object.metadataType);
+    return obj;
   },
   toJSON(message: OperationInfo): JsonSafe<OperationInfo> {
     const obj: any = {};

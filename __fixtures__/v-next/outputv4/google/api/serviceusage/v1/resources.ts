@@ -1,15 +1,14 @@
-import { Api, ApiSDKType } from "../../../protobuf/api";
-import { Documentation, DocumentationSDKType } from "../../documentation";
-import { Quota, QuotaSDKType } from "../../quota";
-import { Authentication, AuthenticationSDKType } from "../../auth";
-import { Usage, UsageSDKType } from "../../usage";
-import { Endpoint, EndpointSDKType } from "../../endpoint";
-import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
-import { Monitoring, MonitoringSDKType } from "../../monitoring";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { Api, ApiSDKType } from "../../../protobuf/api.js";
+import { Documentation, DocumentationSDKType } from "../../documentation.js";
+import { Quota, QuotaSDKType } from "../../quota.js";
+import { Authentication, AuthenticationSDKType } from "../../auth.js";
+import { Usage, UsageSDKType } from "../../usage.js";
+import { Endpoint, EndpointSDKType } from "../../endpoint.js";
+import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource.js";
+import { Monitoring, MonitoringSDKType } from "../../monitoring.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.serviceusage.v1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -85,12 +84,6 @@ export interface Service {
   /** Whether or not the service has been enabled for use by the consumer. */
   state: State;
 }
-export interface ReactiveService {
-  name: ComputedRef<string>;
-  parent: ComputedRef<string>;
-  config?: ComputedRef<ServiceConfig>;
-  state: ComputedRef<State>;
-}
 export interface ServiceProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.Service";
   value: Uint8Array;
@@ -145,18 +138,6 @@ export interface ServiceConfig {
    */
   monitoring?: Monitoring;
 }
-export interface ReactiveServiceConfig {
-  name: ComputedRef<string>;
-  title: ComputedRef<string>;
-  apis: ComputedRef<Api[]>;
-  documentation?: ComputedRef<Documentation>;
-  quota?: ComputedRef<Quota>;
-  authentication?: ComputedRef<Authentication>;
-  usage?: ComputedRef<Usage>;
-  endpoints: ComputedRef<Endpoint[]>;
-  monitoredResources: ComputedRef<MonitoredResourceDescriptor[]>;
-  monitoring?: ComputedRef<Monitoring>;
-}
 export interface ServiceConfigProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.ServiceConfig";
   value: Uint8Array;
@@ -182,9 +163,6 @@ export interface OperationMetadata {
    */
   resourceNames: string[];
 }
-export interface ReactiveOperationMetadata {
-  resourceNames: ComputedRef<string[]>;
-}
 export interface OperationMetadataProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.OperationMetadata";
   value: Uint8Array;
@@ -204,10 +182,10 @@ function createBaseService(): Service {
 export const Service = {
   typeUrl: "/google.api.serviceusage.v1.Service",
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(42).string(message.parent);
     }
     if (message.config !== undefined) {
@@ -245,12 +223,12 @@ export const Service = {
     return message;
   },
   fromJSON(object: any): Service {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      config: isSet(object.config) ? ServiceConfig.fromJSON(object.config) : undefined,
-      state: isSet(object.state) ? stateFromJSON(object.state) : -1
-    };
+    const obj = createBaseService();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.config)) obj.config = ServiceConfig.fromJSON(object.config);
+    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
+    return obj;
   },
   toJSON(message: Service): JsonSafe<Service> {
     const obj: any = {};
@@ -264,7 +242,9 @@ export const Service = {
     const message = createBaseService();
     message.name = object.name ?? "";
     message.parent = object.parent ?? "";
-    message.config = object.config !== undefined && object.config !== null ? ServiceConfig.fromPartial(object.config) : undefined;
+    if (object.config !== undefined && object.config !== null) {
+      message.config = ServiceConfig.fromPartial(object.config);
+    }
     message.state = object.state ?? 0;
     return message;
   },
@@ -349,10 +329,10 @@ function createBaseServiceConfig(): ServiceConfig {
 export const ServiceConfig = {
   typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
   encode(message: ServiceConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(18).string(message.title);
     }
     for (const v of message.apis) {
@@ -426,18 +406,18 @@ export const ServiceConfig = {
     return message;
   },
   fromJSON(object: any): ServiceConfig {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      title: isSet(object.title) ? String(object.title) : "",
-      apis: Array.isArray(object?.apis) ? object.apis.map((e: any) => Api.fromJSON(e)) : [],
-      documentation: isSet(object.documentation) ? Documentation.fromJSON(object.documentation) : undefined,
-      quota: isSet(object.quota) ? Quota.fromJSON(object.quota) : undefined,
-      authentication: isSet(object.authentication) ? Authentication.fromJSON(object.authentication) : undefined,
-      usage: isSet(object.usage) ? Usage.fromJSON(object.usage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromJSON(e)) : [],
-      monitoredResources: Array.isArray(object?.monitoredResources) ? object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e)) : [],
-      monitoring: isSet(object.monitoring) ? Monitoring.fromJSON(object.monitoring) : undefined
-    };
+    const obj = createBaseServiceConfig();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (Array.isArray(object?.apis)) obj.apis = object.apis.map((e: any) => Api.fromJSON(e));
+    if (isSet(object.documentation)) obj.documentation = Documentation.fromJSON(object.documentation);
+    if (isSet(object.quota)) obj.quota = Quota.fromJSON(object.quota);
+    if (isSet(object.authentication)) obj.authentication = Authentication.fromJSON(object.authentication);
+    if (isSet(object.usage)) obj.usage = Usage.fromJSON(object.usage);
+    if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
+    if (Array.isArray(object?.monitoredResources)) obj.monitoredResources = object.monitoredResources.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
+    if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
+    return obj;
   },
   toJSON(message: ServiceConfig): JsonSafe<ServiceConfig> {
     const obj: any = {};
@@ -470,13 +450,23 @@ export const ServiceConfig = {
     message.name = object.name ?? "";
     message.title = object.title ?? "";
     message.apis = object.apis?.map(e => Api.fromPartial(e)) || [];
-    message.documentation = object.documentation !== undefined && object.documentation !== null ? Documentation.fromPartial(object.documentation) : undefined;
-    message.quota = object.quota !== undefined && object.quota !== null ? Quota.fromPartial(object.quota) : undefined;
-    message.authentication = object.authentication !== undefined && object.authentication !== null ? Authentication.fromPartial(object.authentication) : undefined;
-    message.usage = object.usage !== undefined && object.usage !== null ? Usage.fromPartial(object.usage) : undefined;
+    if (object.documentation !== undefined && object.documentation !== null) {
+      message.documentation = Documentation.fromPartial(object.documentation);
+    }
+    if (object.quota !== undefined && object.quota !== null) {
+      message.quota = Quota.fromPartial(object.quota);
+    }
+    if (object.authentication !== undefined && object.authentication !== null) {
+      message.authentication = Authentication.fromPartial(object.authentication);
+    }
+    if (object.usage !== undefined && object.usage !== null) {
+      message.usage = Usage.fromPartial(object.usage);
+    }
     message.endpoints = object.endpoints?.map(e => Endpoint.fromPartial(e)) || [];
     message.monitoredResources = object.monitoredResources?.map(e => MonitoredResourceDescriptor.fromPartial(e)) || [];
-    message.monitoring = object.monitoring !== undefined && object.monitoring !== null ? Monitoring.fromPartial(object.monitoring) : undefined;
+    if (object.monitoring !== undefined && object.monitoring !== null) {
+      message.monitoring = Monitoring.fromPartial(object.monitoring);
+    }
     return message;
   },
   fromSDK(object: ServiceConfigSDKType): ServiceConfig {
@@ -634,9 +624,9 @@ export const OperationMetadata = {
     return message;
   },
   fromJSON(object: any): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseOperationMetadata();
+    if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
     const obj: any = {};

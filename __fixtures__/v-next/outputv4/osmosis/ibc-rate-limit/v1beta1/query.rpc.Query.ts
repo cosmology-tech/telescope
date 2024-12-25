@@ -1,8 +1,8 @@
-import { Params, ParamsSDKType } from "./params";
-import { Rpc } from "../../../helpers";
-import { BinaryReader } from "../../../binary";
+import { Params, ParamsSDKType } from "./params.js";
+import { Rpc } from "../../../helpers.js";
+import { BinaryReader } from "../../../binary.js";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, ReactiveQueryParamsRequest } from "./query";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query.js";
 /** Query defines the gRPC querier service. */
 export interface Query {
   /**

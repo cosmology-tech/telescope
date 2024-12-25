@@ -1,15 +1,10 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;
   value: number;
-}
-export interface ReactiveSourceInfo_PositionsEntry {
-  key: ComputedRef<number>;
-  value: ComputedRef<number>;
 }
 export interface SourceInfo_PositionsEntryProtoMsg {
   typeUrl: string;
@@ -45,13 +40,6 @@ export interface SourceInfo {
     [key: number]: number;
   };
 }
-export interface ReactiveSourceInfo {
-  location: ComputedRef<string>;
-  lineOffsets: ComputedRef<number[]>;
-  positions: ComputedRef<{
-    [key: number]: number;
-  }>;
-}
 export interface SourceInfoProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.SourceInfo";
   value: Uint8Array;
@@ -81,12 +69,6 @@ export interface SourcePosition {
    */
   column: number;
 }
-export interface ReactiveSourcePosition {
-  location: ComputedRef<string>;
-  offset: ComputedRef<number>;
-  line: ComputedRef<number>;
-  column: ComputedRef<number>;
-}
 export interface SourcePositionProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.SourcePosition";
   value: Uint8Array;
@@ -106,10 +88,10 @@ function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
 }
 export const SourceInfo_PositionsEntry = {
   encode(message: SourceInfo_PositionsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== 0) {
+    if (message.key !== undefined) {
       writer.uint32(8).int32(message.key);
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -135,10 +117,10 @@ export const SourceInfo_PositionsEntry = {
     return message;
   },
   fromJSON(object: any): SourceInfo_PositionsEntry {
-    return {
-      key: isSet(object.key) ? Number(object.key) : 0,
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseSourceInfo_PositionsEntry();
+    if (isSet(object.key)) obj.key = Number(object.key);
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: SourceInfo_PositionsEntry): JsonSafe<SourceInfo_PositionsEntry> {
     const obj: any = {};
@@ -206,7 +188,7 @@ function createBaseSourceInfo(): SourceInfo {
 export const SourceInfo = {
   typeUrl: "/google.api.expr.v1beta1.SourceInfo",
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(18).string(message.location);
     }
     writer.uint32(26).fork();
@@ -256,16 +238,16 @@ export const SourceInfo = {
     return message;
   },
   fromJSON(object: any): SourceInfo {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      lineOffsets: Array.isArray(object?.lineOffsets) ? object.lineOffsets.map((e: any) => Number(e)) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: number]: number;
-      }>((acc, [key, value]) => {
-        acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {}
-    };
+    const obj = createBaseSourceInfo();
+    if (isSet(object.location)) obj.location = String(object.location);
+    if (Array.isArray(object?.lineOffsets)) obj.lineOffsets = object.lineOffsets.map((e: any) => Number(e));
+    if (isObject(object.positions)) obj.positions = Object.entries(object.positions).reduce<{
+      [key: number]: number;
+    }>((acc, [key, value]) => {
+      acc[Number(key)] = Number(value);
+      return acc;
+    }, {});
+    return obj;
   },
   toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
     const obj: any = {};
@@ -396,16 +378,16 @@ function createBaseSourcePosition(): SourcePosition {
 export const SourcePosition = {
   typeUrl: "/google.api.expr.v1beta1.SourcePosition",
   encode(message: SourcePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(10).string(message.location);
     }
-    if (message.offset !== 0) {
+    if (message.offset !== undefined) {
       writer.uint32(16).int32(message.offset);
     }
-    if (message.line !== 0) {
+    if (message.line !== undefined) {
       writer.uint32(24).int32(message.line);
     }
-    if (message.column !== 0) {
+    if (message.column !== undefined) {
       writer.uint32(32).int32(message.column);
     }
     return writer;
@@ -437,12 +419,12 @@ export const SourcePosition = {
     return message;
   },
   fromJSON(object: any): SourcePosition {
-    return {
-      location: isSet(object.location) ? String(object.location) : "",
-      offset: isSet(object.offset) ? Number(object.offset) : 0,
-      line: isSet(object.line) ? Number(object.line) : 0,
-      column: isSet(object.column) ? Number(object.column) : 0
-    };
+    const obj = createBaseSourcePosition();
+    if (isSet(object.location)) obj.location = String(object.location);
+    if (isSet(object.offset)) obj.offset = Number(object.offset);
+    if (isSet(object.line)) obj.line = Number(object.line);
+    if (isSet(object.column)) obj.column = Number(object.column);
+    return obj;
   },
   toJSON(message: SourcePosition): JsonSafe<SourcePosition> {
     const obj: any = {};

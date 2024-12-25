@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -229,15 +228,6 @@ export interface ResourceDescriptor {
    */
   style: ResourceDescriptor_Style[];
 }
-export interface ReactiveResourceDescriptor {
-  type: ComputedRef<string>;
-  pattern: ComputedRef<string[]>;
-  nameField: ComputedRef<string>;
-  history: ComputedRef<ResourceDescriptor_History>;
-  plural: ComputedRef<string>;
-  singular: ComputedRef<string>;
-  style: ComputedRef<ResourceDescriptor_Style[]>;
-}
 export interface ResourceDescriptorProtoMsg {
   typeUrl: "/google.api.ResourceDescriptor";
   value: Uint8Array;
@@ -343,10 +333,6 @@ export interface ResourceReference {
    */
   childType: string;
 }
-export interface ReactiveResourceReference {
-  type: ComputedRef<string>;
-  childType: ComputedRef<string>;
-}
 export interface ResourceReferenceProtoMsg {
   typeUrl: "/google.api.ResourceReference";
   value: Uint8Array;
@@ -373,22 +359,22 @@ function createBaseResourceDescriptor(): ResourceDescriptor {
 export const ResourceDescriptor = {
   typeUrl: "/google.api.ResourceDescriptor",
   encode(message: ResourceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
     for (const v of message.pattern) {
       writer.uint32(18).string(v!);
     }
-    if (message.nameField !== "") {
+    if (message.nameField !== undefined) {
       writer.uint32(26).string(message.nameField);
     }
     if (message.history !== 0) {
       writer.uint32(32).int32(message.history);
     }
-    if (message.plural !== "") {
+    if (message.plural !== undefined) {
       writer.uint32(42).string(message.plural);
     }
-    if (message.singular !== "") {
+    if (message.singular !== undefined) {
       writer.uint32(50).string(message.singular);
     }
     writer.uint32(82).fork();
@@ -441,15 +427,15 @@ export const ResourceDescriptor = {
     return message;
   },
   fromJSON(object: any): ResourceDescriptor {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => String(e)) : [],
-      nameField: isSet(object.nameField) ? String(object.nameField) : "",
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
-      plural: isSet(object.plural) ? String(object.plural) : "",
-      singular: isSet(object.singular) ? String(object.singular) : "",
-      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
-    };
+    const obj = createBaseResourceDescriptor();
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (Array.isArray(object?.pattern)) obj.pattern = object.pattern.map((e: any) => String(e));
+    if (isSet(object.nameField)) obj.nameField = String(object.nameField);
+    if (isSet(object.history)) obj.history = resourceDescriptor_HistoryFromJSON(object.history);
+    if (isSet(object.plural)) obj.plural = String(object.plural);
+    if (isSet(object.singular)) obj.singular = String(object.singular);
+    if (Array.isArray(object?.style)) obj.style = object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e));
+    return obj;
   },
   toJSON(message: ResourceDescriptor): JsonSafe<ResourceDescriptor> {
     const obj: any = {};
@@ -587,10 +573,10 @@ function createBaseResourceReference(): ResourceReference {
 export const ResourceReference = {
   typeUrl: "/google.api.ResourceReference",
   encode(message: ResourceReference, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.childType !== "") {
+    if (message.childType !== undefined) {
       writer.uint32(18).string(message.childType);
     }
     return writer;
@@ -616,10 +602,10 @@ export const ResourceReference = {
     return message;
   },
   fromJSON(object: any): ResourceReference {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      childType: isSet(object.childType) ? String(object.childType) : ""
-    };
+    const obj = createBaseResourceReference();
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (isSet(object.childType)) obj.childType = String(object.childType);
+    return obj;
   },
   toJSON(message: ResourceReference): JsonSafe<ResourceReference> {
     const obj: any = {};

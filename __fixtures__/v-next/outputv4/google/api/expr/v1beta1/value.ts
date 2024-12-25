@@ -1,9 +1,8 @@
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import { Any, AnySDKType } from "../../../protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct.js";
+import { Any, AnySDKType } from "../../../protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.expr.v1beta1";
 /**
  * Represents a CEL value.
@@ -37,20 +36,6 @@ export interface Value {
   /** A Type value represented by the fully qualified name of the type. */
   typeValue?: string;
 }
-export interface ReactiveValue {
-  nullValue?: ComputedRef<NullValue>;
-  boolValue?: ComputedRef<boolean>;
-  int64Value?: ComputedRef<bigint>;
-  uint64Value?: ComputedRef<bigint>;
-  doubleValue?: ComputedRef<number>;
-  stringValue?: ComputedRef<string>;
-  bytesValue?: ComputedRef<Uint8Array>;
-  enumValue?: ComputedRef<EnumValue>;
-  objectValue?: ComputedRef<Any>;
-  mapValue?: ComputedRef<MapValue>;
-  listValue?: ComputedRef<ListValue>;
-  typeValue?: ComputedRef<string>;
-}
 export interface ValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Value";
   value: Uint8Array;
@@ -82,10 +67,6 @@ export interface EnumValue {
   /** The value of the enum. */
   value: number;
 }
-export interface ReactiveEnumValue {
-  type: ComputedRef<string>;
-  value: ComputedRef<number>;
-}
 export interface EnumValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.EnumValue";
   value: Uint8Array;
@@ -104,9 +85,6 @@ export interface EnumValueSDKType {
 export interface ListValue {
   /** The ordered values in the list. */
   values: Value[];
-}
-export interface ReactiveListValue {
-  values: ComputedRef<Value[]>;
 }
 export interface ListValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.ListValue";
@@ -136,9 +114,6 @@ export interface MapValue {
    */
   entries: MapValue_Entry[];
 }
-export interface ReactiveMapValue {
-  entries: ComputedRef<MapValue_Entry[]>;
-}
 export interface MapValueProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.MapValue";
   value: Uint8Array;
@@ -163,10 +138,6 @@ export interface MapValue_Entry {
   key?: Value;
   /** The value. */
   value?: Value;
-}
-export interface ReactiveMapValue_Entry {
-  key?: ComputedRef<Value>;
-  value?: ComputedRef<Value>;
 }
 export interface MapValue_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Entry";
@@ -285,20 +256,20 @@ export const Value = {
     return message;
   },
   fromJSON(object: any): Value {
-    return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
-      uint64Value: isSet(object.uint64Value) ? BigInt(object.uint64Value.toString()) : undefined,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
-      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined,
-      enumValue: isSet(object.enumValue) ? EnumValue.fromJSON(object.enumValue) : undefined,
-      objectValue: isSet(object.objectValue) ? Any.fromJSON(object.objectValue) : undefined,
-      mapValue: isSet(object.mapValue) ? MapValue.fromJSON(object.mapValue) : undefined,
-      listValue: isSet(object.listValue) ? ListValue.fromJSON(object.listValue) : undefined,
-      typeValue: isSet(object.typeValue) ? String(object.typeValue) : undefined
-    };
+    const obj = createBaseValue();
+    if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
+    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
+    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
+    if (isSet(object.uint64Value)) obj.uint64Value = BigInt(object.uint64Value.toString());
+    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
+    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
+    if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
+    if (isSet(object.enumValue)) obj.enumValue = EnumValue.fromJSON(object.enumValue);
+    if (isSet(object.objectValue)) obj.objectValue = Any.fromJSON(object.objectValue);
+    if (isSet(object.mapValue)) obj.mapValue = MapValue.fromJSON(object.mapValue);
+    if (isSet(object.listValue)) obj.listValue = ListValue.fromJSON(object.listValue);
+    if (isSet(object.typeValue)) obj.typeValue = String(object.typeValue);
+    return obj;
   },
   toJSON(message: Value): JsonSafe<Value> {
     const obj: any = {};
@@ -324,15 +295,27 @@ export const Value = {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = BigInt(object.uint64Value.toString());
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.enumValue = object.enumValue !== undefined && object.enumValue !== null ? EnumValue.fromPartial(object.enumValue) : undefined;
-    message.objectValue = object.objectValue !== undefined && object.objectValue !== null ? Any.fromPartial(object.objectValue) : undefined;
-    message.mapValue = object.mapValue !== undefined && object.mapValue !== null ? MapValue.fromPartial(object.mapValue) : undefined;
-    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
+    if (object.enumValue !== undefined && object.enumValue !== null) {
+      message.enumValue = EnumValue.fromPartial(object.enumValue);
+    }
+    if (object.objectValue !== undefined && object.objectValue !== null) {
+      message.objectValue = Any.fromPartial(object.objectValue);
+    }
+    if (object.mapValue !== undefined && object.mapValue !== null) {
+      message.mapValue = MapValue.fromPartial(object.mapValue);
+    }
+    if (object.listValue !== undefined && object.listValue !== null) {
+      message.listValue = ListValue.fromPartial(object.listValue);
+    }
     message.typeValue = object.typeValue ?? undefined;
     return message;
   },
@@ -465,10 +448,10 @@ function createBaseEnumValue(): EnumValue {
 export const EnumValue = {
   typeUrl: "/google.api.expr.v1beta1.EnumValue",
   encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -494,10 +477,10 @@ export const EnumValue = {
     return message;
   },
   fromJSON(object: any): EnumValue {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseEnumValue();
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: EnumValue): JsonSafe<EnumValue> {
     const obj: any = {};
@@ -592,9 +575,9 @@ export const ListValue = {
     return message;
   },
   fromJSON(object: any): ListValue {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromJSON(e)) : []
-    };
+    const obj = createBaseListValue();
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
+    return obj;
   },
   toJSON(message: ListValue): JsonSafe<ListValue> {
     const obj: any = {};
@@ -690,9 +673,9 @@ export const MapValue = {
     return message;
   },
   fromJSON(object: any): MapValue {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromJSON(e)) : []
-    };
+    const obj = createBaseMapValue();
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => MapValue_Entry.fromJSON(e));
+    return obj;
   },
   toJSON(message: MapValue): JsonSafe<MapValue> {
     const obj: any = {};
@@ -795,10 +778,10 @@ export const MapValue_Entry = {
     return message;
   },
   fromJSON(object: any): MapValue_Entry {
-    return {
-      key: isSet(object.key) ? Value.fromJSON(object.key) : undefined,
-      value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseMapValue_Entry();
+    if (isSet(object.key)) obj.key = Value.fromJSON(object.key);
+    if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: MapValue_Entry): JsonSafe<MapValue_Entry> {
     const obj: any = {};
@@ -808,8 +791,12 @@ export const MapValue_Entry = {
   },
   fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {
     const message = createBaseMapValue_Entry();
-    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
+    if (object.key !== undefined && object.key !== null) {
+      message.key = Value.fromPartial(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: MapValue_EntrySDKType): MapValue_Entry {

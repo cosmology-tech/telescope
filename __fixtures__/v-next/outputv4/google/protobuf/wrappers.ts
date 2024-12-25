@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.protobuf";
 /**
  * Wrapper message for `double`.
@@ -11,9 +10,6 @@ export const protobufPackage = "google.protobuf";
 export interface DoubleValue {
   /** The double value. */
   value: number;
-}
-export interface ReactiveDoubleValue {
-  value: ComputedRef<number>;
 }
 export interface DoubleValueProtoMsg {
   typeUrl: "/google.protobuf.DoubleValue";
@@ -36,9 +32,6 @@ export interface FloatValue {
   /** The float value. */
   value: number;
 }
-export interface ReactiveFloatValue {
-  value: ComputedRef<number>;
-}
 export interface FloatValueProtoMsg {
   typeUrl: "/google.protobuf.FloatValue";
   value: Uint8Array;
@@ -59,9 +52,6 @@ export interface FloatValueSDKType {
 export interface Int64Value {
   /** The int64 value. */
   value: bigint;
-}
-export interface ReactiveInt64Value {
-  value: ComputedRef<bigint>;
 }
 export interface Int64ValueProtoMsg {
   typeUrl: "/google.protobuf.Int64Value";
@@ -84,9 +74,6 @@ export interface UInt64Value {
   /** The uint64 value. */
   value: bigint;
 }
-export interface ReactiveUInt64Value {
-  value: ComputedRef<bigint>;
-}
 export interface UInt64ValueProtoMsg {
   typeUrl: "/google.protobuf.UInt64Value";
   value: Uint8Array;
@@ -107,9 +94,6 @@ export interface UInt64ValueSDKType {
 export interface Int32Value {
   /** The int32 value. */
   value: number;
-}
-export interface ReactiveInt32Value {
-  value: ComputedRef<number>;
 }
 export interface Int32ValueProtoMsg {
   typeUrl: "/google.protobuf.Int32Value";
@@ -132,9 +116,6 @@ export interface UInt32Value {
   /** The uint32 value. */
   value: number;
 }
-export interface ReactiveUInt32Value {
-  value: ComputedRef<number>;
-}
 export interface UInt32ValueProtoMsg {
   typeUrl: "/google.protobuf.UInt32Value";
   value: Uint8Array;
@@ -155,9 +136,6 @@ export interface UInt32ValueSDKType {
 export interface BoolValue {
   /** The bool value. */
   value: boolean;
-}
-export interface ReactiveBoolValue {
-  value: ComputedRef<boolean>;
 }
 export interface BoolValueProtoMsg {
   typeUrl: "/google.protobuf.BoolValue";
@@ -180,9 +158,6 @@ export interface StringValue {
   /** The string value. */
   value: string;
 }
-export interface ReactiveStringValue {
-  value: ComputedRef<string>;
-}
 export interface StringValueProtoMsg {
   typeUrl: "/google.protobuf.StringValue";
   value: Uint8Array;
@@ -204,9 +179,6 @@ export interface BytesValue {
   /** The bytes value. */
   value: Uint8Array;
 }
-export interface ReactiveBytesValue {
-  value: ComputedRef<Uint8Array>;
-}
 export interface BytesValueProtoMsg {
   typeUrl: "/google.protobuf.BytesValue";
   value: Uint8Array;
@@ -227,7 +199,7 @@ function createBaseDoubleValue(): DoubleValue {
 export const DoubleValue = {
   typeUrl: "/google.protobuf.DoubleValue",
   encode(message: DoubleValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(9).double(message.value);
     }
     return writer;
@@ -250,9 +222,9 @@ export const DoubleValue = {
     return message;
   },
   fromJSON(object: any): DoubleValue {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseDoubleValue();
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: DoubleValue): JsonSafe<DoubleValue> {
     const obj: any = {};
@@ -315,7 +287,7 @@ function createBaseFloatValue(): FloatValue {
 export const FloatValue = {
   typeUrl: "/google.protobuf.FloatValue",
   encode(message: FloatValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(13).float(message.value);
     }
     return writer;
@@ -338,9 +310,9 @@ export const FloatValue = {
     return message;
   },
   fromJSON(object: any): FloatValue {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseFloatValue();
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: FloatValue): JsonSafe<FloatValue> {
     const obj: any = {};
@@ -403,7 +375,7 @@ function createBaseInt64Value(): Int64Value {
 export const Int64Value = {
   typeUrl: "/google.protobuf.Int64Value",
   encode(message: Int64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(8).int64(message.value);
     }
     return writer;
@@ -426,9 +398,9 @@ export const Int64Value = {
     return message;
   },
   fromJSON(object: any): Int64Value {
-    return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
+    const obj = createBaseInt64Value();
+    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
+    return obj;
   },
   toJSON(message: Int64Value): JsonSafe<Int64Value> {
     const obj: any = {};
@@ -437,7 +409,9 @@ export const Int64Value = {
   },
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
     const message = createBaseInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: Int64ValueSDKType): Int64Value {
@@ -491,7 +465,7 @@ function createBaseUInt64Value(): UInt64Value {
 export const UInt64Value = {
   typeUrl: "/google.protobuf.UInt64Value",
   encode(message: UInt64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(8).uint64(message.value);
     }
     return writer;
@@ -514,9 +488,9 @@ export const UInt64Value = {
     return message;
   },
   fromJSON(object: any): UInt64Value {
-    return {
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
+    const obj = createBaseUInt64Value();
+    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
+    return obj;
   },
   toJSON(message: UInt64Value): JsonSafe<UInt64Value> {
     const obj: any = {};
@@ -525,7 +499,9 @@ export const UInt64Value = {
   },
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: UInt64ValueSDKType): UInt64Value {
@@ -579,7 +555,7 @@ function createBaseInt32Value(): Int32Value {
 export const Int32Value = {
   typeUrl: "/google.protobuf.Int32Value",
   encode(message: Int32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(8).int32(message.value);
     }
     return writer;
@@ -602,9 +578,9 @@ export const Int32Value = {
     return message;
   },
   fromJSON(object: any): Int32Value {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseInt32Value();
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: Int32Value): JsonSafe<Int32Value> {
     const obj: any = {};
@@ -667,7 +643,7 @@ function createBaseUInt32Value(): UInt32Value {
 export const UInt32Value = {
   typeUrl: "/google.protobuf.UInt32Value",
   encode(message: UInt32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(8).uint32(message.value);
     }
     return writer;
@@ -690,9 +666,9 @@ export const UInt32Value = {
     return message;
   },
   fromJSON(object: any): UInt32Value {
-    return {
-      value: isSet(object.value) ? Number(object.value) : 0
-    };
+    const obj = createBaseUInt32Value();
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
   },
   toJSON(message: UInt32Value): JsonSafe<UInt32Value> {
     const obj: any = {};
@@ -755,7 +731,7 @@ function createBaseBoolValue(): BoolValue {
 export const BoolValue = {
   typeUrl: "/google.protobuf.BoolValue",
   encode(message: BoolValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value === true) {
+    if (message.value !== undefined) {
       writer.uint32(8).bool(message.value);
     }
     return writer;
@@ -778,9 +754,9 @@ export const BoolValue = {
     return message;
   },
   fromJSON(object: any): BoolValue {
-    return {
-      value: isSet(object.value) ? Boolean(object.value) : false
-    };
+    const obj = createBaseBoolValue();
+    if (isSet(object.value)) obj.value = Boolean(object.value);
+    return obj;
   },
   toJSON(message: BoolValue): JsonSafe<BoolValue> {
     const obj: any = {};
@@ -843,7 +819,7 @@ function createBaseStringValue(): StringValue {
 export const StringValue = {
   typeUrl: "/google.protobuf.StringValue",
   encode(message: StringValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(10).string(message.value);
     }
     return writer;
@@ -866,9 +842,9 @@ export const StringValue = {
     return message;
   },
   fromJSON(object: any): StringValue {
-    return {
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseStringValue();
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: StringValue): JsonSafe<StringValue> {
     const obj: any = {};
@@ -954,9 +930,9 @@ export const BytesValue = {
     return message;
   },
   fromJSON(object: any): BytesValue {
-    return {
-      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
-    };
+    const obj = createBaseBytesValue();
+    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
+    return obj;
   },
   toJSON(message: BytesValue): JsonSafe<BytesValue> {
     const obj: any = {};

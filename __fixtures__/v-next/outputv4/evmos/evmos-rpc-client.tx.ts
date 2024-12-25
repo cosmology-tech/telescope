@@ -1,4 +1,4 @@
-import { Rpc } from "../helpers";
+import { Rpc } from "../helpers.js";
 export const createEvmosRPCTxClient = async ({
   rpc
 }: {
@@ -6,15 +6,15 @@ export const createEvmosRPCTxClient = async ({
 }) => ({
   cosmos: {
     bank: {
-      v1beta1: new (await import("../cosmos/bank/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
+      v1beta1: new (await import("../cosmos/bank/v1beta1/tx.rpc.msg.js")).MsgClientImpl(rpc)
     },
     gov: {
-      v1beta1: new (await import("../cosmos/gov/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
+      v1beta1: new (await import("../cosmos/gov/v1beta1/tx.rpc.msg.js")).MsgClientImpl(rpc)
     }
   },
   evmos: {
     erc20: {
-      v1: new (await import("./erc20/v1/tx.rpc.msg")).MsgClientImpl(rpc)
+      v1: new (await import("./erc20/v1/tx.rpc.msg.js")).MsgClientImpl(rpc)
     }
   }
 });

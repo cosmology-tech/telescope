@@ -1,9 +1,8 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
+import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.vesting.v1";
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccount {
@@ -29,14 +28,6 @@ export interface MsgCreateClawbackVestingAccount {
    */
   merge: boolean;
 }
-export interface ReactiveMsgCreateClawbackVestingAccount {
-  fromAddress: ComputedRef<string>;
-  toAddress: ComputedRef<string>;
-  startTime: ComputedRef<Date>;
-  lockupPeriods: ComputedRef<Period[]>;
-  vestingPeriods: ComputedRef<Period[]>;
-  merge: ComputedRef<boolean>;
-}
 export interface MsgCreateClawbackVestingAccountProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
   value: Uint8Array;
@@ -55,7 +46,6 @@ export interface MsgCreateClawbackVestingAccountSDKType {
  * MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponse {}
-export interface ReactiveMsgCreateClawbackVestingAccountResponse {}
 export interface MsgCreateClawbackVestingAccountResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
   value: Uint8Array;
@@ -81,11 +71,6 @@ export interface MsgClawback {
    */
   destAddress: string;
 }
-export interface ReactiveMsgClawback {
-  funderAddress: ComputedRef<string>;
-  accountAddress: ComputedRef<string>;
-  destAddress: ComputedRef<string>;
-}
 export interface MsgClawbackProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgClawback";
   value: Uint8Array;
@@ -101,7 +86,6 @@ export interface MsgClawbackSDKType {
 }
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponse {}
-export interface ReactiveMsgClawbackResponse {}
 export interface MsgClawbackResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgClawbackResponse";
   value: Uint8Array;
@@ -121,10 +105,10 @@ function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAc
 export const MsgCreateClawbackVestingAccount = {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",
   encode(message: MsgCreateClawbackVestingAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fromAddress !== "") {
+    if (message.fromAddress !== undefined) {
       writer.uint32(10).string(message.fromAddress);
     }
-    if (message.toAddress !== "") {
+    if (message.toAddress !== undefined) {
       writer.uint32(18).string(message.toAddress);
     }
     if (message.startTime !== undefined) {
@@ -136,7 +120,7 @@ export const MsgCreateClawbackVestingAccount = {
     for (const v of message.vestingPeriods) {
       Period.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-    if (message.merge === true) {
+    if (message.merge !== undefined) {
       writer.uint32(48).bool(message.merge);
     }
     return writer;
@@ -174,14 +158,14 @@ export const MsgCreateClawbackVestingAccount = {
     return message;
   },
   fromJSON(object: any): MsgCreateClawbackVestingAccount {
-    return {
-      fromAddress: isSet(object.fromAddress) ? String(object.fromAddress) : "",
-      toAddress: isSet(object.toAddress) ? String(object.toAddress) : "",
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      lockupPeriods: Array.isArray(object?.lockupPeriods) ? object.lockupPeriods.map((e: any) => Period.fromJSON(e)) : [],
-      vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : [],
-      merge: isSet(object.merge) ? Boolean(object.merge) : false
-    };
+    const obj = createBaseMsgCreateClawbackVestingAccount();
+    if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
+    if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (Array.isArray(object?.lockupPeriods)) obj.lockupPeriods = object.lockupPeriods.map((e: any) => Period.fromJSON(e));
+    if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
+    if (isSet(object.merge)) obj.merge = Boolean(object.merge);
+    return obj;
   },
   toJSON(message: MsgCreateClawbackVestingAccount): JsonSafe<MsgCreateClawbackVestingAccount> {
     const obj: any = {};
@@ -324,7 +308,8 @@ export const MsgCreateClawbackVestingAccountResponse = {
     return message;
   },
   fromJSON(_: any): MsgCreateClawbackVestingAccountResponse {
-    return {};
+    const obj = createBaseMsgCreateClawbackVestingAccountResponse();
+    return obj;
   },
   toJSON(_: MsgCreateClawbackVestingAccountResponse): JsonSafe<MsgCreateClawbackVestingAccountResponse> {
     const obj: any = {};
@@ -378,13 +363,13 @@ function createBaseMsgClawback(): MsgClawback {
 export const MsgClawback = {
   typeUrl: "/evmos.vesting.v1.MsgClawback",
   encode(message: MsgClawback, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.funderAddress !== "") {
+    if (message.funderAddress !== undefined) {
       writer.uint32(10).string(message.funderAddress);
     }
-    if (message.accountAddress !== "") {
+    if (message.accountAddress !== undefined) {
       writer.uint32(18).string(message.accountAddress);
     }
-    if (message.destAddress !== "") {
+    if (message.destAddress !== undefined) {
       writer.uint32(26).string(message.destAddress);
     }
     return writer;
@@ -413,11 +398,11 @@ export const MsgClawback = {
     return message;
   },
   fromJSON(object: any): MsgClawback {
-    return {
-      funderAddress: isSet(object.funderAddress) ? String(object.funderAddress) : "",
-      accountAddress: isSet(object.accountAddress) ? String(object.accountAddress) : "",
-      destAddress: isSet(object.destAddress) ? String(object.destAddress) : ""
-    };
+    const obj = createBaseMsgClawback();
+    if (isSet(object.funderAddress)) obj.funderAddress = String(object.funderAddress);
+    if (isSet(object.accountAddress)) obj.accountAddress = String(object.accountAddress);
+    if (isSet(object.destAddress)) obj.destAddress = String(object.destAddress);
+    return obj;
   },
   toJSON(message: MsgClawback): JsonSafe<MsgClawback> {
     const obj: any = {};
@@ -513,7 +498,8 @@ export const MsgClawbackResponse = {
     return message;
   },
   fromJSON(_: any): MsgClawbackResponse {
-    return {};
+    const obj = createBaseMsgClawbackResponse();
+    return obj;
   },
   toJSON(_: MsgClawbackResponse): JsonSafe<MsgClawbackResponse> {
     const obj: any = {};

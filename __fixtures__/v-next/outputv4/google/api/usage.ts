@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.api";
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -34,11 +33,6 @@ export interface Usage {
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
   producerNotificationChannel: string;
-}
-export interface ReactiveUsage {
-  requirements: ComputedRef<string[]>;
-  rules: ComputedRef<UsageRule[]>;
-  producerNotificationChannel: ComputedRef<string>;
 }
 export interface UsageProtoMsg {
   typeUrl: "/google.api.Usage";
@@ -98,11 +92,6 @@ export interface UsageRule {
    */
   skipServiceControl: boolean;
 }
-export interface ReactiveUsageRule {
-  selector: ComputedRef<string>;
-  allowUnregisteredCalls: ComputedRef<boolean>;
-  skipServiceControl: ComputedRef<boolean>;
-}
 export interface UsageRuleProtoMsg {
   typeUrl: "/google.api.UsageRule";
   value: Uint8Array;
@@ -155,7 +144,7 @@ export const Usage = {
     for (const v of message.rules) {
       UsageRule.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-    if (message.producerNotificationChannel !== "") {
+    if (message.producerNotificationChannel !== undefined) {
       writer.uint32(58).string(message.producerNotificationChannel);
     }
     return writer;
@@ -184,11 +173,11 @@ export const Usage = {
     return message;
   },
   fromJSON(object: any): Usage {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => String(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromJSON(e)) : [],
-      producerNotificationChannel: isSet(object.producerNotificationChannel) ? String(object.producerNotificationChannel) : ""
-    };
+    const obj = createBaseUsage();
+    if (Array.isArray(object?.requirements)) obj.requirements = object.requirements.map((e: any) => String(e));
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => UsageRule.fromJSON(e));
+    if (isSet(object.producerNotificationChannel)) obj.producerNotificationChannel = String(object.producerNotificationChannel);
+    return obj;
   },
   toJSON(message: Usage): JsonSafe<Usage> {
     const obj: any = {};
@@ -291,13 +280,13 @@ function createBaseUsageRule(): UsageRule {
 export const UsageRule = {
   typeUrl: "/google.api.UsageRule",
   encode(message: UsageRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.allowUnregisteredCalls === true) {
+    if (message.allowUnregisteredCalls !== undefined) {
       writer.uint32(16).bool(message.allowUnregisteredCalls);
     }
-    if (message.skipServiceControl === true) {
+    if (message.skipServiceControl !== undefined) {
       writer.uint32(24).bool(message.skipServiceControl);
     }
     return writer;
@@ -326,11 +315,11 @@ export const UsageRule = {
     return message;
   },
   fromJSON(object: any): UsageRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      allowUnregisteredCalls: isSet(object.allowUnregisteredCalls) ? Boolean(object.allowUnregisteredCalls) : false,
-      skipServiceControl: isSet(object.skipServiceControl) ? Boolean(object.skipServiceControl) : false
-    };
+    const obj = createBaseUsageRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isSet(object.allowUnregisteredCalls)) obj.allowUnregisteredCalls = Boolean(object.allowUnregisteredCalls);
+    if (isSet(object.skipServiceControl)) obj.skipServiceControl = Boolean(object.skipServiceControl);
+    return obj;
   },
   toJSON(message: UsageRule): JsonSafe<UsageRule> {
     const obj: any = {};

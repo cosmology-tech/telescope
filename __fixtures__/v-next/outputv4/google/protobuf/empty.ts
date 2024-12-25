@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
-import { DeepPartial } from "../../helpers";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial } from "../../helpers.js";
 export const protobufPackage = "google.protobuf";
 /**
  * A generic empty message that you can re-use to avoid defining duplicated
@@ -15,7 +14,6 @@ export const protobufPackage = "google.protobuf";
  * The JSON representation for `Empty` is empty JSON object `{}`.
  */
 export interface Empty {}
-export interface ReactiveEmpty {}
 export interface EmptyProtoMsg {
   typeUrl: "/google.protobuf.Empty";
   value: Uint8Array;
@@ -55,7 +53,8 @@ export const Empty = {
     return message;
   },
   fromJSON(_: any): Empty {
-    return {};
+    const obj = createBaseEmpty();
+    return obj;
   },
   toJSON(_: Empty): JsonSafe<Empty> {
     const obj: any = {};

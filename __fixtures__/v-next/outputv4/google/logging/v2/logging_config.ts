@@ -1,9 +1,8 @@
-import { FieldMask, FieldMaskSDKType } from "../../protobuf/field_mask";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { FieldMask, FieldMaskSDKType } from "../../protobuf/field_mask.js";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "google.logging.v2";
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
@@ -230,17 +229,6 @@ export interface LogBucket {
    */
   cmekSettings?: CmekSettings;
 }
-export interface ReactiveLogBucket {
-  name: ComputedRef<string>;
-  description: ComputedRef<string>;
-  createTime?: ComputedRef<Date>;
-  updateTime?: ComputedRef<Date>;
-  retentionDays: ComputedRef<number>;
-  locked: ComputedRef<boolean>;
-  lifecycleState: ComputedRef<LifecycleState>;
-  restrictedFields: ComputedRef<string[]>;
-  cmekSettings?: ComputedRef<CmekSettings>;
-}
 export interface LogBucketProtoMsg {
   typeUrl: "/google.logging.v2.LogBucket";
   value: Uint8Array;
@@ -290,13 +278,6 @@ export interface LogView {
    *                                AND LOG_ID("stdout")
    */
   filter: string;
-}
-export interface ReactiveLogView {
-  name: ComputedRef<string>;
-  description: ComputedRef<string>;
-  createTime?: ComputedRef<Date>;
-  updateTime?: ComputedRef<Date>;
-  filter: ComputedRef<string>;
 }
 export interface LogViewProtoMsg {
   typeUrl: "/google.logging.v2.LogView";
@@ -428,20 +409,6 @@ export interface LogSink {
    */
   updateTime?: Date;
 }
-export interface ReactiveLogSink {
-  name: ComputedRef<string>;
-  destination: ComputedRef<string>;
-  filter: ComputedRef<string>;
-  description: ComputedRef<string>;
-  disabled: ComputedRef<boolean>;
-  exclusions: ComputedRef<LogExclusion[]>;
-  outputVersionFormat: ComputedRef<LogSink_VersionFormat>;
-  writerIdentity: ComputedRef<string>;
-  includeChildren: ComputedRef<boolean>;
-  bigqueryOptions?: ComputedRef<BigQueryOptions>;
-  createTime?: ComputedRef<Date>;
-  updateTime?: ComputedRef<Date>;
-}
 export interface LogSinkProtoMsg {
   typeUrl: "/google.logging.v2.LogSink";
   value: Uint8Array;
@@ -492,10 +459,6 @@ export interface BigQueryOptions {
    */
   usesTimestampColumnPartitioning: boolean;
 }
-export interface ReactiveBigQueryOptions {
-  usePartitionedTables: ComputedRef<boolean>;
-  usesTimestampColumnPartitioning: ComputedRef<boolean>;
-}
 export interface BigQueryOptionsProtoMsg {
   typeUrl: "/google.logging.v2.BigQueryOptions";
   value: Uint8Array;
@@ -534,11 +497,6 @@ export interface ListBucketsRequest {
    */
   pageSize: number;
 }
-export interface ReactiveListBucketsRequest {
-  parent: ComputedRef<string>;
-  pageToken: ComputedRef<string>;
-  pageSize: ComputedRef<number>;
-}
 export interface ListBucketsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListBucketsRequest";
   value: Uint8Array;
@@ -559,10 +517,6 @@ export interface ListBucketsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
-}
-export interface ReactiveListBucketsResponse {
-  buckets: ComputedRef<LogBucket[]>;
-  nextPageToken: ComputedRef<string>;
 }
 export interface ListBucketsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListBucketsResponse";
@@ -597,11 +551,6 @@ export interface CreateBucketRequest {
    * ignored.
    */
   bucket?: LogBucket;
-}
-export interface ReactiveCreateBucketRequest {
-  parent: ComputedRef<string>;
-  bucketId: ComputedRef<string>;
-  bucket?: ComputedRef<LogBucket>;
 }
 export interface CreateBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateBucketRequest";
@@ -642,11 +591,6 @@ export interface UpdateBucketRequest {
    */
   updateMask?: FieldMask;
 }
-export interface ReactiveUpdateBucketRequest {
-  name: ComputedRef<string>;
-  bucket?: ComputedRef<LogBucket>;
-  updateMask?: ComputedRef<FieldMask>;
-}
 export interface UpdateBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateBucketRequest";
   value: Uint8Array;
@@ -673,9 +617,6 @@ export interface GetBucketRequest {
    */
   name: string;
 }
-export interface ReactiveGetBucketRequest {
-  name: ComputedRef<string>;
-}
 export interface GetBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetBucketRequest";
   value: Uint8Array;
@@ -700,9 +641,6 @@ export interface DeleteBucketRequest {
    */
   name: string;
 }
-export interface ReactiveDeleteBucketRequest {
-  name: ComputedRef<string>;
-}
 export interface DeleteBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteBucketRequest";
   value: Uint8Array;
@@ -726,9 +664,6 @@ export interface UndeleteBucketRequest {
    *   `"projects/my-project/locations/global/buckets/my-bucket"`
    */
   name: string;
-}
-export interface ReactiveUndeleteBucketRequest {
-  name: ComputedRef<string>;
 }
 export interface UndeleteBucketRequestProtoMsg {
   typeUrl: "/google.logging.v2.UndeleteBucketRequest";
@@ -761,11 +696,6 @@ export interface ListViewsRequest {
    */
   pageSize: number;
 }
-export interface ReactiveListViewsRequest {
-  parent: ComputedRef<string>;
-  pageToken: ComputedRef<string>;
-  pageSize: ComputedRef<number>;
-}
 export interface ListViewsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListViewsRequest";
   value: Uint8Array;
@@ -786,10 +716,6 @@ export interface ListViewsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
-}
-export interface ReactiveListViewsResponse {
-  views: ComputedRef<LogView[]>;
-  nextPageToken: ComputedRef<string>;
 }
 export interface ListViewsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListViewsResponse";
@@ -816,11 +742,6 @@ export interface CreateViewRequest {
   viewId: string;
   /** Required. The new view. */
   view?: LogView;
-}
-export interface ReactiveCreateViewRequest {
-  parent: ComputedRef<string>;
-  viewId: ComputedRef<string>;
-  view?: ComputedRef<LogView>;
 }
 export interface CreateViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateViewRequest";
@@ -858,11 +779,6 @@ export interface UpdateViewRequest {
    */
   updateMask?: FieldMask;
 }
-export interface ReactiveUpdateViewRequest {
-  name: ComputedRef<string>;
-  view?: ComputedRef<LogView>;
-  updateMask?: ComputedRef<FieldMask>;
-}
 export interface UpdateViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateViewRequest";
   value: Uint8Array;
@@ -886,9 +802,6 @@ export interface GetViewRequest {
    */
   name: string;
 }
-export interface ReactiveGetViewRequest {
-  name: ComputedRef<string>;
-}
 export interface GetViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetViewRequest";
   value: Uint8Array;
@@ -909,9 +822,6 @@ export interface DeleteViewRequest {
    *    `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
    */
   name: string;
-}
-export interface ReactiveDeleteViewRequest {
-  name: ComputedRef<string>;
 }
 export interface DeleteViewRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteViewRequest";
@@ -946,11 +856,6 @@ export interface ListSinksRequest {
    */
   pageSize: number;
 }
-export interface ReactiveListSinksRequest {
-  parent: ComputedRef<string>;
-  pageToken: ComputedRef<string>;
-  pageSize: ComputedRef<number>;
-}
 export interface ListSinksRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListSinksRequest";
   value: Uint8Array;
@@ -971,10 +876,6 @@ export interface ListSinksResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
-}
-export interface ReactiveListSinksResponse {
-  sinks: ComputedRef<LogSink[]>;
-  nextPageToken: ComputedRef<string>;
 }
 export interface ListSinksResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListSinksResponse";
@@ -1000,9 +901,6 @@ export interface GetSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
-}
-export interface ReactiveGetSinkRequest {
-  sinkName: ComputedRef<string>;
 }
 export interface GetSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetSinkRequest";
@@ -1047,11 +945,6 @@ export interface CreateSinkRequest {
    * more information, see `writer_identity` in [LogSink][google.logging.v2.LogSink].
    */
   uniqueWriterIdentity: boolean;
-}
-export interface ReactiveCreateSinkRequest {
-  parent: ComputedRef<string>;
-  sink?: ComputedRef<LogSink>;
-  uniqueWriterIdentity: ComputedRef<boolean>;
 }
 export interface CreateSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateSinkRequest";
@@ -1118,12 +1011,6 @@ export interface UpdateSinkRequest {
    */
   updateMask?: FieldMask;
 }
-export interface ReactiveUpdateSinkRequest {
-  sinkName: ComputedRef<string>;
-  sink?: ComputedRef<LogSink>;
-  uniqueWriterIdentity: ComputedRef<boolean>;
-  updateMask?: ComputedRef<FieldMask>;
-}
 export interface UpdateSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateSinkRequest";
   value: Uint8Array;
@@ -1151,9 +1038,6 @@ export interface DeleteSinkRequest {
    *   `"projects/my-project/sinks/my-sink"`
    */
   sinkName: string;
-}
-export interface ReactiveDeleteSinkRequest {
-  sinkName: ComputedRef<string>;
 }
 export interface DeleteSinkRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteSinkRequest";
@@ -1213,14 +1097,6 @@ export interface LogExclusion {
    */
   updateTime?: Date;
 }
-export interface ReactiveLogExclusion {
-  name: ComputedRef<string>;
-  description: ComputedRef<string>;
-  filter: ComputedRef<string>;
-  disabled: ComputedRef<boolean>;
-  createTime?: ComputedRef<Date>;
-  updateTime?: ComputedRef<Date>;
-}
 export interface LogExclusionProtoMsg {
   typeUrl: "/google.logging.v2.LogExclusion";
   value: Uint8Array;
@@ -1265,11 +1141,6 @@ export interface ListExclusionsRequest {
    */
   pageSize: number;
 }
-export interface ReactiveListExclusionsRequest {
-  parent: ComputedRef<string>;
-  pageToken: ComputedRef<string>;
-  pageSize: ComputedRef<number>;
-}
 export interface ListExclusionsRequestProtoMsg {
   typeUrl: "/google.logging.v2.ListExclusionsRequest";
   value: Uint8Array;
@@ -1290,10 +1161,6 @@ export interface ListExclusionsResponse {
    * method again using the value of `nextPageToken` as `pageToken`.
    */
   nextPageToken: string;
-}
-export interface ReactiveListExclusionsResponse {
-  exclusions: ComputedRef<LogExclusion[]>;
-  nextPageToken: ComputedRef<string>;
 }
 export interface ListExclusionsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListExclusionsResponse";
@@ -1319,9 +1186,6 @@ export interface GetExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
-}
-export interface ReactiveGetExclusionRequest {
-  name: ComputedRef<string>;
 }
 export interface GetExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetExclusionRequest";
@@ -1352,10 +1216,6 @@ export interface CreateExclusionRequest {
    * that is not already used in the parent resource.
    */
   exclusion?: LogExclusion;
-}
-export interface ReactiveCreateExclusionRequest {
-  parent: ComputedRef<string>;
-  exclusion?: ComputedRef<LogExclusion>;
 }
 export interface CreateExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateExclusionRequest";
@@ -1397,11 +1257,6 @@ export interface UpdateExclusionRequest {
    */
   updateMask?: FieldMask;
 }
-export interface ReactiveUpdateExclusionRequest {
-  name: ComputedRef<string>;
-  exclusion?: ComputedRef<LogExclusion>;
-  updateMask?: ComputedRef<FieldMask>;
-}
 export interface UpdateExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateExclusionRequest";
   value: Uint8Array;
@@ -1427,9 +1282,6 @@ export interface DeleteExclusionRequest {
    *   `"projects/my-project/exclusions/my-exclusion"`
    */
   name: string;
-}
-export interface ReactiveDeleteExclusionRequest {
-  name: ComputedRef<string>;
 }
 export interface DeleteExclusionRequestProtoMsg {
   typeUrl: "/google.logging.v2.DeleteExclusionRequest";
@@ -1466,9 +1318,6 @@ export interface GetCmekSettingsRequest {
    * organization.
    */
   name: string;
-}
-export interface ReactiveGetCmekSettingsRequest {
-  name: ComputedRef<string>;
 }
 export interface GetCmekSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetCmekSettingsRequest";
@@ -1529,11 +1378,6 @@ export interface UpdateCmekSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask?: FieldMask;
-}
-export interface ReactiveUpdateCmekSettingsRequest {
-  name: ComputedRef<string>;
-  cmekSettings?: ComputedRef<CmekSettings>;
-  updateMask?: ComputedRef<FieldMask>;
 }
 export interface UpdateCmekSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest";
@@ -1614,11 +1458,6 @@ export interface CmekSettings {
    */
   serviceAccountId: string;
 }
-export interface ReactiveCmekSettings {
-  name: ComputedRef<string>;
-  kmsKeyName: ComputedRef<string>;
-  serviceAccountId: ComputedRef<string>;
-}
 export interface CmekSettingsProtoMsg {
   typeUrl: "/google.logging.v2.CmekSettings";
   value: Uint8Array;
@@ -1667,9 +1506,6 @@ export interface GetSettingsRequest {
    * applies to all projects and folders in the Google Cloud organization.
    */
   name: string;
-}
-export interface ReactiveGetSettingsRequest {
-  name: ComputedRef<string>;
 }
 export interface GetSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.GetSettingsRequest";
@@ -1727,11 +1563,6 @@ export interface UpdateSettingsRequest {
    * For example: `"updateMask=kmsKeyName"`
    */
   updateMask?: FieldMask;
-}
-export interface ReactiveUpdateSettingsRequest {
-  name: ComputedRef<string>;
-  settings?: ComputedRef<Settings>;
-  updateMask?: ComputedRef<FieldMask>;
 }
 export interface UpdateSettingsRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateSettingsRequest";
@@ -1816,13 +1647,6 @@ export interface Settings {
    */
   disableDefaultSink: boolean;
 }
-export interface ReactiveSettings {
-  name: ComputedRef<string>;
-  kmsKeyName: ComputedRef<string>;
-  kmsServiceAccountId: ComputedRef<string>;
-  storageLocation: ComputedRef<string>;
-  disableDefaultSink: ComputedRef<boolean>;
-}
 export interface SettingsProtoMsg {
   typeUrl: "/google.logging.v2.Settings";
   value: Uint8Array;
@@ -1855,11 +1679,6 @@ export interface CopyLogEntriesRequest {
   filter: string;
   /** Required. Destination to which to copy log entries. */
   destination: string;
-}
-export interface ReactiveCopyLogEntriesRequest {
-  name: ComputedRef<string>;
-  filter: ComputedRef<string>;
-  destination: ComputedRef<string>;
 }
 export interface CopyLogEntriesRequestProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesRequest";
@@ -1896,15 +1715,6 @@ export interface CopyLogEntriesMetadata {
    */
   writerIdentity: string;
 }
-export interface ReactiveCopyLogEntriesMetadata {
-  startTime?: ComputedRef<Date>;
-  endTime?: ComputedRef<Date>;
-  state: ComputedRef<OperationState>;
-  cancellationRequested: ComputedRef<boolean>;
-  request?: ComputedRef<CopyLogEntriesRequest>;
-  progress: ComputedRef<number>;
-  writerIdentity: ComputedRef<string>;
-}
 export interface CopyLogEntriesMetadataProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesMetadata";
   value: Uint8Array;
@@ -1923,9 +1733,6 @@ export interface CopyLogEntriesMetadataSDKType {
 export interface CopyLogEntriesResponse {
   /** Number of log entries copied. */
   logEntriesCopiedCount: bigint;
-}
-export interface ReactiveCopyLogEntriesResponse {
-  logEntriesCopiedCount: ComputedRef<bigint>;
 }
 export interface CopyLogEntriesResponseProtoMsg {
   typeUrl: "/google.logging.v2.CopyLogEntriesResponse";
@@ -1951,10 +1758,10 @@ function createBaseLogBucket(): LogBucket {
 export const LogBucket = {
   typeUrl: "/google.logging.v2.LogBucket",
   encode(message: LogBucket, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     if (message.createTime !== undefined) {
@@ -1963,10 +1770,10 @@ export const LogBucket = {
     if (message.updateTime !== undefined) {
       Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.retentionDays !== 0) {
+    if (message.retentionDays !== undefined) {
       writer.uint32(88).int32(message.retentionDays);
     }
-    if (message.locked === true) {
+    if (message.locked !== undefined) {
       writer.uint32(72).bool(message.locked);
     }
     if (message.lifecycleState !== 0) {
@@ -2022,17 +1829,17 @@ export const LogBucket = {
     return message;
   },
   fromJSON(object: any): LogBucket {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
-      retentionDays: isSet(object.retentionDays) ? Number(object.retentionDays) : 0,
-      locked: isSet(object.locked) ? Boolean(object.locked) : false,
-      lifecycleState: isSet(object.lifecycleState) ? lifecycleStateFromJSON(object.lifecycleState) : -1,
-      restrictedFields: Array.isArray(object?.restrictedFields) ? object.restrictedFields.map((e: any) => String(e)) : [],
-      cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined
-    };
+    const obj = createBaseLogBucket();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
+    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
+    if (isSet(object.retentionDays)) obj.retentionDays = Number(object.retentionDays);
+    if (isSet(object.locked)) obj.locked = Boolean(object.locked);
+    if (isSet(object.lifecycleState)) obj.lifecycleState = lifecycleStateFromJSON(object.lifecycleState);
+    if (Array.isArray(object?.restrictedFields)) obj.restrictedFields = object.restrictedFields.map((e: any) => String(e));
+    if (isSet(object.cmekSettings)) obj.cmekSettings = CmekSettings.fromJSON(object.cmekSettings);
+    return obj;
   },
   toJSON(message: LogBucket): JsonSafe<LogBucket> {
     const obj: any = {};
@@ -2061,7 +1868,9 @@ export const LogBucket = {
     message.locked = object.locked ?? false;
     message.lifecycleState = object.lifecycleState ?? 0;
     message.restrictedFields = object.restrictedFields?.map(e => e) || [];
-    message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
+    if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
+      message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
+    }
     return message;
   },
   fromSDK(object: LogBucketSDKType): LogBucket {
@@ -2181,10 +1990,10 @@ function createBaseLogView(): LogView {
 export const LogView = {
   typeUrl: "/google.logging.v2.LogView",
   encode(message: LogView, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     if (message.createTime !== undefined) {
@@ -2193,7 +2002,7 @@ export const LogView = {
     if (message.updateTime !== undefined) {
       Timestamp.encode(toTimestamp(message.updateTime), writer.uint32(42).fork()).ldelim();
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(58).string(message.filter);
     }
     return writer;
@@ -2228,13 +2037,13 @@ export const LogView = {
     return message;
   },
   fromJSON(object: any): LogView {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
-      filter: isSet(object.filter) ? String(object.filter) : ""
-    };
+    const obj = createBaseLogView();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
+    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
+    if (isSet(object.filter)) obj.filter = String(object.filter);
+    return obj;
   },
   toJSON(message: LogView): JsonSafe<LogView> {
     const obj: any = {};
@@ -2344,19 +2153,19 @@ function createBaseLogSink(): LogSink {
 export const LogSink = {
   typeUrl: "/google.logging.v2.LogSink",
   encode(message: LogSink, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.destination !== "") {
+    if (message.destination !== undefined) {
       writer.uint32(26).string(message.destination);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(42).string(message.filter);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(146).string(message.description);
     }
-    if (message.disabled === true) {
+    if (message.disabled !== undefined) {
       writer.uint32(152).bool(message.disabled);
     }
     for (const v of message.exclusions) {
@@ -2365,10 +2174,10 @@ export const LogSink = {
     if (message.outputVersionFormat !== 0) {
       writer.uint32(48).int32(message.outputVersionFormat);
     }
-    if (message.writerIdentity !== "") {
+    if (message.writerIdentity !== undefined) {
       writer.uint32(66).string(message.writerIdentity);
     }
-    if (message.includeChildren === true) {
+    if (message.includeChildren !== undefined) {
       writer.uint32(72).bool(message.includeChildren);
     }
     if (message.bigqueryOptions !== undefined) {
@@ -2433,20 +2242,20 @@ export const LogSink = {
     return message;
   },
   fromJSON(object: any): LogSink {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      destination: isSet(object.destination) ? String(object.destination) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromJSON(e)) : [],
-      outputVersionFormat: isSet(object.outputVersionFormat) ? logSink_VersionFormatFromJSON(object.outputVersionFormat) : -1,
-      writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : "",
-      includeChildren: isSet(object.includeChildren) ? Boolean(object.includeChildren) : false,
-      bigqueryOptions: isSet(object.bigqueryOptions) ? BigQueryOptions.fromJSON(object.bigqueryOptions) : undefined,
-      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
-    };
+    const obj = createBaseLogSink();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.destination)) obj.destination = String(object.destination);
+    if (isSet(object.filter)) obj.filter = String(object.filter);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
+    if (Array.isArray(object?.exclusions)) obj.exclusions = object.exclusions.map((e: any) => LogExclusion.fromJSON(e));
+    if (isSet(object.outputVersionFormat)) obj.outputVersionFormat = logSink_VersionFormatFromJSON(object.outputVersionFormat);
+    if (isSet(object.writerIdentity)) obj.writerIdentity = String(object.writerIdentity);
+    if (isSet(object.includeChildren)) obj.includeChildren = Boolean(object.includeChildren);
+    if (isSet(object.bigqueryOptions)) obj.bigqueryOptions = BigQueryOptions.fromJSON(object.bigqueryOptions);
+    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
+    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
+    return obj;
   },
   toJSON(message: LogSink): JsonSafe<LogSink> {
     const obj: any = {};
@@ -2479,7 +2288,9 @@ export const LogSink = {
     message.outputVersionFormat = object.outputVersionFormat ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     message.includeChildren = object.includeChildren ?? false;
-    message.bigqueryOptions = object.bigqueryOptions !== undefined && object.bigqueryOptions !== null ? BigQueryOptions.fromPartial(object.bigqueryOptions) : undefined;
+    if (object.bigqueryOptions !== undefined && object.bigqueryOptions !== null) {
+      message.bigqueryOptions = BigQueryOptions.fromPartial(object.bigqueryOptions);
+    }
     message.createTime = object.createTime ?? undefined;
     message.updateTime = object.updateTime ?? undefined;
     return message;
@@ -2619,10 +2430,10 @@ function createBaseBigQueryOptions(): BigQueryOptions {
 export const BigQueryOptions = {
   typeUrl: "/google.logging.v2.BigQueryOptions",
   encode(message: BigQueryOptions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.usePartitionedTables === true) {
+    if (message.usePartitionedTables !== undefined) {
       writer.uint32(8).bool(message.usePartitionedTables);
     }
-    if (message.usesTimestampColumnPartitioning === true) {
+    if (message.usesTimestampColumnPartitioning !== undefined) {
       writer.uint32(24).bool(message.usesTimestampColumnPartitioning);
     }
     return writer;
@@ -2648,10 +2459,10 @@ export const BigQueryOptions = {
     return message;
   },
   fromJSON(object: any): BigQueryOptions {
-    return {
-      usePartitionedTables: isSet(object.usePartitionedTables) ? Boolean(object.usePartitionedTables) : false,
-      usesTimestampColumnPartitioning: isSet(object.usesTimestampColumnPartitioning) ? Boolean(object.usesTimestampColumnPartitioning) : false
-    };
+    const obj = createBaseBigQueryOptions();
+    if (isSet(object.usePartitionedTables)) obj.usePartitionedTables = Boolean(object.usePartitionedTables);
+    if (isSet(object.usesTimestampColumnPartitioning)) obj.usesTimestampColumnPartitioning = Boolean(object.usesTimestampColumnPartitioning);
+    return obj;
   },
   toJSON(message: BigQueryOptions): JsonSafe<BigQueryOptions> {
     const obj: any = {};
@@ -2725,13 +2536,13 @@ function createBaseListBucketsRequest(): ListBucketsRequest {
 export const ListBucketsRequest = {
   typeUrl: "/google.logging.v2.ListBucketsRequest",
   encode(message: ListBucketsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -2760,11 +2571,11 @@ export const ListBucketsRequest = {
     return message;
   },
   fromJSON(object: any): ListBucketsRequest {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
-      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
-    };
+    const obj = createBaseListBucketsRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    return obj;
   },
   toJSON(message: ListBucketsRequest): JsonSafe<ListBucketsRequest> {
     const obj: any = {};
@@ -2849,7 +2660,7 @@ export const ListBucketsResponse = {
     for (const v of message.buckets) {
       LogBucket.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -2875,10 +2686,10 @@ export const ListBucketsResponse = {
     return message;
   },
   fromJSON(object: any): ListBucketsResponse {
-    return {
-      buckets: Array.isArray(object?.buckets) ? object.buckets.map((e: any) => LogBucket.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
-    };
+    const obj = createBaseListBucketsResponse();
+    if (Array.isArray(object?.buckets)) obj.buckets = object.buckets.map((e: any) => LogBucket.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
   },
   toJSON(message: ListBucketsResponse): JsonSafe<ListBucketsResponse> {
     const obj: any = {};
@@ -2962,10 +2773,10 @@ function createBaseCreateBucketRequest(): CreateBucketRequest {
 export const CreateBucketRequest = {
   typeUrl: "/google.logging.v2.CreateBucketRequest",
   encode(message: CreateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.bucketId !== "") {
+    if (message.bucketId !== undefined) {
       writer.uint32(18).string(message.bucketId);
     }
     if (message.bucket !== undefined) {
@@ -2997,11 +2808,11 @@ export const CreateBucketRequest = {
     return message;
   },
   fromJSON(object: any): CreateBucketRequest {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      bucketId: isSet(object.bucketId) ? String(object.bucketId) : "",
-      bucket: isSet(object.bucket) ? LogBucket.fromJSON(object.bucket) : undefined
-    };
+    const obj = createBaseCreateBucketRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.bucketId)) obj.bucketId = String(object.bucketId);
+    if (isSet(object.bucket)) obj.bucket = LogBucket.fromJSON(object.bucket);
+    return obj;
   },
   toJSON(message: CreateBucketRequest): JsonSafe<CreateBucketRequest> {
     const obj: any = {};
@@ -3014,7 +2825,9 @@ export const CreateBucketRequest = {
     const message = createBaseCreateBucketRequest();
     message.parent = object.parent ?? "";
     message.bucketId = object.bucketId ?? "";
-    message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
+    if (object.bucket !== undefined && object.bucket !== null) {
+      message.bucket = LogBucket.fromPartial(object.bucket);
+    }
     return message;
   },
   fromSDK(object: CreateBucketRequestSDKType): CreateBucketRequest {
@@ -3084,7 +2897,7 @@ function createBaseUpdateBucketRequest(): UpdateBucketRequest {
 export const UpdateBucketRequest = {
   typeUrl: "/google.logging.v2.UpdateBucketRequest",
   encode(message: UpdateBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.bucket !== undefined) {
@@ -3119,11 +2932,11 @@ export const UpdateBucketRequest = {
     return message;
   },
   fromJSON(object: any): UpdateBucketRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      bucket: isSet(object.bucket) ? LogBucket.fromJSON(object.bucket) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
-    };
+    const obj = createBaseUpdateBucketRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.bucket)) obj.bucket = LogBucket.fromJSON(object.bucket);
+    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
+    return obj;
   },
   toJSON(message: UpdateBucketRequest): JsonSafe<UpdateBucketRequest> {
     const obj: any = {};
@@ -3135,8 +2948,12 @@ export const UpdateBucketRequest = {
   fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
-    message.bucket = object.bucket !== undefined && object.bucket !== null ? LogBucket.fromPartial(object.bucket) : undefined;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
+    if (object.bucket !== undefined && object.bucket !== null) {
+      message.bucket = LogBucket.fromPartial(object.bucket);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateBucketRequestSDKType): UpdateBucketRequest {
@@ -3204,7 +3021,7 @@ function createBaseGetBucketRequest(): GetBucketRequest {
 export const GetBucketRequest = {
   typeUrl: "/google.logging.v2.GetBucketRequest",
   encode(message: GetBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3227,9 +3044,9 @@ export const GetBucketRequest = {
     return message;
   },
   fromJSON(object: any): GetBucketRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseGetBucketRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: GetBucketRequest): JsonSafe<GetBucketRequest> {
     const obj: any = {};
@@ -3292,7 +3109,7 @@ function createBaseDeleteBucketRequest(): DeleteBucketRequest {
 export const DeleteBucketRequest = {
   typeUrl: "/google.logging.v2.DeleteBucketRequest",
   encode(message: DeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3315,9 +3132,9 @@ export const DeleteBucketRequest = {
     return message;
   },
   fromJSON(object: any): DeleteBucketRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseDeleteBucketRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: DeleteBucketRequest): JsonSafe<DeleteBucketRequest> {
     const obj: any = {};
@@ -3380,7 +3197,7 @@ function createBaseUndeleteBucketRequest(): UndeleteBucketRequest {
 export const UndeleteBucketRequest = {
   typeUrl: "/google.logging.v2.UndeleteBucketRequest",
   encode(message: UndeleteBucketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3403,9 +3220,9 @@ export const UndeleteBucketRequest = {
     return message;
   },
   fromJSON(object: any): UndeleteBucketRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseUndeleteBucketRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: UndeleteBucketRequest): JsonSafe<UndeleteBucketRequest> {
     const obj: any = {};
@@ -3470,13 +3287,13 @@ function createBaseListViewsRequest(): ListViewsRequest {
 export const ListViewsRequest = {
   typeUrl: "/google.logging.v2.ListViewsRequest",
   encode(message: ListViewsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -3505,11 +3322,11 @@ export const ListViewsRequest = {
     return message;
   },
   fromJSON(object: any): ListViewsRequest {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
-      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
-    };
+    const obj = createBaseListViewsRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    return obj;
   },
   toJSON(message: ListViewsRequest): JsonSafe<ListViewsRequest> {
     const obj: any = {};
@@ -3594,7 +3411,7 @@ export const ListViewsResponse = {
     for (const v of message.views) {
       LogView.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -3620,10 +3437,10 @@ export const ListViewsResponse = {
     return message;
   },
   fromJSON(object: any): ListViewsResponse {
-    return {
-      views: Array.isArray(object?.views) ? object.views.map((e: any) => LogView.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
-    };
+    const obj = createBaseListViewsResponse();
+    if (Array.isArray(object?.views)) obj.views = object.views.map((e: any) => LogView.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
   },
   toJSON(message: ListViewsResponse): JsonSafe<ListViewsResponse> {
     const obj: any = {};
@@ -3707,10 +3524,10 @@ function createBaseCreateViewRequest(): CreateViewRequest {
 export const CreateViewRequest = {
   typeUrl: "/google.logging.v2.CreateViewRequest",
   encode(message: CreateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.viewId !== "") {
+    if (message.viewId !== undefined) {
       writer.uint32(18).string(message.viewId);
     }
     if (message.view !== undefined) {
@@ -3742,11 +3559,11 @@ export const CreateViewRequest = {
     return message;
   },
   fromJSON(object: any): CreateViewRequest {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      viewId: isSet(object.viewId) ? String(object.viewId) : "",
-      view: isSet(object.view) ? LogView.fromJSON(object.view) : undefined
-    };
+    const obj = createBaseCreateViewRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.viewId)) obj.viewId = String(object.viewId);
+    if (isSet(object.view)) obj.view = LogView.fromJSON(object.view);
+    return obj;
   },
   toJSON(message: CreateViewRequest): JsonSafe<CreateViewRequest> {
     const obj: any = {};
@@ -3759,7 +3576,9 @@ export const CreateViewRequest = {
     const message = createBaseCreateViewRequest();
     message.parent = object.parent ?? "";
     message.viewId = object.viewId ?? "";
-    message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
+    if (object.view !== undefined && object.view !== null) {
+      message.view = LogView.fromPartial(object.view);
+    }
     return message;
   },
   fromSDK(object: CreateViewRequestSDKType): CreateViewRequest {
@@ -3829,7 +3648,7 @@ function createBaseUpdateViewRequest(): UpdateViewRequest {
 export const UpdateViewRequest = {
   typeUrl: "/google.logging.v2.UpdateViewRequest",
   encode(message: UpdateViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.view !== undefined) {
@@ -3864,11 +3683,11 @@ export const UpdateViewRequest = {
     return message;
   },
   fromJSON(object: any): UpdateViewRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      view: isSet(object.view) ? LogView.fromJSON(object.view) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
-    };
+    const obj = createBaseUpdateViewRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.view)) obj.view = LogView.fromJSON(object.view);
+    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
+    return obj;
   },
   toJSON(message: UpdateViewRequest): JsonSafe<UpdateViewRequest> {
     const obj: any = {};
@@ -3880,8 +3699,12 @@ export const UpdateViewRequest = {
   fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
-    message.view = object.view !== undefined && object.view !== null ? LogView.fromPartial(object.view) : undefined;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
+    if (object.view !== undefined && object.view !== null) {
+      message.view = LogView.fromPartial(object.view);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateViewRequestSDKType): UpdateViewRequest {
@@ -3949,7 +3772,7 @@ function createBaseGetViewRequest(): GetViewRequest {
 export const GetViewRequest = {
   typeUrl: "/google.logging.v2.GetViewRequest",
   encode(message: GetViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -3972,9 +3795,9 @@ export const GetViewRequest = {
     return message;
   },
   fromJSON(object: any): GetViewRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseGetViewRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: GetViewRequest): JsonSafe<GetViewRequest> {
     const obj: any = {};
@@ -4037,7 +3860,7 @@ function createBaseDeleteViewRequest(): DeleteViewRequest {
 export const DeleteViewRequest = {
   typeUrl: "/google.logging.v2.DeleteViewRequest",
   encode(message: DeleteViewRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -4060,9 +3883,9 @@ export const DeleteViewRequest = {
     return message;
   },
   fromJSON(object: any): DeleteViewRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseDeleteViewRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: DeleteViewRequest): JsonSafe<DeleteViewRequest> {
     const obj: any = {};
@@ -4127,13 +3950,13 @@ function createBaseListSinksRequest(): ListSinksRequest {
 export const ListSinksRequest = {
   typeUrl: "/google.logging.v2.ListSinksRequest",
   encode(message: ListSinksRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -4162,11 +3985,11 @@ export const ListSinksRequest = {
     return message;
   },
   fromJSON(object: any): ListSinksRequest {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
-      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
-    };
+    const obj = createBaseListSinksRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    return obj;
   },
   toJSON(message: ListSinksRequest): JsonSafe<ListSinksRequest> {
     const obj: any = {};
@@ -4251,7 +4074,7 @@ export const ListSinksResponse = {
     for (const v of message.sinks) {
       LogSink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -4277,10 +4100,10 @@ export const ListSinksResponse = {
     return message;
   },
   fromJSON(object: any): ListSinksResponse {
-    return {
-      sinks: Array.isArray(object?.sinks) ? object.sinks.map((e: any) => LogSink.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
-    };
+    const obj = createBaseListSinksResponse();
+    if (Array.isArray(object?.sinks)) obj.sinks = object.sinks.map((e: any) => LogSink.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
   },
   toJSON(message: ListSinksResponse): JsonSafe<ListSinksResponse> {
     const obj: any = {};
@@ -4362,7 +4185,7 @@ function createBaseGetSinkRequest(): GetSinkRequest {
 export const GetSinkRequest = {
   typeUrl: "/google.logging.v2.GetSinkRequest",
   encode(message: GetSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== "") {
+    if (message.sinkName !== undefined) {
       writer.uint32(10).string(message.sinkName);
     }
     return writer;
@@ -4385,9 +4208,9 @@ export const GetSinkRequest = {
     return message;
   },
   fromJSON(object: any): GetSinkRequest {
-    return {
-      sinkName: isSet(object.sinkName) ? String(object.sinkName) : ""
-    };
+    const obj = createBaseGetSinkRequest();
+    if (isSet(object.sinkName)) obj.sinkName = String(object.sinkName);
+    return obj;
   },
   toJSON(message: GetSinkRequest): JsonSafe<GetSinkRequest> {
     const obj: any = {};
@@ -4452,13 +4275,13 @@ function createBaseCreateSinkRequest(): CreateSinkRequest {
 export const CreateSinkRequest = {
   typeUrl: "/google.logging.v2.CreateSinkRequest",
   encode(message: CreateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.sink !== undefined) {
       LogSink.encode(message.sink, writer.uint32(18).fork()).ldelim();
     }
-    if (message.uniqueWriterIdentity === true) {
+    if (message.uniqueWriterIdentity !== undefined) {
       writer.uint32(24).bool(message.uniqueWriterIdentity);
     }
     return writer;
@@ -4487,11 +4310,11 @@ export const CreateSinkRequest = {
     return message;
   },
   fromJSON(object: any): CreateSinkRequest {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      sink: isSet(object.sink) ? LogSink.fromJSON(object.sink) : undefined,
-      uniqueWriterIdentity: isSet(object.uniqueWriterIdentity) ? Boolean(object.uniqueWriterIdentity) : false
-    };
+    const obj = createBaseCreateSinkRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.sink)) obj.sink = LogSink.fromJSON(object.sink);
+    if (isSet(object.uniqueWriterIdentity)) obj.uniqueWriterIdentity = Boolean(object.uniqueWriterIdentity);
+    return obj;
   },
   toJSON(message: CreateSinkRequest): JsonSafe<CreateSinkRequest> {
     const obj: any = {};
@@ -4503,7 +4326,9 @@ export const CreateSinkRequest = {
   fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
     const message = createBaseCreateSinkRequest();
     message.parent = object.parent ?? "";
-    message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
+    if (object.sink !== undefined && object.sink !== null) {
+      message.sink = LogSink.fromPartial(object.sink);
+    }
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
     return message;
   },
@@ -4575,13 +4400,13 @@ function createBaseUpdateSinkRequest(): UpdateSinkRequest {
 export const UpdateSinkRequest = {
   typeUrl: "/google.logging.v2.UpdateSinkRequest",
   encode(message: UpdateSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== "") {
+    if (message.sinkName !== undefined) {
       writer.uint32(10).string(message.sinkName);
     }
     if (message.sink !== undefined) {
       LogSink.encode(message.sink, writer.uint32(18).fork()).ldelim();
     }
-    if (message.uniqueWriterIdentity === true) {
+    if (message.uniqueWriterIdentity !== undefined) {
       writer.uint32(24).bool(message.uniqueWriterIdentity);
     }
     if (message.updateMask !== undefined) {
@@ -4616,12 +4441,12 @@ export const UpdateSinkRequest = {
     return message;
   },
   fromJSON(object: any): UpdateSinkRequest {
-    return {
-      sinkName: isSet(object.sinkName) ? String(object.sinkName) : "",
-      sink: isSet(object.sink) ? LogSink.fromJSON(object.sink) : undefined,
-      uniqueWriterIdentity: isSet(object.uniqueWriterIdentity) ? Boolean(object.uniqueWriterIdentity) : false,
-      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
-    };
+    const obj = createBaseUpdateSinkRequest();
+    if (isSet(object.sinkName)) obj.sinkName = String(object.sinkName);
+    if (isSet(object.sink)) obj.sink = LogSink.fromJSON(object.sink);
+    if (isSet(object.uniqueWriterIdentity)) obj.uniqueWriterIdentity = Boolean(object.uniqueWriterIdentity);
+    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
+    return obj;
   },
   toJSON(message: UpdateSinkRequest): JsonSafe<UpdateSinkRequest> {
     const obj: any = {};
@@ -4634,9 +4459,13 @@ export const UpdateSinkRequest = {
   fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
     message.sinkName = object.sinkName ?? "";
-    message.sink = object.sink !== undefined && object.sink !== null ? LogSink.fromPartial(object.sink) : undefined;
+    if (object.sink !== undefined && object.sink !== null) {
+      message.sink = LogSink.fromPartial(object.sink);
+    }
     message.uniqueWriterIdentity = object.uniqueWriterIdentity ?? false;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateSinkRequestSDKType): UpdateSinkRequest {
@@ -4711,7 +4540,7 @@ function createBaseDeleteSinkRequest(): DeleteSinkRequest {
 export const DeleteSinkRequest = {
   typeUrl: "/google.logging.v2.DeleteSinkRequest",
   encode(message: DeleteSinkRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sinkName !== "") {
+    if (message.sinkName !== undefined) {
       writer.uint32(10).string(message.sinkName);
     }
     return writer;
@@ -4734,9 +4563,9 @@ export const DeleteSinkRequest = {
     return message;
   },
   fromJSON(object: any): DeleteSinkRequest {
-    return {
-      sinkName: isSet(object.sinkName) ? String(object.sinkName) : ""
-    };
+    const obj = createBaseDeleteSinkRequest();
+    if (isSet(object.sinkName)) obj.sinkName = String(object.sinkName);
+    return obj;
   },
   toJSON(message: DeleteSinkRequest): JsonSafe<DeleteSinkRequest> {
     const obj: any = {};
@@ -4804,16 +4633,16 @@ function createBaseLogExclusion(): LogExclusion {
 export const LogExclusion = {
   typeUrl: "/google.logging.v2.LogExclusion",
   encode(message: LogExclusion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(26).string(message.filter);
     }
-    if (message.disabled === true) {
+    if (message.disabled !== undefined) {
       writer.uint32(32).bool(message.disabled);
     }
     if (message.createTime !== undefined) {
@@ -4857,14 +4686,14 @@ export const LogExclusion = {
     return message;
   },
   fromJSON(object: any): LogExclusion {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      disabled: isSet(object.disabled) ? Boolean(object.disabled) : false,
-      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
-    };
+    const obj = createBaseLogExclusion();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.filter)) obj.filter = String(object.filter);
+    if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
+    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
+    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
+    return obj;
   },
   toJSON(message: LogExclusion): JsonSafe<LogExclusion> {
     const obj: any = {};
@@ -4974,13 +4803,13 @@ function createBaseListExclusionsRequest(): ListExclusionsRequest {
 export const ListExclusionsRequest = {
   typeUrl: "/google.logging.v2.ListExclusionsRequest",
   encode(message: ListExclusionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(18).string(message.pageToken);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(24).int32(message.pageSize);
     }
     return writer;
@@ -5009,11 +4838,11 @@ export const ListExclusionsRequest = {
     return message;
   },
   fromJSON(object: any): ListExclusionsRequest {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      pageToken: isSet(object.pageToken) ? String(object.pageToken) : "",
-      pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
-    };
+    const obj = createBaseListExclusionsRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    return obj;
   },
   toJSON(message: ListExclusionsRequest): JsonSafe<ListExclusionsRequest> {
     const obj: any = {};
@@ -5098,7 +4927,7 @@ export const ListExclusionsResponse = {
     for (const v of message.exclusions) {
       LogExclusion.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -5124,10 +4953,10 @@ export const ListExclusionsResponse = {
     return message;
   },
   fromJSON(object: any): ListExclusionsResponse {
-    return {
-      exclusions: Array.isArray(object?.exclusions) ? object.exclusions.map((e: any) => LogExclusion.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
-    };
+    const obj = createBaseListExclusionsResponse();
+    if (Array.isArray(object?.exclusions)) obj.exclusions = object.exclusions.map((e: any) => LogExclusion.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
   },
   toJSON(message: ListExclusionsResponse): JsonSafe<ListExclusionsResponse> {
     const obj: any = {};
@@ -5209,7 +5038,7 @@ function createBaseGetExclusionRequest(): GetExclusionRequest {
 export const GetExclusionRequest = {
   typeUrl: "/google.logging.v2.GetExclusionRequest",
   encode(message: GetExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5232,9 +5061,9 @@ export const GetExclusionRequest = {
     return message;
   },
   fromJSON(object: any): GetExclusionRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseGetExclusionRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: GetExclusionRequest): JsonSafe<GetExclusionRequest> {
     const obj: any = {};
@@ -5298,7 +5127,7 @@ function createBaseCreateExclusionRequest(): CreateExclusionRequest {
 export const CreateExclusionRequest = {
   typeUrl: "/google.logging.v2.CreateExclusionRequest",
   encode(message: CreateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.exclusion !== undefined) {
@@ -5327,10 +5156,10 @@ export const CreateExclusionRequest = {
     return message;
   },
   fromJSON(object: any): CreateExclusionRequest {
-    return {
-      parent: isSet(object.parent) ? String(object.parent) : "",
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromJSON(object.exclusion) : undefined
-    };
+    const obj = createBaseCreateExclusionRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.exclusion)) obj.exclusion = LogExclusion.fromJSON(object.exclusion);
+    return obj;
   },
   toJSON(message: CreateExclusionRequest): JsonSafe<CreateExclusionRequest> {
     const obj: any = {};
@@ -5341,7 +5170,9 @@ export const CreateExclusionRequest = {
   fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
     const message = createBaseCreateExclusionRequest();
     message.parent = object.parent ?? "";
-    message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
+    if (object.exclusion !== undefined && object.exclusion !== null) {
+      message.exclusion = LogExclusion.fromPartial(object.exclusion);
+    }
     return message;
   },
   fromSDK(object: CreateExclusionRequestSDKType): CreateExclusionRequest {
@@ -5404,7 +5235,7 @@ function createBaseUpdateExclusionRequest(): UpdateExclusionRequest {
 export const UpdateExclusionRequest = {
   typeUrl: "/google.logging.v2.UpdateExclusionRequest",
   encode(message: UpdateExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.exclusion !== undefined) {
@@ -5439,11 +5270,11 @@ export const UpdateExclusionRequest = {
     return message;
   },
   fromJSON(object: any): UpdateExclusionRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      exclusion: isSet(object.exclusion) ? LogExclusion.fromJSON(object.exclusion) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
-    };
+    const obj = createBaseUpdateExclusionRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.exclusion)) obj.exclusion = LogExclusion.fromJSON(object.exclusion);
+    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
+    return obj;
   },
   toJSON(message: UpdateExclusionRequest): JsonSafe<UpdateExclusionRequest> {
     const obj: any = {};
@@ -5455,8 +5286,12 @@ export const UpdateExclusionRequest = {
   fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
-    message.exclusion = object.exclusion !== undefined && object.exclusion !== null ? LogExclusion.fromPartial(object.exclusion) : undefined;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
+    if (object.exclusion !== undefined && object.exclusion !== null) {
+      message.exclusion = LogExclusion.fromPartial(object.exclusion);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateExclusionRequestSDKType): UpdateExclusionRequest {
@@ -5524,7 +5359,7 @@ function createBaseDeleteExclusionRequest(): DeleteExclusionRequest {
 export const DeleteExclusionRequest = {
   typeUrl: "/google.logging.v2.DeleteExclusionRequest",
   encode(message: DeleteExclusionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5547,9 +5382,9 @@ export const DeleteExclusionRequest = {
     return message;
   },
   fromJSON(object: any): DeleteExclusionRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseDeleteExclusionRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: DeleteExclusionRequest): JsonSafe<DeleteExclusionRequest> {
     const obj: any = {};
@@ -5612,7 +5447,7 @@ function createBaseGetCmekSettingsRequest(): GetCmekSettingsRequest {
 export const GetCmekSettingsRequest = {
   typeUrl: "/google.logging.v2.GetCmekSettingsRequest",
   encode(message: GetCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5635,9 +5470,9 @@ export const GetCmekSettingsRequest = {
     return message;
   },
   fromJSON(object: any): GetCmekSettingsRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseGetCmekSettingsRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: GetCmekSettingsRequest): JsonSafe<GetCmekSettingsRequest> {
     const obj: any = {};
@@ -5702,7 +5537,7 @@ function createBaseUpdateCmekSettingsRequest(): UpdateCmekSettingsRequest {
 export const UpdateCmekSettingsRequest = {
   typeUrl: "/google.logging.v2.UpdateCmekSettingsRequest",
   encode(message: UpdateCmekSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.cmekSettings !== undefined) {
@@ -5737,11 +5572,11 @@ export const UpdateCmekSettingsRequest = {
     return message;
   },
   fromJSON(object: any): UpdateCmekSettingsRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
-    };
+    const obj = createBaseUpdateCmekSettingsRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.cmekSettings)) obj.cmekSettings = CmekSettings.fromJSON(object.cmekSettings);
+    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
+    return obj;
   },
   toJSON(message: UpdateCmekSettingsRequest): JsonSafe<UpdateCmekSettingsRequest> {
     const obj: any = {};
@@ -5753,8 +5588,12 @@ export const UpdateCmekSettingsRequest = {
   fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
     const message = createBaseUpdateCmekSettingsRequest();
     message.name = object.name ?? "";
-    message.cmekSettings = object.cmekSettings !== undefined && object.cmekSettings !== null ? CmekSettings.fromPartial(object.cmekSettings) : undefined;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
+    if (object.cmekSettings !== undefined && object.cmekSettings !== null) {
+      message.cmekSettings = CmekSettings.fromPartial(object.cmekSettings);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateCmekSettingsRequestSDKType): UpdateCmekSettingsRequest {
@@ -5824,13 +5663,13 @@ function createBaseCmekSettings(): CmekSettings {
 export const CmekSettings = {
   typeUrl: "/google.logging.v2.CmekSettings",
   encode(message: CmekSettings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.kmsKeyName !== "") {
+    if (message.kmsKeyName !== undefined) {
       writer.uint32(18).string(message.kmsKeyName);
     }
-    if (message.serviceAccountId !== "") {
+    if (message.serviceAccountId !== undefined) {
       writer.uint32(26).string(message.serviceAccountId);
     }
     return writer;
@@ -5859,11 +5698,11 @@ export const CmekSettings = {
     return message;
   },
   fromJSON(object: any): CmekSettings {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      kmsKeyName: isSet(object.kmsKeyName) ? String(object.kmsKeyName) : "",
-      serviceAccountId: isSet(object.serviceAccountId) ? String(object.serviceAccountId) : ""
-    };
+    const obj = createBaseCmekSettings();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.kmsKeyName)) obj.kmsKeyName = String(object.kmsKeyName);
+    if (isSet(object.serviceAccountId)) obj.serviceAccountId = String(object.serviceAccountId);
+    return obj;
   },
   toJSON(message: CmekSettings): JsonSafe<CmekSettings> {
     const obj: any = {};
@@ -5944,7 +5783,7 @@ function createBaseGetSettingsRequest(): GetSettingsRequest {
 export const GetSettingsRequest = {
   typeUrl: "/google.logging.v2.GetSettingsRequest",
   encode(message: GetSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -5967,9 +5806,9 @@ export const GetSettingsRequest = {
     return message;
   },
   fromJSON(object: any): GetSettingsRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseGetSettingsRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: GetSettingsRequest): JsonSafe<GetSettingsRequest> {
     const obj: any = {};
@@ -6034,7 +5873,7 @@ function createBaseUpdateSettingsRequest(): UpdateSettingsRequest {
 export const UpdateSettingsRequest = {
   typeUrl: "/google.logging.v2.UpdateSettingsRequest",
   encode(message: UpdateSettingsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.settings !== undefined) {
@@ -6069,11 +5908,11 @@ export const UpdateSettingsRequest = {
     return message;
   },
   fromJSON(object: any): UpdateSettingsRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      settings: isSet(object.settings) ? Settings.fromJSON(object.settings) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
-    };
+    const obj = createBaseUpdateSettingsRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.settings)) obj.settings = Settings.fromJSON(object.settings);
+    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
+    return obj;
   },
   toJSON(message: UpdateSettingsRequest): JsonSafe<UpdateSettingsRequest> {
     const obj: any = {};
@@ -6085,8 +5924,12 @@ export const UpdateSettingsRequest = {
   fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
     const message = createBaseUpdateSettingsRequest();
     message.name = object.name ?? "";
-    message.settings = object.settings !== undefined && object.settings !== null ? Settings.fromPartial(object.settings) : undefined;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
+    if (object.settings !== undefined && object.settings !== null) {
+      message.settings = Settings.fromPartial(object.settings);
+    }
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     return message;
   },
   fromSDK(object: UpdateSettingsRequestSDKType): UpdateSettingsRequest {
@@ -6158,19 +6001,19 @@ function createBaseSettings(): Settings {
 export const Settings = {
   typeUrl: "/google.logging.v2.Settings",
   encode(message: Settings, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.kmsKeyName !== "") {
+    if (message.kmsKeyName !== undefined) {
       writer.uint32(18).string(message.kmsKeyName);
     }
-    if (message.kmsServiceAccountId !== "") {
+    if (message.kmsServiceAccountId !== undefined) {
       writer.uint32(26).string(message.kmsServiceAccountId);
     }
-    if (message.storageLocation !== "") {
+    if (message.storageLocation !== undefined) {
       writer.uint32(34).string(message.storageLocation);
     }
-    if (message.disableDefaultSink === true) {
+    if (message.disableDefaultSink !== undefined) {
       writer.uint32(40).bool(message.disableDefaultSink);
     }
     return writer;
@@ -6205,13 +6048,13 @@ export const Settings = {
     return message;
   },
   fromJSON(object: any): Settings {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      kmsKeyName: isSet(object.kmsKeyName) ? String(object.kmsKeyName) : "",
-      kmsServiceAccountId: isSet(object.kmsServiceAccountId) ? String(object.kmsServiceAccountId) : "",
-      storageLocation: isSet(object.storageLocation) ? String(object.storageLocation) : "",
-      disableDefaultSink: isSet(object.disableDefaultSink) ? Boolean(object.disableDefaultSink) : false
-    };
+    const obj = createBaseSettings();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.kmsKeyName)) obj.kmsKeyName = String(object.kmsKeyName);
+    if (isSet(object.kmsServiceAccountId)) obj.kmsServiceAccountId = String(object.kmsServiceAccountId);
+    if (isSet(object.storageLocation)) obj.storageLocation = String(object.storageLocation);
+    if (isSet(object.disableDefaultSink)) obj.disableDefaultSink = Boolean(object.disableDefaultSink);
+    return obj;
   },
   toJSON(message: Settings): JsonSafe<Settings> {
     const obj: any = {};
@@ -6312,13 +6155,13 @@ function createBaseCopyLogEntriesRequest(): CopyLogEntriesRequest {
 export const CopyLogEntriesRequest = {
   typeUrl: "/google.logging.v2.CopyLogEntriesRequest",
   encode(message: CopyLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(26).string(message.filter);
     }
-    if (message.destination !== "") {
+    if (message.destination !== undefined) {
       writer.uint32(34).string(message.destination);
     }
     return writer;
@@ -6347,11 +6190,11 @@ export const CopyLogEntriesRequest = {
     return message;
   },
   fromJSON(object: any): CopyLogEntriesRequest {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      filter: isSet(object.filter) ? String(object.filter) : "",
-      destination: isSet(object.destination) ? String(object.destination) : ""
-    };
+    const obj = createBaseCopyLogEntriesRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.filter)) obj.filter = String(object.filter);
+    if (isSet(object.destination)) obj.destination = String(object.destination);
+    return obj;
   },
   toJSON(message: CopyLogEntriesRequest): JsonSafe<CopyLogEntriesRequest> {
     const obj: any = {};
@@ -6447,16 +6290,16 @@ export const CopyLogEntriesMetadata = {
     if (message.state !== 0) {
       writer.uint32(24).int32(message.state);
     }
-    if (message.cancellationRequested === true) {
+    if (message.cancellationRequested !== undefined) {
       writer.uint32(32).bool(message.cancellationRequested);
     }
     if (message.request !== undefined) {
       CopyLogEntriesRequest.encode(message.request, writer.uint32(42).fork()).ldelim();
     }
-    if (message.progress !== 0) {
+    if (message.progress !== undefined) {
       writer.uint32(48).int32(message.progress);
     }
-    if (message.writerIdentity !== "") {
+    if (message.writerIdentity !== undefined) {
       writer.uint32(58).string(message.writerIdentity);
     }
     return writer;
@@ -6497,15 +6340,15 @@ export const CopyLogEntriesMetadata = {
     return message;
   },
   fromJSON(object: any): CopyLogEntriesMetadata {
-    return {
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      endTime: isSet(object.endTime) ? new Date(object.endTime) : undefined,
-      state: isSet(object.state) ? operationStateFromJSON(object.state) : -1,
-      cancellationRequested: isSet(object.cancellationRequested) ? Boolean(object.cancellationRequested) : false,
-      request: isSet(object.request) ? CopyLogEntriesRequest.fromJSON(object.request) : undefined,
-      progress: isSet(object.progress) ? Number(object.progress) : 0,
-      writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : ""
-    };
+    const obj = createBaseCopyLogEntriesMetadata();
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
+    if (isSet(object.state)) obj.state = operationStateFromJSON(object.state);
+    if (isSet(object.cancellationRequested)) obj.cancellationRequested = Boolean(object.cancellationRequested);
+    if (isSet(object.request)) obj.request = CopyLogEntriesRequest.fromJSON(object.request);
+    if (isSet(object.progress)) obj.progress = Number(object.progress);
+    if (isSet(object.writerIdentity)) obj.writerIdentity = String(object.writerIdentity);
+    return obj;
   },
   toJSON(message: CopyLogEntriesMetadata): JsonSafe<CopyLogEntriesMetadata> {
     const obj: any = {};
@@ -6524,7 +6367,9 @@ export const CopyLogEntriesMetadata = {
     message.endTime = object.endTime ?? undefined;
     message.state = object.state ?? 0;
     message.cancellationRequested = object.cancellationRequested ?? false;
-    message.request = object.request !== undefined && object.request !== null ? CopyLogEntriesRequest.fromPartial(object.request) : undefined;
+    if (object.request !== undefined && object.request !== null) {
+      message.request = CopyLogEntriesRequest.fromPartial(object.request);
+    }
     message.progress = object.progress ?? 0;
     message.writerIdentity = object.writerIdentity ?? "";
     return message;
@@ -6622,7 +6467,7 @@ function createBaseCopyLogEntriesResponse(): CopyLogEntriesResponse {
 export const CopyLogEntriesResponse = {
   typeUrl: "/google.logging.v2.CopyLogEntriesResponse",
   encode(message: CopyLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logEntriesCopiedCount !== BigInt(0)) {
+    if (message.logEntriesCopiedCount !== undefined) {
       writer.uint32(8).int64(message.logEntriesCopiedCount);
     }
     return writer;
@@ -6645,9 +6490,9 @@ export const CopyLogEntriesResponse = {
     return message;
   },
   fromJSON(object: any): CopyLogEntriesResponse {
-    return {
-      logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? BigInt(object.logEntriesCopiedCount.toString()) : BigInt(0)
-    };
+    const obj = createBaseCopyLogEntriesResponse();
+    if (isSet(object.logEntriesCopiedCount)) obj.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
+    return obj;
   },
   toJSON(message: CopyLogEntriesResponse): JsonSafe<CopyLogEntriesResponse> {
     const obj: any = {};
@@ -6656,7 +6501,9 @@ export const CopyLogEntriesResponse = {
   },
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {
     const message = createBaseCopyLogEntriesResponse();
-    message.logEntriesCopiedCount = object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null ? BigInt(object.logEntriesCopiedCount.toString()) : BigInt(0);
+    if (object.logEntriesCopiedCount !== undefined && object.logEntriesCopiedCount !== null) {
+      message.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
+    }
     return message;
   },
   fromSDK(object: CopyLogEntriesResponseSDKType): CopyLogEntriesResponse {

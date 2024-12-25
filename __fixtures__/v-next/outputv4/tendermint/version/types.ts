@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "tendermint.version";
 /**
  * App includes the protocol and software version for the application.
@@ -11,10 +10,6 @@ export const protobufPackage = "tendermint.version";
 export interface App {
   protocol: bigint;
   software: string;
-}
-export interface ReactiveApp {
-  protocol: ComputedRef<bigint>;
-  software: ComputedRef<string>;
 }
 export interface AppProtoMsg {
   typeUrl: "/tendermint.version.App";
@@ -38,10 +33,6 @@ export interface Consensus {
   block: bigint;
   app: bigint;
 }
-export interface ReactiveConsensus {
-  block: ComputedRef<bigint>;
-  app: ComputedRef<bigint>;
-}
 export interface ConsensusProtoMsg {
   typeUrl: "/tendermint.version.Consensus";
   value: Uint8Array;
@@ -64,10 +55,10 @@ function createBaseApp(): App {
 export const App = {
   typeUrl: "/tendermint.version.App",
   encode(message: App, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.protocol !== BigInt(0)) {
+    if (message.protocol !== undefined) {
       writer.uint32(8).uint64(message.protocol);
     }
-    if (message.software !== "") {
+    if (message.software !== undefined) {
       writer.uint32(18).string(message.software);
     }
     return writer;
@@ -93,10 +84,10 @@ export const App = {
     return message;
   },
   fromJSON(object: any): App {
-    return {
-      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt(0),
-      software: isSet(object.software) ? String(object.software) : ""
-    };
+    const obj = createBaseApp();
+    if (isSet(object.protocol)) obj.protocol = BigInt(object.protocol.toString());
+    if (isSet(object.software)) obj.software = String(object.software);
+    return obj;
   },
   toJSON(message: App): JsonSafe<App> {
     const obj: any = {};
@@ -106,7 +97,9 @@ export const App = {
   },
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
-    message.protocol = object.protocol !== undefined && object.protocol !== null ? BigInt(object.protocol.toString()) : BigInt(0);
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = BigInt(object.protocol.toString());
+    }
     message.software = object.software ?? "";
     return message;
   },
@@ -169,10 +162,10 @@ function createBaseConsensus(): Consensus {
 export const Consensus = {
   typeUrl: "/tendermint.version.Consensus",
   encode(message: Consensus, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.block !== BigInt(0)) {
+    if (message.block !== undefined) {
       writer.uint32(8).uint64(message.block);
     }
-    if (message.app !== BigInt(0)) {
+    if (message.app !== undefined) {
       writer.uint32(16).uint64(message.app);
     }
     return writer;
@@ -198,10 +191,10 @@ export const Consensus = {
     return message;
   },
   fromJSON(object: any): Consensus {
-    return {
-      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
-      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
-    };
+    const obj = createBaseConsensus();
+    if (isSet(object.block)) obj.block = BigInt(object.block.toString());
+    if (isSet(object.app)) obj.app = BigInt(object.app.toString());
+    return obj;
   },
   toJSON(message: Consensus): JsonSafe<Consensus> {
     const obj: any = {};
@@ -211,8 +204,12 @@ export const Consensus = {
   },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
-    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt(0);
-    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt(0);
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BigInt(object.block.toString());
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = BigInt(object.app.toString());
+    }
     return message;
   },
   fromSDK(object: ConsensusSDKType): Consensus {

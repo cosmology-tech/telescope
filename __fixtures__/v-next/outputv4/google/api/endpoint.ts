@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.api";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -53,12 +52,6 @@ export interface Endpoint {
    */
   allowCors: boolean;
 }
-export interface ReactiveEndpoint {
-  name: ComputedRef<string>;
-  aliases: ComputedRef<string[]>;
-  target: ComputedRef<string>;
-  allowCors: ComputedRef<boolean>;
-}
 export interface EndpointProtoMsg {
   typeUrl: "/google.api.Endpoint";
   value: Uint8Array;
@@ -99,16 +92,16 @@ function createBaseEndpoint(): Endpoint {
 export const Endpoint = {
   typeUrl: "/google.api.Endpoint",
   encode(message: Endpoint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.aliases) {
       writer.uint32(18).string(v!);
     }
-    if (message.target !== "") {
+    if (message.target !== undefined) {
       writer.uint32(810).string(message.target);
     }
-    if (message.allowCors === true) {
+    if (message.allowCors !== undefined) {
       writer.uint32(40).bool(message.allowCors);
     }
     return writer;
@@ -140,12 +133,12 @@ export const Endpoint = {
     return message;
   },
   fromJSON(object: any): Endpoint {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => String(e)) : [],
-      target: isSet(object.target) ? String(object.target) : "",
-      allowCors: isSet(object.allowCors) ? Boolean(object.allowCors) : false
-    };
+    const obj = createBaseEndpoint();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.aliases)) obj.aliases = object.aliases.map((e: any) => String(e));
+    if (isSet(object.target)) obj.target = String(object.target);
+    if (isSet(object.allowCors)) obj.allowCors = Boolean(object.allowCors);
+    return obj;
   },
   toJSON(message: Endpoint): JsonSafe<Endpoint> {
     const obj: any = {};

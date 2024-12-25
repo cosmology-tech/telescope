@@ -1,9 +1,8 @@
-import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 import { Decimal } from "@cosmjs/math";
-import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -13,11 +12,6 @@ export interface GenesisState {
   incentives: Incentive[];
   /** active Gasmeters */
   gasMeters: GasMeter[];
-}
-export interface ReactiveGenesisState {
-  params: ComputedRef<Params>;
-  incentives: ComputedRef<Incentive[]>;
-  gasMeters: ComputedRef<GasMeter[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.incentives.v1.GenesisState";
@@ -39,12 +33,6 @@ export interface Params {
   incentivesEpochIdentifier: string;
   /** scaling factor for capping rewards */
   rewardScaler: string;
-}
-export interface ReactiveParams {
-  enableIncentives: ComputedRef<boolean>;
-  allocationLimit: ComputedRef<string>;
-  incentivesEpochIdentifier: ComputedRef<string>;
-  rewardScaler: ComputedRef<string>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/evmos.incentives.v1.Params";
@@ -102,11 +90,11 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromJSON(e)) : [],
-      gasMeters: Array.isArray(object?.gasMeters) ? object.gasMeters.map((e: any) => GasMeter.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.incentives)) obj.incentives = object.incentives.map((e: any) => Incentive.fromJSON(e));
+    if (Array.isArray(object?.gasMeters)) obj.gasMeters = object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -125,7 +113,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
     return message;
@@ -210,16 +200,16 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.incentives.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableIncentives === true) {
+    if (message.enableIncentives !== undefined) {
       writer.uint32(8).bool(message.enableIncentives);
     }
-    if (message.allocationLimit !== "") {
+    if (message.allocationLimit !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.allocationLimit, 18).atomics);
     }
-    if (message.incentivesEpochIdentifier !== "") {
+    if (message.incentivesEpochIdentifier !== undefined) {
       writer.uint32(26).string(message.incentivesEpochIdentifier);
     }
-    if (message.rewardScaler !== "") {
+    if (message.rewardScaler !== undefined) {
       writer.uint32(34).string(Decimal.fromUserInput(message.rewardScaler, 18).atomics);
     }
     return writer;
@@ -251,12 +241,12 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      enableIncentives: isSet(object.enableIncentives) ? Boolean(object.enableIncentives) : false,
-      allocationLimit: isSet(object.allocationLimit) ? String(object.allocationLimit) : "",
-      incentivesEpochIdentifier: isSet(object.incentivesEpochIdentifier) ? String(object.incentivesEpochIdentifier) : "",
-      rewardScaler: isSet(object.rewardScaler) ? String(object.rewardScaler) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.enableIncentives)) obj.enableIncentives = Boolean(object.enableIncentives);
+    if (isSet(object.allocationLimit)) obj.allocationLimit = String(object.allocationLimit);
+    if (isSet(object.incentivesEpochIdentifier)) obj.incentivesEpochIdentifier = String(object.incentivesEpochIdentifier);
+    if (isSet(object.rewardScaler)) obj.rewardScaler = String(object.rewardScaler);
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};

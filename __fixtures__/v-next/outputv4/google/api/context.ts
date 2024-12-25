@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
-import { DeepPartial, isSet } from "../../helpers";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /**
  * `Context` defines which contexts an API requests.
@@ -48,9 +47,6 @@ export interface Context {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: ContextRule[];
-}
-export interface ReactiveContext {
-  rules: ComputedRef<ContextRule[]>;
 }
 export interface ContextProtoMsg {
   typeUrl: "/google.api.Context";
@@ -123,13 +119,6 @@ export interface ContextRule {
    */
   allowedResponseExtensions: string[];
 }
-export interface ReactiveContextRule {
-  selector: ComputedRef<string>;
-  requested: ComputedRef<string[]>;
-  provided: ComputedRef<string[]>;
-  allowedRequestExtensions: ComputedRef<string[]>;
-  allowedResponseExtensions: ComputedRef<string[]>;
-}
 export interface ContextRuleProtoMsg {
   typeUrl: "/google.api.ContextRule";
   value: Uint8Array;
@@ -176,9 +165,9 @@ export const Context = {
     return message;
   },
   fromJSON(object: any): Context {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromJSON(e)) : []
-    };
+    const obj = createBaseContext();
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => ContextRule.fromJSON(e));
+    return obj;
   },
   toJSON(message: Context): JsonSafe<Context> {
     const obj: any = {};
@@ -255,7 +244,7 @@ function createBaseContextRule(): ContextRule {
 export const ContextRule = {
   typeUrl: "/google.api.ContextRule",
   encode(message: ContextRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     for (const v of message.requested) {
@@ -302,13 +291,13 @@ export const ContextRule = {
     return message;
   },
   fromJSON(object: any): ContextRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => String(e)) : [],
-      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => String(e)) : [],
-      allowedRequestExtensions: Array.isArray(object?.allowedRequestExtensions) ? object.allowedRequestExtensions.map((e: any) => String(e)) : [],
-      allowedResponseExtensions: Array.isArray(object?.allowedResponseExtensions) ? object.allowedResponseExtensions.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseContextRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (Array.isArray(object?.requested)) obj.requested = object.requested.map((e: any) => String(e));
+    if (Array.isArray(object?.provided)) obj.provided = object.provided.map((e: any) => String(e));
+    if (Array.isArray(object?.allowedRequestExtensions)) obj.allowedRequestExtensions = object.allowedRequestExtensions.map((e: any) => String(e));
+    if (Array.isArray(object?.allowedResponseExtensions)) obj.allowedResponseExtensions = object.allowedResponseExtensions.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: ContextRule): JsonSafe<ContextRule> {
     const obj: any = {};

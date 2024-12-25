@@ -1,9 +1,8 @@
-import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType } from "./tx";
-import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType } from "./tx.js";
+import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -12,13 +11,6 @@ export interface GenesisState {
   contracts: Contract[];
   sequences: Sequence[];
   genMsgs: GenesisState_GenMsgs[];
-}
-export interface ReactiveGenesisState {
-  params: ComputedRef<Params>;
-  codes: ComputedRef<Code[]>;
-  contracts: ComputedRef<Contract[]>;
-  sequences: ComputedRef<Sequence[]>;
-  genMsgs: ComputedRef<GenesisState_GenMsgs[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.GenesisState";
@@ -41,11 +33,6 @@ export interface GenesisState_GenMsgs {
   instantiateContract?: MsgInstantiateContract;
   executeContract?: MsgExecuteContract;
 }
-export interface ReactiveGenesisState_GenMsgs {
-  storeCode?: ComputedRef<MsgStoreCode>;
-  instantiateContract?: ComputedRef<MsgInstantiateContract>;
-  executeContract?: ComputedRef<MsgExecuteContract>;
-}
 export interface GenesisState_GenMsgsProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.GenMsgs";
   value: Uint8Array;
@@ -67,12 +54,6 @@ export interface Code {
   /** Pinned to wasmvm cache */
   pinned: boolean;
 }
-export interface ReactiveCode {
-  codeId: ComputedRef<bigint>;
-  codeInfo: ComputedRef<CodeInfo>;
-  codeBytes: ComputedRef<Uint8Array>;
-  pinned: ComputedRef<boolean>;
-}
 export interface CodeProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Code";
   value: Uint8Array;
@@ -90,11 +71,6 @@ export interface Contract {
   contractInfo: ContractInfo;
   contractState: Model[];
 }
-export interface ReactiveContract {
-  contractAddress: ComputedRef<string>;
-  contractInfo: ComputedRef<ContractInfo>;
-  contractState: ComputedRef<Model[]>;
-}
 export interface ContractProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Contract";
   value: Uint8Array;
@@ -109,10 +85,6 @@ export interface ContractSDKType {
 export interface Sequence {
   idKey: Uint8Array;
   value: bigint;
-}
-export interface ReactiveSequence {
-  idKey: ComputedRef<Uint8Array>;
-  value: ComputedRef<bigint>;
 }
 export interface SequenceProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Sequence";
@@ -182,13 +154,13 @@ export const GenesisState = {
     return message;
   },
   fromJSON(object: any): GenesisState {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromJSON(e)) : [],
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromJSON(e)) : [],
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromJSON(e)) : [],
-      genMsgs: Array.isArray(object?.genMsgs) ? object.genMsgs.map((e: any) => GenesisState_GenMsgs.fromJSON(e)) : []
-    };
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.codes)) obj.codes = object.codes.map((e: any) => Code.fromJSON(e));
+    if (Array.isArray(object?.contracts)) obj.contracts = object.contracts.map((e: any) => Contract.fromJSON(e));
+    if (Array.isArray(object?.sequences)) obj.sequences = object.sequences.map((e: any) => Sequence.fromJSON(e));
+    if (Array.isArray(object?.genMsgs)) obj.genMsgs = object.genMsgs.map((e: any) => GenesisState_GenMsgs.fromJSON(e));
+    return obj;
   },
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
@@ -217,7 +189,9 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.codes = object.codes?.map(e => Code.fromPartial(e)) || [];
     message.contracts = object.contracts?.map(e => Contract.fromPartial(e)) || [];
     message.sequences = object.sequences?.map(e => Sequence.fromPartial(e)) || [];
@@ -370,11 +344,11 @@ export const GenesisState_GenMsgs = {
     return message;
   },
   fromJSON(object: any): GenesisState_GenMsgs {
-    return {
-      storeCode: isSet(object.storeCode) ? MsgStoreCode.fromJSON(object.storeCode) : undefined,
-      instantiateContract: isSet(object.instantiateContract) ? MsgInstantiateContract.fromJSON(object.instantiateContract) : undefined,
-      executeContract: isSet(object.executeContract) ? MsgExecuteContract.fromJSON(object.executeContract) : undefined
-    };
+    const obj = createBaseGenesisState_GenMsgs();
+    if (isSet(object.storeCode)) obj.storeCode = MsgStoreCode.fromJSON(object.storeCode);
+    if (isSet(object.instantiateContract)) obj.instantiateContract = MsgInstantiateContract.fromJSON(object.instantiateContract);
+    if (isSet(object.executeContract)) obj.executeContract = MsgExecuteContract.fromJSON(object.executeContract);
+    return obj;
   },
   toJSON(message: GenesisState_GenMsgs): JsonSafe<GenesisState_GenMsgs> {
     const obj: any = {};
@@ -385,9 +359,15 @@ export const GenesisState_GenMsgs = {
   },
   fromPartial(object: DeepPartial<GenesisState_GenMsgs>): GenesisState_GenMsgs {
     const message = createBaseGenesisState_GenMsgs();
-    message.storeCode = object.storeCode !== undefined && object.storeCode !== null ? MsgStoreCode.fromPartial(object.storeCode) : undefined;
-    message.instantiateContract = object.instantiateContract !== undefined && object.instantiateContract !== null ? MsgInstantiateContract.fromPartial(object.instantiateContract) : undefined;
-    message.executeContract = object.executeContract !== undefined && object.executeContract !== null ? MsgExecuteContract.fromPartial(object.executeContract) : undefined;
+    if (object.storeCode !== undefined && object.storeCode !== null) {
+      message.storeCode = MsgStoreCode.fromPartial(object.storeCode);
+    }
+    if (object.instantiateContract !== undefined && object.instantiateContract !== null) {
+      message.instantiateContract = MsgInstantiateContract.fromPartial(object.instantiateContract);
+    }
+    if (object.executeContract !== undefined && object.executeContract !== null) {
+      message.executeContract = MsgExecuteContract.fromPartial(object.executeContract);
+    }
     return message;
   },
   fromSDK(object: GenesisState_GenMsgsSDKType): GenesisState_GenMsgs {
@@ -464,7 +444,7 @@ function createBaseCode(): Code {
 export const Code = {
   typeUrl: "/cosmwasm.wasm.v1.Code",
   encode(message: Code, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.codeId !== BigInt(0)) {
+    if (message.codeId !== undefined) {
       writer.uint32(8).uint64(message.codeId);
     }
     if (message.codeInfo !== undefined) {
@@ -473,7 +453,7 @@ export const Code = {
     if (message.codeBytes.length !== 0) {
       writer.uint32(26).bytes(message.codeBytes);
     }
-    if (message.pinned === true) {
+    if (message.pinned !== undefined) {
       writer.uint32(32).bool(message.pinned);
     }
     return writer;
@@ -505,12 +485,12 @@ export const Code = {
     return message;
   },
   fromJSON(object: any): Code {
-    return {
-      codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0),
-      codeInfo: isSet(object.codeInfo) ? CodeInfo.fromJSON(object.codeInfo) : undefined,
-      codeBytes: isSet(object.codeBytes) ? bytesFromBase64(object.codeBytes) : new Uint8Array(),
-      pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
-    };
+    const obj = createBaseCode();
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.codeInfo)) obj.codeInfo = CodeInfo.fromJSON(object.codeInfo);
+    if (isSet(object.codeBytes)) obj.codeBytes = bytesFromBase64(object.codeBytes);
+    if (isSet(object.pinned)) obj.pinned = Boolean(object.pinned);
+    return obj;
   },
   toJSON(message: Code): JsonSafe<Code> {
     const obj: any = {};
@@ -522,8 +502,12 @@ export const Code = {
   },
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
-    message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : undefined;
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
+    if (object.codeInfo !== undefined && object.codeInfo !== null) {
+      message.codeInfo = CodeInfo.fromPartial(object.codeInfo);
+    }
     message.codeBytes = object.codeBytes ?? new Uint8Array();
     message.pinned = object.pinned ?? false;
     return message;
@@ -608,7 +592,7 @@ function createBaseContract(): Contract {
 export const Contract = {
   typeUrl: "/cosmwasm.wasm.v1.Contract",
   encode(message: Contract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     if (message.contractInfo !== undefined) {
@@ -643,11 +627,11 @@ export const Contract = {
     return message;
   },
   fromJSON(object: any): Contract {
-    return {
-      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : "",
-      contractInfo: isSet(object.contractInfo) ? ContractInfo.fromJSON(object.contractInfo) : undefined,
-      contractState: Array.isArray(object?.contractState) ? object.contractState.map((e: any) => Model.fromJSON(e)) : []
-    };
+    const obj = createBaseContract();
+    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
+    if (isSet(object.contractInfo)) obj.contractInfo = ContractInfo.fromJSON(object.contractInfo);
+    if (Array.isArray(object?.contractState)) obj.contractState = object.contractState.map((e: any) => Model.fromJSON(e));
+    return obj;
   },
   toJSON(message: Contract): JsonSafe<Contract> {
     const obj: any = {};
@@ -663,7 +647,9 @@ export const Contract = {
   fromPartial(object: DeepPartial<Contract>): Contract {
     const message = createBaseContract();
     message.contractAddress = object.contractAddress ?? "";
-    message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : undefined;
+    if (object.contractInfo !== undefined && object.contractInfo !== null) {
+      message.contractInfo = ContractInfo.fromPartial(object.contractInfo);
+    }
     message.contractState = object.contractState?.map(e => Model.fromPartial(e)) || [];
     return message;
   },
@@ -748,7 +734,7 @@ export const Sequence = {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).uint64(message.value);
     }
     return writer;
@@ -774,10 +760,10 @@ export const Sequence = {
     return message;
   },
   fromJSON(object: any): Sequence {
-    return {
-      idKey: isSet(object.idKey) ? bytesFromBase64(object.idKey) : new Uint8Array(),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
+    const obj = createBaseSequence();
+    if (isSet(object.idKey)) obj.idKey = bytesFromBase64(object.idKey);
+    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
+    return obj;
   },
   toJSON(message: Sequence): JsonSafe<Sequence> {
     const obj: any = {};
@@ -788,7 +774,9 @@ export const Sequence = {
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: SequenceSDKType): Sequence {

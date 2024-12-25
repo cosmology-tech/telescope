@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
-import { DeepPartial, isSet } from "../../helpers";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /**
  * Path Translation specifies how to combine the backend address with the
@@ -104,9 +103,6 @@ export interface Backend {
    */
   rules: BackendRule[];
 }
-export interface ReactiveBackend {
-  rules: ComputedRef<BackendRule[]>;
-}
 export interface BackendProtoMsg {
   typeUrl: "/google.api.Backend";
   value: Uint8Array;
@@ -200,17 +196,6 @@ export interface BackendRule {
    */
   protocol: string;
 }
-export interface ReactiveBackendRule {
-  selector: ComputedRef<string>;
-  address: ComputedRef<string>;
-  deadline: ComputedRef<number>;
-  minDeadline: ComputedRef<number>;
-  operationDeadline: ComputedRef<number>;
-  pathTranslation: ComputedRef<BackendRule_PathTranslation>;
-  jwtAudience?: ComputedRef<string>;
-  disableAuth?: ComputedRef<boolean>;
-  protocol: ComputedRef<string>;
-}
 export interface BackendRuleProtoMsg {
   typeUrl: "/google.api.BackendRule";
   value: Uint8Array;
@@ -258,9 +243,9 @@ export const Backend = {
     return message;
   },
   fromJSON(object: any): Backend {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromJSON(e)) : []
-    };
+    const obj = createBaseBackend();
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => BackendRule.fromJSON(e));
+    return obj;
   },
   toJSON(message: Backend): JsonSafe<Backend> {
     const obj: any = {};
@@ -341,19 +326,19 @@ function createBaseBackendRule(): BackendRule {
 export const BackendRule = {
   typeUrl: "/google.api.BackendRule",
   encode(message: BackendRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(18).string(message.address);
     }
-    if (message.deadline !== 0) {
+    if (message.deadline !== undefined) {
       writer.uint32(25).double(message.deadline);
     }
-    if (message.minDeadline !== 0) {
+    if (message.minDeadline !== undefined) {
       writer.uint32(33).double(message.minDeadline);
     }
-    if (message.operationDeadline !== 0) {
+    if (message.operationDeadline !== undefined) {
       writer.uint32(41).double(message.operationDeadline);
     }
     if (message.pathTranslation !== 0) {
@@ -365,7 +350,7 @@ export const BackendRule = {
     if (message.disableAuth !== undefined) {
       writer.uint32(64).bool(message.disableAuth);
     }
-    if (message.protocol !== "") {
+    if (message.protocol !== undefined) {
       writer.uint32(74).string(message.protocol);
     }
     return writer;
@@ -412,17 +397,17 @@ export const BackendRule = {
     return message;
   },
   fromJSON(object: any): BackendRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      address: isSet(object.address) ? String(object.address) : "",
-      deadline: isSet(object.deadline) ? Number(object.deadline) : 0,
-      minDeadline: isSet(object.minDeadline) ? Number(object.minDeadline) : 0,
-      operationDeadline: isSet(object.operationDeadline) ? Number(object.operationDeadline) : 0,
-      pathTranslation: isSet(object.pathTranslation) ? backendRule_PathTranslationFromJSON(object.pathTranslation) : -1,
-      jwtAudience: isSet(object.jwtAudience) ? String(object.jwtAudience) : undefined,
-      disableAuth: isSet(object.disableAuth) ? Boolean(object.disableAuth) : undefined,
-      protocol: isSet(object.protocol) ? String(object.protocol) : ""
-    };
+    const obj = createBaseBackendRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.deadline)) obj.deadline = Number(object.deadline);
+    if (isSet(object.minDeadline)) obj.minDeadline = Number(object.minDeadline);
+    if (isSet(object.operationDeadline)) obj.operationDeadline = Number(object.operationDeadline);
+    if (isSet(object.pathTranslation)) obj.pathTranslation = backendRule_PathTranslationFromJSON(object.pathTranslation);
+    if (isSet(object.jwtAudience)) obj.jwtAudience = String(object.jwtAudience);
+    if (isSet(object.disableAuth)) obj.disableAuth = Boolean(object.disableAuth);
+    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
+    return obj;
   },
   toJSON(message: BackendRule): JsonSafe<BackendRule> {
     const obj: any = {};
