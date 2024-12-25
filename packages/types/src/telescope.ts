@@ -548,7 +548,6 @@ export const defaultTelescopeOptions: TelescopeOptions = {
   packages: {
     cosmos: {
       stargateClients: {
-        enabled: true,
         includeCosmosDefaultTypes: false,
       },
     },
