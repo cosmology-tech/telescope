@@ -1,14 +1,10 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface Params {
   contractAddress: string;
-}
-export interface ReactiveParams {
-  contractAddress: ComputedRef<string>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.Params";
@@ -26,7 +22,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     return writer;
@@ -49,9 +45,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      contractAddress: isSet(object.contractAddress) ? String(object.contractAddress) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};

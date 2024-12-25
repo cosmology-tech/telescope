@@ -1,8 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
 export interface Params {
@@ -13,9 +12,6 @@ export interface Params {
    * volatilities, and have base staking be 'resistant' to volatility.
    */
   minimumRiskFactor: string;
-}
-export interface ReactiveParams {
-  minimumRiskFactor: ComputedRef<string>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.superfluid.Params";
@@ -33,7 +29,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.superfluid.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.minimumRiskFactor !== "") {
+    if (message.minimumRiskFactor !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.minimumRiskFactor, 18).atomics);
     }
     return writer;
@@ -56,9 +52,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      minimumRiskFactor: isSet(object.minimumRiskFactor) ? String(object.minimumRiskFactor) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.minimumRiskFactor)) obj.minimumRiskFactor = String(object.minimumRiskFactor);
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};

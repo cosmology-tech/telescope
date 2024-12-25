@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
@@ -9,12 +8,6 @@ export interface EventSend {
   id: string;
   sender: string;
   receiver: string;
-}
-export interface ReactiveEventSend {
-  classId: ComputedRef<string>;
-  id: ComputedRef<string>;
-  sender: ComputedRef<string>;
-  receiver: ComputedRef<string>;
 }
 export interface EventSendProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventSend";
@@ -33,11 +26,6 @@ export interface EventMint {
   id: string;
   owner: string;
 }
-export interface ReactiveEventMint {
-  classId: ComputedRef<string>;
-  id: ComputedRef<string>;
-  owner: ComputedRef<string>;
-}
 export interface EventMintProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventMint";
   value: Uint8Array;
@@ -53,11 +41,6 @@ export interface EventBurn {
   classId: string;
   id: string;
   owner: string;
-}
-export interface ReactiveEventBurn {
-  classId: ComputedRef<string>;
-  id: ComputedRef<string>;
-  owner: ComputedRef<string>;
 }
 export interface EventBurnProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.EventBurn";
@@ -80,16 +63,16 @@ function createBaseEventSend(): EventSend {
 export const EventSend = {
   typeUrl: "/cosmos.nft.v1beta1.EventSend",
   encode(message: EventSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== "") {
+    if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(26).string(message.sender);
     }
-    if (message.receiver !== "") {
+    if (message.receiver !== undefined) {
       writer.uint32(34).string(message.receiver);
     }
     return writer;
@@ -121,12 +104,12 @@ export const EventSend = {
     return message;
   },
   fromJSON(object: any): EventSend {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : ""
-    };
+    const obj = createBaseEventSend();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
+    return obj;
   },
   toJSON(message: EventSend): JsonSafe<EventSend> {
     const obj: any = {};
@@ -224,13 +207,13 @@ function createBaseEventMint(): EventMint {
 export const EventMint = {
   typeUrl: "/cosmos.nft.v1beta1.EventMint",
   encode(message: EventMint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== "") {
+    if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
     return writer;
@@ -259,11 +242,11 @@ export const EventMint = {
     return message;
   },
   fromJSON(object: any): EventMint {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseEventMint();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: EventMint): JsonSafe<EventMint> {
     const obj: any = {};
@@ -352,13 +335,13 @@ function createBaseEventBurn(): EventBurn {
 export const EventBurn = {
   typeUrl: "/cosmos.nft.v1beta1.EventBurn",
   encode(message: EventBurn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== "") {
+    if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
     return writer;
@@ -387,11 +370,11 @@ export const EventBurn = {
     return message;
   },
   fromJSON(object: any): EventBurn {
-    return {
-      classId: isSet(object.classId) ? String(object.classId) : "",
-      id: isSet(object.id) ? String(object.id) : "",
-      owner: isSet(object.owner) ? String(object.owner) : ""
-    };
+    const obj = createBaseEventBurn();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
   },
   toJSON(message: EventBurn): JsonSafe<EventBurn> {
     const obj: any = {};

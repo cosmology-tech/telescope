@@ -1,8 +1,8 @@
-import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
-import { Rpc } from "../../../../helpers";
-import { BinaryReader } from "../../../../binary";
+import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel.js";
+import { Rpc } from "../../../../helpers.js";
+import { BinaryReader } from "../../../../binary.js";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType, ReactiveQueryAppVersionRequest } from "./query";
+import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query.js";
 /** Query defines the gRPC querier service */
 export interface Query {
   /** AppVersion queries an IBC Port and determines the appropriate application version to be used */

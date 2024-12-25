@@ -1,16 +1,12 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
-import { Gauge, GaugeSDKType } from "../../incentives/gauge";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
+import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives.js";
+import { Gauge, GaugeSDKType } from "../../incentives/gauge.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface QueryGaugeIdsRequest {
   poolId: bigint;
-}
-export interface ReactiveQueryGaugeIdsRequest {
-  poolId: ComputedRef<bigint>;
 }
 export interface QueryGaugeIdsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest";
@@ -21,9 +17,6 @@ export interface QueryGaugeIdsRequestSDKType {
 }
 export interface QueryGaugeIdsResponse {
   gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
-}
-export interface ReactiveQueryGaugeIdsResponse {
-  gaugeIdsWithDuration: ComputedRef<QueryGaugeIdsResponse_GaugeIdWithDuration[]>;
 }
 export interface QueryGaugeIdsResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse";
@@ -37,11 +30,6 @@ export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
   duration: Duration;
   gaugeIncentivePercentage: string;
 }
-export interface ReactiveQueryGaugeIdsResponse_GaugeIdWithDuration {
-  gaugeId: ComputedRef<bigint>;
-  duration: ComputedRef<Duration>;
-  gaugeIncentivePercentage: ComputedRef<string>;
-}
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration";
   value: Uint8Array;
@@ -52,7 +40,6 @@ export interface QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
   gauge_incentive_percentage: string;
 }
 export interface QueryDistrInfoRequest {}
-export interface ReactiveQueryDistrInfoRequest {}
 export interface QueryDistrInfoRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoRequest";
   value: Uint8Array;
@@ -60,9 +47,6 @@ export interface QueryDistrInfoRequestProtoMsg {
 export interface QueryDistrInfoRequestSDKType {}
 export interface QueryDistrInfoResponse {
   distrInfo: DistrInfo;
-}
-export interface ReactiveQueryDistrInfoResponse {
-  distrInfo: ComputedRef<DistrInfo>;
 }
 export interface QueryDistrInfoResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoResponse";
@@ -72,7 +56,6 @@ export interface QueryDistrInfoResponseSDKType {
   distr_info: DistrInfoSDKType;
 }
 export interface QueryParamsRequest {}
-export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsRequest";
   value: Uint8Array;
@@ -80,9 +63,6 @@ export interface QueryParamsRequestProtoMsg {
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   params: Params;
-}
-export interface ReactiveQueryParamsResponse {
-  params: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsResponse";
@@ -92,7 +72,6 @@ export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
 }
 export interface QueryLockableDurationsRequest {}
-export interface ReactiveQueryLockableDurationsRequest {}
 export interface QueryLockableDurationsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest";
   value: Uint8Array;
@@ -100,9 +79,6 @@ export interface QueryLockableDurationsRequestProtoMsg {
 export interface QueryLockableDurationsRequestSDKType {}
 export interface QueryLockableDurationsResponse {
   lockableDurations: Duration[];
-}
-export interface ReactiveQueryLockableDurationsResponse {
-  lockableDurations: ComputedRef<Duration[]>;
 }
 export interface QueryLockableDurationsResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse";
@@ -112,7 +88,6 @@ export interface QueryLockableDurationsResponseSDKType {
   lockable_durations: DurationSDKType[];
 }
 export interface QueryIncentivizedPoolsRequest {}
-export interface ReactiveQueryIncentivizedPoolsRequest {}
 export interface QueryIncentivizedPoolsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest";
   value: Uint8Array;
@@ -122,11 +97,6 @@ export interface IncentivizedPool {
   poolId: bigint;
   lockableDuration: Duration;
   gaugeId: bigint;
-}
-export interface ReactiveIncentivizedPool {
-  poolId: ComputedRef<bigint>;
-  lockableDuration: ComputedRef<Duration>;
-  gaugeId: ComputedRef<bigint>;
 }
 export interface IncentivizedPoolProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool";
@@ -140,9 +110,6 @@ export interface IncentivizedPoolSDKType {
 export interface QueryIncentivizedPoolsResponse {
   incentivizedPools: IncentivizedPool[];
 }
-export interface ReactiveQueryIncentivizedPoolsResponse {
-  incentivizedPools: ComputedRef<IncentivizedPool[]>;
-}
 export interface QueryIncentivizedPoolsResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse";
   value: Uint8Array;
@@ -151,7 +118,6 @@ export interface QueryIncentivizedPoolsResponseSDKType {
   incentivized_pools: IncentivizedPoolSDKType[];
 }
 export interface QueryExternalIncentiveGaugesRequest {}
-export interface ReactiveQueryExternalIncentiveGaugesRequest {}
 export interface QueryExternalIncentiveGaugesRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest";
   value: Uint8Array;
@@ -159,9 +125,6 @@ export interface QueryExternalIncentiveGaugesRequestProtoMsg {
 export interface QueryExternalIncentiveGaugesRequestSDKType {}
 export interface QueryExternalIncentiveGaugesResponse {
   data: Gauge[];
-}
-export interface ReactiveQueryExternalIncentiveGaugesResponse {
-  data: ComputedRef<Gauge[]>;
 }
 export interface QueryExternalIncentiveGaugesResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse";
@@ -178,7 +141,7 @@ function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
 export const QueryGaugeIdsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest",
   encode(message: QueryGaugeIdsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
@@ -201,9 +164,9 @@ export const QueryGaugeIdsRequest = {
     return message;
   },
   fromJSON(object: any): QueryGaugeIdsRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryGaugeIdsRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: QueryGaugeIdsRequest): JsonSafe<QueryGaugeIdsRequest> {
     const obj: any = {};
@@ -212,7 +175,9 @@ export const QueryGaugeIdsRequest = {
   },
   fromPartial(object: DeepPartial<QueryGaugeIdsRequest>): QueryGaugeIdsRequest {
     const message = createBaseQueryGaugeIdsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryGaugeIdsRequestSDKType): QueryGaugeIdsRequest {
@@ -295,9 +260,9 @@ export const QueryGaugeIdsResponse = {
     return message;
   },
   fromJSON(object: any): QueryGaugeIdsResponse {
-    return {
-      gaugeIdsWithDuration: Array.isArray(object?.gaugeIdsWithDuration) ? object.gaugeIdsWithDuration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryGaugeIdsResponse();
+    if (Array.isArray(object?.gaugeIdsWithDuration)) obj.gaugeIdsWithDuration = object.gaugeIdsWithDuration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryGaugeIdsResponse): JsonSafe<QueryGaugeIdsResponse> {
     const obj: any = {};
@@ -378,13 +343,13 @@ function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsRes
 export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration",
   encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(8).uint64(message.gaugeId);
     }
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
-    if (message.gaugeIncentivePercentage !== "") {
+    if (message.gaugeIncentivePercentage !== undefined) {
       writer.uint32(26).string(message.gaugeIncentivePercentage);
     }
     return writer;
@@ -413,11 +378,11 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     return message;
   },
   fromJSON(object: any): QueryGaugeIdsResponse_GaugeIdWithDuration {
-    return {
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
-      gaugeIncentivePercentage: isSet(object.gaugeIncentivePercentage) ? String(object.gaugeIncentivePercentage) : ""
-    };
+    const obj = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    if (isSet(object.gaugeIncentivePercentage)) obj.gaugeIncentivePercentage = String(object.gaugeIncentivePercentage);
+    return obj;
   },
   toJSON(message: QueryGaugeIdsResponse_GaugeIdWithDuration): JsonSafe<QueryGaugeIdsResponse_GaugeIdWithDuration> {
     const obj: any = {};
@@ -428,8 +393,12 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   },
   fromPartial(object: DeepPartial<QueryGaugeIdsResponse_GaugeIdWithDuration>): QueryGaugeIdsResponse_GaugeIdWithDuration {
     const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
   },
@@ -519,7 +488,8 @@ export const QueryDistrInfoRequest = {
     return message;
   },
   fromJSON(_: any): QueryDistrInfoRequest {
-    return {};
+    const obj = createBaseQueryDistrInfoRequest();
+    return obj;
   },
   toJSON(_: QueryDistrInfoRequest): JsonSafe<QueryDistrInfoRequest> {
     const obj: any = {};
@@ -600,9 +570,9 @@ export const QueryDistrInfoResponse = {
     return message;
   },
   fromJSON(object: any): QueryDistrInfoResponse {
-    return {
-      distrInfo: isSet(object.distrInfo) ? DistrInfo.fromJSON(object.distrInfo) : undefined
-    };
+    const obj = createBaseQueryDistrInfoResponse();
+    if (isSet(object.distrInfo)) obj.distrInfo = DistrInfo.fromJSON(object.distrInfo);
+    return obj;
   },
   toJSON(message: QueryDistrInfoResponse): JsonSafe<QueryDistrInfoResponse> {
     const obj: any = {};
@@ -611,7 +581,9 @@ export const QueryDistrInfoResponse = {
   },
   fromPartial(object: DeepPartial<QueryDistrInfoResponse>): QueryDistrInfoResponse {
     const message = createBaseQueryDistrInfoResponse();
-    message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : undefined;
+    if (object.distrInfo !== undefined && object.distrInfo !== null) {
+      message.distrInfo = DistrInfo.fromPartial(object.distrInfo);
+    }
     return message;
   },
   fromSDK(object: QueryDistrInfoResponseSDKType): QueryDistrInfoResponse {
@@ -686,7 +658,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromJSON(_: any): QueryParamsRequest {
-    return {};
+    const obj = createBaseQueryParamsRequest();
+    return obj;
   },
   toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
@@ -767,9 +740,9 @@ export const QueryParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
@@ -778,7 +751,9 @@ export const QueryParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
@@ -853,7 +828,8 @@ export const QueryLockableDurationsRequest = {
     return message;
   },
   fromJSON(_: any): QueryLockableDurationsRequest {
-    return {};
+    const obj = createBaseQueryLockableDurationsRequest();
+    return obj;
   },
   toJSON(_: QueryLockableDurationsRequest): JsonSafe<QueryLockableDurationsRequest> {
     const obj: any = {};
@@ -934,9 +910,9 @@ export const QueryLockableDurationsResponse = {
     return message;
   },
   fromJSON(object: any): QueryLockableDurationsResponse {
-    return {
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryLockableDurationsResponse();
+    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryLockableDurationsResponse): JsonSafe<QueryLockableDurationsResponse> {
     const obj: any = {};
@@ -1030,7 +1006,8 @@ export const QueryIncentivizedPoolsRequest = {
     return message;
   },
   fromJSON(_: any): QueryIncentivizedPoolsRequest {
-    return {};
+    const obj = createBaseQueryIncentivizedPoolsRequest();
+    return obj;
   },
   toJSON(_: QueryIncentivizedPoolsRequest): JsonSafe<QueryIncentivizedPoolsRequest> {
     const obj: any = {};
@@ -1090,13 +1067,13 @@ function createBaseIncentivizedPool(): IncentivizedPool {
 export const IncentivizedPool = {
   typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool",
   encode(message: IncentivizedPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     if (message.lockableDuration !== undefined) {
       Duration.encode(message.lockableDuration, writer.uint32(18).fork()).ldelim();
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(24).uint64(message.gaugeId);
     }
     return writer;
@@ -1125,11 +1102,11 @@ export const IncentivizedPool = {
     return message;
   },
   fromJSON(object: any): IncentivizedPool {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      lockableDuration: isSet(object.lockableDuration) ? Duration.fromJSON(object.lockableDuration) : undefined,
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0)
-    };
+    const obj = createBaseIncentivizedPool();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.lockableDuration)) obj.lockableDuration = Duration.fromJSON(object.lockableDuration);
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
+    return obj;
   },
   toJSON(message: IncentivizedPool): JsonSafe<IncentivizedPool> {
     const obj: any = {};
@@ -1140,9 +1117,15 @@ export const IncentivizedPool = {
   },
   fromPartial(object: DeepPartial<IncentivizedPool>): IncentivizedPool {
     const message = createBaseIncentivizedPool();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
-    message.lockableDuration = object.lockableDuration !== undefined && object.lockableDuration !== null ? Duration.fromPartial(object.lockableDuration) : undefined;
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
+    if (object.lockableDuration !== undefined && object.lockableDuration !== null) {
+      message.lockableDuration = Duration.fromPartial(object.lockableDuration);
+    }
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
     return message;
   },
   fromSDK(object: IncentivizedPoolSDKType): IncentivizedPool {
@@ -1239,9 +1222,9 @@ export const QueryIncentivizedPoolsResponse = {
     return message;
   },
   fromJSON(object: any): QueryIncentivizedPoolsResponse {
-    return {
-      incentivizedPools: Array.isArray(object?.incentivizedPools) ? object.incentivizedPools.map((e: any) => IncentivizedPool.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryIncentivizedPoolsResponse();
+    if (Array.isArray(object?.incentivizedPools)) obj.incentivizedPools = object.incentivizedPools.map((e: any) => IncentivizedPool.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryIncentivizedPoolsResponse): JsonSafe<QueryIncentivizedPoolsResponse> {
     const obj: any = {};
@@ -1335,7 +1318,8 @@ export const QueryExternalIncentiveGaugesRequest = {
     return message;
   },
   fromJSON(_: any): QueryExternalIncentiveGaugesRequest {
-    return {};
+    const obj = createBaseQueryExternalIncentiveGaugesRequest();
+    return obj;
   },
   toJSON(_: QueryExternalIncentiveGaugesRequest): JsonSafe<QueryExternalIncentiveGaugesRequest> {
     const obj: any = {};
@@ -1416,9 +1400,9 @@ export const QueryExternalIncentiveGaugesResponse = {
     return message;
   },
   fromJSON(object: any): QueryExternalIncentiveGaugesResponse {
-    return {
-      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryExternalIncentiveGaugesResponse();
+    if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryExternalIncentiveGaugesResponse): JsonSafe<QueryExternalIncentiveGaugesResponse> {
     const obj: any = {};

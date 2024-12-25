@@ -1,13 +1,9 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
-import { DeepPartial } from "../../helpers";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial } from "../../helpers.js";
 export const protobufPackage = "osmosis.lockup";
 export interface Params {
   forceUnlockAllowedAddresses: string[];
-}
-export interface ReactiveParams {
-  forceUnlockAllowedAddresses: ComputedRef<string[]>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.lockup.Params";
@@ -47,9 +43,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      forceUnlockAllowedAddresses: Array.isArray(object?.forceUnlockAllowedAddresses) ? object.forceUnlockAllowedAddresses.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseParams();
+    if (Array.isArray(object?.forceUnlockAllowedAddresses)) obj.forceUnlockAllowedAddresses = object.forceUnlockAllowedAddresses.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};

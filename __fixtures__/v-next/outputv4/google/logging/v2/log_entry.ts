@@ -1,21 +1,16 @@
-import { MonitoredResource, MonitoredResourceSDKType } from "../../api/monitored_resource";
-import { Any, AnySDKType } from "../../protobuf/any";
-import { Struct, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
-import { HttpRequest, HttpRequestSDKType } from "../type/http_request";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { MonitoredResource, MonitoredResourceSDKType } from "../../api/monitored_resource.js";
+import { Any, AnySDKType } from "../../protobuf/any.js";
+import { Struct, StructSDKType } from "../../protobuf/struct.js";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp.js";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity.js";
+import { HttpRequest, HttpRequestSDKType } from "../type/http_request.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "google.logging.v2";
 export interface LogEntry_LabelsEntry {
   key: string;
   value: string;
-}
-export interface ReactiveLogEntry_LabelsEntry {
-  key: ComputedRef<string>;
-  value: ComputedRef<string>;
 }
 export interface LogEntry_LabelsEntryProtoMsg {
   typeUrl: string;
@@ -173,27 +168,6 @@ export interface LogEntry {
    */
   split?: LogSplit;
 }
-export interface ReactiveLogEntry {
-  logName: ComputedRef<string>;
-  resource?: ComputedRef<MonitoredResource>;
-  protoPayload?: ComputedRef<Any>;
-  textPayload?: ComputedRef<string>;
-  jsonPayload?: ComputedRef<Struct>;
-  timestamp?: ComputedRef<Date>;
-  receiveTimestamp?: ComputedRef<Date>;
-  severity: ComputedRef<LogSeverity>;
-  insertId: ComputedRef<string>;
-  httpRequest?: ComputedRef<HttpRequest>;
-  labels: ComputedRef<{
-    [key: string]: string;
-  }>;
-  operation?: ComputedRef<LogEntryOperation>;
-  trace: ComputedRef<string>;
-  spanId: ComputedRef<string>;
-  traceSampled: ComputedRef<boolean>;
-  sourceLocation?: ComputedRef<LogEntrySourceLocation>;
-  split?: ComputedRef<LogSplit>;
-}
 export interface LogEntryProtoMsg {
   typeUrl: "/google.logging.v2.LogEntry";
   value: Uint8Array;
@@ -241,12 +215,6 @@ export interface LogEntryOperation {
   /** Optional. Set this to True if this is the last log entry in the operation. */
   last: boolean;
 }
-export interface ReactiveLogEntryOperation {
-  id: ComputedRef<string>;
-  producer: ComputedRef<string>;
-  first: ComputedRef<boolean>;
-  last: ComputedRef<boolean>;
-}
 export interface LogEntryOperationProtoMsg {
   typeUrl: "/google.logging.v2.LogEntryOperation";
   value: Uint8Array;
@@ -286,11 +254,6 @@ export interface LogEntrySourceLocation {
    */
   function: string;
 }
-export interface ReactiveLogEntrySourceLocation {
-  file: ComputedRef<string>;
-  line: ComputedRef<bigint>;
-  function: ComputedRef<string>;
-}
 export interface LogEntrySourceLocationProtoMsg {
   typeUrl: "/google.logging.v2.LogEntrySourceLocation";
   value: Uint8Array;
@@ -325,11 +288,6 @@ export interface LogSplit {
   /** The total number of log entries that the original LogEntry was split into. */
   totalSplits: number;
 }
-export interface ReactiveLogSplit {
-  uid: ComputedRef<string>;
-  index: ComputedRef<number>;
-  totalSplits: ComputedRef<number>;
-}
 export interface LogSplitProtoMsg {
   typeUrl: "/google.logging.v2.LogSplit";
   value: Uint8Array;
@@ -352,10 +310,10 @@ function createBaseLogEntry_LabelsEntry(): LogEntry_LabelsEntry {
 }
 export const LogEntry_LabelsEntry = {
   encode(message: LogEntry_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -381,10 +339,10 @@ export const LogEntry_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): LogEntry_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseLogEntry_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: LogEntry_LabelsEntry): JsonSafe<LogEntry_LabelsEntry> {
     const obj: any = {};
@@ -466,7 +424,7 @@ function createBaseLogEntry(): LogEntry {
 export const LogEntry = {
   typeUrl: "/google.logging.v2.LogEntry",
   encode(message: LogEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.logName !== "") {
+    if (message.logName !== undefined) {
       writer.uint32(98).string(message.logName);
     }
     if (message.resource !== undefined) {
@@ -490,7 +448,7 @@ export const LogEntry = {
     if (message.severity !== 0) {
       writer.uint32(80).int32(message.severity);
     }
-    if (message.insertId !== "") {
+    if (message.insertId !== undefined) {
       writer.uint32(34).string(message.insertId);
     }
     if (message.httpRequest !== undefined) {
@@ -505,13 +463,13 @@ export const LogEntry = {
     if (message.operation !== undefined) {
       LogEntryOperation.encode(message.operation, writer.uint32(122).fork()).ldelim();
     }
-    if (message.trace !== "") {
+    if (message.trace !== undefined) {
       writer.uint32(178).string(message.trace);
     }
-    if (message.spanId !== "") {
+    if (message.spanId !== undefined) {
       writer.uint32(218).string(message.spanId);
     }
-    if (message.traceSampled === true) {
+    if (message.traceSampled !== undefined) {
       writer.uint32(240).bool(message.traceSampled);
     }
     if (message.sourceLocation !== undefined) {
@@ -591,30 +549,30 @@ export const LogEntry = {
     return message;
   },
   fromJSON(object: any): LogEntry {
-    return {
-      logName: isSet(object.logName) ? String(object.logName) : "",
-      resource: isSet(object.resource) ? MonitoredResource.fromJSON(object.resource) : undefined,
-      protoPayload: isSet(object.protoPayload) ? Any.fromJSON(object.protoPayload) : undefined,
-      textPayload: isSet(object.textPayload) ? String(object.textPayload) : undefined,
-      jsonPayload: isSet(object.jsonPayload) ? Struct.fromJSON(object.jsonPayload) : undefined,
-      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
-      receiveTimestamp: isSet(object.receiveTimestamp) ? new Date(object.receiveTimestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
-      insertId: isSet(object.insertId) ? String(object.insertId) : "",
-      httpRequest: isSet(object.httpRequest) ? HttpRequest.fromJSON(object.httpRequest) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      operation: isSet(object.operation) ? LogEntryOperation.fromJSON(object.operation) : undefined,
-      trace: isSet(object.trace) ? String(object.trace) : "",
-      spanId: isSet(object.spanId) ? String(object.spanId) : "",
-      traceSampled: isSet(object.traceSampled) ? Boolean(object.traceSampled) : false,
-      sourceLocation: isSet(object.sourceLocation) ? LogEntrySourceLocation.fromJSON(object.sourceLocation) : undefined,
-      split: isSet(object.split) ? LogSplit.fromJSON(object.split) : undefined
-    };
+    const obj = createBaseLogEntry();
+    if (isSet(object.logName)) obj.logName = String(object.logName);
+    if (isSet(object.resource)) obj.resource = MonitoredResource.fromJSON(object.resource);
+    if (isSet(object.protoPayload)) obj.protoPayload = Any.fromJSON(object.protoPayload);
+    if (isSet(object.textPayload)) obj.textPayload = String(object.textPayload);
+    if (isSet(object.jsonPayload)) obj.jsonPayload = Struct.fromJSON(object.jsonPayload);
+    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
+    if (isSet(object.receiveTimestamp)) obj.receiveTimestamp = new Date(object.receiveTimestamp);
+    if (isSet(object.severity)) obj.severity = logSeverityFromJSON(object.severity);
+    if (isSet(object.insertId)) obj.insertId = String(object.insertId);
+    if (isSet(object.httpRequest)) obj.httpRequest = HttpRequest.fromJSON(object.httpRequest);
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.operation)) obj.operation = LogEntryOperation.fromJSON(object.operation);
+    if (isSet(object.trace)) obj.trace = String(object.trace);
+    if (isSet(object.spanId)) obj.spanId = String(object.spanId);
+    if (isSet(object.traceSampled)) obj.traceSampled = Boolean(object.traceSampled);
+    if (isSet(object.sourceLocation)) obj.sourceLocation = LogEntrySourceLocation.fromJSON(object.sourceLocation);
+    if (isSet(object.split)) obj.split = LogSplit.fromJSON(object.split);
+    return obj;
   },
   toJSON(message: LogEntry): JsonSafe<LogEntry> {
     const obj: any = {};
@@ -645,15 +603,23 @@ export const LogEntry = {
   fromPartial(object: DeepPartial<LogEntry>): LogEntry {
     const message = createBaseLogEntry();
     message.logName = object.logName ?? "";
-    message.resource = object.resource !== undefined && object.resource !== null ? MonitoredResource.fromPartial(object.resource) : undefined;
-    message.protoPayload = object.protoPayload !== undefined && object.protoPayload !== null ? Any.fromPartial(object.protoPayload) : undefined;
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = MonitoredResource.fromPartial(object.resource);
+    }
+    if (object.protoPayload !== undefined && object.protoPayload !== null) {
+      message.protoPayload = Any.fromPartial(object.protoPayload);
+    }
     message.textPayload = object.textPayload ?? undefined;
-    message.jsonPayload = object.jsonPayload !== undefined && object.jsonPayload !== null ? Struct.fromPartial(object.jsonPayload) : undefined;
+    if (object.jsonPayload !== undefined && object.jsonPayload !== null) {
+      message.jsonPayload = Struct.fromPartial(object.jsonPayload);
+    }
     message.timestamp = object.timestamp ?? undefined;
     message.receiveTimestamp = object.receiveTimestamp ?? undefined;
     message.severity = object.severity ?? 0;
     message.insertId = object.insertId ?? "";
-    message.httpRequest = object.httpRequest !== undefined && object.httpRequest !== null ? HttpRequest.fromPartial(object.httpRequest) : undefined;
+    if (object.httpRequest !== undefined && object.httpRequest !== null) {
+      message.httpRequest = HttpRequest.fromPartial(object.httpRequest);
+    }
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -662,12 +628,18 @@ export const LogEntry = {
       }
       return acc;
     }, {});
-    message.operation = object.operation !== undefined && object.operation !== null ? LogEntryOperation.fromPartial(object.operation) : undefined;
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromPartial(object.operation);
+    }
     message.trace = object.trace ?? "";
     message.spanId = object.spanId ?? "";
     message.traceSampled = object.traceSampled ?? false;
-    message.sourceLocation = object.sourceLocation !== undefined && object.sourceLocation !== null ? LogEntrySourceLocation.fromPartial(object.sourceLocation) : undefined;
-    message.split = object.split !== undefined && object.split !== null ? LogSplit.fromPartial(object.split) : undefined;
+    if (object.sourceLocation !== undefined && object.sourceLocation !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromPartial(object.sourceLocation);
+    }
+    if (object.split !== undefined && object.split !== null) {
+      message.split = LogSplit.fromPartial(object.split);
+    }
     return message;
   },
   fromSDK(object: LogEntrySDKType): LogEntry {
@@ -861,16 +833,16 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 export const LogEntryOperation = {
   typeUrl: "/google.logging.v2.LogEntryOperation",
   encode(message: LogEntryOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.producer !== "") {
+    if (message.producer !== undefined) {
       writer.uint32(18).string(message.producer);
     }
-    if (message.first === true) {
+    if (message.first !== undefined) {
       writer.uint32(24).bool(message.first);
     }
-    if (message.last === true) {
+    if (message.last !== undefined) {
       writer.uint32(32).bool(message.last);
     }
     return writer;
@@ -902,12 +874,12 @@ export const LogEntryOperation = {
     return message;
   },
   fromJSON(object: any): LogEntryOperation {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      producer: isSet(object.producer) ? String(object.producer) : "",
-      first: isSet(object.first) ? Boolean(object.first) : false,
-      last: isSet(object.last) ? Boolean(object.last) : false
-    };
+    const obj = createBaseLogEntryOperation();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.producer)) obj.producer = String(object.producer);
+    if (isSet(object.first)) obj.first = Boolean(object.first);
+    if (isSet(object.last)) obj.last = Boolean(object.last);
+    return obj;
   },
   toJSON(message: LogEntryOperation): JsonSafe<LogEntryOperation> {
     const obj: any = {};
@@ -999,13 +971,13 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
 export const LogEntrySourceLocation = {
   typeUrl: "/google.logging.v2.LogEntrySourceLocation",
   encode(message: LogEntrySourceLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.file !== "") {
+    if (message.file !== undefined) {
       writer.uint32(10).string(message.file);
     }
-    if (message.line !== BigInt(0)) {
+    if (message.line !== undefined) {
       writer.uint32(16).int64(message.line);
     }
-    if (message.function !== "") {
+    if (message.function !== undefined) {
       writer.uint32(26).string(message.function);
     }
     return writer;
@@ -1034,11 +1006,11 @@ export const LogEntrySourceLocation = {
     return message;
   },
   fromJSON(object: any): LogEntrySourceLocation {
-    return {
-      file: isSet(object.file) ? String(object.file) : "",
-      line: isSet(object.line) ? BigInt(object.line.toString()) : BigInt(0),
-      function: isSet(object.function) ? String(object.function) : ""
-    };
+    const obj = createBaseLogEntrySourceLocation();
+    if (isSet(object.file)) obj.file = String(object.file);
+    if (isSet(object.line)) obj.line = BigInt(object.line.toString());
+    if (isSet(object.function)) obj.function = String(object.function);
+    return obj;
   },
   toJSON(message: LogEntrySourceLocation): JsonSafe<LogEntrySourceLocation> {
     const obj: any = {};
@@ -1050,7 +1022,9 @@ export const LogEntrySourceLocation = {
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {
     const message = createBaseLogEntrySourceLocation();
     message.file = object.file ?? "";
-    message.line = object.line !== undefined && object.line !== null ? BigInt(object.line.toString()) : BigInt(0);
+    if (object.line !== undefined && object.line !== null) {
+      message.line = BigInt(object.line.toString());
+    }
     message.function = object.function ?? "";
     return message;
   },
@@ -1121,13 +1095,13 @@ function createBaseLogSplit(): LogSplit {
 export const LogSplit = {
   typeUrl: "/google.logging.v2.LogSplit",
   encode(message: LogSplit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.uid !== "") {
+    if (message.uid !== undefined) {
       writer.uint32(10).string(message.uid);
     }
-    if (message.index !== 0) {
+    if (message.index !== undefined) {
       writer.uint32(16).int32(message.index);
     }
-    if (message.totalSplits !== 0) {
+    if (message.totalSplits !== undefined) {
       writer.uint32(24).int32(message.totalSplits);
     }
     return writer;
@@ -1156,11 +1130,11 @@ export const LogSplit = {
     return message;
   },
   fromJSON(object: any): LogSplit {
-    return {
-      uid: isSet(object.uid) ? String(object.uid) : "",
-      index: isSet(object.index) ? Number(object.index) : 0,
-      totalSplits: isSet(object.totalSplits) ? Number(object.totalSplits) : 0
-    };
+    const obj = createBaseLogSplit();
+    if (isSet(object.uid)) obj.uid = String(object.uid);
+    if (isSet(object.index)) obj.index = Number(object.index);
+    if (isSet(object.totalSplits)) obj.totalSplits = Number(object.totalSplits);
+    return obj;
   },
   toJSON(message: LogSplit): JsonSafe<LogSplit> {
     const obj: any = {};

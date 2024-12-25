@@ -75,11 +75,6 @@ export const createLCDClient = async ({
           v1beta1: new (await import("../cosmos/base/tendermint/v1beta1/query.lcd")).LCDQueryClient({
             requestClient
           })
-        },
-        node: {
-          v1beta1: new (await import("../cosmos/base/node/v1beta1/query.lcd")).LCDQueryClient({
-            requestClient
-          })
         }
       },
       distribution: {

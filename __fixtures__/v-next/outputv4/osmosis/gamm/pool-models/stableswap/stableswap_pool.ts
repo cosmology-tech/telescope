@@ -1,9 +1,8 @@
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -14,10 +13,6 @@ export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 export interface PoolParams {
   swapFee: string;
   exitFee: string;
-}
-export interface ReactivePoolParams {
-  swapFee: ComputedRef<string>;
-  exitFee: ComputedRef<string>;
 }
 export interface PoolParamsProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams";
@@ -58,16 +53,6 @@ export interface Pool {
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scalingFactorController: string;
 }
-export interface ReactivePool {
-  address: ComputedRef<string>;
-  id: ComputedRef<bigint>;
-  poolParams: ComputedRef<PoolParams>;
-  futurePoolGovernor: ComputedRef<string>;
-  totalShares: ComputedRef<Coin>;
-  poolLiquidity: ComputedRef<Coin[]>;
-  scalingFactors: ComputedRef<bigint[]>;
-  scalingFactorController: ComputedRef<string>;
-}
 export interface PoolProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool";
   value: Uint8Array;
@@ -92,10 +77,10 @@ function createBasePoolParams(): PoolParams {
 export const PoolParams = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams",
   encode(message: PoolParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.swapFee !== "") {
+    if (message.swapFee !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
     }
-    if (message.exitFee !== "") {
+    if (message.exitFee !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.exitFee, 18).atomics);
     }
     return writer;
@@ -121,10 +106,10 @@ export const PoolParams = {
     return message;
   },
   fromJSON(object: any): PoolParams {
-    return {
-      swapFee: isSet(object.swapFee) ? String(object.swapFee) : "",
-      exitFee: isSet(object.exitFee) ? String(object.exitFee) : ""
-    };
+    const obj = createBasePoolParams();
+    if (isSet(object.swapFee)) obj.swapFee = String(object.swapFee);
+    if (isSet(object.exitFee)) obj.exitFee = String(object.exitFee);
+    return obj;
   },
   toJSON(message: PoolParams): JsonSafe<PoolParams> {
     const obj: any = {};
@@ -209,16 +194,16 @@ function createBasePool(): Pool {
 export const Pool = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(16).uint64(message.id);
     }
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
     }
-    if (message.futurePoolGovernor !== "") {
+    if (message.futurePoolGovernor !== undefined) {
       writer.uint32(34).string(message.futurePoolGovernor);
     }
     if (message.totalShares !== undefined) {
@@ -232,7 +217,7 @@ export const Pool = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.scalingFactorController !== "") {
+    if (message.scalingFactorController !== undefined) {
       writer.uint32(66).string(message.scalingFactorController);
     }
     return writer;
@@ -283,16 +268,16 @@ export const Pool = {
     return message;
   },
   fromJSON(object: any): Pool {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      poolParams: isSet(object.poolParams) ? PoolParams.fromJSON(object.poolParams) : undefined,
-      futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : "",
-      totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined,
-      poolLiquidity: Array.isArray(object?.poolLiquidity) ? object.poolLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
-      scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => BigInt(e.toString())) : [],
-      scalingFactorController: isSet(object.scalingFactorController) ? String(object.scalingFactorController) : ""
-    };
+    const obj = createBasePool();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
+    if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
+    if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
+    if (isSet(object.totalShares)) obj.totalShares = Coin.fromJSON(object.totalShares);
+    if (Array.isArray(object?.poolLiquidity)) obj.poolLiquidity = object.poolLiquidity.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.scalingFactors)) obj.scalingFactors = object.scalingFactors.map((e: any) => BigInt(e.toString()));
+    if (isSet(object.scalingFactorController)) obj.scalingFactorController = String(object.scalingFactorController);
+    return obj;
   },
   toJSON(message: Pool): JsonSafe<Pool> {
     const obj: any = {};
@@ -317,10 +302,16 @@ export const Pool = {
   fromPartial(object: DeepPartial<Pool>): Pool {
     const message = createBasePool();
     message.address = object.address ?? "";
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
+    if (object.poolParams !== undefined && object.poolParams !== null) {
+      message.poolParams = PoolParams.fromPartial(object.poolParams);
+    }
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
-    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
+    if (object.totalShares !== undefined && object.totalShares !== null) {
+      message.totalShares = Coin.fromPartial(object.totalShares);
+    }
     message.poolLiquidity = object.poolLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.scalingFactors = object.scalingFactors?.map(e => BigInt(e.toString())) || [];
     message.scalingFactorController = object.scalingFactorController ?? "";

@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
-import { DeepPartial, isSet } from "../../helpers";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /**
  * Logging configuration of the service.
@@ -49,10 +48,6 @@ export interface Logging {
    * one consumer destination.
    */
   consumerDestinations: Logging_LoggingDestination[];
-}
-export interface ReactiveLogging {
-  producerDestinations: ComputedRef<Logging_LoggingDestination[]>;
-  consumerDestinations: ComputedRef<Logging_LoggingDestination[]>;
 }
 export interface LoggingProtoMsg {
   typeUrl: "/google.api.Logging";
@@ -111,10 +106,6 @@ export interface Logging_LoggingDestination {
    */
   logs: string[];
 }
-export interface ReactiveLogging_LoggingDestination {
-  monitoredResource: ComputedRef<string>;
-  logs: ComputedRef<string[]>;
-}
 export interface Logging_LoggingDestinationProtoMsg {
   typeUrl: "/google.api.LoggingDestination";
   value: Uint8Array;
@@ -165,10 +156,10 @@ export const Logging = {
     return message;
   },
   fromJSON(object: any): Logging {
-    return {
-      producerDestinations: Array.isArray(object?.producerDestinations) ? object.producerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumerDestinations) ? object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e)) : []
-    };
+    const obj = createBaseLogging();
+    if (Array.isArray(object?.producerDestinations)) obj.producerDestinations = object.producerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
+    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
+    return obj;
   },
   toJSON(message: Logging): JsonSafe<Logging> {
     const obj: any = {};
@@ -261,7 +252,7 @@ function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
 export const Logging_LoggingDestination = {
   typeUrl: "/google.api.LoggingDestination",
   encode(message: Logging_LoggingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(26).string(message.monitoredResource);
     }
     for (const v of message.logs) {
@@ -290,10 +281,10 @@ export const Logging_LoggingDestination = {
     return message;
   },
   fromJSON(object: any): Logging_LoggingDestination {
-    return {
-      monitoredResource: isSet(object.monitoredResource) ? String(object.monitoredResource) : "",
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseLogging_LoggingDestination();
+    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
+    if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: Logging_LoggingDestination): JsonSafe<Logging_LoggingDestination> {
     const obj: any = {};

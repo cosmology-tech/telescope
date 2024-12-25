@@ -1,11 +1,10 @@
-import { ParsedExpr, ParsedExprSDKType, SourcePosition, SourcePositionSDKType } from "../../v1alpha1/syntax";
-import { Decl, DeclSDKType, CheckedExpr, CheckedExprSDKType } from "../../v1alpha1/checked";
-import { ExprValue, ExprValueSDKType } from "../../v1alpha1/eval";
-import { Status, StatusSDKType } from "../../../../rpc/status";
-import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../../helpers";
-import { JsonSafe } from "../../../../../json-safe";
-import { ComputedRef } from "vue";
+import { ParsedExpr, ParsedExprSDKType, SourcePosition, SourcePositionSDKType } from "../../v1alpha1/syntax.js";
+import { Decl, DeclSDKType, CheckedExpr, CheckedExprSDKType } from "../../v1alpha1/checked.js";
+import { ExprValue, ExprValueSDKType } from "../../v1alpha1/eval.js";
+import { Status, StatusSDKType } from "../../../../rpc/status.js";
+import { BinaryReader, BinaryWriter } from "../../../../../binary.js";
+import { isSet, DeepPartial, isObject } from "../../../../../helpers.js";
+import { JsonSafe } from "../../../../../json-safe.js";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -69,12 +68,6 @@ export interface ParseRequest {
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
   disableMacros: boolean;
 }
-export interface ReactiveParseRequest {
-  celSource: ComputedRef<string>;
-  syntaxVersion: ComputedRef<string>;
-  sourceLocation: ComputedRef<string>;
-  disableMacros: ComputedRef<boolean>;
-}
 export interface ParseRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest";
   value: Uint8Array;
@@ -92,10 +85,6 @@ export interface ParseResponse {
   parsedExpr?: ParsedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
-}
-export interface ReactiveParseResponse {
-  parsedExpr?: ComputedRef<ParsedExpr>;
-  issues: ComputedRef<Status[]>;
 }
 export interface ParseResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseResponse";
@@ -128,12 +117,6 @@ export interface CheckRequest {
    */
   noStdEnv: boolean;
 }
-export interface ReactiveCheckRequest {
-  parsedExpr?: ComputedRef<ParsedExpr>;
-  typeEnv: ComputedRef<Decl[]>;
-  container: ComputedRef<string>;
-  noStdEnv: ComputedRef<boolean>;
-}
 export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.CheckRequest";
   value: Uint8Array;
@@ -152,10 +135,6 @@ export interface CheckResponse {
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
-export interface ReactiveCheckResponse {
-  checkedExpr?: ComputedRef<CheckedExpr>;
-  issues: ComputedRef<Status[]>;
-}
 export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.CheckResponse";
   value: Uint8Array;
@@ -168,10 +147,6 @@ export interface CheckResponseSDKType {
 export interface EvalRequest_BindingsEntry {
   key: string;
   value?: ExprValue;
-}
-export interface ReactiveEvalRequest_BindingsEntry {
-  key: ComputedRef<string>;
-  value?: ComputedRef<ExprValue>;
 }
 export interface EvalRequest_BindingsEntryProtoMsg {
   typeUrl: string;
@@ -196,14 +171,6 @@ export interface EvalRequest {
   };
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
   container: string;
-}
-export interface ReactiveEvalRequest {
-  parsedExpr?: ComputedRef<ParsedExpr>;
-  checkedExpr?: ComputedRef<CheckedExpr>;
-  bindings: ComputedRef<{
-    [key: string]: ExprValue;
-  }>;
-  container: ComputedRef<string>;
 }
 export interface EvalRequestProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalRequest";
@@ -230,10 +197,6 @@ export interface EvalResponse {
    */
   issues: Status[];
 }
-export interface ReactiveEvalResponse {
-  result?: ComputedRef<ExprValue>;
-  issues: ComputedRef<Status[]>;
-}
 export interface EvalResponseProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.EvalResponse";
   value: Uint8Array;
@@ -255,11 +218,6 @@ export interface IssueDetails {
   position?: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
   id: bigint;
-}
-export interface ReactiveIssueDetails {
-  severity: ComputedRef<IssueDetails_Severity>;
-  position?: ComputedRef<SourcePosition>;
-  id: ComputedRef<bigint>;
 }
 export interface IssueDetailsProtoMsg {
   typeUrl: "/google.api.expr.conformance.v1alpha1.IssueDetails";
@@ -286,16 +244,16 @@ function createBaseParseRequest(): ParseRequest {
 export const ParseRequest = {
   typeUrl: "/google.api.expr.conformance.v1alpha1.ParseRequest",
   encode(message: ParseRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.celSource !== "") {
+    if (message.celSource !== undefined) {
       writer.uint32(10).string(message.celSource);
     }
-    if (message.syntaxVersion !== "") {
+    if (message.syntaxVersion !== undefined) {
       writer.uint32(18).string(message.syntaxVersion);
     }
-    if (message.sourceLocation !== "") {
+    if (message.sourceLocation !== undefined) {
       writer.uint32(26).string(message.sourceLocation);
     }
-    if (message.disableMacros === true) {
+    if (message.disableMacros !== undefined) {
       writer.uint32(32).bool(message.disableMacros);
     }
     return writer;
@@ -327,12 +285,12 @@ export const ParseRequest = {
     return message;
   },
   fromJSON(object: any): ParseRequest {
-    return {
-      celSource: isSet(object.celSource) ? String(object.celSource) : "",
-      syntaxVersion: isSet(object.syntaxVersion) ? String(object.syntaxVersion) : "",
-      sourceLocation: isSet(object.sourceLocation) ? String(object.sourceLocation) : "",
-      disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
-    };
+    const obj = createBaseParseRequest();
+    if (isSet(object.celSource)) obj.celSource = String(object.celSource);
+    if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
+    if (isSet(object.sourceLocation)) obj.sourceLocation = String(object.sourceLocation);
+    if (isSet(object.disableMacros)) obj.disableMacros = Boolean(object.disableMacros);
+    return obj;
   },
   toJSON(message: ParseRequest): JsonSafe<ParseRequest> {
     const obj: any = {};
@@ -452,10 +410,10 @@ export const ParseResponse = {
     return message;
   },
   fromJSON(object: any): ParseResponse {
-    return {
-      parsedExpr: isSet(object.parsedExpr) ? ParsedExpr.fromJSON(object.parsedExpr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
-    };
+    const obj = createBaseParseResponse();
+    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
+    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
+    return obj;
   },
   toJSON(message: ParseResponse): JsonSafe<ParseResponse> {
     const obj: any = {};
@@ -469,7 +427,9 @@ export const ParseResponse = {
   },
   fromPartial(object: DeepPartial<ParseResponse>): ParseResponse {
     const message = createBaseParseResponse();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
+    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
+      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
+    }
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   },
@@ -546,10 +506,10 @@ export const CheckRequest = {
     for (const v of message.typeEnv) {
       Decl.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.container !== "") {
+    if (message.container !== undefined) {
       writer.uint32(26).string(message.container);
     }
-    if (message.noStdEnv === true) {
+    if (message.noStdEnv !== undefined) {
       writer.uint32(32).bool(message.noStdEnv);
     }
     return writer;
@@ -581,12 +541,12 @@ export const CheckRequest = {
     return message;
   },
   fromJSON(object: any): CheckRequest {
-    return {
-      parsedExpr: isSet(object.parsedExpr) ? ParsedExpr.fromJSON(object.parsedExpr) : undefined,
-      typeEnv: Array.isArray(object?.typeEnv) ? object.typeEnv.map((e: any) => Decl.fromJSON(e)) : [],
-      container: isSet(object.container) ? String(object.container) : "",
-      noStdEnv: isSet(object.noStdEnv) ? Boolean(object.noStdEnv) : false
-    };
+    const obj = createBaseCheckRequest();
+    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
+    if (Array.isArray(object?.typeEnv)) obj.typeEnv = object.typeEnv.map((e: any) => Decl.fromJSON(e));
+    if (isSet(object.container)) obj.container = String(object.container);
+    if (isSet(object.noStdEnv)) obj.noStdEnv = Boolean(object.noStdEnv);
+    return obj;
   },
   toJSON(message: CheckRequest): JsonSafe<CheckRequest> {
     const obj: any = {};
@@ -602,7 +562,9 @@ export const CheckRequest = {
   },
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
+    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
+      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
+    }
     message.typeEnv = object.typeEnv?.map(e => Decl.fromPartial(e)) || [];
     message.container = object.container ?? "";
     message.noStdEnv = object.noStdEnv ?? false;
@@ -716,10 +678,10 @@ export const CheckResponse = {
     return message;
   },
   fromJSON(object: any): CheckResponse {
-    return {
-      checkedExpr: isSet(object.checkedExpr) ? CheckedExpr.fromJSON(object.checkedExpr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
-    };
+    const obj = createBaseCheckResponse();
+    if (isSet(object.checkedExpr)) obj.checkedExpr = CheckedExpr.fromJSON(object.checkedExpr);
+    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
+    return obj;
   },
   toJSON(message: CheckResponse): JsonSafe<CheckResponse> {
     const obj: any = {};
@@ -733,7 +695,9 @@ export const CheckResponse = {
   },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
-    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
+    if (object.checkedExpr !== undefined && object.checkedExpr !== null) {
+      message.checkedExpr = CheckedExpr.fromPartial(object.checkedExpr);
+    }
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   },
@@ -801,7 +765,7 @@ function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
 }
 export const EvalRequest_BindingsEntry = {
   encode(message: EvalRequest_BindingsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
@@ -830,10 +794,10 @@ export const EvalRequest_BindingsEntry = {
     return message;
   },
   fromJSON(object: any): EvalRequest_BindingsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? ExprValue.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseEvalRequest_BindingsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = ExprValue.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: EvalRequest_BindingsEntry): JsonSafe<EvalRequest_BindingsEntry> {
     const obj: any = {};
@@ -844,7 +808,9 @@ export const EvalRequest_BindingsEntry = {
   fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
     const message = createBaseEvalRequest_BindingsEntry();
     message.key = object.key ?? "";
-    message.value = object.value !== undefined && object.value !== null ? ExprValue.fromPartial(object.value) : undefined;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = ExprValue.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: EvalRequest_BindingsEntrySDKType): EvalRequest_BindingsEntry {
@@ -914,7 +880,7 @@ export const EvalRequest = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.container !== "") {
+    if (message.container !== undefined) {
       writer.uint32(34).string(message.container);
     }
     return writer;
@@ -949,17 +915,17 @@ export const EvalRequest = {
     return message;
   },
   fromJSON(object: any): EvalRequest {
-    return {
-      parsedExpr: isSet(object.parsedExpr) ? ParsedExpr.fromJSON(object.parsedExpr) : undefined,
-      checkedExpr: isSet(object.checkedExpr) ? CheckedExpr.fromJSON(object.checkedExpr) : undefined,
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
-        acc[key] = ExprValue.fromJSON(value);
-        return acc;
-      }, {}) : {},
-      container: isSet(object.container) ? String(object.container) : ""
-    };
+    const obj = createBaseEvalRequest();
+    if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
+    if (isSet(object.checkedExpr)) obj.checkedExpr = CheckedExpr.fromJSON(object.checkedExpr);
+    if (isObject(object.bindings)) obj.bindings = Object.entries(object.bindings).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      acc[key] = ExprValue.fromJSON(value);
+      return acc;
+    }, {});
+    if (isSet(object.container)) obj.container = String(object.container);
+    return obj;
   },
   toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
     const obj: any = {};
@@ -976,8 +942,12 @@ export const EvalRequest = {
   },
   fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
     const message = createBaseEvalRequest();
-    message.parsedExpr = object.parsedExpr !== undefined && object.parsedExpr !== null ? ParsedExpr.fromPartial(object.parsedExpr) : undefined;
-    message.checkedExpr = object.checkedExpr !== undefined && object.checkedExpr !== null ? CheckedExpr.fromPartial(object.checkedExpr) : undefined;
+    if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
+      message.parsedExpr = ParsedExpr.fromPartial(object.parsedExpr);
+    }
+    if (object.checkedExpr !== undefined && object.checkedExpr !== null) {
+      message.checkedExpr = CheckedExpr.fromPartial(object.checkedExpr);
+    }
     message.bindings = Object.entries(object.bindings ?? {}).reduce<{
       [key: string]: ExprValue;
     }>((acc, [key, value]) => {
@@ -1116,10 +1086,10 @@ export const EvalResponse = {
     return message;
   },
   fromJSON(object: any): EvalResponse {
-    return {
-      result: isSet(object.result) ? ExprValue.fromJSON(object.result) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
-    };
+    const obj = createBaseEvalResponse();
+    if (isSet(object.result)) obj.result = ExprValue.fromJSON(object.result);
+    if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
+    return obj;
   },
   toJSON(message: EvalResponse): JsonSafe<EvalResponse> {
     const obj: any = {};
@@ -1133,7 +1103,9 @@ export const EvalResponse = {
   },
   fromPartial(object: DeepPartial<EvalResponse>): EvalResponse {
     const message = createBaseEvalResponse();
-    message.result = object.result !== undefined && object.result !== null ? ExprValue.fromPartial(object.result) : undefined;
+    if (object.result !== undefined && object.result !== null) {
+      message.result = ExprValue.fromPartial(object.result);
+    }
     message.issues = object.issues?.map(e => Status.fromPartial(e)) || [];
     return message;
   },
@@ -1209,7 +1181,7 @@ export const IssueDetails = {
     if (message.position !== undefined) {
       SourcePosition.encode(message.position, writer.uint32(18).fork()).ldelim();
     }
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(24).int64(message.id);
     }
     return writer;
@@ -1238,11 +1210,11 @@ export const IssueDetails = {
     return message;
   },
   fromJSON(object: any): IssueDetails {
-    return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
-      position: isSet(object.position) ? SourcePosition.fromJSON(object.position) : undefined,
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
-    };
+    const obj = createBaseIssueDetails();
+    if (isSet(object.severity)) obj.severity = issueDetails_SeverityFromJSON(object.severity);
+    if (isSet(object.position)) obj.position = SourcePosition.fromJSON(object.position);
+    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
+    return obj;
   },
   toJSON(message: IssueDetails): JsonSafe<IssueDetails> {
     const obj: any = {};
@@ -1254,8 +1226,12 @@ export const IssueDetails = {
   fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {
     const message = createBaseIssueDetails();
     message.severity = object.severity ?? 0;
-    message.position = object.position !== undefined && object.position !== null ? SourcePosition.fromPartial(object.position) : undefined;
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.position !== undefined && object.position !== null) {
+      message.position = SourcePosition.fromPartial(object.position);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     return message;
   },
   fromSDK(object: IssueDetailsSDKType): IssueDetails {

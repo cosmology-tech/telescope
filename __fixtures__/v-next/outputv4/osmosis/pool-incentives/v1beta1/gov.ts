@@ -1,8 +1,7 @@
-import { DistrRecord, DistrRecordSDKType } from "./incentives";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { DistrRecord, DistrRecordSDKType } from "./incentives.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -17,11 +16,6 @@ export interface ReplacePoolIncentivesProposal {
   title: string;
   description: string;
   records: DistrRecord[];
-}
-export interface ReactiveReplacePoolIncentivesProposal {
-  title: ComputedRef<string>;
-  description: ComputedRef<string>;
-  records: ComputedRef<DistrRecord[]>;
 }
 export interface ReplacePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
@@ -55,11 +49,6 @@ export interface UpdatePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
-export interface ReactiveUpdatePoolIncentivesProposal {
-  title: ComputedRef<string>;
-  description: ComputedRef<string>;
-  records: ComputedRef<DistrRecord[]>;
-}
 export interface UpdatePoolIncentivesProposalProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   value: Uint8Array;
@@ -88,10 +77,10 @@ function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposa
 export const ReplacePoolIncentivesProposal = {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
   encode(message: ReplacePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.records) {
@@ -123,11 +112,11 @@ export const ReplacePoolIncentivesProposal = {
     return message;
   },
   fromJSON(object: any): ReplacePoolIncentivesProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
-    };
+    const obj = createBaseReplacePoolIncentivesProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
+    return obj;
   },
   toJSON(message: ReplacePoolIncentivesProposal): JsonSafe<ReplacePoolIncentivesProposal> {
     const obj: any = {};
@@ -226,10 +215,10 @@ function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal 
 export const UpdatePoolIncentivesProposal = {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
   encode(message: UpdatePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.records) {
@@ -261,11 +250,11 @@ export const UpdatePoolIncentivesProposal = {
     return message;
   },
   fromJSON(object: any): UpdatePoolIncentivesProposal {
-    return {
-      title: isSet(object.title) ? String(object.title) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
-    };
+    const obj = createBaseUpdatePoolIncentivesProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
+    return obj;
   },
   toJSON(message: UpdatePoolIncentivesProposal): JsonSafe<UpdatePoolIncentivesProposal> {
     const obj: any = {};

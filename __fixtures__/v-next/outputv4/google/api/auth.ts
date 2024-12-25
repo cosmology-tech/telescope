@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
-import { DeepPartial, isSet } from "../../helpers";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -32,10 +31,6 @@ export interface Authentication {
   rules: AuthenticationRule[];
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProvider[];
-}
-export interface ReactiveAuthentication {
-  rules: ComputedRef<AuthenticationRule[]>;
-  providers: ComputedRef<AuthProvider[]>;
 }
 export interface AuthenticationProtoMsg {
   typeUrl: "/google.api.Authentication";
@@ -93,12 +88,6 @@ export interface AuthenticationRule {
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirement[];
 }
-export interface ReactiveAuthenticationRule {
-  selector: ComputedRef<string>;
-  oauth?: ComputedRef<OAuthRequirements>;
-  allowWithoutCredential: ComputedRef<boolean>;
-  requirements: ComputedRef<AuthRequirement[]>;
-}
 export interface AuthenticationRuleProtoMsg {
   typeUrl: "/google.api.AuthenticationRule";
   value: Uint8Array;
@@ -137,11 +126,6 @@ export interface JwtLocation {
    * value_prefix="Bearer " with a space at the end.
    */
   valuePrefix: string;
-}
-export interface ReactiveJwtLocation {
-  header?: ComputedRef<string>;
-  query?: ComputedRef<string>;
-  valuePrefix: ComputedRef<string>;
 }
 export interface JwtLocationProtoMsg {
   typeUrl: "/google.api.JwtLocation";
@@ -236,14 +220,6 @@ export interface AuthProvider {
    */
   jwtLocations: JwtLocation[];
 }
-export interface ReactiveAuthProvider {
-  id: ComputedRef<string>;
-  issuer: ComputedRef<string>;
-  jwksUri: ComputedRef<string>;
-  audiences: ComputedRef<string>;
-  authorizationUrl: ComputedRef<string>;
-  jwtLocations: ComputedRef<JwtLocation[]>;
-}
 export interface AuthProviderProtoMsg {
   typeUrl: "/google.api.AuthProvider";
   value: Uint8Array;
@@ -292,9 +268,6 @@ export interface OAuthRequirements {
    *                        https://www.googleapis.com/auth/calendar.read
    */
   canonicalScopes: string;
-}
-export interface ReactiveOAuthRequirements {
-  canonicalScopes: ComputedRef<string>;
 }
 export interface OAuthRequirementsProtoMsg {
   typeUrl: "/google.api.OAuthRequirements";
@@ -357,10 +330,6 @@ export interface AuthRequirement {
    */
   audiences: string;
 }
-export interface ReactiveAuthRequirement {
-  providerId: ComputedRef<string>;
-  audiences: ComputedRef<string>;
-}
 export interface AuthRequirementProtoMsg {
   typeUrl: "/google.api.AuthRequirement";
   value: Uint8Array;
@@ -412,10 +381,10 @@ export const Authentication = {
     return message;
   },
   fromJSON(object: any): Authentication {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromJSON(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromJSON(e)) : []
-    };
+    const obj = createBaseAuthentication();
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => AuthenticationRule.fromJSON(e));
+    if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => AuthProvider.fromJSON(e));
+    return obj;
   },
   toJSON(message: Authentication): JsonSafe<Authentication> {
     const obj: any = {};
@@ -510,13 +479,13 @@ function createBaseAuthenticationRule(): AuthenticationRule {
 export const AuthenticationRule = {
   typeUrl: "/google.api.AuthenticationRule",
   encode(message: AuthenticationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     if (message.oauth !== undefined) {
       OAuthRequirements.encode(message.oauth, writer.uint32(18).fork()).ldelim();
     }
-    if (message.allowWithoutCredential === true) {
+    if (message.allowWithoutCredential !== undefined) {
       writer.uint32(40).bool(message.allowWithoutCredential);
     }
     for (const v of message.requirements) {
@@ -551,12 +520,12 @@ export const AuthenticationRule = {
     return message;
   },
   fromJSON(object: any): AuthenticationRule {
-    return {
-      selector: isSet(object.selector) ? String(object.selector) : "",
-      oauth: isSet(object.oauth) ? OAuthRequirements.fromJSON(object.oauth) : undefined,
-      allowWithoutCredential: isSet(object.allowWithoutCredential) ? Boolean(object.allowWithoutCredential) : false,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromJSON(e)) : []
-    };
+    const obj = createBaseAuthenticationRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isSet(object.oauth)) obj.oauth = OAuthRequirements.fromJSON(object.oauth);
+    if (isSet(object.allowWithoutCredential)) obj.allowWithoutCredential = Boolean(object.allowWithoutCredential);
+    if (Array.isArray(object?.requirements)) obj.requirements = object.requirements.map((e: any) => AuthRequirement.fromJSON(e));
+    return obj;
   },
   toJSON(message: AuthenticationRule): JsonSafe<AuthenticationRule> {
     const obj: any = {};
@@ -573,7 +542,9 @@ export const AuthenticationRule = {
   fromPartial(object: DeepPartial<AuthenticationRule>): AuthenticationRule {
     const message = createBaseAuthenticationRule();
     message.selector = object.selector ?? "";
-    message.oauth = object.oauth !== undefined && object.oauth !== null ? OAuthRequirements.fromPartial(object.oauth) : undefined;
+    if (object.oauth !== undefined && object.oauth !== null) {
+      message.oauth = OAuthRequirements.fromPartial(object.oauth);
+    }
     message.allowWithoutCredential = object.allowWithoutCredential ?? false;
     message.requirements = object.requirements?.map(e => AuthRequirement.fromPartial(e)) || [];
     return message;
@@ -664,7 +635,7 @@ export const JwtLocation = {
     if (message.query !== undefined) {
       writer.uint32(18).string(message.query);
     }
-    if (message.valuePrefix !== "") {
+    if (message.valuePrefix !== undefined) {
       writer.uint32(26).string(message.valuePrefix);
     }
     return writer;
@@ -693,11 +664,11 @@ export const JwtLocation = {
     return message;
   },
   fromJSON(object: any): JwtLocation {
-    return {
-      header: isSet(object.header) ? String(object.header) : undefined,
-      query: isSet(object.query) ? String(object.query) : undefined,
-      valuePrefix: isSet(object.valuePrefix) ? String(object.valuePrefix) : ""
-    };
+    const obj = createBaseJwtLocation();
+    if (isSet(object.header)) obj.header = String(object.header);
+    if (isSet(object.query)) obj.query = String(object.query);
+    if (isSet(object.valuePrefix)) obj.valuePrefix = String(object.valuePrefix);
+    return obj;
   },
   toJSON(message: JwtLocation): JsonSafe<JwtLocation> {
     const obj: any = {};
@@ -783,19 +754,19 @@ function createBaseAuthProvider(): AuthProvider {
 export const AuthProvider = {
   typeUrl: "/google.api.AuthProvider",
   encode(message: AuthProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.issuer !== "") {
+    if (message.issuer !== undefined) {
       writer.uint32(18).string(message.issuer);
     }
-    if (message.jwksUri !== "") {
+    if (message.jwksUri !== undefined) {
       writer.uint32(26).string(message.jwksUri);
     }
-    if (message.audiences !== "") {
+    if (message.audiences !== undefined) {
       writer.uint32(34).string(message.audiences);
     }
-    if (message.authorizationUrl !== "") {
+    if (message.authorizationUrl !== undefined) {
       writer.uint32(42).string(message.authorizationUrl);
     }
     for (const v of message.jwtLocations) {
@@ -836,14 +807,14 @@ export const AuthProvider = {
     return message;
   },
   fromJSON(object: any): AuthProvider {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      issuer: isSet(object.issuer) ? String(object.issuer) : "",
-      jwksUri: isSet(object.jwksUri) ? String(object.jwksUri) : "",
-      audiences: isSet(object.audiences) ? String(object.audiences) : "",
-      authorizationUrl: isSet(object.authorizationUrl) ? String(object.authorizationUrl) : "",
-      jwtLocations: Array.isArray(object?.jwtLocations) ? object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e)) : []
-    };
+    const obj = createBaseAuthProvider();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.issuer)) obj.issuer = String(object.issuer);
+    if (isSet(object.jwksUri)) obj.jwksUri = String(object.jwksUri);
+    if (isSet(object.audiences)) obj.audiences = String(object.audiences);
+    if (isSet(object.authorizationUrl)) obj.authorizationUrl = String(object.authorizationUrl);
+    if (Array.isArray(object?.jwtLocations)) obj.jwtLocations = object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e));
+    return obj;
   },
   toJSON(message: AuthProvider): JsonSafe<AuthProvider> {
     const obj: any = {};
@@ -961,7 +932,7 @@ function createBaseOAuthRequirements(): OAuthRequirements {
 export const OAuthRequirements = {
   typeUrl: "/google.api.OAuthRequirements",
   encode(message: OAuthRequirements, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.canonicalScopes !== "") {
+    if (message.canonicalScopes !== undefined) {
       writer.uint32(10).string(message.canonicalScopes);
     }
     return writer;
@@ -984,9 +955,9 @@ export const OAuthRequirements = {
     return message;
   },
   fromJSON(object: any): OAuthRequirements {
-    return {
-      canonicalScopes: isSet(object.canonicalScopes) ? String(object.canonicalScopes) : ""
-    };
+    const obj = createBaseOAuthRequirements();
+    if (isSet(object.canonicalScopes)) obj.canonicalScopes = String(object.canonicalScopes);
+    return obj;
   },
   toJSON(message: OAuthRequirements): JsonSafe<OAuthRequirements> {
     const obj: any = {};
@@ -1050,10 +1021,10 @@ function createBaseAuthRequirement(): AuthRequirement {
 export const AuthRequirement = {
   typeUrl: "/google.api.AuthRequirement",
   encode(message: AuthRequirement, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.providerId !== "") {
+    if (message.providerId !== undefined) {
       writer.uint32(10).string(message.providerId);
     }
-    if (message.audiences !== "") {
+    if (message.audiences !== undefined) {
       writer.uint32(18).string(message.audiences);
     }
     return writer;
@@ -1079,10 +1050,10 @@ export const AuthRequirement = {
     return message;
   },
   fromJSON(object: any): AuthRequirement {
-    return {
-      providerId: isSet(object.providerId) ? String(object.providerId) : "",
-      audiences: isSet(object.audiences) ? String(object.audiences) : ""
-    };
+    const obj = createBaseAuthRequirement();
+    if (isSet(object.providerId)) obj.providerId = String(object.providerId);
+    if (isSet(object.audiences)) obj.audiences = String(object.audiences);
+    return obj;
   },
   toJSON(message: AuthRequirement): JsonSafe<AuthRequirement> {
     const obj: any = {};

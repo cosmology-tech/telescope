@@ -1,18 +1,14 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** =============================== Pool */
 export interface QueryPoolRequest {
   poolId: bigint;
-}
-export interface ReactiveQueryPoolRequest {
-  poolId: ComputedRef<bigint>;
 }
 export interface QueryPoolRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest";
@@ -25,9 +21,6 @@ export interface QueryPoolRequestSDKType {
 export interface QueryPoolResponse {
   pool?: Any;
 }
-export interface ReactiveQueryPoolResponse {
-  pool?: ComputedRef<Any>;
-}
 export interface QueryPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
   value: Uint8Array;
@@ -39,9 +32,6 @@ export interface QueryPoolResponseSDKType {
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
-}
-export interface ReactiveQueryPoolsRequest {
-  pagination?: ComputedRef<PageRequest>;
 }
 export interface QueryPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest";
@@ -56,10 +46,6 @@ export interface QueryPoolsResponse {
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
-export interface ReactiveQueryPoolsResponse {
-  pools: ComputedRef<Any[]>;
-  pagination?: ComputedRef<PageResponse>;
-}
 export interface QueryPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse";
   value: Uint8Array;
@@ -70,7 +56,6 @@ export interface QueryPoolsResponseSDKType {
 }
 /** =============================== NumPools */
 export interface QueryNumPoolsRequest {}
-export interface ReactiveQueryNumPoolsRequest {}
 export interface QueryNumPoolsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest";
   value: Uint8Array;
@@ -79,9 +64,6 @@ export interface QueryNumPoolsRequestProtoMsg {
 export interface QueryNumPoolsRequestSDKType {}
 export interface QueryNumPoolsResponse {
   numPools: bigint;
-}
-export interface ReactiveQueryNumPoolsResponse {
-  numPools: ComputedRef<bigint>;
 }
 export interface QueryNumPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse";
@@ -94,9 +76,6 @@ export interface QueryNumPoolsResponseSDKType {
 export interface QueryPoolTypeRequest {
   poolId: bigint;
 }
-export interface ReactiveQueryPoolTypeRequest {
-  poolId: ComputedRef<bigint>;
-}
 export interface QueryPoolTypeRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest";
   value: Uint8Array;
@@ -107,9 +86,6 @@ export interface QueryPoolTypeRequestSDKType {
 }
 export interface QueryPoolTypeResponse {
   poolType: string;
-}
-export interface ReactiveQueryPoolTypeResponse {
-  poolType: ComputedRef<string>;
 }
 export interface QueryPoolTypeResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse";
@@ -122,10 +98,6 @@ export interface QueryPoolTypeResponseSDKType {
 export interface QueryCalcJoinPoolSharesRequest {
   poolId: bigint;
   tokensIn: Coin[];
-}
-export interface ReactiveQueryCalcJoinPoolSharesRequest {
-  poolId: ComputedRef<bigint>;
-  tokensIn: ComputedRef<Coin[]>;
 }
 export interface QueryCalcJoinPoolSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest";
@@ -140,10 +112,6 @@ export interface QueryCalcJoinPoolSharesResponse {
   shareOutAmount: string;
   tokensOut: Coin[];
 }
-export interface ReactiveQueryCalcJoinPoolSharesResponse {
-  shareOutAmount: ComputedRef<string>;
-  tokensOut: ComputedRef<Coin[]>;
-}
 export interface QueryCalcJoinPoolSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse";
   value: Uint8Array;
@@ -157,10 +125,6 @@ export interface QueryCalcExitPoolCoinsFromSharesRequest {
   poolId: bigint;
   shareInAmount: string;
 }
-export interface ReactiveQueryCalcExitPoolCoinsFromSharesRequest {
-  poolId: ComputedRef<bigint>;
-  shareInAmount: ComputedRef<string>;
-}
 export interface QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest";
   value: Uint8Array;
@@ -173,9 +137,6 @@ export interface QueryCalcExitPoolCoinsFromSharesRequestSDKType {
 export interface QueryCalcExitPoolCoinsFromSharesResponse {
   tokensOut: Coin[];
 }
-export interface ReactiveQueryCalcExitPoolCoinsFromSharesResponse {
-  tokensOut: ComputedRef<Coin[]>;
-}
 export interface QueryCalcExitPoolCoinsFromSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse";
   value: Uint8Array;
@@ -186,9 +147,6 @@ export interface QueryCalcExitPoolCoinsFromSharesResponseSDKType {
 /** =============================== PoolParams */
 export interface QueryPoolParamsRequest {
   poolId: bigint;
-}
-export interface ReactiveQueryPoolParamsRequest {
-  poolId: ComputedRef<bigint>;
 }
 export interface QueryPoolParamsRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest";
@@ -201,9 +159,6 @@ export interface QueryPoolParamsRequestSDKType {
 export interface QueryPoolParamsResponse {
   params?: Any;
 }
-export interface ReactiveQueryPoolParamsResponse {
-  params?: ComputedRef<Any>;
-}
 export interface QueryPoolParamsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse";
   value: Uint8Array;
@@ -214,9 +169,6 @@ export interface QueryPoolParamsResponseSDKType {
 /** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequest {
   poolId: bigint;
-}
-export interface ReactiveQueryTotalPoolLiquidityRequest {
-  poolId: ComputedRef<bigint>;
 }
 export interface QueryTotalPoolLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest";
@@ -229,9 +181,6 @@ export interface QueryTotalPoolLiquidityRequestSDKType {
 export interface QueryTotalPoolLiquidityResponse {
   liquidity: Coin[];
 }
-export interface ReactiveQueryTotalPoolLiquidityResponse {
-  liquidity: ComputedRef<Coin[]>;
-}
 export interface QueryTotalPoolLiquidityResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse";
   value: Uint8Array;
@@ -243,9 +192,6 @@ export interface QueryTotalPoolLiquidityResponseSDKType {
 export interface QueryTotalSharesRequest {
   poolId: bigint;
 }
-export interface ReactiveQueryTotalSharesRequest {
-  poolId: ComputedRef<bigint>;
-}
 export interface QueryTotalSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest";
   value: Uint8Array;
@@ -256,9 +202,6 @@ export interface QueryTotalSharesRequestSDKType {
 }
 export interface QueryTotalSharesResponse {
   totalShares: Coin;
-}
-export interface ReactiveQueryTotalSharesResponse {
-  totalShares: ComputedRef<Coin>;
 }
 export interface QueryTotalSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse";
@@ -272,10 +215,6 @@ export interface QueryCalcJoinPoolNoSwapSharesRequest {
   poolId: bigint;
   tokensIn: Coin[];
 }
-export interface ReactiveQueryCalcJoinPoolNoSwapSharesRequest {
-  poolId: ComputedRef<bigint>;
-  tokensIn: ComputedRef<Coin[]>;
-}
 export interface QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest";
   value: Uint8Array;
@@ -288,10 +227,6 @@ export interface QueryCalcJoinPoolNoSwapSharesRequestSDKType {
 export interface QueryCalcJoinPoolNoSwapSharesResponse {
   tokensOut: Coin[];
   sharesOut: string;
-}
-export interface ReactiveQueryCalcJoinPoolNoSwapSharesResponse {
-  tokensOut: ComputedRef<Coin[]>;
-  sharesOut: ComputedRef<string>;
 }
 export interface QueryCalcJoinPoolNoSwapSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse";
@@ -310,11 +245,6 @@ export interface QuerySpotPriceRequest {
   poolId: bigint;
   baseAssetDenom: string;
   quoteAssetDenom: string;
-}
-export interface ReactiveQuerySpotPriceRequest {
-  poolId: ComputedRef<bigint>;
-  baseAssetDenom: ComputedRef<string>;
-  quoteAssetDenom: ComputedRef<string>;
 }
 export interface QuerySpotPriceRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest";
@@ -335,11 +265,6 @@ export interface QueryPoolsWithFilterRequest {
   poolType: string;
   pagination?: PageRequest;
 }
-export interface ReactiveQueryPoolsWithFilterRequest {
-  minLiquidity: ComputedRef<Coin[]>;
-  poolType: ComputedRef<string>;
-  pagination?: ComputedRef<PageRequest>;
-}
 export interface QueryPoolsWithFilterRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest";
   value: Uint8Array;
@@ -353,10 +278,6 @@ export interface QueryPoolsWithFilterResponse {
   pools: Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
-}
-export interface ReactiveQueryPoolsWithFilterResponse {
-  pools: ComputedRef<Any[]>;
-  pagination?: ComputedRef<PageResponse>;
 }
 export interface QueryPoolsWithFilterResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse";
@@ -374,9 +295,6 @@ export interface QueryPoolsWithFilterResponseSDKType {
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
-}
-export interface ReactiveQuerySpotPriceResponse {
-  spotPrice: ComputedRef<string>;
 }
 export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse";
@@ -398,12 +316,6 @@ export interface QuerySwapExactAmountInRequest {
   tokenIn: string;
   routes: SwapAmountInRoute[];
 }
-export interface ReactiveQuerySwapExactAmountInRequest {
-  sender: ComputedRef<string>;
-  poolId: ComputedRef<bigint>;
-  tokenIn: ComputedRef<string>;
-  routes: ComputedRef<SwapAmountInRoute[]>;
-}
 export interface QuerySwapExactAmountInRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest";
   value: Uint8Array;
@@ -417,9 +329,6 @@ export interface QuerySwapExactAmountInRequestSDKType {
 }
 export interface QuerySwapExactAmountInResponse {
   tokenOutAmount: string;
-}
-export interface ReactiveQuerySwapExactAmountInResponse {
-  tokenOutAmount: ComputedRef<string>;
 }
 export interface QuerySwapExactAmountInResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse";
@@ -436,12 +345,6 @@ export interface QuerySwapExactAmountOutRequest {
   routes: SwapAmountOutRoute[];
   tokenOut: string;
 }
-export interface ReactiveQuerySwapExactAmountOutRequest {
-  sender: ComputedRef<string>;
-  poolId: ComputedRef<bigint>;
-  routes: ComputedRef<SwapAmountOutRoute[]>;
-  tokenOut: ComputedRef<string>;
-}
 export interface QuerySwapExactAmountOutRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest";
   value: Uint8Array;
@@ -456,9 +359,6 @@ export interface QuerySwapExactAmountOutRequestSDKType {
 export interface QuerySwapExactAmountOutResponse {
   tokenInAmount: string;
 }
-export interface ReactiveQuerySwapExactAmountOutResponse {
-  tokenInAmount: ComputedRef<string>;
-}
 export interface QuerySwapExactAmountOutResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse";
   value: Uint8Array;
@@ -467,7 +367,6 @@ export interface QuerySwapExactAmountOutResponseSDKType {
   token_in_amount: string;
 }
 export interface QueryTotalLiquidityRequest {}
-export interface ReactiveQueryTotalLiquidityRequest {}
 export interface QueryTotalLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest";
   value: Uint8Array;
@@ -475,9 +374,6 @@ export interface QueryTotalLiquidityRequestProtoMsg {
 export interface QueryTotalLiquidityRequestSDKType {}
 export interface QueryTotalLiquidityResponse {
   liquidity: Coin[];
-}
-export interface ReactiveQueryTotalLiquidityResponse {
-  liquidity: ComputedRef<Coin[]>;
 }
 export interface QueryTotalLiquidityResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse";
@@ -494,7 +390,7 @@ function createBaseQueryPoolRequest(): QueryPoolRequest {
 export const QueryPoolRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest",
   encode(message: QueryPoolRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
@@ -517,9 +413,9 @@ export const QueryPoolRequest = {
     return message;
   },
   fromJSON(object: any): QueryPoolRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryPoolRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: QueryPoolRequest): JsonSafe<QueryPoolRequest> {
     const obj: any = {};
@@ -528,7 +424,9 @@ export const QueryPoolRequest = {
   },
   fromPartial(object: DeepPartial<QueryPoolRequest>): QueryPoolRequest {
     const message = createBaseQueryPoolRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryPoolRequestSDKType): QueryPoolRequest {
@@ -611,9 +509,9 @@ export const QueryPoolResponse = {
     return message;
   },
   fromJSON(object: any): QueryPoolResponse {
-    return {
-      pool: isSet(object.pool) ? Any.fromJSON(object.pool) : undefined
-    };
+    const obj = createBaseQueryPoolResponse();
+    if (isSet(object.pool)) obj.pool = Any.fromJSON(object.pool);
+    return obj;
   },
   toJSON(message: QueryPoolResponse): JsonSafe<QueryPoolResponse> {
     const obj: any = {};
@@ -622,7 +520,9 @@ export const QueryPoolResponse = {
   },
   fromPartial(object: DeepPartial<QueryPoolResponse>): QueryPoolResponse {
     const message = createBaseQueryPoolResponse();
-    message.pool = object.pool !== undefined && object.pool !== null ? Any.fromPartial(object.pool) : undefined;
+    if (object.pool !== undefined && object.pool !== null) {
+      message.pool = Any.fromPartial(object.pool);
+    }
     return message;
   },
   fromSDK(object: QueryPoolResponseSDKType): QueryPoolResponse {
@@ -705,9 +605,9 @@ export const QueryPoolsRequest = {
     return message;
   },
   fromJSON(object: any): QueryPoolsRequest {
-    return {
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryPoolsRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryPoolsRequest): JsonSafe<QueryPoolsRequest> {
     const obj: any = {};
@@ -716,7 +616,9 @@ export const QueryPoolsRequest = {
   },
   fromPartial(object: DeepPartial<QueryPoolsRequest>): QueryPoolsRequest {
     const message = createBaseQueryPoolsRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPoolsRequestSDKType): QueryPoolsRequest {
@@ -806,10 +708,10 @@ export const QueryPoolsResponse = {
     return message;
   },
   fromJSON(object: any): QueryPoolsResponse {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryPoolsResponse();
+    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryPoolsResponse): JsonSafe<QueryPoolsResponse> {
     const obj: any = {};
@@ -824,7 +726,9 @@ export const QueryPoolsResponse = {
   fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
@@ -912,7 +816,8 @@ export const QueryNumPoolsRequest = {
     return message;
   },
   fromJSON(_: any): QueryNumPoolsRequest {
-    return {};
+    const obj = createBaseQueryNumPoolsRequest();
+    return obj;
   },
   toJSON(_: QueryNumPoolsRequest): JsonSafe<QueryNumPoolsRequest> {
     const obj: any = {};
@@ -970,7 +875,7 @@ function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
 export const QueryNumPoolsResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse",
   encode(message: QueryNumPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numPools !== BigInt(0)) {
+    if (message.numPools !== undefined) {
       writer.uint32(8).uint64(message.numPools);
     }
     return writer;
@@ -993,9 +898,9 @@ export const QueryNumPoolsResponse = {
     return message;
   },
   fromJSON(object: any): QueryNumPoolsResponse {
-    return {
-      numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryNumPoolsResponse();
+    if (isSet(object.numPools)) obj.numPools = BigInt(object.numPools.toString());
+    return obj;
   },
   toJSON(message: QueryNumPoolsResponse): JsonSafe<QueryNumPoolsResponse> {
     const obj: any = {};
@@ -1004,7 +909,9 @@ export const QueryNumPoolsResponse = {
   },
   fromPartial(object: DeepPartial<QueryNumPoolsResponse>): QueryNumPoolsResponse {
     const message = createBaseQueryNumPoolsResponse();
-    message.numPools = object.numPools !== undefined && object.numPools !== null ? BigInt(object.numPools.toString()) : BigInt(0);
+    if (object.numPools !== undefined && object.numPools !== null) {
+      message.numPools = BigInt(object.numPools.toString());
+    }
     return message;
   },
   fromSDK(object: QueryNumPoolsResponseSDKType): QueryNumPoolsResponse {
@@ -1064,7 +971,7 @@ function createBaseQueryPoolTypeRequest(): QueryPoolTypeRequest {
 export const QueryPoolTypeRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest",
   encode(message: QueryPoolTypeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
@@ -1087,9 +994,9 @@ export const QueryPoolTypeRequest = {
     return message;
   },
   fromJSON(object: any): QueryPoolTypeRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryPoolTypeRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: QueryPoolTypeRequest): JsonSafe<QueryPoolTypeRequest> {
     const obj: any = {};
@@ -1098,7 +1005,9 @@ export const QueryPoolTypeRequest = {
   },
   fromPartial(object: DeepPartial<QueryPoolTypeRequest>): QueryPoolTypeRequest {
     const message = createBaseQueryPoolTypeRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryPoolTypeRequestSDKType): QueryPoolTypeRequest {
@@ -1158,7 +1067,7 @@ function createBaseQueryPoolTypeResponse(): QueryPoolTypeResponse {
 export const QueryPoolTypeResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse",
   encode(message: QueryPoolTypeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolType !== "") {
+    if (message.poolType !== undefined) {
       writer.uint32(10).string(message.poolType);
     }
     return writer;
@@ -1181,9 +1090,9 @@ export const QueryPoolTypeResponse = {
     return message;
   },
   fromJSON(object: any): QueryPoolTypeResponse {
-    return {
-      poolType: isSet(object.poolType) ? String(object.poolType) : ""
-    };
+    const obj = createBaseQueryPoolTypeResponse();
+    if (isSet(object.poolType)) obj.poolType = String(object.poolType);
+    return obj;
   },
   toJSON(message: QueryPoolTypeResponse): JsonSafe<QueryPoolTypeResponse> {
     const obj: any = {};
@@ -1253,7 +1162,7 @@ function createBaseQueryCalcJoinPoolSharesRequest(): QueryCalcJoinPoolSharesRequ
 export const QueryCalcJoinPoolSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest",
   encode(message: QueryCalcJoinPoolSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     for (const v of message.tokensIn) {
@@ -1282,10 +1191,10 @@ export const QueryCalcJoinPoolSharesRequest = {
     return message;
   },
   fromJSON(object: any): QueryCalcJoinPoolSharesRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryCalcJoinPoolSharesRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (Array.isArray(object?.tokensIn)) obj.tokensIn = object.tokensIn.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryCalcJoinPoolSharesRequest): JsonSafe<QueryCalcJoinPoolSharesRequest> {
     const obj: any = {};
@@ -1299,7 +1208,9 @@ export const QueryCalcJoinPoolSharesRequest = {
   },
   fromPartial(object: DeepPartial<QueryCalcJoinPoolSharesRequest>): QueryCalcJoinPoolSharesRequest {
     const message = createBaseQueryCalcJoinPoolSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -1374,7 +1285,7 @@ function createBaseQueryCalcJoinPoolSharesResponse(): QueryCalcJoinPoolSharesRes
 export const QueryCalcJoinPoolSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse",
   encode(message: QueryCalcJoinPoolSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.shareOutAmount !== "") {
+    if (message.shareOutAmount !== undefined) {
       writer.uint32(10).string(message.shareOutAmount);
     }
     for (const v of message.tokensOut) {
@@ -1403,10 +1314,10 @@ export const QueryCalcJoinPoolSharesResponse = {
     return message;
   },
   fromJSON(object: any): QueryCalcJoinPoolSharesResponse {
-    return {
-      shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : "",
-      tokensOut: Array.isArray(object?.tokensOut) ? object.tokensOut.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryCalcJoinPoolSharesResponse();
+    if (isSet(object.shareOutAmount)) obj.shareOutAmount = String(object.shareOutAmount);
+    if (Array.isArray(object?.tokensOut)) obj.tokensOut = object.tokensOut.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryCalcJoinPoolSharesResponse): JsonSafe<QueryCalcJoinPoolSharesResponse> {
     const obj: any = {};
@@ -1495,10 +1406,10 @@ function createBaseQueryCalcExitPoolCoinsFromSharesRequest(): QueryCalcExitPoolC
 export const QueryCalcExitPoolCoinsFromSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest",
   encode(message: QueryCalcExitPoolCoinsFromSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.shareInAmount !== "") {
+    if (message.shareInAmount !== undefined) {
       writer.uint32(18).string(message.shareInAmount);
     }
     return writer;
@@ -1524,10 +1435,10 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
     return message;
   },
   fromJSON(object: any): QueryCalcExitPoolCoinsFromSharesRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      shareInAmount: isSet(object.shareInAmount) ? String(object.shareInAmount) : ""
-    };
+    const obj = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.shareInAmount)) obj.shareInAmount = String(object.shareInAmount);
+    return obj;
   },
   toJSON(message: QueryCalcExitPoolCoinsFromSharesRequest): JsonSafe<QueryCalcExitPoolCoinsFromSharesRequest> {
     const obj: any = {};
@@ -1537,7 +1448,9 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
   },
   fromPartial(object: DeepPartial<QueryCalcExitPoolCoinsFromSharesRequest>): QueryCalcExitPoolCoinsFromSharesRequest {
     const message = createBaseQueryCalcExitPoolCoinsFromSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.shareInAmount = object.shareInAmount ?? "";
     return message;
   },
@@ -1628,9 +1541,9 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
     return message;
   },
   fromJSON(object: any): QueryCalcExitPoolCoinsFromSharesResponse {
-    return {
-      tokensOut: Array.isArray(object?.tokensOut) ? object.tokensOut.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryCalcExitPoolCoinsFromSharesResponse();
+    if (Array.isArray(object?.tokensOut)) obj.tokensOut = object.tokensOut.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryCalcExitPoolCoinsFromSharesResponse): JsonSafe<QueryCalcExitPoolCoinsFromSharesResponse> {
     const obj: any = {};
@@ -1709,7 +1622,7 @@ function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
 export const QueryPoolParamsRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest",
   encode(message: QueryPoolParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
@@ -1732,9 +1645,9 @@ export const QueryPoolParamsRequest = {
     return message;
   },
   fromJSON(object: any): QueryPoolParamsRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryPoolParamsRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: QueryPoolParamsRequest): JsonSafe<QueryPoolParamsRequest> {
     const obj: any = {};
@@ -1743,7 +1656,9 @@ export const QueryPoolParamsRequest = {
   },
   fromPartial(object: DeepPartial<QueryPoolParamsRequest>): QueryPoolParamsRequest {
     const message = createBaseQueryPoolParamsRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryPoolParamsRequestSDKType): QueryPoolParamsRequest {
@@ -1826,9 +1741,9 @@ export const QueryPoolParamsResponse = {
     return message;
   },
   fromJSON(object: any): QueryPoolParamsResponse {
-    return {
-      params: isSet(object.params) ? Any.fromJSON(object.params) : undefined
-    };
+    const obj = createBaseQueryPoolParamsResponse();
+    if (isSet(object.params)) obj.params = Any.fromJSON(object.params);
+    return obj;
   },
   toJSON(message: QueryPoolParamsResponse): JsonSafe<QueryPoolParamsResponse> {
     const obj: any = {};
@@ -1837,7 +1752,9 @@ export const QueryPoolParamsResponse = {
   },
   fromPartial(object: DeepPartial<QueryPoolParamsResponse>): QueryPoolParamsResponse {
     const message = createBaseQueryPoolParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Any.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Any.fromPartial(object.params);
+    }
     return message;
   },
   fromSDK(object: QueryPoolParamsResponseSDKType): QueryPoolParamsResponse {
@@ -1897,7 +1814,7 @@ function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequ
 export const QueryTotalPoolLiquidityRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest",
   encode(message: QueryTotalPoolLiquidityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
@@ -1920,9 +1837,9 @@ export const QueryTotalPoolLiquidityRequest = {
     return message;
   },
   fromJSON(object: any): QueryTotalPoolLiquidityRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryTotalPoolLiquidityRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: QueryTotalPoolLiquidityRequest): JsonSafe<QueryTotalPoolLiquidityRequest> {
     const obj: any = {};
@@ -1931,7 +1848,9 @@ export const QueryTotalPoolLiquidityRequest = {
   },
   fromPartial(object: DeepPartial<QueryTotalPoolLiquidityRequest>): QueryTotalPoolLiquidityRequest {
     const message = createBaseQueryTotalPoolLiquidityRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryTotalPoolLiquidityRequestSDKType): QueryTotalPoolLiquidityRequest {
@@ -2014,9 +1933,9 @@ export const QueryTotalPoolLiquidityResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalPoolLiquidityResponse {
-    return {
-      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryTotalPoolLiquidityResponse();
+    if (Array.isArray(object?.liquidity)) obj.liquidity = object.liquidity.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryTotalPoolLiquidityResponse): JsonSafe<QueryTotalPoolLiquidityResponse> {
     const obj: any = {};
@@ -2095,7 +2014,7 @@ function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
 export const QueryTotalSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest",
   encode(message: QueryTotalSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
@@ -2118,9 +2037,9 @@ export const QueryTotalSharesRequest = {
     return message;
   },
   fromJSON(object: any): QueryTotalSharesRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
-    };
+    const obj = createBaseQueryTotalSharesRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
   },
   toJSON(message: QueryTotalSharesRequest): JsonSafe<QueryTotalSharesRequest> {
     const obj: any = {};
@@ -2129,7 +2048,9 @@ export const QueryTotalSharesRequest = {
   },
   fromPartial(object: DeepPartial<QueryTotalSharesRequest>): QueryTotalSharesRequest {
     const message = createBaseQueryTotalSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
   },
   fromSDK(object: QueryTotalSharesRequestSDKType): QueryTotalSharesRequest {
@@ -2212,9 +2133,9 @@ export const QueryTotalSharesResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalSharesResponse {
-    return {
-      totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined
-    };
+    const obj = createBaseQueryTotalSharesResponse();
+    if (isSet(object.totalShares)) obj.totalShares = Coin.fromJSON(object.totalShares);
+    return obj;
   },
   toJSON(message: QueryTotalSharesResponse): JsonSafe<QueryTotalSharesResponse> {
     const obj: any = {};
@@ -2223,7 +2144,9 @@ export const QueryTotalSharesResponse = {
   },
   fromPartial(object: DeepPartial<QueryTotalSharesResponse>): QueryTotalSharesResponse {
     const message = createBaseQueryTotalSharesResponse();
-    message.totalShares = object.totalShares !== undefined && object.totalShares !== null ? Coin.fromPartial(object.totalShares) : undefined;
+    if (object.totalShares !== undefined && object.totalShares !== null) {
+      message.totalShares = Coin.fromPartial(object.totalShares);
+    }
     return message;
   },
   fromSDK(object: QueryTotalSharesResponseSDKType): QueryTotalSharesResponse {
@@ -2284,7 +2207,7 @@ function createBaseQueryCalcJoinPoolNoSwapSharesRequest(): QueryCalcJoinPoolNoSw
 export const QueryCalcJoinPoolNoSwapSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest",
   encode(message: QueryCalcJoinPoolNoSwapSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     for (const v of message.tokensIn) {
@@ -2313,10 +2236,10 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
     return message;
   },
   fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (Array.isArray(object?.tokensIn)) obj.tokensIn = object.tokensIn.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryCalcJoinPoolNoSwapSharesRequest): JsonSafe<QueryCalcJoinPoolNoSwapSharesRequest> {
     const obj: any = {};
@@ -2330,7 +2253,9 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   },
   fromPartial(object: DeepPartial<QueryCalcJoinPoolNoSwapSharesRequest>): QueryCalcJoinPoolNoSwapSharesRequest {
     const message = createBaseQueryCalcJoinPoolNoSwapSharesRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.tokensIn = object.tokensIn?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -2408,7 +2333,7 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
     for (const v of message.tokensOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.sharesOut !== "") {
+    if (message.sharesOut !== undefined) {
       writer.uint32(18).string(message.sharesOut);
     }
     return writer;
@@ -2434,10 +2359,10 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
     return message;
   },
   fromJSON(object: any): QueryCalcJoinPoolNoSwapSharesResponse {
-    return {
-      tokensOut: Array.isArray(object?.tokensOut) ? object.tokensOut.map((e: any) => Coin.fromJSON(e)) : [],
-      sharesOut: isSet(object.sharesOut) ? String(object.sharesOut) : ""
-    };
+    const obj = createBaseQueryCalcJoinPoolNoSwapSharesResponse();
+    if (Array.isArray(object?.tokensOut)) obj.tokensOut = object.tokensOut.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.sharesOut)) obj.sharesOut = String(object.sharesOut);
+    return obj;
   },
   toJSON(message: QueryCalcJoinPoolNoSwapSharesResponse): JsonSafe<QueryCalcJoinPoolNoSwapSharesResponse> {
     const obj: any = {};
@@ -2527,13 +2452,13 @@ function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
 export const QuerySpotPriceRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest",
   encode(message: QuerySpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.baseAssetDenom !== "") {
+    if (message.baseAssetDenom !== undefined) {
       writer.uint32(18).string(message.baseAssetDenom);
     }
-    if (message.quoteAssetDenom !== "") {
+    if (message.quoteAssetDenom !== undefined) {
       writer.uint32(26).string(message.quoteAssetDenom);
     }
     return writer;
@@ -2562,11 +2487,11 @@ export const QuerySpotPriceRequest = {
     return message;
   },
   fromJSON(object: any): QuerySpotPriceRequest {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      baseAssetDenom: isSet(object.baseAssetDenom) ? String(object.baseAssetDenom) : "",
-      quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
-    };
+    const obj = createBaseQuerySpotPriceRequest();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.baseAssetDenom)) obj.baseAssetDenom = String(object.baseAssetDenom);
+    if (isSet(object.quoteAssetDenom)) obj.quoteAssetDenom = String(object.quoteAssetDenom);
+    return obj;
   },
   toJSON(message: QuerySpotPriceRequest): JsonSafe<QuerySpotPriceRequest> {
     const obj: any = {};
@@ -2577,7 +2502,9 @@ export const QuerySpotPriceRequest = {
   },
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.baseAssetDenom = object.baseAssetDenom ?? "";
     message.quoteAssetDenom = object.quoteAssetDenom ?? "";
     return message;
@@ -2658,7 +2585,7 @@ export const QueryPoolsWithFilterRequest = {
     for (const v of message.minLiquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.poolType !== "") {
+    if (message.poolType !== undefined) {
       writer.uint32(18).string(message.poolType);
     }
     if (message.pagination !== undefined) {
@@ -2690,11 +2617,11 @@ export const QueryPoolsWithFilterRequest = {
     return message;
   },
   fromJSON(object: any): QueryPoolsWithFilterRequest {
-    return {
-      minLiquidity: Array.isArray(object?.minLiquidity) ? object.minLiquidity.map((e: any) => Coin.fromJSON(e)) : [],
-      poolType: isSet(object.poolType) ? String(object.poolType) : "",
-      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryPoolsWithFilterRequest();
+    if (Array.isArray(object?.minLiquidity)) obj.minLiquidity = object.minLiquidity.map((e: any) => Coin.fromJSON(e));
+    if (isSet(object.poolType)) obj.poolType = String(object.poolType);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryPoolsWithFilterRequest): JsonSafe<QueryPoolsWithFilterRequest> {
     const obj: any = {};
@@ -2711,7 +2638,9 @@ export const QueryPoolsWithFilterRequest = {
     const message = createBaseQueryPoolsWithFilterRequest();
     message.minLiquidity = object.minLiquidity?.map(e => Coin.fromPartial(e)) || [];
     message.poolType = object.poolType ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPoolsWithFilterRequestSDKType): QueryPoolsWithFilterRequest {
@@ -2821,10 +2750,10 @@ export const QueryPoolsWithFilterResponse = {
     return message;
   },
   fromJSON(object: any): QueryPoolsWithFilterResponse {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : [],
-      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
-    };
+    const obj = createBaseQueryPoolsWithFilterResponse();
+    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
   },
   toJSON(message: QueryPoolsWithFilterResponse): JsonSafe<QueryPoolsWithFilterResponse> {
     const obj: any = {};
@@ -2839,7 +2768,9 @@ export const QueryPoolsWithFilterResponse = {
   fromPartial(object: DeepPartial<QueryPoolsWithFilterResponse>): QueryPoolsWithFilterResponse {
     const message = createBaseQueryPoolsWithFilterResponse();
     message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
   },
   fromSDK(object: QueryPoolsWithFilterResponseSDKType): QueryPoolsWithFilterResponse {
@@ -2912,7 +2843,7 @@ function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
 export const QuerySpotPriceResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse",
   encode(message: QuerySpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.spotPrice !== "") {
+    if (message.spotPrice !== undefined) {
       writer.uint32(10).string(message.spotPrice);
     }
     return writer;
@@ -2935,9 +2866,9 @@ export const QuerySpotPriceResponse = {
     return message;
   },
   fromJSON(object: any): QuerySpotPriceResponse {
-    return {
-      spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
-    };
+    const obj = createBaseQuerySpotPriceResponse();
+    if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
+    return obj;
   },
   toJSON(message: QuerySpotPriceResponse): JsonSafe<QuerySpotPriceResponse> {
     const obj: any = {};
@@ -3009,13 +2940,13 @@ function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInReques
 export const QuerySwapExactAmountInRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest",
   encode(message: QuerySwapExactAmountInRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
-    if (message.tokenIn !== "") {
+    if (message.tokenIn !== undefined) {
       writer.uint32(26).string(message.tokenIn);
     }
     for (const v of message.routes) {
@@ -3050,12 +2981,12 @@ export const QuerySwapExactAmountInRequest = {
     return message;
   },
   fromJSON(object: any): QuerySwapExactAmountInRequest {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      tokenIn: isSet(object.tokenIn) ? String(object.tokenIn) : "",
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
-    };
+    const obj = createBaseQuerySwapExactAmountInRequest();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.tokenIn)) obj.tokenIn = String(object.tokenIn);
+    if (Array.isArray(object?.routes)) obj.routes = object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e));
+    return obj;
   },
   toJSON(message: QuerySwapExactAmountInRequest): JsonSafe<QuerySwapExactAmountInRequest> {
     const obj: any = {};
@@ -3072,7 +3003,9 @@ export const QuerySwapExactAmountInRequest = {
   fromPartial(object: DeepPartial<QuerySwapExactAmountInRequest>): QuerySwapExactAmountInRequest {
     const message = createBaseQuerySwapExactAmountInRequest();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.tokenIn = object.tokenIn ?? "";
     message.routes = object.routes?.map(e => SwapAmountInRoute.fromPartial(e)) || [];
     return message;
@@ -3161,7 +3094,7 @@ function createBaseQuerySwapExactAmountInResponse(): QuerySwapExactAmountInRespo
 export const QuerySwapExactAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse",
   encode(message: QuerySwapExactAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.tokenOutAmount !== "") {
+    if (message.tokenOutAmount !== undefined) {
       writer.uint32(10).string(message.tokenOutAmount);
     }
     return writer;
@@ -3184,9 +3117,9 @@ export const QuerySwapExactAmountInResponse = {
     return message;
   },
   fromJSON(object: any): QuerySwapExactAmountInResponse {
-    return {
-      tokenOutAmount: isSet(object.tokenOutAmount) ? String(object.tokenOutAmount) : ""
-    };
+    const obj = createBaseQuerySwapExactAmountInResponse();
+    if (isSet(object.tokenOutAmount)) obj.tokenOutAmount = String(object.tokenOutAmount);
+    return obj;
   },
   toJSON(message: QuerySwapExactAmountInResponse): JsonSafe<QuerySwapExactAmountInResponse> {
     const obj: any = {};
@@ -3258,16 +3191,16 @@ function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequ
 export const QuerySwapExactAmountOutRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest",
   encode(message: QuerySwapExactAmountOutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(16).uint64(message.poolId);
     }
     for (const v of message.routes) {
       SwapAmountOutRoute.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.tokenOut !== "") {
+    if (message.tokenOut !== undefined) {
       writer.uint32(34).string(message.tokenOut);
     }
     return writer;
@@ -3299,12 +3232,12 @@ export const QuerySwapExactAmountOutRequest = {
     return message;
   },
   fromJSON(object: any): QuerySwapExactAmountOutRequest {
-    return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e)) : [],
-      tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
-    };
+    const obj = createBaseQuerySwapExactAmountOutRequest();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (Array.isArray(object?.routes)) obj.routes = object.routes.map((e: any) => SwapAmountOutRoute.fromJSON(e));
+    if (isSet(object.tokenOut)) obj.tokenOut = String(object.tokenOut);
+    return obj;
   },
   toJSON(message: QuerySwapExactAmountOutRequest): JsonSafe<QuerySwapExactAmountOutRequest> {
     const obj: any = {};
@@ -3321,7 +3254,9 @@ export const QuerySwapExactAmountOutRequest = {
   fromPartial(object: DeepPartial<QuerySwapExactAmountOutRequest>): QuerySwapExactAmountOutRequest {
     const message = createBaseQuerySwapExactAmountOutRequest();
     message.sender = object.sender ?? "";
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     message.routes = object.routes?.map(e => SwapAmountOutRoute.fromPartial(e)) || [];
     message.tokenOut = object.tokenOut ?? "";
     return message;
@@ -3410,7 +3345,7 @@ function createBaseQuerySwapExactAmountOutResponse(): QuerySwapExactAmountOutRes
 export const QuerySwapExactAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse",
   encode(message: QuerySwapExactAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.tokenInAmount !== "") {
+    if (message.tokenInAmount !== undefined) {
       writer.uint32(10).string(message.tokenInAmount);
     }
     return writer;
@@ -3433,9 +3368,9 @@ export const QuerySwapExactAmountOutResponse = {
     return message;
   },
   fromJSON(object: any): QuerySwapExactAmountOutResponse {
-    return {
-      tokenInAmount: isSet(object.tokenInAmount) ? String(object.tokenInAmount) : ""
-    };
+    const obj = createBaseQuerySwapExactAmountOutResponse();
+    if (isSet(object.tokenInAmount)) obj.tokenInAmount = String(object.tokenInAmount);
+    return obj;
   },
   toJSON(message: QuerySwapExactAmountOutResponse): JsonSafe<QuerySwapExactAmountOutResponse> {
     const obj: any = {};
@@ -3519,7 +3454,8 @@ export const QueryTotalLiquidityRequest = {
     return message;
   },
   fromJSON(_: any): QueryTotalLiquidityRequest {
-    return {};
+    const obj = createBaseQueryTotalLiquidityRequest();
+    return obj;
   },
   toJSON(_: QueryTotalLiquidityRequest): JsonSafe<QueryTotalLiquidityRequest> {
     const obj: any = {};
@@ -3600,9 +3536,9 @@ export const QueryTotalLiquidityResponse = {
     return message;
   },
   fromJSON(object: any): QueryTotalLiquidityResponse {
-    return {
-      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromJSON(e)) : []
-    };
+    const obj = createBaseQueryTotalLiquidityResponse();
+    if (Array.isArray(object?.liquidity)) obj.liquidity = object.liquidity.map((e: any) => Coin.fromJSON(e));
+    return obj;
   },
   toJSON(message: QueryTotalLiquidityResponse): JsonSafe<QueryTotalLiquidityResponse> {
     const obj: any = {};

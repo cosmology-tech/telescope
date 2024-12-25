@@ -1,16 +1,12 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
   /** epoch_provisions represent rewards for the current epoch. */
   epochProvisions: string;
-}
-export interface ReactiveMinter {
-  epochProvisions: ComputedRef<string>;
 }
 export interface MinterProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.Minter";
@@ -28,10 +24,6 @@ export interface MinterSDKType {
 export interface WeightedAddress {
   address: string;
   weight: string;
-}
-export interface ReactiveWeightedAddress {
-  address: ComputedRef<string>;
-  weight: ComputedRef<string>;
 }
 export interface WeightedAddressProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.WeightedAddress";
@@ -72,12 +64,6 @@ export interface DistributionProportions {
    * to be allocated to the community pool.
    */
   communityPool: string;
-}
-export interface ReactiveDistributionProportions {
-  staking: ComputedRef<string>;
-  poolIncentives: ComputedRef<string>;
-  developerRewards: ComputedRef<string>;
-  communityPool: ComputedRef<string>;
 }
 export interface DistributionProportionsProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.DistributionProportions";
@@ -131,16 +117,6 @@ export interface Params {
    */
   mintingRewardsDistributionStartEpoch: bigint;
 }
-export interface ReactiveParams {
-  mintDenom: ComputedRef<string>;
-  genesisEpochProvisions: ComputedRef<string>;
-  epochIdentifier: ComputedRef<string>;
-  reductionPeriodInEpochs: ComputedRef<bigint>;
-  reductionFactor: ComputedRef<string>;
-  distributionProportions: ComputedRef<DistributionProportions>;
-  weightedDeveloperRewardsReceivers: ComputedRef<WeightedAddress[]>;
-  mintingRewardsDistributionStartEpoch: ComputedRef<bigint>;
-}
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.mint.v1beta1.Params";
   value: Uint8Array;
@@ -164,7 +140,7 @@ function createBaseMinter(): Minter {
 export const Minter = {
   typeUrl: "/osmosis.mint.v1beta1.Minter",
   encode(message: Minter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.epochProvisions !== "") {
+    if (message.epochProvisions !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.epochProvisions, 18).atomics);
     }
     return writer;
@@ -187,9 +163,9 @@ export const Minter = {
     return message;
   },
   fromJSON(object: any): Minter {
-    return {
-      epochProvisions: isSet(object.epochProvisions) ? String(object.epochProvisions) : ""
-    };
+    const obj = createBaseMinter();
+    if (isSet(object.epochProvisions)) obj.epochProvisions = String(object.epochProvisions);
+    return obj;
   },
   toJSON(message: Minter): JsonSafe<Minter> {
     const obj: any = {};
@@ -259,10 +235,10 @@ function createBaseWeightedAddress(): WeightedAddress {
 export const WeightedAddress = {
   typeUrl: "/osmosis.mint.v1beta1.WeightedAddress",
   encode(message: WeightedAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.weight !== "") {
+    if (message.weight !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.weight, 18).atomics);
     }
     return writer;
@@ -288,10 +264,10 @@ export const WeightedAddress = {
     return message;
   },
   fromJSON(object: any): WeightedAddress {
-    return {
-      address: isSet(object.address) ? String(object.address) : "",
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
+    const obj = createBaseWeightedAddress();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.weight)) obj.weight = String(object.weight);
+    return obj;
   },
   toJSON(message: WeightedAddress): JsonSafe<WeightedAddress> {
     const obj: any = {};
@@ -372,16 +348,16 @@ function createBaseDistributionProportions(): DistributionProportions {
 export const DistributionProportions = {
   typeUrl: "/osmosis.mint.v1beta1.DistributionProportions",
   encode(message: DistributionProportions, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.staking !== "") {
+    if (message.staking !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.staking, 18).atomics);
     }
-    if (message.poolIncentives !== "") {
+    if (message.poolIncentives !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.poolIncentives, 18).atomics);
     }
-    if (message.developerRewards !== "") {
+    if (message.developerRewards !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.developerRewards, 18).atomics);
     }
-    if (message.communityPool !== "") {
+    if (message.communityPool !== undefined) {
       writer.uint32(34).string(Decimal.fromUserInput(message.communityPool, 18).atomics);
     }
     return writer;
@@ -413,12 +389,12 @@ export const DistributionProportions = {
     return message;
   },
   fromJSON(object: any): DistributionProportions {
-    return {
-      staking: isSet(object.staking) ? String(object.staking) : "",
-      poolIncentives: isSet(object.poolIncentives) ? String(object.poolIncentives) : "",
-      developerRewards: isSet(object.developerRewards) ? String(object.developerRewards) : "",
-      communityPool: isSet(object.communityPool) ? String(object.communityPool) : ""
-    };
+    const obj = createBaseDistributionProportions();
+    if (isSet(object.staking)) obj.staking = String(object.staking);
+    if (isSet(object.poolIncentives)) obj.poolIncentives = String(object.poolIncentives);
+    if (isSet(object.developerRewards)) obj.developerRewards = String(object.developerRewards);
+    if (isSet(object.communityPool)) obj.communityPool = String(object.communityPool);
+    return obj;
   },
   toJSON(message: DistributionProportions): JsonSafe<DistributionProportions> {
     const obj: any = {};
@@ -521,19 +497,19 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.mint.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintDenom !== "") {
+    if (message.mintDenom !== undefined) {
       writer.uint32(10).string(message.mintDenom);
     }
-    if (message.genesisEpochProvisions !== "") {
+    if (message.genesisEpochProvisions !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.genesisEpochProvisions, 18).atomics);
     }
-    if (message.epochIdentifier !== "") {
+    if (message.epochIdentifier !== undefined) {
       writer.uint32(26).string(message.epochIdentifier);
     }
-    if (message.reductionPeriodInEpochs !== BigInt(0)) {
+    if (message.reductionPeriodInEpochs !== undefined) {
       writer.uint32(32).int64(message.reductionPeriodInEpochs);
     }
-    if (message.reductionFactor !== "") {
+    if (message.reductionFactor !== undefined) {
       writer.uint32(42).string(Decimal.fromUserInput(message.reductionFactor, 18).atomics);
     }
     if (message.distributionProportions !== undefined) {
@@ -542,7 +518,7 @@ export const Params = {
     for (const v of message.weightedDeveloperRewardsReceivers) {
       WeightedAddress.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.mintingRewardsDistributionStartEpoch !== BigInt(0)) {
+    if (message.mintingRewardsDistributionStartEpoch !== undefined) {
       writer.uint32(64).int64(message.mintingRewardsDistributionStartEpoch);
     }
     return writer;
@@ -586,16 +562,16 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      mintDenom: isSet(object.mintDenom) ? String(object.mintDenom) : "",
-      genesisEpochProvisions: isSet(object.genesisEpochProvisions) ? String(object.genesisEpochProvisions) : "",
-      epochIdentifier: isSet(object.epochIdentifier) ? String(object.epochIdentifier) : "",
-      reductionPeriodInEpochs: isSet(object.reductionPeriodInEpochs) ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt(0),
-      reductionFactor: isSet(object.reductionFactor) ? String(object.reductionFactor) : "",
-      distributionProportions: isSet(object.distributionProportions) ? DistributionProportions.fromJSON(object.distributionProportions) : undefined,
-      weightedDeveloperRewardsReceivers: Array.isArray(object?.weightedDeveloperRewardsReceivers) ? object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e)) : [],
-      mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt(0)
-    };
+    const obj = createBaseParams();
+    if (isSet(object.mintDenom)) obj.mintDenom = String(object.mintDenom);
+    if (isSet(object.genesisEpochProvisions)) obj.genesisEpochProvisions = String(object.genesisEpochProvisions);
+    if (isSet(object.epochIdentifier)) obj.epochIdentifier = String(object.epochIdentifier);
+    if (isSet(object.reductionPeriodInEpochs)) obj.reductionPeriodInEpochs = BigInt(object.reductionPeriodInEpochs.toString());
+    if (isSet(object.reductionFactor)) obj.reductionFactor = String(object.reductionFactor);
+    if (isSet(object.distributionProportions)) obj.distributionProportions = DistributionProportions.fromJSON(object.distributionProportions);
+    if (Array.isArray(object?.weightedDeveloperRewardsReceivers)) obj.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e));
+    if (isSet(object.mintingRewardsDistributionStartEpoch)) obj.mintingRewardsDistributionStartEpoch = BigInt(object.mintingRewardsDistributionStartEpoch.toString());
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
@@ -618,11 +594,17 @@ export const Params = {
     message.mintDenom = object.mintDenom ?? "";
     message.genesisEpochProvisions = object.genesisEpochProvisions ?? "";
     message.epochIdentifier = object.epochIdentifier ?? "";
-    message.reductionPeriodInEpochs = object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null ? BigInt(object.reductionPeriodInEpochs.toString()) : BigInt(0);
+    if (object.reductionPeriodInEpochs !== undefined && object.reductionPeriodInEpochs !== null) {
+      message.reductionPeriodInEpochs = BigInt(object.reductionPeriodInEpochs.toString());
+    }
     message.reductionFactor = object.reductionFactor ?? "";
-    message.distributionProportions = object.distributionProportions !== undefined && object.distributionProportions !== null ? DistributionProportions.fromPartial(object.distributionProportions) : undefined;
+    if (object.distributionProportions !== undefined && object.distributionProportions !== null) {
+      message.distributionProportions = DistributionProportions.fromPartial(object.distributionProportions);
+    }
     message.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers?.map(e => WeightedAddress.fromPartial(e)) || [];
-    message.mintingRewardsDistributionStartEpoch = object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt(0);
+    if (object.mintingRewardsDistributionStartEpoch !== undefined && object.mintingRewardsDistributionStartEpoch !== null) {
+      message.mintingRewardsDistributionStartEpoch = BigInt(object.mintingRewardsDistributionStartEpoch.toString());
+    }
     return message;
   },
   fromSDK(object: ParamsSDKType): Params {

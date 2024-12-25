@@ -1,9 +1,8 @@
-import { Value, ValueSDKType } from "./value";
-import { Status, StatusSDKType } from "../../../rpc/status";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { JsonSafe } from "../../../../json-safe";
-import { DeepPartial, isSet } from "../../../../helpers";
-import { ComputedRef } from "vue";
+import { Value, ValueSDKType } from "./value.js";
+import { Status, StatusSDKType } from "../../../rpc/status.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { JsonSafe } from "../../../../json-safe.js";
+import { DeepPartial, isSet } from "../../../../helpers.js";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * The state of an evaluation.
@@ -20,10 +19,6 @@ export interface EvalState {
    * May be sparse.
    */
   results: EvalState_Result[];
-}
-export interface ReactiveEvalState {
-  values: ComputedRef<ExprValue[]>;
-  results: ComputedRef<EvalState_Result[]>;
 }
 export interface EvalStateProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.EvalState";
@@ -44,10 +39,6 @@ export interface EvalState_Result {
   expr: bigint;
   /** The index in `values` of the resulting value. */
   value: bigint;
-}
-export interface ReactiveEvalState_Result {
-  expr: ComputedRef<bigint>;
-  value: ComputedRef<bigint>;
 }
 export interface EvalState_ResultProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Result";
@@ -109,11 +100,6 @@ export interface ExprValue {
    */
   unknown?: UnknownSet;
 }
-export interface ReactiveExprValue {
-  value?: ComputedRef<Value>;
-  error?: ComputedRef<ErrorSet>;
-  unknown?: ComputedRef<UnknownSet>;
-}
 export interface ExprValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprValue";
   value: Uint8Array;
@@ -132,9 +118,6 @@ export interface ExprValueSDKType {
 export interface ErrorSet {
   /** The errors in the set. */
   errors: Status[];
-}
-export interface ReactiveErrorSet {
-  errors: ComputedRef<Status[]>;
 }
 export interface ErrorSetProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ErrorSet";
@@ -156,9 +139,6 @@ export interface ErrorSetSDKType {
 export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
   exprs: bigint[];
-}
-export interface ReactiveUnknownSet {
-  exprs: ComputedRef<bigint[]>;
 }
 export interface UnknownSetProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.UnknownSet";
@@ -210,10 +190,10 @@ export const EvalState = {
     return message;
   },
   fromJSON(object: any): EvalState {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromJSON(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromJSON(e)) : []
-    };
+    const obj = createBaseEvalState();
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => ExprValue.fromJSON(e));
+    if (Array.isArray(object?.results)) obj.results = object.results.map((e: any) => EvalState_Result.fromJSON(e));
+    return obj;
   },
   toJSON(message: EvalState): JsonSafe<EvalState> {
     const obj: any = {};
@@ -306,10 +286,10 @@ function createBaseEvalState_Result(): EvalState_Result {
 export const EvalState_Result = {
   typeUrl: "/google.api.expr.v1alpha1.Result",
   encode(message: EvalState_Result, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.expr !== BigInt(0)) {
+    if (message.expr !== undefined) {
       writer.uint32(8).int64(message.expr);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).int64(message.value);
     }
     return writer;
@@ -335,10 +315,10 @@ export const EvalState_Result = {
     return message;
   },
   fromJSON(object: any): EvalState_Result {
-    return {
-      expr: isSet(object.expr) ? BigInt(object.expr.toString()) : BigInt(0),
-      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
-    };
+    const obj = createBaseEvalState_Result();
+    if (isSet(object.expr)) obj.expr = BigInt(object.expr.toString());
+    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
+    return obj;
   },
   toJSON(message: EvalState_Result): JsonSafe<EvalState_Result> {
     const obj: any = {};
@@ -348,8 +328,12 @@ export const EvalState_Result = {
   },
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
     const message = createBaseEvalState_Result();
-    message.expr = object.expr !== undefined && object.expr !== null ? BigInt(object.expr.toString()) : BigInt(0);
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = BigInt(object.expr.toString());
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
   },
   fromSDK(object: EvalState_ResultSDKType): EvalState_Result {
@@ -447,11 +431,11 @@ export const ExprValue = {
     return message;
   },
   fromJSON(object: any): ExprValue {
-    return {
-      value: isSet(object.value) ? Value.fromJSON(object.value) : undefined,
-      error: isSet(object.error) ? ErrorSet.fromJSON(object.error) : undefined,
-      unknown: isSet(object.unknown) ? UnknownSet.fromJSON(object.unknown) : undefined
-    };
+    const obj = createBaseExprValue();
+    if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
+    if (isSet(object.error)) obj.error = ErrorSet.fromJSON(object.error);
+    if (isSet(object.unknown)) obj.unknown = UnknownSet.fromJSON(object.unknown);
+    return obj;
   },
   toJSON(message: ExprValue): JsonSafe<ExprValue> {
     const obj: any = {};
@@ -462,9 +446,15 @@ export const ExprValue = {
   },
   fromPartial(object: DeepPartial<ExprValue>): ExprValue {
     const message = createBaseExprValue();
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
-    message.error = object.error !== undefined && object.error !== null ? ErrorSet.fromPartial(object.error) : undefined;
-    message.unknown = object.unknown !== undefined && object.unknown !== null ? UnknownSet.fromPartial(object.unknown) : undefined;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = ErrorSet.fromPartial(object.error);
+    }
+    if (object.unknown !== undefined && object.unknown !== null) {
+      message.unknown = UnknownSet.fromPartial(object.unknown);
+    }
     return message;
   },
   fromSDK(object: ExprValueSDKType): ExprValue {
@@ -555,9 +545,9 @@ export const ErrorSet = {
     return message;
   },
   fromJSON(object: any): ErrorSet {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromJSON(e)) : []
-    };
+    const obj = createBaseErrorSet();
+    if (Array.isArray(object?.errors)) obj.errors = object.errors.map((e: any) => Status.fromJSON(e));
+    return obj;
   },
   toJSON(message: ErrorSet): JsonSafe<ErrorSet> {
     const obj: any = {};
@@ -662,9 +652,9 @@ export const UnknownSet = {
     return message;
   },
   fromJSON(object: any): UnknownSet {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => BigInt(e.toString())) : []
-    };
+    const obj = createBaseUnknownSet();
+    if (Array.isArray(object?.exprs)) obj.exprs = object.exprs.map((e: any) => BigInt(e.toString()));
+    return obj;
   },
   toJSON(message: UnknownSet): JsonSafe<UnknownSet> {
     const obj: any = {};

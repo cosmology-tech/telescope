@@ -1,14 +1,15 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Rpc } from "../../../helpers";
-import { BinaryReader } from "../../../binary";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { Rpc } from "../../../helpers.js";
+import { BinaryReader } from "../../../binary.js";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
-import { VueQueryParams } from "../../../vue-query";
-import { ComputedRef, computed, Ref } from "vue";
-import { useQuery } from "@tanstack/vue-query";
-import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolsWithFilterRequest, QueryPoolsWithFilterRequestSDKType, QueryPoolsWithFilterResponse, QueryPoolsWithFilterResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolTypeRequest, QueryPoolTypeRequestSDKType, QueryPoolTypeResponse, QueryPoolTypeResponseSDKType, QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesRequestSDKType, QueryCalcJoinPoolNoSwapSharesResponse, QueryCalcJoinPoolNoSwapSharesResponseSDKType, QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesRequestSDKType, QueryCalcJoinPoolSharesResponse, QueryCalcJoinPoolSharesResponseSDKType, QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesRequestSDKType, QueryCalcExitPoolCoinsFromSharesResponse, QueryCalcExitPoolCoinsFromSharesResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType, ReactiveQueryPoolsRequest, ReactiveQueryNumPoolsRequest, ReactiveQueryTotalLiquidityRequest, ReactiveQueryPoolsWithFilterRequest, ReactiveQueryPoolRequest, ReactiveQueryPoolTypeRequest, ReactiveQueryCalcJoinPoolNoSwapSharesRequest, ReactiveQueryCalcJoinPoolSharesRequest, ReactiveQueryCalcExitPoolCoinsFromSharesRequest, ReactiveQueryPoolParamsRequest, ReactiveQueryTotalPoolLiquidityRequest, ReactiveQueryTotalSharesRequest, ReactiveQuerySpotPriceRequest, ReactiveQuerySwapExactAmountInRequest, ReactiveQuerySwapExactAmountOutRequest } from "./query";
+import { ReactQueryParams } from "../../../react-query.js";
+import { useQuery } from "@tanstack/react-query";
+import { QueryStore, MobxResponse } from "../../../mobx.js";
+import { makeObservable, override } from "mobx";
+import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolsWithFilterRequest, QueryPoolsWithFilterRequestSDKType, QueryPoolsWithFilterResponse, QueryPoolsWithFilterResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolTypeRequest, QueryPoolTypeRequestSDKType, QueryPoolTypeResponse, QueryPoolTypeResponseSDKType, QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesRequestSDKType, QueryCalcJoinPoolNoSwapSharesResponse, QueryCalcJoinPoolNoSwapSharesResponseSDKType, QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesRequestSDKType, QueryCalcJoinPoolSharesResponse, QueryCalcJoinPoolSharesResponseSDKType, QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesRequestSDKType, QueryCalcExitPoolCoinsFromSharesResponse, QueryCalcExitPoolCoinsFromSharesResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query.js";
 export interface Query {
   pools(request?: QueryPoolsRequest): Promise<QueryPoolsResponse>;
   numPools(request?: QueryNumPoolsRequest): Promise<QueryNumPoolsResponse>;
@@ -66,7 +67,7 @@ export class QueryClientImpl implements Query {
     this.estimateSwapExactAmountOut = this.estimateSwapExactAmountOut.bind(this);
   }
   pools(request: QueryPoolsRequest = {
-    pagination: undefined
+    pagination: PageRequest.fromPartial({})
   }): Promise<QueryPoolsResponse> {
     const data = QueryPoolsRequest.encode(request).finish();
     const promise = this.rpc.request("osmosis.gamm.v1beta1.Query", "Pools", data);
@@ -194,440 +195,197 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     }
   };
 };
-export interface UsePoolsQuery<TData> extends VueQueryParams<QueryPoolsResponse, TData> {
-  request?: ReactiveQueryPoolsRequest;
+export interface UsePoolsQuery<TData> extends ReactQueryParams<QueryPoolsResponse, TData> {
+  request?: QueryPoolsRequest;
 }
-export interface UseNumPoolsQuery<TData> extends VueQueryParams<QueryNumPoolsResponse, TData> {
-  request?: ReactiveQueryNumPoolsRequest;
+export interface UseNumPoolsQuery<TData> extends ReactQueryParams<QueryNumPoolsResponse, TData> {
+  request?: QueryNumPoolsRequest;
 }
-export interface UseTotalLiquidityQuery<TData> extends VueQueryParams<QueryTotalLiquidityResponse, TData> {
-  request?: ReactiveQueryTotalLiquidityRequest;
+export interface UseTotalLiquidityQuery<TData> extends ReactQueryParams<QueryTotalLiquidityResponse, TData> {
+  request?: QueryTotalLiquidityRequest;
 }
-export interface UsePoolsWithFilterQuery<TData> extends VueQueryParams<QueryPoolsWithFilterResponse, TData> {
-  request: ReactiveQueryPoolsWithFilterRequest;
+export interface UsePoolsWithFilterQuery<TData> extends ReactQueryParams<QueryPoolsWithFilterResponse, TData> {
+  request: QueryPoolsWithFilterRequest;
 }
-export interface UsePoolQuery<TData> extends VueQueryParams<QueryPoolResponse, TData> {
-  request: ReactiveQueryPoolRequest;
+export interface UsePoolQuery<TData> extends ReactQueryParams<QueryPoolResponse, TData> {
+  request: QueryPoolRequest;
 }
-export interface UsePoolTypeQuery<TData> extends VueQueryParams<QueryPoolTypeResponse, TData> {
-  request: ReactiveQueryPoolTypeRequest;
+export interface UsePoolTypeQuery<TData> extends ReactQueryParams<QueryPoolTypeResponse, TData> {
+  request: QueryPoolTypeRequest;
 }
-export interface UseCalcJoinPoolNoSwapSharesQuery<TData> extends VueQueryParams<QueryCalcJoinPoolNoSwapSharesResponse, TData> {
-  request: ReactiveQueryCalcJoinPoolNoSwapSharesRequest;
+export interface UseCalcJoinPoolNoSwapSharesQuery<TData> extends ReactQueryParams<QueryCalcJoinPoolNoSwapSharesResponse, TData> {
+  request: QueryCalcJoinPoolNoSwapSharesRequest;
 }
-export interface UseCalcJoinPoolSharesQuery<TData> extends VueQueryParams<QueryCalcJoinPoolSharesResponse, TData> {
-  request: ReactiveQueryCalcJoinPoolSharesRequest;
+export interface UseCalcJoinPoolSharesQuery<TData> extends ReactQueryParams<QueryCalcJoinPoolSharesResponse, TData> {
+  request: QueryCalcJoinPoolSharesRequest;
 }
-export interface UseCalcExitPoolCoinsFromSharesQuery<TData> extends VueQueryParams<QueryCalcExitPoolCoinsFromSharesResponse, TData> {
-  request: ReactiveQueryCalcExitPoolCoinsFromSharesRequest;
+export interface UseCalcExitPoolCoinsFromSharesQuery<TData> extends ReactQueryParams<QueryCalcExitPoolCoinsFromSharesResponse, TData> {
+  request: QueryCalcExitPoolCoinsFromSharesRequest;
 }
-export interface UsePoolParamsQuery<TData> extends VueQueryParams<QueryPoolParamsResponse, TData> {
-  request: ReactiveQueryPoolParamsRequest;
+export interface UsePoolParamsQuery<TData> extends ReactQueryParams<QueryPoolParamsResponse, TData> {
+  request: QueryPoolParamsRequest;
 }
-export interface UseTotalPoolLiquidityQuery<TData> extends VueQueryParams<QueryTotalPoolLiquidityResponse, TData> {
-  request: ReactiveQueryTotalPoolLiquidityRequest;
+export interface UseTotalPoolLiquidityQuery<TData> extends ReactQueryParams<QueryTotalPoolLiquidityResponse, TData> {
+  request: QueryTotalPoolLiquidityRequest;
 }
-export interface UseTotalSharesQuery<TData> extends VueQueryParams<QueryTotalSharesResponse, TData> {
-  request: ReactiveQueryTotalSharesRequest;
+export interface UseTotalSharesQuery<TData> extends ReactQueryParams<QueryTotalSharesResponse, TData> {
+  request: QueryTotalSharesRequest;
 }
-export interface UseSpotPriceQuery<TData> extends VueQueryParams<QuerySpotPriceResponse, TData> {
-  request: ReactiveQuerySpotPriceRequest;
+export interface UseSpotPriceQuery<TData> extends ReactQueryParams<QuerySpotPriceResponse, TData> {
+  request: QuerySpotPriceRequest;
 }
-export interface UseEstimateSwapExactAmountInQuery<TData> extends VueQueryParams<QuerySwapExactAmountInResponse, TData> {
-  request: ReactiveQuerySwapExactAmountInRequest;
+export interface UseEstimateSwapExactAmountInQuery<TData> extends ReactQueryParams<QuerySwapExactAmountInResponse, TData> {
+  request: QuerySwapExactAmountInRequest;
 }
-export interface UseEstimateSwapExactAmountOutQuery<TData> extends VueQueryParams<QuerySwapExactAmountOutResponse, TData> {
-  request: ReactiveQuerySwapExactAmountOutRequest;
+export interface UseEstimateSwapExactAmountOutQuery<TData> extends ReactQueryParams<QuerySwapExactAmountOutResponse, TData> {
+  request: QuerySwapExactAmountOutRequest;
 }
-export const useQueryService = (rpc: Ref<ProtobufRpcClient | undefined>): ComputedRef<QueryClientImpl | undefined> => {
-  const _queryClients = new WeakMap();
-  return computed(() => {
-    if (rpc.value) {
-      if (_queryClients.has(rpc.value)) {
-        return _queryClients.get(rpc.value);
-      }
-      const queryService = new QueryClientImpl(rpc.value);
-      _queryClients.set(rpc.value, queryService);
-      return queryService;
-    }
-  });
+const _queryClients: WeakMap<ProtobufRpcClient, QueryClientImpl> = new WeakMap();
+const getQueryService = (rpc: ProtobufRpcClient | undefined): QueryClientImpl | undefined => {
+  if (!rpc) return;
+  if (_queryClients.has(rpc)) {
+    return _queryClients.get(rpc);
+  }
+  const queryService = new QueryClientImpl(rpc);
+  _queryClients.set(rpc, queryService);
+  return queryService;
 };
-export const createRpcQueryHooks = (rpc: Ref<ProtobufRpcClient | undefined>) => {
-  const queryService = useQueryService(rpc);
+export const createRpcQueryHooks = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
   const usePools = <TData = QueryPoolsResponse,>({
     request,
     options
   }: UsePoolsQuery<TData>) => {
-    const queryKey = ["poolsQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryPoolsResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.pools(params);
-      },
-      ...options
-    });
+    return useQuery<QueryPoolsResponse, Error, TData>(["poolsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.pools(request);
+    }, options);
   };
   const useNumPools = <TData = QueryNumPoolsResponse,>({
     request,
     options
   }: UseNumPoolsQuery<TData>) => {
-    const queryKey = ["numPoolsQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryNumPoolsResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.numPools(params);
-      },
-      ...options
-    });
+    return useQuery<QueryNumPoolsResponse, Error, TData>(["numPoolsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.numPools(request);
+    }, options);
   };
   const useTotalLiquidity = <TData = QueryTotalLiquidityResponse,>({
     request,
     options
   }: UseTotalLiquidityQuery<TData>) => {
-    const queryKey = ["totalLiquidityQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryTotalLiquidityResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.totalLiquidity(params);
-      },
-      ...options
-    });
+    return useQuery<QueryTotalLiquidityResponse, Error, TData>(["totalLiquidityQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.totalLiquidity(request);
+    }, options);
   };
   const usePoolsWithFilter = <TData = QueryPoolsWithFilterResponse,>({
     request,
     options
   }: UsePoolsWithFilterQuery<TData>) => {
-    const queryKey = ["poolsWithFilterQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryPoolsWithFilterResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.poolsWithFilter(params);
-      },
-      ...options
-    });
+    return useQuery<QueryPoolsWithFilterResponse, Error, TData>(["poolsWithFilterQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.poolsWithFilter(request);
+    }, options);
   };
   const usePool = <TData = QueryPoolResponse,>({
     request,
     options
   }: UsePoolQuery<TData>) => {
-    const queryKey = ["poolQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryPoolResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.pool(params);
-      },
-      ...options
-    });
+    return useQuery<QueryPoolResponse, Error, TData>(["poolQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.pool(request);
+    }, options);
   };
   const usePoolType = <TData = QueryPoolTypeResponse,>({
     request,
     options
   }: UsePoolTypeQuery<TData>) => {
-    const queryKey = ["poolTypeQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryPoolTypeResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.poolType(params);
-      },
-      ...options
-    });
+    return useQuery<QueryPoolTypeResponse, Error, TData>(["poolTypeQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.poolType(request);
+    }, options);
   };
   const useCalcJoinPoolNoSwapShares = <TData = QueryCalcJoinPoolNoSwapSharesResponse,>({
     request,
     options
   }: UseCalcJoinPoolNoSwapSharesQuery<TData>) => {
-    const queryKey = ["calcJoinPoolNoSwapSharesQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryCalcJoinPoolNoSwapSharesResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.calcJoinPoolNoSwapShares(params);
-      },
-      ...options
-    });
+    return useQuery<QueryCalcJoinPoolNoSwapSharesResponse, Error, TData>(["calcJoinPoolNoSwapSharesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.calcJoinPoolNoSwapShares(request);
+    }, options);
   };
   const useCalcJoinPoolShares = <TData = QueryCalcJoinPoolSharesResponse,>({
     request,
     options
   }: UseCalcJoinPoolSharesQuery<TData>) => {
-    const queryKey = ["calcJoinPoolSharesQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryCalcJoinPoolSharesResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.calcJoinPoolShares(params);
-      },
-      ...options
-    });
+    return useQuery<QueryCalcJoinPoolSharesResponse, Error, TData>(["calcJoinPoolSharesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.calcJoinPoolShares(request);
+    }, options);
   };
   const useCalcExitPoolCoinsFromShares = <TData = QueryCalcExitPoolCoinsFromSharesResponse,>({
     request,
     options
   }: UseCalcExitPoolCoinsFromSharesQuery<TData>) => {
-    const queryKey = ["calcExitPoolCoinsFromSharesQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryCalcExitPoolCoinsFromSharesResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.calcExitPoolCoinsFromShares(params);
-      },
-      ...options
-    });
+    return useQuery<QueryCalcExitPoolCoinsFromSharesResponse, Error, TData>(["calcExitPoolCoinsFromSharesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.calcExitPoolCoinsFromShares(request);
+    }, options);
   };
   const usePoolParams = <TData = QueryPoolParamsResponse,>({
     request,
     options
   }: UsePoolParamsQuery<TData>) => {
-    const queryKey = ["poolParamsQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryPoolParamsResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.poolParams(params);
-      },
-      ...options
-    });
+    return useQuery<QueryPoolParamsResponse, Error, TData>(["poolParamsQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.poolParams(request);
+    }, options);
   };
   const useTotalPoolLiquidity = <TData = QueryTotalPoolLiquidityResponse,>({
     request,
     options
   }: UseTotalPoolLiquidityQuery<TData>) => {
-    const queryKey = ["totalPoolLiquidityQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryTotalPoolLiquidityResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.totalPoolLiquidity(params);
-      },
-      ...options
-    });
+    return useQuery<QueryTotalPoolLiquidityResponse, Error, TData>(["totalPoolLiquidityQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.totalPoolLiquidity(request);
+    }, options);
   };
   const useTotalShares = <TData = QueryTotalSharesResponse,>({
     request,
     options
   }: UseTotalSharesQuery<TData>) => {
-    const queryKey = ["totalSharesQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QueryTotalSharesResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.totalShares(params);
-      },
-      ...options
-    });
+    return useQuery<QueryTotalSharesResponse, Error, TData>(["totalSharesQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.totalShares(request);
+    }, options);
   };
   const useSpotPrice = <TData = QuerySpotPriceResponse,>({
     request,
     options
   }: UseSpotPriceQuery<TData>) => {
-    const queryKey = ["spotPriceQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QuerySpotPriceResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.spotPrice(params);
-      },
-      ...options
-    });
+    return useQuery<QuerySpotPriceResponse, Error, TData>(["spotPriceQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.spotPrice(request);
+    }, options);
   };
   const useEstimateSwapExactAmountIn = <TData = QuerySwapExactAmountInResponse,>({
     request,
     options
   }: UseEstimateSwapExactAmountInQuery<TData>) => {
-    const queryKey = ["estimateSwapExactAmountInQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QuerySwapExactAmountInResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.estimateSwapExactAmountIn(params);
-      },
-      ...options
-    });
+    return useQuery<QuerySwapExactAmountInResponse, Error, TData>(["estimateSwapExactAmountInQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.estimateSwapExactAmountIn(request);
+    }, options);
   };
   const useEstimateSwapExactAmountOut = <TData = QuerySwapExactAmountOutResponse,>({
     request,
     options
   }: UseEstimateSwapExactAmountOutQuery<TData>) => {
-    const queryKey = ["estimateSwapExactAmountOutQuery", queryService];
-    if (request) {
-      Object.values(request).forEach((val: any) => {
-        queryKey.push(val);
-      });
-    }
-    return useQuery<QuerySwapExactAmountOutResponse, Error, TData>({
-      queryKey,
-      queryFn: () => {
-        if (!queryService.value) throw new Error("Query Service not initialized");
-        let params = ({} as any);
-        if (request) {
-          Object.entries(request).forEach(([key, val]) => {
-            params[key] = val.value;
-          });
-        }
-        return queryService.value.estimateSwapExactAmountOut(params);
-      },
-      ...options
-    });
+    return useQuery<QuerySwapExactAmountOutResponse, Error, TData>(["estimateSwapExactAmountOutQuery", request], () => {
+      if (!queryService) throw new Error("Query Service not initialized");
+      return queryService.estimateSwapExactAmountOut(request);
+    }, options);
   };
   return {
     usePools,
@@ -662,5 +420,132 @@ export const createRpcQueryHooks = (rpc: Ref<ProtobufRpcClient | undefined>) => 
     useSpotPrice,
     /** Estimate the swap. */useEstimateSwapExactAmountIn,
     useEstimateSwapExactAmountOut
+  };
+};
+export const createRpcQueryMobxStores = (rpc: ProtobufRpcClient | undefined) => {
+  const queryService = getQueryService(rpc);
+  class QueryPoolsStore {
+    store = new QueryStore<QueryPoolsRequest, QueryPoolsResponse>(queryService?.pools);
+    pools(request: QueryPoolsRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryNumPoolsStore {
+    store = new QueryStore<QueryNumPoolsRequest, QueryNumPoolsResponse>(queryService?.numPools);
+    numPools(request: QueryNumPoolsRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryTotalLiquidityStore {
+    store = new QueryStore<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse>(queryService?.totalLiquidity);
+    totalLiquidity(request: QueryTotalLiquidityRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryPoolsWithFilterStore {
+    store = new QueryStore<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse>(queryService?.poolsWithFilter);
+    poolsWithFilter(request: QueryPoolsWithFilterRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryPoolStore {
+    store = new QueryStore<QueryPoolRequest, QueryPoolResponse>(queryService?.pool);
+    pool(request: QueryPoolRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryPoolTypeStore {
+    store = new QueryStore<QueryPoolTypeRequest, QueryPoolTypeResponse>(queryService?.poolType);
+    poolType(request: QueryPoolTypeRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryCalcJoinPoolNoSwapSharesStore {
+    store = new QueryStore<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse>(queryService?.calcJoinPoolNoSwapShares);
+    calcJoinPoolNoSwapShares(request: QueryCalcJoinPoolNoSwapSharesRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryCalcJoinPoolSharesStore {
+    store = new QueryStore<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse>(queryService?.calcJoinPoolShares);
+    calcJoinPoolShares(request: QueryCalcJoinPoolSharesRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryCalcExitPoolCoinsFromSharesStore {
+    store = new QueryStore<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse>(queryService?.calcExitPoolCoinsFromShares);
+    calcExitPoolCoinsFromShares(request: QueryCalcExitPoolCoinsFromSharesRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryPoolParamsStore {
+    store = new QueryStore<QueryPoolParamsRequest, QueryPoolParamsResponse>(queryService?.poolParams);
+    poolParams(request: QueryPoolParamsRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryTotalPoolLiquidityStore {
+    store = new QueryStore<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse>(queryService?.totalPoolLiquidity);
+    totalPoolLiquidity(request: QueryTotalPoolLiquidityRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryTotalSharesStore {
+    store = new QueryStore<QueryTotalSharesRequest, QueryTotalSharesResponse>(queryService?.totalShares);
+    totalShares(request: QueryTotalSharesRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QuerySpotPriceStore {
+    store = new QueryStore<QuerySpotPriceRequest, QuerySpotPriceResponse>(queryService?.spotPrice);
+    spotPrice(request: QuerySpotPriceRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryEstimateSwapExactAmountInStore {
+    store = new QueryStore<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse>(queryService?.estimateSwapExactAmountIn);
+    estimateSwapExactAmountIn(request: QuerySwapExactAmountInRequest) {
+      return this.store.getData(request);
+    }
+  }
+  class QueryEstimateSwapExactAmountOutStore {
+    store = new QueryStore<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse>(queryService?.estimateSwapExactAmountOut);
+    estimateSwapExactAmountOut(request: QuerySwapExactAmountOutRequest) {
+      return this.store.getData(request);
+    }
+  }
+  return {
+    QueryPoolsStore,
+    QueryNumPoolsStore,
+    QueryTotalLiquidityStore,
+    /**
+     * PoolsWithFilter allows you to query specific pools with requested
+     * parameters
+     */
+    QueryPoolsWithFilterStore,
+    /** Per Pool gRPC Endpoints */QueryPoolStore,
+    /**
+     * PoolType returns the type of the pool.
+     * Returns "Balancer" as a string literal when the pool is a balancer pool.
+     * Errors if the pool is failed to be type caseted.
+     */
+    QueryPoolTypeStore,
+    /**
+     * Simulates joining pool without a swap. Returns the amount of shares you'd
+     * get and tokens needed to provide
+     */
+    QueryCalcJoinPoolNoSwapSharesStore,
+    QueryCalcJoinPoolSharesStore,
+    QueryCalcExitPoolCoinsFromSharesStore,
+    QueryPoolParamsStore,
+    QueryTotalPoolLiquidityStore,
+    QueryTotalSharesStore,
+    /**
+     * SpotPrice defines a gRPC query handler that returns the spot price given
+     * a base denomination and a quote denomination.
+     */
+    QuerySpotPriceStore,
+    /** Estimate the swap. */QueryEstimateSwapExactAmountInStore,
+    QueryEstimateSwapExactAmountOutStore
   };
 };

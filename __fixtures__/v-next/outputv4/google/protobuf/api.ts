@@ -1,9 +1,8 @@
-import { Option, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type";
-import { SourceContext, SourceContextSDKType } from "./source_context";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { Option, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type.js";
+import { SourceContext, SourceContextSDKType } from "./source_context.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.protobuf";
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -58,15 +57,6 @@ export interface Api {
   /** The source syntax of the service. */
   syntax: Syntax;
 }
-export interface ReactiveApi {
-  name: ComputedRef<string>;
-  methods: ComputedRef<Method[]>;
-  options: ComputedRef<Option[]>;
-  version: ComputedRef<string>;
-  sourceContext?: ComputedRef<SourceContext>;
-  mixins: ComputedRef<Mixin[]>;
-  syntax: ComputedRef<Syntax>;
-}
 export interface ApiProtoMsg {
   typeUrl: "/google.protobuf.Api";
   value: Uint8Array;
@@ -107,15 +97,6 @@ export interface Method {
   options: Option[];
   /** The source syntax of this method. */
   syntax: Syntax;
-}
-export interface ReactiveMethod {
-  name: ComputedRef<string>;
-  requestTypeUrl: ComputedRef<string>;
-  requestStreaming: ComputedRef<boolean>;
-  responseTypeUrl: ComputedRef<string>;
-  responseStreaming: ComputedRef<boolean>;
-  options: ComputedRef<Option[]>;
-  syntax: ComputedRef<Syntax>;
 }
 export interface MethodProtoMsg {
   typeUrl: "/google.protobuf.Method";
@@ -220,10 +201,6 @@ export interface Mixin {
    */
   root: string;
 }
-export interface ReactiveMixin {
-  name: ComputedRef<string>;
-  root: ComputedRef<string>;
-}
 export interface MixinProtoMsg {
   typeUrl: "/google.protobuf.Mixin";
   value: Uint8Array;
@@ -326,7 +303,7 @@ function createBaseApi(): Api {
 export const Api = {
   typeUrl: "/google.protobuf.Api",
   encode(message: Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.methods) {
@@ -335,7 +312,7 @@ export const Api = {
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(34).string(message.version);
     }
     if (message.sourceContext !== undefined) {
@@ -385,15 +362,15 @@ export const Api = {
     return message;
   },
   fromJSON(object: any): Api {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromJSON(e)) : [],
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
-      version: isSet(object.version) ? String(object.version) : "",
-      sourceContext: isSet(object.sourceContext) ? SourceContext.fromJSON(object.sourceContext) : undefined,
-      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromJSON(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
-    };
+    const obj = createBaseApi();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.methods)) obj.methods = object.methods.map((e: any) => Method.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
+    if (isSet(object.version)) obj.version = String(object.version);
+    if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
+    if (Array.isArray(object?.mixins)) obj.mixins = object.mixins.map((e: any) => Mixin.fromJSON(e));
+    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
+    return obj;
   },
   toJSON(message: Api): JsonSafe<Api> {
     const obj: any = {};
@@ -424,7 +401,9 @@ export const Api = {
     message.methods = object.methods?.map(e => Method.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.version = object.version ?? "";
-    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
     message.mixins = object.mixins?.map(e => Mixin.fromPartial(e)) || [];
     message.syntax = object.syntax ?? 0;
     return message;
@@ -546,19 +525,19 @@ function createBaseMethod(): Method {
 export const Method = {
   typeUrl: "/google.protobuf.Method",
   encode(message: Method, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.requestTypeUrl !== "") {
+    if (message.requestTypeUrl !== undefined) {
       writer.uint32(18).string(message.requestTypeUrl);
     }
-    if (message.requestStreaming === true) {
+    if (message.requestStreaming !== undefined) {
       writer.uint32(24).bool(message.requestStreaming);
     }
-    if (message.responseTypeUrl !== "") {
+    if (message.responseTypeUrl !== undefined) {
       writer.uint32(34).string(message.responseTypeUrl);
     }
-    if (message.responseStreaming === true) {
+    if (message.responseStreaming !== undefined) {
       writer.uint32(40).bool(message.responseStreaming);
     }
     for (const v of message.options) {
@@ -605,15 +584,15 @@ export const Method = {
     return message;
   },
   fromJSON(object: any): Method {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      requestTypeUrl: isSet(object.requestTypeUrl) ? String(object.requestTypeUrl) : "",
-      requestStreaming: isSet(object.requestStreaming) ? Boolean(object.requestStreaming) : false,
-      responseTypeUrl: isSet(object.responseTypeUrl) ? String(object.responseTypeUrl) : "",
-      responseStreaming: isSet(object.responseStreaming) ? Boolean(object.responseStreaming) : false,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
-    };
+    const obj = createBaseMethod();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.requestTypeUrl)) obj.requestTypeUrl = String(object.requestTypeUrl);
+    if (isSet(object.requestStreaming)) obj.requestStreaming = Boolean(object.requestStreaming);
+    if (isSet(object.responseTypeUrl)) obj.responseTypeUrl = String(object.responseTypeUrl);
+    if (isSet(object.responseStreaming)) obj.responseStreaming = Boolean(object.responseStreaming);
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
+    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
+    return obj;
   },
   toJSON(message: Method): JsonSafe<Method> {
     const obj: any = {};
@@ -741,10 +720,10 @@ function createBaseMixin(): Mixin {
 export const Mixin = {
   typeUrl: "/google.protobuf.Mixin",
   encode(message: Mixin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.root !== "") {
+    if (message.root !== undefined) {
       writer.uint32(18).string(message.root);
     }
     return writer;
@@ -770,10 +749,10 @@ export const Mixin = {
     return message;
   },
   fromJSON(object: any): Mixin {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-      root: isSet(object.root) ? String(object.root) : ""
-    };
+    const obj = createBaseMixin();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.root)) obj.root = String(object.root);
+    return obj;
   },
   toJSON(message: Mixin): JsonSafe<Mixin> {
     const obj: any = {};

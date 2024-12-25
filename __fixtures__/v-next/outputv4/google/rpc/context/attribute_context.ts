@@ -1,11 +1,10 @@
-import { Struct, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../protobuf/duration";
-import { Any, AnySDKType } from "../../protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { Struct, StructSDKType } from "../../protobuf/struct.js";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp.js";
+import { Duration, DurationSDKType } from "../../protobuf/duration.js";
+import { Any, AnySDKType } from "../../protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "google.rpc.context";
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -60,16 +59,6 @@ export interface AttributeContext {
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: Any[];
 }
-export interface ReactiveAttributeContext {
-  origin?: ComputedRef<AttributeContext_Peer>;
-  source?: ComputedRef<AttributeContext_Peer>;
-  destination?: ComputedRef<AttributeContext_Peer>;
-  request?: ComputedRef<AttributeContext_Request>;
-  response?: ComputedRef<AttributeContext_Response>;
-  resource?: ComputedRef<AttributeContext_Resource>;
-  api?: ComputedRef<AttributeContext_Api>;
-  extensions: ComputedRef<Any[]>;
-}
 export interface AttributeContextProtoMsg {
   typeUrl: "/google.rpc.context.AttributeContext";
   value: Uint8Array;
@@ -107,10 +96,6 @@ export interface AttributeContext_Peer_LabelsEntry {
   key: string;
   value: string;
 }
-export interface ReactiveAttributeContext_Peer_LabelsEntry {
-  key: ComputedRef<string>;
-  value: ComputedRef<string>;
-}
 export interface AttributeContext_Peer_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
@@ -146,15 +131,6 @@ export interface AttributeContext_Peer {
    * physical location where this peer is running.
    */
   regionCode: string;
-}
-export interface ReactiveAttributeContext_Peer {
-  ip: ComputedRef<string>;
-  port: ComputedRef<bigint>;
-  labels: ComputedRef<{
-    [key: string]: string;
-  }>;
-  principal: ComputedRef<string>;
-  regionCode: ComputedRef<string>;
 }
 export interface AttributeContext_PeerProtoMsg {
   typeUrl: "/google.rpc.context.Peer";
@@ -203,12 +179,6 @@ export interface AttributeContext_Api {
    * "v1alpha1".
    */
   version: string;
-}
-export interface ReactiveAttributeContext_Api {
-  service: ComputedRef<string>;
-  operation: ComputedRef<string>;
-  protocol: ComputedRef<string>;
-  version: ComputedRef<string>;
 }
 export interface AttributeContext_ApiProtoMsg {
   typeUrl: "/google.rpc.context.Api";
@@ -292,13 +262,6 @@ export interface AttributeContext_Auth {
    */
   accessLevels: string[];
 }
-export interface ReactiveAttributeContext_Auth {
-  principal: ComputedRef<string>;
-  audiences: ComputedRef<string[]>;
-  presenter: ComputedRef<string>;
-  claims?: ComputedRef<Struct>;
-  accessLevels: ComputedRef<string[]>;
-}
 export interface AttributeContext_AuthProtoMsg {
   typeUrl: "/google.rpc.context.Auth";
   value: Uint8Array;
@@ -318,10 +281,6 @@ export interface AttributeContext_AuthSDKType {
 export interface AttributeContext_Request_HeadersEntry {
   key: string;
   value: string;
-}
-export interface ReactiveAttributeContext_Request_HeadersEntry {
-  key: ComputedRef<string>;
-  value: ComputedRef<string>;
 }
 export interface AttributeContext_Request_HeadersEntryProtoMsg {
   typeUrl: string;
@@ -389,22 +348,6 @@ export interface AttributeContext_Request {
    */
   auth?: AttributeContext_Auth;
 }
-export interface ReactiveAttributeContext_Request {
-  id: ComputedRef<string>;
-  method: ComputedRef<string>;
-  headers: ComputedRef<{
-    [key: string]: string;
-  }>;
-  path: ComputedRef<string>;
-  host: ComputedRef<string>;
-  scheme: ComputedRef<string>;
-  query: ComputedRef<string>;
-  time?: ComputedRef<Date>;
-  size: ComputedRef<bigint>;
-  protocol: ComputedRef<string>;
-  reason: ComputedRef<string>;
-  auth?: ComputedRef<AttributeContext_Auth>;
-}
 export interface AttributeContext_RequestProtoMsg {
   typeUrl: "/google.rpc.context.Request";
   value: Uint8Array;
@@ -433,10 +376,6 @@ export interface AttributeContext_RequestSDKType {
 export interface AttributeContext_Response_HeadersEntry {
   key: string;
   value: string;
-}
-export interface ReactiveAttributeContext_Response_HeadersEntry {
-  key: ComputedRef<string>;
-  value: ComputedRef<string>;
 }
 export interface AttributeContext_Response_HeadersEntryProtoMsg {
   typeUrl: string;
@@ -476,15 +415,6 @@ export interface AttributeContext_Response {
    */
   backendLatency?: Duration;
 }
-export interface ReactiveAttributeContext_Response {
-  code: ComputedRef<bigint>;
-  size: ComputedRef<bigint>;
-  headers: ComputedRef<{
-    [key: string]: string;
-  }>;
-  time?: ComputedRef<Date>;
-  backendLatency?: ComputedRef<Duration>;
-}
 export interface AttributeContext_ResponseProtoMsg {
   typeUrl: "/google.rpc.context.Response";
   value: Uint8Array;
@@ -506,10 +436,6 @@ export interface AttributeContext_Resource_LabelsEntry {
   key: string;
   value: string;
 }
-export interface ReactiveAttributeContext_Resource_LabelsEntry {
-  key: ComputedRef<string>;
-  value: ComputedRef<string>;
-}
 export interface AttributeContext_Resource_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
@@ -521,10 +447,6 @@ export interface AttributeContext_Resource_LabelsEntrySDKType {
 export interface AttributeContext_Resource_AnnotationsEntry {
   key: string;
   value: string;
-}
-export interface ReactiveAttributeContext_Resource_AnnotationsEntry {
-  key: ComputedRef<string>;
-  value: ComputedRef<string>;
 }
 export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
   typeUrl: string;
@@ -628,24 +550,6 @@ export interface AttributeContext_Resource {
    * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
    */
   location: string;
-}
-export interface ReactiveAttributeContext_Resource {
-  service: ComputedRef<string>;
-  name: ComputedRef<string>;
-  type: ComputedRef<string>;
-  labels: ComputedRef<{
-    [key: string]: string;
-  }>;
-  uid: ComputedRef<string>;
-  annotations: ComputedRef<{
-    [key: string]: string;
-  }>;
-  displayName: ComputedRef<string>;
-  createTime?: ComputedRef<Date>;
-  updateTime?: ComputedRef<Date>;
-  deleteTime?: ComputedRef<Date>;
-  etag: ComputedRef<string>;
-  location: ComputedRef<string>;
 }
 export interface AttributeContext_ResourceProtoMsg {
   typeUrl: "/google.rpc.context.Resource";
@@ -754,16 +658,16 @@ export const AttributeContext = {
     return message;
   },
   fromJSON(object: any): AttributeContext {
-    return {
-      origin: isSet(object.origin) ? AttributeContext_Peer.fromJSON(object.origin) : undefined,
-      source: isSet(object.source) ? AttributeContext_Peer.fromJSON(object.source) : undefined,
-      destination: isSet(object.destination) ? AttributeContext_Peer.fromJSON(object.destination) : undefined,
-      request: isSet(object.request) ? AttributeContext_Request.fromJSON(object.request) : undefined,
-      response: isSet(object.response) ? AttributeContext_Response.fromJSON(object.response) : undefined,
-      resource: isSet(object.resource) ? AttributeContext_Resource.fromJSON(object.resource) : undefined,
-      api: isSet(object.api) ? AttributeContext_Api.fromJSON(object.api) : undefined,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
-    };
+    const obj = createBaseAttributeContext();
+    if (isSet(object.origin)) obj.origin = AttributeContext_Peer.fromJSON(object.origin);
+    if (isSet(object.source)) obj.source = AttributeContext_Peer.fromJSON(object.source);
+    if (isSet(object.destination)) obj.destination = AttributeContext_Peer.fromJSON(object.destination);
+    if (isSet(object.request)) obj.request = AttributeContext_Request.fromJSON(object.request);
+    if (isSet(object.response)) obj.response = AttributeContext_Response.fromJSON(object.response);
+    if (isSet(object.resource)) obj.resource = AttributeContext_Resource.fromJSON(object.resource);
+    if (isSet(object.api)) obj.api = AttributeContext_Api.fromJSON(object.api);
+    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
+    return obj;
   },
   toJSON(message: AttributeContext): JsonSafe<AttributeContext> {
     const obj: any = {};
@@ -783,13 +687,27 @@ export const AttributeContext = {
   },
   fromPartial(object: DeepPartial<AttributeContext>): AttributeContext {
     const message = createBaseAttributeContext();
-    message.origin = object.origin !== undefined && object.origin !== null ? AttributeContext_Peer.fromPartial(object.origin) : undefined;
-    message.source = object.source !== undefined && object.source !== null ? AttributeContext_Peer.fromPartial(object.source) : undefined;
-    message.destination = object.destination !== undefined && object.destination !== null ? AttributeContext_Peer.fromPartial(object.destination) : undefined;
-    message.request = object.request !== undefined && object.request !== null ? AttributeContext_Request.fromPartial(object.request) : undefined;
-    message.response = object.response !== undefined && object.response !== null ? AttributeContext_Response.fromPartial(object.response) : undefined;
-    message.resource = object.resource !== undefined && object.resource !== null ? AttributeContext_Resource.fromPartial(object.resource) : undefined;
-    message.api = object.api !== undefined && object.api !== null ? AttributeContext_Api.fromPartial(object.api) : undefined;
+    if (object.origin !== undefined && object.origin !== null) {
+      message.origin = AttributeContext_Peer.fromPartial(object.origin);
+    }
+    if (object.source !== undefined && object.source !== null) {
+      message.source = AttributeContext_Peer.fromPartial(object.source);
+    }
+    if (object.destination !== undefined && object.destination !== null) {
+      message.destination = AttributeContext_Peer.fromPartial(object.destination);
+    }
+    if (object.request !== undefined && object.request !== null) {
+      message.request = AttributeContext_Request.fromPartial(object.request);
+    }
+    if (object.response !== undefined && object.response !== null) {
+      message.response = AttributeContext_Response.fromPartial(object.response);
+    }
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = AttributeContext_Resource.fromPartial(object.resource);
+    }
+    if (object.api !== undefined && object.api !== null) {
+      message.api = AttributeContext_Api.fromPartial(object.api);
+    }
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
   },
@@ -899,10 +817,10 @@ function createBaseAttributeContext_Peer_LabelsEntry(): AttributeContext_Peer_La
 }
 export const AttributeContext_Peer_LabelsEntry = {
   encode(message: AttributeContext_Peer_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -928,10 +846,10 @@ export const AttributeContext_Peer_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Peer_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseAttributeContext_Peer_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: AttributeContext_Peer_LabelsEntry): JsonSafe<AttributeContext_Peer_LabelsEntry> {
     const obj: any = {};
@@ -1001,10 +919,10 @@ function createBaseAttributeContext_Peer(): AttributeContext_Peer {
 export const AttributeContext_Peer = {
   typeUrl: "/google.rpc.context.Peer",
   encode(message: AttributeContext_Peer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.ip !== "") {
+    if (message.ip !== undefined) {
       writer.uint32(10).string(message.ip);
     }
-    if (message.port !== BigInt(0)) {
+    if (message.port !== undefined) {
       writer.uint32(16).int64(message.port);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -1013,10 +931,10 @@ export const AttributeContext_Peer = {
         value
       }, writer.uint32(50).fork()).ldelim();
     });
-    if (message.principal !== "") {
+    if (message.principal !== undefined) {
       writer.uint32(58).string(message.principal);
     }
-    if (message.regionCode !== "") {
+    if (message.regionCode !== undefined) {
       writer.uint32(66).string(message.regionCode);
     }
     return writer;
@@ -1054,18 +972,18 @@ export const AttributeContext_Peer = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Peer {
-    return {
-      ip: isSet(object.ip) ? String(object.ip) : "",
-      port: isSet(object.port) ? BigInt(object.port.toString()) : BigInt(0),
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      principal: isSet(object.principal) ? String(object.principal) : "",
-      regionCode: isSet(object.regionCode) ? String(object.regionCode) : ""
-    };
+    const obj = createBaseAttributeContext_Peer();
+    if (isSet(object.ip)) obj.ip = String(object.ip);
+    if (isSet(object.port)) obj.port = BigInt(object.port.toString());
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.principal)) obj.principal = String(object.principal);
+    if (isSet(object.regionCode)) obj.regionCode = String(object.regionCode);
+    return obj;
   },
   toJSON(message: AttributeContext_Peer): JsonSafe<AttributeContext_Peer> {
     const obj: any = {};
@@ -1084,7 +1002,9 @@ export const AttributeContext_Peer = {
   fromPartial(object: DeepPartial<AttributeContext_Peer>): AttributeContext_Peer {
     const message = createBaseAttributeContext_Peer();
     message.ip = object.ip ?? "";
-    message.port = object.port !== undefined && object.port !== null ? BigInt(object.port.toString()) : BigInt(0);
+    if (object.port !== undefined && object.port !== null) {
+      message.port = BigInt(object.port.toString());
+    }
     message.labels = Object.entries(object.labels ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -1204,16 +1124,16 @@ function createBaseAttributeContext_Api(): AttributeContext_Api {
 export const AttributeContext_Api = {
   typeUrl: "/google.rpc.context.Api",
   encode(message: AttributeContext_Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.service !== "") {
+    if (message.service !== undefined) {
       writer.uint32(10).string(message.service);
     }
-    if (message.operation !== "") {
+    if (message.operation !== undefined) {
       writer.uint32(18).string(message.operation);
     }
-    if (message.protocol !== "") {
+    if (message.protocol !== undefined) {
       writer.uint32(26).string(message.protocol);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(34).string(message.version);
     }
     return writer;
@@ -1245,12 +1165,12 @@ export const AttributeContext_Api = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Api {
-    return {
-      service: isSet(object.service) ? String(object.service) : "",
-      operation: isSet(object.operation) ? String(object.operation) : "",
-      protocol: isSet(object.protocol) ? String(object.protocol) : "",
-      version: isSet(object.version) ? String(object.version) : ""
-    };
+    const obj = createBaseAttributeContext_Api();
+    if (isSet(object.service)) obj.service = String(object.service);
+    if (isSet(object.operation)) obj.operation = String(object.operation);
+    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
+    if (isSet(object.version)) obj.version = String(object.version);
+    return obj;
   },
   toJSON(message: AttributeContext_Api): JsonSafe<AttributeContext_Api> {
     const obj: any = {};
@@ -1344,13 +1264,13 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
 export const AttributeContext_Auth = {
   typeUrl: "/google.rpc.context.Auth",
   encode(message: AttributeContext_Auth, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.principal !== "") {
+    if (message.principal !== undefined) {
       writer.uint32(10).string(message.principal);
     }
     for (const v of message.audiences) {
       writer.uint32(18).string(v!);
     }
-    if (message.presenter !== "") {
+    if (message.presenter !== undefined) {
       writer.uint32(26).string(message.presenter);
     }
     if (message.claims !== undefined) {
@@ -1391,13 +1311,13 @@ export const AttributeContext_Auth = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Auth {
-    return {
-      principal: isSet(object.principal) ? String(object.principal) : "",
-      audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => String(e)) : [],
-      presenter: isSet(object.presenter) ? String(object.presenter) : "",
-      claims: isSet(object.claims) ? Struct.fromJSON(object.claims) : undefined,
-      accessLevels: Array.isArray(object?.accessLevels) ? object.accessLevels.map((e: any) => String(e)) : []
-    };
+    const obj = createBaseAttributeContext_Auth();
+    if (isSet(object.principal)) obj.principal = String(object.principal);
+    if (Array.isArray(object?.audiences)) obj.audiences = object.audiences.map((e: any) => String(e));
+    if (isSet(object.presenter)) obj.presenter = String(object.presenter);
+    if (isSet(object.claims)) obj.claims = Struct.fromJSON(object.claims);
+    if (Array.isArray(object?.accessLevels)) obj.accessLevels = object.accessLevels.map((e: any) => String(e));
+    return obj;
   },
   toJSON(message: AttributeContext_Auth): JsonSafe<AttributeContext_Auth> {
     const obj: any = {};
@@ -1421,7 +1341,9 @@ export const AttributeContext_Auth = {
     message.principal = object.principal ?? "";
     message.audiences = object.audiences?.map(e => e) || [];
     message.presenter = object.presenter ?? "";
-    message.claims = object.claims !== undefined && object.claims !== null ? Struct.fromPartial(object.claims) : undefined;
+    if (object.claims !== undefined && object.claims !== null) {
+      message.claims = Struct.fromPartial(object.claims);
+    }
     message.accessLevels = object.accessLevels?.map(e => e) || [];
     return message;
   },
@@ -1516,10 +1438,10 @@ function createBaseAttributeContext_Request_HeadersEntry(): AttributeContext_Req
 }
 export const AttributeContext_Request_HeadersEntry = {
   encode(message: AttributeContext_Request_HeadersEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -1545,10 +1467,10 @@ export const AttributeContext_Request_HeadersEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Request_HeadersEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseAttributeContext_Request_HeadersEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: AttributeContext_Request_HeadersEntry): JsonSafe<AttributeContext_Request_HeadersEntry> {
     const obj: any = {};
@@ -1625,10 +1547,10 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
 export const AttributeContext_Request = {
   typeUrl: "/google.rpc.context.Request",
   encode(message: AttributeContext_Request, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.method !== "") {
+    if (message.method !== undefined) {
       writer.uint32(18).string(message.method);
     }
     Object.entries(message.headers).forEach(([key, value]) => {
@@ -1637,28 +1559,28 @@ export const AttributeContext_Request = {
         value
       }, writer.uint32(26).fork()).ldelim();
     });
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       writer.uint32(34).string(message.path);
     }
-    if (message.host !== "") {
+    if (message.host !== undefined) {
       writer.uint32(42).string(message.host);
     }
-    if (message.scheme !== "") {
+    if (message.scheme !== undefined) {
       writer.uint32(50).string(message.scheme);
     }
-    if (message.query !== "") {
+    if (message.query !== undefined) {
       writer.uint32(58).string(message.query);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(74).fork()).ldelim();
     }
-    if (message.size !== BigInt(0)) {
+    if (message.size !== undefined) {
       writer.uint32(80).int64(message.size);
     }
-    if (message.protocol !== "") {
+    if (message.protocol !== undefined) {
       writer.uint32(90).string(message.protocol);
     }
-    if (message.reason !== "") {
+    if (message.reason !== undefined) {
       writer.uint32(98).string(message.reason);
     }
     if (message.auth !== undefined) {
@@ -1720,25 +1642,25 @@ export const AttributeContext_Request = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Request {
-    return {
-      id: isSet(object.id) ? String(object.id) : "",
-      method: isSet(object.method) ? String(object.method) : "",
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      path: isSet(object.path) ? String(object.path) : "",
-      host: isSet(object.host) ? String(object.host) : "",
-      scheme: isSet(object.scheme) ? String(object.scheme) : "",
-      query: isSet(object.query) ? String(object.query) : "",
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
-      protocol: isSet(object.protocol) ? String(object.protocol) : "",
-      reason: isSet(object.reason) ? String(object.reason) : "",
-      auth: isSet(object.auth) ? AttributeContext_Auth.fromJSON(object.auth) : undefined
-    };
+    const obj = createBaseAttributeContext_Request();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.method)) obj.method = String(object.method);
+    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.path)) obj.path = String(object.path);
+    if (isSet(object.host)) obj.host = String(object.host);
+    if (isSet(object.scheme)) obj.scheme = String(object.scheme);
+    if (isSet(object.query)) obj.query = String(object.query);
+    if (isSet(object.time)) obj.time = new Date(object.time);
+    if (isSet(object.size)) obj.size = BigInt(object.size.toString());
+    if (isSet(object.protocol)) obj.protocol = String(object.protocol);
+    if (isSet(object.reason)) obj.reason = String(object.reason);
+    if (isSet(object.auth)) obj.auth = AttributeContext_Auth.fromJSON(object.auth);
+    return obj;
   },
   toJSON(message: AttributeContext_Request): JsonSafe<AttributeContext_Request> {
     const obj: any = {};
@@ -1778,10 +1700,14 @@ export const AttributeContext_Request = {
     message.scheme = object.scheme ?? "";
     message.query = object.query ?? "";
     message.time = object.time ?? undefined;
-    message.size = object.size !== undefined && object.size !== null ? BigInt(object.size.toString()) : BigInt(0);
+    if (object.size !== undefined && object.size !== null) {
+      message.size = BigInt(object.size.toString());
+    }
     message.protocol = object.protocol ?? "";
     message.reason = object.reason ?? "";
-    message.auth = object.auth !== undefined && object.auth !== null ? AttributeContext_Auth.fromPartial(object.auth) : undefined;
+    if (object.auth !== undefined && object.auth !== null) {
+      message.auth = AttributeContext_Auth.fromPartial(object.auth);
+    }
     return message;
   },
   fromSDK(object: AttributeContext_RequestSDKType): AttributeContext_Request {
@@ -1937,10 +1863,10 @@ function createBaseAttributeContext_Response_HeadersEntry(): AttributeContext_Re
 }
 export const AttributeContext_Response_HeadersEntry = {
   encode(message: AttributeContext_Response_HeadersEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -1966,10 +1892,10 @@ export const AttributeContext_Response_HeadersEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Response_HeadersEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseAttributeContext_Response_HeadersEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: AttributeContext_Response_HeadersEntry): JsonSafe<AttributeContext_Response_HeadersEntry> {
     const obj: any = {};
@@ -2039,10 +1965,10 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
 export const AttributeContext_Response = {
   typeUrl: "/google.rpc.context.Response",
   encode(message: AttributeContext_Response, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== BigInt(0)) {
+    if (message.code !== undefined) {
       writer.uint32(8).int64(message.code);
     }
-    if (message.size !== BigInt(0)) {
+    if (message.size !== undefined) {
       writer.uint32(16).int64(message.size);
     }
     Object.entries(message.headers).forEach(([key, value]) => {
@@ -2092,18 +2018,18 @@ export const AttributeContext_Response = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Response {
-    return {
-      code: isSet(object.code) ? BigInt(object.code.toString()) : BigInt(0),
-      size: isSet(object.size) ? BigInt(object.size.toString()) : BigInt(0),
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      time: isSet(object.time) ? new Date(object.time) : undefined,
-      backendLatency: isSet(object.backendLatency) ? Duration.fromJSON(object.backendLatency) : undefined
-    };
+    const obj = createBaseAttributeContext_Response();
+    if (isSet(object.code)) obj.code = BigInt(object.code.toString());
+    if (isSet(object.size)) obj.size = BigInt(object.size.toString());
+    if (isObject(object.headers)) obj.headers = Object.entries(object.headers).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.time)) obj.time = new Date(object.time);
+    if (isSet(object.backendLatency)) obj.backendLatency = Duration.fromJSON(object.backendLatency);
+    return obj;
   },
   toJSON(message: AttributeContext_Response): JsonSafe<AttributeContext_Response> {
     const obj: any = {};
@@ -2121,8 +2047,12 @@ export const AttributeContext_Response = {
   },
   fromPartial(object: DeepPartial<AttributeContext_Response>): AttributeContext_Response {
     const message = createBaseAttributeContext_Response();
-    message.code = object.code !== undefined && object.code !== null ? BigInt(object.code.toString()) : BigInt(0);
-    message.size = object.size !== undefined && object.size !== null ? BigInt(object.size.toString()) : BigInt(0);
+    if (object.code !== undefined && object.code !== null) {
+      message.code = BigInt(object.code.toString());
+    }
+    if (object.size !== undefined && object.size !== null) {
+      message.size = BigInt(object.size.toString());
+    }
     message.headers = Object.entries(object.headers ?? {}).reduce<{
       [key: string]: string;
     }>((acc, [key, value]) => {
@@ -2132,7 +2062,9 @@ export const AttributeContext_Response = {
       return acc;
     }, {});
     message.time = object.time ?? undefined;
-    message.backendLatency = object.backendLatency !== undefined && object.backendLatency !== null ? Duration.fromPartial(object.backendLatency) : undefined;
+    if (object.backendLatency !== undefined && object.backendLatency !== null) {
+      message.backendLatency = Duration.fromPartial(object.backendLatency);
+    }
     return message;
   },
   fromSDK(object: AttributeContext_ResponseSDKType): AttributeContext_Response {
@@ -2239,10 +2171,10 @@ function createBaseAttributeContext_Resource_LabelsEntry(): AttributeContext_Res
 }
 export const AttributeContext_Resource_LabelsEntry = {
   encode(message: AttributeContext_Resource_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -2268,10 +2200,10 @@ export const AttributeContext_Resource_LabelsEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Resource_LabelsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseAttributeContext_Resource_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: AttributeContext_Resource_LabelsEntry): JsonSafe<AttributeContext_Resource_LabelsEntry> {
     const obj: any = {};
@@ -2337,10 +2269,10 @@ function createBaseAttributeContext_Resource_AnnotationsEntry(): AttributeContex
 }
 export const AttributeContext_Resource_AnnotationsEntry = {
   encode(message: AttributeContext_Resource_AnnotationsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -2366,10 +2298,10 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Resource_AnnotationsEntry {
-    return {
-      key: isSet(object.key) ? String(object.key) : "",
-      value: isSet(object.value) ? String(object.value) : ""
-    };
+    const obj = createBaseAttributeContext_Resource_AnnotationsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
   },
   toJSON(message: AttributeContext_Resource_AnnotationsEntry): JsonSafe<AttributeContext_Resource_AnnotationsEntry> {
     const obj: any = {};
@@ -2446,13 +2378,13 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
 export const AttributeContext_Resource = {
   typeUrl: "/google.rpc.context.Resource",
   encode(message: AttributeContext_Resource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.service !== "") {
+    if (message.service !== undefined) {
       writer.uint32(10).string(message.service);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(26).string(message.type);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
@@ -2461,7 +2393,7 @@ export const AttributeContext_Resource = {
         value
       }, writer.uint32(34).fork()).ldelim();
     });
-    if (message.uid !== "") {
+    if (message.uid !== undefined) {
       writer.uint32(42).string(message.uid);
     }
     Object.entries(message.annotations).forEach(([key, value]) => {
@@ -2470,7 +2402,7 @@ export const AttributeContext_Resource = {
         value
       }, writer.uint32(50).fork()).ldelim();
     });
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(58).string(message.displayName);
     }
     if (message.createTime !== undefined) {
@@ -2482,10 +2414,10 @@ export const AttributeContext_Resource = {
     if (message.deleteTime !== undefined) {
       Timestamp.encode(toTimestamp(message.deleteTime), writer.uint32(82).fork()).ldelim();
     }
-    if (message.etag !== "") {
+    if (message.etag !== undefined) {
       writer.uint32(90).string(message.etag);
     }
-    if (message.location !== "") {
+    if (message.location !== undefined) {
       writer.uint32(98).string(message.location);
     }
     return writer;
@@ -2547,30 +2479,30 @@ export const AttributeContext_Resource = {
     return message;
   },
   fromJSON(object: any): AttributeContext_Resource {
-    return {
-      service: isSet(object.service) ? String(object.service) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      type: isSet(object.type) ? String(object.type) : "",
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      uid: isSet(object.uid) ? String(object.uid) : "",
-      annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
-        acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      displayName: isSet(object.displayName) ? String(object.displayName) : "",
-      createTime: isSet(object.createTime) ? new Date(object.createTime) : undefined,
-      updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined,
-      deleteTime: isSet(object.deleteTime) ? new Date(object.deleteTime) : undefined,
-      etag: isSet(object.etag) ? String(object.etag) : "",
-      location: isSet(object.location) ? String(object.location) : ""
-    };
+    const obj = createBaseAttributeContext_Resource();
+    if (isSet(object.service)) obj.service = String(object.service);
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.uid)) obj.uid = String(object.uid);
+    if (isObject(object.annotations)) obj.annotations = Object.entries(object.annotations).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
+    if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
+    if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
+    if (isSet(object.deleteTime)) obj.deleteTime = new Date(object.deleteTime);
+    if (isSet(object.etag)) obj.etag = String(object.etag);
+    if (isSet(object.location)) obj.location = String(object.location);
+    return obj;
   },
   toJSON(message: AttributeContext_Resource): JsonSafe<AttributeContext_Resource> {
     const obj: any = {};

@@ -1,9 +1,8 @@
-import { BaseVestingAccount, BaseVestingAccountSDKType, Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { BaseVestingAccount, BaseVestingAccountSDKType, Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.vesting.v1";
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
@@ -25,13 +24,6 @@ export interface ClawbackVestingAccount {
   lockupPeriods: Period[];
   /** vesting_periods defines the vesting schedule relative to the start_time */
   vestingPeriods: Period[];
-}
-export interface ReactiveClawbackVestingAccount {
-  baseVestingAccount?: ComputedRef<BaseVestingAccount>;
-  funderAddress: ComputedRef<string>;
-  startTime: ComputedRef<Date>;
-  lockupPeriods: ComputedRef<Period[]>;
-  vestingPeriods: ComputedRef<Period[]>;
 }
 export interface ClawbackVestingAccountProtoMsg {
   typeUrl: "/evmos.vesting.v1.ClawbackVestingAccount";
@@ -65,7 +57,7 @@ export const ClawbackVestingAccount = {
     if (message.baseVestingAccount !== undefined) {
       BaseVestingAccount.encode(message.baseVestingAccount, writer.uint32(10).fork()).ldelim();
     }
-    if (message.funderAddress !== "") {
+    if (message.funderAddress !== undefined) {
       writer.uint32(18).string(message.funderAddress);
     }
     if (message.startTime !== undefined) {
@@ -109,13 +101,13 @@ export const ClawbackVestingAccount = {
     return message;
   },
   fromJSON(object: any): ClawbackVestingAccount {
-    return {
-      baseVestingAccount: isSet(object.baseVestingAccount) ? BaseVestingAccount.fromJSON(object.baseVestingAccount) : undefined,
-      funderAddress: isSet(object.funderAddress) ? String(object.funderAddress) : "",
-      startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined,
-      lockupPeriods: Array.isArray(object?.lockupPeriods) ? object.lockupPeriods.map((e: any) => Period.fromJSON(e)) : [],
-      vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
-    };
+    const obj = createBaseClawbackVestingAccount();
+    if (isSet(object.baseVestingAccount)) obj.baseVestingAccount = BaseVestingAccount.fromJSON(object.baseVestingAccount);
+    if (isSet(object.funderAddress)) obj.funderAddress = String(object.funderAddress);
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (Array.isArray(object?.lockupPeriods)) obj.lockupPeriods = object.lockupPeriods.map((e: any) => Period.fromJSON(e));
+    if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
+    return obj;
   },
   toJSON(message: ClawbackVestingAccount): JsonSafe<ClawbackVestingAccount> {
     const obj: any = {};
@@ -136,7 +128,9 @@ export const ClawbackVestingAccount = {
   },
   fromPartial(object: DeepPartial<ClawbackVestingAccount>): ClawbackVestingAccount {
     const message = createBaseClawbackVestingAccount();
-    message.baseVestingAccount = object.baseVestingAccount !== undefined && object.baseVestingAccount !== null ? BaseVestingAccount.fromPartial(object.baseVestingAccount) : undefined;
+    if (object.baseVestingAccount !== undefined && object.baseVestingAccount !== null) {
+      message.baseVestingAccount = BaseVestingAccount.fromPartial(object.baseVestingAccount);
+    }
     message.funderAddress = object.funderAddress ?? "";
     message.startTime = object.startTime ?? undefined;
     message.lockupPeriods = object.lockupPeriods?.map(e => Period.fromPartial(e)) || [];

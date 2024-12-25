@@ -1,9 +1,8 @@
-import { SourceInfo, SourceInfoSDKType } from "./source";
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
-import { ComputedRef } from "vue";
+import { SourceInfo, SourceInfoSDKType } from "./source.js";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -13,11 +12,6 @@ export interface ParsedExpr {
   sourceInfo?: SourceInfo;
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
-}
-export interface ReactiveParsedExpr {
-  expr?: ComputedRef<Expr>;
-  sourceInfo?: ComputedRef<SourceInfo>;
-  syntaxVersion: ComputedRef<string>;
 }
 export interface ParsedExprProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.ParsedExpr";
@@ -68,16 +62,6 @@ export interface Expr {
   /** A comprehension expression. */
   comprehensionExpr?: Expr_Comprehension;
 }
-export interface ReactiveExpr {
-  id: ComputedRef<number>;
-  literalExpr?: ComputedRef<Literal>;
-  identExpr?: ComputedRef<Expr_Ident>;
-  selectExpr?: ComputedRef<Expr_Select>;
-  callExpr?: ComputedRef<Expr_Call>;
-  listExpr?: ComputedRef<Expr_CreateList>;
-  structExpr?: ComputedRef<Expr_CreateStruct>;
-  comprehensionExpr?: ComputedRef<Expr_Comprehension>;
-}
 export interface ExprProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Expr";
   value: Uint8Array;
@@ -119,9 +103,6 @@ export interface Expr_Ident {
    */
   name: string;
 }
-export interface ReactiveExpr_Ident {
-  name: ComputedRef<string>;
-}
 export interface Expr_IdentProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Ident";
   value: Uint8Array;
@@ -153,11 +134,6 @@ export interface Expr_Select {
    */
   testOnly: boolean;
 }
-export interface ReactiveExpr_Select {
-  operand?: ComputedRef<Expr>;
-  field: ComputedRef<string>;
-  testOnly: ComputedRef<boolean>;
-}
 export interface Expr_SelectProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Select";
   value: Uint8Array;
@@ -184,11 +160,6 @@ export interface Expr_Call {
   /** The arguments. */
   args: Expr[];
 }
-export interface ReactiveExpr_Call {
-  target?: ComputedRef<Expr>;
-  function: ComputedRef<string>;
-  args: ComputedRef<Expr[]>;
-}
 export interface Expr_CallProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Call";
   value: Uint8Array;
@@ -212,9 +183,6 @@ export interface Expr_CallSDKType {
 export interface Expr_CreateList {
   /** The elements part of the list. */
   elements: Expr[];
-}
-export interface ReactiveExpr_CreateList {
-  elements: ComputedRef<Expr[]>;
 }
 export interface Expr_CreateListProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.CreateList";
@@ -245,10 +213,6 @@ export interface Expr_CreateStruct {
   /** The entries in the creation expression. */
   entries: Expr_CreateStruct_Entry[];
 }
-export interface ReactiveExpr_CreateStruct {
-  type: ComputedRef<string>;
-  entries: ComputedRef<Expr_CreateStruct_Entry[]>;
-}
 export interface Expr_CreateStructProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.CreateStruct";
   value: Uint8Array;
@@ -278,12 +242,6 @@ export interface Expr_CreateStruct_Entry {
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
   value?: Expr;
-}
-export interface ReactiveExpr_CreateStruct_Entry {
-  id: ComputedRef<number>;
-  fieldKey?: ComputedRef<string>;
-  mapKey?: ComputedRef<Expr>;
-  value?: ComputedRef<Expr>;
 }
 export interface Expr_CreateStruct_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Entry";
@@ -352,15 +310,6 @@ export interface Expr_Comprehension {
    * Computes the result.
    */
   result?: Expr;
-}
-export interface ReactiveExpr_Comprehension {
-  iterVar: ComputedRef<string>;
-  iterRange?: ComputedRef<Expr>;
-  accuVar: ComputedRef<string>;
-  accuInit?: ComputedRef<Expr>;
-  loopCondition?: ComputedRef<Expr>;
-  loopStep?: ComputedRef<Expr>;
-  result?: ComputedRef<Expr>;
 }
 export interface Expr_ComprehensionProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Comprehension";
@@ -432,15 +381,6 @@ export interface Literal {
   /** bytes value. */
   bytesValue?: Uint8Array;
 }
-export interface ReactiveLiteral {
-  nullValue?: ComputedRef<NullValue>;
-  boolValue?: ComputedRef<boolean>;
-  int64Value?: ComputedRef<bigint>;
-  uint64Value?: ComputedRef<bigint>;
-  doubleValue?: ComputedRef<number>;
-  stringValue?: ComputedRef<string>;
-  bytesValue?: ComputedRef<Uint8Array>;
-}
 export interface LiteralProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Literal";
   value: Uint8Array;
@@ -483,7 +423,7 @@ export const ParsedExpr = {
     if (message.sourceInfo !== undefined) {
       SourceInfo.encode(message.sourceInfo, writer.uint32(26).fork()).ldelim();
     }
-    if (message.syntaxVersion !== "") {
+    if (message.syntaxVersion !== undefined) {
       writer.uint32(34).string(message.syntaxVersion);
     }
     return writer;
@@ -512,11 +452,11 @@ export const ParsedExpr = {
     return message;
   },
   fromJSON(object: any): ParsedExpr {
-    return {
-      expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined,
-      sourceInfo: isSet(object.sourceInfo) ? SourceInfo.fromJSON(object.sourceInfo) : undefined,
-      syntaxVersion: isSet(object.syntaxVersion) ? String(object.syntaxVersion) : ""
-    };
+    const obj = createBaseParsedExpr();
+    if (isSet(object.expr)) obj.expr = Expr.fromJSON(object.expr);
+    if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
+    if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
+    return obj;
   },
   toJSON(message: ParsedExpr): JsonSafe<ParsedExpr> {
     const obj: any = {};
@@ -527,8 +467,12 @@ export const ParsedExpr = {
   },
   fromPartial(object: DeepPartial<ParsedExpr>): ParsedExpr {
     const message = createBaseParsedExpr();
-    message.expr = object.expr !== undefined && object.expr !== null ? Expr.fromPartial(object.expr) : undefined;
-    message.sourceInfo = object.sourceInfo !== undefined && object.sourceInfo !== null ? SourceInfo.fromPartial(object.sourceInfo) : undefined;
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = Expr.fromPartial(object.expr);
+    }
+    if (object.sourceInfo !== undefined && object.sourceInfo !== null) {
+      message.sourceInfo = SourceInfo.fromPartial(object.sourceInfo);
+    }
     message.syntaxVersion = object.syntaxVersion ?? "";
     return message;
   },
@@ -604,7 +548,7 @@ function createBaseExpr(): Expr {
 export const Expr = {
   typeUrl: "/google.api.expr.v1beta1.Expr",
   encode(message: Expr, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(16).int32(message.id);
     }
     if (message.literalExpr !== undefined) {
@@ -669,16 +613,16 @@ export const Expr = {
     return message;
   },
   fromJSON(object: any): Expr {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      literalExpr: isSet(object.literalExpr) ? Literal.fromJSON(object.literalExpr) : undefined,
-      identExpr: isSet(object.identExpr) ? Expr_Ident.fromJSON(object.identExpr) : undefined,
-      selectExpr: isSet(object.selectExpr) ? Expr_Select.fromJSON(object.selectExpr) : undefined,
-      callExpr: isSet(object.callExpr) ? Expr_Call.fromJSON(object.callExpr) : undefined,
-      listExpr: isSet(object.listExpr) ? Expr_CreateList.fromJSON(object.listExpr) : undefined,
-      structExpr: isSet(object.structExpr) ? Expr_CreateStruct.fromJSON(object.structExpr) : undefined,
-      comprehensionExpr: isSet(object.comprehensionExpr) ? Expr_Comprehension.fromJSON(object.comprehensionExpr) : undefined
-    };
+    const obj = createBaseExpr();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    if (isSet(object.literalExpr)) obj.literalExpr = Literal.fromJSON(object.literalExpr);
+    if (isSet(object.identExpr)) obj.identExpr = Expr_Ident.fromJSON(object.identExpr);
+    if (isSet(object.selectExpr)) obj.selectExpr = Expr_Select.fromJSON(object.selectExpr);
+    if (isSet(object.callExpr)) obj.callExpr = Expr_Call.fromJSON(object.callExpr);
+    if (isSet(object.listExpr)) obj.listExpr = Expr_CreateList.fromJSON(object.listExpr);
+    if (isSet(object.structExpr)) obj.structExpr = Expr_CreateStruct.fromJSON(object.structExpr);
+    if (isSet(object.comprehensionExpr)) obj.comprehensionExpr = Expr_Comprehension.fromJSON(object.comprehensionExpr);
+    return obj;
   },
   toJSON(message: Expr): JsonSafe<Expr> {
     const obj: any = {};
@@ -695,13 +639,27 @@ export const Expr = {
   fromPartial(object: DeepPartial<Expr>): Expr {
     const message = createBaseExpr();
     message.id = object.id ?? 0;
-    message.literalExpr = object.literalExpr !== undefined && object.literalExpr !== null ? Literal.fromPartial(object.literalExpr) : undefined;
-    message.identExpr = object.identExpr !== undefined && object.identExpr !== null ? Expr_Ident.fromPartial(object.identExpr) : undefined;
-    message.selectExpr = object.selectExpr !== undefined && object.selectExpr !== null ? Expr_Select.fromPartial(object.selectExpr) : undefined;
-    message.callExpr = object.callExpr !== undefined && object.callExpr !== null ? Expr_Call.fromPartial(object.callExpr) : undefined;
-    message.listExpr = object.listExpr !== undefined && object.listExpr !== null ? Expr_CreateList.fromPartial(object.listExpr) : undefined;
-    message.structExpr = object.structExpr !== undefined && object.structExpr !== null ? Expr_CreateStruct.fromPartial(object.structExpr) : undefined;
-    message.comprehensionExpr = object.comprehensionExpr !== undefined && object.comprehensionExpr !== null ? Expr_Comprehension.fromPartial(object.comprehensionExpr) : undefined;
+    if (object.literalExpr !== undefined && object.literalExpr !== null) {
+      message.literalExpr = Literal.fromPartial(object.literalExpr);
+    }
+    if (object.identExpr !== undefined && object.identExpr !== null) {
+      message.identExpr = Expr_Ident.fromPartial(object.identExpr);
+    }
+    if (object.selectExpr !== undefined && object.selectExpr !== null) {
+      message.selectExpr = Expr_Select.fromPartial(object.selectExpr);
+    }
+    if (object.callExpr !== undefined && object.callExpr !== null) {
+      message.callExpr = Expr_Call.fromPartial(object.callExpr);
+    }
+    if (object.listExpr !== undefined && object.listExpr !== null) {
+      message.listExpr = Expr_CreateList.fromPartial(object.listExpr);
+    }
+    if (object.structExpr !== undefined && object.structExpr !== null) {
+      message.structExpr = Expr_CreateStruct.fromPartial(object.structExpr);
+    }
+    if (object.comprehensionExpr !== undefined && object.comprehensionExpr !== null) {
+      message.comprehensionExpr = Expr_Comprehension.fromPartial(object.comprehensionExpr);
+    }
     return message;
   },
   fromSDK(object: ExprSDKType): Expr {
@@ -804,7 +762,7 @@ function createBaseExpr_Ident(): Expr_Ident {
 export const Expr_Ident = {
   typeUrl: "/google.api.expr.v1beta1.Ident",
   encode(message: Expr_Ident, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -827,9 +785,9 @@ export const Expr_Ident = {
     return message;
   },
   fromJSON(object: any): Expr_Ident {
-    return {
-      name: isSet(object.name) ? String(object.name) : ""
-    };
+    const obj = createBaseExpr_Ident();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
   },
   toJSON(message: Expr_Ident): JsonSafe<Expr_Ident> {
     const obj: any = {};
@@ -897,10 +855,10 @@ export const Expr_Select = {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
     }
-    if (message.field !== "") {
+    if (message.field !== undefined) {
       writer.uint32(18).string(message.field);
     }
-    if (message.testOnly === true) {
+    if (message.testOnly !== undefined) {
       writer.uint32(24).bool(message.testOnly);
     }
     return writer;
@@ -929,11 +887,11 @@ export const Expr_Select = {
     return message;
   },
   fromJSON(object: any): Expr_Select {
-    return {
-      operand: isSet(object.operand) ? Expr.fromJSON(object.operand) : undefined,
-      field: isSet(object.field) ? String(object.field) : "",
-      testOnly: isSet(object.testOnly) ? Boolean(object.testOnly) : false
-    };
+    const obj = createBaseExpr_Select();
+    if (isSet(object.operand)) obj.operand = Expr.fromJSON(object.operand);
+    if (isSet(object.field)) obj.field = String(object.field);
+    if (isSet(object.testOnly)) obj.testOnly = Boolean(object.testOnly);
+    return obj;
   },
   toJSON(message: Expr_Select): JsonSafe<Expr_Select> {
     const obj: any = {};
@@ -944,7 +902,9 @@ export const Expr_Select = {
   },
   fromPartial(object: DeepPartial<Expr_Select>): Expr_Select {
     const message = createBaseExpr_Select();
-    message.operand = object.operand !== undefined && object.operand !== null ? Expr.fromPartial(object.operand) : undefined;
+    if (object.operand !== undefined && object.operand !== null) {
+      message.operand = Expr.fromPartial(object.operand);
+    }
     message.field = object.field ?? "";
     message.testOnly = object.testOnly ?? false;
     return message;
@@ -1019,7 +979,7 @@ export const Expr_Call = {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
     }
-    if (message.function !== "") {
+    if (message.function !== undefined) {
       writer.uint32(18).string(message.function);
     }
     for (const v of message.args) {
@@ -1051,11 +1011,11 @@ export const Expr_Call = {
     return message;
   },
   fromJSON(object: any): Expr_Call {
-    return {
-      target: isSet(object.target) ? Expr.fromJSON(object.target) : undefined,
-      function: isSet(object.function) ? String(object.function) : "",
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromJSON(e)) : []
-    };
+    const obj = createBaseExpr_Call();
+    if (isSet(object.target)) obj.target = Expr.fromJSON(object.target);
+    if (isSet(object.function)) obj.function = String(object.function);
+    if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => Expr.fromJSON(e));
+    return obj;
   },
   toJSON(message: Expr_Call): JsonSafe<Expr_Call> {
     const obj: any = {};
@@ -1070,7 +1030,9 @@ export const Expr_Call = {
   },
   fromPartial(object: DeepPartial<Expr_Call>): Expr_Call {
     const message = createBaseExpr_Call();
-    message.target = object.target !== undefined && object.target !== null ? Expr.fromPartial(object.target) : undefined;
+    if (object.target !== undefined && object.target !== null) {
+      message.target = Expr.fromPartial(object.target);
+    }
     message.function = object.function ?? "";
     message.args = object.args?.map(e => Expr.fromPartial(e)) || [];
     return message;
@@ -1169,9 +1131,9 @@ export const Expr_CreateList = {
     return message;
   },
   fromJSON(object: any): Expr_CreateList {
-    return {
-      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromJSON(e)) : []
-    };
+    const obj = createBaseExpr_CreateList();
+    if (Array.isArray(object?.elements)) obj.elements = object.elements.map((e: any) => Expr.fromJSON(e));
+    return obj;
   },
   toJSON(message: Expr_CreateList): JsonSafe<Expr_CreateList> {
     const obj: any = {};
@@ -1245,7 +1207,7 @@ function createBaseExpr_CreateStruct(): Expr_CreateStruct {
 export const Expr_CreateStruct = {
   typeUrl: "/google.api.expr.v1beta1.CreateStruct",
   encode(message: Expr_CreateStruct, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
     for (const v of message.entries) {
@@ -1274,10 +1236,10 @@ export const Expr_CreateStruct = {
     return message;
   },
   fromJSON(object: any): Expr_CreateStruct {
-    return {
-      type: isSet(object.type) ? String(object.type) : "",
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e)) : []
-    };
+    const obj = createBaseExpr_CreateStruct();
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e));
+    return obj;
   },
   toJSON(message: Expr_CreateStruct): JsonSafe<Expr_CreateStruct> {
     const obj: any = {};
@@ -1362,7 +1324,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 export const Expr_CreateStruct_Entry = {
   typeUrl: "/google.api.expr.v1beta1.Entry",
   encode(message: Expr_CreateStruct_Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).int32(message.id);
     }
     if (message.fieldKey !== undefined) {
@@ -1403,12 +1365,12 @@ export const Expr_CreateStruct_Entry = {
     return message;
   },
   fromJSON(object: any): Expr_CreateStruct_Entry {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      fieldKey: isSet(object.fieldKey) ? String(object.fieldKey) : undefined,
-      mapKey: isSet(object.mapKey) ? Expr.fromJSON(object.mapKey) : undefined,
-      value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
-    };
+    const obj = createBaseExpr_CreateStruct_Entry();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    if (isSet(object.fieldKey)) obj.fieldKey = String(object.fieldKey);
+    if (isSet(object.mapKey)) obj.mapKey = Expr.fromJSON(object.mapKey);
+    if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
+    return obj;
   },
   toJSON(message: Expr_CreateStruct_Entry): JsonSafe<Expr_CreateStruct_Entry> {
     const obj: any = {};
@@ -1422,8 +1384,12 @@ export const Expr_CreateStruct_Entry = {
     const message = createBaseExpr_CreateStruct_Entry();
     message.id = object.id ?? 0;
     message.fieldKey = object.fieldKey ?? undefined;
-    message.mapKey = object.mapKey !== undefined && object.mapKey !== null ? Expr.fromPartial(object.mapKey) : undefined;
-    message.value = object.value !== undefined && object.value !== null ? Expr.fromPartial(object.value) : undefined;
+    if (object.mapKey !== undefined && object.mapKey !== null) {
+      message.mapKey = Expr.fromPartial(object.mapKey);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromPartial(object.value);
+    }
     return message;
   },
   fromSDK(object: Expr_CreateStruct_EntrySDKType): Expr_CreateStruct_Entry {
@@ -1504,13 +1470,13 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 export const Expr_Comprehension = {
   typeUrl: "/google.api.expr.v1beta1.Comprehension",
   encode(message: Expr_Comprehension, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.iterVar !== "") {
+    if (message.iterVar !== undefined) {
       writer.uint32(10).string(message.iterVar);
     }
     if (message.iterRange !== undefined) {
       Expr.encode(message.iterRange, writer.uint32(18).fork()).ldelim();
     }
-    if (message.accuVar !== "") {
+    if (message.accuVar !== undefined) {
       writer.uint32(26).string(message.accuVar);
     }
     if (message.accuInit !== undefined) {
@@ -1563,15 +1529,15 @@ export const Expr_Comprehension = {
     return message;
   },
   fromJSON(object: any): Expr_Comprehension {
-    return {
-      iterVar: isSet(object.iterVar) ? String(object.iterVar) : "",
-      iterRange: isSet(object.iterRange) ? Expr.fromJSON(object.iterRange) : undefined,
-      accuVar: isSet(object.accuVar) ? String(object.accuVar) : "",
-      accuInit: isSet(object.accuInit) ? Expr.fromJSON(object.accuInit) : undefined,
-      loopCondition: isSet(object.loopCondition) ? Expr.fromJSON(object.loopCondition) : undefined,
-      loopStep: isSet(object.loopStep) ? Expr.fromJSON(object.loopStep) : undefined,
-      result: isSet(object.result) ? Expr.fromJSON(object.result) : undefined
-    };
+    const obj = createBaseExpr_Comprehension();
+    if (isSet(object.iterVar)) obj.iterVar = String(object.iterVar);
+    if (isSet(object.iterRange)) obj.iterRange = Expr.fromJSON(object.iterRange);
+    if (isSet(object.accuVar)) obj.accuVar = String(object.accuVar);
+    if (isSet(object.accuInit)) obj.accuInit = Expr.fromJSON(object.accuInit);
+    if (isSet(object.loopCondition)) obj.loopCondition = Expr.fromJSON(object.loopCondition);
+    if (isSet(object.loopStep)) obj.loopStep = Expr.fromJSON(object.loopStep);
+    if (isSet(object.result)) obj.result = Expr.fromJSON(object.result);
+    return obj;
   },
   toJSON(message: Expr_Comprehension): JsonSafe<Expr_Comprehension> {
     const obj: any = {};
@@ -1587,12 +1553,22 @@ export const Expr_Comprehension = {
   fromPartial(object: DeepPartial<Expr_Comprehension>): Expr_Comprehension {
     const message = createBaseExpr_Comprehension();
     message.iterVar = object.iterVar ?? "";
-    message.iterRange = object.iterRange !== undefined && object.iterRange !== null ? Expr.fromPartial(object.iterRange) : undefined;
+    if (object.iterRange !== undefined && object.iterRange !== null) {
+      message.iterRange = Expr.fromPartial(object.iterRange);
+    }
     message.accuVar = object.accuVar ?? "";
-    message.accuInit = object.accuInit !== undefined && object.accuInit !== null ? Expr.fromPartial(object.accuInit) : undefined;
-    message.loopCondition = object.loopCondition !== undefined && object.loopCondition !== null ? Expr.fromPartial(object.loopCondition) : undefined;
-    message.loopStep = object.loopStep !== undefined && object.loopStep !== null ? Expr.fromPartial(object.loopStep) : undefined;
-    message.result = object.result !== undefined && object.result !== null ? Expr.fromPartial(object.result) : undefined;
+    if (object.accuInit !== undefined && object.accuInit !== null) {
+      message.accuInit = Expr.fromPartial(object.accuInit);
+    }
+    if (object.loopCondition !== undefined && object.loopCondition !== null) {
+      message.loopCondition = Expr.fromPartial(object.loopCondition);
+    }
+    if (object.loopStep !== undefined && object.loopStep !== null) {
+      message.loopStep = Expr.fromPartial(object.loopStep);
+    }
+    if (object.result !== undefined && object.result !== null) {
+      message.result = Expr.fromPartial(object.result);
+    }
     return message;
   },
   fromSDK(object: Expr_ComprehensionSDKType): Expr_Comprehension {
@@ -1753,15 +1729,15 @@ export const Literal = {
     return message;
   },
   fromJSON(object: any): Literal {
-    return {
-      nullValue: isSet(object.nullValue) ? nullValueFromJSON(object.nullValue) : undefined,
-      boolValue: isSet(object.boolValue) ? Boolean(object.boolValue) : undefined,
-      int64Value: isSet(object.int64Value) ? BigInt(object.int64Value.toString()) : undefined,
-      uint64Value: isSet(object.uint64Value) ? BigInt(object.uint64Value.toString()) : undefined,
-      doubleValue: isSet(object.doubleValue) ? Number(object.doubleValue) : undefined,
-      stringValue: isSet(object.stringValue) ? String(object.stringValue) : undefined,
-      bytesValue: isSet(object.bytesValue) ? bytesFromBase64(object.bytesValue) : undefined
-    };
+    const obj = createBaseLiteral();
+    if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
+    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
+    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
+    if (isSet(object.uint64Value)) obj.uint64Value = BigInt(object.uint64Value.toString());
+    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
+    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
+    if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
+    return obj;
   },
   toJSON(message: Literal): JsonSafe<Literal> {
     const obj: any = {};
@@ -1782,8 +1758,12 @@ export const Literal = {
     const message = createBaseLiteral();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = BigInt(object.uint64Value.toString());
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;

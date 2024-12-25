@@ -1,8 +1,7 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
@@ -13,9 +12,6 @@ export interface Params {
    */
   mintedDenom: string;
 }
-export interface ReactiveParams {
-  mintedDenom: ComputedRef<string>;
-}
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.Params";
   value: Uint8Array;
@@ -25,9 +21,6 @@ export interface ParamsSDKType {
 }
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
-}
-export interface ReactiveLockableDurationsInfo {
-  lockableDurations: ComputedRef<Duration[]>;
 }
 export interface LockableDurationsInfoProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo";
@@ -40,10 +33,6 @@ export interface DistrInfo {
   totalWeight: string;
   records: DistrRecord[];
 }
-export interface ReactiveDistrInfo {
-  totalWeight: ComputedRef<string>;
-  records: ComputedRef<DistrRecord[]>;
-}
 export interface DistrInfoProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo";
   value: Uint8Array;
@@ -55,10 +44,6 @@ export interface DistrInfoSDKType {
 export interface DistrRecord {
   gaugeId: bigint;
   weight: string;
-}
-export interface ReactiveDistrRecord {
-  gaugeId: ComputedRef<bigint>;
-  weight: ComputedRef<string>;
 }
 export interface DistrRecordProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord";
@@ -73,11 +58,6 @@ export interface PoolToGauge {
   gaugeId: bigint;
   duration: Duration;
 }
-export interface ReactivePoolToGauge {
-  poolId: ComputedRef<bigint>;
-  gaugeId: ComputedRef<bigint>;
-  duration: ComputedRef<Duration>;
-}
 export interface PoolToGaugeProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge";
   value: Uint8Array;
@@ -89,9 +69,6 @@ export interface PoolToGaugeSDKType {
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];
-}
-export interface ReactivePoolToGauges {
-  poolToGauge: ComputedRef<PoolToGauge[]>;
 }
 export interface PoolToGaugesProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges";
@@ -108,7 +85,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.poolincentives.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintedDenom !== "") {
+    if (message.mintedDenom !== undefined) {
       writer.uint32(10).string(message.mintedDenom);
     }
     return writer;
@@ -131,9 +108,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      mintedDenom: isSet(object.mintedDenom) ? String(object.mintedDenom) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.mintedDenom)) obj.mintedDenom = String(object.mintedDenom);
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
@@ -225,9 +202,9 @@ export const LockableDurationsInfo = {
     return message;
   },
   fromJSON(object: any): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
-    };
+    const obj = createBaseLockableDurationsInfo();
+    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    return obj;
   },
   toJSON(message: LockableDurationsInfo): JsonSafe<LockableDurationsInfo> {
     const obj: any = {};
@@ -307,7 +284,7 @@ function createBaseDistrInfo(): DistrInfo {
 export const DistrInfo = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo",
   encode(message: DistrInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.totalWeight !== "") {
+    if (message.totalWeight !== undefined) {
       writer.uint32(10).string(message.totalWeight);
     }
     for (const v of message.records) {
@@ -336,10 +313,10 @@ export const DistrInfo = {
     return message;
   },
   fromJSON(object: any): DistrInfo {
-    return {
-      totalWeight: isSet(object.totalWeight) ? String(object.totalWeight) : "",
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
-    };
+    const obj = createBaseDistrInfo();
+    if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
+    return obj;
   },
   toJSON(message: DistrInfo): JsonSafe<DistrInfo> {
     const obj: any = {};
@@ -428,10 +405,10 @@ function createBaseDistrRecord(): DistrRecord {
 export const DistrRecord = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord",
   encode(message: DistrRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(8).uint64(message.gaugeId);
     }
-    if (message.weight !== "") {
+    if (message.weight !== undefined) {
       writer.uint32(18).string(message.weight);
     }
     return writer;
@@ -457,10 +434,10 @@ export const DistrRecord = {
     return message;
   },
   fromJSON(object: any): DistrRecord {
-    return {
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
-      weight: isSet(object.weight) ? String(object.weight) : ""
-    };
+    const obj = createBaseDistrRecord();
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
+    if (isSet(object.weight)) obj.weight = String(object.weight);
+    return obj;
   },
   toJSON(message: DistrRecord): JsonSafe<DistrRecord> {
     const obj: any = {};
@@ -470,7 +447,9 @@ export const DistrRecord = {
   },
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
     message.weight = object.weight ?? "";
     return message;
   },
@@ -540,10 +519,10 @@ function createBasePoolToGauge(): PoolToGauge {
 export const PoolToGauge = {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge",
   encode(message: PoolToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(16).uint64(message.gaugeId);
     }
     if (message.duration !== undefined) {
@@ -575,11 +554,11 @@ export const PoolToGauge = {
     return message;
   },
   fromJSON(object: any): PoolToGauge {
-    return {
-      poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0),
-      gaugeId: isSet(object.gaugeId) ? BigInt(object.gaugeId.toString()) : BigInt(0),
-      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
-    };
+    const obj = createBasePoolToGauge();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    return obj;
   },
   toJSON(message: PoolToGauge): JsonSafe<PoolToGauge> {
     const obj: any = {};
@@ -590,9 +569,15 @@ export const PoolToGauge = {
   },
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
   },
   fromSDK(object: PoolToGaugeSDKType): PoolToGauge {
@@ -689,9 +674,9 @@ export const PoolToGauges = {
     return message;
   },
   fromJSON(object: any): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.poolToGauge) ? object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e)) : []
-    };
+    const obj = createBasePoolToGauges();
+    if (Array.isArray(object?.poolToGauge)) obj.poolToGauge = object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e));
+    return obj;
   },
   toJSON(message: PoolToGauges): JsonSafe<PoolToGauges> {
     const obj: any = {};

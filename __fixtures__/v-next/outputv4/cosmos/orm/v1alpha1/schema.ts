@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.orm.v1alpha1";
 /** StorageType */
 export enum StorageType {
@@ -96,10 +95,6 @@ export interface ModuleSchemaDescriptor {
    */
   prefix: Uint8Array;
 }
-export interface ReactiveModuleSchemaDescriptor {
-  schemaFile: ComputedRef<ModuleSchemaDescriptor_FileEntry[]>;
-  prefix: ComputedRef<Uint8Array>;
-}
 export interface ModuleSchemaDescriptorProtoMsg {
   typeUrl: "/cosmos.orm.v1alpha1.ModuleSchemaDescriptor";
   value: Uint8Array;
@@ -128,11 +123,6 @@ export interface ModuleSchemaDescriptor_FileEntry {
    * of the app will be used.
    */
   storageType: StorageType;
-}
-export interface ReactiveModuleSchemaDescriptor_FileEntry {
-  id: ComputedRef<number>;
-  protoFileName: ComputedRef<string>;
-  storageType: ComputedRef<StorageType>;
 }
 export interface ModuleSchemaDescriptor_FileEntryProtoMsg {
   typeUrl: "/cosmos.orm.v1alpha1.FileEntry";
@@ -182,10 +172,10 @@ export const ModuleSchemaDescriptor = {
     return message;
   },
   fromJSON(object: any): ModuleSchemaDescriptor {
-    return {
-      schemaFile: Array.isArray(object?.schemaFile) ? object.schemaFile.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromJSON(e)) : [],
-      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array()
-    };
+    const obj = createBaseModuleSchemaDescriptor();
+    if (Array.isArray(object?.schemaFile)) obj.schemaFile = object.schemaFile.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromJSON(e));
+    if (isSet(object.prefix)) obj.prefix = bytesFromBase64(object.prefix);
+    return obj;
   },
   toJSON(message: ModuleSchemaDescriptor): JsonSafe<ModuleSchemaDescriptor> {
     const obj: any = {};
@@ -275,10 +265,10 @@ function createBaseModuleSchemaDescriptor_FileEntry(): ModuleSchemaDescriptor_Fi
 export const ModuleSchemaDescriptor_FileEntry = {
   typeUrl: "/cosmos.orm.v1alpha1.FileEntry",
   encode(message: ModuleSchemaDescriptor_FileEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).uint32(message.id);
     }
-    if (message.protoFileName !== "") {
+    if (message.protoFileName !== undefined) {
       writer.uint32(18).string(message.protoFileName);
     }
     if (message.storageType !== 0) {
@@ -310,11 +300,11 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return message;
   },
   fromJSON(object: any): ModuleSchemaDescriptor_FileEntry {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      protoFileName: isSet(object.protoFileName) ? String(object.protoFileName) : "",
-      storageType: isSet(object.storageType) ? storageTypeFromJSON(object.storageType) : -1
-    };
+    const obj = createBaseModuleSchemaDescriptor_FileEntry();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    if (isSet(object.protoFileName)) obj.protoFileName = String(object.protoFileName);
+    if (isSet(object.storageType)) obj.storageType = storageTypeFromJSON(object.storageType);
+    return obj;
   },
   toJSON(message: ModuleSchemaDescriptor_FileEntry): JsonSafe<ModuleSchemaDescriptor_FileEntry> {
     const obj: any = {};

@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -11,9 +10,6 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 export interface DenomAuthorityMetadata {
   /** Can be empty for no admin, or a valid osmosis address */
   admin: string;
-}
-export interface ReactiveDenomAuthorityMetadata {
-  admin: ComputedRef<string>;
 }
 export interface DenomAuthorityMetadataProtoMsg {
   typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata";
@@ -35,7 +31,7 @@ function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
 export const DenomAuthorityMetadata = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
   encode(message: DenomAuthorityMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       writer.uint32(10).string(message.admin);
     }
     return writer;
@@ -58,9 +54,9 @@ export const DenomAuthorityMetadata = {
     return message;
   },
   fromJSON(object: any): DenomAuthorityMetadata {
-    return {
-      admin: isSet(object.admin) ? String(object.admin) : ""
-    };
+    const obj = createBaseDenomAuthorityMetadata();
+    if (isSet(object.admin)) obj.admin = String(object.admin);
+    return obj;
   },
   toJSON(message: DenomAuthorityMetadata): JsonSafe<DenomAuthorityMetadata> {
     const obj: any = {};

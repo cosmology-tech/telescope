@@ -1,7 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
-import { ComputedRef } from "vue";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "osmosis.incentives";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -10,9 +9,6 @@ export interface Params {
    * (day, week, etc.)
    */
   distrEpochIdentifier: string;
-}
-export interface ReactiveParams {
-  distrEpochIdentifier: ComputedRef<string>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.incentives.Params";
@@ -30,7 +26,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.incentives.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.distrEpochIdentifier !== "") {
+    if (message.distrEpochIdentifier !== undefined) {
       writer.uint32(10).string(message.distrEpochIdentifier);
     }
     return writer;
@@ -53,9 +49,9 @@ export const Params = {
     return message;
   },
   fromJSON(object: any): Params {
-    return {
-      distrEpochIdentifier: isSet(object.distrEpochIdentifier) ? String(object.distrEpochIdentifier) : ""
-    };
+    const obj = createBaseParams();
+    if (isSet(object.distrEpochIdentifier)) obj.distrEpochIdentifier = String(object.distrEpochIdentifier);
+    return obj;
   },
   toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};

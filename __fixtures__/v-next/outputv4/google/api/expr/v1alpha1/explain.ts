@@ -1,8 +1,7 @@
-import { Value, ValueSDKType } from "./value";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { JsonSafe } from "../../../../json-safe";
-import { DeepPartial, isSet } from "../../../../helpers";
-import { ComputedRef } from "vue";
+import { Value, ValueSDKType } from "./value.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { JsonSafe } from "../../../../json-safe.js";
+import { DeepPartial, isSet } from "../../../../helpers.js";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -26,10 +25,6 @@ export interface Explain {
    */
   exprSteps: Explain_ExprStep[];
 }
-export interface ReactiveExplain {
-  values: ComputedRef<Value[]>;
-  exprSteps: ComputedRef<Explain_ExprStep[]>;
-}
 export interface ExplainProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Explain";
   value: Uint8Array;
@@ -49,10 +44,6 @@ export interface Explain_ExprStep {
   id: bigint;
   /** Index of the value in the values list. */
   valueIndex: number;
-}
-export interface ReactiveExplain_ExprStep {
-  id: ComputedRef<bigint>;
-  valueIndex: ComputedRef<number>;
 }
 export interface Explain_ExprStepProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ExprStep";
@@ -101,10 +92,10 @@ export const Explain = {
     return message;
   },
   fromJSON(object: any): Explain {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromJSON(e)) : [],
-      exprSteps: Array.isArray(object?.exprSteps) ? object.exprSteps.map((e: any) => Explain_ExprStep.fromJSON(e)) : []
-    };
+    const obj = createBaseExplain();
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
+    if (Array.isArray(object?.exprSteps)) obj.exprSteps = object.exprSteps.map((e: any) => Explain_ExprStep.fromJSON(e));
+    return obj;
   },
   toJSON(message: Explain): JsonSafe<Explain> {
     const obj: any = {};
@@ -197,10 +188,10 @@ function createBaseExplain_ExprStep(): Explain_ExprStep {
 export const Explain_ExprStep = {
   typeUrl: "/google.api.expr.v1alpha1.ExprStep",
   encode(message: Explain_ExprStep, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(8).int64(message.id);
     }
-    if (message.valueIndex !== 0) {
+    if (message.valueIndex !== undefined) {
       writer.uint32(16).int32(message.valueIndex);
     }
     return writer;
@@ -226,10 +217,10 @@ export const Explain_ExprStep = {
     return message;
   },
   fromJSON(object: any): Explain_ExprStep {
-    return {
-      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
-      valueIndex: isSet(object.valueIndex) ? Number(object.valueIndex) : 0
-    };
+    const obj = createBaseExplain_ExprStep();
+    if (isSet(object.id)) obj.id = BigInt(object.id.toString());
+    if (isSet(object.valueIndex)) obj.valueIndex = Number(object.valueIndex);
+    return obj;
   },
   toJSON(message: Explain_ExprStep): JsonSafe<Explain_ExprStep> {
     const obj: any = {};
@@ -239,7 +230,9 @@ export const Explain_ExprStep = {
   },
   fromPartial(object: DeepPartial<Explain_ExprStep>): Explain_ExprStep {
     const message = createBaseExplain_ExprStep();
-    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id.toString());
+    }
     message.valueIndex = object.valueIndex ?? 0;
     return message;
   },

@@ -1,6 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { AminoMsg } from "@cosmjs/amino";
-import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertERC20, MsgConvertERC20SDKType } from "./tx";
+import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertERC20, MsgConvertERC20SDKType } from "./tx.js";
 export interface MsgConvertCoinAminoType extends AminoMsg {
   type: "/evmos.erc20.v1.MsgConvertCoin";
   value: {
