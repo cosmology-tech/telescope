@@ -1,0 +1,4 @@
+import { MsgCloseGroup, MsgPauseGroup, MsgStartGroup } from "./group";
+import { TelescopeGeneratedType } from "../../../types";
+import { MsgCreateDeployment, MsgDepositDeployment, MsgUpdateDeployment, MsgCloseDeployment } from "./deployment";
+export const registry: ReadonlyArray<[string, TelescopeGeneratedType<any, any, any>]> = [["/akash.deployment.v1beta1.MsgCreateDeployment", MsgCreateDeployment], ["/akash.deployment.v1beta1.MsgDepositDeployment", MsgDepositDeployment], ["/akash.deployment.v1beta1.MsgUpdateDeployment", MsgUpdateDeployment], ["/akash.deployment.v1beta1.MsgCloseDeployment", MsgCloseDeployment], ["/akash.deployment.v1beta1.MsgCloseGroup", MsgCloseGroup], ["/akash.deployment.v1beta1.MsgPauseGroup", MsgPauseGroup], ["/akash.deployment.v1beta1.MsgStartGroup", MsgStartGroup]];

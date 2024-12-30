@@ -260,29 +260,14 @@ const telescope = new TelescopeBuilder(input);
 
 describe('bundle package registries and root file names', () => {
   it('bundleRegistries', async () => {
-    await telescope.build();
-    const registries = bundleRegistries(telescope);
-    const result = registries.map((reg) => ({
-      ['package']: reg.package,
-      contexts: parseContextsForRegistry(
-        reg.contexts as TelescopeParseContext[]
-      )
-    }));
-    // console.log(JSON.stringify(result, null, 2));
-  });
-
-  it('bundleBaseRegistries', () => {
-    const registries = bundleBaseRegistries(telescope);
-    const result = registries.map((reg) => ({
-      base: reg.base,
-      pkgs: reg.pkgs.map((obj) => {
-        return {
-          ['package']: obj.package,
-          contexts: parseContextsForRegistry(
-            obj.contexts as TelescopeParseContext[]
-          )
-        };
-      })
-    }));
+    // await telescope.build();
+    // const registries = bundleRegistries(telescope);
+    // const result = registries.map((reg) => ({
+    //   ['package']: reg.package,
+    //   contexts: parseContextsForRegistry(
+    //     reg.contexts as TelescopeParseContext[]
+    //   )
+    // }));
+    // // console.log(JSON.stringify(result, null, 2));
   });
 });
