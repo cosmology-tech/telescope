@@ -1,7 +1,7 @@
 import { MsgCloseGroup, MsgPauseGroup, MsgStartGroup } from "./group";
 import { buildTx, SigningClientResolver } from "../../../helper-func-types";
-import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
+import { buildUseMutation } from "../../../react-query";
 import { MsgCreateDeployment, MsgDepositDeployment, MsgUpdateDeployment, MsgCloseDeployment } from "./deployment";
 export const createCreateDeployment = (clientResolver?: SigningClientResolver) => buildTx<MsgCreateDeployment>({
   clientResolver,

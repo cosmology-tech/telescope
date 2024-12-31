@@ -17,40 +17,58 @@ export function createQueryHelperCreator(
     methodKey?: string,
     helperCreatorName?: string
 ) {
-    const pkgImportName = context.ref.proto.package + '.' + svcKey
+    const pkgImportName = context.ref.proto.package + "." + svcKey;
 
     context.addUtil("RpcResolver");
     context.addUtil("buildQuery");
+
+    const useGlobalDecoderRegistry =
+        context.pluginValue("interfaces.enabled") &&
+        context.pluginValue("interfaces.useGlobalDecoderRegistry") &&
+        context.pluginValue("helperFuncCreators.enabled") &&
+        context.pluginValue("helperFuncCreators.useGlobalDecoderRegistry");
+
     const callExpression = ast.callExpression(ast.identifier("buildQuery"), [
-        ast.objectExpression([
-            ast.objectProperty(
-                ast.identifier("encode"),
-                ast.memberExpression(
-                    ast.identifier(service.requestType),
-                    ast.identifier("encode")
-                )
-            ),
-            ast.objectProperty(
-                ast.identifier("decode"),
-                ast.memberExpression(
-                    ast.identifier(service.responseType),
-                    ast.identifier("decode")
-                )
-            ),
-            ast.objectProperty(
-                ast.identifier("service"),
-                ast.stringLiteral(pkgImportName)
-            ),
-            ast.objectProperty(
-                ast.identifier("method"),
-                ast.stringLiteral(methodKey)
-            ),
-            ast.objectProperty(
-                ast.identifier("clientResolver"),
-                ast.identifier("clientResolver"),
-                false, true
-            ),
-        ]),
+        ast.objectExpression(
+            [
+                ast.objectProperty(
+                    ast.identifier("encode"),
+                    ast.memberExpression(
+                        ast.identifier(service.requestType),
+                        ast.identifier("encode")
+                    )
+                ),
+                ast.objectProperty(
+                    ast.identifier("decode"),
+                    ast.memberExpression(
+                        ast.identifier(service.responseType),
+                        ast.identifier("decode")
+                    )
+                ),
+                ast.objectProperty(
+                    ast.identifier("service"),
+                    ast.stringLiteral(pkgImportName)
+                ),
+                ast.objectProperty(
+                    ast.identifier("method"),
+                    ast.stringLiteral(methodKey)
+                ),
+                ast.objectProperty(
+                    ast.identifier("clientResolver"),
+                    ast.identifier("clientResolver"),
+                    false,
+                    true
+                ),
+                useGlobalDecoderRegistry &&
+                    ast.objectProperty(
+                        ast.identifier("deps"),
+                        ast.arrayExpression([
+                            ast.identifier(service.requestType),
+                            ast.identifier(service.responseType),
+                        ])
+                    ),
+            ].filter(Boolean)
+        ),
     ]);
     callExpression.typeParameters = ast.tsTypeParameterInstantiation([
         ast.tsTypeReference(ast.identifier(service.requestType)),
