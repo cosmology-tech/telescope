@@ -10,7 +10,7 @@ import { toAminoJSONMethod, toAminoMsgMethod } from './proto/to-amino';
 import { toSDKMethod } from './proto/to-sdk';
 import { fromSDKMethod } from './proto/from-sdk';
 import { ProtoParseContext } from './context';
-import { createAminoTypeProperty, createTypeUrlProperty, fromProtoMsgMethod, fromSDKJSONMethod, toProtoMethod, toProtoMsgMethod } from './proto';
+import { createAminoTypeProperty, createTypeUrlProperty, fromProtoMsgMethod, fromSDKJSONMethod, registerTypeUrlMethod, toProtoMethod, toProtoMsgMethod } from './proto';
 import { isMethod } from './proto/is';
 import { getAminoFieldName, getSdkFieldName } from '../utils';
 import { getAminoTypeName, getTypeUrl } from '@cosmology/utils';
@@ -20,7 +20,6 @@ export const createObjectWithMethods = (
     name: string,
     proto: ProtoType
 ) => {
-
     const methodsAndProps = [
         ( context.pluginValue('prototypes.addTypeUrlToObjects') || context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') ) && createTypeUrlProperty(context, proto),
         ( context.pluginValue('prototypes.addAminoTypeToObjects') || context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') ) && createAminoTypeProperty(context, proto),
@@ -42,6 +41,7 @@ export const createObjectWithMethods = (
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.fromProto')) && fromProtoMsgMethod(context, name, proto),
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.toProto')) && toProtoMethod(context, name, proto),
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.toProto')) && toProtoMsgMethod(context, name, proto),
+        context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') && context.pluginValue('helperFuncCreators.enabled') && context.pluginValue('helperFuncCreators.useGlobalDecoderRegistry') && registerTypeUrlMethod({context, name, proto}),
     ].filter(Boolean);
 
     return t.exportNamedDeclaration(
@@ -56,56 +56,4 @@ export const createObjectWithMethods = (
             ]
         )
     )
-};
-
-export const createRegisterObject = (
-  context: ProtoParseContext,
-  name: string,
-  proto: ProtoType,
-) => {
-  if (name === 'Any') {
-    return;
-  }
-
-  context.addUtil("GlobalDecoderRegistry");
-
-  const typeUrl = getTypeUrl(context.ref.proto, proto);
-  if (!typeUrl) return;
-
-  return t.expressionStatement(
-    t.callExpression(
-      t.memberExpression(
-        t.identifier("GlobalDecoderRegistry"),
-        t.identifier("register")
-      ),
-      [
-        t.memberExpression(t.identifier(name), t.identifier("typeUrl")),
-        t.identifier(name),
-      ]
-    )
-  );
-};
-
-export const createRegisterAminoProtoMapping = (
-  context: ProtoParseContext,
-  name: string,
-  proto: ProtoType,
-) => {
-  context.addUtil("GlobalDecoderRegistry");
-
-  const str = getAminoTypeName(context, context.ref.proto, proto);
-  if (!str || str.startsWith('/')) return;
-
-  return t.expressionStatement(
-    t.callExpression(
-      t.memberExpression(
-        t.identifier("GlobalDecoderRegistry"),
-        t.identifier("registerAminoProtoMapping")
-      ),
-      [
-        t.memberExpression(t.identifier(name), t.identifier("aminoType")),
-        t.memberExpression(t.identifier(name), t.identifier("typeUrl")),
-      ]
-    )
-  );
 };

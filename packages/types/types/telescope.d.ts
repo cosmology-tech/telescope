@@ -42,6 +42,7 @@ export interface TelescopeOpts {
     interfaces?: {
         enabled?: boolean;
         useGlobalDecoderRegistry?: boolean;
+        registerAllDecodersToGlobal?: boolean;
         useUseInterfacesParams?: boolean;
         useByDefault?: boolean;
         useByDefaultRpc?: boolean;
@@ -240,6 +241,7 @@ export interface TelescopeOpts {
     };
     helperFuncCreators?: {
         enabled: boolean;
+        useGlobalDecoderRegistry?: boolean;
         genCustomHooks?: boolean;
         include?: {
             serviceTypes?: ("Query" | "Tx")[];

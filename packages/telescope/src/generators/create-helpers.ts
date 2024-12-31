@@ -84,7 +84,7 @@ export const plugin = (builder: TelescopeBuilder) => {
 
   if (builder.options.helperFuncCreators?.enabled) {
     builder.files.push("helper-func-types.ts");
-    if(builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry) {
+    if(builder.options.interfaces?.enabled && builder.options.helperFuncCreators?.useGlobalDecoderRegistry) {
       write(builder, "helper-func-types.ts", getHelperFuncTypesForInterface(builder.options));
     } else {
       write(builder, "helper-func-types.ts", getHelperFuncTypes(builder.options));
@@ -172,7 +172,7 @@ export const plugin = (builder: TelescopeBuilder) => {
   if (
     builder.options.prototypes?.typingsFormat?.useTelescopeGeneratedType ||
     (builder.options.interfaces?.enabled &&
-      builder.options.interfaces?.useGlobalDecoderRegistry)
+      ( builder.options.interfaces?.useGlobalDecoderRegistry || builder.options.helperFuncCreators?.useGlobalDecoderRegistry ))
   ) {
     builder.files.push("types.ts");
     write(builder, "types.ts", getTypesHelper(builder.options));
@@ -180,7 +180,7 @@ export const plugin = (builder: TelescopeBuilder) => {
 
   if (
     builder.options.interfaces?.enabled &&
-    builder.options.interfaces?.useGlobalDecoderRegistry
+    ( builder.options.interfaces?.useGlobalDecoderRegistry || builder.options.helperFuncCreators?.useGlobalDecoderRegistry )
   ) {
     builder.files.push("registry.ts");
     write(builder, "registry.ts", getRegistryHelper(builder.options));

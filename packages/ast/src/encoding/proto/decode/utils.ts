@@ -395,6 +395,8 @@ export const baseTypes = {
         const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
 
         if(isGlobalRegistry) {
+          args.context.addUtil("GlobalDecoderRegistry");
+
           return t.callExpression(
             t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("unwrapAny")),
             [

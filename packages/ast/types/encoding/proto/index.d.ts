@@ -13,5 +13,6 @@ export * from './to-proto';
 export * from './from-proto';
 export * from './to-json';
 export * from './to-sdk';
+export * from './register';
 export * from './props';
 export * from './types';

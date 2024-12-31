@@ -19,3 +19,4 @@ export * from './registry-helper';
 export * from './json-safe';
 export * from './decimals';
 export * from './helper-func-types';
+export * from './helper-func-types-interface';

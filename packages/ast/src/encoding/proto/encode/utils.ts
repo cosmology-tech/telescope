@@ -279,6 +279,10 @@ export const encode = {
 
         const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
 
+        if(isGlobalRegistry){
+          args.context.addUtil("GlobalDecoderRegistry");
+        }
+
         return types.type(num, prop, name, isAnyType, isGlobalRegistry);
     },
 

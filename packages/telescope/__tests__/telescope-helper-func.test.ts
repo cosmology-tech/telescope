@@ -35,7 +35,8 @@ const options: TelescopeOptions = {
   interfaces: {
     enabled: true,
     useGlobalDecoderRegistry: true,
-    useUnionTypes: false,
+    registerAllDecodersToGlobal: false,
+    useUnionTypes: true,
   },
 
   prototypes: {
@@ -218,6 +219,7 @@ const options: TelescopeOptions = {
 
   helperFuncCreators: {
     enabled: true,
+    useGlobalDecoderRegistry: true,
     genCustomHooks: true,
     include: {
       // pattern matching is case sensitive

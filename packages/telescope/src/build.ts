@@ -59,7 +59,7 @@ export const buildBaseTypeScriptClass = (
         context.body.push(createCreateProtoType(context.proto, name, obj));
         context.body.push(createObjectWithMethods(context.proto, name, obj));
 
-        if(context.options.interfaces?.enabled && context.options.interfaces?.useGlobalDecoderRegistry){
+        if(context.options.interfaces?.enabled && context.options.interfaces?.useGlobalDecoderRegistry && context.options.interfaces?.registerAllDecodersToGlobal){
           const registerObj = createRegisterObject(context.proto, name, obj);
           if(registerObj){
             context.body.push(registerObj);

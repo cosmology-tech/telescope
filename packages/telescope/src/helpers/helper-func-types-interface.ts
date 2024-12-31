@@ -196,10 +196,7 @@ export type RpcResolver = string | HttpEndpoint | Rpc ;
 
 function registerDependencies(deps: TelescopeGeneratedCodec<any, any, any>[]) {
   for (const dep of deps) {
-    GlobalDecoderRegistry.register(dep.typeUrl, dep);
-    if (dep.aminoType) {
-      GlobalDecoderRegistry.registerAminoProtoMapping(dep.aminoType, dep.typeUrl);
-    }
+    dep.registerTypeUrl?.();
   }
 }
 `;
