@@ -90,6 +90,56 @@ export interface ContextProtoMsg {
  * You can also specify extension ID instead of fully qualified extension name
  * here.
  */
+export interface ContextAmino {
+  /**
+   * A list of RPC context rules that apply to individual API methods.
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules?: ContextRuleAmino[];
+}
+export interface ContextAminoMsg {
+  type: "/google.api.Context";
+  value: ContextAmino;
+}
+/**
+ * `Context` defines which contexts an API requests.
+ * 
+ * Example:
+ * 
+ *     context:
+ *       rules:
+ *       - selector: "*"
+ *         requested:
+ *         - google.rpc.context.ProjectContext
+ *         - google.rpc.context.OriginContext
+ * 
+ * The above specifies that all methods in the API request
+ * `google.rpc.context.ProjectContext` and
+ * `google.rpc.context.OriginContext`.
+ * 
+ * Available context types are defined in package
+ * `google.rpc.context`.
+ * 
+ * This also provides mechanism to allowlist any protobuf message extension that
+ * can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
+ * “x-goog-ext-<extension_id>-jspb” format. For example, list any service
+ * specific protobuf types that can appear in grpc metadata as follows in your
+ * yaml file:
+ * 
+ * Example:
+ * 
+ *     context:
+ *       rules:
+ *        - selector: "google.example.library.v1.LibraryService.CreateBook"
+ *          allowed_request_extensions:
+ *          - google.foo.v1.NewExtension
+ *          allowed_response_extensions:
+ *          - google.foo.v1.NewExtension
+ * 
+ * You can also specify extension ID instead of fully qualified extension name
+ * here.
+ */
 export interface ContextSDKType {
   rules: ContextRuleSDKType[];
 }
@@ -127,6 +177,36 @@ export interface ContextRuleProtoMsg {
  * A context rule provides information about the context for an individual API
  * element.
  */
+export interface ContextRuleAmino {
+  /**
+   * Selects the methods to which this rule applies.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector?: string;
+  /** A list of full type names of requested contexts. */
+  requested?: string[];
+  /** A list of full type names of provided contexts. */
+  provided?: string[];
+  /**
+   * A list of full type names or extension IDs of extensions allowed in grpc
+   * side channel from client to backend.
+   */
+  allowed_request_extensions?: string[];
+  /**
+   * A list of full type names or extension IDs of extensions allowed in grpc
+   * side channel from backend to client.
+   */
+  allowed_response_extensions?: string[];
+}
+export interface ContextRuleAminoMsg {
+  type: "/google.api.ContextRule";
+  value: ContextRuleAmino;
+}
+/**
+ * A context rule provides information about the context for an individual API
+ * element.
+ */
 export interface ContextRuleSDKType {
   selector: string;
   requested: string[];
@@ -141,6 +221,15 @@ function createBaseContext(): Context {
 }
 export const Context = {
   typeUrl: "/google.api.Context",
+  is(o: any): o is Context {
+    return o && (o.$typeUrl === Context.typeUrl || Array.isArray(o.rules) && (!o.rules.length || ContextRule.is(o.rules[0])));
+  },
+  isSDK(o: any): o is ContextSDKType {
+    return o && (o.$typeUrl === Context.typeUrl || Array.isArray(o.rules) && (!o.rules.length || ContextRule.isSDK(o.rules[0])));
+  },
+  isAmino(o: any): o is ContextAmino {
+    return o && (o.$typeUrl === Context.typeUrl || Array.isArray(o.rules) && (!o.rules.length || ContextRule.isAmino(o.rules[0])));
+  },
   encode(message: Context, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rules) {
       ContextRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -230,6 +319,9 @@ export const Context = {
       typeUrl: "/google.api.Context",
       value: Context.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ContextRule.registerTypeUrl();
   }
 };
 function createBaseContextRule(): ContextRule {
@@ -243,6 +335,15 @@ function createBaseContextRule(): ContextRule {
 }
 export const ContextRule = {
   typeUrl: "/google.api.ContextRule",
+  is(o: any): o is ContextRule {
+    return o && (o.$typeUrl === ContextRule.typeUrl || typeof o.selector === "string" && Array.isArray(o.requested) && (!o.requested.length || typeof o.requested[0] === "string") && Array.isArray(o.provided) && (!o.provided.length || typeof o.provided[0] === "string") && Array.isArray(o.allowedRequestExtensions) && (!o.allowedRequestExtensions.length || typeof o.allowedRequestExtensions[0] === "string") && Array.isArray(o.allowedResponseExtensions) && (!o.allowedResponseExtensions.length || typeof o.allowedResponseExtensions[0] === "string"));
+  },
+  isSDK(o: any): o is ContextRuleSDKType {
+    return o && (o.$typeUrl === ContextRule.typeUrl || typeof o.selector === "string" && Array.isArray(o.requested) && (!o.requested.length || typeof o.requested[0] === "string") && Array.isArray(o.provided) && (!o.provided.length || typeof o.provided[0] === "string") && Array.isArray(o.allowed_request_extensions) && (!o.allowed_request_extensions.length || typeof o.allowed_request_extensions[0] === "string") && Array.isArray(o.allowed_response_extensions) && (!o.allowed_response_extensions.length || typeof o.allowed_response_extensions[0] === "string"));
+  },
+  isAmino(o: any): o is ContextRuleAmino {
+    return o && (o.$typeUrl === ContextRule.typeUrl || typeof o.selector === "string" && Array.isArray(o.requested) && (!o.requested.length || typeof o.requested[0] === "string") && Array.isArray(o.provided) && (!o.provided.length || typeof o.provided[0] === "string") && Array.isArray(o.allowed_request_extensions) && (!o.allowed_request_extensions.length || typeof o.allowed_request_extensions[0] === "string") && Array.isArray(o.allowed_response_extensions) && (!o.allowed_response_extensions.length || typeof o.allowed_response_extensions[0] === "string"));
+  },
   encode(message: ContextRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
@@ -426,5 +527,6 @@ export const ContextRule = {
       typeUrl: "/google.api.ContextRule",
       value: ContextRule.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

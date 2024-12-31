@@ -1,6 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Grant, GrantSDKType, GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Grant, GrantAmino, GrantSDKType, GrantAuthorization, GrantAuthorizationAmino, GrantAuthorizationSDKType } from "./authz";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.authz.v1beta1";
@@ -16,6 +17,19 @@ export interface QueryGrantsRequest {
 export interface QueryGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest";
   value: Uint8Array;
+}
+/** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
+export interface QueryGrantsRequestAmino {
+  granter?: string;
+  grantee?: string;
+  /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
+  msg_type_url?: string;
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryGrantsRequestAminoMsg {
+  type: "cosmos-sdk/QueryGrantsRequest";
+  value: QueryGrantsRequestAmino;
 }
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestSDKType {
@@ -36,6 +50,17 @@ export interface QueryGrantsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
+export interface QueryGrantsResponseAmino {
+  /** authorizations is a list of grants granted for grantee by granter. */
+  grants?: GrantAmino[];
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryGrantsResponseAminoMsg {
+  type: "cosmos-sdk/QueryGrantsResponse";
+  value: QueryGrantsResponseAmino;
+}
+/** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseSDKType {
   grants: GrantSDKType[];
   pagination?: PageResponseSDKType;
@@ -49,6 +74,16 @@ export interface QueryGranterGrantsRequest {
 export interface QueryGranterGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest";
   value: Uint8Array;
+}
+/** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
+export interface QueryGranterGrantsRequestAmino {
+  granter?: string;
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryGranterGrantsRequestAminoMsg {
+  type: "cosmos-sdk/QueryGranterGrantsRequest";
+  value: QueryGranterGrantsRequestAmino;
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequestSDKType {
@@ -67,6 +102,17 @@ export interface QueryGranterGrantsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
+export interface QueryGranterGrantsResponseAmino {
+  /** grants is a list of grants granted by the granter. */
+  grants?: GrantAuthorizationAmino[];
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryGranterGrantsResponseAminoMsg {
+  type: "cosmos-sdk/QueryGranterGrantsResponse";
+  value: QueryGranterGrantsResponseAmino;
+}
+/** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseSDKType {
   grants: GrantAuthorizationSDKType[];
   pagination?: PageResponseSDKType;
@@ -80,6 +126,16 @@ export interface QueryGranteeGrantsRequest {
 export interface QueryGranteeGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest";
   value: Uint8Array;
+}
+/** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
+export interface QueryGranteeGrantsRequestAmino {
+  grantee?: string;
+  /** pagination defines an pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryGranteeGrantsRequestAminoMsg {
+  type: "cosmos-sdk/QueryGranteeGrantsRequest";
+  value: QueryGranteeGrantsRequestAmino;
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestSDKType {
@@ -98,6 +154,17 @@ export interface QueryGranteeGrantsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
+export interface QueryGranteeGrantsResponseAmino {
+  /** grants is a list of grants granted to the grantee. */
+  grants?: GrantAuthorizationAmino[];
+  /** pagination defines an pagination for the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryGranteeGrantsResponseAminoMsg {
+  type: "cosmos-sdk/QueryGranteeGrantsResponse";
+  value: QueryGranteeGrantsResponseAmino;
+}
+/** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponseSDKType {
   grants: GrantAuthorizationSDKType[];
   pagination?: PageResponseSDKType;
@@ -112,6 +179,16 @@ function createBaseQueryGrantsRequest(): QueryGrantsRequest {
 }
 export const QueryGrantsRequest = {
   typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest",
+  aminoType: "cosmos-sdk/QueryGrantsRequest",
+  is(o: any): o is QueryGrantsRequest {
+    return o && (o.$typeUrl === QueryGrantsRequest.typeUrl || typeof o.granter === "string" && typeof o.grantee === "string" && typeof o.msgTypeUrl === "string");
+  },
+  isSDK(o: any): o is QueryGrantsRequestSDKType {
+    return o && (o.$typeUrl === QueryGrantsRequest.typeUrl || typeof o.granter === "string" && typeof o.grantee === "string" && typeof o.msg_type_url === "string");
+  },
+  isAmino(o: any): o is QueryGrantsRequestAmino {
+    return o && (o.$typeUrl === QueryGrantsRequest.typeUrl || typeof o.granter === "string" && typeof o.grantee === "string" && typeof o.msg_type_url === "string");
+  },
   encode(message: QueryGrantsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.granter !== undefined) {
       writer.uint32(10).string(message.granter);
@@ -247,6 +324,9 @@ export const QueryGrantsRequest = {
       typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest",
       value: QueryGrantsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryGrantsResponse(): QueryGrantsResponse {
@@ -257,6 +337,16 @@ function createBaseQueryGrantsResponse(): QueryGrantsResponse {
 }
 export const QueryGrantsResponse = {
   typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse",
+  aminoType: "cosmos-sdk/QueryGrantsResponse",
+  is(o: any): o is QueryGrantsResponse {
+    return o && (o.$typeUrl === QueryGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || Grant.is(o.grants[0])));
+  },
+  isSDK(o: any): o is QueryGrantsResponseSDKType {
+    return o && (o.$typeUrl === QueryGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || Grant.isSDK(o.grants[0])));
+  },
+  isAmino(o: any): o is QueryGrantsResponseAmino {
+    return o && (o.$typeUrl === QueryGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || Grant.isAmino(o.grants[0])));
+  },
   encode(message: QueryGrantsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.grants) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -370,6 +460,10 @@ export const QueryGrantsResponse = {
       typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse",
       value: QueryGrantsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Grant.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryGranterGrantsRequest(): QueryGranterGrantsRequest {
@@ -380,6 +474,16 @@ function createBaseQueryGranterGrantsRequest(): QueryGranterGrantsRequest {
 }
 export const QueryGranterGrantsRequest = {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest",
+  aminoType: "cosmos-sdk/QueryGranterGrantsRequest",
+  is(o: any): o is QueryGranterGrantsRequest {
+    return o && (o.$typeUrl === QueryGranterGrantsRequest.typeUrl || typeof o.granter === "string");
+  },
+  isSDK(o: any): o is QueryGranterGrantsRequestSDKType {
+    return o && (o.$typeUrl === QueryGranterGrantsRequest.typeUrl || typeof o.granter === "string");
+  },
+  isAmino(o: any): o is QueryGranterGrantsRequestAmino {
+    return o && (o.$typeUrl === QueryGranterGrantsRequest.typeUrl || typeof o.granter === "string");
+  },
   encode(message: QueryGranterGrantsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.granter !== undefined) {
       writer.uint32(10).string(message.granter);
@@ -483,6 +587,9 @@ export const QueryGranterGrantsRequest = {
       typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest",
       value: QueryGranterGrantsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryGranterGrantsResponse(): QueryGranterGrantsResponse {
@@ -493,6 +600,16 @@ function createBaseQueryGranterGrantsResponse(): QueryGranterGrantsResponse {
 }
 export const QueryGranterGrantsResponse = {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse",
+  aminoType: "cosmos-sdk/QueryGranterGrantsResponse",
+  is(o: any): o is QueryGranterGrantsResponse {
+    return o && (o.$typeUrl === QueryGranterGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || GrantAuthorization.is(o.grants[0])));
+  },
+  isSDK(o: any): o is QueryGranterGrantsResponseSDKType {
+    return o && (o.$typeUrl === QueryGranterGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || GrantAuthorization.isSDK(o.grants[0])));
+  },
+  isAmino(o: any): o is QueryGranterGrantsResponseAmino {
+    return o && (o.$typeUrl === QueryGranterGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || GrantAuthorization.isAmino(o.grants[0])));
+  },
   encode(message: QueryGranterGrantsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.grants) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -606,6 +723,10 @@ export const QueryGranterGrantsResponse = {
       typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse",
       value: QueryGranterGrantsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GrantAuthorization.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryGranteeGrantsRequest(): QueryGranteeGrantsRequest {
@@ -616,6 +737,16 @@ function createBaseQueryGranteeGrantsRequest(): QueryGranteeGrantsRequest {
 }
 export const QueryGranteeGrantsRequest = {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest",
+  aminoType: "cosmos-sdk/QueryGranteeGrantsRequest",
+  is(o: any): o is QueryGranteeGrantsRequest {
+    return o && (o.$typeUrl === QueryGranteeGrantsRequest.typeUrl || typeof o.grantee === "string");
+  },
+  isSDK(o: any): o is QueryGranteeGrantsRequestSDKType {
+    return o && (o.$typeUrl === QueryGranteeGrantsRequest.typeUrl || typeof o.grantee === "string");
+  },
+  isAmino(o: any): o is QueryGranteeGrantsRequestAmino {
+    return o && (o.$typeUrl === QueryGranteeGrantsRequest.typeUrl || typeof o.grantee === "string");
+  },
   encode(message: QueryGranteeGrantsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.grantee !== undefined) {
       writer.uint32(10).string(message.grantee);
@@ -719,6 +850,9 @@ export const QueryGranteeGrantsRequest = {
       typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest",
       value: QueryGranteeGrantsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryGranteeGrantsResponse(): QueryGranteeGrantsResponse {
@@ -729,6 +863,16 @@ function createBaseQueryGranteeGrantsResponse(): QueryGranteeGrantsResponse {
 }
 export const QueryGranteeGrantsResponse = {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse",
+  aminoType: "cosmos-sdk/QueryGranteeGrantsResponse",
+  is(o: any): o is QueryGranteeGrantsResponse {
+    return o && (o.$typeUrl === QueryGranteeGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || GrantAuthorization.is(o.grants[0])));
+  },
+  isSDK(o: any): o is QueryGranteeGrantsResponseSDKType {
+    return o && (o.$typeUrl === QueryGranteeGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || GrantAuthorization.isSDK(o.grants[0])));
+  },
+  isAmino(o: any): o is QueryGranteeGrantsResponseAmino {
+    return o && (o.$typeUrl === QueryGranteeGrantsResponse.typeUrl || Array.isArray(o.grants) && (!o.grants.length || GrantAuthorization.isAmino(o.grants[0])));
+  },
   encode(message: QueryGranteeGrantsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.grants) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -842,5 +986,9 @@ export const QueryGranteeGrantsResponse = {
       typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse",
       value: QueryGranteeGrantsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GrantAuthorization.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };

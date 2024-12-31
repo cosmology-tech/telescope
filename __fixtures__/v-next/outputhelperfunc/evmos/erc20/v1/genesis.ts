@@ -1,5 +1,6 @@
-import { TokenPair, TokenPairSDKType } from "./erc20";
+import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
@@ -13,6 +14,17 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.erc20.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateAmino {
+  /** module parameters */
+  params?: ParamsAmino;
+  /** registered token pairs */
+  token_pairs?: TokenPairAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.erc20.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
@@ -35,6 +47,21 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the erc20 module params */
+export interface ParamsAmino {
+  /** parameter to enable the conversion of Cosmos coins <--> ERC20 tokens. */
+  enable_erc20?: boolean;
+  /**
+   * parameter to enable the EVM hook that converts an ERC20 token to a Cosmos
+   * Coin by transferring the Tokens through a MsgEthereumTx to the
+   * ModuleAddress Ethereum address.
+   */
+  enable_evm_hook?: boolean;
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.erc20.v1.Params";
+  value: ParamsAmino;
+}
+/** Params defines the erc20 module params */
 export interface ParamsSDKType {
   enable_erc20: boolean;
   enable_evm_hook: boolean;
@@ -47,6 +74,15 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/evmos.erc20.v1.GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params) && Array.isArray(o.tokenPairs) && (!o.tokenPairs.length || TokenPair.is(o.tokenPairs[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params) && Array.isArray(o.token_pairs) && (!o.token_pairs.length || TokenPair.isSDK(o.token_pairs[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params) && Array.isArray(o.token_pairs) && (!o.token_pairs.length || TokenPair.isAmino(o.token_pairs[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -154,6 +190,10 @@ export const GenesisState = {
       typeUrl: "/evmos.erc20.v1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
+    TokenPair.registerTypeUrl();
   }
 };
 function createBaseParams(): Params {
@@ -164,6 +204,15 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/evmos.erc20.v1.Params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enableErc20 === "boolean" && typeof o.enableEvmHook === "boolean");
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enable_erc20 === "boolean" && typeof o.enable_evm_hook === "boolean");
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enable_erc20 === "boolean" && typeof o.enable_evm_hook === "boolean");
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.enableErc20 !== undefined) {
       writer.uint32(8).bool(message.enableErc20);
@@ -259,5 +308,6 @@ export const Params = {
       typeUrl: "/evmos.erc20.v1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

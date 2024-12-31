@@ -1,10 +1,11 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./genesis";
-import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
+import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKType, Claim, ClaimAmino, ClaimSDKType } from "./claims";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "evmos.claims.v1";
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
@@ -14,6 +15,15 @@ export interface QueryTotalUnclaimedRequest {}
 export interface QueryTotalUnclaimedRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
   value: Uint8Array;
+}
+/**
+ * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
+ * RPC method.
+ */
+export interface QueryTotalUnclaimedRequestAmino {}
+export interface QueryTotalUnclaimedRequestAminoMsg {
+  type: "/evmos.claims.v1.QueryTotalUnclaimedRequest";
+  value: QueryTotalUnclaimedRequestAmino;
 }
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
@@ -36,6 +46,18 @@ export interface QueryTotalUnclaimedResponseProtoMsg {
  * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
  * RPC method.
  */
+export interface QueryTotalUnclaimedResponseAmino {
+  /** coins defines the unclaimed coins */
+  coins?: CoinAmino[];
+}
+export interface QueryTotalUnclaimedResponseAminoMsg {
+  type: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
+  value: QueryTotalUnclaimedResponseAmino;
+}
+/**
+ * QueryTotalUnclaimedResponse is the response type for the Query/TotalUnclaimed
+ * RPC method.
+ */
 export interface QueryTotalUnclaimedResponseSDKType {
   coins: CoinSDKType[];
 }
@@ -44,6 +66,12 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "/evmos.claims.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -55,6 +83,15 @@ export interface QueryParamsResponse {
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryParamsResponse";
   value: Uint8Array;
+}
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "/evmos.claims.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -71,6 +108,18 @@ export interface QueryClaimsRecordsRequest {
 export interface QueryClaimsRecordsRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest";
   value: Uint8Array;
+}
+/**
+ * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
+ * method.
+ */
+export interface QueryClaimsRecordsRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryClaimsRecordsRequestAminoMsg {
+  type: "/evmos.claims.v1.QueryClaimsRecordsRequest";
+  value: QueryClaimsRecordsRequestAmino;
 }
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
@@ -97,6 +146,20 @@ export interface QueryClaimsRecordsResponseProtoMsg {
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
  * RPC method.
  */
+export interface QueryClaimsRecordsResponseAmino {
+  /** claims defines all claims records */
+  claims?: ClaimsRecordAddressAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryClaimsRecordsResponseAminoMsg {
+  type: "/evmos.claims.v1.QueryClaimsRecordsResponse";
+  value: QueryClaimsRecordsResponseAmino;
+}
+/**
+ * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
+ * RPC method.
+ */
 export interface QueryClaimsRecordsResponseSDKType {
   claims: ClaimsRecordAddressSDKType[];
   pagination?: PageResponseSDKType;
@@ -112,6 +175,18 @@ export interface QueryClaimsRecordRequest {
 export interface QueryClaimsRecordRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest";
   value: Uint8Array;
+}
+/**
+ * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
+ * method.
+ */
+export interface QueryClaimsRecordRequestAmino {
+  /** address defines the user to query claims record for */
+  address?: string;
+}
+export interface QueryClaimsRecordRequestAminoMsg {
+  type: "/evmos.claims.v1.QueryClaimsRecordRequest";
+  value: QueryClaimsRecordRequestAmino;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -138,6 +213,20 @@ export interface QueryClaimsRecordResponseProtoMsg {
  * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
  * method.
  */
+export interface QueryClaimsRecordResponseAmino {
+  /** total initial claimable amount for the user */
+  initial_claimable_amount?: string;
+  /** the claims of the user */
+  claims?: ClaimAmino[];
+}
+export interface QueryClaimsRecordResponseAminoMsg {
+  type: "/evmos.claims.v1.QueryClaimsRecordResponse";
+  value: QueryClaimsRecordResponseAmino;
+}
+/**
+ * QueryClaimsRecordResponse is the response type for the Query/ClaimsRecord RPC
+ * method.
+ */
 export interface QueryClaimsRecordResponseSDKType {
   initial_claimable_amount: string;
   claims: ClaimSDKType[];
@@ -147,6 +236,15 @@ function createBaseQueryTotalUnclaimedRequest(): QueryTotalUnclaimedRequest {
 }
 export const QueryTotalUnclaimedRequest = {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest",
+  is(o: any): o is QueryTotalUnclaimedRequest {
+    return o && o.$typeUrl === QueryTotalUnclaimedRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryTotalUnclaimedRequestSDKType {
+    return o && o.$typeUrl === QueryTotalUnclaimedRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryTotalUnclaimedRequestAmino {
+    return o && o.$typeUrl === QueryTotalUnclaimedRequest.typeUrl;
+  },
   encode(_: QueryTotalUnclaimedRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -208,7 +306,8 @@ export const QueryTotalUnclaimedRequest = {
       typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedRequest",
       value: QueryTotalUnclaimedRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryTotalUnclaimedResponse(): QueryTotalUnclaimedResponse {
   return {
@@ -217,6 +316,15 @@ function createBaseQueryTotalUnclaimedResponse(): QueryTotalUnclaimedResponse {
 }
 export const QueryTotalUnclaimedResponse = {
   typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse",
+  is(o: any): o is QueryTotalUnclaimedResponse {
+    return o && (o.$typeUrl === QueryTotalUnclaimedResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.is(o.coins[0])));
+  },
+  isSDK(o: any): o is QueryTotalUnclaimedResponseSDKType {
+    return o && (o.$typeUrl === QueryTotalUnclaimedResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.isSDK(o.coins[0])));
+  },
+  isAmino(o: any): o is QueryTotalUnclaimedResponseAmino {
+    return o && (o.$typeUrl === QueryTotalUnclaimedResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.isAmino(o.coins[0])));
+  },
   encode(message: QueryTotalUnclaimedResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -306,6 +414,9 @@ export const QueryTotalUnclaimedResponse = {
       typeUrl: "/evmos.claims.v1.QueryTotalUnclaimedResponse",
       value: QueryTotalUnclaimedResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -313,6 +424,15 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/evmos.claims.v1.QueryParamsRequest",
+  is(o: any): o is QueryParamsRequest {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsRequestSDKType {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsRequestAmino {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -374,7 +494,8 @@ export const QueryParamsRequest = {
       typeUrl: "/evmos.claims.v1.QueryParamsRequest",
       value: QueryParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -383,6 +504,15 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/evmos.claims.v1.QueryParamsResponse",
+  is(o: any): o is QueryParamsResponse {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.is(o.params));
+  },
+  isSDK(o: any): o is QueryParamsResponseSDKType {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is QueryParamsResponseAmino {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isAmino(o.params));
+  },
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -464,6 +594,9 @@ export const QueryParamsResponse = {
       typeUrl: "/evmos.claims.v1.QueryParamsResponse",
       value: QueryParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };
 function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
@@ -473,6 +606,15 @@ function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
 }
 export const QueryClaimsRecordsRequest = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest",
+  is(o: any): o is QueryClaimsRecordsRequest {
+    return o && o.$typeUrl === QueryClaimsRecordsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryClaimsRecordsRequestSDKType {
+    return o && o.$typeUrl === QueryClaimsRecordsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryClaimsRecordsRequestAmino {
+    return o && o.$typeUrl === QueryClaimsRecordsRequest.typeUrl;
+  },
   encode(message: QueryClaimsRecordsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -554,6 +696,9 @@ export const QueryClaimsRecordsRequest = {
       typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest",
       value: QueryClaimsRecordsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
@@ -564,6 +709,15 @@ function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
 }
 export const QueryClaimsRecordsResponse = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse",
+  is(o: any): o is QueryClaimsRecordsResponse {
+    return o && (o.$typeUrl === QueryClaimsRecordsResponse.typeUrl || Array.isArray(o.claims) && (!o.claims.length || ClaimsRecordAddress.is(o.claims[0])));
+  },
+  isSDK(o: any): o is QueryClaimsRecordsResponseSDKType {
+    return o && (o.$typeUrl === QueryClaimsRecordsResponse.typeUrl || Array.isArray(o.claims) && (!o.claims.length || ClaimsRecordAddress.isSDK(o.claims[0])));
+  },
+  isAmino(o: any): o is QueryClaimsRecordsResponseAmino {
+    return o && (o.$typeUrl === QueryClaimsRecordsResponse.typeUrl || Array.isArray(o.claims) && (!o.claims.length || ClaimsRecordAddress.isAmino(o.claims[0])));
+  },
   encode(message: QueryClaimsRecordsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.claims) {
       ClaimsRecordAddress.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -671,6 +825,10 @@ export const QueryClaimsRecordsResponse = {
       typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse",
       value: QueryClaimsRecordsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ClaimsRecordAddress.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
@@ -680,6 +838,15 @@ function createBaseQueryClaimsRecordRequest(): QueryClaimsRecordRequest {
 }
 export const QueryClaimsRecordRequest = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
+  is(o: any): o is QueryClaimsRecordRequest {
+    return o && (o.$typeUrl === QueryClaimsRecordRequest.typeUrl || typeof o.address === "string");
+  },
+  isSDK(o: any): o is QueryClaimsRecordRequestSDKType {
+    return o && (o.$typeUrl === QueryClaimsRecordRequest.typeUrl || typeof o.address === "string");
+  },
+  isAmino(o: any): o is QueryClaimsRecordRequestAmino {
+    return o && (o.$typeUrl === QueryClaimsRecordRequest.typeUrl || typeof o.address === "string");
+  },
   encode(message: QueryClaimsRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -759,7 +926,8 @@ export const QueryClaimsRecordRequest = {
       typeUrl: "/evmos.claims.v1.QueryClaimsRecordRequest",
       value: QueryClaimsRecordRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryClaimsRecordResponse(): QueryClaimsRecordResponse {
   return {
@@ -769,6 +937,15 @@ function createBaseQueryClaimsRecordResponse(): QueryClaimsRecordResponse {
 }
 export const QueryClaimsRecordResponse = {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
+  is(o: any): o is QueryClaimsRecordResponse {
+    return o && (o.$typeUrl === QueryClaimsRecordResponse.typeUrl || typeof o.initialClaimableAmount === "string" && Array.isArray(o.claims) && (!o.claims.length || Claim.is(o.claims[0])));
+  },
+  isSDK(o: any): o is QueryClaimsRecordResponseSDKType {
+    return o && (o.$typeUrl === QueryClaimsRecordResponse.typeUrl || typeof o.initial_claimable_amount === "string" && Array.isArray(o.claims) && (!o.claims.length || Claim.isSDK(o.claims[0])));
+  },
+  isAmino(o: any): o is QueryClaimsRecordResponseAmino {
+    return o && (o.$typeUrl === QueryClaimsRecordResponse.typeUrl || typeof o.initial_claimable_amount === "string" && Array.isArray(o.claims) && (!o.claims.length || Claim.isAmino(o.claims[0])));
+  },
   encode(message: QueryClaimsRecordResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.initialClaimableAmount !== undefined) {
       writer.uint32(10).string(message.initialClaimableAmount);
@@ -874,5 +1051,8 @@ export const QueryClaimsRecordResponse = {
       typeUrl: "/evmos.claims.v1.QueryClaimsRecordResponse",
       value: QueryClaimsRecordResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Claim.registerTypeUrl();
   }
 };

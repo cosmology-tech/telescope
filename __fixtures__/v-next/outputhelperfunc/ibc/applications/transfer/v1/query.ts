@@ -1,8 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, ParamsSDKType } from "./transfer";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
@@ -15,6 +16,18 @@ export interface QueryDenomTraceRequest {
 export interface QueryDenomTraceRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest";
   value: Uint8Array;
+}
+/**
+ * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
+ * method
+ */
+export interface QueryDenomTraceRequestAmino {
+  /** hash (in hex format) of the denomination trace information. */
+  hash?: string;
+}
+export interface QueryDenomTraceRequestAminoMsg {
+  type: "cosmos-sdk/QueryDenomTraceRequest";
+  value: QueryDenomTraceRequestAmino;
 }
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
@@ -39,6 +52,18 @@ export interface QueryDenomTraceResponseProtoMsg {
  * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
  * method.
  */
+export interface QueryDenomTraceResponseAmino {
+  /** denom_trace returns the requested denomination trace information. */
+  denom_trace?: DenomTraceAmino;
+}
+export interface QueryDenomTraceResponseAminoMsg {
+  type: "cosmos-sdk/QueryDenomTraceResponse";
+  value: QueryDenomTraceResponseAmino;
+}
+/**
+ * QueryDenomTraceResponse is the response type for the Query/DenomTrace RPC
+ * method.
+ */
 export interface QueryDenomTraceResponseSDKType {
   denom_trace?: DenomTraceSDKType;
 }
@@ -53,6 +78,18 @@ export interface QueryDenomTracesRequest {
 export interface QueryDenomTracesRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest";
   value: Uint8Array;
+}
+/**
+ * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
+ * method
+ */
+export interface QueryDenomTracesRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDenomTracesRequestAminoMsg {
+  type: "cosmos-sdk/QueryDenomTracesRequest";
+  value: QueryDenomTracesRequestAmino;
 }
 /**
  * QueryConnectionsRequest is the request type for the Query/DenomTraces RPC
@@ -79,6 +116,20 @@ export interface QueryDenomTracesResponseProtoMsg {
  * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
  * method.
  */
+export interface QueryDenomTracesResponseAmino {
+  /** denom_traces returns all denominations trace information. */
+  denom_traces?: DenomTraceAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryDenomTracesResponseAminoMsg {
+  type: "cosmos-sdk/QueryDenomTracesResponse";
+  value: QueryDenomTracesResponseAmino;
+}
+/**
+ * QueryConnectionsResponse is the response type for the Query/DenomTraces RPC
+ * method.
+ */
 export interface QueryDenomTracesResponseSDKType {
   denom_traces: DenomTraceSDKType[];
   pagination?: PageResponseSDKType;
@@ -88,6 +139,12 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "cosmos-sdk/QueryParamsRequest";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -101,6 +158,15 @@ export interface QueryParamsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "cosmos-sdk/QueryParamsResponse";
+  value: QueryParamsResponseAmino;
+}
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params?: ParamsSDKType;
 }
@@ -111,6 +177,16 @@ function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
 }
 export const QueryDenomTraceRequest = {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest",
+  aminoType: "cosmos-sdk/QueryDenomTraceRequest",
+  is(o: any): o is QueryDenomTraceRequest {
+    return o && (o.$typeUrl === QueryDenomTraceRequest.typeUrl || typeof o.hash === "string");
+  },
+  isSDK(o: any): o is QueryDenomTraceRequestSDKType {
+    return o && (o.$typeUrl === QueryDenomTraceRequest.typeUrl || typeof o.hash === "string");
+  },
+  isAmino(o: any): o is QueryDenomTraceRequestAmino {
+    return o && (o.$typeUrl === QueryDenomTraceRequest.typeUrl || typeof o.hash === "string");
+  },
   encode(message: QueryDenomTraceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hash !== undefined) {
       writer.uint32(10).string(message.hash);
@@ -196,7 +272,8 @@ export const QueryDenomTraceRequest = {
       typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceRequest",
       value: QueryDenomTraceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
   return {
@@ -205,6 +282,16 @@ function createBaseQueryDenomTraceResponse(): QueryDenomTraceResponse {
 }
 export const QueryDenomTraceResponse = {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse",
+  aminoType: "cosmos-sdk/QueryDenomTraceResponse",
+  is(o: any): o is QueryDenomTraceResponse {
+    return o && o.$typeUrl === QueryDenomTraceResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryDenomTraceResponseSDKType {
+    return o && o.$typeUrl === QueryDenomTraceResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryDenomTraceResponseAmino {
+    return o && o.$typeUrl === QueryDenomTraceResponse.typeUrl;
+  },
   encode(message: QueryDenomTraceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denomTrace !== undefined) {
       DenomTrace.encode(message.denomTrace, writer.uint32(10).fork()).ldelim();
@@ -292,6 +379,9 @@ export const QueryDenomTraceResponse = {
       typeUrl: "/ibc.applications.transfer.v1.QueryDenomTraceResponse",
       value: QueryDenomTraceResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DenomTrace.registerTypeUrl();
   }
 };
 function createBaseQueryDenomTracesRequest(): QueryDenomTracesRequest {
@@ -301,6 +391,16 @@ function createBaseQueryDenomTracesRequest(): QueryDenomTracesRequest {
 }
 export const QueryDenomTracesRequest = {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest",
+  aminoType: "cosmos-sdk/QueryDenomTracesRequest",
+  is(o: any): o is QueryDenomTracesRequest {
+    return o && o.$typeUrl === QueryDenomTracesRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryDenomTracesRequestSDKType {
+    return o && o.$typeUrl === QueryDenomTracesRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryDenomTracesRequestAmino {
+    return o && o.$typeUrl === QueryDenomTracesRequest.typeUrl;
+  },
   encode(message: QueryDenomTracesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -388,6 +488,9 @@ export const QueryDenomTracesRequest = {
       typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesRequest",
       value: QueryDenomTracesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
@@ -398,6 +501,16 @@ function createBaseQueryDenomTracesResponse(): QueryDenomTracesResponse {
 }
 export const QueryDenomTracesResponse = {
   typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse",
+  aminoType: "cosmos-sdk/QueryDenomTracesResponse",
+  is(o: any): o is QueryDenomTracesResponse {
+    return o && (o.$typeUrl === QueryDenomTracesResponse.typeUrl || Array.isArray(o.denomTraces) && (!o.denomTraces.length || DenomTrace.is(o.denomTraces[0])));
+  },
+  isSDK(o: any): o is QueryDenomTracesResponseSDKType {
+    return o && (o.$typeUrl === QueryDenomTracesResponse.typeUrl || Array.isArray(o.denom_traces) && (!o.denom_traces.length || DenomTrace.isSDK(o.denom_traces[0])));
+  },
+  isAmino(o: any): o is QueryDenomTracesResponseAmino {
+    return o && (o.$typeUrl === QueryDenomTracesResponse.typeUrl || Array.isArray(o.denom_traces) && (!o.denom_traces.length || DenomTrace.isAmino(o.denom_traces[0])));
+  },
   encode(message: QueryDenomTracesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.denomTraces) {
       DenomTrace.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -511,6 +624,10 @@ export const QueryDenomTracesResponse = {
       typeUrl: "/ibc.applications.transfer.v1.QueryDenomTracesResponse",
       value: QueryDenomTracesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DenomTrace.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -518,6 +635,16 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest",
+  aminoType: "cosmos-sdk/QueryParamsRequest",
+  is(o: any): o is QueryParamsRequest {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsRequestSDKType {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsRequestAmino {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -585,7 +712,8 @@ export const QueryParamsRequest = {
       typeUrl: "/ibc.applications.transfer.v1.QueryParamsRequest",
       value: QueryParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -594,6 +722,16 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse",
+  aminoType: "cosmos-sdk/QueryParamsResponse",
+  is(o: any): o is QueryParamsResponse {
+    return o && o.$typeUrl === QueryParamsResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsResponseSDKType {
+    return o && o.$typeUrl === QueryParamsResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsResponseAmino {
+    return o && o.$typeUrl === QueryParamsResponse.typeUrl;
+  },
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -681,5 +819,8 @@ export const QueryParamsResponse = {
       typeUrl: "/ibc.applications.transfer.v1.QueryParamsResponse",
       value: QueryParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };

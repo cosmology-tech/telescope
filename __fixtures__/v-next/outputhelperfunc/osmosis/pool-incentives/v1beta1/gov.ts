@@ -1,4 +1,4 @@
-import { DistrRecord, DistrRecordSDKType } from "./incentives";
+import { DistrRecord, DistrRecordAmino, DistrRecordSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
@@ -13,6 +13,7 @@ export const protobufPackage = "osmosis.poolincentives.v1beta1";
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposal {
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecord[];
@@ -30,7 +31,26 @@ export interface ReplacePoolIncentivesProposalProtoMsg {
  * pool and it is allocated to gauges and community pool by the DistrRecords
  * configuration. Note that gaugeId=0 represents the community pool.
  */
+export interface ReplacePoolIncentivesProposalAmino {
+  title?: string;
+  description?: string;
+  records?: DistrRecordAmino[];
+}
+export interface ReplacePoolIncentivesProposalAminoMsg {
+  type: "osmosis/poolincentives/replace-pool-incentives-proposal";
+  value: ReplacePoolIncentivesProposalAmino;
+}
+/**
+ * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
+ * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
+ * override the existing DistrRecords set in the module. Each record has a
+ * specified gauge id and weight, and the incentives are distributed to each
+ * gauge according to weight/total_weight. The incentives are put in the fee
+ * pool and it is allocated to gauges and community pool by the DistrRecords
+ * configuration. Note that gaugeId=0 represents the community pool.
+ */
 export interface ReplacePoolIncentivesProposalSDKType {
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecordSDKType[];
@@ -45,6 +65,7 @@ export interface ReplacePoolIncentivesProposalSDKType {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposal {
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecord[];
@@ -62,13 +83,33 @@ export interface UpdatePoolIncentivesProposalProtoMsg {
  * The result DistrRecords in state would be:
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
+export interface UpdatePoolIncentivesProposalAmino {
+  title?: string;
+  description?: string;
+  records?: DistrRecordAmino[];
+}
+export interface UpdatePoolIncentivesProposalAminoMsg {
+  type: "osmosis/poolincentives/update-pool-incentives-proposal";
+  value: UpdatePoolIncentivesProposalAmino;
+}
+/**
+ * For example: if the existing DistrRecords were:
+ * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
+ * An UpdatePoolIncentivesProposal includes
+ * [(Gauge 1, 0), (Gauge 2, 4), (Gauge 3, 10)]
+ * This would delete Gauge 1, Edit Gauge 2, and Add Gauge 3
+ * The result DistrRecords in state would be:
+ * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
+ */
 export interface UpdatePoolIncentivesProposalSDKType {
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecordSDKType[];
 }
 function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposal {
   return {
+    $typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
     title: "",
     description: "",
     records: []
@@ -76,6 +117,16 @@ function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposa
 }
 export const ReplacePoolIncentivesProposal = {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
+  aminoType: "osmosis/poolincentives/replace-pool-incentives-proposal",
+  is(o: any): o is ReplacePoolIncentivesProposal {
+    return o && (o.$typeUrl === ReplacePoolIncentivesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.records) && (!o.records.length || DistrRecord.is(o.records[0])));
+  },
+  isSDK(o: any): o is ReplacePoolIncentivesProposalSDKType {
+    return o && (o.$typeUrl === ReplacePoolIncentivesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.records) && (!o.records.length || DistrRecord.isSDK(o.records[0])));
+  },
+  isAmino(o: any): o is ReplacePoolIncentivesProposalAmino {
+    return o && (o.$typeUrl === ReplacePoolIncentivesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.records) && (!o.records.length || DistrRecord.isAmino(o.records[0])));
+  },
   encode(message: ReplacePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -203,10 +254,14 @@ export const ReplacePoolIncentivesProposal = {
       typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
       value: ReplacePoolIncentivesProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DistrRecord.registerTypeUrl();
   }
 };
 function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal {
   return {
+    $typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
     title: "",
     description: "",
     records: []
@@ -214,6 +269,16 @@ function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal 
 }
 export const UpdatePoolIncentivesProposal = {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
+  aminoType: "osmosis/poolincentives/update-pool-incentives-proposal",
+  is(o: any): o is UpdatePoolIncentivesProposal {
+    return o && (o.$typeUrl === UpdatePoolIncentivesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.records) && (!o.records.length || DistrRecord.is(o.records[0])));
+  },
+  isSDK(o: any): o is UpdatePoolIncentivesProposalSDKType {
+    return o && (o.$typeUrl === UpdatePoolIncentivesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.records) && (!o.records.length || DistrRecord.isSDK(o.records[0])));
+  },
+  isAmino(o: any): o is UpdatePoolIncentivesProposalAmino {
+    return o && (o.$typeUrl === UpdatePoolIncentivesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.records) && (!o.records.length || DistrRecord.isAmino(o.records[0])));
+  },
   encode(message: UpdatePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -341,5 +406,8 @@ export const UpdatePoolIncentivesProposal = {
       typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
       value: UpdatePoolIncentivesProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DistrRecord.registerTypeUrl();
   }
 };

@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
@@ -27,6 +27,7 @@ export enum ChangeType {
   UNRECOGNIZED = -1,
 }
 export const ChangeTypeSDKType = ChangeType;
+export const ChangeTypeAmino = ChangeType;
 export function changeTypeFromJSON(object: any): ChangeType {
   switch (object) {
     case 0:
@@ -113,6 +114,49 @@ export interface ConfigChangeProtoMsg {
  * applicable advice about potential consequences for the change, such as
  * backwards-incompatibility.
  */
+export interface ConfigChangeAmino {
+  /**
+   * Object hierarchy path to the change, with levels separated by a '.'
+   * character. For repeated fields, an applicable unique identifier field is
+   * used for the index (usually selector, name, or id). For maps, the term
+   * 'key' is used. If the field has no unique identifier, the numeric index
+   * is used.
+   * Examples:
+   * - visibility.rules[selector=="google.LibraryService.ListBooks"].restriction
+   * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
+   * - logging.producer_destinations[0]
+   */
+  element?: string;
+  /**
+   * Value of the changed object in the old Service configuration,
+   * in JSON format. This field will not be populated if ChangeType == ADDED.
+   */
+  old_value?: string;
+  /**
+   * Value of the changed object in the new Service configuration,
+   * in JSON format. This field will not be populated if ChangeType == REMOVED.
+   */
+  new_value?: string;
+  /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
+  change_type?: ChangeType;
+  /**
+   * Collection of advice provided for this change, useful for determining the
+   * possible impact of this change.
+   */
+  advices?: AdviceAmino[];
+}
+export interface ConfigChangeAminoMsg {
+  type: "/google.api.ConfigChange";
+  value: ConfigChangeAmino;
+}
+/**
+ * Output generated from semantically comparing two versions of a service
+ * configuration.
+ * 
+ * Includes detailed information about a field that have changed with
+ * applicable advice about potential consequences for the change, such as
+ * backwards-incompatibility.
+ */
 export interface ConfigChangeSDKType {
   element: string;
   old_value: string;
@@ -139,6 +183,21 @@ export interface AdviceProtoMsg {
  * Generated advice about this change, used for providing more
  * information about how a change will affect the existing service.
  */
+export interface AdviceAmino {
+  /**
+   * Useful description for why this advice was applied and what actions should
+   * be taken to mitigate any implied risks.
+   */
+  description?: string;
+}
+export interface AdviceAminoMsg {
+  type: "/google.api.Advice";
+  value: AdviceAmino;
+}
+/**
+ * Generated advice about this change, used for providing more
+ * information about how a change will affect the existing service.
+ */
 export interface AdviceSDKType {
   description: string;
 }
@@ -153,6 +212,15 @@ function createBaseConfigChange(): ConfigChange {
 }
 export const ConfigChange = {
   typeUrl: "/google.api.ConfigChange",
+  is(o: any): o is ConfigChange {
+    return o && (o.$typeUrl === ConfigChange.typeUrl || typeof o.element === "string" && typeof o.oldValue === "string" && typeof o.newValue === "string" && isSet(o.changeType) && Array.isArray(o.advices) && (!o.advices.length || Advice.is(o.advices[0])));
+  },
+  isSDK(o: any): o is ConfigChangeSDKType {
+    return o && (o.$typeUrl === ConfigChange.typeUrl || typeof o.element === "string" && typeof o.old_value === "string" && typeof o.new_value === "string" && isSet(o.change_type) && Array.isArray(o.advices) && (!o.advices.length || Advice.isSDK(o.advices[0])));
+  },
+  isAmino(o: any): o is ConfigChangeAmino {
+    return o && (o.$typeUrl === ConfigChange.typeUrl || typeof o.element === "string" && typeof o.old_value === "string" && typeof o.new_value === "string" && isSet(o.change_type) && Array.isArray(o.advices) && (!o.advices.length || Advice.isAmino(o.advices[0])));
+  },
   encode(message: ConfigChange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.element !== undefined) {
       writer.uint32(10).string(message.element);
@@ -306,6 +374,9 @@ export const ConfigChange = {
       typeUrl: "/google.api.ConfigChange",
       value: ConfigChange.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Advice.registerTypeUrl();
   }
 };
 function createBaseAdvice(): Advice {
@@ -315,6 +386,15 @@ function createBaseAdvice(): Advice {
 }
 export const Advice = {
   typeUrl: "/google.api.Advice",
+  is(o: any): o is Advice {
+    return o && (o.$typeUrl === Advice.typeUrl || typeof o.description === "string");
+  },
+  isSDK(o: any): o is AdviceSDKType {
+    return o && (o.$typeUrl === Advice.typeUrl || typeof o.description === "string");
+  },
+  isAmino(o: any): o is AdviceAmino {
+    return o && (o.$typeUrl === Advice.typeUrl || typeof o.description === "string");
+  },
   encode(message: Advice, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
@@ -394,5 +474,6 @@ export const Advice = {
       typeUrl: "/google.api.Advice",
       value: Advice.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

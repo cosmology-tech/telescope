@@ -1,5 +1,6 @@
-import { Distribution_Exemplar, Distribution_ExemplarSDKType } from "../../distribution";
+import { Distribution_Exemplar, Distribution_ExemplarAmino, Distribution_ExemplarSDKType } from "../../distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
@@ -69,6 +70,62 @@ export interface DistributionProtoMsg {
  * * the sum-squared-deviation of the samples, used to compute variance
  * * a histogram of the values of the sample points
  */
+export interface DistributionAmino {
+  /** The total number of samples in the distribution. Must be >= 0. */
+  count?: string;
+  /**
+   * The arithmetic mean of the samples in the distribution. If `count` is
+   * zero then this field must be zero.
+   */
+  mean?: number;
+  /** The minimum of the population of values. Ignored if `count` is zero. */
+  minimum?: number;
+  /** The maximum of the population of values. Ignored if `count` is zero. */
+  maximum?: number;
+  /**
+   * The sum of squared deviations from the mean:
+   *   Sum[i=1..count]((x_i - mean)^2)
+   * where each x_i is a sample values. If `count` is zero then this field
+   * must be zero, otherwise validation of the request fails.
+   */
+  sum_of_squared_deviation?: number;
+  /**
+   * The number of samples in each histogram bucket. `bucket_counts` are
+   * optional. If present, they must sum to the `count` value.
+   * 
+   * The buckets are defined below in `bucket_option`. There are N buckets.
+   * `bucket_counts[0]` is the number of samples in the underflow bucket.
+   * `bucket_counts[1]` to `bucket_counts[N-1]` are the numbers of samples
+   * in each of the finite buckets. And `bucket_counts[N] is the number
+   * of samples in the overflow bucket. See the comments of `bucket_option`
+   * below for more details.
+   * 
+   * Any suffix of trailing zeros may be omitted.
+   */
+  bucket_counts?: string[];
+  /** Buckets with constant width. */
+  linear_buckets?: Distribution_LinearBucketsAmino;
+  /** Buckets with exponentially growing width. */
+  exponential_buckets?: Distribution_ExponentialBucketsAmino;
+  /** Buckets with arbitrary user-provided width. */
+  explicit_buckets?: Distribution_ExplicitBucketsAmino;
+  /** Example points. Must be in increasing order of `value` field. */
+  exemplars?: Distribution_ExemplarAmino[];
+}
+export interface DistributionAminoMsg {
+  type: "/google.api.servicecontrol.v1.Distribution";
+  value: DistributionAmino;
+}
+/**
+ * Distribution represents a frequency distribution of double-valued sample
+ * points. It contains the size of the population of sample points plus
+ * additional optional information:
+ * 
+ * * the arithmetic mean of the samples
+ * * the minimum and maximum of the samples
+ * * the sum-squared-deviation of the samples, used to compute variance
+ * * a histogram of the values of the sample points
+ */
 export interface DistributionSDKType {
   count: bigint;
   mean: number;
@@ -108,6 +165,32 @@ export interface Distribution_LinearBucketsProtoMsg {
   value: Uint8Array;
 }
 /** Describing buckets with constant width. */
+export interface Distribution_LinearBucketsAmino {
+  /**
+   * The number of finite buckets. With the underflow and overflow buckets,
+   * the total number of buckets is `num_finite_buckets` + 2.
+   * See comments on `bucket_options` for details.
+   */
+  num_finite_buckets?: number;
+  /**
+   * The i'th linear bucket covers the interval
+   *   [offset + (i-1) * width, offset + i * width)
+   * where i ranges from 1 to num_finite_buckets, inclusive.
+   * Must be strictly positive.
+   */
+  width?: number;
+  /**
+   * The i'th linear bucket covers the interval
+   *   [offset + (i-1) * width, offset + i * width)
+   * where i ranges from 1 to num_finite_buckets, inclusive.
+   */
+  offset?: number;
+}
+export interface Distribution_LinearBucketsAminoMsg {
+  type: "/google.api.servicecontrol.v1.LinearBuckets";
+  value: Distribution_LinearBucketsAmino;
+}
+/** Describing buckets with constant width. */
 export interface Distribution_LinearBucketsSDKType {
   num_finite_buckets: number;
   width: number;
@@ -141,6 +224,33 @@ export interface Distribution_ExponentialBucketsProtoMsg {
   value: Uint8Array;
 }
 /** Describing buckets with exponentially growing width. */
+export interface Distribution_ExponentialBucketsAmino {
+  /**
+   * The number of finite buckets. With the underflow and overflow buckets,
+   * the total number of buckets is `num_finite_buckets` + 2.
+   * See comments on `bucket_options` for details.
+   */
+  num_finite_buckets?: number;
+  /**
+   * The i'th exponential bucket covers the interval
+   *   [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * where i ranges from 1 to num_finite_buckets inclusive.
+   * Must be larger than 1.0.
+   */
+  growth_factor?: number;
+  /**
+   * The i'th exponential bucket covers the interval
+   *   [scale * growth_factor^(i-1), scale * growth_factor^i)
+   * where i ranges from 1 to num_finite_buckets inclusive.
+   * Must be > 0.
+   */
+  scale?: number;
+}
+export interface Distribution_ExponentialBucketsAminoMsg {
+  type: "/google.api.servicecontrol.v1.ExponentialBuckets";
+  value: Distribution_ExponentialBucketsAmino;
+}
+/** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBucketsSDKType {
   num_finite_buckets: number;
   growth_factor: number;
@@ -172,6 +282,31 @@ export interface Distribution_ExplicitBucketsProtoMsg {
   value: Uint8Array;
 }
 /** Describing buckets with arbitrary user-provided width. */
+export interface Distribution_ExplicitBucketsAmino {
+  /**
+   * 'bound' is a list of strictly increasing boundaries between
+   * buckets. Note that a list of length N-1 defines N buckets because
+   * of fenceposting. See comments on `bucket_options` for details.
+   * 
+   * The i'th finite bucket covers the interval
+   *   [bound[i-1], bound[i])
+   * where i ranges from 1 to bound_size() - 1. Note that there are no
+   * finite buckets at all if 'bound' only contains a single element; in
+   * that special case the single bound defines the boundary between the
+   * underflow and overflow buckets.
+   * 
+   * bucket number                   lower bound    upper bound
+   *  i == 0 (underflow)              -inf           bound[i]
+   *  0 < i < bound_size()            bound[i-1]     bound[i]
+   *  i == bound_size() (overflow)    bound[i-1]     +inf
+   */
+  bounds?: number[];
+}
+export interface Distribution_ExplicitBucketsAminoMsg {
+  type: "/google.api.servicecontrol.v1.ExplicitBuckets";
+  value: Distribution_ExplicitBucketsAmino;
+}
+/** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBucketsSDKType {
   bounds: number[];
 }
@@ -191,6 +326,15 @@ function createBaseDistribution(): Distribution {
 }
 export const Distribution = {
   typeUrl: "/google.api.servicecontrol.v1.Distribution",
+  is(o: any): o is Distribution {
+    return o && (o.$typeUrl === Distribution.typeUrl || typeof o.count === "bigint" && typeof o.mean === "number" && typeof o.minimum === "number" && typeof o.maximum === "number" && typeof o.sumOfSquaredDeviation === "number" && Array.isArray(o.bucketCounts) && (!o.bucketCounts.length || typeof o.bucketCounts[0] === "bigint") && Array.isArray(o.exemplars) && (!o.exemplars.length || Distribution_Exemplar.is(o.exemplars[0])));
+  },
+  isSDK(o: any): o is DistributionSDKType {
+    return o && (o.$typeUrl === Distribution.typeUrl || typeof o.count === "bigint" && typeof o.mean === "number" && typeof o.minimum === "number" && typeof o.maximum === "number" && typeof o.sum_of_squared_deviation === "number" && Array.isArray(o.bucket_counts) && (!o.bucket_counts.length || typeof o.bucket_counts[0] === "bigint") && Array.isArray(o.exemplars) && (!o.exemplars.length || Distribution_Exemplar.isSDK(o.exemplars[0])));
+  },
+  isAmino(o: any): o is DistributionAmino {
+    return o && (o.$typeUrl === Distribution.typeUrl || typeof o.count === "bigint" && typeof o.mean === "number" && typeof o.minimum === "number" && typeof o.maximum === "number" && typeof o.sum_of_squared_deviation === "number" && Array.isArray(o.bucket_counts) && (!o.bucket_counts.length || typeof o.bucket_counts[0] === "bigint") && Array.isArray(o.exemplars) && (!o.exemplars.length || Distribution_Exemplar.isAmino(o.exemplars[0])));
+  },
   encode(message: Distribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.count !== undefined) {
       writer.uint32(8).int64(message.count);
@@ -451,6 +595,12 @@ export const Distribution = {
       typeUrl: "/google.api.servicecontrol.v1.Distribution",
       value: Distribution.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Distribution_LinearBuckets.registerTypeUrl();
+    Distribution_ExponentialBuckets.registerTypeUrl();
+    Distribution_ExplicitBuckets.registerTypeUrl();
+    Distribution_Exemplar.registerTypeUrl();
   }
 };
 function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
@@ -462,6 +612,15 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
 }
 export const Distribution_LinearBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
+  is(o: any): o is Distribution_LinearBuckets {
+    return o && (o.$typeUrl === Distribution_LinearBuckets.typeUrl || typeof o.numFiniteBuckets === "number" && typeof o.width === "number" && typeof o.offset === "number");
+  },
+  isSDK(o: any): o is Distribution_LinearBucketsSDKType {
+    return o && (o.$typeUrl === Distribution_LinearBuckets.typeUrl || typeof o.num_finite_buckets === "number" && typeof o.width === "number" && typeof o.offset === "number");
+  },
+  isAmino(o: any): o is Distribution_LinearBucketsAmino {
+    return o && (o.$typeUrl === Distribution_LinearBuckets.typeUrl || typeof o.num_finite_buckets === "number" && typeof o.width === "number" && typeof o.offset === "number");
+  },
   encode(message: Distribution_LinearBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numFiniteBuckets !== undefined) {
       writer.uint32(8).int32(message.numFiniteBuckets);
@@ -573,7 +732,8 @@ export const Distribution_LinearBuckets = {
       typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
       value: Distribution_LinearBuckets.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBuckets {
   return {
@@ -584,6 +744,15 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
 }
 export const Distribution_ExponentialBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
+  is(o: any): o is Distribution_ExponentialBuckets {
+    return o && (o.$typeUrl === Distribution_ExponentialBuckets.typeUrl || typeof o.numFiniteBuckets === "number" && typeof o.growthFactor === "number" && typeof o.scale === "number");
+  },
+  isSDK(o: any): o is Distribution_ExponentialBucketsSDKType {
+    return o && (o.$typeUrl === Distribution_ExponentialBuckets.typeUrl || typeof o.num_finite_buckets === "number" && typeof o.growth_factor === "number" && typeof o.scale === "number");
+  },
+  isAmino(o: any): o is Distribution_ExponentialBucketsAmino {
+    return o && (o.$typeUrl === Distribution_ExponentialBuckets.typeUrl || typeof o.num_finite_buckets === "number" && typeof o.growth_factor === "number" && typeof o.scale === "number");
+  },
   encode(message: Distribution_ExponentialBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numFiniteBuckets !== undefined) {
       writer.uint32(8).int32(message.numFiniteBuckets);
@@ -695,7 +864,8 @@ export const Distribution_ExponentialBuckets = {
       typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
       value: Distribution_ExponentialBuckets.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets {
   return {
@@ -704,6 +874,15 @@ function createBaseDistribution_ExplicitBuckets(): Distribution_ExplicitBuckets 
 }
 export const Distribution_ExplicitBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets",
+  is(o: any): o is Distribution_ExplicitBuckets {
+    return o && (o.$typeUrl === Distribution_ExplicitBuckets.typeUrl || Array.isArray(o.bounds) && (!o.bounds.length || typeof o.bounds[0] === "number"));
+  },
+  isSDK(o: any): o is Distribution_ExplicitBucketsSDKType {
+    return o && (o.$typeUrl === Distribution_ExplicitBuckets.typeUrl || Array.isArray(o.bounds) && (!o.bounds.length || typeof o.bounds[0] === "number"));
+  },
+  isAmino(o: any): o is Distribution_ExplicitBucketsAmino {
+    return o && (o.$typeUrl === Distribution_ExplicitBuckets.typeUrl || Array.isArray(o.bounds) && (!o.bounds.length || typeof o.bounds[0] === "number"));
+  },
   encode(message: Distribution_ExplicitBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.bounds) {
@@ -802,5 +981,6 @@ export const Distribution_ExplicitBuckets = {
       typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets",
       value: Distribution_ExplicitBuckets.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

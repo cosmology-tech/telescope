@@ -25,6 +25,25 @@ export interface DevFeeInfoProtoMsg {
  * DevFeeInfo defines an instance that organizes fee distribution conditions
  * for the owner of a given smart contract
  */
+export interface DevFeeInfoAmino {
+  /** hex address of registered contract */
+  contract_address?: string;
+  /** bech32 address of contract deployer */
+  deployer_address?: string;
+  /**
+   * bech32 address of account receiving the transaction fees
+   * it defaults to deployer_address
+   */
+  withdraw_address?: string;
+}
+export interface DevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.DevFeeInfo";
+  value: DevFeeInfoAmino;
+}
+/**
+ * DevFeeInfo defines an instance that organizes fee distribution conditions
+ * for the owner of a given smart contract
+ */
 export interface DevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -39,6 +58,15 @@ function createBaseDevFeeInfo(): DevFeeInfo {
 }
 export const DevFeeInfo = {
   typeUrl: "/evmos.fees.v1.DevFeeInfo",
+  is(o: any): o is DevFeeInfo {
+    return o && (o.$typeUrl === DevFeeInfo.typeUrl || typeof o.contractAddress === "string" && typeof o.deployerAddress === "string" && typeof o.withdrawAddress === "string");
+  },
+  isSDK(o: any): o is DevFeeInfoSDKType {
+    return o && (o.$typeUrl === DevFeeInfo.typeUrl || typeof o.contract_address === "string" && typeof o.deployer_address === "string" && typeof o.withdraw_address === "string");
+  },
+  isAmino(o: any): o is DevFeeInfoAmino {
+    return o && (o.$typeUrl === DevFeeInfo.typeUrl || typeof o.contract_address === "string" && typeof o.deployer_address === "string" && typeof o.withdraw_address === "string");
+  },
   encode(message: DevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
@@ -150,5 +178,6 @@ export const DevFeeInfo = {
       typeUrl: "/evmos.fees.v1.DevFeeInfo",
       value: DevFeeInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

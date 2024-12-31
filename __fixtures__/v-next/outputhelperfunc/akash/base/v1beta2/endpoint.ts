@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta2";
 /** This describes how the endpoint is implemented when the lease is deployed */
@@ -13,6 +13,7 @@ export enum Endpoint_Kind {
   UNRECOGNIZED = -1,
 }
 export const Endpoint_KindSDKType = Endpoint_Kind;
+export const Endpoint_KindAmino = Endpoint_Kind;
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:
@@ -53,6 +54,15 @@ export interface EndpointProtoMsg {
   value: Uint8Array;
 }
 /** Endpoint describes a publicly accessible IP service */
+export interface EndpointAmino {
+  kind?: Endpoint_Kind;
+  sequence_number: number;
+}
+export interface EndpointAminoMsg {
+  type: "akash/base/v1beta2/endpoint";
+  value: EndpointAmino;
+}
+/** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
   kind: Endpoint_Kind;
   sequence_number: number;
@@ -65,6 +75,16 @@ function createBaseEndpoint(): Endpoint {
 }
 export const Endpoint = {
   typeUrl: "/akash.base.v1beta2.Endpoint",
+  aminoType: "akash/base/v1beta2/endpoint",
+  is(o: any): o is Endpoint {
+    return o && (o.$typeUrl === Endpoint.typeUrl || isSet(o.kind) && typeof o.sequenceNumber === "number");
+  },
+  isSDK(o: any): o is EndpointSDKType {
+    return o && (o.$typeUrl === Endpoint.typeUrl || isSet(o.kind) && typeof o.sequence_number === "number");
+  },
+  isAmino(o: any): o is EndpointAmino {
+    return o && (o.$typeUrl === Endpoint.typeUrl || isSet(o.kind) && typeof o.sequence_number === "number");
+  },
   encode(message: Endpoint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -166,5 +186,6 @@ export const Endpoint = {
       typeUrl: "/akash.base.v1beta2.Endpoint",
       value: Endpoint.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

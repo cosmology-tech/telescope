@@ -26,6 +26,25 @@ export interface FungibleTokenPacketDataProtoMsg {
  * See FungibleTokenPacketData spec:
  * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
+export interface FungibleTokenPacketDataAmino {
+  /** the token denomination to be transferred */
+  denom?: string;
+  /** the token amount to be transferred */
+  amount?: string;
+  /** the sender address */
+  sender?: string;
+  /** the recipient address on the destination chain */
+  receiver?: string;
+}
+export interface FungibleTokenPacketDataAminoMsg {
+  type: "cosmos-sdk/FungibleTokenPacketData";
+  value: FungibleTokenPacketDataAmino;
+}
+/**
+ * FungibleTokenPacketData defines a struct for the packet payload
+ * See FungibleTokenPacketData spec:
+ * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
+ */
 export interface FungibleTokenPacketDataSDKType {
   denom: string;
   amount: string;
@@ -42,6 +61,16 @@ function createBaseFungibleTokenPacketData(): FungibleTokenPacketData {
 }
 export const FungibleTokenPacketData = {
   typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData",
+  aminoType: "cosmos-sdk/FungibleTokenPacketData",
+  is(o: any): o is FungibleTokenPacketData {
+    return o && (o.$typeUrl === FungibleTokenPacketData.typeUrl || typeof o.denom === "string" && typeof o.amount === "string" && typeof o.sender === "string" && typeof o.receiver === "string");
+  },
+  isSDK(o: any): o is FungibleTokenPacketDataSDKType {
+    return o && (o.$typeUrl === FungibleTokenPacketData.typeUrl || typeof o.denom === "string" && typeof o.amount === "string" && typeof o.sender === "string" && typeof o.receiver === "string");
+  },
+  isAmino(o: any): o is FungibleTokenPacketDataAmino {
+    return o && (o.$typeUrl === FungibleTokenPacketData.typeUrl || typeof o.denom === "string" && typeof o.amount === "string" && typeof o.sender === "string" && typeof o.receiver === "string");
+  },
   encode(message: FungibleTokenPacketData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
@@ -175,5 +204,6 @@ export const FungibleTokenPacketData = {
       typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData",
       value: FungibleTokenPacketData.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

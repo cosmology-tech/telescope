@@ -1,6 +1,6 @@
 import { buildTx, SigningClientResolver } from "../../helper-func-types";
-import { buildUseMutation } from "../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
+import { buildUseMutation } from "../../react-query";
 import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock, MsgLockAndSuperfluidDelegate, MsgUnPoolWhitelistedPool } from "./tx";
 export const createSuperfluidDelegate = (clientResolver?: SigningClientResolver) => buildTx<MsgSuperfluidDelegate>({
   clientResolver,

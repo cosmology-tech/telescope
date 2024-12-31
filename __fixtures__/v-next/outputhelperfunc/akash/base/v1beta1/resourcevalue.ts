@@ -11,6 +11,14 @@ export interface ResourceValueProtoMsg {
   value: Uint8Array;
 }
 /** Unit stores cpu, memory and storage metrics */
+export interface ResourceValueAmino {
+  val?: string;
+}
+export interface ResourceValueAminoMsg {
+  type: "akash/base/resource-value";
+  value: ResourceValueAmino;
+}
+/** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueSDKType {
   val: Uint8Array;
 }
@@ -21,6 +29,16 @@ function createBaseResourceValue(): ResourceValue {
 }
 export const ResourceValue = {
   typeUrl: "/akash.base.v1beta1.ResourceValue",
+  aminoType: "akash/base/resource-value",
+  is(o: any): o is ResourceValue {
+    return o && (o.$typeUrl === ResourceValue.typeUrl || o.val instanceof Uint8Array || typeof o.val === "string");
+  },
+  isSDK(o: any): o is ResourceValueSDKType {
+    return o && (o.$typeUrl === ResourceValue.typeUrl || o.val instanceof Uint8Array || typeof o.val === "string");
+  },
+  isAmino(o: any): o is ResourceValueAmino {
+    return o && (o.$typeUrl === ResourceValue.typeUrl || o.val instanceof Uint8Array || typeof o.val === "string");
+  },
   encode(message: ResourceValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.val.length !== 0) {
       writer.uint32(10).bytes(message.val);
@@ -106,5 +124,6 @@ export const ResourceValue = {
       typeUrl: "/akash.base.v1beta1.ResourceValue",
       value: ResourceValue.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

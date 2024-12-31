@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
@@ -108,6 +108,66 @@ export interface HttpBodyProtoMsg {
  * Use of this type only changes how the request and response bodies are
  * handled, all other features will continue to work unchanged.
  */
+export interface HttpBodyAmino {
+  /** The HTTP Content-Type header value specifying the content type of the body. */
+  content_type?: string;
+  /** The HTTP request/response body as raw binary. */
+  data?: string;
+  /**
+   * Application specific response metadata. Must be set in the first response
+   * for streaming APIs.
+   */
+  extensions?: AnyAmino[];
+}
+export interface HttpBodyAminoMsg {
+  type: "/google.api.HttpBody";
+  value: HttpBodyAmino;
+}
+/**
+ * Message that represents an arbitrary HTTP body. It should only be used for
+ * payload formats that can't be represented as JSON, such as raw binary or
+ * an HTML page.
+ * 
+ * 
+ * This message can be used both in streaming and non-streaming API methods in
+ * the request as well as the response.
+ * 
+ * It can be used as a top-level request field, which is convenient if one
+ * wants to extract parameters from either the URL or HTTP template into the
+ * request fields and also want access to the raw HTTP body.
+ * 
+ * Example:
+ * 
+ *     message GetResourceRequest {
+ *       // A unique request id.
+ *       string request_id = 1;
+ * 
+ *       // The raw HTTP body is bound to this field.
+ *       google.api.HttpBody http_body = 2;
+ * 
+ *     }
+ * 
+ *     service ResourceService {
+ *       rpc GetResource(GetResourceRequest)
+ *         returns (google.api.HttpBody);
+ *       rpc UpdateResource(google.api.HttpBody)
+ *         returns (google.protobuf.Empty);
+ * 
+ *     }
+ * 
+ * Example with streaming methods:
+ * 
+ *     service CaldavService {
+ *       rpc GetCalendar(stream google.api.HttpBody)
+ *         returns (stream google.api.HttpBody);
+ *       rpc UpdateCalendar(stream google.api.HttpBody)
+ *         returns (stream google.api.HttpBody);
+ * 
+ *     }
+ * 
+ * Use of this type only changes how the request and response bodies are
+ * handled, all other features will continue to work unchanged.
+ */
 export interface HttpBodySDKType {
   content_type: string;
   data: Uint8Array;
@@ -122,6 +182,15 @@ function createBaseHttpBody(): HttpBody {
 }
 export const HttpBody = {
   typeUrl: "/google.api.HttpBody",
+  is(o: any): o is HttpBody {
+    return o && (o.$typeUrl === HttpBody.typeUrl || typeof o.contentType === "string" && (o.data instanceof Uint8Array || typeof o.data === "string") && Array.isArray(o.extensions) && (!o.extensions.length || Any.is(o.extensions[0])));
+  },
+  isSDK(o: any): o is HttpBodySDKType {
+    return o && (o.$typeUrl === HttpBody.typeUrl || typeof o.content_type === "string" && (o.data instanceof Uint8Array || typeof o.data === "string") && Array.isArray(o.extensions) && (!o.extensions.length || Any.isSDK(o.extensions[0])));
+  },
+  isAmino(o: any): o is HttpBodyAmino {
+    return o && (o.$typeUrl === HttpBody.typeUrl || typeof o.content_type === "string" && (o.data instanceof Uint8Array || typeof o.data === "string") && Array.isArray(o.extensions) && (!o.extensions.length || Any.isAmino(o.extensions[0])));
+  },
   encode(message: HttpBody, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contentType !== undefined) {
       writer.uint32(10).string(message.contentType);
@@ -243,5 +312,6 @@ export const HttpBody = {
       typeUrl: "/google.api.HttpBody",
       value: HttpBody.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

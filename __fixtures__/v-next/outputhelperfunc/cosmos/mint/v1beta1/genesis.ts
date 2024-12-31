@@ -1,5 +1,6 @@
-import { Minter, MinterSDKType, Params, ParamsSDKType } from "./mint";
+import { Minter, MinterAmino, MinterSDKType, Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.mint.v1beta1";
@@ -15,6 +16,17 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the mint module's genesis state. */
+export interface GenesisStateAmino {
+  /** minter is a space for holding current inflation information. */
+  minter?: MinterAmino;
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
   minter: MinterSDKType;
   params: ParamsSDKType;
@@ -27,6 +39,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.mint.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Minter.is(o.minter) && Params.is(o.params));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Minter.isSDK(o.minter) && Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Minter.isAmino(o.minter) && Params.isAmino(o.params));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.minter !== undefined) {
       Minter.encode(message.minter, writer.uint32(10).fork()).ldelim();
@@ -132,5 +154,9 @@ export const GenesisState = {
       typeUrl: "/cosmos.mint.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Minter.registerTypeUrl();
+    Params.registerTypeUrl();
   }
 };

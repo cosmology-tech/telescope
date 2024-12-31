@@ -56,6 +56,51 @@ export interface PageRequestProtoMsg {
  *          PageRequest pagination = 2;
  *  }
  */
+export interface PageRequestAmino {
+  /**
+   * key is a value returned in PageResponse.next_key to begin
+   * querying the next page most efficiently. Only one of offset or key
+   * should be set.
+   */
+  key?: string;
+  /**
+   * offset is a numeric offset that can be used when key is unavailable.
+   * It is less efficient than using key. Only one of offset or key should
+   * be set.
+   */
+  offset?: string;
+  /**
+   * limit is the total number of results to be returned in the result page.
+   * If left empty it will default to a value to be set by each app.
+   */
+  limit?: string;
+  /**
+   * count_total is set to true  to indicate that the result set should include
+   * a count of the total number of items available for pagination in UIs.
+   * count_total is only respected when offset is used. It is ignored when key
+   * is set.
+   */
+  count_total?: boolean;
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  reverse?: boolean;
+}
+export interface PageRequestAminoMsg {
+  type: "cosmos-sdk/PageRequest";
+  value: PageRequestAmino;
+}
+/**
+ * PageRequest is to be embedded in gRPC request messages for efficient
+ * pagination. Ex:
+ * 
+ *  message SomeRequest {
+ *          Foo some_parameter = 1;
+ *          PageRequest pagination = 2;
+ *  }
+ */
 export interface PageRequestSDKType {
   key: Uint8Array;
   offset: bigint;
@@ -98,6 +143,32 @@ export interface PageResponseProtoMsg {
  *          PageResponse page = 2;
  *  }
  */
+export interface PageResponseAmino {
+  /**
+   * next_key is the key to be passed to PageRequest.key to
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
+   */
+  next_key?: string;
+  /**
+   * total is total number of results available if PageRequest.count_total
+   * was set, its value is undefined otherwise
+   */
+  total?: string;
+}
+export interface PageResponseAminoMsg {
+  type: "cosmos-sdk/PageResponse";
+  value: PageResponseAmino;
+}
+/**
+ * PageResponse is to be embedded in gRPC response messages where the
+ * corresponding request message has used PageRequest.
+ * 
+ *  message SomeResponse {
+ *          repeated Bar results = 1;
+ *          PageResponse page = 2;
+ *  }
+ */
 export interface PageResponseSDKType {
   next_key: Uint8Array;
   total: bigint;
@@ -113,6 +184,16 @@ function createBasePageRequest(): PageRequest {
 }
 export const PageRequest = {
   typeUrl: "/cosmos.base.query.v1beta1.PageRequest",
+  aminoType: "cosmos-sdk/PageRequest",
+  is(o: any): o is PageRequest {
+    return o && (o.$typeUrl === PageRequest.typeUrl || (o.key instanceof Uint8Array || typeof o.key === "string") && typeof o.offset === "bigint" && typeof o.limit === "bigint" && typeof o.countTotal === "boolean" && typeof o.reverse === "boolean");
+  },
+  isSDK(o: any): o is PageRequestSDKType {
+    return o && (o.$typeUrl === PageRequest.typeUrl || (o.key instanceof Uint8Array || typeof o.key === "string") && typeof o.offset === "bigint" && typeof o.limit === "bigint" && typeof o.count_total === "boolean" && typeof o.reverse === "boolean");
+  },
+  isAmino(o: any): o is PageRequestAmino {
+    return o && (o.$typeUrl === PageRequest.typeUrl || (o.key instanceof Uint8Array || typeof o.key === "string") && typeof o.offset === "bigint" && typeof o.limit === "bigint" && typeof o.count_total === "boolean" && typeof o.reverse === "boolean");
+  },
   encode(message: PageRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -266,7 +347,8 @@ export const PageRequest = {
       typeUrl: "/cosmos.base.query.v1beta1.PageRequest",
       value: PageRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBasePageResponse(): PageResponse {
   return {
@@ -276,6 +358,16 @@ function createBasePageResponse(): PageResponse {
 }
 export const PageResponse = {
   typeUrl: "/cosmos.base.query.v1beta1.PageResponse",
+  aminoType: "cosmos-sdk/PageResponse",
+  is(o: any): o is PageResponse {
+    return o && (o.$typeUrl === PageResponse.typeUrl || (o.nextKey instanceof Uint8Array || typeof o.nextKey === "string") && typeof o.total === "bigint");
+  },
+  isSDK(o: any): o is PageResponseSDKType {
+    return o && (o.$typeUrl === PageResponse.typeUrl || (o.next_key instanceof Uint8Array || typeof o.next_key === "string") && typeof o.total === "bigint");
+  },
+  isAmino(o: any): o is PageResponseAmino {
+    return o && (o.$typeUrl === PageResponse.typeUrl || (o.next_key instanceof Uint8Array || typeof o.next_key === "string") && typeof o.total === "bigint");
+  },
   encode(message: PageResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nextKey.length !== 0) {
       writer.uint32(10).bytes(message.nextKey);
@@ -379,5 +471,6 @@ export const PageResponse = {
       typeUrl: "/cosmos.base.query.v1beta1.PageResponse",
       value: PageResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

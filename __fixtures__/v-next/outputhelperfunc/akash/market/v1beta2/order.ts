@@ -1,7 +1,8 @@
-import { GroupSpec, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of order */
 export enum Order_State {
@@ -16,6 +17,7 @@ export enum Order_State {
   UNRECOGNIZED = -1,
 }
 export const Order_StateSDKType = Order_State;
+export const Order_StateAmino = Order_State;
 export function order_StateFromJSON(object: any): Order_State {
   switch (object) {
     case 0:
@@ -63,6 +65,17 @@ export interface OrderIDProtoMsg {
   value: Uint8Array;
 }
 /** OrderID stores owner and all other seq numbers */
+export interface OrderIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+}
+export interface OrderIDAminoMsg {
+  type: "akash/market/v1beta2/order-i-d";
+  value: OrderIDAmino;
+}
+/** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
   owner: string;
   dseq: bigint;
@@ -79,6 +92,17 @@ export interface Order {
 export interface OrderProtoMsg {
   typeUrl: "/akash.market.v1beta2.Order";
   value: Uint8Array;
+}
+/** Order stores orderID, state of order and other details */
+export interface OrderAmino {
+  order_id: OrderIDAmino;
+  state: Order_State;
+  spec: GroupSpecAmino;
+  created_at?: string;
+}
+export interface OrderAminoMsg {
+  type: "akash/market/v1beta2/order";
+  value: OrderAmino;
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderSDKType {
@@ -100,6 +124,18 @@ export interface OrderFiltersProtoMsg {
   value: Uint8Array;
 }
 /** OrderFilters defines flags for order list filter */
+export interface OrderFiltersAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  state: string;
+}
+export interface OrderFiltersAminoMsg {
+  type: "akash/market/v1beta2/order-filters";
+  value: OrderFiltersAmino;
+}
+/** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
   owner: string;
   dseq: bigint;
@@ -117,6 +153,16 @@ function createBaseOrderID(): OrderID {
 }
 export const OrderID = {
   typeUrl: "/akash.market.v1beta2.OrderID",
+  aminoType: "akash/market/v1beta2/order-i-d",
+  is(o: any): o is OrderID {
+    return o && (o.$typeUrl === OrderID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number");
+  },
+  isSDK(o: any): o is OrderIDSDKType {
+    return o && (o.$typeUrl === OrderID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number");
+  },
+  isAmino(o: any): o is OrderIDAmino {
+    return o && (o.$typeUrl === OrderID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number");
+  },
   encode(message: OrderID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -252,7 +298,8 @@ export const OrderID = {
       typeUrl: "/akash.market.v1beta2.OrderID",
       value: OrderID.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseOrder(): Order {
   return {
@@ -264,6 +311,16 @@ function createBaseOrder(): Order {
 }
 export const Order = {
   typeUrl: "/akash.market.v1beta2.Order",
+  aminoType: "akash/market/v1beta2/order",
+  is(o: any): o is Order {
+    return o && (o.$typeUrl === Order.typeUrl || OrderID.is(o.orderId) && isSet(o.state) && GroupSpec.is(o.spec) && typeof o.createdAt === "bigint");
+  },
+  isSDK(o: any): o is OrderSDKType {
+    return o && (o.$typeUrl === Order.typeUrl || OrderID.isSDK(o.order_id) && isSet(o.state) && GroupSpec.isSDK(o.spec) && typeof o.created_at === "bigint");
+  },
+  isAmino(o: any): o is OrderAmino {
+    return o && (o.$typeUrl === Order.typeUrl || OrderID.isAmino(o.order_id) && isSet(o.state) && GroupSpec.isAmino(o.spec) && typeof o.created_at === "bigint");
+  },
   encode(message: Order, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.orderId !== undefined) {
       OrderID.encode(message.orderId, writer.uint32(10).fork()).ldelim();
@@ -403,6 +460,10 @@ export const Order = {
       typeUrl: "/akash.market.v1beta2.Order",
       value: Order.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    OrderID.registerTypeUrl();
+    GroupSpec.registerTypeUrl();
   }
 };
 function createBaseOrderFilters(): OrderFilters {
@@ -416,6 +477,16 @@ function createBaseOrderFilters(): OrderFilters {
 }
 export const OrderFilters = {
   typeUrl: "/akash.market.v1beta2.OrderFilters",
+  aminoType: "akash/market/v1beta2/order-filters",
+  is(o: any): o is OrderFilters {
+    return o && (o.$typeUrl === OrderFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.state === "string");
+  },
+  isSDK(o: any): o is OrderFiltersSDKType {
+    return o && (o.$typeUrl === OrderFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.state === "string");
+  },
+  isAmino(o: any): o is OrderFiltersAmino {
+    return o && (o.$typeUrl === OrderFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.state === "string");
+  },
   encode(message: OrderFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -567,5 +638,6 @@ export const OrderFilters = {
       typeUrl: "/akash.market.v1beta2.OrderFilters",
       value: OrderFilters.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

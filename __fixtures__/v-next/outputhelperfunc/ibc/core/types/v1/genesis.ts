@@ -1,10 +1,14 @@
 import { GenesisState as GenesisState1 } from "../../client/v1/genesis";
+import { GenesisStateAmino as GenesisState1Amino } from "../../client/v1/genesis";
 import { GenesisStateSDKType as GenesisState1SDKType } from "../../client/v1/genesis";
 import { GenesisState as GenesisState2 } from "../../connection/v1/genesis";
+import { GenesisStateAmino as GenesisState2Amino } from "../../connection/v1/genesis";
 import { GenesisStateSDKType as GenesisState2SDKType } from "../../connection/v1/genesis";
 import { GenesisState as GenesisState3 } from "../../channel/v1/genesis";
+import { GenesisStateAmino as GenesisState3Amino } from "../../channel/v1/genesis";
 import { GenesisStateSDKType as GenesisState3SDKType } from "../../channel/v1/genesis";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.types.v1";
@@ -22,6 +26,19 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the ibc module's genesis state. */
+export interface GenesisStateAmino {
+  /** ICS002 - Clients genesis state */
+  client_genesis?: GenesisState1Amino;
+  /** ICS003 - Connections genesis state */
+  connection_genesis?: GenesisState2Amino;
+  /** ICS004 - Channel genesis state */
+  channel_genesis?: GenesisState3Amino;
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the ibc module's genesis state. */
 export interface GenesisStateSDKType {
   client_genesis: GenesisState1SDKType;
   connection_genesis: GenesisState2SDKType;
@@ -36,6 +53,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/ibc.core.types.v1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || GenesisState1.is(o.clientGenesis) && GenesisState2.is(o.connectionGenesis) && GenesisState3.is(o.channelGenesis));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || GenesisState1.isSDK(o.client_genesis) && GenesisState2.isSDK(o.connection_genesis) && GenesisState3.isSDK(o.channel_genesis));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || GenesisState1.isAmino(o.client_genesis) && GenesisState2.isAmino(o.connection_genesis) && GenesisState3.isAmino(o.channel_genesis));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientGenesis !== undefined) {
       GenesisState1.encode(message.clientGenesis, writer.uint32(10).fork()).ldelim();
@@ -159,5 +186,10 @@ export const GenesisState = {
       typeUrl: "/ibc.core.types.v1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GenesisState1.registerTypeUrl();
+    GenesisState2.registerTypeUrl();
+    GenesisState3.registerTypeUrl();
   }
 };

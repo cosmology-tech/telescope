@@ -15,6 +15,18 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params holds parameters for the incentives module */
+export interface ParamsAmino {
+  /**
+   * distr_epoch_identifier is what epoch type distribution will be triggered by
+   * (day, week, etc.)
+   */
+  distr_epoch_identifier?: string;
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/incentives/params";
+  value: ParamsAmino;
+}
+/** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
   distr_epoch_identifier: string;
 }
@@ -25,6 +37,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.incentives.Params",
+  aminoType: "osmosis/incentives/params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.distrEpochIdentifier === "string");
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.distr_epoch_identifier === "string");
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.distr_epoch_identifier === "string");
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.distrEpochIdentifier !== undefined) {
       writer.uint32(10).string(message.distrEpochIdentifier);
@@ -110,5 +132,6 @@ export const Params = {
       typeUrl: "/osmosis.incentives.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

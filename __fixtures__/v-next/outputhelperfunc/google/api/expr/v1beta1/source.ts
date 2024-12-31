@@ -10,6 +10,14 @@ export interface SourceInfo_PositionsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface SourceInfo_PositionsEntryAmino {
+  key?: number;
+  value?: number;
+}
+export interface SourceInfo_PositionsEntryAminoMsg {
+  type: string;
+  value: SourceInfo_PositionsEntryAmino;
+}
 export interface SourceInfo_PositionsEntrySDKType {
   key: number;
   value: number;
@@ -45,6 +53,36 @@ export interface SourceInfoProtoMsg {
   value: Uint8Array;
 }
 /** Source information collected at parse time. */
+export interface SourceInfoAmino {
+  /**
+   * The location name. All position information attached to an expression is
+   * relative to this location.
+   * 
+   * The location could be a file, UI element, or similar. For example,
+   * `acme/app/AnvilPolicy.cel`.
+   */
+  location?: string;
+  /**
+   * Monotonically increasing list of character offsets where newlines appear.
+   * 
+   * The line number of a given position is the index `i` where for a given
+   * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
+   * column may be derivd from `id_positions[id] - line_offsets[i]`.
+   */
+  line_offsets?: number[];
+  /**
+   * A map from the parse node id (e.g. `Expr.id`) to the character offset
+   * within source.
+   */
+  positions?: {
+    [key: number]: number;
+  };
+}
+export interface SourceInfoAminoMsg {
+  type: "/google.api.expr.v1beta1.SourceInfo";
+  value: SourceInfoAmino;
+}
+/** Source information collected at parse time. */
 export interface SourceInfoSDKType {
   location: string;
   line_offsets: number[];
@@ -72,6 +110,27 @@ export interface SourcePosition {
 export interface SourcePositionProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.SourcePosition";
   value: Uint8Array;
+}
+/** A specific position in source. */
+export interface SourcePositionAmino {
+  /** The soucre location name (e.g. file name). */
+  location?: string;
+  /** The character offset. */
+  offset?: number;
+  /**
+   * The 1-based index of the starting line in the source text
+   * where the issue occurs, or 0 if unknown.
+   */
+  line?: number;
+  /**
+   * The 0-based index of the starting position within the line of source text
+   * where the issue occurs.  Only meaningful if line is nonzer..
+   */
+  column?: number;
+}
+export interface SourcePositionAminoMsg {
+  type: "/google.api.expr.v1beta1.SourcePosition";
+  value: SourcePositionAmino;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {
@@ -176,7 +235,8 @@ export const SourceInfo_PositionsEntry = {
   },
   toProto(message: SourceInfo_PositionsEntry): Uint8Array {
     return SourceInfo_PositionsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSourceInfo(): SourceInfo {
   return {
@@ -187,6 +247,15 @@ function createBaseSourceInfo(): SourceInfo {
 }
 export const SourceInfo = {
   typeUrl: "/google.api.expr.v1beta1.SourceInfo",
+  is(o: any): o is SourceInfo {
+    return o && (o.$typeUrl === SourceInfo.typeUrl || typeof o.location === "string" && Array.isArray(o.lineOffsets) && (!o.lineOffsets.length || typeof o.lineOffsets[0] === "number") && isSet(o.positions));
+  },
+  isSDK(o: any): o is SourceInfoSDKType {
+    return o && (o.$typeUrl === SourceInfo.typeUrl || typeof o.location === "string" && Array.isArray(o.line_offsets) && (!o.line_offsets.length || typeof o.line_offsets[0] === "number") && isSet(o.positions));
+  },
+  isAmino(o: any): o is SourceInfoAmino {
+    return o && (o.$typeUrl === SourceInfo.typeUrl || typeof o.location === "string" && Array.isArray(o.line_offsets) && (!o.line_offsets.length || typeof o.line_offsets[0] === "number") && isSet(o.positions));
+  },
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.location !== undefined) {
       writer.uint32(18).string(message.location);
@@ -365,7 +434,8 @@ export const SourceInfo = {
       typeUrl: "/google.api.expr.v1beta1.SourceInfo",
       value: SourceInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSourcePosition(): SourcePosition {
   return {
@@ -377,6 +447,15 @@ function createBaseSourcePosition(): SourcePosition {
 }
 export const SourcePosition = {
   typeUrl: "/google.api.expr.v1beta1.SourcePosition",
+  is(o: any): o is SourcePosition {
+    return o && (o.$typeUrl === SourcePosition.typeUrl || typeof o.location === "string" && typeof o.offset === "number" && typeof o.line === "number" && typeof o.column === "number");
+  },
+  isSDK(o: any): o is SourcePositionSDKType {
+    return o && (o.$typeUrl === SourcePosition.typeUrl || typeof o.location === "string" && typeof o.offset === "number" && typeof o.line === "number" && typeof o.column === "number");
+  },
+  isAmino(o: any): o is SourcePositionAmino {
+    return o && (o.$typeUrl === SourcePosition.typeUrl || typeof o.location === "string" && typeof o.offset === "number" && typeof o.line === "number" && typeof o.column === "number");
+  },
   encode(message: SourcePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.location !== undefined) {
       writer.uint32(10).string(message.location);
@@ -504,5 +583,6 @@ export const SourcePosition = {
       typeUrl: "/google.api.expr.v1beta1.SourcePosition",
       value: SourcePosition.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

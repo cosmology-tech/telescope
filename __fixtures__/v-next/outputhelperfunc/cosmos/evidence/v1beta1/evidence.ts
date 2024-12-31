@@ -1,4 +1,4 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
@@ -21,6 +21,20 @@ export interface EquivocationProtoMsg {
  * Equivocation implements the Evidence interface and defines evidence of double
  * signing misbehavior.
  */
+export interface EquivocationAmino {
+  height?: string;
+  time?: string;
+  power?: string;
+  consensus_address?: string;
+}
+export interface EquivocationAminoMsg {
+  type: "cosmos-sdk/Equivocation";
+  value: EquivocationAmino;
+}
+/**
+ * Equivocation implements the Evidence interface and defines evidence of double
+ * signing misbehavior.
+ */
 export interface EquivocationSDKType {
   height: bigint;
   time: Date;
@@ -37,6 +51,16 @@ function createBaseEquivocation(): Equivocation {
 }
 export const Equivocation = {
   typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
+  aminoType: "cosmos-sdk/Equivocation",
+  is(o: any): o is Equivocation {
+    return o && (o.$typeUrl === Equivocation.typeUrl || typeof o.height === "bigint" && Timestamp.is(o.time) && typeof o.power === "bigint" && typeof o.consensusAddress === "string");
+  },
+  isSDK(o: any): o is EquivocationSDKType {
+    return o && (o.$typeUrl === Equivocation.typeUrl || typeof o.height === "bigint" && Timestamp.isSDK(o.time) && typeof o.power === "bigint" && typeof o.consensus_address === "string");
+  },
+  isAmino(o: any): o is EquivocationAmino {
+    return o && (o.$typeUrl === Equivocation.typeUrl || typeof o.height === "bigint" && Timestamp.isAmino(o.time) && typeof o.power === "bigint" && typeof o.consensus_address === "string");
+  },
   encode(message: Equivocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
@@ -174,5 +198,6 @@ export const Equivocation = {
       typeUrl: "/cosmos.evidence.v1beta1.Equivocation",
       value: Equivocation.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

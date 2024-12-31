@@ -15,6 +15,18 @@ export interface PubKeyProtoMsg {
   value: Uint8Array;
 }
 /** PubKey defines a secp256r1 ECDSA public key. */
+export interface PubKeyAmino {
+  /**
+   * Point on secp256r1 curve in a compressed representation as specified in section
+   * 4.3.6 of ANSI X9.62: https://webstore.ansi.org/standards/ascx9/ansix9621998
+   */
+  key?: string;
+}
+export interface PubKeyAminoMsg {
+  type: "cosmos-sdk/PubKey";
+  value: PubKeyAmino;
+}
+/** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKeySDKType {
   key: Uint8Array;
 }
@@ -28,6 +40,15 @@ export interface PrivKeyProtoMsg {
   value: Uint8Array;
 }
 /** PrivKey defines a secp256r1 ECDSA private key. */
+export interface PrivKeyAmino {
+  /** secret number serialized using big-endian encoding */
+  secret?: string;
+}
+export interface PrivKeyAminoMsg {
+  type: "cosmos-sdk/PrivKey";
+  value: PrivKeyAmino;
+}
+/** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKeySDKType {
   secret: Uint8Array;
 }
@@ -38,6 +59,16 @@ function createBasePubKey(): PubKey {
 }
 export const PubKey = {
   typeUrl: "/cosmos.crypto.secp256r1.PubKey",
+  aminoType: "cosmos-sdk/PubKey",
+  is(o: any): o is PubKey {
+    return o && (o.$typeUrl === PubKey.typeUrl || o.key instanceof Uint8Array || typeof o.key === "string");
+  },
+  isSDK(o: any): o is PubKeySDKType {
+    return o && (o.$typeUrl === PubKey.typeUrl || o.key instanceof Uint8Array || typeof o.key === "string");
+  },
+  isAmino(o: any): o is PubKeyAmino {
+    return o && (o.$typeUrl === PubKey.typeUrl || o.key instanceof Uint8Array || typeof o.key === "string");
+  },
   encode(message: PubKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -123,7 +154,8 @@ export const PubKey = {
       typeUrl: "/cosmos.crypto.secp256r1.PubKey",
       value: PubKey.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBasePrivKey(): PrivKey {
   return {
@@ -132,6 +164,16 @@ function createBasePrivKey(): PrivKey {
 }
 export const PrivKey = {
   typeUrl: "/cosmos.crypto.secp256r1.PrivKey",
+  aminoType: "cosmos-sdk/PrivKey",
+  is(o: any): o is PrivKey {
+    return o && (o.$typeUrl === PrivKey.typeUrl || o.secret instanceof Uint8Array || typeof o.secret === "string");
+  },
+  isSDK(o: any): o is PrivKeySDKType {
+    return o && (o.$typeUrl === PrivKey.typeUrl || o.secret instanceof Uint8Array || typeof o.secret === "string");
+  },
+  isAmino(o: any): o is PrivKeyAmino {
+    return o && (o.$typeUrl === PrivKey.typeUrl || o.secret instanceof Uint8Array || typeof o.secret === "string");
+  },
   encode(message: PrivKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.secret.length !== 0) {
       writer.uint32(10).bytes(message.secret);
@@ -217,5 +259,6 @@ export const PrivKey = {
       typeUrl: "/cosmos.crypto.secp256r1.PrivKey",
       value: PrivKey.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

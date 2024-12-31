@@ -1,5 +1,6 @@
-import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
+import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
@@ -14,6 +15,17 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.fees.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateAmino {
+  /** module parameters */
+  params?: ParamsAmino;
+  /** active registered contracts */
+  dev_fee_infos?: DevFeeInfoAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.fees.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
@@ -47,6 +59,32 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the fees module params */
+export interface ParamsAmino {
+  /** parameter to enable fees */
+  enable_fees?: boolean;
+  /**
+   * developer_shares defines the proportion of the transaction fees to be
+   * distributed to the registered contract owner
+   */
+  developer_shares?: string;
+  /**
+   * developer_shares defines the proportion of the transaction fees to be
+   * distributed to validators
+   */
+  validator_shares?: string;
+  /**
+   * addr_derivation_cost_create defines the cost of address derivation for
+   * verifying the contract deployer at fee registration
+   */
+  addr_derivation_cost_create?: string;
+  /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
+  min_gas_price?: string;
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.fees.v1.Params";
+  value: ParamsAmino;
+}
+/** Params defines the fees module params */
 export interface ParamsSDKType {
   enable_fees: boolean;
   developer_shares: string;
@@ -62,6 +100,15 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/evmos.fees.v1.GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params) && Array.isArray(o.devFeeInfos) && (!o.devFeeInfos.length || DevFeeInfo.is(o.devFeeInfos[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params) && Array.isArray(o.dev_fee_infos) && (!o.dev_fee_infos.length || DevFeeInfo.isSDK(o.dev_fee_infos[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params) && Array.isArray(o.dev_fee_infos) && (!o.dev_fee_infos.length || DevFeeInfo.isAmino(o.dev_fee_infos[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -169,6 +216,10 @@ export const GenesisState = {
       typeUrl: "/evmos.fees.v1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
+    DevFeeInfo.registerTypeUrl();
   }
 };
 function createBaseParams(): Params {
@@ -182,6 +233,15 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/evmos.fees.v1.Params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enableFees === "boolean" && typeof o.developerShares === "string" && typeof o.validatorShares === "string" && typeof o.addrDerivationCostCreate === "bigint" && typeof o.minGasPrice === "string");
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enable_fees === "boolean" && typeof o.developer_shares === "string" && typeof o.validator_shares === "string" && typeof o.addr_derivation_cost_create === "bigint" && typeof o.min_gas_price === "string");
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enable_fees === "boolean" && typeof o.developer_shares === "string" && typeof o.validator_shares === "string" && typeof o.addr_derivation_cost_create === "bigint" && typeof o.min_gas_price === "string");
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.enableFees !== undefined) {
       writer.uint32(8).bool(message.enableFees);
@@ -327,5 +387,6 @@ export const Params = {
       typeUrl: "/evmos.fees.v1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

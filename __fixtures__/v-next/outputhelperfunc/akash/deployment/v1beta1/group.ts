@@ -1,7 +1,8 @@
-import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta1/attribute";
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirementsSDKType } from "../../base/v1beta1/attribute";
+import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -20,6 +21,7 @@ export enum Group_State {
   UNRECOGNIZED = -1,
 }
 export const Group_StateSDKType = Group_State;
+export const Group_StateAmino = Group_State;
 export function group_StateFromJSON(object: any): Group_State {
   switch (object) {
     case 0:
@@ -69,6 +71,14 @@ export interface MsgCloseGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgCloseGroupAmino {
+  id: GroupIDAmino | undefined;
+}
+export interface MsgCloseGroupAminoMsg {
+  type: "akash/deployment/testonly-close-group";
+  value: MsgCloseGroupAmino;
+}
+/** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
   id: GroupIDSDKType | undefined;
 }
@@ -77,6 +87,12 @@ export interface MsgCloseGroupResponse {}
 export interface MsgCloseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
   value: Uint8Array;
+}
+/** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
+export interface MsgCloseGroupResponseAmino {}
+export interface MsgCloseGroupResponseAminoMsg {
+  type: "akash/deployment/testonly-close-group-response";
+  value: MsgCloseGroupResponseAmino;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
@@ -89,6 +105,14 @@ export interface MsgPauseGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgPauseGroupAmino {
+  id: GroupIDAmino | undefined;
+}
+export interface MsgPauseGroupAminoMsg {
+  type: "akash/deployment/testonly-pause-group";
+  value: MsgPauseGroupAmino;
+}
+/** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
   id: GroupIDSDKType | undefined;
 }
@@ -97,6 +121,12 @@ export interface MsgPauseGroupResponse {}
 export interface MsgPauseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
   value: Uint8Array;
+}
+/** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
+export interface MsgPauseGroupResponseAmino {}
+export interface MsgPauseGroupResponseAminoMsg {
+  type: "akash/deployment/testonly-pause-group-response";
+  value: MsgPauseGroupResponseAmino;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
@@ -109,6 +139,14 @@ export interface MsgStartGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgStartGroupAmino {
+  id: GroupIDAmino | undefined;
+}
+export interface MsgStartGroupAminoMsg {
+  type: "akash/deployment/testonly-start-group";
+  value: MsgStartGroupAmino;
+}
+/** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
   id: GroupIDSDKType | undefined;
 }
@@ -117,6 +155,12 @@ export interface MsgStartGroupResponse {}
 export interface MsgStartGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse";
   value: Uint8Array;
+}
+/** MsgStartGroupResponse defines the Msg/StartGroup response type. */
+export interface MsgStartGroupResponseAmino {}
+export interface MsgStartGroupResponseAminoMsg {
+  type: "akash/deployment/testonly-start-group-response";
+  value: MsgStartGroupResponseAmino;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
@@ -129,6 +173,16 @@ export interface GroupID {
 export interface GroupIDProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GroupID";
   value: Uint8Array;
+}
+/** GroupID stores owner, deployment sequence number and group sequence number */
+export interface GroupIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+}
+export interface GroupIDAminoMsg {
+  type: "akash/deployment/group-i-d";
+  value: GroupIDAmino;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
@@ -145,6 +199,16 @@ export interface GroupSpec {
 export interface GroupSpecProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GroupSpec";
   value: Uint8Array;
+}
+/** GroupSpec stores group specifications */
+export interface GroupSpecAmino {
+  name: string;
+  requirements: PlacementRequirementsAmino | undefined;
+  resources: ResourceAmino[];
+}
+export interface GroupSpecAminoMsg {
+  type: "akash/deployment/group-spec";
+  value: GroupSpecAmino;
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -164,6 +228,17 @@ export interface GroupProtoMsg {
   value: Uint8Array;
 }
 /** Group stores group id, state and specifications of group */
+export interface GroupAmino {
+  group_id: GroupIDAmino | undefined;
+  state: Group_State;
+  group_spec: GroupSpecAmino | undefined;
+  created_at?: string;
+}
+export interface GroupAminoMsg {
+  type: "akash/deployment/group";
+  value: GroupAmino;
+}
+/** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id: GroupIDSDKType | undefined;
   state: Group_State;
@@ -181,6 +256,16 @@ export interface ResourceProtoMsg {
   value: Uint8Array;
 }
 /** Resource stores unit, total count and price of resource */
+export interface ResourceAmino {
+  resources: ResourceUnitsAmino | undefined;
+  count: number;
+  price: CoinAmino | undefined;
+}
+export interface ResourceAminoMsg {
+  type: "akash/deployment/resource";
+  value: ResourceAmino;
+}
+/** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
   resources: ResourceUnitsSDKType | undefined;
   count: number;
@@ -193,6 +278,13 @@ function createBaseMsgCloseGroup(): MsgCloseGroup {
 }
 export const MsgCloseGroup = {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup",
+  aminoType: "akash/deployment/testonly-close-group",
+  is(o: any): o is MsgCloseGroup {
+    return o && (o.$typeUrl === MsgCloseGroup.typeUrl || GroupID.is(o.id));
+  },
+  isSDK(o: any): o is MsgCloseGroupSDKType {
+    return o && (o.$typeUrl === MsgCloseGroup.typeUrl || GroupID.isSDK(o.id));
+  },
   encode(message: MsgCloseGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -280,6 +372,9 @@ export const MsgCloseGroup = {
       typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup",
       value: MsgCloseGroup.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GroupID.registerTypeUrl();
   }
 };
 function createBaseMsgCloseGroupResponse(): MsgCloseGroupResponse {
@@ -287,6 +382,13 @@ function createBaseMsgCloseGroupResponse(): MsgCloseGroupResponse {
 }
 export const MsgCloseGroupResponse = {
   typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse",
+  aminoType: "akash/deployment/testonly-close-group-response",
+  is(o: any): o is MsgCloseGroupResponse {
+    return o && o.$typeUrl === MsgCloseGroupResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCloseGroupResponseSDKType {
+    return o && o.$typeUrl === MsgCloseGroupResponse.typeUrl;
+  },
   encode(_: MsgCloseGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -354,7 +456,8 @@ export const MsgCloseGroupResponse = {
       typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse",
       value: MsgCloseGroupResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgPauseGroup(): MsgPauseGroup {
   return {
@@ -363,6 +466,13 @@ function createBaseMsgPauseGroup(): MsgPauseGroup {
 }
 export const MsgPauseGroup = {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup",
+  aminoType: "akash/deployment/testonly-pause-group",
+  is(o: any): o is MsgPauseGroup {
+    return o && (o.$typeUrl === MsgPauseGroup.typeUrl || GroupID.is(o.id));
+  },
+  isSDK(o: any): o is MsgPauseGroupSDKType {
+    return o && (o.$typeUrl === MsgPauseGroup.typeUrl || GroupID.isSDK(o.id));
+  },
   encode(message: MsgPauseGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -450,6 +560,9 @@ export const MsgPauseGroup = {
       typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup",
       value: MsgPauseGroup.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GroupID.registerTypeUrl();
   }
 };
 function createBaseMsgPauseGroupResponse(): MsgPauseGroupResponse {
@@ -457,6 +570,13 @@ function createBaseMsgPauseGroupResponse(): MsgPauseGroupResponse {
 }
 export const MsgPauseGroupResponse = {
   typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse",
+  aminoType: "akash/deployment/testonly-pause-group-response",
+  is(o: any): o is MsgPauseGroupResponse {
+    return o && o.$typeUrl === MsgPauseGroupResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgPauseGroupResponseSDKType {
+    return o && o.$typeUrl === MsgPauseGroupResponse.typeUrl;
+  },
   encode(_: MsgPauseGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -524,7 +644,8 @@ export const MsgPauseGroupResponse = {
       typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse",
       value: MsgPauseGroupResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgStartGroup(): MsgStartGroup {
   return {
@@ -533,6 +654,13 @@ function createBaseMsgStartGroup(): MsgStartGroup {
 }
 export const MsgStartGroup = {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroup",
+  aminoType: "akash/deployment/testonly-start-group",
+  is(o: any): o is MsgStartGroup {
+    return o && (o.$typeUrl === MsgStartGroup.typeUrl || GroupID.is(o.id));
+  },
+  isSDK(o: any): o is MsgStartGroupSDKType {
+    return o && (o.$typeUrl === MsgStartGroup.typeUrl || GroupID.isSDK(o.id));
+  },
   encode(message: MsgStartGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -620,6 +748,9 @@ export const MsgStartGroup = {
       typeUrl: "/akash.deployment.v1beta1.MsgStartGroup",
       value: MsgStartGroup.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GroupID.registerTypeUrl();
   }
 };
 function createBaseMsgStartGroupResponse(): MsgStartGroupResponse {
@@ -627,6 +758,13 @@ function createBaseMsgStartGroupResponse(): MsgStartGroupResponse {
 }
 export const MsgStartGroupResponse = {
   typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse",
+  aminoType: "akash/deployment/testonly-start-group-response",
+  is(o: any): o is MsgStartGroupResponse {
+    return o && o.$typeUrl === MsgStartGroupResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgStartGroupResponseSDKType {
+    return o && o.$typeUrl === MsgStartGroupResponse.typeUrl;
+  },
   encode(_: MsgStartGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -694,7 +832,8 @@ export const MsgStartGroupResponse = {
       typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse",
       value: MsgStartGroupResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseGroupID(): GroupID {
   return {
@@ -705,6 +844,13 @@ function createBaseGroupID(): GroupID {
 }
 export const GroupID = {
   typeUrl: "/akash.deployment.v1beta1.GroupID",
+  aminoType: "akash/deployment/group-i-d",
+  is(o: any): o is GroupID {
+    return o && (o.$typeUrl === GroupID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number");
+  },
+  isSDK(o: any): o is GroupIDSDKType {
+    return o && (o.$typeUrl === GroupID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number");
+  },
   encode(message: GroupID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -824,7 +970,8 @@ export const GroupID = {
       typeUrl: "/akash.deployment.v1beta1.GroupID",
       value: GroupID.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseGroupSpec(): GroupSpec {
   return {
@@ -835,6 +982,13 @@ function createBaseGroupSpec(): GroupSpec {
 }
 export const GroupSpec = {
   typeUrl: "/akash.deployment.v1beta1.GroupSpec",
+  aminoType: "akash/deployment/group-spec",
+  is(o: any): o is GroupSpec {
+    return o && (o.$typeUrl === GroupSpec.typeUrl || typeof o.name === "string" && PlacementRequirements.is(o.requirements) && Array.isArray(o.resources) && (!o.resources.length || Resource.is(o.resources[0])));
+  },
+  isSDK(o: any): o is GroupSpecSDKType {
+    return o && (o.$typeUrl === GroupSpec.typeUrl || typeof o.name === "string" && PlacementRequirements.isSDK(o.requirements) && Array.isArray(o.resources) && (!o.resources.length || Resource.isSDK(o.resources[0])));
+  },
   encode(message: GroupSpec, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -964,6 +1118,10 @@ export const GroupSpec = {
       typeUrl: "/akash.deployment.v1beta1.GroupSpec",
       value: GroupSpec.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PlacementRequirements.registerTypeUrl();
+    Resource.registerTypeUrl();
   }
 };
 function createBaseGroup(): Group {
@@ -976,6 +1134,13 @@ function createBaseGroup(): Group {
 }
 export const Group = {
   typeUrl: "/akash.deployment.v1beta1.Group",
+  aminoType: "akash/deployment/group",
+  is(o: any): o is Group {
+    return o && (o.$typeUrl === Group.typeUrl || GroupID.is(o.groupId) && isSet(o.state) && GroupSpec.is(o.groupSpec) && typeof o.createdAt === "bigint");
+  },
+  isSDK(o: any): o is GroupSDKType {
+    return o && (o.$typeUrl === Group.typeUrl || GroupID.isSDK(o.group_id) && isSet(o.state) && GroupSpec.isSDK(o.group_spec) && typeof o.created_at === "bigint");
+  },
   encode(message: Group, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.groupId !== undefined) {
       GroupID.encode(message.groupId, writer.uint32(10).fork()).ldelim();
@@ -1115,6 +1280,10 @@ export const Group = {
       typeUrl: "/akash.deployment.v1beta1.Group",
       value: Group.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GroupID.registerTypeUrl();
+    GroupSpec.registerTypeUrl();
   }
 };
 function createBaseResource(): Resource {
@@ -1126,6 +1295,13 @@ function createBaseResource(): Resource {
 }
 export const Resource = {
   typeUrl: "/akash.deployment.v1beta1.Resource",
+  aminoType: "akash/deployment/resource",
+  is(o: any): o is Resource {
+    return o && (o.$typeUrl === Resource.typeUrl || ResourceUnits.is(o.resources) && typeof o.count === "number" && Coin.is(o.price));
+  },
+  isSDK(o: any): o is ResourceSDKType {
+    return o && (o.$typeUrl === Resource.typeUrl || ResourceUnits.isSDK(o.resources) && typeof o.count === "number" && Coin.isSDK(o.price));
+  },
   encode(message: Resource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.resources !== undefined) {
       ResourceUnits.encode(message.resources, writer.uint32(10).fork()).ldelim();
@@ -1247,5 +1423,9 @@ export const Resource = {
       typeUrl: "/akash.deployment.v1beta1.Resource",
       value: Resource.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ResourceUnits.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };

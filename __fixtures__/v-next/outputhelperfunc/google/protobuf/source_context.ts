@@ -21,6 +21,21 @@ export interface SourceContextProtoMsg {
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
  */
+export interface SourceContextAmino {
+  /**
+   * The path-qualified name of the .proto file that contained the associated
+   * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
+   */
+  file_name?: string;
+}
+export interface SourceContextAminoMsg {
+  type: "/google.protobuf.SourceContext";
+  value: SourceContextAmino;
+}
+/**
+ * `SourceContext` represents information about the source of a
+ * protobuf element, like the file in which it is defined.
+ */
 export interface SourceContextSDKType {
   file_name: string;
 }
@@ -31,6 +46,15 @@ function createBaseSourceContext(): SourceContext {
 }
 export const SourceContext = {
   typeUrl: "/google.protobuf.SourceContext",
+  is(o: any): o is SourceContext {
+    return o && (o.$typeUrl === SourceContext.typeUrl || typeof o.fileName === "string");
+  },
+  isSDK(o: any): o is SourceContextSDKType {
+    return o && (o.$typeUrl === SourceContext.typeUrl || typeof o.file_name === "string");
+  },
+  isAmino(o: any): o is SourceContextAmino {
+    return o && (o.$typeUrl === SourceContext.typeUrl || typeof o.file_name === "string");
+  },
   encode(message: SourceContext, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fileName !== undefined) {
       writer.uint32(10).string(message.fileName);
@@ -110,5 +134,6 @@ export const SourceContext = {
       typeUrl: "/google.protobuf.SourceContext",
       value: SourceContext.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

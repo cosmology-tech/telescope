@@ -1,6 +1,7 @@
-import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType } from "./tx";
-import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
+import { MsgStoreCode, MsgStoreCodeAmino, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractAmino, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractAmino, MsgExecuteContractSDKType } from "./tx";
+import { Params, ParamsAmino, ParamsSDKType, CodeInfo, CodeInfoAmino, CodeInfoSDKType, ContractInfo, ContractInfoAmino, ContractInfoSDKType, Model, ModelAmino, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmwasm.wasm.v1";
@@ -15,6 +16,18 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState - genesis state of x/wasm */
+export interface GenesisStateAmino {
+  params?: ParamsAmino;
+  codes?: CodeAmino[];
+  contracts?: ContractAmino[];
+  sequences?: SequenceAmino[];
+  gen_msgs?: GenesisState_GenMsgsAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "wasm/GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisStateSDKType {
@@ -41,6 +54,19 @@ export interface GenesisState_GenMsgsProtoMsg {
  * GenMsgs define the messages that can be executed during genesis phase in
  * order. The intention is to have more human readable data that is auditable.
  */
+export interface GenesisState_GenMsgsAmino {
+  store_code?: MsgStoreCodeAmino;
+  instantiate_contract?: MsgInstantiateContractAmino;
+  execute_contract?: MsgExecuteContractAmino;
+}
+export interface GenesisState_GenMsgsAminoMsg {
+  type: "wasm/GenMsgs";
+  value: GenesisState_GenMsgsAmino;
+}
+/**
+ * GenMsgs define the messages that can be executed during genesis phase in
+ * order. The intention is to have more human readable data that is auditable.
+ */
 export interface GenesisState_GenMsgsSDKType {
   store_code?: MsgStoreCodeSDKType;
   instantiate_contract?: MsgInstantiateContractSDKType;
@@ -57,6 +83,18 @@ export interface Code {
 export interface CodeProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Code";
   value: Uint8Array;
+}
+/** Code struct encompasses CodeInfo and CodeBytes */
+export interface CodeAmino {
+  code_id?: string;
+  code_info?: CodeInfoAmino;
+  code_bytes?: string;
+  /** Pinned to wasmvm cache */
+  pinned?: boolean;
+}
+export interface CodeAminoMsg {
+  type: "wasm/Code";
+  value: CodeAmino;
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeSDKType {
@@ -76,6 +114,16 @@ export interface ContractProtoMsg {
   value: Uint8Array;
 }
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
+export interface ContractAmino {
+  contract_address?: string;
+  contract_info?: ContractInfoAmino;
+  contract_state?: ModelAmino[];
+}
+export interface ContractAminoMsg {
+  type: "wasm/Contract";
+  value: ContractAmino;
+}
+/** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface ContractSDKType {
   contract_address: string;
   contract_info: ContractInfoSDKType;
@@ -89,6 +137,15 @@ export interface Sequence {
 export interface SequenceProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.Sequence";
   value: Uint8Array;
+}
+/** Sequence key and value of an id generation counter */
+export interface SequenceAmino {
+  id_key?: string;
+  value?: string;
+}
+export interface SequenceAminoMsg {
+  type: "wasm/Sequence";
+  value: SequenceAmino;
 }
 /** Sequence key and value of an id generation counter */
 export interface SequenceSDKType {
@@ -106,6 +163,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmwasm.wasm.v1.GenesisState",
+  aminoType: "wasm/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params) && Array.isArray(o.codes) && (!o.codes.length || Code.is(o.codes[0])) && Array.isArray(o.contracts) && (!o.contracts.length || Contract.is(o.contracts[0])) && Array.isArray(o.sequences) && (!o.sequences.length || Sequence.is(o.sequences[0])) && Array.isArray(o.genMsgs) && (!o.genMsgs.length || GenesisState_GenMsgs.is(o.genMsgs[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params) && Array.isArray(o.codes) && (!o.codes.length || Code.isSDK(o.codes[0])) && Array.isArray(o.contracts) && (!o.contracts.length || Contract.isSDK(o.contracts[0])) && Array.isArray(o.sequences) && (!o.sequences.length || Sequence.isSDK(o.sequences[0])) && Array.isArray(o.gen_msgs) && (!o.gen_msgs.length || GenesisState_GenMsgs.isSDK(o.gen_msgs[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params) && Array.isArray(o.codes) && (!o.codes.length || Code.isAmino(o.codes[0])) && Array.isArray(o.contracts) && (!o.contracts.length || Contract.isAmino(o.contracts[0])) && Array.isArray(o.sequences) && (!o.sequences.length || Sequence.isAmino(o.sequences[0])) && Array.isArray(o.gen_msgs) && (!o.gen_msgs.length || GenesisState_GenMsgs.isAmino(o.gen_msgs[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -297,6 +364,13 @@ export const GenesisState = {
       typeUrl: "/cosmwasm.wasm.v1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
+    Code.registerTypeUrl();
+    Contract.registerTypeUrl();
+    Sequence.registerTypeUrl();
+    GenesisState_GenMsgs.registerTypeUrl();
   }
 };
 function createBaseGenesisState_GenMsgs(): GenesisState_GenMsgs {
@@ -308,6 +382,16 @@ function createBaseGenesisState_GenMsgs(): GenesisState_GenMsgs {
 }
 export const GenesisState_GenMsgs = {
   typeUrl: "/cosmwasm.wasm.v1.GenMsgs",
+  aminoType: "wasm/GenMsgs",
+  is(o: any): o is GenesisState_GenMsgs {
+    return o && o.$typeUrl === GenesisState_GenMsgs.typeUrl;
+  },
+  isSDK(o: any): o is GenesisState_GenMsgsSDKType {
+    return o && o.$typeUrl === GenesisState_GenMsgs.typeUrl;
+  },
+  isAmino(o: any): o is GenesisState_GenMsgsAmino {
+    return o && o.$typeUrl === GenesisState_GenMsgs.typeUrl;
+  },
   encode(message: GenesisState_GenMsgs, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.storeCode !== undefined) {
       MsgStoreCode.encode(message.storeCode, writer.uint32(10).fork()).ldelim();
@@ -431,6 +515,11 @@ export const GenesisState_GenMsgs = {
       typeUrl: "/cosmwasm.wasm.v1.GenMsgs",
       value: GenesisState_GenMsgs.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    MsgStoreCode.registerTypeUrl();
+    MsgInstantiateContract.registerTypeUrl();
+    MsgExecuteContract.registerTypeUrl();
   }
 };
 function createBaseCode(): Code {
@@ -443,6 +532,16 @@ function createBaseCode(): Code {
 }
 export const Code = {
   typeUrl: "/cosmwasm.wasm.v1.Code",
+  aminoType: "wasm/Code",
+  is(o: any): o is Code {
+    return o && (o.$typeUrl === Code.typeUrl || typeof o.codeId === "bigint" && CodeInfo.is(o.codeInfo) && (o.codeBytes instanceof Uint8Array || typeof o.codeBytes === "string") && typeof o.pinned === "boolean");
+  },
+  isSDK(o: any): o is CodeSDKType {
+    return o && (o.$typeUrl === Code.typeUrl || typeof o.code_id === "bigint" && CodeInfo.isSDK(o.code_info) && (o.code_bytes instanceof Uint8Array || typeof o.code_bytes === "string") && typeof o.pinned === "boolean");
+  },
+  isAmino(o: any): o is CodeAmino {
+    return o && (o.$typeUrl === Code.typeUrl || typeof o.code_id === "bigint" && CodeInfo.isAmino(o.code_info) && (o.code_bytes instanceof Uint8Array || typeof o.code_bytes === "string") && typeof o.pinned === "boolean");
+  },
   encode(message: Code, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.codeId !== undefined) {
       writer.uint32(8).uint64(message.codeId);
@@ -580,6 +679,9 @@ export const Code = {
       typeUrl: "/cosmwasm.wasm.v1.Code",
       value: Code.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    CodeInfo.registerTypeUrl();
   }
 };
 function createBaseContract(): Contract {
@@ -591,6 +693,16 @@ function createBaseContract(): Contract {
 }
 export const Contract = {
   typeUrl: "/cosmwasm.wasm.v1.Contract",
+  aminoType: "wasm/Contract",
+  is(o: any): o is Contract {
+    return o && (o.$typeUrl === Contract.typeUrl || typeof o.contractAddress === "string" && ContractInfo.is(o.contractInfo) && Array.isArray(o.contractState) && (!o.contractState.length || Model.is(o.contractState[0])));
+  },
+  isSDK(o: any): o is ContractSDKType {
+    return o && (o.$typeUrl === Contract.typeUrl || typeof o.contract_address === "string" && ContractInfo.isSDK(o.contract_info) && Array.isArray(o.contract_state) && (!o.contract_state.length || Model.isSDK(o.contract_state[0])));
+  },
+  isAmino(o: any): o is ContractAmino {
+    return o && (o.$typeUrl === Contract.typeUrl || typeof o.contract_address === "string" && ContractInfo.isAmino(o.contract_info) && Array.isArray(o.contract_state) && (!o.contract_state.length || Model.isAmino(o.contract_state[0])));
+  },
   encode(message: Contract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
@@ -720,6 +832,10 @@ export const Contract = {
       typeUrl: "/cosmwasm.wasm.v1.Contract",
       value: Contract.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ContractInfo.registerTypeUrl();
+    Model.registerTypeUrl();
   }
 };
 function createBaseSequence(): Sequence {
@@ -730,6 +846,16 @@ function createBaseSequence(): Sequence {
 }
 export const Sequence = {
   typeUrl: "/cosmwasm.wasm.v1.Sequence",
+  aminoType: "wasm/Sequence",
+  is(o: any): o is Sequence {
+    return o && (o.$typeUrl === Sequence.typeUrl || (o.idKey instanceof Uint8Array || typeof o.idKey === "string") && typeof o.value === "bigint");
+  },
+  isSDK(o: any): o is SequenceSDKType {
+    return o && (o.$typeUrl === Sequence.typeUrl || (o.id_key instanceof Uint8Array || typeof o.id_key === "string") && typeof o.value === "bigint");
+  },
+  isAmino(o: any): o is SequenceAmino {
+    return o && (o.$typeUrl === Sequence.typeUrl || (o.id_key instanceof Uint8Array || typeof o.id_key === "string") && typeof o.value === "bigint");
+  },
   encode(message: Sequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
@@ -833,5 +959,6 @@ export const Sequence = {
       typeUrl: "/cosmwasm.wasm.v1.Sequence",
       value: Sequence.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

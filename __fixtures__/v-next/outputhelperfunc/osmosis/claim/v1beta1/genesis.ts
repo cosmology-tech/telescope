@@ -1,7 +1,8 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./params";
-import { ClaimRecord, ClaimRecordSDKType } from "./claim";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType } from "./claim";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.claim.v1beta1";
@@ -19,6 +20,19 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the claim module's genesis state. */
+export interface GenesisStateAmino {
+  /** balance of the claim module's account */
+  module_account_balance?: CoinAmino;
+  /** params defines all the parameters of the module. */
+  params?: ParamsAmino;
+  /** list of claim records, one for every airdrop recipient */
+  claim_records?: ClaimRecordAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "osmosis/claim/genesis-state";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the claim module's genesis state. */
 export interface GenesisStateSDKType {
   module_account_balance: CoinSDKType;
   params: ParamsSDKType;
@@ -33,6 +47,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/osmosis.claim.v1beta1.GenesisState",
+  aminoType: "osmosis/claim/genesis-state",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Coin.is(o.moduleAccountBalance) && Params.is(o.params) && Array.isArray(o.claimRecords) && (!o.claimRecords.length || ClaimRecord.is(o.claimRecords[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Coin.isSDK(o.module_account_balance) && Params.isSDK(o.params) && Array.isArray(o.claim_records) && (!o.claim_records.length || ClaimRecord.isSDK(o.claim_records[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Coin.isAmino(o.module_account_balance) && Params.isAmino(o.params) && Array.isArray(o.claim_records) && (!o.claim_records.length || ClaimRecord.isAmino(o.claim_records[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.moduleAccountBalance !== undefined) {
       Coin.encode(message.moduleAccountBalance, writer.uint32(10).fork()).ldelim();
@@ -164,5 +188,10 @@ export const GenesisState = {
       typeUrl: "/osmosis.claim.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
+    Params.registerTypeUrl();
+    ClaimRecord.registerTypeUrl();
   }
 };

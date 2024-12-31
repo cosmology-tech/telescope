@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -13,6 +14,18 @@ export interface CommitInfo {
 export interface CommitInfoProtoMsg {
   typeUrl: "/cosmos.base.store.v1beta1.CommitInfo";
   value: Uint8Array;
+}
+/**
+ * CommitInfo defines commit information used by the multi-store when committing
+ * a version/height.
+ */
+export interface CommitInfoAmino {
+  version?: string;
+  store_infos?: StoreInfoAmino[];
+}
+export interface CommitInfoAminoMsg {
+  type: "cosmos-sdk/CommitInfo";
+  value: CommitInfoAmino;
 }
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -38,6 +51,18 @@ export interface StoreInfoProtoMsg {
  * StoreInfo defines store-specific commit information. It contains a reference
  * between a store name and the commit ID.
  */
+export interface StoreInfoAmino {
+  name?: string;
+  commit_id?: CommitIDAmino;
+}
+export interface StoreInfoAminoMsg {
+  type: "cosmos-sdk/StoreInfo";
+  value: StoreInfoAmino;
+}
+/**
+ * StoreInfo defines store-specific commit information. It contains a reference
+ * between a store name and the commit ID.
+ */
 export interface StoreInfoSDKType {
   name: string;
   commit_id: CommitIDSDKType;
@@ -58,6 +83,18 @@ export interface CommitIDProtoMsg {
  * CommitID defines the committment information when a specific store is
  * committed.
  */
+export interface CommitIDAmino {
+  version?: string;
+  hash?: string;
+}
+export interface CommitIDAminoMsg {
+  type: "cosmos-sdk/CommitID";
+  value: CommitIDAmino;
+}
+/**
+ * CommitID defines the committment information when a specific store is
+ * committed.
+ */
 export interface CommitIDSDKType {
   version: bigint;
   hash: Uint8Array;
@@ -70,6 +107,16 @@ function createBaseCommitInfo(): CommitInfo {
 }
 export const CommitInfo = {
   typeUrl: "/cosmos.base.store.v1beta1.CommitInfo",
+  aminoType: "cosmos-sdk/CommitInfo",
+  is(o: any): o is CommitInfo {
+    return o && (o.$typeUrl === CommitInfo.typeUrl || typeof o.version === "bigint" && Array.isArray(o.storeInfos) && (!o.storeInfos.length || StoreInfo.is(o.storeInfos[0])));
+  },
+  isSDK(o: any): o is CommitInfoSDKType {
+    return o && (o.$typeUrl === CommitInfo.typeUrl || typeof o.version === "bigint" && Array.isArray(o.store_infos) && (!o.store_infos.length || StoreInfo.isSDK(o.store_infos[0])));
+  },
+  isAmino(o: any): o is CommitInfoAmino {
+    return o && (o.$typeUrl === CommitInfo.typeUrl || typeof o.version === "bigint" && Array.isArray(o.store_infos) && (!o.store_infos.length || StoreInfo.isAmino(o.store_infos[0])));
+  },
   encode(message: CommitInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.version !== undefined) {
       writer.uint32(8).int64(message.version);
@@ -183,6 +230,9 @@ export const CommitInfo = {
       typeUrl: "/cosmos.base.store.v1beta1.CommitInfo",
       value: CommitInfo.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    StoreInfo.registerTypeUrl();
   }
 };
 function createBaseStoreInfo(): StoreInfo {
@@ -193,6 +243,16 @@ function createBaseStoreInfo(): StoreInfo {
 }
 export const StoreInfo = {
   typeUrl: "/cosmos.base.store.v1beta1.StoreInfo",
+  aminoType: "cosmos-sdk/StoreInfo",
+  is(o: any): o is StoreInfo {
+    return o && (o.$typeUrl === StoreInfo.typeUrl || typeof o.name === "string" && CommitID.is(o.commitId));
+  },
+  isSDK(o: any): o is StoreInfoSDKType {
+    return o && (o.$typeUrl === StoreInfo.typeUrl || typeof o.name === "string" && CommitID.isSDK(o.commit_id));
+  },
+  isAmino(o: any): o is StoreInfoAmino {
+    return o && (o.$typeUrl === StoreInfo.typeUrl || typeof o.name === "string" && CommitID.isAmino(o.commit_id));
+  },
   encode(message: StoreInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -296,6 +356,9 @@ export const StoreInfo = {
       typeUrl: "/cosmos.base.store.v1beta1.StoreInfo",
       value: StoreInfo.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    CommitID.registerTypeUrl();
   }
 };
 function createBaseCommitID(): CommitID {
@@ -306,6 +369,16 @@ function createBaseCommitID(): CommitID {
 }
 export const CommitID = {
   typeUrl: "/cosmos.base.store.v1beta1.CommitID",
+  aminoType: "cosmos-sdk/CommitID",
+  is(o: any): o is CommitID {
+    return o && (o.$typeUrl === CommitID.typeUrl || typeof o.version === "bigint" && (o.hash instanceof Uint8Array || typeof o.hash === "string"));
+  },
+  isSDK(o: any): o is CommitIDSDKType {
+    return o && (o.$typeUrl === CommitID.typeUrl || typeof o.version === "bigint" && (o.hash instanceof Uint8Array || typeof o.hash === "string"));
+  },
+  isAmino(o: any): o is CommitIDAmino {
+    return o && (o.$typeUrl === CommitID.typeUrl || typeof o.version === "bigint" && (o.hash instanceof Uint8Array || typeof o.hash === "string"));
+  },
   encode(message: CommitID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.version !== undefined) {
       writer.uint32(8).int64(message.version);
@@ -409,5 +482,6 @@ export const CommitID = {
       typeUrl: "/cosmos.base.store.v1beta1.CommitID",
       value: CommitID.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

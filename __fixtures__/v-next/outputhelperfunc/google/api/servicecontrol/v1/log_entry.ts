@@ -1,11 +1,12 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
-import { HttpRequest, HttpRequestSDKType } from "./http_request";
-import { Any, AnySDKType } from "../../../protobuf/any";
-import { Struct, StructSDKType } from "../../../protobuf/struct";
+import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_request";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
+import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -14,6 +15,14 @@ export interface LogEntry_LabelsEntry {
 export interface LogEntry_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface LogEntry_LabelsEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface LogEntry_LabelsEntryAminoMsg {
+  type: string;
+  value: LogEntry_LabelsEntryAmino;
 }
 export interface LogEntry_LabelsEntrySDKType {
   key: string;
@@ -89,6 +98,75 @@ export interface LogEntryProtoMsg {
   value: Uint8Array;
 }
 /** An individual log entry. */
+export interface LogEntryAmino {
+  /**
+   * Required. The log to which this log entry belongs. Examples: `"syslog"`,
+   * `"book_log"`.
+   */
+  name?: string;
+  /**
+   * The time the event described by the log entry occurred. If
+   * omitted, defaults to operation start time.
+   */
+  timestamp?: string;
+  /**
+   * The severity of the log entry. The default value is
+   * `LogSeverity.DEFAULT`.
+   */
+  severity?: LogSeverity;
+  /**
+   * Optional. Information about the HTTP request associated with this
+   * log entry, if applicable.
+   */
+  http_request?: HttpRequestAmino;
+  /**
+   * Optional. Resource name of the trace associated with the log entry, if any.
+   * If this field contains a relative resource name, you can assume the name is
+   * relative to `//tracing.googleapis.com`. Example:
+   * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
+   */
+  trace?: string;
+  /**
+   * A unique ID for the log entry used for deduplication. If omitted,
+   * the implementation will generate one based on operation_id.
+   */
+  insert_id?: string;
+  /**
+   * A set of user-defined (key, value) data that provides additional
+   * information about the log entry.
+   */
+  labels?: {
+    [key: string]: string;
+  };
+  /**
+   * The log entry payload, represented as a protocol buffer that is
+   * expressed as a JSON object. The only accepted type currently is
+   * [AuditLog][google.cloud.audit.AuditLog].
+   */
+  proto_payload?: AnyAmino;
+  /** The log entry payload, represented as a Unicode string (UTF-8). */
+  text_payload?: string;
+  /**
+   * The log entry payload, represented as a structure that
+   * is expressed as a JSON object.
+   */
+  struct_payload?: StructAmino;
+  /**
+   * Optional. Information about an operation associated with the log entry, if
+   * applicable.
+   */
+  operation?: LogEntryOperationAmino;
+  /**
+   * Optional. Source code location information associated with the log entry,
+   * if any.
+   */
+  source_location?: LogEntrySourceLocationAmino;
+}
+export interface LogEntryAminoMsg {
+  type: "/google.api.servicecontrol.v1.LogEntry";
+  value: LogEntryAmino;
+}
+/** An individual log entry. */
 export interface LogEntrySDKType {
   name: string;
   timestamp?: Date;
@@ -134,6 +212,31 @@ export interface LogEntryOperationProtoMsg {
  * Additional information about a potentially long-running operation with which
  * a log entry is associated.
  */
+export interface LogEntryOperationAmino {
+  /**
+   * Optional. An arbitrary operation identifier. Log entries with the
+   * same identifier are assumed to be part of the same operation.
+   */
+  id?: string;
+  /**
+   * Optional. An arbitrary producer identifier. The combination of
+   * `id` and `producer` must be globally unique.  Examples for `producer`:
+   * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
+   */
+  producer?: string;
+  /** Optional. Set this to True if this is the first log entry in the operation. */
+  first?: boolean;
+  /** Optional. Set this to True if this is the last log entry in the operation. */
+  last?: boolean;
+}
+export interface LogEntryOperationAminoMsg {
+  type: "/google.api.servicecontrol.v1.LogEntryOperation";
+  value: LogEntryOperationAmino;
+}
+/**
+ * Additional information about a potentially long-running operation with which
+ * a log entry is associated.
+ */
 export interface LogEntryOperationSDKType {
   id: string;
   producer: string;
@@ -168,6 +271,35 @@ export interface LogEntrySourceLocation {
 export interface LogEntrySourceLocationProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
   value: Uint8Array;
+}
+/**
+ * Additional information about the source code location that produced the log
+ * entry.
+ */
+export interface LogEntrySourceLocationAmino {
+  /**
+   * Optional. Source file name. Depending on the runtime environment, this
+   * might be a simple name or a fully-qualified name.
+   */
+  file?: string;
+  /**
+   * Optional. Line within the source file. 1-based; 0 indicates no line number
+   * available.
+   */
+  line?: string;
+  /**
+   * Optional. Human-readable name of the function or method being invoked, with
+   * optional context such as the class or package name. This information may be
+   * used in contexts such as the logs viewer, where a file and line number are
+   * less meaningful. The format can vary by language. For example:
+   * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
+   * (Python).
+   */
+  function?: string;
+}
+export interface LogEntrySourceLocationAminoMsg {
+  type: "/google.api.servicecontrol.v1.LogEntrySourceLocation";
+  value: LogEntrySourceLocationAmino;
 }
 /**
  * Additional information about the source code location that produced the log
@@ -274,7 +406,8 @@ export const LogEntry_LabelsEntry = {
   },
   toProto(message: LogEntry_LabelsEntry): Uint8Array {
     return LogEntry_LabelsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseLogEntry(): LogEntry {
   return {
@@ -294,6 +427,15 @@ function createBaseLogEntry(): LogEntry {
 }
 export const LogEntry = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntry",
+  is(o: any): o is LogEntry {
+    return o && (o.$typeUrl === LogEntry.typeUrl || typeof o.name === "string" && isSet(o.severity) && typeof o.trace === "string" && typeof o.insertId === "string" && isSet(o.labels));
+  },
+  isSDK(o: any): o is LogEntrySDKType {
+    return o && (o.$typeUrl === LogEntry.typeUrl || typeof o.name === "string" && isSet(o.severity) && typeof o.trace === "string" && typeof o.insert_id === "string" && isSet(o.labels));
+  },
+  isAmino(o: any): o is LogEntryAmino {
+    return o && (o.$typeUrl === LogEntry.typeUrl || typeof o.name === "string" && isSet(o.severity) && typeof o.trace === "string" && typeof o.insert_id === "string" && isSet(o.labels));
+  },
   encode(message: LogEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(82).string(message.name);
@@ -607,6 +749,11 @@ export const LogEntry = {
       typeUrl: "/google.api.servicecontrol.v1.LogEntry",
       value: LogEntry.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Struct.registerTypeUrl();
+    LogEntryOperation.registerTypeUrl();
+    LogEntrySourceLocation.registerTypeUrl();
   }
 };
 function createBaseLogEntryOperation(): LogEntryOperation {
@@ -619,6 +766,15 @@ function createBaseLogEntryOperation(): LogEntryOperation {
 }
 export const LogEntryOperation = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
+  is(o: any): o is LogEntryOperation {
+    return o && (o.$typeUrl === LogEntryOperation.typeUrl || typeof o.id === "string" && typeof o.producer === "string" && typeof o.first === "boolean" && typeof o.last === "boolean");
+  },
+  isSDK(o: any): o is LogEntryOperationSDKType {
+    return o && (o.$typeUrl === LogEntryOperation.typeUrl || typeof o.id === "string" && typeof o.producer === "string" && typeof o.first === "boolean" && typeof o.last === "boolean");
+  },
+  isAmino(o: any): o is LogEntryOperationAmino {
+    return o && (o.$typeUrl === LogEntryOperation.typeUrl || typeof o.id === "string" && typeof o.producer === "string" && typeof o.first === "boolean" && typeof o.last === "boolean");
+  },
   encode(message: LogEntryOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
@@ -746,7 +902,8 @@ export const LogEntryOperation = {
       typeUrl: "/google.api.servicecontrol.v1.LogEntryOperation",
       value: LogEntryOperation.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
   return {
@@ -757,6 +914,15 @@ function createBaseLogEntrySourceLocation(): LogEntrySourceLocation {
 }
 export const LogEntrySourceLocation = {
   typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
+  is(o: any): o is LogEntrySourceLocation {
+    return o && (o.$typeUrl === LogEntrySourceLocation.typeUrl || typeof o.file === "string" && typeof o.line === "bigint" && typeof o.function === "string");
+  },
+  isSDK(o: any): o is LogEntrySourceLocationSDKType {
+    return o && (o.$typeUrl === LogEntrySourceLocation.typeUrl || typeof o.file === "string" && typeof o.line === "bigint" && typeof o.function === "string");
+  },
+  isAmino(o: any): o is LogEntrySourceLocationAmino {
+    return o && (o.$typeUrl === LogEntrySourceLocation.typeUrl || typeof o.file === "string" && typeof o.line === "bigint" && typeof o.function === "string");
+  },
   encode(message: LogEntrySourceLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.file !== undefined) {
       writer.uint32(10).string(message.file);
@@ -870,5 +1036,6 @@ export const LogEntrySourceLocation = {
       typeUrl: "/google.api.servicecontrol.v1.LogEntrySourceLocation",
       value: LogEntrySourceLocation.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

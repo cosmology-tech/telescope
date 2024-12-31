@@ -1,6 +1,6 @@
 import { buildTx, SigningClientResolver } from "../../../helper-func-types";
-import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
+import { buildUseMutation } from "../../../react-query";
 import { MsgRegisterDevFeeInfo, MsgCancelDevFeeInfo, MsgUpdateDevFeeInfo } from "./tx";
 export const createRegisterDevFeeInfo = (clientResolver?: SigningClientResolver) => buildTx<MsgRegisterDevFeeInfo>({
   clientResolver,

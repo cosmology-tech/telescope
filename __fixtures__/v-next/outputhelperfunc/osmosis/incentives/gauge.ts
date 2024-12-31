@@ -1,8 +1,9 @@
-import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { QueryCondition, QueryConditionAmino, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { GlobalDecoderRegistry } from "../../registry";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
@@ -56,6 +57,51 @@ export interface GaugeProtoMsg {
  * satisfy certain conditions. Currently gauges support conditions around the
  * duration for which a given denom is locked.
  */
+export interface GaugeAmino {
+  /** id is the unique ID of a Gauge */
+  id?: string;
+  /**
+   * is_perpetual is a flag to show if it's a perpetual or non-perpetual gauge
+   * Non-perpetual gauges distribute their tokens equally per epoch while the
+   * gauge is in the active period. Perpetual gauges distribute all their tokens
+   * at a single time and only distribute their tokens again once the gauge is
+   * refilled, Intended for use with incentives that get refilled daily.
+   */
+  is_perpetual?: boolean;
+  /**
+   * distribute_to is where the gauge rewards are distributed to.
+   * This is queried via lock duration or by timestamp
+   */
+  distribute_to?: QueryConditionAmino;
+  /**
+   * coins is the total amount of coins that have been in the gauge
+   * Can distribute multiple coin denoms
+   */
+  coins?: CoinAmino[];
+  /** start_time is the distribution start time */
+  start_time?: string;
+  /**
+   * num_epochs_paid_over is the number of total epochs distribution will be
+   * completed over
+   */
+  num_epochs_paid_over?: string;
+  /**
+   * filled_epochs is the number of epochs distribution has been completed on
+   * already
+   */
+  filled_epochs?: string;
+  /** distributed_coins are coins that have been distributed already */
+  distributed_coins?: CoinAmino[];
+}
+export interface GaugeAminoMsg {
+  type: "osmosis/incentives/gauge";
+  value: GaugeAmino;
+}
+/**
+ * Gauge is an object that stores and distributes yields to recipients who
+ * satisfy certain conditions. Currently gauges support conditions around the
+ * duration for which a given denom is locked.
+ */
 export interface GaugeSDKType {
   id: bigint;
   is_perpetual: boolean;
@@ -74,6 +120,14 @@ export interface LockableDurationsInfoProtoMsg {
   typeUrl: "/osmosis.incentives.LockableDurationsInfo";
   value: Uint8Array;
 }
+export interface LockableDurationsInfoAmino {
+  /** List of incentivised durations that gauges will pay out to */
+  lockable_durations?: DurationAmino[];
+}
+export interface LockableDurationsInfoAminoMsg {
+  type: "osmosis/incentives/lockable-durations-info";
+  value: LockableDurationsInfoAmino;
+}
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
 }
@@ -91,6 +145,16 @@ function createBaseGauge(): Gauge {
 }
 export const Gauge = {
   typeUrl: "/osmosis.incentives.Gauge",
+  aminoType: "osmosis/incentives/gauge",
+  is(o: any): o is Gauge {
+    return o && (o.$typeUrl === Gauge.typeUrl || typeof o.id === "bigint" && typeof o.isPerpetual === "boolean" && QueryCondition.is(o.distributeTo) && Array.isArray(o.coins) && (!o.coins.length || Coin.is(o.coins[0])) && Timestamp.is(o.startTime) && typeof o.numEpochsPaidOver === "bigint" && typeof o.filledEpochs === "bigint" && Array.isArray(o.distributedCoins) && (!o.distributedCoins.length || Coin.is(o.distributedCoins[0])));
+  },
+  isSDK(o: any): o is GaugeSDKType {
+    return o && (o.$typeUrl === Gauge.typeUrl || typeof o.id === "bigint" && typeof o.is_perpetual === "boolean" && QueryCondition.isSDK(o.distribute_to) && Array.isArray(o.coins) && (!o.coins.length || Coin.isSDK(o.coins[0])) && Timestamp.isSDK(o.start_time) && typeof o.num_epochs_paid_over === "bigint" && typeof o.filled_epochs === "bigint" && Array.isArray(o.distributed_coins) && (!o.distributed_coins.length || Coin.isSDK(o.distributed_coins[0])));
+  },
+  isAmino(o: any): o is GaugeAmino {
+    return o && (o.$typeUrl === Gauge.typeUrl || typeof o.id === "bigint" && typeof o.is_perpetual === "boolean" && QueryCondition.isAmino(o.distribute_to) && Array.isArray(o.coins) && (!o.coins.length || Coin.isAmino(o.coins[0])) && Timestamp.isAmino(o.start_time) && typeof o.num_epochs_paid_over === "bigint" && typeof o.filled_epochs === "bigint" && Array.isArray(o.distributed_coins) && (!o.distributed_coins.length || Coin.isAmino(o.distributed_coins[0])));
+  },
   encode(message: Gauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(8).uint64(message.id);
@@ -316,6 +380,11 @@ export const Gauge = {
       typeUrl: "/osmosis.incentives.Gauge",
       value: Gauge.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    QueryCondition.registerTypeUrl();
+    Coin.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseLockableDurationsInfo(): LockableDurationsInfo {
@@ -325,6 +394,16 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
 }
 export const LockableDurationsInfo = {
   typeUrl: "/osmosis.incentives.LockableDurationsInfo",
+  aminoType: "osmosis/incentives/lockable-durations-info",
+  is(o: any): o is LockableDurationsInfo {
+    return o && (o.$typeUrl === LockableDurationsInfo.typeUrl || Array.isArray(o.lockableDurations) && (!o.lockableDurations.length || Duration.is(o.lockableDurations[0])));
+  },
+  isSDK(o: any): o is LockableDurationsInfoSDKType {
+    return o && (o.$typeUrl === LockableDurationsInfo.typeUrl || Array.isArray(o.lockable_durations) && (!o.lockable_durations.length || Duration.isSDK(o.lockable_durations[0])));
+  },
+  isAmino(o: any): o is LockableDurationsInfoAmino {
+    return o && (o.$typeUrl === LockableDurationsInfo.typeUrl || Array.isArray(o.lockable_durations) && (!o.lockable_durations.length || Duration.isAmino(o.lockable_durations[0])));
+  },
   encode(message: LockableDurationsInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -420,5 +499,6 @@ export const LockableDurationsInfo = {
       typeUrl: "/osmosis.incentives.LockableDurationsInfo",
       value: LockableDurationsInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

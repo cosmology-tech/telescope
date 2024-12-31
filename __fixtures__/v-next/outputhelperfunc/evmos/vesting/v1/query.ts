@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
@@ -11,6 +11,15 @@ export interface QueryBalancesRequest {
 export interface QueryBalancesRequestProtoMsg {
   typeUrl: "/evmos.vesting.v1.QueryBalancesRequest";
   value: Uint8Array;
+}
+/** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
+export interface QueryBalancesRequestAmino {
+  /** address of the clawback vesting account */
+  address?: string;
+}
+export interface QueryBalancesRequestAminoMsg {
+  type: "/evmos.vesting.v1.QueryBalancesRequest";
+  value: QueryBalancesRequestAmino;
 }
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestSDKType {
@@ -36,6 +45,22 @@ export interface QueryBalancesResponseProtoMsg {
  * QueryBalancesResponse is the response type for the Query/Balances RPC
  * method.
  */
+export interface QueryBalancesResponseAmino {
+  /** current amount of locked tokens */
+  locked?: CoinAmino[];
+  /** current amount of unvested tokens */
+  unvested?: CoinAmino[];
+  /** current amount of vested tokens */
+  vested?: CoinAmino[];
+}
+export interface QueryBalancesResponseAminoMsg {
+  type: "/evmos.vesting.v1.QueryBalancesResponse";
+  value: QueryBalancesResponseAmino;
+}
+/**
+ * QueryBalancesResponse is the response type for the Query/Balances RPC
+ * method.
+ */
 export interface QueryBalancesResponseSDKType {
   locked: CoinSDKType[];
   unvested: CoinSDKType[];
@@ -48,6 +73,15 @@ function createBaseQueryBalancesRequest(): QueryBalancesRequest {
 }
 export const QueryBalancesRequest = {
   typeUrl: "/evmos.vesting.v1.QueryBalancesRequest",
+  is(o: any): o is QueryBalancesRequest {
+    return o && (o.$typeUrl === QueryBalancesRequest.typeUrl || typeof o.address === "string");
+  },
+  isSDK(o: any): o is QueryBalancesRequestSDKType {
+    return o && (o.$typeUrl === QueryBalancesRequest.typeUrl || typeof o.address === "string");
+  },
+  isAmino(o: any): o is QueryBalancesRequestAmino {
+    return o && (o.$typeUrl === QueryBalancesRequest.typeUrl || typeof o.address === "string");
+  },
   encode(message: QueryBalancesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -127,7 +161,8 @@ export const QueryBalancesRequest = {
       typeUrl: "/evmos.vesting.v1.QueryBalancesRequest",
       value: QueryBalancesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryBalancesResponse(): QueryBalancesResponse {
   return {
@@ -138,6 +173,15 @@ function createBaseQueryBalancesResponse(): QueryBalancesResponse {
 }
 export const QueryBalancesResponse = {
   typeUrl: "/evmos.vesting.v1.QueryBalancesResponse",
+  is(o: any): o is QueryBalancesResponse {
+    return o && (o.$typeUrl === QueryBalancesResponse.typeUrl || Array.isArray(o.locked) && (!o.locked.length || Coin.is(o.locked[0])) && Array.isArray(o.unvested) && (!o.unvested.length || Coin.is(o.unvested[0])) && Array.isArray(o.vested) && (!o.vested.length || Coin.is(o.vested[0])));
+  },
+  isSDK(o: any): o is QueryBalancesResponseSDKType {
+    return o && (o.$typeUrl === QueryBalancesResponse.typeUrl || Array.isArray(o.locked) && (!o.locked.length || Coin.isSDK(o.locked[0])) && Array.isArray(o.unvested) && (!o.unvested.length || Coin.isSDK(o.unvested[0])) && Array.isArray(o.vested) && (!o.vested.length || Coin.isSDK(o.vested[0])));
+  },
+  isAmino(o: any): o is QueryBalancesResponseAmino {
+    return o && (o.$typeUrl === QueryBalancesResponse.typeUrl || Array.isArray(o.locked) && (!o.locked.length || Coin.isAmino(o.locked[0])) && Array.isArray(o.unvested) && (!o.unvested.length || Coin.isAmino(o.unvested[0])) && Array.isArray(o.vested) && (!o.vested.length || Coin.isAmino(o.vested[0])));
+  },
   encode(message: QueryBalancesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locked) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -279,5 +323,10 @@ export const QueryBalancesResponse = {
       typeUrl: "/evmos.vesting.v1.QueryBalancesResponse",
       value: QueryBalancesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
+    Coin.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };

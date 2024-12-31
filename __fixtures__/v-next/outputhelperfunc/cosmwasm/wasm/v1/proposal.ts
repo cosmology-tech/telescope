@@ -1,6 +1,7 @@
-import { AccessConfig, AccessConfigSDKType } from "./types";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
@@ -21,6 +22,23 @@ export interface StoreCodeProposal {
 export interface StoreCodeProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal";
   value: Uint8Array;
+}
+/** StoreCodeProposal gov proposal content type to submit WASM code to the system */
+export interface StoreCodeProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** RunAs is the address that is passed to the contract's environment as sender */
+  run_as?: string;
+  /** WASMByteCode can be raw or gzip compressed */
+  wasm_byte_code?: string;
+  /** InstantiatePermission to apply on contract creation, optional */
+  instantiate_permission?: AccessConfigAmino;
+}
+export interface StoreCodeProposalAminoMsg {
+  type: "wasm/StoreCodeProposal";
+  value: StoreCodeProposalAmino;
 }
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposalSDKType {
@@ -60,6 +78,32 @@ export interface InstantiateContractProposalProtoMsg {
  * InstantiateContractProposal gov proposal content type to instantiate a
  * contract.
  */
+export interface InstantiateContractProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** RunAs is the address that is passed to the contract's environment as sender */
+  run_as?: string;
+  /** Admin is an optional address that can execute migrations */
+  admin?: string;
+  /** CodeID is the reference to the stored WASM code */
+  code_id?: string;
+  /** Label is optional metadata to be stored with a constract instance. */
+  label?: string;
+  /** Msg json encoded message to be passed to the contract on instantiation */
+  msg?: any;
+  /** Funds coins that are transferred to the contract on instantiation */
+  funds?: CoinAmino[];
+}
+export interface InstantiateContractProposalAminoMsg {
+  type: "wasm/InstantiateContractProposal";
+  value: InstantiateContractProposalAmino;
+}
+/**
+ * InstantiateContractProposal gov proposal content type to instantiate a
+ * contract.
+ */
 export interface InstantiateContractProposalSDKType {
   title: string;
   description: string;
@@ -88,6 +132,23 @@ export interface MigrateContractProposalProtoMsg {
   value: Uint8Array;
 }
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
+export interface MigrateContractProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** Contract is the address of the smart contract */
+  contract?: string;
+  /** CodeID references the new WASM codesudo */
+  code_id?: string;
+  /** Msg json encoded message to be passed to the contract on migration */
+  msg?: any;
+}
+export interface MigrateContractProposalAminoMsg {
+  type: "wasm/MigrateContractProposal";
+  value: MigrateContractProposalAmino;
+}
+/** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalSDKType {
   title: string;
   description: string;
@@ -109,6 +170,21 @@ export interface SudoContractProposal {
 export interface SudoContractProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal";
   value: Uint8Array;
+}
+/** SudoContractProposal gov proposal content type to call sudo on a contract. */
+export interface SudoContractProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** Contract is the address of the smart contract */
+  contract?: string;
+  /** Msg json encoded message to be passed to the contract as sudo */
+  msg?: any;
+}
+export interface SudoContractProposalAminoMsg {
+  type: "wasm/SudoContractProposal";
+  value: SudoContractProposalAmino;
 }
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposalSDKType {
@@ -143,6 +219,28 @@ export interface ExecuteContractProposalProtoMsg {
  * ExecuteContractProposal gov proposal content type to call execute on a
  * contract.
  */
+export interface ExecuteContractProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** RunAs is the address that is passed to the contract's environment as sender */
+  run_as?: string;
+  /** Contract is the address of the smart contract */
+  contract?: string;
+  /** Msg json encoded message to be passed to the contract as execute */
+  msg?: any;
+  /** Funds coins that are transferred to the contract on instantiation */
+  funds?: CoinAmino[];
+}
+export interface ExecuteContractProposalAminoMsg {
+  type: "wasm/ExecuteContractProposal";
+  value: ExecuteContractProposalAmino;
+}
+/**
+ * ExecuteContractProposal gov proposal content type to call execute on a
+ * contract.
+ */
 export interface ExecuteContractProposalSDKType {
   title: string;
   description: string;
@@ -167,6 +265,21 @@ export interface UpdateAdminProposalProtoMsg {
   value: Uint8Array;
 }
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
+export interface UpdateAdminProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** NewAdmin address to be set */
+  new_admin?: string;
+  /** Contract is the address of the smart contract */
+  contract?: string;
+}
+export interface UpdateAdminProposalAminoMsg {
+  type: "wasm/UpdateAdminProposal";
+  value: UpdateAdminProposalAmino;
+}
+/** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalSDKType {
   title: string;
   description: string;
@@ -188,6 +301,22 @@ export interface ClearAdminProposal {
 export interface ClearAdminProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal";
   value: Uint8Array;
+}
+/**
+ * ClearAdminProposal gov proposal content type to clear the admin of a
+ * contract.
+ */
+export interface ClearAdminProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** Contract is the address of the smart contract */
+  contract?: string;
+}
+export interface ClearAdminProposalAminoMsg {
+  type: "wasm/ClearAdminProposal";
+  value: ClearAdminProposalAmino;
 }
 /**
  * ClearAdminProposal gov proposal content type to clear the admin of a
@@ -218,6 +347,22 @@ export interface PinCodesProposalProtoMsg {
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
  * wasmvm cache.
  */
+export interface PinCodesProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** CodeIDs references the new WASM codes */
+  code_ids?: string[];
+}
+export interface PinCodesProposalAminoMsg {
+  type: "wasm/PinCodesProposal";
+  value: PinCodesProposalAmino;
+}
+/**
+ * PinCodesProposal gov proposal content type to pin a set of code ids in the
+ * wasmvm cache.
+ */
 export interface PinCodesProposalSDKType {
   title: string;
   description: string;
@@ -243,6 +388,22 @@ export interface UnpinCodesProposalProtoMsg {
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
  * the wasmvm cache.
  */
+export interface UnpinCodesProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** CodeIDs references the WASM codes */
+  code_ids?: string[];
+}
+export interface UnpinCodesProposalAminoMsg {
+  type: "wasm/UnpinCodesProposal";
+  value: UnpinCodesProposalAmino;
+}
+/**
+ * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
+ * the wasmvm cache.
+ */
 export interface UnpinCodesProposalSDKType {
   title: string;
   description: string;
@@ -259,6 +420,16 @@ function createBaseStoreCodeProposal(): StoreCodeProposal {
 }
 export const StoreCodeProposal = {
   typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal",
+  aminoType: "wasm/StoreCodeProposal",
+  is(o: any): o is StoreCodeProposal {
+    return o && (o.$typeUrl === StoreCodeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.runAs === "string" && (o.wasmByteCode instanceof Uint8Array || typeof o.wasmByteCode === "string"));
+  },
+  isSDK(o: any): o is StoreCodeProposalSDKType {
+    return o && (o.$typeUrl === StoreCodeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.run_as === "string" && (o.wasm_byte_code instanceof Uint8Array || typeof o.wasm_byte_code === "string"));
+  },
+  isAmino(o: any): o is StoreCodeProposalAmino {
+    return o && (o.$typeUrl === StoreCodeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.run_as === "string" && (o.wasm_byte_code instanceof Uint8Array || typeof o.wasm_byte_code === "string"));
+  },
   encode(message: StoreCodeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -410,6 +581,9 @@ export const StoreCodeProposal = {
       typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal",
       value: StoreCodeProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    AccessConfig.registerTypeUrl();
   }
 };
 function createBaseInstantiateContractProposal(): InstantiateContractProposal {
@@ -426,6 +600,16 @@ function createBaseInstantiateContractProposal(): InstantiateContractProposal {
 }
 export const InstantiateContractProposal = {
   typeUrl: "/cosmwasm.wasm.v1.InstantiateContractProposal",
+  aminoType: "wasm/InstantiateContractProposal",
+  is(o: any): o is InstantiateContractProposal {
+    return o && (o.$typeUrl === InstantiateContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.runAs === "string" && typeof o.admin === "string" && typeof o.codeId === "bigint" && typeof o.label === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string") && Array.isArray(o.funds) && (!o.funds.length || Coin.is(o.funds[0])));
+  },
+  isSDK(o: any): o is InstantiateContractProposalSDKType {
+    return o && (o.$typeUrl === InstantiateContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.run_as === "string" && typeof o.admin === "string" && typeof o.code_id === "bigint" && typeof o.label === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string") && Array.isArray(o.funds) && (!o.funds.length || Coin.isSDK(o.funds[0])));
+  },
+  isAmino(o: any): o is InstantiateContractProposalAmino {
+    return o && (o.$typeUrl === InstantiateContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.run_as === "string" && typeof o.admin === "string" && typeof o.code_id === "bigint" && typeof o.label === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string") && Array.isArray(o.funds) && (!o.funds.length || Coin.isAmino(o.funds[0])));
+  },
   encode(message: InstantiateContractProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -635,6 +819,9 @@ export const InstantiateContractProposal = {
       typeUrl: "/cosmwasm.wasm.v1.InstantiateContractProposal",
       value: InstantiateContractProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMigrateContractProposal(): MigrateContractProposal {
@@ -648,6 +835,16 @@ function createBaseMigrateContractProposal(): MigrateContractProposal {
 }
 export const MigrateContractProposal = {
   typeUrl: "/cosmwasm.wasm.v1.MigrateContractProposal",
+  aminoType: "wasm/MigrateContractProposal",
+  is(o: any): o is MigrateContractProposal {
+    return o && (o.$typeUrl === MigrateContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && typeof o.codeId === "bigint" && (o.msg instanceof Uint8Array || typeof o.msg === "string"));
+  },
+  isSDK(o: any): o is MigrateContractProposalSDKType {
+    return o && (o.$typeUrl === MigrateContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && typeof o.code_id === "bigint" && (o.msg instanceof Uint8Array || typeof o.msg === "string"));
+  },
+  isAmino(o: any): o is MigrateContractProposalAmino {
+    return o && (o.$typeUrl === MigrateContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && typeof o.code_id === "bigint" && (o.msg instanceof Uint8Array || typeof o.msg === "string"));
+  },
   encode(message: MigrateContractProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -799,7 +996,8 @@ export const MigrateContractProposal = {
       typeUrl: "/cosmwasm.wasm.v1.MigrateContractProposal",
       value: MigrateContractProposal.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSudoContractProposal(): SudoContractProposal {
   return {
@@ -811,6 +1009,16 @@ function createBaseSudoContractProposal(): SudoContractProposal {
 }
 export const SudoContractProposal = {
   typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal",
+  aminoType: "wasm/SudoContractProposal",
+  is(o: any): o is SudoContractProposal {
+    return o && (o.$typeUrl === SudoContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string"));
+  },
+  isSDK(o: any): o is SudoContractProposalSDKType {
+    return o && (o.$typeUrl === SudoContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string"));
+  },
+  isAmino(o: any): o is SudoContractProposalAmino {
+    return o && (o.$typeUrl === SudoContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string"));
+  },
   encode(message: SudoContractProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -944,7 +1152,8 @@ export const SudoContractProposal = {
       typeUrl: "/cosmwasm.wasm.v1.SudoContractProposal",
       value: SudoContractProposal.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseExecuteContractProposal(): ExecuteContractProposal {
   return {
@@ -958,6 +1167,16 @@ function createBaseExecuteContractProposal(): ExecuteContractProposal {
 }
 export const ExecuteContractProposal = {
   typeUrl: "/cosmwasm.wasm.v1.ExecuteContractProposal",
+  aminoType: "wasm/ExecuteContractProposal",
+  is(o: any): o is ExecuteContractProposal {
+    return o && (o.$typeUrl === ExecuteContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.runAs === "string" && typeof o.contract === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string") && Array.isArray(o.funds) && (!o.funds.length || Coin.is(o.funds[0])));
+  },
+  isSDK(o: any): o is ExecuteContractProposalSDKType {
+    return o && (o.$typeUrl === ExecuteContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.run_as === "string" && typeof o.contract === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string") && Array.isArray(o.funds) && (!o.funds.length || Coin.isSDK(o.funds[0])));
+  },
+  isAmino(o: any): o is ExecuteContractProposalAmino {
+    return o && (o.$typeUrl === ExecuteContractProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.run_as === "string" && typeof o.contract === "string" && (o.msg instanceof Uint8Array || typeof o.msg === "string") && Array.isArray(o.funds) && (!o.funds.length || Coin.isAmino(o.funds[0])));
+  },
   encode(message: ExecuteContractProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -1133,6 +1352,9 @@ export const ExecuteContractProposal = {
       typeUrl: "/cosmwasm.wasm.v1.ExecuteContractProposal",
       value: ExecuteContractProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseUpdateAdminProposal(): UpdateAdminProposal {
@@ -1145,6 +1367,16 @@ function createBaseUpdateAdminProposal(): UpdateAdminProposal {
 }
 export const UpdateAdminProposal = {
   typeUrl: "/cosmwasm.wasm.v1.UpdateAdminProposal",
+  aminoType: "wasm/UpdateAdminProposal",
+  is(o: any): o is UpdateAdminProposal {
+    return o && (o.$typeUrl === UpdateAdminProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.newAdmin === "string" && typeof o.contract === "string");
+  },
+  isSDK(o: any): o is UpdateAdminProposalSDKType {
+    return o && (o.$typeUrl === UpdateAdminProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.new_admin === "string" && typeof o.contract === "string");
+  },
+  isAmino(o: any): o is UpdateAdminProposalAmino {
+    return o && (o.$typeUrl === UpdateAdminProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.new_admin === "string" && typeof o.contract === "string");
+  },
   encode(message: UpdateAdminProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -1278,7 +1510,8 @@ export const UpdateAdminProposal = {
       typeUrl: "/cosmwasm.wasm.v1.UpdateAdminProposal",
       value: UpdateAdminProposal.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseClearAdminProposal(): ClearAdminProposal {
   return {
@@ -1289,6 +1522,16 @@ function createBaseClearAdminProposal(): ClearAdminProposal {
 }
 export const ClearAdminProposal = {
   typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal",
+  aminoType: "wasm/ClearAdminProposal",
+  is(o: any): o is ClearAdminProposal {
+    return o && (o.$typeUrl === ClearAdminProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string");
+  },
+  isSDK(o: any): o is ClearAdminProposalSDKType {
+    return o && (o.$typeUrl === ClearAdminProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string");
+  },
+  isAmino(o: any): o is ClearAdminProposalAmino {
+    return o && (o.$typeUrl === ClearAdminProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string");
+  },
   encode(message: ClearAdminProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -1406,7 +1649,8 @@ export const ClearAdminProposal = {
       typeUrl: "/cosmwasm.wasm.v1.ClearAdminProposal",
       value: ClearAdminProposal.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBasePinCodesProposal(): PinCodesProposal {
   return {
@@ -1417,6 +1661,16 @@ function createBasePinCodesProposal(): PinCodesProposal {
 }
 export const PinCodesProposal = {
   typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal",
+  aminoType: "wasm/PinCodesProposal",
+  is(o: any): o is PinCodesProposal {
+    return o && (o.$typeUrl === PinCodesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.codeIds) && (!o.codeIds.length || typeof o.codeIds[0] === "bigint"));
+  },
+  isSDK(o: any): o is PinCodesProposalSDKType {
+    return o && (o.$typeUrl === PinCodesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.code_ids) && (!o.code_ids.length || typeof o.code_ids[0] === "bigint"));
+  },
+  isAmino(o: any): o is PinCodesProposalAmino {
+    return o && (o.$typeUrl === PinCodesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.code_ids) && (!o.code_ids.length || typeof o.code_ids[0] === "bigint"));
+  },
   encode(message: PinCodesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -1553,7 +1807,8 @@ export const PinCodesProposal = {
       typeUrl: "/cosmwasm.wasm.v1.PinCodesProposal",
       value: PinCodesProposal.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseUnpinCodesProposal(): UnpinCodesProposal {
   return {
@@ -1564,6 +1819,16 @@ function createBaseUnpinCodesProposal(): UnpinCodesProposal {
 }
 export const UnpinCodesProposal = {
   typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal",
+  aminoType: "wasm/UnpinCodesProposal",
+  is(o: any): o is UnpinCodesProposal {
+    return o && (o.$typeUrl === UnpinCodesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.codeIds) && (!o.codeIds.length || typeof o.codeIds[0] === "bigint"));
+  },
+  isSDK(o: any): o is UnpinCodesProposalSDKType {
+    return o && (o.$typeUrl === UnpinCodesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.code_ids) && (!o.code_ids.length || typeof o.code_ids[0] === "bigint"));
+  },
+  isAmino(o: any): o is UnpinCodesProposalAmino {
+    return o && (o.$typeUrl === UnpinCodesProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.code_ids) && (!o.code_ids.length || typeof o.code_ids[0] === "bigint"));
+  },
   encode(message: UnpinCodesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -1700,5 +1965,6 @@ export const UnpinCodesProposal = {
       typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal",
       value: UnpinCodesProposal.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

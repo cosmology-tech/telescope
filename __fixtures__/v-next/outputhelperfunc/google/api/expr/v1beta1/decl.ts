@@ -1,5 +1,6 @@
-import { Expr, ExprSDKType } from "./expr";
+import { Expr, ExprAmino, ExprSDKType } from "./expr";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1beta1";
@@ -19,6 +20,23 @@ export interface Decl {
 export interface DeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.Decl";
   value: Uint8Array;
+}
+/** A declaration. */
+export interface DeclAmino {
+  /** The id of the declaration. */
+  id?: number;
+  /** The name of the declaration. */
+  name?: string;
+  /** The documentation string for the declaration. */
+  doc?: string;
+  /** An identifier declaration. */
+  ident?: IdentDeclAmino;
+  /** A function declaration. */
+  function?: FunctionDeclAmino;
+}
+export interface DeclAminoMsg {
+  type: "/google.api.expr.v1beta1.Decl";
+  value: DeclAmino;
 }
 /** A declaration. */
 export interface DeclSDKType {
@@ -55,6 +73,27 @@ export interface DeclTypeProtoMsg {
  * Extends runtime type values with extra information used for type checking
  * and dispatching.
  */
+export interface DeclTypeAmino {
+  /** The expression id of the declared type, if applicable. */
+  id?: number;
+  /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
+  type?: string;
+  /**
+   * An ordered list of type parameters, e.g. `<string, int>`.
+   * Only applies to a subset of types, e.g. `map`, `list`.
+   */
+  type_params?: DeclTypeAmino[];
+}
+export interface DeclTypeAminoMsg {
+  type: "/google.api.expr.v1beta1.DeclType";
+  value: DeclTypeAmino;
+}
+/**
+ * The declared type of a variable.
+ * 
+ * Extends runtime type values with extra information used for type checking
+ * and dispatching.
+ */
 export interface DeclTypeSDKType {
   id: number;
   type: string;
@@ -70,6 +109,17 @@ export interface IdentDecl {
 export interface IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.IdentDecl";
   value: Uint8Array;
+}
+/** An identifier declaration. */
+export interface IdentDeclAmino {
+  /** Optional type of the identifier. */
+  type?: DeclTypeAmino;
+  /** Optional value of the identifier. */
+  value?: ExprAmino;
+}
+export interface IdentDeclAminoMsg {
+  type: "/google.api.expr.v1beta1.IdentDecl";
+  value: IdentDeclAmino;
 }
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
@@ -90,6 +140,19 @@ export interface FunctionDeclProtoMsg {
   value: Uint8Array;
 }
 /** A function declaration. */
+export interface FunctionDeclAmino {
+  /** The function arguments. */
+  args?: IdentDeclAmino[];
+  /** Optional declared return type. */
+  return_type?: DeclTypeAmino;
+  /** If the first argument of the function is the receiver. */
+  receiver_function?: boolean;
+}
+export interface FunctionDeclAminoMsg {
+  type: "/google.api.expr.v1beta1.FunctionDecl";
+  value: FunctionDeclAmino;
+}
+/** A function declaration. */
 export interface FunctionDeclSDKType {
   args: IdentDeclSDKType[];
   return_type?: DeclTypeSDKType;
@@ -106,6 +169,15 @@ function createBaseDecl(): Decl {
 }
 export const Decl = {
   typeUrl: "/google.api.expr.v1beta1.Decl",
+  is(o: any): o is Decl {
+    return o && (o.$typeUrl === Decl.typeUrl || typeof o.id === "number" && typeof o.name === "string" && typeof o.doc === "string");
+  },
+  isSDK(o: any): o is DeclSDKType {
+    return o && (o.$typeUrl === Decl.typeUrl || typeof o.id === "number" && typeof o.name === "string" && typeof o.doc === "string");
+  },
+  isAmino(o: any): o is DeclAmino {
+    return o && (o.$typeUrl === Decl.typeUrl || typeof o.id === "number" && typeof o.name === "string" && typeof o.doc === "string");
+  },
   encode(message: Decl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(8).int32(message.id);
@@ -253,6 +325,10 @@ export const Decl = {
       typeUrl: "/google.api.expr.v1beta1.Decl",
       value: Decl.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    IdentDecl.registerTypeUrl();
+    FunctionDecl.registerTypeUrl();
   }
 };
 function createBaseDeclType(): DeclType {
@@ -264,6 +340,15 @@ function createBaseDeclType(): DeclType {
 }
 export const DeclType = {
   typeUrl: "/google.api.expr.v1beta1.DeclType",
+  is(o: any): o is DeclType {
+    return o && (o.$typeUrl === DeclType.typeUrl || typeof o.id === "number" && typeof o.type === "string" && Array.isArray(o.typeParams) && (!o.typeParams.length || DeclType.is(o.typeParams[0])));
+  },
+  isSDK(o: any): o is DeclTypeSDKType {
+    return o && (o.$typeUrl === DeclType.typeUrl || typeof o.id === "number" && typeof o.type === "string" && Array.isArray(o.type_params) && (!o.type_params.length || DeclType.isSDK(o.type_params[0])));
+  },
+  isAmino(o: any): o is DeclTypeAmino {
+    return o && (o.$typeUrl === DeclType.typeUrl || typeof o.id === "number" && typeof o.type === "string" && Array.isArray(o.type_params) && (!o.type_params.length || DeclType.isAmino(o.type_params[0])));
+  },
   encode(message: DeclType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(8).int32(message.id);
@@ -385,6 +470,9 @@ export const DeclType = {
       typeUrl: "/google.api.expr.v1beta1.DeclType",
       value: DeclType.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeclType.registerTypeUrl();
   }
 };
 function createBaseIdentDecl(): IdentDecl {
@@ -395,6 +483,15 @@ function createBaseIdentDecl(): IdentDecl {
 }
 export const IdentDecl = {
   typeUrl: "/google.api.expr.v1beta1.IdentDecl",
+  is(o: any): o is IdentDecl {
+    return o && o.$typeUrl === IdentDecl.typeUrl;
+  },
+  isSDK(o: any): o is IdentDeclSDKType {
+    return o && o.$typeUrl === IdentDecl.typeUrl;
+  },
+  isAmino(o: any): o is IdentDeclAmino {
+    return o && o.$typeUrl === IdentDecl.typeUrl;
+  },
   encode(message: IdentDecl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== undefined) {
       DeclType.encode(message.type, writer.uint32(26).fork()).ldelim();
@@ -494,6 +591,10 @@ export const IdentDecl = {
       typeUrl: "/google.api.expr.v1beta1.IdentDecl",
       value: IdentDecl.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeclType.registerTypeUrl();
+    Expr.registerTypeUrl();
   }
 };
 function createBaseFunctionDecl(): FunctionDecl {
@@ -505,6 +606,15 @@ function createBaseFunctionDecl(): FunctionDecl {
 }
 export const FunctionDecl = {
   typeUrl: "/google.api.expr.v1beta1.FunctionDecl",
+  is(o: any): o is FunctionDecl {
+    return o && (o.$typeUrl === FunctionDecl.typeUrl || Array.isArray(o.args) && (!o.args.length || IdentDecl.is(o.args[0])) && typeof o.receiverFunction === "boolean");
+  },
+  isSDK(o: any): o is FunctionDeclSDKType {
+    return o && (o.$typeUrl === FunctionDecl.typeUrl || Array.isArray(o.args) && (!o.args.length || IdentDecl.isSDK(o.args[0])) && typeof o.receiver_function === "boolean");
+  },
+  isAmino(o: any): o is FunctionDeclAmino {
+    return o && (o.$typeUrl === FunctionDecl.typeUrl || Array.isArray(o.args) && (!o.args.length || IdentDecl.isAmino(o.args[0])) && typeof o.receiver_function === "boolean");
+  },
   encode(message: FunctionDecl, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.args) {
       IdentDecl.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -628,5 +738,9 @@ export const FunctionDecl = {
       typeUrl: "/google.api.expr.v1beta1.FunctionDecl",
       value: FunctionDecl.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    IdentDecl.registerTypeUrl();
+    DeclType.registerTypeUrl();
   }
 };

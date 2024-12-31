@@ -1,5 +1,6 @@
-import { FeeToken, FeeTokenSDKType } from "./feetoken";
+import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.txfees.v1beta1";
@@ -11,6 +12,7 @@ export const protobufPackage = "osmosis.txfees.v1beta1";
  * it will remove the denom from the whitelisted set.
  */
 export interface UpdateFeeTokenProposal {
+  $typeUrl?: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
   title: string;
   description: string;
   feetoken: FeeToken;
@@ -26,13 +28,31 @@ export interface UpdateFeeTokenProposalProtoMsg {
  * used to update the Pool to associate with the denom. If Pool ID is set to 0,
  * it will remove the denom from the whitelisted set.
  */
+export interface UpdateFeeTokenProposalAmino {
+  title?: string;
+  description?: string;
+  feetoken?: FeeTokenAmino;
+}
+export interface UpdateFeeTokenProposalAminoMsg {
+  type: "osmosis/txfees/update-fee-token-proposal";
+  value: UpdateFeeTokenProposalAmino;
+}
+/**
+ * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
+ * token. It must specify a denom along with gamm pool ID to use as a spot price
+ * calculator. It can be used to add a new denom to the whitelist It can also be
+ * used to update the Pool to associate with the denom. If Pool ID is set to 0,
+ * it will remove the denom from the whitelisted set.
+ */
 export interface UpdateFeeTokenProposalSDKType {
+  $typeUrl?: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
   title: string;
   description: string;
   feetoken: FeeTokenSDKType;
 }
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {
+    $typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
     title: "",
     description: "",
     feetoken: FeeToken.fromPartial({})
@@ -40,6 +60,16 @@ function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
 }
 export const UpdateFeeTokenProposal = {
   typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
+  aminoType: "osmosis/txfees/update-fee-token-proposal",
+  is(o: any): o is UpdateFeeTokenProposal {
+    return o && (o.$typeUrl === UpdateFeeTokenProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && FeeToken.is(o.feetoken));
+  },
+  isSDK(o: any): o is UpdateFeeTokenProposalSDKType {
+    return o && (o.$typeUrl === UpdateFeeTokenProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && FeeToken.isSDK(o.feetoken));
+  },
+  isAmino(o: any): o is UpdateFeeTokenProposalAmino {
+    return o && (o.$typeUrl === UpdateFeeTokenProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && FeeToken.isAmino(o.feetoken));
+  },
   encode(message: UpdateFeeTokenProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -159,5 +189,8 @@ export const UpdateFeeTokenProposal = {
       typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
       value: UpdateFeeTokenProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    FeeToken.registerTypeUrl();
   }
 };

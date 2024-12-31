@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -13,6 +14,7 @@ export enum Deployment_State {
   UNRECOGNIZED = -1,
 }
 export const Deployment_StateSDKType = Deployment_State;
+export const Deployment_StateAmino = Deployment_State;
 export function deployment_StateFromJSON(object: any): Deployment_State {
   switch (object) {
     case 0:
@@ -53,6 +55,15 @@ export interface DeploymentIDProtoMsg {
   value: Uint8Array;
 }
 /** DeploymentID stores owner and sequence number */
+export interface DeploymentIDAmino {
+  owner: string;
+  dseq: string;
+}
+export interface DeploymentIDAminoMsg {
+  type: "akash/deployment/v1beta2/deployment-i-d";
+  value: DeploymentIDAmino;
+}
+/** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
   owner: string;
   dseq: bigint;
@@ -67,6 +78,17 @@ export interface Deployment {
 export interface DeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Deployment";
   value: Uint8Array;
+}
+/** Deployment stores deploymentID, state and version details */
+export interface DeploymentAmino {
+  deployment_id: DeploymentIDAmino;
+  state: Deployment_State;
+  version: string;
+  created_at?: string;
+}
+export interface DeploymentAminoMsg {
+  type: "akash/deployment/v1beta2/deployment";
+  value: DeploymentAmino;
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
@@ -86,6 +108,16 @@ export interface DeploymentFiltersProtoMsg {
   value: Uint8Array;
 }
 /** DeploymentFilters defines filters used to filter deployments */
+export interface DeploymentFiltersAmino {
+  owner: string;
+  dseq: string;
+  state: string;
+}
+export interface DeploymentFiltersAminoMsg {
+  type: "akash/deployment/v1beta2/deployment-filters";
+  value: DeploymentFiltersAmino;
+}
+/** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
   owner: string;
   dseq: bigint;
@@ -99,6 +131,16 @@ function createBaseDeploymentID(): DeploymentID {
 }
 export const DeploymentID = {
   typeUrl: "/akash.deployment.v1beta2.DeploymentID",
+  aminoType: "akash/deployment/v1beta2/deployment-i-d",
+  is(o: any): o is DeploymentID {
+    return o && (o.$typeUrl === DeploymentID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint");
+  },
+  isSDK(o: any): o is DeploymentIDSDKType {
+    return o && (o.$typeUrl === DeploymentID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint");
+  },
+  isAmino(o: any): o is DeploymentIDAmino {
+    return o && (o.$typeUrl === DeploymentID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint");
+  },
   encode(message: DeploymentID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -202,7 +244,8 @@ export const DeploymentID = {
       typeUrl: "/akash.deployment.v1beta2.DeploymentID",
       value: DeploymentID.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDeployment(): Deployment {
   return {
@@ -214,6 +257,16 @@ function createBaseDeployment(): Deployment {
 }
 export const Deployment = {
   typeUrl: "/akash.deployment.v1beta2.Deployment",
+  aminoType: "akash/deployment/v1beta2/deployment",
+  is(o: any): o is Deployment {
+    return o && (o.$typeUrl === Deployment.typeUrl || DeploymentID.is(o.deploymentId) && isSet(o.state) && (o.version instanceof Uint8Array || typeof o.version === "string") && typeof o.createdAt === "bigint");
+  },
+  isSDK(o: any): o is DeploymentSDKType {
+    return o && (o.$typeUrl === Deployment.typeUrl || DeploymentID.isSDK(o.deployment_id) && isSet(o.state) && (o.version instanceof Uint8Array || typeof o.version === "string") && typeof o.created_at === "bigint");
+  },
+  isAmino(o: any): o is DeploymentAmino {
+    return o && (o.$typeUrl === Deployment.typeUrl || DeploymentID.isAmino(o.deployment_id) && isSet(o.state) && (o.version instanceof Uint8Array || typeof o.version === "string") && typeof o.created_at === "bigint");
+  },
   encode(message: Deployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deploymentId !== undefined) {
       DeploymentID.encode(message.deploymentId, writer.uint32(10).fork()).ldelim();
@@ -351,6 +404,9 @@ export const Deployment = {
       typeUrl: "/akash.deployment.v1beta2.Deployment",
       value: Deployment.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeploymentID.registerTypeUrl();
   }
 };
 function createBaseDeploymentFilters(): DeploymentFilters {
@@ -362,6 +418,16 @@ function createBaseDeploymentFilters(): DeploymentFilters {
 }
 export const DeploymentFilters = {
   typeUrl: "/akash.deployment.v1beta2.DeploymentFilters",
+  aminoType: "akash/deployment/v1beta2/deployment-filters",
+  is(o: any): o is DeploymentFilters {
+    return o && (o.$typeUrl === DeploymentFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.state === "string");
+  },
+  isSDK(o: any): o is DeploymentFiltersSDKType {
+    return o && (o.$typeUrl === DeploymentFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.state === "string");
+  },
+  isAmino(o: any): o is DeploymentFiltersAmino {
+    return o && (o.$typeUrl === DeploymentFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.state === "string");
+  },
   encode(message: DeploymentFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -481,5 +547,6 @@ export const DeploymentFilters = {
       typeUrl: "/akash.deployment.v1beta2.DeploymentFilters",
       value: DeploymentFilters.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

@@ -1,7 +1,8 @@
-import { Service, ServiceSDKType } from "./resources";
+import { Service, ServiceAmino, ServiceSDKType } from "./resources";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "google.api.serviceusage.v1";
 /**
  * Enum to determine if service usage should be checked when disabling a
@@ -21,6 +22,7 @@ export enum DisableServiceRequest_CheckIfServiceHasUsage {
   UNRECOGNIZED = -1,
 }
 export const DisableServiceRequest_CheckIfServiceHasUsageSDKType = DisableServiceRequest_CheckIfServiceHasUsage;
+export const DisableServiceRequest_CheckIfServiceHasUsageAmino = DisableServiceRequest_CheckIfServiceHasUsage;
 export function disableServiceRequest_CheckIfServiceHasUsageFromJSON(object: any): DisableServiceRequest_CheckIfServiceHasUsage {
   switch (object) {
     case 0:
@@ -73,6 +75,27 @@ export interface EnableServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `EnableService` method. */
+export interface EnableServiceRequestAmino {
+  /**
+   * Name of the consumer and service to enable the service on.
+   * 
+   * The `EnableService` and `DisableService` methods currently only support
+   * projects.
+   * 
+   * Enabling a service requires that the service is public or is shared with
+   * the user enabling the service.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
+   * project number.
+   */
+  name?: string;
+}
+export interface EnableServiceRequestAminoMsg {
+  type: "/google.api.serviceusage.v1.EnableServiceRequest";
+  value: EnableServiceRequestAmino;
+}
+/** Request message for the `EnableService` method. */
 export interface EnableServiceRequestSDKType {
   name: string;
 }
@@ -88,6 +111,19 @@ export interface EnableServiceResponse {
 export interface EnableServiceResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceResponse";
   value: Uint8Array;
+}
+/**
+ * Response message for the `EnableService` method.
+ * This response message is assigned to the `response` field of the returned
+ * Operation when that operation is done.
+ */
+export interface EnableServiceResponseAmino {
+  /** The new state of the service after enabling. */
+  service?: ServiceAmino;
+}
+export interface EnableServiceResponseAminoMsg {
+  type: "/google.api.serviceusage.v1.EnableServiceResponse";
+  value: EnableServiceResponseAmino;
 }
 /**
  * Response message for the `EnableService` method.
@@ -125,6 +161,33 @@ export interface DisableServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `DisableService` method. */
+export interface DisableServiceRequestAmino {
+  /**
+   * Name of the consumer and service to disable the service on.
+   * 
+   * The enable and disable methods currently only support projects.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
+   * project number.
+   */
+  name?: string;
+  /**
+   * Indicates if services that are enabled and which depend on this service
+   * should also be disabled. If not set, an error will be generated if any
+   * enabled services depend on the service to be disabled. When set, the
+   * service, and any enabled services that depend on it, will be disabled
+   * together.
+   */
+  disable_dependent_services?: boolean;
+  /** Defines the behavior for checking service usage when disabling a service. */
+  check_if_service_has_usage?: DisableServiceRequest_CheckIfServiceHasUsage;
+}
+export interface DisableServiceRequestAminoMsg {
+  type: "/google.api.serviceusage.v1.DisableServiceRequest";
+  value: DisableServiceRequestAmino;
+}
+/** Request message for the `DisableService` method. */
 export interface DisableServiceRequestSDKType {
   name: string;
   disable_dependent_services: boolean;
@@ -148,6 +211,19 @@ export interface DisableServiceResponseProtoMsg {
  * This response message is assigned to the `response` field of the returned
  * Operation when that operation is done.
  */
+export interface DisableServiceResponseAmino {
+  /** The new state of the service after disabling. */
+  service?: ServiceAmino;
+}
+export interface DisableServiceResponseAminoMsg {
+  type: "/google.api.serviceusage.v1.DisableServiceResponse";
+  value: DisableServiceResponseAmino;
+}
+/**
+ * Response message for the `DisableService` method.
+ * This response message is assigned to the `response` field of the returned
+ * Operation when that operation is done.
+ */
 export interface DisableServiceResponseSDKType {
   service?: ServiceSDKType;
 }
@@ -165,6 +241,21 @@ export interface GetServiceRequest {
 export interface GetServiceRequestProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.GetServiceRequest";
   value: Uint8Array;
+}
+/** Request message for the `GetService` method. */
+export interface GetServiceRequestAmino {
+  /**
+   * Name of the consumer and service to get the `ConsumerState` for.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
+   * project number.
+   */
+  name?: string;
+}
+export interface GetServiceRequestAminoMsg {
+  type: "/google.api.serviceusage.v1.GetServiceRequest";
+  value: GetServiceRequestAmino;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequestSDKType {
@@ -201,6 +292,36 @@ export interface ListServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `ListServices` method. */
+export interface ListServicesRequestAmino {
+  /**
+   * Parent to search for services on.
+   * 
+   * An example name would be:
+   * `projects/123` where `123` is the project number.
+   */
+  parent?: string;
+  /**
+   * Requested size of the next page of data.
+   * Requested page size cannot exceed 200.
+   * If not set, the default page size is 50.
+   */
+  page_size?: number;
+  /**
+   * Token identifying which result to start with, which is returned by a
+   * previous list call.
+   */
+  page_token?: string;
+  /**
+   * Only list services that conform to the given filter.
+   * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
+   */
+  filter?: string;
+}
+export interface ListServicesRequestAminoMsg {
+  type: "/google.api.serviceusage.v1.ListServicesRequest";
+  value: ListServicesRequestAmino;
+}
+/** Request message for the `ListServices` method. */
 export interface ListServicesRequestSDKType {
   parent: string;
   page_size: number;
@@ -220,6 +341,20 @@ export interface ListServicesResponse {
 export interface ListServicesResponseProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.ListServicesResponse";
   value: Uint8Array;
+}
+/** Response message for the `ListServices` method. */
+export interface ListServicesResponseAmino {
+  /** The available services for the requested project. */
+  services?: ServiceAmino[];
+  /**
+   * Token that can be passed to `ListServices` to resume a paginated
+   * query.
+   */
+  next_page_token?: string;
+}
+export interface ListServicesResponseAminoMsg {
+  type: "/google.api.serviceusage.v1.ListServicesResponse";
+  value: ListServicesResponseAmino;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponseSDKType {
@@ -257,6 +392,36 @@ export interface BatchEnableServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `BatchEnableServices` method. */
+export interface BatchEnableServicesRequestAmino {
+  /**
+   * Parent to enable services on.
+   * 
+   * An example name would be:
+   * `projects/123` where `123` is the project number.
+   * 
+   * The `BatchEnableServices` method currently only supports projects.
+   */
+  parent?: string;
+  /**
+   * The identifiers of the services to enable on the project.
+   * 
+   * A valid identifier would be:
+   * serviceusage.googleapis.com
+   * 
+   * Enabling services requires that each service is public or is shared with
+   * the user enabling the service.
+   * 
+   * A single request can enable a maximum of 20 services at a time. If more
+   * than 20 services are specified, the request will fail, and no state changes
+   * will occur.
+   */
+  service_ids?: string[];
+}
+export interface BatchEnableServicesRequestAminoMsg {
+  type: "/google.api.serviceusage.v1.BatchEnableServicesRequest";
+  value: BatchEnableServicesRequestAmino;
+}
+/** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequestSDKType {
   parent: string;
   service_ids: string[];
@@ -284,6 +449,24 @@ export interface BatchEnableServicesResponseProtoMsg {
  * This response message is assigned to the `response` field of the returned
  * Operation when that operation is done.
  */
+export interface BatchEnableServicesResponseAmino {
+  /** The new state of the services after enabling. */
+  services?: ServiceAmino[];
+  /**
+   * If allow_partial_success is true, and one or more services could not be
+   * enabled, this field contains the details about each failure.
+   */
+  failures?: BatchEnableServicesResponse_EnableFailureAmino[];
+}
+export interface BatchEnableServicesResponseAminoMsg {
+  type: "/google.api.serviceusage.v1.BatchEnableServicesResponse";
+  value: BatchEnableServicesResponseAmino;
+}
+/**
+ * Response message for the `BatchEnableServices` method.
+ * This response message is assigned to the `response` field of the returned
+ * Operation when that operation is done.
+ */
 export interface BatchEnableServicesResponseSDKType {
   services: ServiceSDKType[];
   failures: BatchEnableServicesResponse_EnableFailureSDKType[];
@@ -298,6 +481,17 @@ export interface BatchEnableServicesResponse_EnableFailure {
 export interface BatchEnableServicesResponse_EnableFailureProtoMsg {
   typeUrl: "/google.api.serviceusage.v1.EnableFailure";
   value: Uint8Array;
+}
+/** Provides error messages for the failing services. */
+export interface BatchEnableServicesResponse_EnableFailureAmino {
+  /** The service id of a service that could not be enabled. */
+  service_id?: string;
+  /** An error message describing why the service could not be enabled. */
+  error_message?: string;
+}
+export interface BatchEnableServicesResponse_EnableFailureAminoMsg {
+  type: "/google.api.serviceusage.v1.EnableFailure";
+  value: BatchEnableServicesResponse_EnableFailureAmino;
 }
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailureSDKType {
@@ -329,6 +523,30 @@ export interface BatchGetServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `BatchGetServices` method. */
+export interface BatchGetServicesRequestAmino {
+  /**
+   * Parent to retrieve services from.
+   * If this is set, the parent of all of the services specified in `names` must
+   * match this field. An example name would be: `projects/123` where `123` is
+   * the project number. The `BatchGetServices` method currently only supports
+   * projects.
+   */
+  parent?: string;
+  /**
+   * Names of the services to retrieve.
+   * 
+   * An example name would be:
+   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
+   * project number.
+   * A single request can get a maximum of 30 services at a time.
+   */
+  names?: string[];
+}
+export interface BatchGetServicesRequestAminoMsg {
+  type: "/google.api.serviceusage.v1.BatchGetServicesRequest";
+  value: BatchGetServicesRequestAmino;
+}
+/** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequestSDKType {
   parent: string;
   names: string[];
@@ -343,6 +561,15 @@ export interface BatchGetServicesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for the `BatchGetServices` method. */
+export interface BatchGetServicesResponseAmino {
+  /** The requested Service states. */
+  services?: ServiceAmino[];
+}
+export interface BatchGetServicesResponseAminoMsg {
+  type: "/google.api.serviceusage.v1.BatchGetServicesResponse";
+  value: BatchGetServicesResponseAmino;
+}
+/** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponseSDKType {
   services: ServiceSDKType[];
 }
@@ -353,6 +580,15 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 }
 export const EnableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest",
+  is(o: any): o is EnableServiceRequest {
+    return o && (o.$typeUrl === EnableServiceRequest.typeUrl || typeof o.name === "string");
+  },
+  isSDK(o: any): o is EnableServiceRequestSDKType {
+    return o && (o.$typeUrl === EnableServiceRequest.typeUrl || typeof o.name === "string");
+  },
+  isAmino(o: any): o is EnableServiceRequestAmino {
+    return o && (o.$typeUrl === EnableServiceRequest.typeUrl || typeof o.name === "string");
+  },
   encode(message: EnableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -432,7 +668,8 @@ export const EnableServiceRequest = {
       typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest",
       value: EnableServiceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseEnableServiceResponse(): EnableServiceResponse {
   return {
@@ -441,6 +678,15 @@ function createBaseEnableServiceResponse(): EnableServiceResponse {
 }
 export const EnableServiceResponse = {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceResponse",
+  is(o: any): o is EnableServiceResponse {
+    return o && o.$typeUrl === EnableServiceResponse.typeUrl;
+  },
+  isSDK(o: any): o is EnableServiceResponseSDKType {
+    return o && o.$typeUrl === EnableServiceResponse.typeUrl;
+  },
+  isAmino(o: any): o is EnableServiceResponseAmino {
+    return o && o.$typeUrl === EnableServiceResponse.typeUrl;
+  },
   encode(message: EnableServiceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.service !== undefined) {
       Service.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -522,6 +768,9 @@ export const EnableServiceResponse = {
       typeUrl: "/google.api.serviceusage.v1.EnableServiceResponse",
       value: EnableServiceResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Service.registerTypeUrl();
   }
 };
 function createBaseDisableServiceRequest(): DisableServiceRequest {
@@ -533,6 +782,15 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 }
 export const DisableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest",
+  is(o: any): o is DisableServiceRequest {
+    return o && (o.$typeUrl === DisableServiceRequest.typeUrl || typeof o.name === "string" && typeof o.disableDependentServices === "boolean" && isSet(o.checkIfServiceHasUsage));
+  },
+  isSDK(o: any): o is DisableServiceRequestSDKType {
+    return o && (o.$typeUrl === DisableServiceRequest.typeUrl || typeof o.name === "string" && typeof o.disable_dependent_services === "boolean" && isSet(o.check_if_service_has_usage));
+  },
+  isAmino(o: any): o is DisableServiceRequestAmino {
+    return o && (o.$typeUrl === DisableServiceRequest.typeUrl || typeof o.name === "string" && typeof o.disable_dependent_services === "boolean" && isSet(o.check_if_service_has_usage));
+  },
   encode(message: DisableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -644,7 +902,8 @@ export const DisableServiceRequest = {
       typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest",
       value: DisableServiceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDisableServiceResponse(): DisableServiceResponse {
   return {
@@ -653,6 +912,15 @@ function createBaseDisableServiceResponse(): DisableServiceResponse {
 }
 export const DisableServiceResponse = {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceResponse",
+  is(o: any): o is DisableServiceResponse {
+    return o && o.$typeUrl === DisableServiceResponse.typeUrl;
+  },
+  isSDK(o: any): o is DisableServiceResponseSDKType {
+    return o && o.$typeUrl === DisableServiceResponse.typeUrl;
+  },
+  isAmino(o: any): o is DisableServiceResponseAmino {
+    return o && o.$typeUrl === DisableServiceResponse.typeUrl;
+  },
   encode(message: DisableServiceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.service !== undefined) {
       Service.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -734,6 +1002,9 @@ export const DisableServiceResponse = {
       typeUrl: "/google.api.serviceusage.v1.DisableServiceResponse",
       value: DisableServiceResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Service.registerTypeUrl();
   }
 };
 function createBaseGetServiceRequest(): GetServiceRequest {
@@ -743,6 +1014,15 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 }
 export const GetServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.GetServiceRequest",
+  is(o: any): o is GetServiceRequest {
+    return o && (o.$typeUrl === GetServiceRequest.typeUrl || typeof o.name === "string");
+  },
+  isSDK(o: any): o is GetServiceRequestSDKType {
+    return o && (o.$typeUrl === GetServiceRequest.typeUrl || typeof o.name === "string");
+  },
+  isAmino(o: any): o is GetServiceRequestAmino {
+    return o && (o.$typeUrl === GetServiceRequest.typeUrl || typeof o.name === "string");
+  },
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -822,7 +1102,8 @@ export const GetServiceRequest = {
       typeUrl: "/google.api.serviceusage.v1.GetServiceRequest",
       value: GetServiceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListServicesRequest(): ListServicesRequest {
   return {
@@ -834,6 +1115,15 @@ function createBaseListServicesRequest(): ListServicesRequest {
 }
 export const ListServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.ListServicesRequest",
+  is(o: any): o is ListServicesRequest {
+    return o && (o.$typeUrl === ListServicesRequest.typeUrl || typeof o.parent === "string" && typeof o.pageSize === "number" && typeof o.pageToken === "string" && typeof o.filter === "string");
+  },
+  isSDK(o: any): o is ListServicesRequestSDKType {
+    return o && (o.$typeUrl === ListServicesRequest.typeUrl || typeof o.parent === "string" && typeof o.page_size === "number" && typeof o.page_token === "string" && typeof o.filter === "string");
+  },
+  isAmino(o: any): o is ListServicesRequestAmino {
+    return o && (o.$typeUrl === ListServicesRequest.typeUrl || typeof o.parent === "string" && typeof o.page_size === "number" && typeof o.page_token === "string" && typeof o.filter === "string");
+  },
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
@@ -961,7 +1251,8 @@ export const ListServicesRequest = {
       typeUrl: "/google.api.serviceusage.v1.ListServicesRequest",
       value: ListServicesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListServicesResponse(): ListServicesResponse {
   return {
@@ -971,6 +1262,15 @@ function createBaseListServicesResponse(): ListServicesResponse {
 }
 export const ListServicesResponse = {
   typeUrl: "/google.api.serviceusage.v1.ListServicesResponse",
+  is(o: any): o is ListServicesResponse {
+    return o && (o.$typeUrl === ListServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.is(o.services[0])) && typeof o.nextPageToken === "string");
+  },
+  isSDK(o: any): o is ListServicesResponseSDKType {
+    return o && (o.$typeUrl === ListServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.isSDK(o.services[0])) && typeof o.next_page_token === "string");
+  },
+  isAmino(o: any): o is ListServicesResponseAmino {
+    return o && (o.$typeUrl === ListServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.isAmino(o.services[0])) && typeof o.next_page_token === "string");
+  },
   encode(message: ListServicesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1076,6 +1376,9 @@ export const ListServicesResponse = {
       typeUrl: "/google.api.serviceusage.v1.ListServicesResponse",
       value: ListServicesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Service.registerTypeUrl();
   }
 };
 function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
@@ -1086,6 +1389,15 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 }
 export const BatchEnableServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest",
+  is(o: any): o is BatchEnableServicesRequest {
+    return o && (o.$typeUrl === BatchEnableServicesRequest.typeUrl || typeof o.parent === "string" && Array.isArray(o.serviceIds) && (!o.serviceIds.length || typeof o.serviceIds[0] === "string"));
+  },
+  isSDK(o: any): o is BatchEnableServicesRequestSDKType {
+    return o && (o.$typeUrl === BatchEnableServicesRequest.typeUrl || typeof o.parent === "string" && Array.isArray(o.service_ids) && (!o.service_ids.length || typeof o.service_ids[0] === "string"));
+  },
+  isAmino(o: any): o is BatchEnableServicesRequestAmino {
+    return o && (o.$typeUrl === BatchEnableServicesRequest.typeUrl || typeof o.parent === "string" && Array.isArray(o.service_ids) && (!o.service_ids.length || typeof o.service_ids[0] === "string"));
+  },
   encode(message: BatchEnableServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
@@ -1191,7 +1503,8 @@ export const BatchEnableServicesRequest = {
       typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest",
       value: BatchEnableServicesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseBatchEnableServicesResponse(): BatchEnableServicesResponse {
   return {
@@ -1201,6 +1514,15 @@ function createBaseBatchEnableServicesResponse(): BatchEnableServicesResponse {
 }
 export const BatchEnableServicesResponse = {
   typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesResponse",
+  is(o: any): o is BatchEnableServicesResponse {
+    return o && (o.$typeUrl === BatchEnableServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.is(o.services[0])) && Array.isArray(o.failures) && (!o.failures.length || BatchEnableServicesResponse_EnableFailure.is(o.failures[0])));
+  },
+  isSDK(o: any): o is BatchEnableServicesResponseSDKType {
+    return o && (o.$typeUrl === BatchEnableServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.isSDK(o.services[0])) && Array.isArray(o.failures) && (!o.failures.length || BatchEnableServicesResponse_EnableFailure.isSDK(o.failures[0])));
+  },
+  isAmino(o: any): o is BatchEnableServicesResponseAmino {
+    return o && (o.$typeUrl === BatchEnableServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.isAmino(o.services[0])) && Array.isArray(o.failures) && (!o.failures.length || BatchEnableServicesResponse_EnableFailure.isAmino(o.failures[0])));
+  },
   encode(message: BatchEnableServicesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1316,6 +1638,10 @@ export const BatchEnableServicesResponse = {
       typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesResponse",
       value: BatchEnableServicesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Service.registerTypeUrl();
+    BatchEnableServicesResponse_EnableFailure.registerTypeUrl();
   }
 };
 function createBaseBatchEnableServicesResponse_EnableFailure(): BatchEnableServicesResponse_EnableFailure {
@@ -1326,6 +1652,15 @@ function createBaseBatchEnableServicesResponse_EnableFailure(): BatchEnableServi
 }
 export const BatchEnableServicesResponse_EnableFailure = {
   typeUrl: "/google.api.serviceusage.v1.EnableFailure",
+  is(o: any): o is BatchEnableServicesResponse_EnableFailure {
+    return o && (o.$typeUrl === BatchEnableServicesResponse_EnableFailure.typeUrl || typeof o.serviceId === "string" && typeof o.errorMessage === "string");
+  },
+  isSDK(o: any): o is BatchEnableServicesResponse_EnableFailureSDKType {
+    return o && (o.$typeUrl === BatchEnableServicesResponse_EnableFailure.typeUrl || typeof o.service_id === "string" && typeof o.error_message === "string");
+  },
+  isAmino(o: any): o is BatchEnableServicesResponse_EnableFailureAmino {
+    return o && (o.$typeUrl === BatchEnableServicesResponse_EnableFailure.typeUrl || typeof o.service_id === "string" && typeof o.error_message === "string");
+  },
   encode(message: BatchEnableServicesResponse_EnableFailure, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceId !== undefined) {
       writer.uint32(10).string(message.serviceId);
@@ -1421,7 +1756,8 @@ export const BatchEnableServicesResponse_EnableFailure = {
       typeUrl: "/google.api.serviceusage.v1.EnableFailure",
       value: BatchEnableServicesResponse_EnableFailure.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseBatchGetServicesRequest(): BatchGetServicesRequest {
   return {
@@ -1431,6 +1767,15 @@ function createBaseBatchGetServicesRequest(): BatchGetServicesRequest {
 }
 export const BatchGetServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest",
+  is(o: any): o is BatchGetServicesRequest {
+    return o && (o.$typeUrl === BatchGetServicesRequest.typeUrl || typeof o.parent === "string" && Array.isArray(o.names) && (!o.names.length || typeof o.names[0] === "string"));
+  },
+  isSDK(o: any): o is BatchGetServicesRequestSDKType {
+    return o && (o.$typeUrl === BatchGetServicesRequest.typeUrl || typeof o.parent === "string" && Array.isArray(o.names) && (!o.names.length || typeof o.names[0] === "string"));
+  },
+  isAmino(o: any): o is BatchGetServicesRequestAmino {
+    return o && (o.$typeUrl === BatchGetServicesRequest.typeUrl || typeof o.parent === "string" && Array.isArray(o.names) && (!o.names.length || typeof o.names[0] === "string"));
+  },
   encode(message: BatchGetServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
@@ -1536,7 +1881,8 @@ export const BatchGetServicesRequest = {
       typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest",
       value: BatchGetServicesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseBatchGetServicesResponse(): BatchGetServicesResponse {
   return {
@@ -1545,6 +1891,15 @@ function createBaseBatchGetServicesResponse(): BatchGetServicesResponse {
 }
 export const BatchGetServicesResponse = {
   typeUrl: "/google.api.serviceusage.v1.BatchGetServicesResponse",
+  is(o: any): o is BatchGetServicesResponse {
+    return o && (o.$typeUrl === BatchGetServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.is(o.services[0])));
+  },
+  isSDK(o: any): o is BatchGetServicesResponseSDKType {
+    return o && (o.$typeUrl === BatchGetServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.isSDK(o.services[0])));
+  },
+  isAmino(o: any): o is BatchGetServicesResponseAmino {
+    return o && (o.$typeUrl === BatchGetServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || Service.isAmino(o.services[0])));
+  },
   encode(message: BatchGetServicesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1634,5 +1989,8 @@ export const BatchGetServicesResponse = {
       typeUrl: "/google.api.serviceusage.v1.BatchGetServicesResponse",
       value: BatchGetServicesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Service.registerTypeUrl();
   }
 };

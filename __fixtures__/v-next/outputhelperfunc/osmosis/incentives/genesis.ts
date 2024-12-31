@@ -1,7 +1,8 @@
-import { Params, ParamsSDKType } from "./params";
-import { Gauge, GaugeSDKType } from "./gauge";
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
+import { Gauge, GaugeAmino, GaugeSDKType } from "./gauge";
+import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { GlobalDecoderRegistry } from "../../registry";
 import { isSet, DeepPartial } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
@@ -33,6 +34,30 @@ export interface GenesisStateProtoMsg {
  * GenesisState defines the incentives module's various parameters when first
  * initialized
  */
+export interface GenesisStateAmino {
+  /** params are all the parameters of the module */
+  params?: ParamsAmino;
+  /** gauges are all gauges that should exist at genesis */
+  gauges?: GaugeAmino[];
+  /**
+   * lockable_durations are all lockup durations that gauges can be locked for
+   * in order to recieve incentives
+   */
+  lockable_durations?: DurationAmino[];
+  /**
+   * last_gauge_id is what the gauge number will increment from when creating
+   * the next gauge after genesis
+   */
+  last_gauge_id?: string;
+}
+export interface GenesisStateAminoMsg {
+  type: "osmosis/incentives/genesis-state";
+  value: GenesisStateAmino;
+}
+/**
+ * GenesisState defines the incentives module's various parameters when first
+ * initialized
+ */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
   gauges: GaugeSDKType[];
@@ -49,6 +74,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/osmosis.incentives.GenesisState",
+  aminoType: "osmosis/incentives/genesis-state",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params) && Array.isArray(o.gauges) && (!o.gauges.length || Gauge.is(o.gauges[0])) && Array.isArray(o.lockableDurations) && (!o.lockableDurations.length || Duration.is(o.lockableDurations[0])) && typeof o.lastGaugeId === "bigint");
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params) && Array.isArray(o.gauges) && (!o.gauges.length || Gauge.isSDK(o.gauges[0])) && Array.isArray(o.lockable_durations) && (!o.lockable_durations.length || Duration.isSDK(o.lockable_durations[0])) && typeof o.last_gauge_id === "bigint");
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params) && Array.isArray(o.gauges) && (!o.gauges.length || Gauge.isAmino(o.gauges[0])) && Array.isArray(o.lockable_durations) && (!o.lockable_durations.length || Duration.isAmino(o.lockable_durations[0])) && typeof o.last_gauge_id === "bigint");
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -206,5 +241,9 @@ export const GenesisState = {
       typeUrl: "/osmosis.incentives.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
+    Gauge.registerTypeUrl();
   }
 };

@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
@@ -13,6 +13,15 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the evidence module's genesis state. */
+export interface GenesisStateAmino {
+  /** evidence defines all the evidence at genesis. */
+  evidence?: AnyAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the evidence module's genesis state. */
 export interface GenesisStateSDKType {
   evidence: AnySDKType[];
 }
@@ -23,6 +32,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.evidence.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.evidence) && (!o.evidence.length || Any.is(o.evidence[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.evidence) && (!o.evidence.length || Any.isSDK(o.evidence[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.evidence) && (!o.evidence.length || Any.isAmino(o.evidence[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.evidence) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -118,5 +137,6 @@ export const GenesisState = {
       typeUrl: "/cosmos.evidence.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

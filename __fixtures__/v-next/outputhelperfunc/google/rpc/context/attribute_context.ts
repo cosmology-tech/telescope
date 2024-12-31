@@ -1,8 +1,9 @@
-import { Struct, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../protobuf/duration";
-import { Any, AnySDKType } from "../../protobuf/any";
+import { Struct, StructAmino, StructSDKType } from "../../protobuf/struct";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.rpc.context";
@@ -82,6 +83,63 @@ export interface AttributeContextProtoMsg {
  * verify the system specification before relying on an attribute generated
  * a system.
  */
+export interface AttributeContextAmino {
+  /**
+   * The origin of a network activity. In a multi hop network activity,
+   * the origin represents the sender of the first hop. For the first hop,
+   * the `source` and the `origin` must have the same content.
+   */
+  origin?: AttributeContext_PeerAmino;
+  /**
+   * The source of a network activity, such as starting a TCP connection.
+   * In a multi hop network activity, the source represents the sender of the
+   * last hop.
+   */
+  source?: AttributeContext_PeerAmino;
+  /**
+   * The destination of a network activity, such as accepting a TCP connection.
+   * In a multi hop network activity, the destination represents the receiver of
+   * the last hop.
+   */
+  destination?: AttributeContext_PeerAmino;
+  /** Represents a network request, such as an HTTP request. */
+  request?: AttributeContext_RequestAmino;
+  /** Represents a network response, such as an HTTP response. */
+  response?: AttributeContext_ResponseAmino;
+  /**
+   * Represents a target resource that is involved with a network activity.
+   * If multiple resources are involved with an activity, this must be the
+   * primary one.
+   */
+  resource?: AttributeContext_ResourceAmino;
+  /** Represents an API operation that is involved to a network activity. */
+  api?: AttributeContext_ApiAmino;
+  /** Supports extensions for advanced use cases, such as logs and metrics. */
+  extensions?: AnyAmino[];
+}
+export interface AttributeContextAminoMsg {
+  type: "/google.rpc.context.AttributeContext";
+  value: AttributeContextAmino;
+}
+/**
+ * This message defines the standard attribute vocabulary for Google APIs.
+ * 
+ * An attribute is a piece of metadata that describes an activity on a network
+ * service. For example, the size of an HTTP request, or the status code of
+ * an HTTP response.
+ * 
+ * Each attribute has a type and a name, which is logically defined as
+ * a proto message field in `AttributeContext`. The field type becomes the
+ * attribute type, and the field path becomes the attribute name. For example,
+ * the attribute `source.ip` maps to field `AttributeContext.source.ip`.
+ * 
+ * This message definition is guaranteed not to have any wire breaking change.
+ * So you can use it directly for passing attributes across different systems.
+ * 
+ * NOTE: Different system may generate different subset of attributes. Please
+ * verify the system specification before relying on an attribute generated
+ * a system.
+ */
 export interface AttributeContextSDKType {
   origin?: AttributeContext_PeerSDKType;
   source?: AttributeContext_PeerSDKType;
@@ -99,6 +157,14 @@ export interface AttributeContext_Peer_LabelsEntry {
 export interface AttributeContext_Peer_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface AttributeContext_Peer_LabelsEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface AttributeContext_Peer_LabelsEntryAminoMsg {
+  type: string;
+  value: AttributeContext_Peer_LabelsEntryAmino;
 }
 export interface AttributeContext_Peer_LabelsEntrySDKType {
   key: string;
@@ -135,6 +201,38 @@ export interface AttributeContext_Peer {
 export interface AttributeContext_PeerProtoMsg {
   typeUrl: "/google.rpc.context.Peer";
   value: Uint8Array;
+}
+/**
+ * This message defines attributes for a node that handles a network request.
+ * The node can be either a service or an application that sends, forwards,
+ * or receives the request. Service peers should fill in
+ * `principal` and `labels` as appropriate.
+ */
+export interface AttributeContext_PeerAmino {
+  /** The IP address of the peer. */
+  ip?: string;
+  /** The network port of the peer. */
+  port?: string;
+  /** The labels associated with the peer. */
+  labels?: {
+    [key: string]: string;
+  };
+  /**
+   * The identity of this peer. Similar to `Request.auth.principal`, but
+   * relative to the peer instead of the request. For example, the
+   * idenity associated with a load balancer that forwared the request.
+   */
+  principal?: string;
+  /**
+   * The CLDR country/region code associated with the above IP address.
+   * If the IP address is private, the `region_code` should reflect the
+   * physical location where this peer is running.
+   */
+  region_code?: string;
+}
+export interface AttributeContext_PeerAminoMsg {
+  type: "/google.rpc.context.Peer";
+  value: AttributeContext_PeerAmino;
 }
 /**
  * This message defines attributes for a node that handles a network request.
@@ -183,6 +281,39 @@ export interface AttributeContext_Api {
 export interface AttributeContext_ApiProtoMsg {
   typeUrl: "/google.rpc.context.Api";
   value: Uint8Array;
+}
+/**
+ * This message defines attributes associated with API operations, such as
+ * a network API request. The terminology is based on the conventions used
+ * by Google APIs, Istio, and OpenAPI.
+ */
+export interface AttributeContext_ApiAmino {
+  /**
+   * The API service name. It is a logical identifier for a networked API,
+   * such as "pubsub.googleapis.com". The naming syntax depends on the
+   * API management system being used for handling the request.
+   */
+  service?: string;
+  /**
+   * The API operation name. For gRPC requests, it is the fully qualified API
+   * method name, such as "google.pubsub.v1.Publisher.Publish". For OpenAPI
+   * requests, it is the `operationId`, such as "getPet".
+   */
+  operation?: string;
+  /**
+   * The API protocol used for sending the request, such as "http", "https",
+   * "grpc", or "internal".
+   */
+  protocol?: string;
+  /**
+   * The API version associated with the API operation above, such as "v1" or
+   * "v1alpha1".
+   */
+  version?: string;
+}
+export interface AttributeContext_ApiAminoMsg {
+  type: "/google.rpc.context.Api";
+  value: AttributeContext_ApiAmino;
 }
 /**
  * This message defines attributes associated with API operations, such as
@@ -271,6 +402,77 @@ export interface AttributeContext_AuthProtoMsg {
  * based on the JSON Web Token (JWT) standard, but the terms also
  * correlate to concepts in other standards.
  */
+export interface AttributeContext_AuthAmino {
+  /**
+   * The authenticated principal. Reflects the issuer (`iss`) and subject
+   * (`sub`) claims within a JWT. The issuer and subject should be `/`
+   * delimited, with `/` percent-encoded within the subject fragment. For
+   * Google accounts, the principal format is:
+   * "https://accounts.google.com/{id}"
+   */
+  principal?: string;
+  /**
+   * The intended audience(s) for this authentication information. Reflects
+   * the audience (`aud`) claim within a JWT. The audience
+   * value(s) depends on the `issuer`, but typically include one or more of
+   * the following pieces of information:
+   * 
+   * *  The services intended to receive the credential. For example,
+   *    ["https://pubsub.googleapis.com/", "https://storage.googleapis.com/"].
+   * *  A set of service-based scopes. For example,
+   *    ["https://www.googleapis.com/auth/cloud-platform"].
+   * *  The client id of an app, such as the Firebase project id for JWTs
+   *    from Firebase Auth.
+   * 
+   * Consult the documentation for the credential issuer to determine the
+   * information provided.
+   */
+  audiences?: string[];
+  /**
+   * The authorized presenter of the credential. Reflects the optional
+   * Authorized Presenter (`azp`) claim within a JWT or the
+   * OAuth client id. For example, a Google Cloud Platform client id looks
+   * as follows: "123456789012.apps.googleusercontent.com".
+   */
+  presenter?: string;
+  /**
+   * Structured claims presented with the credential. JWTs include
+   * `{key: value}` pairs for standard and private claims. The following
+   * is a subset of the standard required and optional claims that would
+   * typically be presented for a Google-based JWT:
+   * 
+   *    {'iss': 'accounts.google.com',
+   *     'sub': '113289723416554971153',
+   *     'aud': ['123456789012', 'pubsub.googleapis.com'],
+   *     'azp': '123456789012.apps.googleusercontent.com',
+   *     'email': 'jsmith@example.com',
+   *     'iat': 1353601026,
+   *     'exp': 1353604926}
+   * 
+   * SAML assertions are similarly specified, but with an identity provider
+   * dependent structure.
+   */
+  claims?: StructAmino;
+  /**
+   * A list of access level resource names that allow resources to be
+   * accessed by authenticated requester. It is part of Secure GCP processing
+   * for the incoming request. An access level string has the format:
+   * "//{api_service_name}/accessPolicies/{policy_id}/accessLevels/{short_name}"
+   * 
+   * Example:
+   * "//accesscontextmanager.googleapis.com/accessPolicies/MY_POLICY_ID/accessLevels/MY_LEVEL"
+   */
+  access_levels?: string[];
+}
+export interface AttributeContext_AuthAminoMsg {
+  type: "/google.rpc.context.Auth";
+  value: AttributeContext_AuthAmino;
+}
+/**
+ * This message defines request authentication attributes. Terminology is
+ * based on the JSON Web Token (JWT) standard, but the terms also
+ * correlate to concepts in other standards.
+ */
 export interface AttributeContext_AuthSDKType {
   principal: string;
   audiences: string[];
@@ -285,6 +487,14 @@ export interface AttributeContext_Request_HeadersEntry {
 export interface AttributeContext_Request_HeadersEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface AttributeContext_Request_HeadersEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface AttributeContext_Request_HeadersEntryAminoMsg {
+  type: string;
+  value: AttributeContext_Request_HeadersEntryAmino;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
   key: string;
@@ -357,6 +567,68 @@ export interface AttributeContext_RequestProtoMsg {
  * request is not an HTTP request, the runtime system should try to map
  * the actual request to an equivalent HTTP request.
  */
+export interface AttributeContext_RequestAmino {
+  /**
+   * The unique ID for a request, which can be propagated to downstream
+   * systems. The ID should have low probability of collision
+   * within a single day for a specific service.
+   */
+  id?: string;
+  /** The HTTP request method, such as `GET`, `POST`. */
+  method?: string;
+  /**
+   * The HTTP request headers. If multiple headers share the same key, they
+   * must be merged according to the HTTP spec. All header keys must be
+   * lowercased, because HTTP header keys are case-insensitive.
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /** The HTTP URL path. */
+  path?: string;
+  /** The HTTP request `Host` header value. */
+  host?: string;
+  /** The HTTP URL scheme, such as `http` and `https`. */
+  scheme?: string;
+  /**
+   * The HTTP URL query in the format of `name1=value1&name2=value2`, as it
+   * appears in the first line of the HTTP request. No decoding is performed.
+   */
+  query?: string;
+  /**
+   * The timestamp when the `destination` service receives the last byte of
+   * the request.
+   */
+  time?: string;
+  /** The HTTP request size in bytes. If unknown, it must be -1. */
+  size?: string;
+  /**
+   * The network protocol used with the request, such as "http/1.1",
+   * "spdy/3", "h2", "h2c", "webrtc", "tcp", "udp", "quic". See
+   * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+   * for details.
+   */
+  protocol?: string;
+  /**
+   * A special parameter for request reason. It is used by security systems
+   * to associate auditing information with a request.
+   */
+  reason?: string;
+  /**
+   * The request authentication. May be absent for unauthenticated requests.
+   * Derived from the HTTP request `Authorization` header or equivalent.
+   */
+  auth?: AttributeContext_AuthAmino;
+}
+export interface AttributeContext_RequestAminoMsg {
+  type: "/google.rpc.context.Request";
+  value: AttributeContext_RequestAmino;
+}
+/**
+ * This message defines attributes for an HTTP request. If the actual
+ * request is not an HTTP request, the runtime system should try to map
+ * the actual request to an equivalent HTTP request.
+ */
 export interface AttributeContext_RequestSDKType {
   id: string;
   method: string;
@@ -380,6 +652,14 @@ export interface AttributeContext_Response_HeadersEntry {
 export interface AttributeContext_Response_HeadersEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface AttributeContext_Response_HeadersEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface AttributeContext_Response_HeadersEntryAminoMsg {
+  type: string;
+  value: AttributeContext_Response_HeadersEntryAmino;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
   key: string;
@@ -423,6 +703,40 @@ export interface AttributeContext_ResponseProtoMsg {
  * This message defines attributes for a typical network response. It
  * generally models semantics of an HTTP response.
  */
+export interface AttributeContext_ResponseAmino {
+  /** The HTTP response status code, such as `200` and `404`. */
+  code?: string;
+  /** The HTTP response size in bytes. If unknown, it must be -1. */
+  size?: string;
+  /**
+   * The HTTP response headers. If multiple headers share the same key, they
+   * must be merged according to HTTP spec. All header keys must be
+   * lowercased, because HTTP header keys are case-insensitive.
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * The timestamp when the `destination` service sends the last byte of
+   * the response.
+   */
+  time?: string;
+  /**
+   * The length of time it takes the backend service to fully respond to a
+   * request. Measured from when the destination service starts to send the
+   * request to the backend until when the destination service receives the
+   * complete response from the backend.
+   */
+  backend_latency?: DurationAmino;
+}
+export interface AttributeContext_ResponseAminoMsg {
+  type: "/google.rpc.context.Response";
+  value: AttributeContext_ResponseAmino;
+}
+/**
+ * This message defines attributes for a typical network response. It
+ * generally models semantics of an HTTP response.
+ */
 export interface AttributeContext_ResponseSDKType {
   code: bigint;
   size: bigint;
@@ -440,6 +754,14 @@ export interface AttributeContext_Resource_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface AttributeContext_Resource_LabelsEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface AttributeContext_Resource_LabelsEntryAminoMsg {
+  type: string;
+  value: AttributeContext_Resource_LabelsEntryAmino;
+}
 export interface AttributeContext_Resource_LabelsEntrySDKType {
   key: string;
   value: string;
@@ -451,6 +773,14 @@ export interface AttributeContext_Resource_AnnotationsEntry {
 export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface AttributeContext_Resource_AnnotationsEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface AttributeContext_Resource_AnnotationsEntryAminoMsg {
+  type: string;
+  value: AttributeContext_Resource_AnnotationsEntryAmino;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
   key: string;
@@ -560,6 +890,105 @@ export interface AttributeContext_ResourceProtoMsg {
  * addressable (named) entity provided by the destination service. For
  * example, a file stored on a network storage service.
  */
+export interface AttributeContext_ResourceAmino {
+  /**
+   * The name of the service that this resource belongs to, such as
+   * `pubsub.googleapis.com`. The service may be different from the DNS
+   * hostname that actually serves the request.
+   */
+  service?: string;
+  /**
+   * The stable identifier (name) of a resource on the `service`. A resource
+   * can be logically identified as "//{resource.service}/{resource.name}".
+   * The differences between a resource name and a URI are:
+   * 
+   * *   Resource name is a logical identifier, independent of network
+   *     protocol and API version. For example,
+   *     `//pubsub.googleapis.com/projects/123/topics/news-feed`.
+   * *   URI often includes protocol and version information, so it can
+   *     be used directly by applications. For example,
+   *     `https://pubsub.googleapis.com/v1/projects/123/topics/news-feed`.
+   * 
+   * See https://cloud.google.com/apis/design/resource_names for details.
+   */
+  name?: string;
+  /**
+   * The type of the resource. The syntax is platform-specific because
+   * different platforms define their resources differently.
+   * 
+   * For Google APIs, the type format must be "{service}/{kind}".
+   */
+  type?: string;
+  /**
+   * The labels or tags on the resource, such as AWS resource tags and
+   * Kubernetes resource labels.
+   */
+  labels?: {
+    [key: string]: string;
+  };
+  /**
+   * The unique identifier of the resource. UID is unique in the time
+   * and space for this resource within the scope of the service. It is
+   * typically generated by the server on successful creation of a resource
+   * and must not be changed. UID is used to uniquely identify resources
+   * with resource name reuses. This should be a UUID4.
+   */
+  uid?: string;
+  /**
+   * Annotations is an unstructured key-value map stored with a resource that
+   * may be set by external tools to store and retrieve arbitrary metadata.
+   * They are not queryable and should be preserved when modifying objects.
+   * 
+   * More info: https://kubernetes.io/docs/user-guide/annotations
+   */
+  annotations?: {
+    [key: string]: string;
+  };
+  /** Mutable. The display name set by clients. Must be <= 63 characters. */
+  display_name?: string;
+  /**
+   * Output only. The timestamp when the resource was created. This may
+   * be either the time creation was initiated or when it was completed.
+   */
+  create_time?: string;
+  /**
+   * Output only. The timestamp when the resource was last updated. Any
+   * change to the resource made by users must refresh this value.
+   * Changes to a resource made by the service should refresh this value.
+   */
+  update_time?: string;
+  /**
+   * Output only. The timestamp when the resource was deleted.
+   * If the resource is not deleted, this must be empty.
+   */
+  delete_time?: string;
+  /**
+   * Output only. An opaque value that uniquely identifies a version or
+   * generation of a resource. It can be used to confirm that the client
+   * and server agree on the ordering of a resource being written.
+   */
+  etag?: string;
+  /**
+   * Immutable. The location of the resource. The location encoding is
+   * specific to the service provider, and new encoding may be introduced
+   * as the service evolves.
+   * 
+   * For Google Cloud products, the encoding is what is used by Google Cloud
+   * APIs, such as `us-east1`, `aws-us-east-1`, and `azure-eastus2`. The
+   * semantics of `location` is identical to the
+   * `cloud.googleapis.com/location` label used by some Google Cloud APIs.
+   */
+  location?: string;
+}
+export interface AttributeContext_ResourceAminoMsg {
+  type: "/google.rpc.context.Resource";
+  value: AttributeContext_ResourceAmino;
+}
+/**
+ * This message defines core attributes for a resource. A resource is an
+ * addressable (named) entity provided by the destination service. For
+ * example, a file stored on a network storage service.
+ */
 export interface AttributeContext_ResourceSDKType {
   service: string;
   name: string;
@@ -592,6 +1021,15 @@ function createBaseAttributeContext(): AttributeContext {
 }
 export const AttributeContext = {
   typeUrl: "/google.rpc.context.AttributeContext",
+  is(o: any): o is AttributeContext {
+    return o && (o.$typeUrl === AttributeContext.typeUrl || Array.isArray(o.extensions) && (!o.extensions.length || Any.is(o.extensions[0])));
+  },
+  isSDK(o: any): o is AttributeContextSDKType {
+    return o && (o.$typeUrl === AttributeContext.typeUrl || Array.isArray(o.extensions) && (!o.extensions.length || Any.isSDK(o.extensions[0])));
+  },
+  isAmino(o: any): o is AttributeContextAmino {
+    return o && (o.$typeUrl === AttributeContext.typeUrl || Array.isArray(o.extensions) && (!o.extensions.length || Any.isAmino(o.extensions[0])));
+  },
   encode(message: AttributeContext, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.origin !== undefined) {
       AttributeContext_Peer.encode(message.origin, writer.uint32(58).fork()).ldelim();
@@ -807,7 +1245,8 @@ export const AttributeContext = {
       typeUrl: "/google.rpc.context.AttributeContext",
       value: AttributeContext.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Peer_LabelsEntry(): AttributeContext_Peer_LabelsEntry {
   return {
@@ -905,7 +1344,8 @@ export const AttributeContext_Peer_LabelsEntry = {
   },
   toProto(message: AttributeContext_Peer_LabelsEntry): Uint8Array {
     return AttributeContext_Peer_LabelsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Peer(): AttributeContext_Peer {
   return {
@@ -918,6 +1358,15 @@ function createBaseAttributeContext_Peer(): AttributeContext_Peer {
 }
 export const AttributeContext_Peer = {
   typeUrl: "/google.rpc.context.Peer",
+  is(o: any): o is AttributeContext_Peer {
+    return o && (o.$typeUrl === AttributeContext_Peer.typeUrl || typeof o.ip === "string" && typeof o.port === "bigint" && isSet(o.labels) && typeof o.principal === "string" && typeof o.regionCode === "string");
+  },
+  isSDK(o: any): o is AttributeContext_PeerSDKType {
+    return o && (o.$typeUrl === AttributeContext_Peer.typeUrl || typeof o.ip === "string" && typeof o.port === "bigint" && isSet(o.labels) && typeof o.principal === "string" && typeof o.region_code === "string");
+  },
+  isAmino(o: any): o is AttributeContext_PeerAmino {
+    return o && (o.$typeUrl === AttributeContext_Peer.typeUrl || typeof o.ip === "string" && typeof o.port === "bigint" && isSet(o.labels) && typeof o.principal === "string" && typeof o.region_code === "string");
+  },
   encode(message: AttributeContext_Peer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.ip !== undefined) {
       writer.uint32(10).string(message.ip);
@@ -1111,7 +1560,8 @@ export const AttributeContext_Peer = {
       typeUrl: "/google.rpc.context.Peer",
       value: AttributeContext_Peer.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Api(): AttributeContext_Api {
   return {
@@ -1123,6 +1573,15 @@ function createBaseAttributeContext_Api(): AttributeContext_Api {
 }
 export const AttributeContext_Api = {
   typeUrl: "/google.rpc.context.Api",
+  is(o: any): o is AttributeContext_Api {
+    return o && (o.$typeUrl === AttributeContext_Api.typeUrl || typeof o.service === "string" && typeof o.operation === "string" && typeof o.protocol === "string" && typeof o.version === "string");
+  },
+  isSDK(o: any): o is AttributeContext_ApiSDKType {
+    return o && (o.$typeUrl === AttributeContext_Api.typeUrl || typeof o.service === "string" && typeof o.operation === "string" && typeof o.protocol === "string" && typeof o.version === "string");
+  },
+  isAmino(o: any): o is AttributeContext_ApiAmino {
+    return o && (o.$typeUrl === AttributeContext_Api.typeUrl || typeof o.service === "string" && typeof o.operation === "string" && typeof o.protocol === "string" && typeof o.version === "string");
+  },
   encode(message: AttributeContext_Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.service !== undefined) {
       writer.uint32(10).string(message.service);
@@ -1250,7 +1709,8 @@ export const AttributeContext_Api = {
       typeUrl: "/google.rpc.context.Api",
       value: AttributeContext_Api.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Auth(): AttributeContext_Auth {
   return {
@@ -1263,6 +1723,15 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
 }
 export const AttributeContext_Auth = {
   typeUrl: "/google.rpc.context.Auth",
+  is(o: any): o is AttributeContext_Auth {
+    return o && (o.$typeUrl === AttributeContext_Auth.typeUrl || typeof o.principal === "string" && Array.isArray(o.audiences) && (!o.audiences.length || typeof o.audiences[0] === "string") && typeof o.presenter === "string" && Array.isArray(o.accessLevels) && (!o.accessLevels.length || typeof o.accessLevels[0] === "string"));
+  },
+  isSDK(o: any): o is AttributeContext_AuthSDKType {
+    return o && (o.$typeUrl === AttributeContext_Auth.typeUrl || typeof o.principal === "string" && Array.isArray(o.audiences) && (!o.audiences.length || typeof o.audiences[0] === "string") && typeof o.presenter === "string" && Array.isArray(o.access_levels) && (!o.access_levels.length || typeof o.access_levels[0] === "string"));
+  },
+  isAmino(o: any): o is AttributeContext_AuthAmino {
+    return o && (o.$typeUrl === AttributeContext_Auth.typeUrl || typeof o.principal === "string" && Array.isArray(o.audiences) && (!o.audiences.length || typeof o.audiences[0] === "string") && typeof o.presenter === "string" && Array.isArray(o.access_levels) && (!o.access_levels.length || typeof o.access_levels[0] === "string"));
+  },
   encode(message: AttributeContext_Auth, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.principal !== undefined) {
       writer.uint32(10).string(message.principal);
@@ -1428,6 +1897,9 @@ export const AttributeContext_Auth = {
       typeUrl: "/google.rpc.context.Auth",
       value: AttributeContext_Auth.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Struct.registerTypeUrl();
   }
 };
 function createBaseAttributeContext_Request_HeadersEntry(): AttributeContext_Request_HeadersEntry {
@@ -1526,7 +1998,8 @@ export const AttributeContext_Request_HeadersEntry = {
   },
   toProto(message: AttributeContext_Request_HeadersEntry): Uint8Array {
     return AttributeContext_Request_HeadersEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Request(): AttributeContext_Request {
   return {
@@ -1546,6 +2019,15 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
 }
 export const AttributeContext_Request = {
   typeUrl: "/google.rpc.context.Request",
+  is(o: any): o is AttributeContext_Request {
+    return o && (o.$typeUrl === AttributeContext_Request.typeUrl || typeof o.id === "string" && typeof o.method === "string" && isSet(o.headers) && typeof o.path === "string" && typeof o.host === "string" && typeof o.scheme === "string" && typeof o.query === "string" && typeof o.size === "bigint" && typeof o.protocol === "string" && typeof o.reason === "string");
+  },
+  isSDK(o: any): o is AttributeContext_RequestSDKType {
+    return o && (o.$typeUrl === AttributeContext_Request.typeUrl || typeof o.id === "string" && typeof o.method === "string" && isSet(o.headers) && typeof o.path === "string" && typeof o.host === "string" && typeof o.scheme === "string" && typeof o.query === "string" && typeof o.size === "bigint" && typeof o.protocol === "string" && typeof o.reason === "string");
+  },
+  isAmino(o: any): o is AttributeContext_RequestAmino {
+    return o && (o.$typeUrl === AttributeContext_Request.typeUrl || typeof o.id === "string" && typeof o.method === "string" && isSet(o.headers) && typeof o.path === "string" && typeof o.host === "string" && typeof o.scheme === "string" && typeof o.query === "string" && typeof o.size === "bigint" && typeof o.protocol === "string" && typeof o.reason === "string");
+  },
   encode(message: AttributeContext_Request, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
@@ -1853,6 +2335,9 @@ export const AttributeContext_Request = {
       typeUrl: "/google.rpc.context.Request",
       value: AttributeContext_Request.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    AttributeContext_Auth.registerTypeUrl();
   }
 };
 function createBaseAttributeContext_Response_HeadersEntry(): AttributeContext_Response_HeadersEntry {
@@ -1951,7 +2436,8 @@ export const AttributeContext_Response_HeadersEntry = {
   },
   toProto(message: AttributeContext_Response_HeadersEntry): Uint8Array {
     return AttributeContext_Response_HeadersEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Response(): AttributeContext_Response {
   return {
@@ -1964,6 +2450,15 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
 }
 export const AttributeContext_Response = {
   typeUrl: "/google.rpc.context.Response",
+  is(o: any): o is AttributeContext_Response {
+    return o && (o.$typeUrl === AttributeContext_Response.typeUrl || typeof o.code === "bigint" && typeof o.size === "bigint" && isSet(o.headers));
+  },
+  isSDK(o: any): o is AttributeContext_ResponseSDKType {
+    return o && (o.$typeUrl === AttributeContext_Response.typeUrl || typeof o.code === "bigint" && typeof o.size === "bigint" && isSet(o.headers));
+  },
+  isAmino(o: any): o is AttributeContext_ResponseAmino {
+    return o && (o.$typeUrl === AttributeContext_Response.typeUrl || typeof o.code === "bigint" && typeof o.size === "bigint" && isSet(o.headers));
+  },
   encode(message: AttributeContext_Response, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.code !== undefined) {
       writer.uint32(8).int64(message.code);
@@ -2161,7 +2656,8 @@ export const AttributeContext_Response = {
       typeUrl: "/google.rpc.context.Response",
       value: AttributeContext_Response.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Resource_LabelsEntry(): AttributeContext_Resource_LabelsEntry {
   return {
@@ -2259,7 +2755,8 @@ export const AttributeContext_Resource_LabelsEntry = {
   },
   toProto(message: AttributeContext_Resource_LabelsEntry): Uint8Array {
     return AttributeContext_Resource_LabelsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Resource_AnnotationsEntry(): AttributeContext_Resource_AnnotationsEntry {
   return {
@@ -2357,7 +2854,8 @@ export const AttributeContext_Resource_AnnotationsEntry = {
   },
   toProto(message: AttributeContext_Resource_AnnotationsEntry): Uint8Array {
     return AttributeContext_Resource_AnnotationsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAttributeContext_Resource(): AttributeContext_Resource {
   return {
@@ -2377,6 +2875,15 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
 }
 export const AttributeContext_Resource = {
   typeUrl: "/google.rpc.context.Resource",
+  is(o: any): o is AttributeContext_Resource {
+    return o && (o.$typeUrl === AttributeContext_Resource.typeUrl || typeof o.service === "string" && typeof o.name === "string" && typeof o.type === "string" && isSet(o.labels) && typeof o.uid === "string" && isSet(o.annotations) && typeof o.displayName === "string" && typeof o.etag === "string" && typeof o.location === "string");
+  },
+  isSDK(o: any): o is AttributeContext_ResourceSDKType {
+    return o && (o.$typeUrl === AttributeContext_Resource.typeUrl || typeof o.service === "string" && typeof o.name === "string" && typeof o.type === "string" && isSet(o.labels) && typeof o.uid === "string" && isSet(o.annotations) && typeof o.display_name === "string" && typeof o.etag === "string" && typeof o.location === "string");
+  },
+  isAmino(o: any): o is AttributeContext_ResourceAmino {
+    return o && (o.$typeUrl === AttributeContext_Resource.typeUrl || typeof o.service === "string" && typeof o.name === "string" && typeof o.type === "string" && isSet(o.labels) && typeof o.uid === "string" && isSet(o.annotations) && typeof o.display_name === "string" && typeof o.etag === "string" && typeof o.location === "string");
+  },
   encode(message: AttributeContext_Resource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.service !== undefined) {
       writer.uint32(10).string(message.service);
@@ -2728,5 +3235,6 @@ export const AttributeContext_Resource = {
       typeUrl: "/google.rpc.context.Resource",
       value: AttributeContext_Resource.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

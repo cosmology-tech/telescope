@@ -1,7 +1,8 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
  * ===================== MsgJoinPool
@@ -21,6 +22,20 @@ export interface MsgJoinPoolProtoMsg {
  * ===================== MsgJoinPool
  * This is really MsgJoinPoolNoSwap
  */
+export interface MsgJoinPoolAmino {
+  sender?: string;
+  pool_id?: string;
+  share_out_amount?: string;
+  token_in_maxs?: CoinAmino[];
+}
+export interface MsgJoinPoolAminoMsg {
+  type: "osmosis/gamm/join-pool";
+  value: MsgJoinPoolAmino;
+}
+/**
+ * ===================== MsgJoinPool
+ * This is really MsgJoinPoolNoSwap
+ */
 export interface MsgJoinPoolSDKType {
   sender: string;
   pool_id: bigint;
@@ -34,6 +49,14 @@ export interface MsgJoinPoolResponse {
 export interface MsgJoinPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPoolResponse";
   value: Uint8Array;
+}
+export interface MsgJoinPoolResponseAmino {
+  share_out_amount?: string;
+  token_in?: CoinAmino[];
+}
+export interface MsgJoinPoolResponseAminoMsg {
+  type: "osmosis/gamm/join-pool-response";
+  value: MsgJoinPoolResponseAmino;
 }
 export interface MsgJoinPoolResponseSDKType {
   share_out_amount: string;
@@ -51,6 +74,17 @@ export interface MsgExitPoolProtoMsg {
   value: Uint8Array;
 }
 /** ===================== MsgExitPool */
+export interface MsgExitPoolAmino {
+  sender?: string;
+  pool_id?: string;
+  share_in_amount?: string;
+  token_out_mins?: CoinAmino[];
+}
+export interface MsgExitPoolAminoMsg {
+  type: "osmosis/gamm/exit-pool";
+  value: MsgExitPoolAmino;
+}
+/** ===================== MsgExitPool */
 export interface MsgExitPoolSDKType {
   sender: string;
   pool_id: bigint;
@@ -64,6 +98,13 @@ export interface MsgExitPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitPoolResponse";
   value: Uint8Array;
 }
+export interface MsgExitPoolResponseAmino {
+  token_out?: CoinAmino[];
+}
+export interface MsgExitPoolResponseAminoMsg {
+  type: "osmosis/gamm/exit-pool-response";
+  value: MsgExitPoolResponseAmino;
+}
 export interface MsgExitPoolResponseSDKType {
   token_out: CoinSDKType[];
 }
@@ -75,6 +116,15 @@ export interface SwapAmountInRoute {
 export interface SwapAmountInRouteProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.SwapAmountInRoute";
   value: Uint8Array;
+}
+/** ===================== MsgSwapExactAmountIn */
+export interface SwapAmountInRouteAmino {
+  pool_id?: string;
+  token_out_denom?: string;
+}
+export interface SwapAmountInRouteAminoMsg {
+  type: "osmosis/gamm/swap-amount-in-route";
+  value: SwapAmountInRouteAmino;
 }
 /** ===================== MsgSwapExactAmountIn */
 export interface SwapAmountInRouteSDKType {
@@ -91,6 +141,16 @@ export interface MsgSwapExactAmountInProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn";
   value: Uint8Array;
 }
+export interface MsgSwapExactAmountInAmino {
+  sender?: string;
+  routes?: SwapAmountInRouteAmino[];
+  token_in?: CoinAmino;
+  token_out_min_amount?: string;
+}
+export interface MsgSwapExactAmountInAminoMsg {
+  type: "osmosis/gamm/swap-exact-amount-in";
+  value: MsgSwapExactAmountInAmino;
+}
 export interface MsgSwapExactAmountInSDKType {
   sender: string;
   routes: SwapAmountInRouteSDKType[];
@@ -104,6 +164,13 @@ export interface MsgSwapExactAmountInResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse";
   value: Uint8Array;
 }
+export interface MsgSwapExactAmountInResponseAmino {
+  token_out_amount?: string;
+}
+export interface MsgSwapExactAmountInResponseAminoMsg {
+  type: "osmosis/gamm/swap-exact-amount-in-response";
+  value: MsgSwapExactAmountInResponseAmino;
+}
 export interface MsgSwapExactAmountInResponseSDKType {
   token_out_amount: string;
 }
@@ -115,6 +182,15 @@ export interface SwapAmountOutRoute {
 export interface SwapAmountOutRouteProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.SwapAmountOutRoute";
   value: Uint8Array;
+}
+/** ===================== MsgSwapExactAmountOut */
+export interface SwapAmountOutRouteAmino {
+  pool_id?: string;
+  token_in_denom?: string;
+}
+export interface SwapAmountOutRouteAminoMsg {
+  type: "osmosis/gamm/swap-amount-out-route";
+  value: SwapAmountOutRouteAmino;
 }
 /** ===================== MsgSwapExactAmountOut */
 export interface SwapAmountOutRouteSDKType {
@@ -131,6 +207,16 @@ export interface MsgSwapExactAmountOutProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut";
   value: Uint8Array;
 }
+export interface MsgSwapExactAmountOutAmino {
+  sender?: string;
+  routes?: SwapAmountOutRouteAmino[];
+  token_in_max_amount?: string;
+  token_out?: CoinAmino;
+}
+export interface MsgSwapExactAmountOutAminoMsg {
+  type: "osmosis/gamm/swap-exact-amount-out";
+  value: MsgSwapExactAmountOutAmino;
+}
 export interface MsgSwapExactAmountOutSDKType {
   sender: string;
   routes: SwapAmountOutRouteSDKType[];
@@ -143,6 +229,13 @@ export interface MsgSwapExactAmountOutResponse {
 export interface MsgSwapExactAmountOutResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse";
   value: Uint8Array;
+}
+export interface MsgSwapExactAmountOutResponseAmino {
+  token_in_amount?: string;
+}
+export interface MsgSwapExactAmountOutResponseAminoMsg {
+  type: "osmosis/gamm/swap-exact-amount-out-response";
+  value: MsgSwapExactAmountOutResponseAmino;
 }
 export interface MsgSwapExactAmountOutResponseSDKType {
   token_in_amount: string;
@@ -165,6 +258,20 @@ export interface MsgJoinSwapExternAmountInProtoMsg {
  * ===================== MsgJoinSwapExternAmountIn
  * TODO: Rename to MsgJoinSwapExactAmountIn
  */
+export interface MsgJoinSwapExternAmountInAmino {
+  sender?: string;
+  pool_id?: string;
+  token_in?: CoinAmino;
+  share_out_min_amount?: string;
+}
+export interface MsgJoinSwapExternAmountInAminoMsg {
+  type: "osmosis/gamm/join-swap-extern-amount-in";
+  value: MsgJoinSwapExternAmountInAmino;
+}
+/**
+ * ===================== MsgJoinSwapExternAmountIn
+ * TODO: Rename to MsgJoinSwapExactAmountIn
+ */
 export interface MsgJoinSwapExternAmountInSDKType {
   sender: string;
   pool_id: bigint;
@@ -177,6 +284,13 @@ export interface MsgJoinSwapExternAmountInResponse {
 export interface MsgJoinSwapExternAmountInResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse";
   value: Uint8Array;
+}
+export interface MsgJoinSwapExternAmountInResponseAmino {
+  share_out_amount?: string;
+}
+export interface MsgJoinSwapExternAmountInResponseAminoMsg {
+  type: "osmosis/gamm/join-swap-extern-amount-in-response";
+  value: MsgJoinSwapExternAmountInResponseAmino;
 }
 export interface MsgJoinSwapExternAmountInResponseSDKType {
   share_out_amount: string;
@@ -194,6 +308,18 @@ export interface MsgJoinSwapShareAmountOutProtoMsg {
   value: Uint8Array;
 }
 /** ===================== MsgJoinSwapShareAmountOut */
+export interface MsgJoinSwapShareAmountOutAmino {
+  sender?: string;
+  pool_id?: string;
+  token_in_denom?: string;
+  share_out_amount?: string;
+  token_in_max_amount?: string;
+}
+export interface MsgJoinSwapShareAmountOutAminoMsg {
+  type: "osmosis/gamm/join-swap-share-amount-out";
+  value: MsgJoinSwapShareAmountOutAmino;
+}
+/** ===================== MsgJoinSwapShareAmountOut */
 export interface MsgJoinSwapShareAmountOutSDKType {
   sender: string;
   pool_id: bigint;
@@ -207,6 +333,13 @@ export interface MsgJoinSwapShareAmountOutResponse {
 export interface MsgJoinSwapShareAmountOutResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse";
   value: Uint8Array;
+}
+export interface MsgJoinSwapShareAmountOutResponseAmino {
+  token_in_amount?: string;
+}
+export interface MsgJoinSwapShareAmountOutResponseAminoMsg {
+  type: "osmosis/gamm/join-swap-share-amount-out-response";
+  value: MsgJoinSwapShareAmountOutResponseAmino;
 }
 export interface MsgJoinSwapShareAmountOutResponseSDKType {
   token_in_amount: string;
@@ -224,6 +357,18 @@ export interface MsgExitSwapShareAmountInProtoMsg {
   value: Uint8Array;
 }
 /** ===================== MsgExitSwapShareAmountIn */
+export interface MsgExitSwapShareAmountInAmino {
+  sender?: string;
+  pool_id?: string;
+  token_out_denom?: string;
+  share_in_amount?: string;
+  token_out_min_amount?: string;
+}
+export interface MsgExitSwapShareAmountInAminoMsg {
+  type: "osmosis/gamm/exit-swap-share-amount-in";
+  value: MsgExitSwapShareAmountInAmino;
+}
+/** ===================== MsgExitSwapShareAmountIn */
 export interface MsgExitSwapShareAmountInSDKType {
   sender: string;
   pool_id: bigint;
@@ -237,6 +382,13 @@ export interface MsgExitSwapShareAmountInResponse {
 export interface MsgExitSwapShareAmountInResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse";
   value: Uint8Array;
+}
+export interface MsgExitSwapShareAmountInResponseAmino {
+  token_out_amount?: string;
+}
+export interface MsgExitSwapShareAmountInResponseAminoMsg {
+  type: "osmosis/gamm/exit-swap-share-amount-in-response";
+  value: MsgExitSwapShareAmountInResponseAmino;
 }
 export interface MsgExitSwapShareAmountInResponseSDKType {
   token_out_amount: string;
@@ -253,6 +405,17 @@ export interface MsgExitSwapExternAmountOutProtoMsg {
   value: Uint8Array;
 }
 /** ===================== MsgExitSwapExternAmountOut */
+export interface MsgExitSwapExternAmountOutAmino {
+  sender?: string;
+  pool_id?: string;
+  token_out?: CoinAmino;
+  share_in_max_amount?: string;
+}
+export interface MsgExitSwapExternAmountOutAminoMsg {
+  type: "osmosis/gamm/exit-swap-extern-amount-out";
+  value: MsgExitSwapExternAmountOutAmino;
+}
+/** ===================== MsgExitSwapExternAmountOut */
 export interface MsgExitSwapExternAmountOutSDKType {
   sender: string;
   pool_id: bigint;
@@ -265,6 +428,13 @@ export interface MsgExitSwapExternAmountOutResponse {
 export interface MsgExitSwapExternAmountOutResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse";
   value: Uint8Array;
+}
+export interface MsgExitSwapExternAmountOutResponseAmino {
+  share_in_amount?: string;
+}
+export interface MsgExitSwapExternAmountOutResponseAminoMsg {
+  type: "osmosis/gamm/exit-swap-extern-amount-out-response";
+  value: MsgExitSwapExternAmountOutResponseAmino;
 }
 export interface MsgExitSwapExternAmountOutResponseSDKType {
   share_in_amount: string;
@@ -279,6 +449,16 @@ function createBaseMsgJoinPool(): MsgJoinPool {
 }
 export const MsgJoinPool = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool",
+  aminoType: "osmosis/gamm/join-pool",
+  is(o: any): o is MsgJoinPool {
+    return o && (o.$typeUrl === MsgJoinPool.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && typeof o.shareOutAmount === "string" && Array.isArray(o.tokenInMaxs) && (!o.tokenInMaxs.length || Coin.is(o.tokenInMaxs[0])));
+  },
+  isSDK(o: any): o is MsgJoinPoolSDKType {
+    return o && (o.$typeUrl === MsgJoinPool.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.share_out_amount === "string" && Array.isArray(o.token_in_maxs) && (!o.token_in_maxs.length || Coin.isSDK(o.token_in_maxs[0])));
+  },
+  isAmino(o: any): o is MsgJoinPoolAmino {
+    return o && (o.$typeUrl === MsgJoinPool.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.share_out_amount === "string" && Array.isArray(o.token_in_maxs) && (!o.token_in_maxs.length || Coin.isAmino(o.token_in_maxs[0])));
+  },
   encode(message: MsgJoinPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -424,6 +604,9 @@ export const MsgJoinPool = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPool",
       value: MsgJoinPool.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgJoinPoolResponse(): MsgJoinPoolResponse {
@@ -434,6 +617,16 @@ function createBaseMsgJoinPoolResponse(): MsgJoinPoolResponse {
 }
 export const MsgJoinPoolResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPoolResponse",
+  aminoType: "osmosis/gamm/join-pool-response",
+  is(o: any): o is MsgJoinPoolResponse {
+    return o && (o.$typeUrl === MsgJoinPoolResponse.typeUrl || typeof o.shareOutAmount === "string" && Array.isArray(o.tokenIn) && (!o.tokenIn.length || Coin.is(o.tokenIn[0])));
+  },
+  isSDK(o: any): o is MsgJoinPoolResponseSDKType {
+    return o && (o.$typeUrl === MsgJoinPoolResponse.typeUrl || typeof o.share_out_amount === "string" && Array.isArray(o.token_in) && (!o.token_in.length || Coin.isSDK(o.token_in[0])));
+  },
+  isAmino(o: any): o is MsgJoinPoolResponseAmino {
+    return o && (o.$typeUrl === MsgJoinPoolResponse.typeUrl || typeof o.share_out_amount === "string" && Array.isArray(o.token_in) && (!o.token_in.length || Coin.isAmino(o.token_in[0])));
+  },
   encode(message: MsgJoinPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.shareOutAmount !== undefined) {
       writer.uint32(10).string(message.shareOutAmount);
@@ -545,6 +738,9 @@ export const MsgJoinPoolResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgJoinPoolResponse",
       value: MsgJoinPoolResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgExitPool(): MsgExitPool {
@@ -557,6 +753,16 @@ function createBaseMsgExitPool(): MsgExitPool {
 }
 export const MsgExitPool = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitPool",
+  aminoType: "osmosis/gamm/exit-pool",
+  is(o: any): o is MsgExitPool {
+    return o && (o.$typeUrl === MsgExitPool.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && typeof o.shareInAmount === "string" && Array.isArray(o.tokenOutMins) && (!o.tokenOutMins.length || Coin.is(o.tokenOutMins[0])));
+  },
+  isSDK(o: any): o is MsgExitPoolSDKType {
+    return o && (o.$typeUrl === MsgExitPool.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.share_in_amount === "string" && Array.isArray(o.token_out_mins) && (!o.token_out_mins.length || Coin.isSDK(o.token_out_mins[0])));
+  },
+  isAmino(o: any): o is MsgExitPoolAmino {
+    return o && (o.$typeUrl === MsgExitPool.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.share_in_amount === "string" && Array.isArray(o.token_out_mins) && (!o.token_out_mins.length || Coin.isAmino(o.token_out_mins[0])));
+  },
   encode(message: MsgExitPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -702,6 +908,9 @@ export const MsgExitPool = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgExitPool",
       value: MsgExitPool.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgExitPoolResponse(): MsgExitPoolResponse {
@@ -711,6 +920,16 @@ function createBaseMsgExitPoolResponse(): MsgExitPoolResponse {
 }
 export const MsgExitPoolResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitPoolResponse",
+  aminoType: "osmosis/gamm/exit-pool-response",
+  is(o: any): o is MsgExitPoolResponse {
+    return o && (o.$typeUrl === MsgExitPoolResponse.typeUrl || Array.isArray(o.tokenOut) && (!o.tokenOut.length || Coin.is(o.tokenOut[0])));
+  },
+  isSDK(o: any): o is MsgExitPoolResponseSDKType {
+    return o && (o.$typeUrl === MsgExitPoolResponse.typeUrl || Array.isArray(o.token_out) && (!o.token_out.length || Coin.isSDK(o.token_out[0])));
+  },
+  isAmino(o: any): o is MsgExitPoolResponseAmino {
+    return o && (o.$typeUrl === MsgExitPoolResponse.typeUrl || Array.isArray(o.token_out) && (!o.token_out.length || Coin.isAmino(o.token_out[0])));
+  },
   encode(message: MsgExitPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.tokenOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -806,6 +1025,9 @@ export const MsgExitPoolResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgExitPoolResponse",
       value: MsgExitPoolResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseSwapAmountInRoute(): SwapAmountInRoute {
@@ -816,6 +1038,16 @@ function createBaseSwapAmountInRoute(): SwapAmountInRoute {
 }
 export const SwapAmountInRoute = {
   typeUrl: "/osmosis.gamm.v1beta1.SwapAmountInRoute",
+  aminoType: "osmosis/gamm/swap-amount-in-route",
+  is(o: any): o is SwapAmountInRoute {
+    return o && (o.$typeUrl === SwapAmountInRoute.typeUrl || typeof o.poolId === "bigint" && typeof o.tokenOutDenom === "string");
+  },
+  isSDK(o: any): o is SwapAmountInRouteSDKType {
+    return o && (o.$typeUrl === SwapAmountInRoute.typeUrl || typeof o.pool_id === "bigint" && typeof o.token_out_denom === "string");
+  },
+  isAmino(o: any): o is SwapAmountInRouteAmino {
+    return o && (o.$typeUrl === SwapAmountInRoute.typeUrl || typeof o.pool_id === "bigint" && typeof o.token_out_denom === "string");
+  },
   encode(message: SwapAmountInRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -919,7 +1151,8 @@ export const SwapAmountInRoute = {
       typeUrl: "/osmosis.gamm.v1beta1.SwapAmountInRoute",
       value: SwapAmountInRoute.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
   return {
@@ -931,6 +1164,16 @@ function createBaseMsgSwapExactAmountIn(): MsgSwapExactAmountIn {
 }
 export const MsgSwapExactAmountIn = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
+  aminoType: "osmosis/gamm/swap-exact-amount-in",
+  is(o: any): o is MsgSwapExactAmountIn {
+    return o && (o.$typeUrl === MsgSwapExactAmountIn.typeUrl || typeof o.sender === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountInRoute.is(o.routes[0])) && Coin.is(o.tokenIn) && typeof o.tokenOutMinAmount === "string");
+  },
+  isSDK(o: any): o is MsgSwapExactAmountInSDKType {
+    return o && (o.$typeUrl === MsgSwapExactAmountIn.typeUrl || typeof o.sender === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountInRoute.isSDK(o.routes[0])) && Coin.isSDK(o.token_in) && typeof o.token_out_min_amount === "string");
+  },
+  isAmino(o: any): o is MsgSwapExactAmountInAmino {
+    return o && (o.$typeUrl === MsgSwapExactAmountIn.typeUrl || typeof o.sender === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountInRoute.isAmino(o.routes[0])) && Coin.isAmino(o.token_in) && typeof o.token_out_min_amount === "string");
+  },
   encode(message: MsgSwapExactAmountIn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -1076,6 +1319,10 @@ export const MsgSwapExactAmountIn = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn",
       value: MsgSwapExactAmountIn.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    SwapAmountInRoute.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse {
@@ -1085,6 +1332,16 @@ function createBaseMsgSwapExactAmountInResponse(): MsgSwapExactAmountInResponse 
 }
 export const MsgSwapExactAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse",
+  aminoType: "osmosis/gamm/swap-exact-amount-in-response",
+  is(o: any): o is MsgSwapExactAmountInResponse {
+    return o && (o.$typeUrl === MsgSwapExactAmountInResponse.typeUrl || typeof o.tokenOutAmount === "string");
+  },
+  isSDK(o: any): o is MsgSwapExactAmountInResponseSDKType {
+    return o && (o.$typeUrl === MsgSwapExactAmountInResponse.typeUrl || typeof o.token_out_amount === "string");
+  },
+  isAmino(o: any): o is MsgSwapExactAmountInResponseAmino {
+    return o && (o.$typeUrl === MsgSwapExactAmountInResponse.typeUrl || typeof o.token_out_amount === "string");
+  },
   encode(message: MsgSwapExactAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenOutAmount !== undefined) {
       writer.uint32(10).string(message.tokenOutAmount);
@@ -1170,7 +1427,8 @@ export const MsgSwapExactAmountInResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountInResponse",
       value: MsgSwapExactAmountInResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
   return {
@@ -1180,6 +1438,16 @@ function createBaseSwapAmountOutRoute(): SwapAmountOutRoute {
 }
 export const SwapAmountOutRoute = {
   typeUrl: "/osmosis.gamm.v1beta1.SwapAmountOutRoute",
+  aminoType: "osmosis/gamm/swap-amount-out-route",
+  is(o: any): o is SwapAmountOutRoute {
+    return o && (o.$typeUrl === SwapAmountOutRoute.typeUrl || typeof o.poolId === "bigint" && typeof o.tokenInDenom === "string");
+  },
+  isSDK(o: any): o is SwapAmountOutRouteSDKType {
+    return o && (o.$typeUrl === SwapAmountOutRoute.typeUrl || typeof o.pool_id === "bigint" && typeof o.token_in_denom === "string");
+  },
+  isAmino(o: any): o is SwapAmountOutRouteAmino {
+    return o && (o.$typeUrl === SwapAmountOutRoute.typeUrl || typeof o.pool_id === "bigint" && typeof o.token_in_denom === "string");
+  },
   encode(message: SwapAmountOutRoute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -1283,7 +1551,8 @@ export const SwapAmountOutRoute = {
       typeUrl: "/osmosis.gamm.v1beta1.SwapAmountOutRoute",
       value: SwapAmountOutRoute.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
   return {
@@ -1295,6 +1564,16 @@ function createBaseMsgSwapExactAmountOut(): MsgSwapExactAmountOut {
 }
 export const MsgSwapExactAmountOut = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
+  aminoType: "osmosis/gamm/swap-exact-amount-out",
+  is(o: any): o is MsgSwapExactAmountOut {
+    return o && (o.$typeUrl === MsgSwapExactAmountOut.typeUrl || typeof o.sender === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountOutRoute.is(o.routes[0])) && typeof o.tokenInMaxAmount === "string" && Coin.is(o.tokenOut));
+  },
+  isSDK(o: any): o is MsgSwapExactAmountOutSDKType {
+    return o && (o.$typeUrl === MsgSwapExactAmountOut.typeUrl || typeof o.sender === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountOutRoute.isSDK(o.routes[0])) && typeof o.token_in_max_amount === "string" && Coin.isSDK(o.token_out));
+  },
+  isAmino(o: any): o is MsgSwapExactAmountOutAmino {
+    return o && (o.$typeUrl === MsgSwapExactAmountOut.typeUrl || typeof o.sender === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountOutRoute.isAmino(o.routes[0])) && typeof o.token_in_max_amount === "string" && Coin.isAmino(o.token_out));
+  },
   encode(message: MsgSwapExactAmountOut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -1440,6 +1719,10 @@ export const MsgSwapExactAmountOut = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOut",
       value: MsgSwapExactAmountOut.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    SwapAmountOutRoute.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutResponse {
@@ -1449,6 +1732,16 @@ function createBaseMsgSwapExactAmountOutResponse(): MsgSwapExactAmountOutRespons
 }
 export const MsgSwapExactAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse",
+  aminoType: "osmosis/gamm/swap-exact-amount-out-response",
+  is(o: any): o is MsgSwapExactAmountOutResponse {
+    return o && (o.$typeUrl === MsgSwapExactAmountOutResponse.typeUrl || typeof o.tokenInAmount === "string");
+  },
+  isSDK(o: any): o is MsgSwapExactAmountOutResponseSDKType {
+    return o && (o.$typeUrl === MsgSwapExactAmountOutResponse.typeUrl || typeof o.token_in_amount === "string");
+  },
+  isAmino(o: any): o is MsgSwapExactAmountOutResponseAmino {
+    return o && (o.$typeUrl === MsgSwapExactAmountOutResponse.typeUrl || typeof o.token_in_amount === "string");
+  },
   encode(message: MsgSwapExactAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenInAmount !== undefined) {
       writer.uint32(10).string(message.tokenInAmount);
@@ -1534,7 +1827,8 @@ export const MsgSwapExactAmountOutResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgSwapExactAmountOutResponse",
       value: MsgSwapExactAmountOutResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
   return {
@@ -1546,6 +1840,16 @@ function createBaseMsgJoinSwapExternAmountIn(): MsgJoinSwapExternAmountIn {
 }
 export const MsgJoinSwapExternAmountIn = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn",
+  aminoType: "osmosis/gamm/join-swap-extern-amount-in",
+  is(o: any): o is MsgJoinSwapExternAmountIn {
+    return o && (o.$typeUrl === MsgJoinSwapExternAmountIn.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && Coin.is(o.tokenIn) && typeof o.shareOutMinAmount === "string");
+  },
+  isSDK(o: any): o is MsgJoinSwapExternAmountInSDKType {
+    return o && (o.$typeUrl === MsgJoinSwapExternAmountIn.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && Coin.isSDK(o.token_in) && typeof o.share_out_min_amount === "string");
+  },
+  isAmino(o: any): o is MsgJoinSwapExternAmountInAmino {
+    return o && (o.$typeUrl === MsgJoinSwapExternAmountIn.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && Coin.isAmino(o.token_in) && typeof o.share_out_min_amount === "string");
+  },
   encode(message: MsgJoinSwapExternAmountIn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -1683,6 +1987,9 @@ export const MsgJoinSwapExternAmountIn = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountIn",
       value: MsgJoinSwapExternAmountIn.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgJoinSwapExternAmountInResponse(): MsgJoinSwapExternAmountInResponse {
@@ -1692,6 +1999,16 @@ function createBaseMsgJoinSwapExternAmountInResponse(): MsgJoinSwapExternAmountI
 }
 export const MsgJoinSwapExternAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse",
+  aminoType: "osmosis/gamm/join-swap-extern-amount-in-response",
+  is(o: any): o is MsgJoinSwapExternAmountInResponse {
+    return o && (o.$typeUrl === MsgJoinSwapExternAmountInResponse.typeUrl || typeof o.shareOutAmount === "string");
+  },
+  isSDK(o: any): o is MsgJoinSwapExternAmountInResponseSDKType {
+    return o && (o.$typeUrl === MsgJoinSwapExternAmountInResponse.typeUrl || typeof o.share_out_amount === "string");
+  },
+  isAmino(o: any): o is MsgJoinSwapExternAmountInResponseAmino {
+    return o && (o.$typeUrl === MsgJoinSwapExternAmountInResponse.typeUrl || typeof o.share_out_amount === "string");
+  },
   encode(message: MsgJoinSwapExternAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.shareOutAmount !== undefined) {
       writer.uint32(10).string(message.shareOutAmount);
@@ -1777,7 +2094,8 @@ export const MsgJoinSwapExternAmountInResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapExternAmountInResponse",
       value: MsgJoinSwapExternAmountInResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgJoinSwapShareAmountOut(): MsgJoinSwapShareAmountOut {
   return {
@@ -1790,6 +2108,16 @@ function createBaseMsgJoinSwapShareAmountOut(): MsgJoinSwapShareAmountOut {
 }
 export const MsgJoinSwapShareAmountOut = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut",
+  aminoType: "osmosis/gamm/join-swap-share-amount-out",
+  is(o: any): o is MsgJoinSwapShareAmountOut {
+    return o && (o.$typeUrl === MsgJoinSwapShareAmountOut.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && typeof o.tokenInDenom === "string" && typeof o.shareOutAmount === "string" && typeof o.tokenInMaxAmount === "string");
+  },
+  isSDK(o: any): o is MsgJoinSwapShareAmountOutSDKType {
+    return o && (o.$typeUrl === MsgJoinSwapShareAmountOut.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.token_in_denom === "string" && typeof o.share_out_amount === "string" && typeof o.token_in_max_amount === "string");
+  },
+  isAmino(o: any): o is MsgJoinSwapShareAmountOutAmino {
+    return o && (o.$typeUrl === MsgJoinSwapShareAmountOut.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.token_in_denom === "string" && typeof o.share_out_amount === "string" && typeof o.token_in_max_amount === "string");
+  },
   encode(message: MsgJoinSwapShareAmountOut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -1941,7 +2269,8 @@ export const MsgJoinSwapShareAmountOut = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOut",
       value: MsgJoinSwapShareAmountOut.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgJoinSwapShareAmountOutResponse(): MsgJoinSwapShareAmountOutResponse {
   return {
@@ -1950,6 +2279,16 @@ function createBaseMsgJoinSwapShareAmountOutResponse(): MsgJoinSwapShareAmountOu
 }
 export const MsgJoinSwapShareAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse",
+  aminoType: "osmosis/gamm/join-swap-share-amount-out-response",
+  is(o: any): o is MsgJoinSwapShareAmountOutResponse {
+    return o && (o.$typeUrl === MsgJoinSwapShareAmountOutResponse.typeUrl || typeof o.tokenInAmount === "string");
+  },
+  isSDK(o: any): o is MsgJoinSwapShareAmountOutResponseSDKType {
+    return o && (o.$typeUrl === MsgJoinSwapShareAmountOutResponse.typeUrl || typeof o.token_in_amount === "string");
+  },
+  isAmino(o: any): o is MsgJoinSwapShareAmountOutResponseAmino {
+    return o && (o.$typeUrl === MsgJoinSwapShareAmountOutResponse.typeUrl || typeof o.token_in_amount === "string");
+  },
   encode(message: MsgJoinSwapShareAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenInAmount !== undefined) {
       writer.uint32(10).string(message.tokenInAmount);
@@ -2035,7 +2374,8 @@ export const MsgJoinSwapShareAmountOutResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgJoinSwapShareAmountOutResponse",
       value: MsgJoinSwapShareAmountOutResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgExitSwapShareAmountIn(): MsgExitSwapShareAmountIn {
   return {
@@ -2048,6 +2388,16 @@ function createBaseMsgExitSwapShareAmountIn(): MsgExitSwapShareAmountIn {
 }
 export const MsgExitSwapShareAmountIn = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn",
+  aminoType: "osmosis/gamm/exit-swap-share-amount-in",
+  is(o: any): o is MsgExitSwapShareAmountIn {
+    return o && (o.$typeUrl === MsgExitSwapShareAmountIn.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && typeof o.tokenOutDenom === "string" && typeof o.shareInAmount === "string" && typeof o.tokenOutMinAmount === "string");
+  },
+  isSDK(o: any): o is MsgExitSwapShareAmountInSDKType {
+    return o && (o.$typeUrl === MsgExitSwapShareAmountIn.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.token_out_denom === "string" && typeof o.share_in_amount === "string" && typeof o.token_out_min_amount === "string");
+  },
+  isAmino(o: any): o is MsgExitSwapShareAmountInAmino {
+    return o && (o.$typeUrl === MsgExitSwapShareAmountIn.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.token_out_denom === "string" && typeof o.share_in_amount === "string" && typeof o.token_out_min_amount === "string");
+  },
   encode(message: MsgExitSwapShareAmountIn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -2199,7 +2549,8 @@ export const MsgExitSwapShareAmountIn = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountIn",
       value: MsgExitSwapShareAmountIn.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgExitSwapShareAmountInResponse(): MsgExitSwapShareAmountInResponse {
   return {
@@ -2208,6 +2559,16 @@ function createBaseMsgExitSwapShareAmountInResponse(): MsgExitSwapShareAmountInR
 }
 export const MsgExitSwapShareAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse",
+  aminoType: "osmosis/gamm/exit-swap-share-amount-in-response",
+  is(o: any): o is MsgExitSwapShareAmountInResponse {
+    return o && (o.$typeUrl === MsgExitSwapShareAmountInResponse.typeUrl || typeof o.tokenOutAmount === "string");
+  },
+  isSDK(o: any): o is MsgExitSwapShareAmountInResponseSDKType {
+    return o && (o.$typeUrl === MsgExitSwapShareAmountInResponse.typeUrl || typeof o.token_out_amount === "string");
+  },
+  isAmino(o: any): o is MsgExitSwapShareAmountInResponseAmino {
+    return o && (o.$typeUrl === MsgExitSwapShareAmountInResponse.typeUrl || typeof o.token_out_amount === "string");
+  },
   encode(message: MsgExitSwapShareAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenOutAmount !== undefined) {
       writer.uint32(10).string(message.tokenOutAmount);
@@ -2293,7 +2654,8 @@ export const MsgExitSwapShareAmountInResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapShareAmountInResponse",
       value: MsgExitSwapShareAmountInResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
   return {
@@ -2305,6 +2667,16 @@ function createBaseMsgExitSwapExternAmountOut(): MsgExitSwapExternAmountOut {
 }
 export const MsgExitSwapExternAmountOut = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut",
+  aminoType: "osmosis/gamm/exit-swap-extern-amount-out",
+  is(o: any): o is MsgExitSwapExternAmountOut {
+    return o && (o.$typeUrl === MsgExitSwapExternAmountOut.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && Coin.is(o.tokenOut) && typeof o.shareInMaxAmount === "string");
+  },
+  isSDK(o: any): o is MsgExitSwapExternAmountOutSDKType {
+    return o && (o.$typeUrl === MsgExitSwapExternAmountOut.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && Coin.isSDK(o.token_out) && typeof o.share_in_max_amount === "string");
+  },
+  isAmino(o: any): o is MsgExitSwapExternAmountOutAmino {
+    return o && (o.$typeUrl === MsgExitSwapExternAmountOut.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && Coin.isAmino(o.token_out) && typeof o.share_in_max_amount === "string");
+  },
   encode(message: MsgExitSwapExternAmountOut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -2442,6 +2814,9 @@ export const MsgExitSwapExternAmountOut = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOut",
       value: MsgExitSwapExternAmountOut.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgExitSwapExternAmountOutResponse(): MsgExitSwapExternAmountOutResponse {
@@ -2451,6 +2826,16 @@ function createBaseMsgExitSwapExternAmountOutResponse(): MsgExitSwapExternAmount
 }
 export const MsgExitSwapExternAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse",
+  aminoType: "osmosis/gamm/exit-swap-extern-amount-out-response",
+  is(o: any): o is MsgExitSwapExternAmountOutResponse {
+    return o && (o.$typeUrl === MsgExitSwapExternAmountOutResponse.typeUrl || typeof o.shareInAmount === "string");
+  },
+  isSDK(o: any): o is MsgExitSwapExternAmountOutResponseSDKType {
+    return o && (o.$typeUrl === MsgExitSwapExternAmountOutResponse.typeUrl || typeof o.share_in_amount === "string");
+  },
+  isAmino(o: any): o is MsgExitSwapExternAmountOutResponseAmino {
+    return o && (o.$typeUrl === MsgExitSwapExternAmountOutResponse.typeUrl || typeof o.share_in_amount === "string");
+  },
   encode(message: MsgExitSwapExternAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.shareInAmount !== undefined) {
       writer.uint32(10).string(message.shareInAmount);
@@ -2536,5 +2921,6 @@ export const MsgExitSwapExternAmountOutResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.MsgExitSwapExternAmountOutResponse",
       value: MsgExitSwapExternAmountOutResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

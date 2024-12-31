@@ -25,6 +25,28 @@ export interface MsgRegisterDevFeeInfoProtoMsg {
   value: Uint8Array;
 }
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
+export interface MsgRegisterDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address?: string;
+  /**
+   * bech32 address of message sender, must be the same as the origin EOA
+   * sending the transaction which deploys the contract
+   */
+  deployer_address?: string;
+  /** bech32 address of account receiving the transaction fees */
+  withdraw_address?: string;
+  /**
+   * array of nonces from the address path, where the last nonce is
+   * the nonce that determines the contract's address - it can be an EOA nonce
+   * or a factory contract nonce
+   */
+  nonces?: string[];
+}
+export interface MsgRegisterDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: MsgRegisterDevFeeInfoAmino;
+}
+/** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -39,6 +61,15 @@ export interface MsgRegisterDevFeeInfoResponse {}
 export interface MsgRegisterDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
   value: Uint8Array;
+}
+/**
+ * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
+ * type
+ */
+export interface MsgRegisterDevFeeInfoResponseAmino {}
+export interface MsgRegisterDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: MsgRegisterDevFeeInfoResponseAmino;
 }
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
@@ -63,6 +94,20 @@ export interface MsgCancelDevFeeInfoProtoMsg {
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
  * DevFeeInfo
  */
+export interface MsgCancelDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address?: string;
+  /** deployer bech32 address */
+  deployer_address?: string;
+}
+export interface MsgCancelDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: MsgCancelDevFeeInfoAmino;
+}
+/**
+ * MsgCancelDevFeeInfo defines a message that cancels a registered a
+ * DevFeeInfo
+ */
 export interface MsgCancelDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -72,6 +117,12 @@ export interface MsgCancelDevFeeInfoResponse {}
 export interface MsgCancelDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
   value: Uint8Array;
+}
+/** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
+export interface MsgCancelDevFeeInfoResponseAmino {}
+export interface MsgCancelDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: MsgCancelDevFeeInfoResponseAmino;
 }
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseSDKType {}
@@ -95,6 +146,22 @@ export interface MsgUpdateDevFeeInfoProtoMsg {
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
  * a registered DevFeeInfo
  */
+export interface MsgUpdateDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address?: string;
+  /** deployer bech32 address */
+  deployer_address?: string;
+  /** new withdraw bech32 address for receiving the transaction fees */
+  withdraw_address?: string;
+}
+export interface MsgUpdateDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: MsgUpdateDevFeeInfoAmino;
+}
+/**
+ * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
+ * a registered DevFeeInfo
+ */
 export interface MsgUpdateDevFeeInfoSDKType {
   contract_address: string;
   deployer_address: string;
@@ -105,6 +172,12 @@ export interface MsgUpdateDevFeeInfoResponse {}
 export interface MsgUpdateDevFeeInfoResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
   value: Uint8Array;
+}
+/** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
+export interface MsgUpdateDevFeeInfoResponseAmino {}
+export interface MsgUpdateDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: MsgUpdateDevFeeInfoResponseAmino;
 }
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseSDKType {}
@@ -118,6 +191,15 @@ function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
 }
 export const MsgRegisterDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
+  is(o: any): o is MsgRegisterDevFeeInfo {
+    return o && (o.$typeUrl === MsgRegisterDevFeeInfo.typeUrl || typeof o.contractAddress === "string" && typeof o.deployerAddress === "string" && typeof o.withdrawAddress === "string" && Array.isArray(o.nonces) && (!o.nonces.length || typeof o.nonces[0] === "bigint"));
+  },
+  isSDK(o: any): o is MsgRegisterDevFeeInfoSDKType {
+    return o && (o.$typeUrl === MsgRegisterDevFeeInfo.typeUrl || typeof o.contract_address === "string" && typeof o.deployer_address === "string" && typeof o.withdraw_address === "string" && Array.isArray(o.nonces) && (!o.nonces.length || typeof o.nonces[0] === "bigint"));
+  },
+  isAmino(o: any): o is MsgRegisterDevFeeInfoAmino {
+    return o && (o.$typeUrl === MsgRegisterDevFeeInfo.typeUrl || typeof o.contract_address === "string" && typeof o.deployer_address === "string" && typeof o.withdraw_address === "string" && Array.isArray(o.nonces) && (!o.nonces.length || typeof o.nonces[0] === "bigint"));
+  },
   encode(message: MsgRegisterDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
@@ -264,13 +346,23 @@ export const MsgRegisterDevFeeInfo = {
       typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
       value: MsgRegisterDevFeeInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgRegisterDevFeeInfoResponse(): MsgRegisterDevFeeInfoResponse {
   return {};
 }
 export const MsgRegisterDevFeeInfoResponse = {
   typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse",
+  is(o: any): o is MsgRegisterDevFeeInfoResponse {
+    return o && o.$typeUrl === MsgRegisterDevFeeInfoResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgRegisterDevFeeInfoResponseSDKType {
+    return o && o.$typeUrl === MsgRegisterDevFeeInfoResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgRegisterDevFeeInfoResponseAmino {
+    return o && o.$typeUrl === MsgRegisterDevFeeInfoResponse.typeUrl;
+  },
   encode(_: MsgRegisterDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -332,7 +424,8 @@ export const MsgRegisterDevFeeInfoResponse = {
       typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse",
       value: MsgRegisterDevFeeInfoResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgCancelDevFeeInfo(): MsgCancelDevFeeInfo {
   return {
@@ -342,6 +435,15 @@ function createBaseMsgCancelDevFeeInfo(): MsgCancelDevFeeInfo {
 }
 export const MsgCancelDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
+  is(o: any): o is MsgCancelDevFeeInfo {
+    return o && (o.$typeUrl === MsgCancelDevFeeInfo.typeUrl || typeof o.contractAddress === "string" && typeof o.deployerAddress === "string");
+  },
+  isSDK(o: any): o is MsgCancelDevFeeInfoSDKType {
+    return o && (o.$typeUrl === MsgCancelDevFeeInfo.typeUrl || typeof o.contract_address === "string" && typeof o.deployer_address === "string");
+  },
+  isAmino(o: any): o is MsgCancelDevFeeInfoAmino {
+    return o && (o.$typeUrl === MsgCancelDevFeeInfo.typeUrl || typeof o.contract_address === "string" && typeof o.deployer_address === "string");
+  },
   encode(message: MsgCancelDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
@@ -437,13 +539,23 @@ export const MsgCancelDevFeeInfo = {
       typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
       value: MsgCancelDevFeeInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgCancelDevFeeInfoResponse(): MsgCancelDevFeeInfoResponse {
   return {};
 }
 export const MsgCancelDevFeeInfoResponse = {
   typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse",
+  is(o: any): o is MsgCancelDevFeeInfoResponse {
+    return o && o.$typeUrl === MsgCancelDevFeeInfoResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCancelDevFeeInfoResponseSDKType {
+    return o && o.$typeUrl === MsgCancelDevFeeInfoResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgCancelDevFeeInfoResponseAmino {
+    return o && o.$typeUrl === MsgCancelDevFeeInfoResponse.typeUrl;
+  },
   encode(_: MsgCancelDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -505,7 +617,8 @@ export const MsgCancelDevFeeInfoResponse = {
       typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse",
       value: MsgCancelDevFeeInfoResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgUpdateDevFeeInfo(): MsgUpdateDevFeeInfo {
   return {
@@ -516,6 +629,15 @@ function createBaseMsgUpdateDevFeeInfo(): MsgUpdateDevFeeInfo {
 }
 export const MsgUpdateDevFeeInfo = {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
+  is(o: any): o is MsgUpdateDevFeeInfo {
+    return o && (o.$typeUrl === MsgUpdateDevFeeInfo.typeUrl || typeof o.contractAddress === "string" && typeof o.deployerAddress === "string" && typeof o.withdrawAddress === "string");
+  },
+  isSDK(o: any): o is MsgUpdateDevFeeInfoSDKType {
+    return o && (o.$typeUrl === MsgUpdateDevFeeInfo.typeUrl || typeof o.contract_address === "string" && typeof o.deployer_address === "string" && typeof o.withdraw_address === "string");
+  },
+  isAmino(o: any): o is MsgUpdateDevFeeInfoAmino {
+    return o && (o.$typeUrl === MsgUpdateDevFeeInfo.typeUrl || typeof o.contract_address === "string" && typeof o.deployer_address === "string" && typeof o.withdraw_address === "string");
+  },
   encode(message: MsgUpdateDevFeeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
@@ -627,13 +749,23 @@ export const MsgUpdateDevFeeInfo = {
       typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
       value: MsgUpdateDevFeeInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgUpdateDevFeeInfoResponse(): MsgUpdateDevFeeInfoResponse {
   return {};
 }
 export const MsgUpdateDevFeeInfoResponse = {
   typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse",
+  is(o: any): o is MsgUpdateDevFeeInfoResponse {
+    return o && o.$typeUrl === MsgUpdateDevFeeInfoResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgUpdateDevFeeInfoResponseSDKType {
+    return o && o.$typeUrl === MsgUpdateDevFeeInfoResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgUpdateDevFeeInfoResponseAmino {
+    return o && o.$typeUrl === MsgUpdateDevFeeInfoResponse.typeUrl;
+  },
   encode(_: MsgUpdateDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -695,5 +827,6 @@ export const MsgUpdateDevFeeInfoResponse = {
       typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse",
       value: MsgUpdateDevFeeInfoResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

@@ -1,6 +1,7 @@
-import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
-import { Status, StatusSDKType } from "../../../rpc/status";
+import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./metric_value";
+import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
@@ -53,6 +54,7 @@ export enum QuotaOperation_QuotaMode {
   UNRECOGNIZED = -1,
 }
 export const QuotaOperation_QuotaModeSDKType = QuotaOperation_QuotaMode;
+export const QuotaOperation_QuotaModeAmino = QuotaOperation_QuotaMode;
 export function quotaOperation_QuotaModeFromJSON(object: any): QuotaOperation_QuotaMode {
   switch (object) {
     case 0:
@@ -127,6 +129,7 @@ export enum QuotaError_Code {
   UNRECOGNIZED = -1,
 }
 export const QuotaError_CodeSDKType = QuotaError_Code;
+export const QuotaError_CodeAmino = QuotaError_Code;
 export function quotaError_CodeFromJSON(object: any): QuotaError_Code {
   switch (object) {
     case 0:
@@ -195,6 +198,28 @@ export interface AllocateQuotaRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the AllocateQuota method. */
+export interface AllocateQuotaRequestAmino {
+  /**
+   * Name of the service as specified in the service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See [google.api.Service][google.api.Service] for the definition of a service name.
+   */
+  service_name?: string;
+  /** Operation that describes the quota allocation. */
+  allocate_operation?: QuotaOperationAmino;
+  /**
+   * Specifies which version of service configuration should be used to process
+   * the request. If unspecified or no matching version can be found, the latest
+   * one will be used.
+   */
+  service_config_id?: string;
+}
+export interface AllocateQuotaRequestAminoMsg {
+  type: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
+  value: AllocateQuotaRequestAmino;
+}
+/** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestSDKType {
   service_name: string;
   allocate_operation?: QuotaOperationSDKType;
@@ -207,6 +232,14 @@ export interface QuotaOperation_LabelsEntry {
 export interface QuotaOperation_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface QuotaOperation_LabelsEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface QuotaOperation_LabelsEntryAminoMsg {
+  type: string;
+  value: QuotaOperation_LabelsEntryAmino;
 }
 export interface QuotaOperation_LabelsEntrySDKType {
   key: string;
@@ -276,6 +309,69 @@ export interface QuotaOperationProtoMsg {
   value: Uint8Array;
 }
 /** Represents information regarding a quota operation. */
+export interface QuotaOperationAmino {
+  /**
+   * Identity of the operation. This is expected to be unique within the scope
+   * of the service that generated the operation, and guarantees idempotency in
+   * case of retries.
+   * 
+   * In order to ensure best performance and latency in the Quota backends,
+   * operation_ids are optimally associated with time, so that related
+   * operations can be accessed fast in storage. For this reason, the
+   * recommended token for services that intend to operate at a high QPS is
+   * Unix time in nanos + UUID
+   */
+  operation_id?: string;
+  /**
+   * Fully qualified name of the API method for which this quota operation is
+   * requested. This name is used for matching quota rules or metric rules and
+   * billing status rules defined in service configuration.
+   * 
+   * This field should not be set if any of the following is true:
+   * (1) the quota operation is performed on non-API resources.
+   * (2) quota_metrics is set because the caller is doing quota override.
+   * 
+   * 
+   * Example of an RPC method name:
+   *     google.example.library.v1.LibraryService.CreateShelf
+   */
+  method_name?: string;
+  /**
+   * Identity of the consumer for whom this quota operation is being performed.
+   * 
+   * This can be in one of the following formats:
+   *   project:<project_id>,
+   *   project_number:<project_number>,
+   *   api_key:<api_key>.
+   */
+  consumer_id?: string;
+  /** Labels describing the operation. */
+  labels?: {
+    [key: string]: string;
+  };
+  /**
+   * Represents information about this operation. Each MetricValueSet
+   * corresponds to a metric defined in the service configuration.
+   * The data type used in the MetricValueSet must agree with
+   * the data type specified in the metric definition.
+   * 
+   * Within a single operation, it is not allowed to have more than one
+   * MetricValue instances that have the same metric names and identical
+   * label value combinations. If a request has such duplicated MetricValue
+   * instances, the entire request is rejected with
+   * an invalid argument error.
+   * 
+   * This field is mutually exclusive with method_name.
+   */
+  quota_metrics?: MetricValueSetAmino[];
+  /** Quota mode for this operation. */
+  quota_mode?: QuotaOperation_QuotaMode;
+}
+export interface QuotaOperationAminoMsg {
+  type: "/google.api.servicecontrol.v1.QuotaOperation";
+  value: QuotaOperationAmino;
+}
+/** Represents information regarding a quota operation. */
 export interface QuotaOperationSDKType {
   operation_id: string;
   method_name: string;
@@ -316,6 +412,35 @@ export interface AllocateQuotaResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for the AllocateQuota method. */
+export interface AllocateQuotaResponseAmino {
+  /**
+   * The same operation_id value used in the AllocateQuotaRequest. Used for
+   * logging and diagnostics purposes.
+   */
+  operation_id?: string;
+  /** Indicates the decision of the allocate. */
+  allocate_errors?: QuotaErrorAmino[];
+  /**
+   * Quota metrics to indicate the result of allocation. Depending on the
+   * request, one or more of the following metrics will be included:
+   * 
+   * 1. Per quota group or per quota metric incremental usage will be specified
+   * using the following delta metric :
+   *   "serviceruntime.googleapis.com/api/consumer/quota_used_count"
+   * 
+   * 2. The quota limit reached condition will be specified using the following
+   * boolean metric :
+   *   "serviceruntime.googleapis.com/quota/exceeded"
+   */
+  quota_metrics?: MetricValueSetAmino[];
+  /** ID of the actual config used to process the request. */
+  service_config_id?: string;
+}
+export interface AllocateQuotaResponseAminoMsg {
+  type: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
+  value: AllocateQuotaResponseAmino;
+}
+/** Response message for the AllocateQuota method. */
 export interface AllocateQuotaResponseSDKType {
   operation_id: string;
   allocate_errors: QuotaErrorSDKType[];
@@ -345,6 +470,28 @@ export interface QuotaErrorProtoMsg {
   value: Uint8Array;
 }
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
+export interface QuotaErrorAmino {
+  /** Error code. */
+  code?: QuotaError_Code;
+  /**
+   * Subject to whom this error applies. See the specific enum for more details
+   * on this field. For example, "clientip:<ip address of client>" or
+   * "project:<Google developer project id>".
+   */
+  subject?: string;
+  /** Free-form text that provides details on the cause of the error. */
+  description?: string;
+  /**
+   * Contains additional information about the quota error.
+   * If available, `status.code` will be non zero.
+   */
+  status?: StatusAmino;
+}
+export interface QuotaErrorAminoMsg {
+  type: "/google.api.servicecontrol.v1.QuotaError";
+  value: QuotaErrorAmino;
+}
+/** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorSDKType {
   code: QuotaError_Code;
   subject: string;
@@ -360,6 +507,15 @@ function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
 }
 export const AllocateQuotaRequest = {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest",
+  is(o: any): o is AllocateQuotaRequest {
+    return o && (o.$typeUrl === AllocateQuotaRequest.typeUrl || typeof o.serviceName === "string" && typeof o.serviceConfigId === "string");
+  },
+  isSDK(o: any): o is AllocateQuotaRequestSDKType {
+    return o && (o.$typeUrl === AllocateQuotaRequest.typeUrl || typeof o.service_name === "string" && typeof o.service_config_id === "string");
+  },
+  isAmino(o: any): o is AllocateQuotaRequestAmino {
+    return o && (o.$typeUrl === AllocateQuotaRequest.typeUrl || typeof o.service_name === "string" && typeof o.service_config_id === "string");
+  },
   encode(message: AllocateQuotaRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -473,6 +629,9 @@ export const AllocateQuotaRequest = {
       typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest",
       value: AllocateQuotaRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    QuotaOperation.registerTypeUrl();
   }
 };
 function createBaseQuotaOperation_LabelsEntry(): QuotaOperation_LabelsEntry {
@@ -571,7 +730,8 @@ export const QuotaOperation_LabelsEntry = {
   },
   toProto(message: QuotaOperation_LabelsEntry): Uint8Array {
     return QuotaOperation_LabelsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQuotaOperation(): QuotaOperation {
   return {
@@ -585,6 +745,15 @@ function createBaseQuotaOperation(): QuotaOperation {
 }
 export const QuotaOperation = {
   typeUrl: "/google.api.servicecontrol.v1.QuotaOperation",
+  is(o: any): o is QuotaOperation {
+    return o && (o.$typeUrl === QuotaOperation.typeUrl || typeof o.operationId === "string" && typeof o.methodName === "string" && typeof o.consumerId === "string" && isSet(o.labels) && Array.isArray(o.quotaMetrics) && (!o.quotaMetrics.length || MetricValueSet.is(o.quotaMetrics[0])) && isSet(o.quotaMode));
+  },
+  isSDK(o: any): o is QuotaOperationSDKType {
+    return o && (o.$typeUrl === QuotaOperation.typeUrl || typeof o.operation_id === "string" && typeof o.method_name === "string" && typeof o.consumer_id === "string" && isSet(o.labels) && Array.isArray(o.quota_metrics) && (!o.quota_metrics.length || MetricValueSet.isSDK(o.quota_metrics[0])) && isSet(o.quota_mode));
+  },
+  isAmino(o: any): o is QuotaOperationAmino {
+    return o && (o.$typeUrl === QuotaOperation.typeUrl || typeof o.operation_id === "string" && typeof o.method_name === "string" && typeof o.consumer_id === "string" && isSet(o.labels) && Array.isArray(o.quota_metrics) && (!o.quota_metrics.length || MetricValueSet.isAmino(o.quota_metrics[0])) && isSet(o.quota_mode));
+  },
   encode(message: QuotaOperation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
@@ -802,6 +971,9 @@ export const QuotaOperation = {
       typeUrl: "/google.api.servicecontrol.v1.QuotaOperation",
       value: QuotaOperation.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    MetricValueSet.registerTypeUrl();
   }
 };
 function createBaseAllocateQuotaResponse(): AllocateQuotaResponse {
@@ -814,6 +986,15 @@ function createBaseAllocateQuotaResponse(): AllocateQuotaResponse {
 }
 export const AllocateQuotaResponse = {
   typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse",
+  is(o: any): o is AllocateQuotaResponse {
+    return o && (o.$typeUrl === AllocateQuotaResponse.typeUrl || typeof o.operationId === "string" && Array.isArray(o.allocateErrors) && (!o.allocateErrors.length || QuotaError.is(o.allocateErrors[0])) && Array.isArray(o.quotaMetrics) && (!o.quotaMetrics.length || MetricValueSet.is(o.quotaMetrics[0])) && typeof o.serviceConfigId === "string");
+  },
+  isSDK(o: any): o is AllocateQuotaResponseSDKType {
+    return o && (o.$typeUrl === AllocateQuotaResponse.typeUrl || typeof o.operation_id === "string" && Array.isArray(o.allocate_errors) && (!o.allocate_errors.length || QuotaError.isSDK(o.allocate_errors[0])) && Array.isArray(o.quota_metrics) && (!o.quota_metrics.length || MetricValueSet.isSDK(o.quota_metrics[0])) && typeof o.service_config_id === "string");
+  },
+  isAmino(o: any): o is AllocateQuotaResponseAmino {
+    return o && (o.$typeUrl === AllocateQuotaResponse.typeUrl || typeof o.operation_id === "string" && Array.isArray(o.allocate_errors) && (!o.allocate_errors.length || QuotaError.isAmino(o.allocate_errors[0])) && Array.isArray(o.quota_metrics) && (!o.quota_metrics.length || MetricValueSet.isAmino(o.quota_metrics[0])) && typeof o.service_config_id === "string");
+  },
   encode(message: AllocateQuotaResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
@@ -961,6 +1142,10 @@ export const AllocateQuotaResponse = {
       typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse",
       value: AllocateQuotaResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    QuotaError.registerTypeUrl();
+    MetricValueSet.registerTypeUrl();
   }
 };
 function createBaseQuotaError(): QuotaError {
@@ -973,6 +1158,15 @@ function createBaseQuotaError(): QuotaError {
 }
 export const QuotaError = {
   typeUrl: "/google.api.servicecontrol.v1.QuotaError",
+  is(o: any): o is QuotaError {
+    return o && (o.$typeUrl === QuotaError.typeUrl || isSet(o.code) && typeof o.subject === "string" && typeof o.description === "string");
+  },
+  isSDK(o: any): o is QuotaErrorSDKType {
+    return o && (o.$typeUrl === QuotaError.typeUrl || isSet(o.code) && typeof o.subject === "string" && typeof o.description === "string");
+  },
+  isAmino(o: any): o is QuotaErrorAmino {
+    return o && (o.$typeUrl === QuotaError.typeUrl || isSet(o.code) && typeof o.subject === "string" && typeof o.description === "string");
+  },
   encode(message: QuotaError, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
@@ -1102,5 +1296,8 @@ export const QuotaError = {
       typeUrl: "/google.api.servicecontrol.v1.QuotaError",
       value: QuotaError.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Status.registerTypeUrl();
   }
 };

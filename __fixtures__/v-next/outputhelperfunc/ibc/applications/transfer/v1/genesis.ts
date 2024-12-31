@@ -1,5 +1,6 @@
-import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
+import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, ParamsSDKType } from "./transfer";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.transfer.v1";
@@ -12,6 +13,16 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the ibc-transfer genesis state */
+export interface GenesisStateAmino {
+  port_id?: string;
+  denom_traces?: DenomTraceAmino[];
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisStateSDKType {
@@ -28,6 +39,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/ibc.applications.transfer.v1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || typeof o.portId === "string" && Array.isArray(o.denomTraces) && (!o.denomTraces.length || DenomTrace.is(o.denomTraces[0])) && Params.is(o.params));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || typeof o.port_id === "string" && Array.isArray(o.denom_traces) && (!o.denom_traces.length || DenomTrace.isSDK(o.denom_traces[0])) && Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || typeof o.port_id === "string" && Array.isArray(o.denom_traces) && (!o.denom_traces.length || DenomTrace.isAmino(o.denom_traces[0])) && Params.isAmino(o.params));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -157,5 +178,9 @@ export const GenesisState = {
       typeUrl: "/ibc.applications.transfer.v1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DenomTrace.registerTypeUrl();
+    Params.registerTypeUrl();
   }
 };

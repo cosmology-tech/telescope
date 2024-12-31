@@ -62,6 +62,42 @@ export interface VisibilityProtoMsg {
  * Here, all methods are publicly visible except for the restricted methods
  * EnhancedSearch and Delegate.
  */
+export interface VisibilityAmino {
+  /**
+   * A list of visibility rules that apply to individual API elements.
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules?: VisibilityRuleAmino[];
+}
+export interface VisibilityAminoMsg {
+  type: "/google.api.Visibility";
+  value: VisibilityAmino;
+}
+/**
+ * `Visibility` defines restrictions for the visibility of service
+ * elements.  Restrictions are specified using visibility labels
+ * (e.g., PREVIEW) that are elsewhere linked to users and projects.
+ * 
+ * Users and projects can have access to more than one visibility label. The
+ * effective visibility for multiple labels is the union of each label's
+ * elements, plus any unrestricted elements.
+ * 
+ * If an element and its parents have no restrictions, visibility is
+ * unconditionally granted.
+ * 
+ * Example:
+ * 
+ *     visibility:
+ *       rules:
+ *       - selector: google.calendar.Calendar.EnhancedSearch
+ *         restriction: PREVIEW
+ *       - selector: google.calendar.Calendar.Delegate
+ *         restriction: INTERNAL
+ * 
+ * Here, all methods are publicly visible except for the restricted methods
+ * EnhancedSearch and Delegate.
+ */
 export interface VisibilitySDKType {
   rules: VisibilityRuleSDKType[];
 }
@@ -103,6 +139,40 @@ export interface VisibilityRuleProtoMsg {
  * A visibility rule provides visibility configuration for an individual API
  * element.
  */
+export interface VisibilityRuleAmino {
+  /**
+   * Selects methods, messages, fields, enums, etc. to which this rule applies.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector?: string;
+  /**
+   * A comma-separated list of visibility labels that apply to the `selector`.
+   * Any of the listed labels can be used to grant the visibility.
+   * 
+   * If a rule has multiple labels, removing one of the labels but not all of
+   * them can break clients.
+   * 
+   * Example:
+   * 
+   *     visibility:
+   *       rules:
+   *       - selector: google.calendar.Calendar.EnhancedSearch
+   *         restriction: INTERNAL, PREVIEW
+   * 
+   * Removing INTERNAL from this restriction will break clients that rely on
+   * this method and only had access to it through INTERNAL.
+   */
+  restriction?: string;
+}
+export interface VisibilityRuleAminoMsg {
+  type: "/google.api.VisibilityRule";
+  value: VisibilityRuleAmino;
+}
+/**
+ * A visibility rule provides visibility configuration for an individual API
+ * element.
+ */
 export interface VisibilityRuleSDKType {
   selector: string;
   restriction: string;
@@ -114,6 +184,15 @@ function createBaseVisibility(): Visibility {
 }
 export const Visibility = {
   typeUrl: "/google.api.Visibility",
+  is(o: any): o is Visibility {
+    return o && (o.$typeUrl === Visibility.typeUrl || Array.isArray(o.rules) && (!o.rules.length || VisibilityRule.is(o.rules[0])));
+  },
+  isSDK(o: any): o is VisibilitySDKType {
+    return o && (o.$typeUrl === Visibility.typeUrl || Array.isArray(o.rules) && (!o.rules.length || VisibilityRule.isSDK(o.rules[0])));
+  },
+  isAmino(o: any): o is VisibilityAmino {
+    return o && (o.$typeUrl === Visibility.typeUrl || Array.isArray(o.rules) && (!o.rules.length || VisibilityRule.isAmino(o.rules[0])));
+  },
   encode(message: Visibility, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rules) {
       VisibilityRule.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -203,6 +282,9 @@ export const Visibility = {
       typeUrl: "/google.api.Visibility",
       value: Visibility.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    VisibilityRule.registerTypeUrl();
   }
 };
 function createBaseVisibilityRule(): VisibilityRule {
@@ -213,6 +295,15 @@ function createBaseVisibilityRule(): VisibilityRule {
 }
 export const VisibilityRule = {
   typeUrl: "/google.api.VisibilityRule",
+  is(o: any): o is VisibilityRule {
+    return o && (o.$typeUrl === VisibilityRule.typeUrl || typeof o.selector === "string" && typeof o.restriction === "string");
+  },
+  isSDK(o: any): o is VisibilityRuleSDKType {
+    return o && (o.$typeUrl === VisibilityRule.typeUrl || typeof o.selector === "string" && typeof o.restriction === "string");
+  },
+  isAmino(o: any): o is VisibilityRuleAmino {
+    return o && (o.$typeUrl === VisibilityRule.typeUrl || typeof o.selector === "string" && typeof o.restriction === "string");
+  },
   encode(message: VisibilityRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
@@ -308,5 +399,6 @@ export const VisibilityRule = {
       typeUrl: "/google.api.VisibilityRule",
       value: VisibilityRule.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

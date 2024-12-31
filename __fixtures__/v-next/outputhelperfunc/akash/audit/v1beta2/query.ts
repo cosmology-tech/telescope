@@ -1,6 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderSDKType } from "./audit";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderAmino, ProviderSDKType } from "./audit";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.audit.v1beta2";
@@ -12,6 +13,15 @@ export interface QueryProvidersResponse {
 export interface QueryProvidersResponseProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse";
   value: Uint8Array;
+}
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryProvidersResponseAmino {
+  providers?: ProviderAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryProvidersResponseAminoMsg {
+  type: "akash/audit/v1beta2/query-providers-response";
+  value: QueryProvidersResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseSDKType {
@@ -28,6 +38,15 @@ export interface QueryProviderRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
+export interface QueryProviderRequestAmino {
+  auditor?: string;
+  owner?: string;
+}
+export interface QueryProviderRequestAminoMsg {
+  type: "akash/audit/v1beta2/query-provider-request";
+  value: QueryProviderRequestAmino;
+}
+/** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestSDKType {
   auditor: string;
   owner: string;
@@ -41,6 +60,14 @@ export interface QueryAllProvidersAttributesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
+export interface QueryAllProvidersAttributesRequestAmino {
+  pagination?: PageRequestAmino;
+}
+export interface QueryAllProvidersAttributesRequestAminoMsg {
+  type: "akash/audit/v1beta2/query-all-providers-attributes-request";
+  value: QueryAllProvidersAttributesRequestAmino;
+}
+/** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
 export interface QueryAllProvidersAttributesRequestSDKType {
   pagination?: PageRequestSDKType;
 }
@@ -52,6 +79,15 @@ export interface QueryProviderAttributesRequest {
 export interface QueryProviderAttributesRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest";
   value: Uint8Array;
+}
+/** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
+export interface QueryProviderAttributesRequestAmino {
+  owner?: string;
+  pagination?: PageRequestAmino;
+}
+export interface QueryProviderAttributesRequestAminoMsg {
+  type: "akash/audit/v1beta2/query-provider-attributes-request";
+  value: QueryProviderAttributesRequestAmino;
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderAttributesRequestSDKType {
@@ -68,6 +104,15 @@ export interface QueryProviderAuditorRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
+export interface QueryProviderAuditorRequestAmino {
+  auditor?: string;
+  owner?: string;
+}
+export interface QueryProviderAuditorRequestAminoMsg {
+  type: "akash/audit/v1beta2/query-provider-auditor-request";
+  value: QueryProviderAuditorRequestAmino;
+}
+/** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequestSDKType {
   auditor: string;
   owner: string;
@@ -82,6 +127,15 @@ export interface QueryAuditorAttributesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
+export interface QueryAuditorAttributesRequestAmino {
+  auditor?: string;
+  pagination?: PageRequestAmino;
+}
+export interface QueryAuditorAttributesRequestAminoMsg {
+  type: "akash/audit/v1beta2/query-auditor-attributes-request";
+  value: QueryAuditorAttributesRequestAmino;
+}
+/** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
 export interface QueryAuditorAttributesRequestSDKType {
   auditor: string;
   pagination?: PageRequestSDKType;
@@ -94,6 +148,16 @@ function createBaseQueryProvidersResponse(): QueryProvidersResponse {
 }
 export const QueryProvidersResponse = {
   typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse",
+  aminoType: "akash/audit/v1beta2/query-providers-response",
+  is(o: any): o is QueryProvidersResponse {
+    return o && (o.$typeUrl === QueryProvidersResponse.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.is(o.providers[0])));
+  },
+  isSDK(o: any): o is QueryProvidersResponseSDKType {
+    return o && (o.$typeUrl === QueryProvidersResponse.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.isSDK(o.providers[0])));
+  },
+  isAmino(o: any): o is QueryProvidersResponseAmino {
+    return o && (o.$typeUrl === QueryProvidersResponse.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.isAmino(o.providers[0])));
+  },
   encode(message: QueryProvidersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.providers) {
       Provider.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -207,6 +271,10 @@ export const QueryProvidersResponse = {
       typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse",
       value: QueryProvidersResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Provider.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryProviderRequest(): QueryProviderRequest {
@@ -217,6 +285,16 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
 }
 export const QueryProviderRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderRequest",
+  aminoType: "akash/audit/v1beta2/query-provider-request",
+  is(o: any): o is QueryProviderRequest {
+    return o && (o.$typeUrl === QueryProviderRequest.typeUrl || typeof o.auditor === "string" && typeof o.owner === "string");
+  },
+  isSDK(o: any): o is QueryProviderRequestSDKType {
+    return o && (o.$typeUrl === QueryProviderRequest.typeUrl || typeof o.auditor === "string" && typeof o.owner === "string");
+  },
+  isAmino(o: any): o is QueryProviderRequestAmino {
+    return o && (o.$typeUrl === QueryProviderRequest.typeUrl || typeof o.auditor === "string" && typeof o.owner === "string");
+  },
   encode(message: QueryProviderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
@@ -318,7 +396,8 @@ export const QueryProviderRequest = {
       typeUrl: "/akash.audit.v1beta2.QueryProviderRequest",
       value: QueryProviderRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttributesRequest {
   return {
@@ -327,6 +406,16 @@ function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttrib
 }
 export const QueryAllProvidersAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest",
+  aminoType: "akash/audit/v1beta2/query-all-providers-attributes-request",
+  is(o: any): o is QueryAllProvidersAttributesRequest {
+    return o && o.$typeUrl === QueryAllProvidersAttributesRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryAllProvidersAttributesRequestSDKType {
+    return o && o.$typeUrl === QueryAllProvidersAttributesRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryAllProvidersAttributesRequestAmino {
+    return o && o.$typeUrl === QueryAllProvidersAttributesRequest.typeUrl;
+  },
   encode(message: QueryAllProvidersAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -414,6 +503,9 @@ export const QueryAllProvidersAttributesRequest = {
       typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest",
       value: QueryAllProvidersAttributesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequest {
@@ -424,6 +516,16 @@ function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequ
 }
 export const QueryProviderAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest",
+  aminoType: "akash/audit/v1beta2/query-provider-attributes-request",
+  is(o: any): o is QueryProviderAttributesRequest {
+    return o && (o.$typeUrl === QueryProviderAttributesRequest.typeUrl || typeof o.owner === "string");
+  },
+  isSDK(o: any): o is QueryProviderAttributesRequestSDKType {
+    return o && (o.$typeUrl === QueryProviderAttributesRequest.typeUrl || typeof o.owner === "string");
+  },
+  isAmino(o: any): o is QueryProviderAttributesRequestAmino {
+    return o && (o.$typeUrl === QueryProviderAttributesRequest.typeUrl || typeof o.owner === "string");
+  },
   encode(message: QueryProviderAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -527,6 +629,9 @@ export const QueryProviderAttributesRequest = {
       typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest",
       value: QueryProviderAttributesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryProviderAuditorRequest(): QueryProviderAuditorRequest {
@@ -537,6 +642,16 @@ function createBaseQueryProviderAuditorRequest(): QueryProviderAuditorRequest {
 }
 export const QueryProviderAuditorRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest",
+  aminoType: "akash/audit/v1beta2/query-provider-auditor-request",
+  is(o: any): o is QueryProviderAuditorRequest {
+    return o && (o.$typeUrl === QueryProviderAuditorRequest.typeUrl || typeof o.auditor === "string" && typeof o.owner === "string");
+  },
+  isSDK(o: any): o is QueryProviderAuditorRequestSDKType {
+    return o && (o.$typeUrl === QueryProviderAuditorRequest.typeUrl || typeof o.auditor === "string" && typeof o.owner === "string");
+  },
+  isAmino(o: any): o is QueryProviderAuditorRequestAmino {
+    return o && (o.$typeUrl === QueryProviderAuditorRequest.typeUrl || typeof o.auditor === "string" && typeof o.owner === "string");
+  },
   encode(message: QueryProviderAuditorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
@@ -638,7 +753,8 @@ export const QueryProviderAuditorRequest = {
       typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest",
       value: QueryProviderAuditorRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesRequest {
   return {
@@ -648,6 +764,16 @@ function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesReques
 }
 export const QueryAuditorAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest",
+  aminoType: "akash/audit/v1beta2/query-auditor-attributes-request",
+  is(o: any): o is QueryAuditorAttributesRequest {
+    return o && (o.$typeUrl === QueryAuditorAttributesRequest.typeUrl || typeof o.auditor === "string");
+  },
+  isSDK(o: any): o is QueryAuditorAttributesRequestSDKType {
+    return o && (o.$typeUrl === QueryAuditorAttributesRequest.typeUrl || typeof o.auditor === "string");
+  },
+  isAmino(o: any): o is QueryAuditorAttributesRequestAmino {
+    return o && (o.$typeUrl === QueryAuditorAttributesRequest.typeUrl || typeof o.auditor === "string");
+  },
   encode(message: QueryAuditorAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
@@ -751,5 +877,8 @@ export const QueryAuditorAttributesRequest = {
       typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest",
       value: QueryAuditorAttributesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };

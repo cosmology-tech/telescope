@@ -1,13 +1,14 @@
-import { Api, ApiSDKType } from "../../../protobuf/api";
-import { Documentation, DocumentationSDKType } from "../../documentation";
-import { Quota, QuotaSDKType } from "../../quota";
-import { Authentication, AuthenticationSDKType } from "../../auth";
-import { Usage, UsageSDKType } from "../../usage";
-import { Endpoint, EndpointSDKType } from "../../endpoint";
-import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
-import { Monitoring, MonitoringSDKType } from "../../monitoring";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { Api, ApiAmino, ApiSDKType } from "../../../protobuf/api";
+import { Documentation, DocumentationAmino, DocumentationSDKType } from "../../documentation";
+import { Quota, QuotaAmino, QuotaSDKType } from "../../quota";
+import { Authentication, AuthenticationAmino, AuthenticationSDKType } from "../../auth";
+import { Usage, UsageAmino, UsageSDKType } from "../../usage";
+import { Endpoint, EndpointAmino, EndpointSDKType } from "../../endpoint";
+import { MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, MonitoredResourceDescriptorSDKType } from "../../monitored_resource";
+import { Monitoring, MonitoringAmino, MonitoringSDKType } from "../../monitoring";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.serviceusage.v1";
 /** Whether or not a service has been enabled for use by a consumer. */
@@ -28,6 +29,7 @@ export enum State {
   UNRECOGNIZED = -1,
 }
 export const StateSDKType = State;
+export const StateAmino = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -89,6 +91,36 @@ export interface ServiceProtoMsg {
   value: Uint8Array;
 }
 /** A service that is available for use by the consumer. */
+export interface ServiceAmino {
+  /**
+   * The resource name of the consumer and service.
+   * 
+   * A valid name would be:
+   * - projects/123/services/serviceusage.googleapis.com
+   */
+  name?: string;
+  /**
+   * The resource name of the consumer.
+   * 
+   * A valid name would be:
+   * - projects/123
+   */
+  parent?: string;
+  /**
+   * The service configuration of the available service.
+   * Some fields may be filtered out of the configuration in responses to
+   * the `ListServices` method. These fields are present only in responses to
+   * the `GetService` method.
+   */
+  config?: ServiceConfigAmino;
+  /** Whether or not the service has been enabled for use by the consumer. */
+  state?: State;
+}
+export interface ServiceAminoMsg {
+  type: "/google.api.serviceusage.v1.Service";
+  value: ServiceAmino;
+}
+/** A service that is available for use by the consumer. */
 export interface ServiceSDKType {
   name: string;
   parent: string;
@@ -143,6 +175,53 @@ export interface ServiceConfigProtoMsg {
   value: Uint8Array;
 }
 /** The configuration of the service. */
+export interface ServiceConfigAmino {
+  /**
+   * The DNS address at which this service is available.
+   * 
+   * An example DNS address would be:
+   * `calendar.googleapis.com`.
+   */
+  name?: string;
+  /** The product title for this service. */
+  title?: string;
+  /**
+   * A list of API interfaces exported by this service. Contains only the names,
+   * versions, and method names of the interfaces.
+   */
+  apis?: ApiAmino[];
+  /**
+   * Additional API documentation. Contains only the summary and the
+   * documentation URL.
+   */
+  documentation?: DocumentationAmino;
+  /** Quota configuration. */
+  quota?: QuotaAmino;
+  /** Auth configuration. Contains only the OAuth rules. */
+  authentication?: AuthenticationAmino;
+  /** Configuration controlling usage of this service. */
+  usage?: UsageAmino;
+  /**
+   * Configuration for network endpoints. Contains only the names and aliases
+   * of the endpoints.
+   */
+  endpoints?: EndpointAmino[];
+  /**
+   * Defines the monitored resources used by this service. This is required
+   * by the [Service.monitoring][google.api.Service.monitoring] and [Service.logging][google.api.Service.logging] configurations.
+   */
+  monitored_resources?: MonitoredResourceDescriptorAmino[];
+  /**
+   * Monitoring configuration.
+   * This should not include the 'producer_destinations' field.
+   */
+  monitoring?: MonitoringAmino;
+}
+export interface ServiceConfigAminoMsg {
+  type: "/google.api.serviceusage.v1.ServiceConfig";
+  value: ServiceConfigAmino;
+}
+/** The configuration of the service. */
 export interface ServiceConfigSDKType {
   name: string;
   title: string;
@@ -168,6 +247,18 @@ export interface OperationMetadataProtoMsg {
   value: Uint8Array;
 }
 /** The operation metadata returned for the batchend services operation. */
+export interface OperationMetadataAmino {
+  /**
+   * The full name of the resources that this operation is directly
+   * associated with.
+   */
+  resource_names?: string[];
+}
+export interface OperationMetadataAminoMsg {
+  type: "/google.api.serviceusage.v1.OperationMetadata";
+  value: OperationMetadataAmino;
+}
+/** The operation metadata returned for the batchend services operation. */
 export interface OperationMetadataSDKType {
   resource_names: string[];
 }
@@ -181,6 +272,15 @@ function createBaseService(): Service {
 }
 export const Service = {
   typeUrl: "/google.api.serviceusage.v1.Service",
+  is(o: any): o is Service {
+    return o && (o.$typeUrl === Service.typeUrl || typeof o.name === "string" && typeof o.parent === "string" && isSet(o.state));
+  },
+  isSDK(o: any): o is ServiceSDKType {
+    return o && (o.$typeUrl === Service.typeUrl || typeof o.name === "string" && typeof o.parent === "string" && isSet(o.state));
+  },
+  isAmino(o: any): o is ServiceAmino {
+    return o && (o.$typeUrl === Service.typeUrl || typeof o.name === "string" && typeof o.parent === "string" && isSet(o.state));
+  },
   encode(message: Service, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -310,6 +410,9 @@ export const Service = {
       typeUrl: "/google.api.serviceusage.v1.Service",
       value: Service.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ServiceConfig.registerTypeUrl();
   }
 };
 function createBaseServiceConfig(): ServiceConfig {
@@ -328,6 +431,15 @@ function createBaseServiceConfig(): ServiceConfig {
 }
 export const ServiceConfig = {
   typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
+  is(o: any): o is ServiceConfig {
+    return o && (o.$typeUrl === ServiceConfig.typeUrl || typeof o.name === "string" && typeof o.title === "string" && Array.isArray(o.apis) && (!o.apis.length || Api.is(o.apis[0])) && Array.isArray(o.endpoints) && (!o.endpoints.length || Endpoint.is(o.endpoints[0])) && Array.isArray(o.monitoredResources) && (!o.monitoredResources.length || MonitoredResourceDescriptor.is(o.monitoredResources[0])));
+  },
+  isSDK(o: any): o is ServiceConfigSDKType {
+    return o && (o.$typeUrl === ServiceConfig.typeUrl || typeof o.name === "string" && typeof o.title === "string" && Array.isArray(o.apis) && (!o.apis.length || Api.isSDK(o.apis[0])) && Array.isArray(o.endpoints) && (!o.endpoints.length || Endpoint.isSDK(o.endpoints[0])) && Array.isArray(o.monitored_resources) && (!o.monitored_resources.length || MonitoredResourceDescriptor.isSDK(o.monitored_resources[0])));
+  },
+  isAmino(o: any): o is ServiceConfigAmino {
+    return o && (o.$typeUrl === ServiceConfig.typeUrl || typeof o.name === "string" && typeof o.title === "string" && Array.isArray(o.apis) && (!o.apis.length || Api.isAmino(o.apis[0])) && Array.isArray(o.endpoints) && (!o.endpoints.length || Endpoint.isAmino(o.endpoints[0])) && Array.isArray(o.monitored_resources) && (!o.monitored_resources.length || MonitoredResourceDescriptor.isAmino(o.monitored_resources[0])));
+  },
   encode(message: ServiceConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -591,6 +703,16 @@ export const ServiceConfig = {
       typeUrl: "/google.api.serviceusage.v1.ServiceConfig",
       value: ServiceConfig.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Api.registerTypeUrl();
+    Documentation.registerTypeUrl();
+    Quota.registerTypeUrl();
+    Authentication.registerTypeUrl();
+    Usage.registerTypeUrl();
+    Endpoint.registerTypeUrl();
+    MonitoredResourceDescriptor.registerTypeUrl();
+    Monitoring.registerTypeUrl();
   }
 };
 function createBaseOperationMetadata(): OperationMetadata {
@@ -600,6 +722,15 @@ function createBaseOperationMetadata(): OperationMetadata {
 }
 export const OperationMetadata = {
   typeUrl: "/google.api.serviceusage.v1.OperationMetadata",
+  is(o: any): o is OperationMetadata {
+    return o && (o.$typeUrl === OperationMetadata.typeUrl || Array.isArray(o.resourceNames) && (!o.resourceNames.length || typeof o.resourceNames[0] === "string"));
+  },
+  isSDK(o: any): o is OperationMetadataSDKType {
+    return o && (o.$typeUrl === OperationMetadata.typeUrl || Array.isArray(o.resource_names) && (!o.resource_names.length || typeof o.resource_names[0] === "string"));
+  },
+  isAmino(o: any): o is OperationMetadataAmino {
+    return o && (o.$typeUrl === OperationMetadata.typeUrl || Array.isArray(o.resource_names) && (!o.resource_names.length || typeof o.resource_names[0] === "string"));
+  },
   encode(message: OperationMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceNames) {
       writer.uint32(18).string(v!);
@@ -689,5 +820,6 @@ export const OperationMetadata = {
       typeUrl: "/google.api.serviceusage.v1.OperationMetadata",
       value: OperationMetadata.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

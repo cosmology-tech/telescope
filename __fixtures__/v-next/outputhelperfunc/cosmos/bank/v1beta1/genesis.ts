@@ -1,6 +1,7 @@
-import { Params, ParamsSDKType, Metadata, MetadataSDKType } from "./bank";
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsSDKType, Metadata, MetadataAmino, MetadataSDKType } from "./bank";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.bank.v1beta1";
@@ -21,6 +22,24 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the bank module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+  /** balances is an array containing the balances of all the accounts. */
+  balances?: BalanceAmino[];
+  /**
+   * supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
+   * balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
+   */
+  supply?: CoinAmino[];
+  /** denom_metadata defines the metadata of the differents coins. */
+  denom_metadata?: MetadataAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisStateSDKType {
@@ -47,6 +66,20 @@ export interface BalanceProtoMsg {
  * Balance defines an account address and balance pair used in the bank module's
  * genesis state.
  */
+export interface BalanceAmino {
+  /** address is the address of the balance holder. */
+  address?: string;
+  /** coins defines the different coins this balance holds. */
+  coins?: CoinAmino[];
+}
+export interface BalanceAminoMsg {
+  type: "cosmos-sdk/Balance";
+  value: BalanceAmino;
+}
+/**
+ * Balance defines an account address and balance pair used in the bank module's
+ * genesis state.
+ */
 export interface BalanceSDKType {
   address: string;
   coins: CoinSDKType[];
@@ -61,6 +94,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.bank.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params) && Array.isArray(o.balances) && (!o.balances.length || Balance.is(o.balances[0])) && Array.isArray(o.supply) && (!o.supply.length || Coin.is(o.supply[0])) && Array.isArray(o.denomMetadata) && (!o.denomMetadata.length || Metadata.is(o.denomMetadata[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params) && Array.isArray(o.balances) && (!o.balances.length || Balance.isSDK(o.balances[0])) && Array.isArray(o.supply) && (!o.supply.length || Coin.isSDK(o.supply[0])) && Array.isArray(o.denom_metadata) && (!o.denom_metadata.length || Metadata.isSDK(o.denom_metadata[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params) && Array.isArray(o.balances) && (!o.balances.length || Balance.isAmino(o.balances[0])) && Array.isArray(o.supply) && (!o.supply.length || Coin.isAmino(o.supply[0])) && Array.isArray(o.denom_metadata) && (!o.denom_metadata.length || Metadata.isAmino(o.denom_metadata[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -226,6 +269,12 @@ export const GenesisState = {
       typeUrl: "/cosmos.bank.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
+    Balance.registerTypeUrl();
+    Coin.registerTypeUrl();
+    Metadata.registerTypeUrl();
   }
 };
 function createBaseBalance(): Balance {
@@ -236,6 +285,16 @@ function createBaseBalance(): Balance {
 }
 export const Balance = {
   typeUrl: "/cosmos.bank.v1beta1.Balance",
+  aminoType: "cosmos-sdk/Balance",
+  is(o: any): o is Balance {
+    return o && (o.$typeUrl === Balance.typeUrl || typeof o.address === "string" && Array.isArray(o.coins) && (!o.coins.length || Coin.is(o.coins[0])));
+  },
+  isSDK(o: any): o is BalanceSDKType {
+    return o && (o.$typeUrl === Balance.typeUrl || typeof o.address === "string" && Array.isArray(o.coins) && (!o.coins.length || Coin.isSDK(o.coins[0])));
+  },
+  isAmino(o: any): o is BalanceAmino {
+    return o && (o.$typeUrl === Balance.typeUrl || typeof o.address === "string" && Array.isArray(o.coins) && (!o.coins.length || Coin.isAmino(o.coins[0])));
+  },
   encode(message: Balance, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -347,5 +406,8 @@ export const Balance = {
       typeUrl: "/cosmos.bank.v1beta1.Balance",
       value: Balance.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };

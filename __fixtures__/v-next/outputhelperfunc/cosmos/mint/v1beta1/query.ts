@@ -1,13 +1,20 @@
-import { Params, ParamsSDKType } from "./mint";
+import { Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "cosmos-sdk/QueryParamsRequest";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -21,6 +28,15 @@ export interface QueryParamsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "cosmos-sdk/QueryParamsResponse";
+  value: QueryParamsResponseAmino;
+}
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
 }
@@ -29,6 +45,12 @@ export interface QueryInflationRequest {}
 export interface QueryInflationRequestProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryInflationRequest";
   value: Uint8Array;
+}
+/** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
+export interface QueryInflationRequestAmino {}
+export interface QueryInflationRequestAminoMsg {
+  type: "cosmos-sdk/QueryInflationRequest";
+  value: QueryInflationRequestAmino;
 }
 /** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequestSDKType {}
@@ -48,6 +70,18 @@ export interface QueryInflationResponseProtoMsg {
  * QueryInflationResponse is the response type for the Query/Inflation RPC
  * method.
  */
+export interface QueryInflationResponseAmino {
+  /** inflation is the current minting inflation value. */
+  inflation?: string;
+}
+export interface QueryInflationResponseAminoMsg {
+  type: "cosmos-sdk/QueryInflationResponse";
+  value: QueryInflationResponseAmino;
+}
+/**
+ * QueryInflationResponse is the response type for the Query/Inflation RPC
+ * method.
+ */
 export interface QueryInflationResponseSDKType {
   inflation: Uint8Array;
 }
@@ -59,6 +93,15 @@ export interface QueryAnnualProvisionsRequest {}
 export interface QueryAnnualProvisionsRequestProtoMsg {
   typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsRequest";
   value: Uint8Array;
+}
+/**
+ * QueryAnnualProvisionsRequest is the request type for the
+ * Query/AnnualProvisions RPC method.
+ */
+export interface QueryAnnualProvisionsRequestAmino {}
+export interface QueryAnnualProvisionsRequestAminoMsg {
+  type: "cosmos-sdk/QueryAnnualProvisionsRequest";
+  value: QueryAnnualProvisionsRequestAmino;
 }
 /**
  * QueryAnnualProvisionsRequest is the request type for the
@@ -81,6 +124,18 @@ export interface QueryAnnualProvisionsResponseProtoMsg {
  * QueryAnnualProvisionsResponse is the response type for the
  * Query/AnnualProvisions RPC method.
  */
+export interface QueryAnnualProvisionsResponseAmino {
+  /** annual_provisions is the current minting annual provisions value. */
+  annual_provisions?: string;
+}
+export interface QueryAnnualProvisionsResponseAminoMsg {
+  type: "cosmos-sdk/QueryAnnualProvisionsResponse";
+  value: QueryAnnualProvisionsResponseAmino;
+}
+/**
+ * QueryAnnualProvisionsResponse is the response type for the
+ * Query/AnnualProvisions RPC method.
+ */
 export interface QueryAnnualProvisionsResponseSDKType {
   annual_provisions: Uint8Array;
 }
@@ -89,6 +144,16 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/cosmos.mint.v1beta1.QueryParamsRequest",
+  aminoType: "cosmos-sdk/QueryParamsRequest",
+  is(o: any): o is QueryParamsRequest {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsRequestSDKType {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsRequestAmino {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -156,7 +221,8 @@ export const QueryParamsRequest = {
       typeUrl: "/cosmos.mint.v1beta1.QueryParamsRequest",
       value: QueryParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -165,6 +231,16 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/cosmos.mint.v1beta1.QueryParamsResponse",
+  aminoType: "cosmos-sdk/QueryParamsResponse",
+  is(o: any): o is QueryParamsResponse {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.is(o.params));
+  },
+  isSDK(o: any): o is QueryParamsResponseSDKType {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is QueryParamsResponseAmino {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isAmino(o.params));
+  },
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -252,6 +328,9 @@ export const QueryParamsResponse = {
       typeUrl: "/cosmos.mint.v1beta1.QueryParamsResponse",
       value: QueryParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };
 function createBaseQueryInflationRequest(): QueryInflationRequest {
@@ -259,6 +338,16 @@ function createBaseQueryInflationRequest(): QueryInflationRequest {
 }
 export const QueryInflationRequest = {
   typeUrl: "/cosmos.mint.v1beta1.QueryInflationRequest",
+  aminoType: "cosmos-sdk/QueryInflationRequest",
+  is(o: any): o is QueryInflationRequest {
+    return o && o.$typeUrl === QueryInflationRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryInflationRequestSDKType {
+    return o && o.$typeUrl === QueryInflationRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryInflationRequestAmino {
+    return o && o.$typeUrl === QueryInflationRequest.typeUrl;
+  },
   encode(_: QueryInflationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -326,7 +415,8 @@ export const QueryInflationRequest = {
       typeUrl: "/cosmos.mint.v1beta1.QueryInflationRequest",
       value: QueryInflationRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryInflationResponse(): QueryInflationResponse {
   return {
@@ -335,6 +425,16 @@ function createBaseQueryInflationResponse(): QueryInflationResponse {
 }
 export const QueryInflationResponse = {
   typeUrl: "/cosmos.mint.v1beta1.QueryInflationResponse",
+  aminoType: "cosmos-sdk/QueryInflationResponse",
+  is(o: any): o is QueryInflationResponse {
+    return o && (o.$typeUrl === QueryInflationResponse.typeUrl || o.inflation instanceof Uint8Array || typeof o.inflation === "string");
+  },
+  isSDK(o: any): o is QueryInflationResponseSDKType {
+    return o && (o.$typeUrl === QueryInflationResponse.typeUrl || o.inflation instanceof Uint8Array || typeof o.inflation === "string");
+  },
+  isAmino(o: any): o is QueryInflationResponseAmino {
+    return o && (o.$typeUrl === QueryInflationResponse.typeUrl || o.inflation instanceof Uint8Array || typeof o.inflation === "string");
+  },
   encode(message: QueryInflationResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.inflation.length !== 0) {
       writer.uint32(10).bytes(message.inflation);
@@ -420,13 +520,24 @@ export const QueryInflationResponse = {
       typeUrl: "/cosmos.mint.v1beta1.QueryInflationResponse",
       value: QueryInflationResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryAnnualProvisionsRequest(): QueryAnnualProvisionsRequest {
   return {};
 }
 export const QueryAnnualProvisionsRequest = {
   typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsRequest",
+  aminoType: "cosmos-sdk/QueryAnnualProvisionsRequest",
+  is(o: any): o is QueryAnnualProvisionsRequest {
+    return o && o.$typeUrl === QueryAnnualProvisionsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryAnnualProvisionsRequestSDKType {
+    return o && o.$typeUrl === QueryAnnualProvisionsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryAnnualProvisionsRequestAmino {
+    return o && o.$typeUrl === QueryAnnualProvisionsRequest.typeUrl;
+  },
   encode(_: QueryAnnualProvisionsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -494,7 +605,8 @@ export const QueryAnnualProvisionsRequest = {
       typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsRequest",
       value: QueryAnnualProvisionsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryAnnualProvisionsResponse(): QueryAnnualProvisionsResponse {
   return {
@@ -503,6 +615,16 @@ function createBaseQueryAnnualProvisionsResponse(): QueryAnnualProvisionsRespons
 }
 export const QueryAnnualProvisionsResponse = {
   typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsResponse",
+  aminoType: "cosmos-sdk/QueryAnnualProvisionsResponse",
+  is(o: any): o is QueryAnnualProvisionsResponse {
+    return o && (o.$typeUrl === QueryAnnualProvisionsResponse.typeUrl || o.annualProvisions instanceof Uint8Array || typeof o.annualProvisions === "string");
+  },
+  isSDK(o: any): o is QueryAnnualProvisionsResponseSDKType {
+    return o && (o.$typeUrl === QueryAnnualProvisionsResponse.typeUrl || o.annual_provisions instanceof Uint8Array || typeof o.annual_provisions === "string");
+  },
+  isAmino(o: any): o is QueryAnnualProvisionsResponseAmino {
+    return o && (o.$typeUrl === QueryAnnualProvisionsResponse.typeUrl || o.annual_provisions instanceof Uint8Array || typeof o.annual_provisions === "string");
+  },
   encode(message: QueryAnnualProvisionsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.annualProvisions.length !== 0) {
       writer.uint32(10).bytes(message.annualProvisions);
@@ -588,5 +710,6 @@ export const QueryAnnualProvisionsResponse = {
       typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsResponse",
       value: QueryAnnualProvisionsResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

@@ -22,6 +22,20 @@ export interface CoinProtoMsg {
  * NOTE: The amount field is an Int which implements the custom method
  * signatures required by gogoproto.
  */
+export interface CoinAmino {
+  denom?: string;
+  amount?: string;
+}
+export interface CoinAminoMsg {
+  type: "cosmos-sdk/Coin";
+  value: CoinAmino;
+}
+/**
+ * Coin defines a token with a denomination and an amount.
+ * 
+ * NOTE: The amount field is an Int which implements the custom method
+ * signatures required by gogoproto.
+ */
 export interface CoinSDKType {
   denom: string;
   amount: string;
@@ -46,6 +60,20 @@ export interface DecCoinProtoMsg {
  * NOTE: The amount field is an Dec which implements the custom method
  * signatures required by gogoproto.
  */
+export interface DecCoinAmino {
+  denom?: string;
+  amount?: string;
+}
+export interface DecCoinAminoMsg {
+  type: "cosmos-sdk/DecCoin";
+  value: DecCoinAmino;
+}
+/**
+ * DecCoin defines a token with a denomination and a decimal amount.
+ * 
+ * NOTE: The amount field is an Dec which implements the custom method
+ * signatures required by gogoproto.
+ */
 export interface DecCoinSDKType {
   denom: string;
   amount: string;
@@ -57,6 +85,14 @@ export interface IntProto {
 export interface IntProtoProtoMsg {
   typeUrl: "/cosmos.base.v1beta1.IntProto";
   value: Uint8Array;
+}
+/** IntProto defines a Protobuf wrapper around an Int object. */
+export interface IntProtoAmino {
+  int?: string;
+}
+export interface IntProtoAminoMsg {
+  type: "cosmos-sdk/IntProto";
+  value: IntProtoAmino;
 }
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoSDKType {
@@ -71,6 +107,14 @@ export interface DecProtoProtoMsg {
   value: Uint8Array;
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
+export interface DecProtoAmino {
+  dec?: string;
+}
+export interface DecProtoAminoMsg {
+  type: "cosmos-sdk/DecProto";
+  value: DecProtoAmino;
+}
+/** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoSDKType {
   dec: string;
 }
@@ -82,6 +126,16 @@ function createBaseCoin(): Coin {
 }
 export const Coin = {
   typeUrl: "/cosmos.base.v1beta1.Coin",
+  aminoType: "cosmos-sdk/Coin",
+  is(o: any): o is Coin {
+    return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
+  isSDK(o: any): o is CoinSDKType {
+    return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
+  isAmino(o: any): o is CoinAmino {
+    return o && (o.$typeUrl === Coin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
   encode(message: Coin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
@@ -183,7 +237,8 @@ export const Coin = {
       typeUrl: "/cosmos.base.v1beta1.Coin",
       value: Coin.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDecCoin(): DecCoin {
   return {
@@ -193,6 +248,16 @@ function createBaseDecCoin(): DecCoin {
 }
 export const DecCoin = {
   typeUrl: "/cosmos.base.v1beta1.DecCoin",
+  aminoType: "cosmos-sdk/DecCoin",
+  is(o: any): o is DecCoin {
+    return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
+  isSDK(o: any): o is DecCoinSDKType {
+    return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
+  isAmino(o: any): o is DecCoinAmino {
+    return o && (o.$typeUrl === DecCoin.typeUrl || typeof o.denom === "string" && typeof o.amount === "string");
+  },
   encode(message: DecCoin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
@@ -294,7 +359,8 @@ export const DecCoin = {
       typeUrl: "/cosmos.base.v1beta1.DecCoin",
       value: DecCoin.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseIntProto(): IntProto {
   return {
@@ -303,6 +369,16 @@ function createBaseIntProto(): IntProto {
 }
 export const IntProto = {
   typeUrl: "/cosmos.base.v1beta1.IntProto",
+  aminoType: "cosmos-sdk/IntProto",
+  is(o: any): o is IntProto {
+    return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
+  },
+  isSDK(o: any): o is IntProtoSDKType {
+    return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
+  },
+  isAmino(o: any): o is IntProtoAmino {
+    return o && (o.$typeUrl === IntProto.typeUrl || typeof o.int === "string");
+  },
   encode(message: IntProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.int !== undefined) {
       writer.uint32(10).string(message.int);
@@ -388,7 +464,8 @@ export const IntProto = {
       typeUrl: "/cosmos.base.v1beta1.IntProto",
       value: IntProto.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDecProto(): DecProto {
   return {
@@ -397,6 +474,16 @@ function createBaseDecProto(): DecProto {
 }
 export const DecProto = {
   typeUrl: "/cosmos.base.v1beta1.DecProto",
+  aminoType: "cosmos-sdk/DecProto",
+  is(o: any): o is DecProto {
+    return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
+  },
+  isSDK(o: any): o is DecProtoSDKType {
+    return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
+  },
+  isAmino(o: any): o is DecProtoAmino {
+    return o && (o.$typeUrl === DecProto.typeUrl || typeof o.dec === "string");
+  },
   encode(message: DecProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.dec !== undefined) {
       writer.uint32(10).string(message.dec);
@@ -482,5 +569,6 @@ export const DecProto = {
       typeUrl: "/cosmos.base.v1beta1.DecProto",
       value: DecProto.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

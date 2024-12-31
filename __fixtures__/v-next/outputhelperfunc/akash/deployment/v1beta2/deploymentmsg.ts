@@ -1,7 +1,8 @@
-import { DeploymentID, DeploymentIDSDKType } from "./deployment";
-import { GroupSpec, GroupSpecSDKType } from "./groupspec";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { DeploymentID, DeploymentIDAmino, DeploymentIDSDKType } from "./deployment";
+import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "./groupspec";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -19,6 +20,19 @@ export interface MsgCreateDeploymentProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
+export interface MsgCreateDeploymentAmino {
+  id: DeploymentIDAmino;
+  groups: GroupSpecAmino[];
+  version: string;
+  deposit: CoinAmino;
+  /** Depositor pays for the deposit */
+  depositor: string;
+}
+export interface MsgCreateDeploymentAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-create-deployment";
+  value: MsgCreateDeploymentAmino;
+}
+/** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id: DeploymentIDSDKType;
   groups: GroupSpecSDKType[];
@@ -31,6 +45,12 @@ export interface MsgCreateDeploymentResponse {}
 export interface MsgCreateDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgCreateDeploymentResponse";
   value: Uint8Array;
+}
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgCreateDeploymentResponseAmino {}
+export interface MsgCreateDeploymentResponseAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-create-deployment-response";
+  value: MsgCreateDeploymentResponseAmino;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
@@ -46,6 +66,17 @@ export interface MsgDepositDeploymentProtoMsg {
   value: Uint8Array;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
+export interface MsgDepositDeploymentAmino {
+  id: DeploymentIDAmino;
+  amount: CoinAmino;
+  /** Depositor pays for the deposit */
+  depositor: string;
+}
+export interface MsgDepositDeploymentAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-deposit-deployment";
+  value: MsgDepositDeploymentAmino;
+}
+/** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
   id: DeploymentIDSDKType;
   amount: CoinSDKType;
@@ -56,6 +87,12 @@ export interface MsgDepositDeploymentResponse {}
 export interface MsgDepositDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgDepositDeploymentResponse";
   value: Uint8Array;
+}
+/** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
+export interface MsgDepositDeploymentResponseAmino {}
+export interface MsgDepositDeploymentResponseAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-deposit-deployment-response";
+  value: MsgDepositDeploymentResponseAmino;
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
@@ -69,6 +106,15 @@ export interface MsgUpdateDeploymentProtoMsg {
   value: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
+export interface MsgUpdateDeploymentAmino {
+  id: DeploymentIDAmino;
+  version: string;
+}
+export interface MsgUpdateDeploymentAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-update-deployment";
+  value: MsgUpdateDeploymentAmino;
+}
+/** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
   id: DeploymentIDSDKType;
   version: Uint8Array;
@@ -78,6 +124,12 @@ export interface MsgUpdateDeploymentResponse {}
 export interface MsgUpdateDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgUpdateDeploymentResponse";
   value: Uint8Array;
+}
+/** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
+export interface MsgUpdateDeploymentResponseAmino {}
+export interface MsgUpdateDeploymentResponseAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-update-deployment-response";
+  value: MsgUpdateDeploymentResponseAmino;
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
@@ -90,6 +142,14 @@ export interface MsgCloseDeploymentProtoMsg {
   value: Uint8Array;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
+export interface MsgCloseDeploymentAmino {
+  id: DeploymentIDAmino;
+}
+export interface MsgCloseDeploymentAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-close-deployment";
+  value: MsgCloseDeploymentAmino;
+}
+/** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
   id: DeploymentIDSDKType;
 }
@@ -98,6 +158,12 @@ export interface MsgCloseDeploymentResponse {}
 export interface MsgCloseDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgCloseDeploymentResponse";
   value: Uint8Array;
+}
+/** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
+export interface MsgCloseDeploymentResponseAmino {}
+export interface MsgCloseDeploymentResponseAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-close-deployment-response";
+  value: MsgCloseDeploymentResponseAmino;
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}
@@ -112,6 +178,16 @@ function createBaseMsgCreateDeployment(): MsgCreateDeployment {
 }
 export const MsgCreateDeployment = {
   typeUrl: "/akash.deployment.v1beta2.MsgCreateDeployment",
+  aminoType: "akash/deployment/v1beta2/testonly-create-deployment",
+  is(o: any): o is MsgCreateDeployment {
+    return o && (o.$typeUrl === MsgCreateDeployment.typeUrl || DeploymentID.is(o.id) && Array.isArray(o.groups) && (!o.groups.length || GroupSpec.is(o.groups[0])) && (o.version instanceof Uint8Array || typeof o.version === "string") && Coin.is(o.deposit) && typeof o.depositor === "string");
+  },
+  isSDK(o: any): o is MsgCreateDeploymentSDKType {
+    return o && (o.$typeUrl === MsgCreateDeployment.typeUrl || DeploymentID.isSDK(o.id) && Array.isArray(o.groups) && (!o.groups.length || GroupSpec.isSDK(o.groups[0])) && (o.version instanceof Uint8Array || typeof o.version === "string") && Coin.isSDK(o.deposit) && typeof o.depositor === "string");
+  },
+  isAmino(o: any): o is MsgCreateDeploymentAmino {
+    return o && (o.$typeUrl === MsgCreateDeployment.typeUrl || DeploymentID.isAmino(o.id) && Array.isArray(o.groups) && (!o.groups.length || GroupSpec.isAmino(o.groups[0])) && (o.version instanceof Uint8Array || typeof o.version === "string") && Coin.isAmino(o.deposit) && typeof o.depositor === "string");
+  },
   encode(message: MsgCreateDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -275,6 +351,11 @@ export const MsgCreateDeployment = {
       typeUrl: "/akash.deployment.v1beta2.MsgCreateDeployment",
       value: MsgCreateDeployment.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeploymentID.registerTypeUrl();
+    GroupSpec.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgCreateDeploymentResponse(): MsgCreateDeploymentResponse {
@@ -282,6 +363,16 @@ function createBaseMsgCreateDeploymentResponse(): MsgCreateDeploymentResponse {
 }
 export const MsgCreateDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta2.MsgCreateDeploymentResponse",
+  aminoType: "akash/deployment/v1beta2/testonly-create-deployment-response",
+  is(o: any): o is MsgCreateDeploymentResponse {
+    return o && o.$typeUrl === MsgCreateDeploymentResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCreateDeploymentResponseSDKType {
+    return o && o.$typeUrl === MsgCreateDeploymentResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgCreateDeploymentResponseAmino {
+    return o && o.$typeUrl === MsgCreateDeploymentResponse.typeUrl;
+  },
   encode(_: MsgCreateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -349,7 +440,8 @@ export const MsgCreateDeploymentResponse = {
       typeUrl: "/akash.deployment.v1beta2.MsgCreateDeploymentResponse",
       value: MsgCreateDeploymentResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgDepositDeployment(): MsgDepositDeployment {
   return {
@@ -360,6 +452,16 @@ function createBaseMsgDepositDeployment(): MsgDepositDeployment {
 }
 export const MsgDepositDeployment = {
   typeUrl: "/akash.deployment.v1beta2.MsgDepositDeployment",
+  aminoType: "akash/deployment/v1beta2/testonly-deposit-deployment",
+  is(o: any): o is MsgDepositDeployment {
+    return o && (o.$typeUrl === MsgDepositDeployment.typeUrl || DeploymentID.is(o.id) && Coin.is(o.amount) && typeof o.depositor === "string");
+  },
+  isSDK(o: any): o is MsgDepositDeploymentSDKType {
+    return o && (o.$typeUrl === MsgDepositDeployment.typeUrl || DeploymentID.isSDK(o.id) && Coin.isSDK(o.amount) && typeof o.depositor === "string");
+  },
+  isAmino(o: any): o is MsgDepositDeploymentAmino {
+    return o && (o.$typeUrl === MsgDepositDeployment.typeUrl || DeploymentID.isAmino(o.id) && Coin.isAmino(o.amount) && typeof o.depositor === "string");
+  },
   encode(message: MsgDepositDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -481,6 +583,10 @@ export const MsgDepositDeployment = {
       typeUrl: "/akash.deployment.v1beta2.MsgDepositDeployment",
       value: MsgDepositDeployment.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeploymentID.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgDepositDeploymentResponse(): MsgDepositDeploymentResponse {
@@ -488,6 +594,16 @@ function createBaseMsgDepositDeploymentResponse(): MsgDepositDeploymentResponse 
 }
 export const MsgDepositDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta2.MsgDepositDeploymentResponse",
+  aminoType: "akash/deployment/v1beta2/testonly-deposit-deployment-response",
+  is(o: any): o is MsgDepositDeploymentResponse {
+    return o && o.$typeUrl === MsgDepositDeploymentResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgDepositDeploymentResponseSDKType {
+    return o && o.$typeUrl === MsgDepositDeploymentResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgDepositDeploymentResponseAmino {
+    return o && o.$typeUrl === MsgDepositDeploymentResponse.typeUrl;
+  },
   encode(_: MsgDepositDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -555,7 +671,8 @@ export const MsgDepositDeploymentResponse = {
       typeUrl: "/akash.deployment.v1beta2.MsgDepositDeploymentResponse",
       value: MsgDepositDeploymentResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
   return {
@@ -565,6 +682,16 @@ function createBaseMsgUpdateDeployment(): MsgUpdateDeployment {
 }
 export const MsgUpdateDeployment = {
   typeUrl: "/akash.deployment.v1beta2.MsgUpdateDeployment",
+  aminoType: "akash/deployment/v1beta2/testonly-update-deployment",
+  is(o: any): o is MsgUpdateDeployment {
+    return o && (o.$typeUrl === MsgUpdateDeployment.typeUrl || DeploymentID.is(o.id) && (o.version instanceof Uint8Array || typeof o.version === "string"));
+  },
+  isSDK(o: any): o is MsgUpdateDeploymentSDKType {
+    return o && (o.$typeUrl === MsgUpdateDeployment.typeUrl || DeploymentID.isSDK(o.id) && (o.version instanceof Uint8Array || typeof o.version === "string"));
+  },
+  isAmino(o: any): o is MsgUpdateDeploymentAmino {
+    return o && (o.$typeUrl === MsgUpdateDeployment.typeUrl || DeploymentID.isAmino(o.id) && (o.version instanceof Uint8Array || typeof o.version === "string"));
+  },
   encode(message: MsgUpdateDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -668,6 +795,9 @@ export const MsgUpdateDeployment = {
       typeUrl: "/akash.deployment.v1beta2.MsgUpdateDeployment",
       value: MsgUpdateDeployment.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeploymentID.registerTypeUrl();
   }
 };
 function createBaseMsgUpdateDeploymentResponse(): MsgUpdateDeploymentResponse {
@@ -675,6 +805,16 @@ function createBaseMsgUpdateDeploymentResponse(): MsgUpdateDeploymentResponse {
 }
 export const MsgUpdateDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta2.MsgUpdateDeploymentResponse",
+  aminoType: "akash/deployment/v1beta2/testonly-update-deployment-response",
+  is(o: any): o is MsgUpdateDeploymentResponse {
+    return o && o.$typeUrl === MsgUpdateDeploymentResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgUpdateDeploymentResponseSDKType {
+    return o && o.$typeUrl === MsgUpdateDeploymentResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgUpdateDeploymentResponseAmino {
+    return o && o.$typeUrl === MsgUpdateDeploymentResponse.typeUrl;
+  },
   encode(_: MsgUpdateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -742,7 +882,8 @@ export const MsgUpdateDeploymentResponse = {
       typeUrl: "/akash.deployment.v1beta2.MsgUpdateDeploymentResponse",
       value: MsgUpdateDeploymentResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgCloseDeployment(): MsgCloseDeployment {
   return {
@@ -751,6 +892,16 @@ function createBaseMsgCloseDeployment(): MsgCloseDeployment {
 }
 export const MsgCloseDeployment = {
   typeUrl: "/akash.deployment.v1beta2.MsgCloseDeployment",
+  aminoType: "akash/deployment/v1beta2/testonly-close-deployment",
+  is(o: any): o is MsgCloseDeployment {
+    return o && (o.$typeUrl === MsgCloseDeployment.typeUrl || DeploymentID.is(o.id));
+  },
+  isSDK(o: any): o is MsgCloseDeploymentSDKType {
+    return o && (o.$typeUrl === MsgCloseDeployment.typeUrl || DeploymentID.isSDK(o.id));
+  },
+  isAmino(o: any): o is MsgCloseDeploymentAmino {
+    return o && (o.$typeUrl === MsgCloseDeployment.typeUrl || DeploymentID.isAmino(o.id));
+  },
   encode(message: MsgCloseDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -838,6 +989,9 @@ export const MsgCloseDeployment = {
       typeUrl: "/akash.deployment.v1beta2.MsgCloseDeployment",
       value: MsgCloseDeployment.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeploymentID.registerTypeUrl();
   }
 };
 function createBaseMsgCloseDeploymentResponse(): MsgCloseDeploymentResponse {
@@ -845,6 +999,16 @@ function createBaseMsgCloseDeploymentResponse(): MsgCloseDeploymentResponse {
 }
 export const MsgCloseDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta2.MsgCloseDeploymentResponse",
+  aminoType: "akash/deployment/v1beta2/testonly-close-deployment-response",
+  is(o: any): o is MsgCloseDeploymentResponse {
+    return o && o.$typeUrl === MsgCloseDeploymentResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCloseDeploymentResponseSDKType {
+    return o && o.$typeUrl === MsgCloseDeploymentResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgCloseDeploymentResponseAmino {
+    return o && o.$typeUrl === MsgCloseDeploymentResponse.typeUrl;
+  },
   encode(_: MsgCloseDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -912,5 +1076,6 @@ export const MsgCloseDeploymentResponse = {
       typeUrl: "/akash.deployment.v1beta2.MsgCloseDeploymentResponse",
       value: MsgCloseDeploymentResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

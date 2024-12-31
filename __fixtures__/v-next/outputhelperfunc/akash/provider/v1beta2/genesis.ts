@@ -1,4 +1,4 @@
-import { Provider, ProviderSDKType } from "./provider";
+import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, Exact } from "../../../helpers";
@@ -12,6 +12,14 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the basic genesis state used by provider module */
+export interface GenesisStateAmino {
+  providers: ProviderAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "akash/provider/v1beta2/genesis-state";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateSDKType {
   providers: ProviderSDKType[];
 }
@@ -22,6 +30,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/akash.provider.v1beta2.GenesisState",
+  aminoType: "akash/provider/v1beta2/genesis-state",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.is(o.providers[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.isSDK(o.providers[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.isAmino(o.providers[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.providers) {
       Provider.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -117,5 +135,8 @@ export const GenesisState = {
       typeUrl: "/akash.provider.v1beta2.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Provider.registerTypeUrl();
   }
 };

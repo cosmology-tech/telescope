@@ -1,7 +1,8 @@
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -16,6 +17,7 @@ export enum Account_State {
   UNRECOGNIZED = -1,
 }
 export const Account_StateSDKType = Account_State;
+export const Account_StateAmino = Account_State;
 export function account_StateFromJSON(object: any): Account_State {
   switch (object) {
     case 0:
@@ -64,6 +66,7 @@ export enum FractionalPayment_State {
   UNRECOGNIZED = -1,
 }
 export const FractionalPayment_StateSDKType = FractionalPayment_State;
+export const FractionalPayment_StateAmino = FractionalPayment_State;
 export function fractionalPayment_StateFromJSON(object: any): FractionalPayment_State {
   switch (object) {
     case 0:
@@ -109,6 +112,15 @@ export interface AccountIDProtoMsg {
   value: Uint8Array;
 }
 /** AccountID is the account identifier */
+export interface AccountIDAmino {
+  scope: string;
+  xid: string;
+}
+export interface AccountIDAminoMsg {
+  type: "akash/escrow/v1beta2/account-i-d";
+  value: AccountIDAmino;
+}
+/** AccountID is the account identifier */
 export interface AccountIDSDKType {
   scope: string;
   xid: string;
@@ -144,6 +156,36 @@ export interface AccountProtoMsg {
   value: Uint8Array;
 }
 /** Account stores state for an escrow account */
+export interface AccountAmino {
+  /** unique identifier for this escrow account */
+  id: AccountIDAmino;
+  /** bech32 encoded account address of the owner of this escrow account */
+  owner: string;
+  /** current state of this escrow account */
+  state: Account_State;
+  /** unspent coins received from the owner's wallet */
+  balance: DecCoinAmino;
+  /** total coins spent by this account */
+  transferred: DecCoinAmino;
+  /** block height at which this account was last settled */
+  settled_at: string;
+  /**
+   * bech32 encoded account address of the depositor.
+   * If depositor is same as the owner, then any incoming coins are added to the Balance.
+   * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
+   */
+  depositor: string;
+  /**
+   * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
+   * If there are any funds, they should be spent before spending the Balance.
+   */
+  funds: DecCoinAmino;
+}
+export interface AccountAminoMsg {
+  type: "akash/escrow/v1beta2/account";
+  value: AccountAmino;
+}
+/** Account stores state for an escrow account */
 export interface AccountSDKType {
   id: AccountIDSDKType;
   owner: string;
@@ -169,6 +211,20 @@ export interface FractionalPaymentProtoMsg {
   value: Uint8Array;
 }
 /** Payment stores state for a payment */
+export interface FractionalPaymentAmino {
+  account_id: AccountIDAmino;
+  payment_id: string;
+  owner: string;
+  state: FractionalPayment_State;
+  rate: DecCoinAmino;
+  balance: DecCoinAmino;
+  withdrawn: CoinAmino;
+}
+export interface FractionalPaymentAminoMsg {
+  type: "akash/escrow/v1beta2/fractional-payment";
+  value: FractionalPaymentAmino;
+}
+/** Payment stores state for a payment */
 export interface FractionalPaymentSDKType {
   account_id: AccountIDSDKType;
   payment_id: string;
@@ -186,6 +242,16 @@ function createBaseAccountID(): AccountID {
 }
 export const AccountID = {
   typeUrl: "/akash.escrow.v1beta2.AccountID",
+  aminoType: "akash/escrow/v1beta2/account-i-d",
+  is(o: any): o is AccountID {
+    return o && (o.$typeUrl === AccountID.typeUrl || typeof o.scope === "string" && typeof o.xid === "string");
+  },
+  isSDK(o: any): o is AccountIDSDKType {
+    return o && (o.$typeUrl === AccountID.typeUrl || typeof o.scope === "string" && typeof o.xid === "string");
+  },
+  isAmino(o: any): o is AccountIDAmino {
+    return o && (o.$typeUrl === AccountID.typeUrl || typeof o.scope === "string" && typeof o.xid === "string");
+  },
   encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
@@ -287,7 +353,8 @@ export const AccountID = {
       typeUrl: "/akash.escrow.v1beta2.AccountID",
       value: AccountID.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAccount(): Account {
   return {
@@ -303,6 +370,16 @@ function createBaseAccount(): Account {
 }
 export const Account = {
   typeUrl: "/akash.escrow.v1beta2.Account",
+  aminoType: "akash/escrow/v1beta2/account",
+  is(o: any): o is Account {
+    return o && (o.$typeUrl === Account.typeUrl || AccountID.is(o.id) && typeof o.owner === "string" && isSet(o.state) && DecCoin.is(o.balance) && DecCoin.is(o.transferred) && typeof o.settledAt === "bigint" && typeof o.depositor === "string" && DecCoin.is(o.funds));
+  },
+  isSDK(o: any): o is AccountSDKType {
+    return o && (o.$typeUrl === Account.typeUrl || AccountID.isSDK(o.id) && typeof o.owner === "string" && isSet(o.state) && DecCoin.isSDK(o.balance) && DecCoin.isSDK(o.transferred) && typeof o.settled_at === "bigint" && typeof o.depositor === "string" && DecCoin.isSDK(o.funds));
+  },
+  isAmino(o: any): o is AccountAmino {
+    return o && (o.$typeUrl === Account.typeUrl || AccountID.isAmino(o.id) && typeof o.owner === "string" && isSet(o.state) && DecCoin.isAmino(o.balance) && DecCoin.isAmino(o.transferred) && typeof o.settled_at === "bigint" && typeof o.depositor === "string" && DecCoin.isAmino(o.funds));
+  },
   encode(message: Account, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -510,6 +587,12 @@ export const Account = {
       typeUrl: "/akash.escrow.v1beta2.Account",
       value: Account.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    AccountID.registerTypeUrl();
+    DecCoin.registerTypeUrl();
+    DecCoin.registerTypeUrl();
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseFractionalPayment(): FractionalPayment {
@@ -525,6 +608,16 @@ function createBaseFractionalPayment(): FractionalPayment {
 }
 export const FractionalPayment = {
   typeUrl: "/akash.escrow.v1beta2.FractionalPayment",
+  aminoType: "akash/escrow/v1beta2/fractional-payment",
+  is(o: any): o is FractionalPayment {
+    return o && (o.$typeUrl === FractionalPayment.typeUrl || AccountID.is(o.accountId) && typeof o.paymentId === "string" && typeof o.owner === "string" && isSet(o.state) && DecCoin.is(o.rate) && DecCoin.is(o.balance) && Coin.is(o.withdrawn));
+  },
+  isSDK(o: any): o is FractionalPaymentSDKType {
+    return o && (o.$typeUrl === FractionalPayment.typeUrl || AccountID.isSDK(o.account_id) && typeof o.payment_id === "string" && typeof o.owner === "string" && isSet(o.state) && DecCoin.isSDK(o.rate) && DecCoin.isSDK(o.balance) && Coin.isSDK(o.withdrawn));
+  },
+  isAmino(o: any): o is FractionalPaymentAmino {
+    return o && (o.$typeUrl === FractionalPayment.typeUrl || AccountID.isAmino(o.account_id) && typeof o.payment_id === "string" && typeof o.owner === "string" && isSet(o.state) && DecCoin.isAmino(o.rate) && DecCoin.isAmino(o.balance) && Coin.isAmino(o.withdrawn));
+  },
   encode(message: FractionalPayment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
@@ -714,5 +807,11 @@ export const FractionalPayment = {
       typeUrl: "/akash.escrow.v1beta2.FractionalPayment",
       value: FractionalPayment.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    AccountID.registerTypeUrl();
+    DecCoin.registerTypeUrl();
+    DecCoin.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };

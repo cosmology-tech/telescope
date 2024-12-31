@@ -1,7 +1,8 @@
-import { SourceContext, SourceContextSDKType } from "./source_context";
-import { Any, AnySDKType } from "./any";
-import { BinaryReader, BinaryWriter } from "../../binary";
+import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "./any";
 import { isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { GlobalDecoderRegistry } from "../../registry";
 import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /** Basic field types. */
@@ -47,6 +48,7 @@ export enum Field_Kind {
   UNRECOGNIZED = -1,
 }
 export const Field_KindSDKType = Field_Kind;
+export const Field_KindAmino = Field_Kind;
 export function field_KindFromJSON(object: any): Field_Kind {
   switch (object) {
     case 0:
@@ -170,6 +172,7 @@ export enum Field_Cardinality {
   UNRECOGNIZED = -1,
 }
 export const Field_CardinalitySDKType = Field_Cardinality;
+export const Field_CardinalityAmino = Field_Cardinality;
 export function field_CardinalityFromJSON(object: any): Field_Cardinality {
   switch (object) {
     case 0:
@@ -214,6 +217,7 @@ export enum Syntax {
   UNRECOGNIZED = -1,
 }
 export const SyntaxSDKType = Syntax;
+export const SyntaxAmino = Syntax;
 export function syntaxFromJSON(object: any): Syntax {
   switch (object) {
     case 0:
@@ -259,6 +263,25 @@ export interface TypeProtoMsg {
   value: Uint8Array;
 }
 /** A protocol buffer message type. */
+export interface TypeAmino {
+  /** The fully qualified message name. */
+  name?: string;
+  /** The list of fields. */
+  fields?: FieldAmino[];
+  /** The list of types appearing in `oneof` definitions in this type. */
+  oneofs?: string[];
+  /** The protocol buffer options. */
+  options?: OptionAmino[];
+  /** The source context. */
+  source_context?: SourceContextAmino;
+  /** The source syntax. */
+  syntax?: Syntax;
+}
+export interface TypeAminoMsg {
+  type: "/google.protobuf.Type";
+  value: TypeAmino;
+}
+/** A protocol buffer message type. */
 export interface TypeSDKType {
   name: string;
   fields: FieldSDKType[];
@@ -301,6 +324,39 @@ export interface FieldProtoMsg {
   value: Uint8Array;
 }
 /** A single field of a message type. */
+export interface FieldAmino {
+  /** The field type. */
+  kind?: Field_Kind;
+  /** The field cardinality. */
+  cardinality?: Field_Cardinality;
+  /** The field number. */
+  number?: number;
+  /** The field name. */
+  name?: string;
+  /**
+   * The field type URL, without the scheme, for message or enumeration
+   * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
+   */
+  type_url?: string;
+  /**
+   * The index of the field type in `Type.oneofs`, for message or enumeration
+   * types. The first type has index 1; zero means the type is not in the list.
+   */
+  oneof_index?: number;
+  /** Whether to use alternative packed wire representation. */
+  packed?: boolean;
+  /** The protocol buffer options. */
+  options?: OptionAmino[];
+  /** The field JSON name. */
+  json_name?: string;
+  /** The string value of the default value of this field. Proto2 syntax only. */
+  default_value?: string;
+}
+export interface FieldAminoMsg {
+  type: "/google.protobuf.Field";
+  value: FieldAmino;
+}
+/** A single field of a message type. */
 export interface FieldSDKType {
   kind: Field_Kind;
   cardinality: Field_Cardinality;
@@ -331,6 +387,23 @@ export interface EnumProtoMsg {
   value: Uint8Array;
 }
 /** Enum type definition. */
+export interface EnumAmino {
+  /** Enum type name. */
+  name?: string;
+  /** Enum value definitions. */
+  enumvalue?: EnumValueAmino[];
+  /** Protocol buffer options. */
+  options?: OptionAmino[];
+  /** The source context. */
+  source_context?: SourceContextAmino;
+  /** The source syntax. */
+  syntax?: Syntax;
+}
+export interface EnumAminoMsg {
+  type: "/google.protobuf.Enum";
+  value: EnumAmino;
+}
+/** Enum type definition. */
 export interface EnumSDKType {
   name: string;
   enumvalue: EnumValueSDKType[];
@@ -350,6 +423,19 @@ export interface EnumValue {
 export interface EnumValueProtoMsg {
   typeUrl: "/google.protobuf.EnumValue";
   value: Uint8Array;
+}
+/** Enum value definition. */
+export interface EnumValueAmino {
+  /** Enum value name. */
+  name?: string;
+  /** Enum value number. */
+  number?: number;
+  /** Protocol buffer options. */
+  options?: OptionAmino[];
+}
+export interface EnumValueAminoMsg {
+  type: "/google.protobuf.EnumValue";
+  value: EnumValueAmino;
 }
 /** Enum value definition. */
 export interface EnumValueSDKType {
@@ -385,6 +471,30 @@ export interface OptionProtoMsg {
  * A protocol buffer option, which can be attached to a message, field,
  * enumeration, etc.
  */
+export interface OptionAmino {
+  /**
+   * The option's name. For protobuf built-in options (options defined in
+   * descriptor.proto), this is the short name. For example, `"map_entry"`.
+   * For custom options, it should be the fully-qualified name. For example,
+   * `"google.api.http"`.
+   */
+  name?: string;
+  /**
+   * The option's value packed in an Any message. If the value is a primitive,
+   * the corresponding wrapper type defined in google/protobuf/wrappers.proto
+   * should be used. If the value is an enum, it should be stored as an int32
+   * value using the google.protobuf.Int32Value type.
+   */
+  value?: AnyAmino;
+}
+export interface OptionAminoMsg {
+  type: "/google.protobuf.Option";
+  value: OptionAmino;
+}
+/**
+ * A protocol buffer option, which can be attached to a message, field,
+ * enumeration, etc.
+ */
 export interface OptionSDKType {
   name: string;
   value?: AnySDKType;
@@ -401,6 +511,15 @@ function createBaseType(): Type {
 }
 export const Type = {
   typeUrl: "/google.protobuf.Type",
+  is(o: any): o is Type {
+    return o && (o.$typeUrl === Type.typeUrl || typeof o.name === "string" && Array.isArray(o.fields) && (!o.fields.length || Field.is(o.fields[0])) && Array.isArray(o.oneofs) && (!o.oneofs.length || typeof o.oneofs[0] === "string") && Array.isArray(o.options) && (!o.options.length || Option.is(o.options[0])) && isSet(o.syntax));
+  },
+  isSDK(o: any): o is TypeSDKType {
+    return o && (o.$typeUrl === Type.typeUrl || typeof o.name === "string" && Array.isArray(o.fields) && (!o.fields.length || Field.isSDK(o.fields[0])) && Array.isArray(o.oneofs) && (!o.oneofs.length || typeof o.oneofs[0] === "string") && Array.isArray(o.options) && (!o.options.length || Option.isSDK(o.options[0])) && isSet(o.syntax));
+  },
+  isAmino(o: any): o is TypeAmino {
+    return o && (o.$typeUrl === Type.typeUrl || typeof o.name === "string" && Array.isArray(o.fields) && (!o.fields.length || Field.isAmino(o.fields[0])) && Array.isArray(o.oneofs) && (!o.oneofs.length || typeof o.oneofs[0] === "string") && Array.isArray(o.options) && (!o.options.length || Option.isAmino(o.options[0])) && isSet(o.syntax));
+  },
   encode(message: Type, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -592,6 +711,11 @@ export const Type = {
       typeUrl: "/google.protobuf.Type",
       value: Type.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Field.registerTypeUrl();
+    Option.registerTypeUrl();
+    SourceContext.registerTypeUrl();
   }
 };
 function createBaseField(): Field {
@@ -610,6 +734,15 @@ function createBaseField(): Field {
 }
 export const Field = {
   typeUrl: "/google.protobuf.Field",
+  is(o: any): o is Field {
+    return o && (o.$typeUrl === Field.typeUrl || isSet(o.kind) && isSet(o.cardinality) && typeof o.number === "number" && typeof o.name === "string" && typeof o.typeUrl === "string" && typeof o.oneofIndex === "number" && typeof o.packed === "boolean" && Array.isArray(o.options) && (!o.options.length || Option.is(o.options[0])) && typeof o.jsonName === "string" && typeof o.defaultValue === "string");
+  },
+  isSDK(o: any): o is FieldSDKType {
+    return o && (o.$typeUrl === Field.typeUrl || isSet(o.kind) && isSet(o.cardinality) && typeof o.number === "number" && typeof o.name === "string" && typeof o.type_url === "string" && typeof o.oneof_index === "number" && typeof o.packed === "boolean" && Array.isArray(o.options) && (!o.options.length || Option.isSDK(o.options[0])) && typeof o.json_name === "string" && typeof o.default_value === "string");
+  },
+  isAmino(o: any): o is FieldAmino {
+    return o && (o.$typeUrl === Field.typeUrl || isSet(o.kind) && isSet(o.cardinality) && typeof o.number === "number" && typeof o.name === "string" && typeof o.type_url === "string" && typeof o.oneof_index === "number" && typeof o.packed === "boolean" && Array.isArray(o.options) && (!o.options.length || Option.isAmino(o.options[0])) && typeof o.json_name === "string" && typeof o.default_value === "string");
+  },
   encode(message: Field, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -843,6 +976,9 @@ export const Field = {
       typeUrl: "/google.protobuf.Field",
       value: Field.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Option.registerTypeUrl();
   }
 };
 function createBaseEnum(): Enum {
@@ -856,6 +992,15 @@ function createBaseEnum(): Enum {
 }
 export const Enum = {
   typeUrl: "/google.protobuf.Enum",
+  is(o: any): o is Enum {
+    return o && (o.$typeUrl === Enum.typeUrl || typeof o.name === "string" && Array.isArray(o.enumvalue) && (!o.enumvalue.length || EnumValue.is(o.enumvalue[0])) && Array.isArray(o.options) && (!o.options.length || Option.is(o.options[0])) && isSet(o.syntax));
+  },
+  isSDK(o: any): o is EnumSDKType {
+    return o && (o.$typeUrl === Enum.typeUrl || typeof o.name === "string" && Array.isArray(o.enumvalue) && (!o.enumvalue.length || EnumValue.isSDK(o.enumvalue[0])) && Array.isArray(o.options) && (!o.options.length || Option.isSDK(o.options[0])) && isSet(o.syntax));
+  },
+  isAmino(o: any): o is EnumAmino {
+    return o && (o.$typeUrl === Enum.typeUrl || typeof o.name === "string" && Array.isArray(o.enumvalue) && (!o.enumvalue.length || EnumValue.isAmino(o.enumvalue[0])) && Array.isArray(o.options) && (!o.options.length || Option.isAmino(o.options[0])) && isSet(o.syntax));
+  },
   encode(message: Enum, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -1021,6 +1166,11 @@ export const Enum = {
       typeUrl: "/google.protobuf.Enum",
       value: Enum.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    EnumValue.registerTypeUrl();
+    Option.registerTypeUrl();
+    SourceContext.registerTypeUrl();
   }
 };
 function createBaseEnumValue(): EnumValue {
@@ -1032,6 +1182,15 @@ function createBaseEnumValue(): EnumValue {
 }
 export const EnumValue = {
   typeUrl: "/google.protobuf.EnumValue",
+  is(o: any): o is EnumValue {
+    return o && (o.$typeUrl === EnumValue.typeUrl || typeof o.name === "string" && typeof o.number === "number" && Array.isArray(o.options) && (!o.options.length || Option.is(o.options[0])));
+  },
+  isSDK(o: any): o is EnumValueSDKType {
+    return o && (o.$typeUrl === EnumValue.typeUrl || typeof o.name === "string" && typeof o.number === "number" && Array.isArray(o.options) && (!o.options.length || Option.isSDK(o.options[0])));
+  },
+  isAmino(o: any): o is EnumValueAmino {
+    return o && (o.$typeUrl === EnumValue.typeUrl || typeof o.name === "string" && typeof o.number === "number" && Array.isArray(o.options) && (!o.options.length || Option.isAmino(o.options[0])));
+  },
   encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -1153,6 +1312,9 @@ export const EnumValue = {
       typeUrl: "/google.protobuf.EnumValue",
       value: EnumValue.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Option.registerTypeUrl();
   }
 };
 function createBaseOption(): Option {
@@ -1163,6 +1325,15 @@ function createBaseOption(): Option {
 }
 export const Option = {
   typeUrl: "/google.protobuf.Option",
+  is(o: any): o is Option {
+    return o && (o.$typeUrl === Option.typeUrl || typeof o.name === "string");
+  },
+  isSDK(o: any): o is OptionSDKType {
+    return o && (o.$typeUrl === Option.typeUrl || typeof o.name === "string");
+  },
+  isAmino(o: any): o is OptionAmino {
+    return o && (o.$typeUrl === Option.typeUrl || typeof o.name === "string");
+  },
   encode(message: Option, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -1260,5 +1431,6 @@ export const Option = {
       typeUrl: "/google.protobuf.Option",
       value: Option.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

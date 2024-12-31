@@ -1,7 +1,8 @@
-import { Duration, DurationSDKType } from "../protobuf/duration";
-import { Any, AnySDKType } from "../protobuf/any";
-import { Status, StatusSDKType } from "../rpc/status";
+import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
+import { Status, StatusAmino, StatusSDKType } from "../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { GlobalDecoderRegistry } from "../../registry";
 import { isSet, DeepPartial } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.longrunning";
@@ -51,6 +52,48 @@ export interface OperationProtoMsg {
  * This resource represents a long-running operation that is the result of a
  * network API call.
  */
+export interface OperationAmino {
+  /**
+   * The server-assigned name, which is only unique within the same service that
+   * originally returns it. If you use the default HTTP mapping, the
+   * `name` should be a resource name ending with `operations/{unique_id}`.
+   */
+  name?: string;
+  /**
+   * Service-specific metadata associated with the operation.  It typically
+   * contains progress information and common metadata such as create time.
+   * Some services might not provide such metadata.  Any method that returns a
+   * long-running operation should document the metadata type, if any.
+   */
+  metadata?: AnyAmino;
+  /**
+   * If the value is `false`, it means the operation is still in progress.
+   * If `true`, the operation is completed, and either `error` or `response` is
+   * available.
+   */
+  done?: boolean;
+  /** The error result of the operation in case of failure or cancellation. */
+  error?: StatusAmino;
+  /**
+   * The normal response of the operation in case of success.  If the original
+   * method returns no data on success, such as `Delete`, the response is
+   * `google.protobuf.Empty`.  If the original method is standard
+   * `Get`/`Create`/`Update`, the response should be the resource.  For other
+   * methods, the response should have the type `XxxResponse`, where `Xxx`
+   * is the original method name.  For example, if the original method name
+   * is `TakeSnapshot()`, the inferred response type is
+   * `TakeSnapshotResponse`.
+   */
+  response?: AnyAmino;
+}
+export interface OperationAminoMsg {
+  type: "/google.longrunning.Operation";
+  value: OperationAmino;
+}
+/**
+ * This resource represents a long-running operation that is the result of a
+ * network API call.
+ */
 export interface OperationSDKType {
   name: string;
   metadata?: AnySDKType;
@@ -66,6 +109,15 @@ export interface GetOperationRequest {
 export interface GetOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.GetOperationRequest";
   value: Uint8Array;
+}
+/** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
+export interface GetOperationRequestAmino {
+  /** The name of the operation resource. */
+  name?: string;
+}
+export interface GetOperationRequestAminoMsg {
+  type: "/google.longrunning.GetOperationRequest";
+  value: GetOperationRequestAmino;
 }
 /** The request message for [Operations.GetOperation][google.longrunning.Operations.GetOperation]. */
 export interface GetOperationRequestSDKType {
@@ -87,6 +139,21 @@ export interface ListOperationsRequestProtoMsg {
   value: Uint8Array;
 }
 /** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
+export interface ListOperationsRequestAmino {
+  /** The name of the operation's parent resource. */
+  name?: string;
+  /** The standard list filter. */
+  filter?: string;
+  /** The standard list page size. */
+  page_size?: number;
+  /** The standard list page token. */
+  page_token?: string;
+}
+export interface ListOperationsRequestAminoMsg {
+  type: "/google.longrunning.ListOperationsRequest";
+  value: ListOperationsRequestAmino;
+}
+/** The request message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsRequestSDKType {
   name: string;
   filter: string;
@@ -105,6 +172,17 @@ export interface ListOperationsResponseProtoMsg {
   value: Uint8Array;
 }
 /** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
+export interface ListOperationsResponseAmino {
+  /** A list of operations that matches the specified filter in the request. */
+  operations?: OperationAmino[];
+  /** The standard List next-page token. */
+  next_page_token?: string;
+}
+export interface ListOperationsResponseAminoMsg {
+  type: "/google.longrunning.ListOperationsResponse";
+  value: ListOperationsResponseAmino;
+}
+/** The response message for [Operations.ListOperations][google.longrunning.Operations.ListOperations]. */
 export interface ListOperationsResponseSDKType {
   operations: OperationSDKType[];
   next_page_token: string;
@@ -119,6 +197,15 @@ export interface CancelOperationRequestProtoMsg {
   value: Uint8Array;
 }
 /** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
+export interface CancelOperationRequestAmino {
+  /** The name of the operation resource to be cancelled. */
+  name?: string;
+}
+export interface CancelOperationRequestAminoMsg {
+  type: "/google.longrunning.CancelOperationRequest";
+  value: CancelOperationRequestAmino;
+}
+/** The request message for [Operations.CancelOperation][google.longrunning.Operations.CancelOperation]. */
 export interface CancelOperationRequestSDKType {
   name: string;
 }
@@ -130,6 +217,15 @@ export interface DeleteOperationRequest {
 export interface DeleteOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.DeleteOperationRequest";
   value: Uint8Array;
+}
+/** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
+export interface DeleteOperationRequestAmino {
+  /** The name of the operation resource to be deleted. */
+  name?: string;
+}
+export interface DeleteOperationRequestAminoMsg {
+  type: "/google.longrunning.DeleteOperationRequest";
+  value: DeleteOperationRequestAmino;
 }
 /** The request message for [Operations.DeleteOperation][google.longrunning.Operations.DeleteOperation]. */
 export interface DeleteOperationRequestSDKType {
@@ -149,6 +245,21 @@ export interface WaitOperationRequest {
 export interface WaitOperationRequestProtoMsg {
   typeUrl: "/google.longrunning.WaitOperationRequest";
   value: Uint8Array;
+}
+/** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
+export interface WaitOperationRequestAmino {
+  /** The name of the operation resource to wait on. */
+  name?: string;
+  /**
+   * The maximum duration to wait before timing out. If left blank, the wait
+   * will be at most the time permitted by the underlying HTTP/RPC protocol.
+   * If RPC context deadline is also specified, the shorter one will be used.
+   */
+  timeout?: DurationAmino;
+}
+export interface WaitOperationRequestAminoMsg {
+  type: "/google.longrunning.WaitOperationRequest";
+  value: WaitOperationRequestAmino;
 }
 /** The request message for [Operations.WaitOperation][google.longrunning.Operations.WaitOperation]. */
 export interface WaitOperationRequestSDKType {
@@ -208,6 +319,46 @@ export interface OperationInfoProtoMsg {
  *     };
  *   }
  */
+export interface OperationInfoAmino {
+  /**
+   * Required. The message name of the primary return type for this
+   * long-running operation.
+   * This type will be used to deserialize the LRO's response.
+   * 
+   * If the response is in a different package from the rpc, a fully-qualified
+   * message name must be used (e.g. `google.protobuf.Struct`).
+   * 
+   * Note: Altering this value constitutes a breaking change.
+   */
+  response_type?: string;
+  /**
+   * Required. The message name of the metadata type for this long-running
+   * operation.
+   * 
+   * If the response is in a different package from the rpc, a fully-qualified
+   * message name must be used (e.g. `google.protobuf.Struct`).
+   * 
+   * Note: Altering this value constitutes a breaking change.
+   */
+  metadata_type?: string;
+}
+export interface OperationInfoAminoMsg {
+  type: "/google.longrunning.OperationInfo";
+  value: OperationInfoAmino;
+}
+/**
+ * A message representing the message types used by a long-running operation.
+ * 
+ * Example:
+ * 
+ *   rpc LongRunningRecognize(LongRunningRecognizeRequest)
+ *       returns (google.longrunning.Operation) {
+ *     option (google.longrunning.operation_info) = {
+ *       response_type: "LongRunningRecognizeResponse"
+ *       metadata_type: "LongRunningRecognizeMetadata"
+ *     };
+ *   }
+ */
 export interface OperationInfoSDKType {
   response_type: string;
   metadata_type: string;
@@ -223,6 +374,15 @@ function createBaseOperation(): Operation {
 }
 export const Operation = {
   typeUrl: "/google.longrunning.Operation",
+  is(o: any): o is Operation {
+    return o && (o.$typeUrl === Operation.typeUrl || typeof o.name === "string" && typeof o.done === "boolean");
+  },
+  isSDK(o: any): o is OperationSDKType {
+    return o && (o.$typeUrl === Operation.typeUrl || typeof o.name === "string" && typeof o.done === "boolean");
+  },
+  isAmino(o: any): o is OperationAmino {
+    return o && (o.$typeUrl === Operation.typeUrl || typeof o.name === "string" && typeof o.done === "boolean");
+  },
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -372,7 +532,8 @@ export const Operation = {
       typeUrl: "/google.longrunning.Operation",
       value: Operation.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseGetOperationRequest(): GetOperationRequest {
   return {
@@ -381,6 +542,15 @@ function createBaseGetOperationRequest(): GetOperationRequest {
 }
 export const GetOperationRequest = {
   typeUrl: "/google.longrunning.GetOperationRequest",
+  is(o: any): o is GetOperationRequest {
+    return o && (o.$typeUrl === GetOperationRequest.typeUrl || typeof o.name === "string");
+  },
+  isSDK(o: any): o is GetOperationRequestSDKType {
+    return o && (o.$typeUrl === GetOperationRequest.typeUrl || typeof o.name === "string");
+  },
+  isAmino(o: any): o is GetOperationRequestAmino {
+    return o && (o.$typeUrl === GetOperationRequest.typeUrl || typeof o.name === "string");
+  },
   encode(message: GetOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -460,7 +630,8 @@ export const GetOperationRequest = {
       typeUrl: "/google.longrunning.GetOperationRequest",
       value: GetOperationRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListOperationsRequest(): ListOperationsRequest {
   return {
@@ -472,6 +643,15 @@ function createBaseListOperationsRequest(): ListOperationsRequest {
 }
 export const ListOperationsRequest = {
   typeUrl: "/google.longrunning.ListOperationsRequest",
+  is(o: any): o is ListOperationsRequest {
+    return o && (o.$typeUrl === ListOperationsRequest.typeUrl || typeof o.name === "string" && typeof o.filter === "string" && typeof o.pageSize === "number" && typeof o.pageToken === "string");
+  },
+  isSDK(o: any): o is ListOperationsRequestSDKType {
+    return o && (o.$typeUrl === ListOperationsRequest.typeUrl || typeof o.name === "string" && typeof o.filter === "string" && typeof o.page_size === "number" && typeof o.page_token === "string");
+  },
+  isAmino(o: any): o is ListOperationsRequestAmino {
+    return o && (o.$typeUrl === ListOperationsRequest.typeUrl || typeof o.name === "string" && typeof o.filter === "string" && typeof o.page_size === "number" && typeof o.page_token === "string");
+  },
   encode(message: ListOperationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(34).string(message.name);
@@ -599,7 +779,8 @@ export const ListOperationsRequest = {
       typeUrl: "/google.longrunning.ListOperationsRequest",
       value: ListOperationsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListOperationsResponse(): ListOperationsResponse {
   return {
@@ -609,6 +790,15 @@ function createBaseListOperationsResponse(): ListOperationsResponse {
 }
 export const ListOperationsResponse = {
   typeUrl: "/google.longrunning.ListOperationsResponse",
+  is(o: any): o is ListOperationsResponse {
+    return o && (o.$typeUrl === ListOperationsResponse.typeUrl || Array.isArray(o.operations) && (!o.operations.length || Operation.is(o.operations[0])) && typeof o.nextPageToken === "string");
+  },
+  isSDK(o: any): o is ListOperationsResponseSDKType {
+    return o && (o.$typeUrl === ListOperationsResponse.typeUrl || Array.isArray(o.operations) && (!o.operations.length || Operation.isSDK(o.operations[0])) && typeof o.next_page_token === "string");
+  },
+  isAmino(o: any): o is ListOperationsResponseAmino {
+    return o && (o.$typeUrl === ListOperationsResponse.typeUrl || Array.isArray(o.operations) && (!o.operations.length || Operation.isAmino(o.operations[0])) && typeof o.next_page_token === "string");
+  },
   encode(message: ListOperationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.operations) {
       Operation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -714,6 +904,9 @@ export const ListOperationsResponse = {
       typeUrl: "/google.longrunning.ListOperationsResponse",
       value: ListOperationsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Operation.registerTypeUrl();
   }
 };
 function createBaseCancelOperationRequest(): CancelOperationRequest {
@@ -723,6 +916,15 @@ function createBaseCancelOperationRequest(): CancelOperationRequest {
 }
 export const CancelOperationRequest = {
   typeUrl: "/google.longrunning.CancelOperationRequest",
+  is(o: any): o is CancelOperationRequest {
+    return o && (o.$typeUrl === CancelOperationRequest.typeUrl || typeof o.name === "string");
+  },
+  isSDK(o: any): o is CancelOperationRequestSDKType {
+    return o && (o.$typeUrl === CancelOperationRequest.typeUrl || typeof o.name === "string");
+  },
+  isAmino(o: any): o is CancelOperationRequestAmino {
+    return o && (o.$typeUrl === CancelOperationRequest.typeUrl || typeof o.name === "string");
+  },
   encode(message: CancelOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -802,7 +1004,8 @@ export const CancelOperationRequest = {
       typeUrl: "/google.longrunning.CancelOperationRequest",
       value: CancelOperationRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDeleteOperationRequest(): DeleteOperationRequest {
   return {
@@ -811,6 +1014,15 @@ function createBaseDeleteOperationRequest(): DeleteOperationRequest {
 }
 export const DeleteOperationRequest = {
   typeUrl: "/google.longrunning.DeleteOperationRequest",
+  is(o: any): o is DeleteOperationRequest {
+    return o && (o.$typeUrl === DeleteOperationRequest.typeUrl || typeof o.name === "string");
+  },
+  isSDK(o: any): o is DeleteOperationRequestSDKType {
+    return o && (o.$typeUrl === DeleteOperationRequest.typeUrl || typeof o.name === "string");
+  },
+  isAmino(o: any): o is DeleteOperationRequestAmino {
+    return o && (o.$typeUrl === DeleteOperationRequest.typeUrl || typeof o.name === "string");
+  },
   encode(message: DeleteOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -890,7 +1102,8 @@ export const DeleteOperationRequest = {
       typeUrl: "/google.longrunning.DeleteOperationRequest",
       value: DeleteOperationRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseWaitOperationRequest(): WaitOperationRequest {
   return {
@@ -900,6 +1113,15 @@ function createBaseWaitOperationRequest(): WaitOperationRequest {
 }
 export const WaitOperationRequest = {
   typeUrl: "/google.longrunning.WaitOperationRequest",
+  is(o: any): o is WaitOperationRequest {
+    return o && (o.$typeUrl === WaitOperationRequest.typeUrl || typeof o.name === "string");
+  },
+  isSDK(o: any): o is WaitOperationRequestSDKType {
+    return o && (o.$typeUrl === WaitOperationRequest.typeUrl || typeof o.name === "string");
+  },
+  isAmino(o: any): o is WaitOperationRequestAmino {
+    return o && (o.$typeUrl === WaitOperationRequest.typeUrl || typeof o.name === "string");
+  },
   encode(message: WaitOperationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -997,7 +1219,8 @@ export const WaitOperationRequest = {
       typeUrl: "/google.longrunning.WaitOperationRequest",
       value: WaitOperationRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseOperationInfo(): OperationInfo {
   return {
@@ -1007,6 +1230,15 @@ function createBaseOperationInfo(): OperationInfo {
 }
 export const OperationInfo = {
   typeUrl: "/google.longrunning.OperationInfo",
+  is(o: any): o is OperationInfo {
+    return o && (o.$typeUrl === OperationInfo.typeUrl || typeof o.responseType === "string" && typeof o.metadataType === "string");
+  },
+  isSDK(o: any): o is OperationInfoSDKType {
+    return o && (o.$typeUrl === OperationInfo.typeUrl || typeof o.response_type === "string" && typeof o.metadata_type === "string");
+  },
+  isAmino(o: any): o is OperationInfoAmino {
+    return o && (o.$typeUrl === OperationInfo.typeUrl || typeof o.response_type === "string" && typeof o.metadata_type === "string");
+  },
   encode(message: OperationInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.responseType !== undefined) {
       writer.uint32(10).string(message.responseType);
@@ -1102,5 +1334,6 @@ export const OperationInfo = {
       typeUrl: "/google.longrunning.OperationInfo",
       value: OperationInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

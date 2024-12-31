@@ -1,10 +1,11 @@
-import { MonitoredResource, MonitoredResourceSDKType, MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from "../../api/monitored_resource";
-import { LogEntry, LogEntrySDKType } from "./log_entry";
-import { Duration, DurationSDKType } from "../../protobuf/duration";
-import { Status, StatusSDKType } from "../../rpc/status";
+import { MonitoredResource, MonitoredResourceAmino, MonitoredResourceSDKType, MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, MonitoredResourceDescriptorSDKType } from "../../api/monitored_resource";
+import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
+import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
+import { Status, StatusAmino, StatusSDKType } from "../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "google.logging.v2";
 /** An indicator of why entries were omitted. */
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
@@ -25,6 +26,7 @@ export enum TailLogEntriesResponse_SuppressionInfo_Reason {
   UNRECOGNIZED = -1,
 }
 export const TailLogEntriesResponse_SuppressionInfo_ReasonSDKType = TailLogEntriesResponse_SuppressionInfo_Reason;
+export const TailLogEntriesResponse_SuppressionInfo_ReasonAmino = TailLogEntriesResponse_SuppressionInfo_Reason;
 export function tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object: any): TailLogEntriesResponse_SuppressionInfo_Reason {
   switch (object) {
     case 0:
@@ -79,6 +81,29 @@ export interface DeleteLogRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to DeleteLog. */
+export interface DeleteLogRequestAmino {
+  /**
+   * Required. The resource name of the log to delete:
+   * 
+   * * `projects/[PROJECT_ID]/logs/[LOG_ID]`
+   * * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
+   * * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
+   * * `folders/[FOLDER_ID]/logs/[LOG_ID]`
+   * 
+   * `[LOG_ID]` must be URL-encoded. For example,
+   * `"projects/my-project-id/logs/syslog"`,
+   * `"organizations/123/logs/cloudaudit.googleapis.com%2Factivity"`.
+   * 
+   * For more information about log names, see
+   * [LogEntry][google.logging.v2.LogEntry].
+   */
+  log_name?: string;
+}
+export interface DeleteLogRequestAminoMsg {
+  type: "/google.logging.v2.DeleteLogRequest";
+  value: DeleteLogRequestAmino;
+}
+/** The parameters to DeleteLog. */
 export interface DeleteLogRequestSDKType {
   log_name: string;
 }
@@ -89,6 +114,14 @@ export interface WriteLogEntriesRequest_LabelsEntry {
 export interface WriteLogEntriesRequest_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface WriteLogEntriesRequest_LabelsEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface WriteLogEntriesRequest_LabelsEntryAminoMsg {
+  type: string;
+  value: WriteLogEntriesRequest_LabelsEntryAmino;
 }
 export interface WriteLogEntriesRequest_LabelsEntrySDKType {
   key: string;
@@ -183,6 +216,94 @@ export interface WriteLogEntriesRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to WriteLogEntries. */
+export interface WriteLogEntriesRequestAmino {
+  /**
+   * Optional. A default log resource name that is assigned to all log entries
+   * in `entries` that do not specify a value for `log_name`:
+   * 
+   * * `projects/[PROJECT_ID]/logs/[LOG_ID]`
+   * * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
+   * * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
+   * * `folders/[FOLDER_ID]/logs/[LOG_ID]`
+   * 
+   * `[LOG_ID]` must be URL-encoded. For example:
+   * 
+   *     "projects/my-project-id/logs/syslog"
+   *     "organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
+   * 
+   * The permission `logging.logEntries.create` is needed on each project,
+   * organization, billing account, or folder that is receiving new log
+   * entries, whether the resource is specified in `logName` or in an
+   * individual log entry.
+   */
+  log_name?: string;
+  /**
+   * Optional. A default monitored resource object that is assigned to all log
+   * entries in `entries` that do not specify a value for `resource`. Example:
+   * 
+   *     { "type": "gce_instance",
+   *       "labels": {
+   *         "zone": "us-central1-a", "instance_id": "00000000000000000000" }}
+   * 
+   * See [LogEntry][google.logging.v2.LogEntry].
+   */
+  resource?: MonitoredResourceAmino;
+  /**
+   * Optional. Default labels that are added to the `labels` field of all log
+   * entries in `entries`. If a log entry already has a label with the same key
+   * as a label in this parameter, then the log entry's label is not changed.
+   * See [LogEntry][google.logging.v2.LogEntry].
+   */
+  labels?: {
+    [key: string]: string;
+  };
+  /**
+   * Required. The log entries to send to Logging. The order of log
+   * entries in this list does not matter. Values supplied in this method's
+   * `log_name`, `resource`, and `labels` fields are copied into those log
+   * entries in this list that do not include values for their corresponding
+   * fields. For more information, see the
+   * [LogEntry][google.logging.v2.LogEntry] type.
+   * 
+   * If the `timestamp` or `insert_id` fields are missing in log entries, then
+   * this method supplies the current time or a unique identifier, respectively.
+   * The supplied values are chosen so that, among the log entries that did not
+   * supply their own values, the entries earlier in the list will sort before
+   * the entries later in the list. See the `entries.list` method.
+   * 
+   * Log entries with timestamps that are more than the
+   * [logs retention period](https://cloud.google.com/logging/quotas) in
+   * the past or more than 24 hours in the future will not be available when
+   * calling `entries.list`. However, those log entries can still be [exported
+   * with
+   * LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+   * 
+   * To improve throughput and to avoid exceeding the
+   * [quota limit](https://cloud.google.com/logging/quotas) for calls to
+   * `entries.write`, you should try to include several log entries in this
+   * list, rather than calling this method for each individual log entry.
+   */
+  entries?: LogEntryAmino[];
+  /**
+   * Optional. Whether valid entries should be written even if some other
+   * entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
+   * entry is not written, then the response status is the error associated
+   * with one of the failed entries and the response includes error details
+   * keyed by the entries' zero-based index in the `entries.write` method.
+   */
+  partial_success?: boolean;
+  /**
+   * Optional. If true, the request should expect normal response, but the
+   * entries won't be persisted nor exported. Useful for checking whether the
+   * logging API endpoints are working properly before sending valuable data.
+   */
+  dry_run?: boolean;
+}
+export interface WriteLogEntriesRequestAminoMsg {
+  type: "/google.logging.v2.WriteLogEntriesRequest";
+  value: WriteLogEntriesRequestAmino;
+}
+/** The parameters to WriteLogEntries. */
 export interface WriteLogEntriesRequestSDKType {
   log_name: string;
   resource?: MonitoredResourceSDKType;
@@ -200,6 +321,12 @@ export interface WriteLogEntriesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Result returned from WriteLogEntries. */
+export interface WriteLogEntriesResponseAmino {}
+export interface WriteLogEntriesResponseAminoMsg {
+  type: "/google.logging.v2.WriteLogEntriesResponse";
+  value: WriteLogEntriesResponseAmino;
+}
+/** Result returned from WriteLogEntries. */
 export interface WriteLogEntriesResponseSDKType {}
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   key: number;
@@ -208,6 +335,14 @@ export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
+  key?: number;
+  value?: StatusAmino;
+}
+export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntryAminoMsg {
+  type: string;
+  value: WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino;
 }
 export interface WriteLogEntriesPartialErrors_LogEntryErrorsEntrySDKType {
   key: number;
@@ -230,6 +365,24 @@ export interface WriteLogEntriesPartialErrors {
 export interface WriteLogEntriesPartialErrorsProtoMsg {
   typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors";
   value: Uint8Array;
+}
+/** Error details for WriteLogEntries with partial success. */
+export interface WriteLogEntriesPartialErrorsAmino {
+  /**
+   * When `WriteLogEntriesRequest.partial_success` is true, records the error
+   * status for entries that were not written due to a permanent error, keyed
+   * by the entry's zero-based index in `WriteLogEntriesRequest.entries`.
+   * 
+   * Failed requests for which no entries are written will not include
+   * per-entry errors.
+   */
+  log_entry_errors?: {
+    [key: number]: StatusAmino;
+  };
+}
+export interface WriteLogEntriesPartialErrorsAminoMsg {
+  type: "/google.logging.v2.WriteLogEntriesPartialErrors";
+  value: WriteLogEntriesPartialErrorsAmino;
 }
 /** Error details for WriteLogEntries with partial success. */
 export interface WriteLogEntriesPartialErrorsSDKType {
@@ -297,6 +450,65 @@ export interface ListLogEntriesRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to `ListLogEntries`. */
+export interface ListLogEntriesRequestAmino {
+  /**
+   * Required. Names of one or more parent resources from which to
+   * retrieve log entries:
+   * 
+   * *  `projects/[PROJECT_ID]`
+   * *  `organizations/[ORGANIZATION_ID]`
+   * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+   * *  `folders/[FOLDER_ID]`
+   * 
+   * May alternatively be one or more views:
+   * 
+   *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   * 
+   * Projects listed in the `project_ids` field are added to this list.
+   */
+  resource_names?: string[];
+  /**
+   * Optional. A filter that chooses which log entries to return.  See [Advanced
+   * Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
+   * Only log entries that match the filter are returned.  An empty filter
+   * matches all log entries in the resources listed in `resource_names`.
+   * Referencing a parent resource that is not listed in `resource_names` will
+   * cause the filter to return no results. The maximum length of the filter is
+   * 20000 characters.
+   */
+  filter?: string;
+  /**
+   * Optional. How the results should be sorted.  Presently, the only permitted
+   * values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
+   * option returns entries in order of increasing values of
+   * `LogEntry.timestamp` (oldest first), and the second option returns entries
+   * in order of decreasing timestamps (newest first).  Entries with equal
+   * timestamps are returned in order of their `insert_id` values.
+   */
+  order_by?: string;
+  /**
+   * Optional. The maximum number of results to return from this request. Default is 50.
+   * If the value is negative or exceeds 1000, the request is rejected. The
+   * presence of `next_page_token` in the response indicates that more results
+   * might be available.
+   */
+  page_size?: number;
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method.  `page_token` must be the value of
+   * `next_page_token` from the previous response.  The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token?: string;
+}
+export interface ListLogEntriesRequestAminoMsg {
+  type: "/google.logging.v2.ListLogEntriesRequest";
+  value: ListLogEntriesRequestAmino;
+}
+/** The parameters to `ListLogEntries`. */
 export interface ListLogEntriesRequestSDKType {
   resource_names: string[];
   filter: string;
@@ -331,6 +543,32 @@ export interface ListLogEntriesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Result returned from `ListLogEntries`. */
+export interface ListLogEntriesResponseAmino {
+  /**
+   * A list of log entries.  If `entries` is empty, `nextPageToken` may still be
+   * returned, indicating that more entries may exist.  See `nextPageToken` for
+   * more information.
+   */
+  entries?: LogEntryAmino[];
+  /**
+   * If there might be more results than those appearing in this response, then
+   * `nextPageToken` is included.  To get the next set of results, call this
+   * method again using the value of `nextPageToken` as `pageToken`.
+   * 
+   * If a value for `next_page_token` appears and the `entries` field is empty,
+   * it means that the search found no log entries so far but it did not have
+   * time to search all the possible log entries.  Retry the method with this
+   * value for `page_token` to continue the search.  Alternatively, consider
+   * speeding up the search by changing your filter to specify a single log name
+   * or resource type, or to narrow the time range of the search.
+   */
+  next_page_token?: string;
+}
+export interface ListLogEntriesResponseAminoMsg {
+  type: "/google.logging.v2.ListLogEntriesResponse";
+  value: ListLogEntriesResponseAmino;
+}
+/** Result returned from `ListLogEntries`. */
 export interface ListLogEntriesResponseSDKType {
   entries: LogEntrySDKType[];
   next_page_token: string;
@@ -356,6 +594,26 @@ export interface ListMonitoredResourceDescriptorsRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to ListMonitoredResourceDescriptors */
+export interface ListMonitoredResourceDescriptorsRequestAmino {
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored.  The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size?: number;
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method.  `pageToken` must be the value of
+   * `nextPageToken` from the previous response.  The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token?: string;
+}
+export interface ListMonitoredResourceDescriptorsRequestAminoMsg {
+  type: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest";
+  value: ListMonitoredResourceDescriptorsRequestAmino;
+}
+/** The parameters to ListMonitoredResourceDescriptors */
 export interface ListMonitoredResourceDescriptorsRequestSDKType {
   page_size: number;
   page_token: string;
@@ -374,6 +632,21 @@ export interface ListMonitoredResourceDescriptorsResponse {
 export interface ListMonitoredResourceDescriptorsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse";
   value: Uint8Array;
+}
+/** Result returned from ListMonitoredResourceDescriptors. */
+export interface ListMonitoredResourceDescriptorsResponseAmino {
+  /** A list of resource descriptors. */
+  resource_descriptors?: MonitoredResourceDescriptorAmino[];
+  /**
+   * If there might be more results than those appearing in this response, then
+   * `nextPageToken` is included.  To get the next set of results, call this
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token?: string;
+}
+export interface ListMonitoredResourceDescriptorsResponseAminoMsg {
+  type: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse";
+  value: ListMonitoredResourceDescriptorsResponseAmino;
 }
 /** Result returned from ListMonitoredResourceDescriptors. */
 export interface ListMonitoredResourceDescriptorsResponseSDKType {
@@ -426,6 +699,51 @@ export interface ListLogsRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to ListLogs. */
+export interface ListLogsRequestAmino {
+  /**
+   * Required. The resource name that owns the logs:
+   * 
+   * *  `projects/[PROJECT_ID]`
+   * *  `organizations/[ORGANIZATION_ID]`
+   * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+   * *  `folders/[FOLDER_ID]`
+   */
+  parent?: string;
+  /**
+   * Optional. The maximum number of results to return from this request.
+   * Non-positive values are ignored.  The presence of `nextPageToken` in the
+   * response indicates that more results might be available.
+   */
+  page_size?: number;
+  /**
+   * Optional. If present, then retrieve the next batch of results from the
+   * preceding call to this method.  `pageToken` must be the value of
+   * `nextPageToken` from the previous response.  The values of other method
+   * parameters should be identical to those in the previous call.
+   */
+  page_token?: string;
+  /**
+   * Optional. The resource name that owns the logs:
+   * 
+   *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   * 
+   * To support legacy queries, it could also be:
+   * 
+   * *  `projects/[PROJECT_ID]`
+   * *  `organizations/[ORGANIZATION_ID]`
+   * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+   * *  `folders/[FOLDER_ID]`
+   */
+  resource_names?: string[];
+}
+export interface ListLogsRequestAminoMsg {
+  type: "/google.logging.v2.ListLogsRequest";
+  value: ListLogsRequestAmino;
+}
+/** The parameters to ListLogs. */
 export interface ListLogsRequestSDKType {
   parent: string;
   page_size: number;
@@ -450,6 +768,25 @@ export interface ListLogsResponse {
 export interface ListLogsResponseProtoMsg {
   typeUrl: "/google.logging.v2.ListLogsResponse";
   value: Uint8Array;
+}
+/** Result returned from ListLogs. */
+export interface ListLogsResponseAmino {
+  /**
+   * A list of log names. For example,
+   * `"projects/my-project/logs/syslog"` or
+   * `"organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+   */
+  log_names?: string[];
+  /**
+   * If there might be more results than those appearing in this response, then
+   * `nextPageToken` is included.  To get the next set of results, call this
+   * method again using the value of `nextPageToken` as `pageToken`.
+   */
+  next_page_token?: string;
+}
+export interface ListLogsResponseAminoMsg {
+  type: "/google.logging.v2.ListLogsResponse";
+  value: ListLogsResponseAmino;
 }
 /** Result returned from ListLogs. */
 export interface ListLogsResponseSDKType {
@@ -497,6 +834,46 @@ export interface TailLogEntriesRequestProtoMsg {
   value: Uint8Array;
 }
 /** The parameters to `TailLogEntries`. */
+export interface TailLogEntriesRequestAmino {
+  /**
+   * Required. Name of a parent resource from which to retrieve log entries:
+   * 
+   * *  `projects/[PROJECT_ID]`
+   * *  `organizations/[ORGANIZATION_ID]`
+   * *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+   * *  `folders/[FOLDER_ID]`
+   * 
+   * May alternatively be one or more views:
+   * 
+   *  * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   *  * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+   */
+  resource_names?: string[];
+  /**
+   * Optional. A filter that chooses which log entries to return.  See [Advanced
+   * Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+   * Only log entries that match the filter are returned.  An empty filter
+   * matches all log entries in the resources listed in `resource_names`.
+   * Referencing a parent resource that is not in `resource_names` will cause
+   * the filter to return no results. The maximum length of the filter is 20000
+   * characters.
+   */
+  filter?: string;
+  /**
+   * Optional. The amount of time to buffer log entries at the server before
+   * being returned to prevent out of order results due to late arriving log
+   * entries. Valid values are between 0-60000 milliseconds. Defaults to 2000
+   * milliseconds.
+   */
+  buffer_window?: DurationAmino;
+}
+export interface TailLogEntriesRequestAminoMsg {
+  type: "/google.logging.v2.TailLogEntriesRequest";
+  value: TailLogEntriesRequestAmino;
+}
+/** The parameters to `TailLogEntries`. */
 export interface TailLogEntriesRequestSDKType {
   resource_names: string[];
   filter: string;
@@ -524,6 +901,27 @@ export interface TailLogEntriesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Result returned from `TailLogEntries`. */
+export interface TailLogEntriesResponseAmino {
+  /**
+   * A list of log entries. Each response in the stream will order entries with
+   * increasing values of `LogEntry.timestamp`. Ordering is not guaranteed
+   * between separate responses.
+   */
+  entries?: LogEntryAmino[];
+  /**
+   * If entries that otherwise would have been included in the session were not
+   * sent back to the client, counts of relevant entries omitted from the
+   * session with the reason that they were not included. There will be at most
+   * one of each reason per response. The counts represent the number of
+   * suppressed entries since the last streamed response.
+   */
+  suppression_info?: TailLogEntriesResponse_SuppressionInfoAmino[];
+}
+export interface TailLogEntriesResponseAminoMsg {
+  type: "/google.logging.v2.TailLogEntriesResponse";
+  value: TailLogEntriesResponseAmino;
+}
+/** Result returned from `TailLogEntries`. */
 export interface TailLogEntriesResponseSDKType {
   entries: LogEntrySDKType[];
   suppression_info: TailLogEntriesResponse_SuppressionInfoSDKType[];
@@ -540,6 +938,17 @@ export interface TailLogEntriesResponse_SuppressionInfoProtoMsg {
   value: Uint8Array;
 }
 /** Information about entries that were omitted from the session. */
+export interface TailLogEntriesResponse_SuppressionInfoAmino {
+  /** The reason that entries were omitted from the session. */
+  reason?: TailLogEntriesResponse_SuppressionInfo_Reason;
+  /** A lower bound on the count of entries omitted due to `reason`. */
+  suppressed_count?: number;
+}
+export interface TailLogEntriesResponse_SuppressionInfoAminoMsg {
+  type: "/google.logging.v2.SuppressionInfo";
+  value: TailLogEntriesResponse_SuppressionInfoAmino;
+}
+/** Information about entries that were omitted from the session. */
 export interface TailLogEntriesResponse_SuppressionInfoSDKType {
   reason: TailLogEntriesResponse_SuppressionInfo_Reason;
   suppressed_count: number;
@@ -551,6 +960,15 @@ function createBaseDeleteLogRequest(): DeleteLogRequest {
 }
 export const DeleteLogRequest = {
   typeUrl: "/google.logging.v2.DeleteLogRequest",
+  is(o: any): o is DeleteLogRequest {
+    return o && (o.$typeUrl === DeleteLogRequest.typeUrl || typeof o.logName === "string");
+  },
+  isSDK(o: any): o is DeleteLogRequestSDKType {
+    return o && (o.$typeUrl === DeleteLogRequest.typeUrl || typeof o.log_name === "string");
+  },
+  isAmino(o: any): o is DeleteLogRequestAmino {
+    return o && (o.$typeUrl === DeleteLogRequest.typeUrl || typeof o.log_name === "string");
+  },
   encode(message: DeleteLogRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.logName !== undefined) {
       writer.uint32(10).string(message.logName);
@@ -630,7 +1048,8 @@ export const DeleteLogRequest = {
       typeUrl: "/google.logging.v2.DeleteLogRequest",
       value: DeleteLogRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseWriteLogEntriesRequest_LabelsEntry(): WriteLogEntriesRequest_LabelsEntry {
   return {
@@ -728,7 +1147,8 @@ export const WriteLogEntriesRequest_LabelsEntry = {
   },
   toProto(message: WriteLogEntriesRequest_LabelsEntry): Uint8Array {
     return WriteLogEntriesRequest_LabelsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
   return {
@@ -742,6 +1162,15 @@ function createBaseWriteLogEntriesRequest(): WriteLogEntriesRequest {
 }
 export const WriteLogEntriesRequest = {
   typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
+  is(o: any): o is WriteLogEntriesRequest {
+    return o && (o.$typeUrl === WriteLogEntriesRequest.typeUrl || typeof o.logName === "string" && isSet(o.labels) && Array.isArray(o.entries) && (!o.entries.length || LogEntry.is(o.entries[0])) && typeof o.partialSuccess === "boolean" && typeof o.dryRun === "boolean");
+  },
+  isSDK(o: any): o is WriteLogEntriesRequestSDKType {
+    return o && (o.$typeUrl === WriteLogEntriesRequest.typeUrl || typeof o.log_name === "string" && isSet(o.labels) && Array.isArray(o.entries) && (!o.entries.length || LogEntry.isSDK(o.entries[0])) && typeof o.partial_success === "boolean" && typeof o.dry_run === "boolean");
+  },
+  isAmino(o: any): o is WriteLogEntriesRequestAmino {
+    return o && (o.$typeUrl === WriteLogEntriesRequest.typeUrl || typeof o.log_name === "string" && isSet(o.labels) && Array.isArray(o.entries) && (!o.entries.length || LogEntry.isAmino(o.entries[0])) && typeof o.partial_success === "boolean" && typeof o.dry_run === "boolean");
+  },
   encode(message: WriteLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.logName !== undefined) {
       writer.uint32(10).string(message.logName);
@@ -961,6 +1390,10 @@ export const WriteLogEntriesRequest = {
       typeUrl: "/google.logging.v2.WriteLogEntriesRequest",
       value: WriteLogEntriesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    MonitoredResource.registerTypeUrl();
+    LogEntry.registerTypeUrl();
   }
 };
 function createBaseWriteLogEntriesResponse(): WriteLogEntriesResponse {
@@ -968,6 +1401,15 @@ function createBaseWriteLogEntriesResponse(): WriteLogEntriesResponse {
 }
 export const WriteLogEntriesResponse = {
   typeUrl: "/google.logging.v2.WriteLogEntriesResponse",
+  is(o: any): o is WriteLogEntriesResponse {
+    return o && o.$typeUrl === WriteLogEntriesResponse.typeUrl;
+  },
+  isSDK(o: any): o is WriteLogEntriesResponseSDKType {
+    return o && o.$typeUrl === WriteLogEntriesResponse.typeUrl;
+  },
+  isAmino(o: any): o is WriteLogEntriesResponseAmino {
+    return o && o.$typeUrl === WriteLogEntriesResponse.typeUrl;
+  },
   encode(_: WriteLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1029,7 +1471,8 @@ export const WriteLogEntriesResponse = {
       typeUrl: "/google.logging.v2.WriteLogEntriesResponse",
       value: WriteLogEntriesResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry(): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
   return {
@@ -1129,6 +1572,9 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   },
   toProto(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): Uint8Array {
     return WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode(message).finish();
+  },
+  registerTypeUrl() {
+    Status.registerTypeUrl();
   }
 };
 function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors {
@@ -1138,6 +1584,15 @@ function createBaseWriteLogEntriesPartialErrors(): WriteLogEntriesPartialErrors 
 }
 export const WriteLogEntriesPartialErrors = {
   typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors",
+  is(o: any): o is WriteLogEntriesPartialErrors {
+    return o && (o.$typeUrl === WriteLogEntriesPartialErrors.typeUrl || isSet(o.logEntryErrors));
+  },
+  isSDK(o: any): o is WriteLogEntriesPartialErrorsSDKType {
+    return o && (o.$typeUrl === WriteLogEntriesPartialErrors.typeUrl || isSet(o.log_entry_errors));
+  },
+  isAmino(o: any): o is WriteLogEntriesPartialErrorsAmino {
+    return o && (o.$typeUrl === WriteLogEntriesPartialErrors.typeUrl || isSet(o.log_entry_errors));
+  },
   encode(message: WriteLogEntriesPartialErrors, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.logEntryErrors).forEach(([key, value]) => {
       WriteLogEntriesPartialErrors_LogEntryErrorsEntry.encode({
@@ -1265,6 +1720,9 @@ export const WriteLogEntriesPartialErrors = {
       typeUrl: "/google.logging.v2.WriteLogEntriesPartialErrors",
       value: WriteLogEntriesPartialErrors.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Status.registerTypeUrl();
   }
 };
 function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
@@ -1278,6 +1736,15 @@ function createBaseListLogEntriesRequest(): ListLogEntriesRequest {
 }
 export const ListLogEntriesRequest = {
   typeUrl: "/google.logging.v2.ListLogEntriesRequest",
+  is(o: any): o is ListLogEntriesRequest {
+    return o && (o.$typeUrl === ListLogEntriesRequest.typeUrl || Array.isArray(o.resourceNames) && (!o.resourceNames.length || typeof o.resourceNames[0] === "string") && typeof o.filter === "string" && typeof o.orderBy === "string" && typeof o.pageSize === "number" && typeof o.pageToken === "string");
+  },
+  isSDK(o: any): o is ListLogEntriesRequestSDKType {
+    return o && (o.$typeUrl === ListLogEntriesRequest.typeUrl || Array.isArray(o.resource_names) && (!o.resource_names.length || typeof o.resource_names[0] === "string") && typeof o.filter === "string" && typeof o.order_by === "string" && typeof o.page_size === "number" && typeof o.page_token === "string");
+  },
+  isAmino(o: any): o is ListLogEntriesRequestAmino {
+    return o && (o.$typeUrl === ListLogEntriesRequest.typeUrl || Array.isArray(o.resource_names) && (!o.resource_names.length || typeof o.resource_names[0] === "string") && typeof o.filter === "string" && typeof o.order_by === "string" && typeof o.page_size === "number" && typeof o.page_token === "string");
+  },
   encode(message: ListLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceNames) {
       writer.uint32(66).string(v!);
@@ -1431,7 +1898,8 @@ export const ListLogEntriesRequest = {
       typeUrl: "/google.logging.v2.ListLogEntriesRequest",
       value: ListLogEntriesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
   return {
@@ -1441,6 +1909,15 @@ function createBaseListLogEntriesResponse(): ListLogEntriesResponse {
 }
 export const ListLogEntriesResponse = {
   typeUrl: "/google.logging.v2.ListLogEntriesResponse",
+  is(o: any): o is ListLogEntriesResponse {
+    return o && (o.$typeUrl === ListLogEntriesResponse.typeUrl || Array.isArray(o.entries) && (!o.entries.length || LogEntry.is(o.entries[0])) && typeof o.nextPageToken === "string");
+  },
+  isSDK(o: any): o is ListLogEntriesResponseSDKType {
+    return o && (o.$typeUrl === ListLogEntriesResponse.typeUrl || Array.isArray(o.entries) && (!o.entries.length || LogEntry.isSDK(o.entries[0])) && typeof o.next_page_token === "string");
+  },
+  isAmino(o: any): o is ListLogEntriesResponseAmino {
+    return o && (o.$typeUrl === ListLogEntriesResponse.typeUrl || Array.isArray(o.entries) && (!o.entries.length || LogEntry.isAmino(o.entries[0])) && typeof o.next_page_token === "string");
+  },
   encode(message: ListLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1546,6 +2023,9 @@ export const ListLogEntriesResponse = {
       typeUrl: "/google.logging.v2.ListLogEntriesResponse",
       value: ListLogEntriesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    LogEntry.registerTypeUrl();
   }
 };
 function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResourceDescriptorsRequest {
@@ -1556,6 +2036,15 @@ function createBaseListMonitoredResourceDescriptorsRequest(): ListMonitoredResou
 }
 export const ListMonitoredResourceDescriptorsRequest = {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
+  is(o: any): o is ListMonitoredResourceDescriptorsRequest {
+    return o && (o.$typeUrl === ListMonitoredResourceDescriptorsRequest.typeUrl || typeof o.pageSize === "number" && typeof o.pageToken === "string");
+  },
+  isSDK(o: any): o is ListMonitoredResourceDescriptorsRequestSDKType {
+    return o && (o.$typeUrl === ListMonitoredResourceDescriptorsRequest.typeUrl || typeof o.page_size === "number" && typeof o.page_token === "string");
+  },
+  isAmino(o: any): o is ListMonitoredResourceDescriptorsRequestAmino {
+    return o && (o.$typeUrl === ListMonitoredResourceDescriptorsRequest.typeUrl || typeof o.page_size === "number" && typeof o.page_token === "string");
+  },
   encode(message: ListMonitoredResourceDescriptorsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pageSize !== undefined) {
       writer.uint32(8).int32(message.pageSize);
@@ -1651,7 +2140,8 @@ export const ListMonitoredResourceDescriptorsRequest = {
       typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsRequest",
       value: ListMonitoredResourceDescriptorsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredResourceDescriptorsResponse {
   return {
@@ -1661,6 +2151,15 @@ function createBaseListMonitoredResourceDescriptorsResponse(): ListMonitoredReso
 }
 export const ListMonitoredResourceDescriptorsResponse = {
   typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse",
+  is(o: any): o is ListMonitoredResourceDescriptorsResponse {
+    return o && (o.$typeUrl === ListMonitoredResourceDescriptorsResponse.typeUrl || Array.isArray(o.resourceDescriptors) && (!o.resourceDescriptors.length || MonitoredResourceDescriptor.is(o.resourceDescriptors[0])) && typeof o.nextPageToken === "string");
+  },
+  isSDK(o: any): o is ListMonitoredResourceDescriptorsResponseSDKType {
+    return o && (o.$typeUrl === ListMonitoredResourceDescriptorsResponse.typeUrl || Array.isArray(o.resource_descriptors) && (!o.resource_descriptors.length || MonitoredResourceDescriptor.isSDK(o.resource_descriptors[0])) && typeof o.next_page_token === "string");
+  },
+  isAmino(o: any): o is ListMonitoredResourceDescriptorsResponseAmino {
+    return o && (o.$typeUrl === ListMonitoredResourceDescriptorsResponse.typeUrl || Array.isArray(o.resource_descriptors) && (!o.resource_descriptors.length || MonitoredResourceDescriptor.isAmino(o.resource_descriptors[0])) && typeof o.next_page_token === "string");
+  },
   encode(message: ListMonitoredResourceDescriptorsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceDescriptors) {
       MonitoredResourceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1766,6 +2265,9 @@ export const ListMonitoredResourceDescriptorsResponse = {
       typeUrl: "/google.logging.v2.ListMonitoredResourceDescriptorsResponse",
       value: ListMonitoredResourceDescriptorsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    MonitoredResourceDescriptor.registerTypeUrl();
   }
 };
 function createBaseListLogsRequest(): ListLogsRequest {
@@ -1778,6 +2280,15 @@ function createBaseListLogsRequest(): ListLogsRequest {
 }
 export const ListLogsRequest = {
   typeUrl: "/google.logging.v2.ListLogsRequest",
+  is(o: any): o is ListLogsRequest {
+    return o && (o.$typeUrl === ListLogsRequest.typeUrl || typeof o.parent === "string" && typeof o.pageSize === "number" && typeof o.pageToken === "string" && Array.isArray(o.resourceNames) && (!o.resourceNames.length || typeof o.resourceNames[0] === "string"));
+  },
+  isSDK(o: any): o is ListLogsRequestSDKType {
+    return o && (o.$typeUrl === ListLogsRequest.typeUrl || typeof o.parent === "string" && typeof o.page_size === "number" && typeof o.page_token === "string" && Array.isArray(o.resource_names) && (!o.resource_names.length || typeof o.resource_names[0] === "string"));
+  },
+  isAmino(o: any): o is ListLogsRequestAmino {
+    return o && (o.$typeUrl === ListLogsRequest.typeUrl || typeof o.parent === "string" && typeof o.page_size === "number" && typeof o.page_token === "string" && Array.isArray(o.resource_names) && (!o.resource_names.length || typeof o.resource_names[0] === "string"));
+  },
   encode(message: ListLogsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
@@ -1915,7 +2426,8 @@ export const ListLogsRequest = {
       typeUrl: "/google.logging.v2.ListLogsRequest",
       value: ListLogsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListLogsResponse(): ListLogsResponse {
   return {
@@ -1925,6 +2437,15 @@ function createBaseListLogsResponse(): ListLogsResponse {
 }
 export const ListLogsResponse = {
   typeUrl: "/google.logging.v2.ListLogsResponse",
+  is(o: any): o is ListLogsResponse {
+    return o && (o.$typeUrl === ListLogsResponse.typeUrl || Array.isArray(o.logNames) && (!o.logNames.length || typeof o.logNames[0] === "string") && typeof o.nextPageToken === "string");
+  },
+  isSDK(o: any): o is ListLogsResponseSDKType {
+    return o && (o.$typeUrl === ListLogsResponse.typeUrl || Array.isArray(o.log_names) && (!o.log_names.length || typeof o.log_names[0] === "string") && typeof o.next_page_token === "string");
+  },
+  isAmino(o: any): o is ListLogsResponseAmino {
+    return o && (o.$typeUrl === ListLogsResponse.typeUrl || Array.isArray(o.log_names) && (!o.log_names.length || typeof o.log_names[0] === "string") && typeof o.next_page_token === "string");
+  },
   encode(message: ListLogsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.logNames) {
       writer.uint32(26).string(v!);
@@ -2030,7 +2551,8 @@ export const ListLogsResponse = {
       typeUrl: "/google.logging.v2.ListLogsResponse",
       value: ListLogsResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
   return {
@@ -2041,6 +2563,15 @@ function createBaseTailLogEntriesRequest(): TailLogEntriesRequest {
 }
 export const TailLogEntriesRequest = {
   typeUrl: "/google.logging.v2.TailLogEntriesRequest",
+  is(o: any): o is TailLogEntriesRequest {
+    return o && (o.$typeUrl === TailLogEntriesRequest.typeUrl || Array.isArray(o.resourceNames) && (!o.resourceNames.length || typeof o.resourceNames[0] === "string") && typeof o.filter === "string");
+  },
+  isSDK(o: any): o is TailLogEntriesRequestSDKType {
+    return o && (o.$typeUrl === TailLogEntriesRequest.typeUrl || Array.isArray(o.resource_names) && (!o.resource_names.length || typeof o.resource_names[0] === "string") && typeof o.filter === "string");
+  },
+  isAmino(o: any): o is TailLogEntriesRequestAmino {
+    return o && (o.$typeUrl === TailLogEntriesRequest.typeUrl || Array.isArray(o.resource_names) && (!o.resource_names.length || typeof o.resource_names[0] === "string") && typeof o.filter === "string");
+  },
   encode(message: TailLogEntriesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resourceNames) {
       writer.uint32(10).string(v!);
@@ -2164,7 +2695,8 @@ export const TailLogEntriesRequest = {
       typeUrl: "/google.logging.v2.TailLogEntriesRequest",
       value: TailLogEntriesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
   return {
@@ -2174,6 +2706,15 @@ function createBaseTailLogEntriesResponse(): TailLogEntriesResponse {
 }
 export const TailLogEntriesResponse = {
   typeUrl: "/google.logging.v2.TailLogEntriesResponse",
+  is(o: any): o is TailLogEntriesResponse {
+    return o && (o.$typeUrl === TailLogEntriesResponse.typeUrl || Array.isArray(o.entries) && (!o.entries.length || LogEntry.is(o.entries[0])) && Array.isArray(o.suppressionInfo) && (!o.suppressionInfo.length || TailLogEntriesResponse_SuppressionInfo.is(o.suppressionInfo[0])));
+  },
+  isSDK(o: any): o is TailLogEntriesResponseSDKType {
+    return o && (o.$typeUrl === TailLogEntriesResponse.typeUrl || Array.isArray(o.entries) && (!o.entries.length || LogEntry.isSDK(o.entries[0])) && Array.isArray(o.suppression_info) && (!o.suppression_info.length || TailLogEntriesResponse_SuppressionInfo.isSDK(o.suppression_info[0])));
+  },
+  isAmino(o: any): o is TailLogEntriesResponseAmino {
+    return o && (o.$typeUrl === TailLogEntriesResponse.typeUrl || Array.isArray(o.entries) && (!o.entries.length || LogEntry.isAmino(o.entries[0])) && Array.isArray(o.suppression_info) && (!o.suppression_info.length || TailLogEntriesResponse_SuppressionInfo.isAmino(o.suppression_info[0])));
+  },
   encode(message: TailLogEntriesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       LogEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2289,6 +2830,10 @@ export const TailLogEntriesResponse = {
       typeUrl: "/google.logging.v2.TailLogEntriesResponse",
       value: TailLogEntriesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    LogEntry.registerTypeUrl();
+    TailLogEntriesResponse_SuppressionInfo.registerTypeUrl();
   }
 };
 function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesResponse_SuppressionInfo {
@@ -2299,6 +2844,15 @@ function createBaseTailLogEntriesResponse_SuppressionInfo(): TailLogEntriesRespo
 }
 export const TailLogEntriesResponse_SuppressionInfo = {
   typeUrl: "/google.logging.v2.SuppressionInfo",
+  is(o: any): o is TailLogEntriesResponse_SuppressionInfo {
+    return o && (o.$typeUrl === TailLogEntriesResponse_SuppressionInfo.typeUrl || isSet(o.reason) && typeof o.suppressedCount === "number");
+  },
+  isSDK(o: any): o is TailLogEntriesResponse_SuppressionInfoSDKType {
+    return o && (o.$typeUrl === TailLogEntriesResponse_SuppressionInfo.typeUrl || isSet(o.reason) && typeof o.suppressed_count === "number");
+  },
+  isAmino(o: any): o is TailLogEntriesResponse_SuppressionInfoAmino {
+    return o && (o.$typeUrl === TailLogEntriesResponse_SuppressionInfo.typeUrl || isSet(o.reason) && typeof o.suppressed_count === "number");
+  },
   encode(message: TailLogEntriesResponse_SuppressionInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.reason !== 0) {
       writer.uint32(8).int32(message.reason);
@@ -2394,5 +2948,6 @@ export const TailLogEntriesResponse_SuppressionInfo = {
       typeUrl: "/google.logging.v2.SuppressionInfo",
       value: TailLogEntriesResponse_SuppressionInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

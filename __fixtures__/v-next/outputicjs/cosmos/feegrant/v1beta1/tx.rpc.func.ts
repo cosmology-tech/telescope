@@ -1,6 +1,6 @@
 import { buildTx, SigningClientResolver } from "../../../helper-func-types";
-import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
+import { buildUseMutation } from "../../../react-query";
 import { MsgGrantAllowance, MsgRevokeAllowance } from "./tx";
 export const createGrantAllowance = (clientResolver?: SigningClientResolver) => buildTx<MsgGrantAllowance>({
   clientResolver,

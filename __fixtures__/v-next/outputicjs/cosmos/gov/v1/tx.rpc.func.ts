@@ -1,6 +1,6 @@
 import { buildTx, SigningClientResolver } from "../../../helper-func-types";
-import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
+import { buildUseMutation } from "../../../react-query";
 import { MsgSubmitProposal, MsgExecLegacyContent, MsgVote, MsgVoteWeighted, MsgDeposit } from "./tx";
 export const createSubmitProposal = (clientResolver?: SigningClientResolver) => buildTx<MsgSubmitProposal>({
   clientResolver,

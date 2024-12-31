@@ -13,6 +13,16 @@ export interface ParameterChangeProposalProtoMsg {
   value: Uint8Array;
 }
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
+export interface ParameterChangeProposalAmino {
+  title?: string;
+  description?: string;
+  changes?: ParamChangeAmino[];
+}
+export interface ParameterChangeProposalAminoMsg {
+  type: "cosmos-sdk/ParameterChangeProposal";
+  value: ParameterChangeProposalAmino;
+}
+/** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalSDKType {
   title: string;
   description: string;
@@ -35,6 +45,19 @@ export interface ParamChangeProtoMsg {
  * ParamChange defines an individual parameter change, for use in
  * ParameterChangeProposal.
  */
+export interface ParamChangeAmino {
+  subspace?: string;
+  key?: string;
+  value?: string;
+}
+export interface ParamChangeAminoMsg {
+  type: "cosmos-sdk/ParamChange";
+  value: ParamChangeAmino;
+}
+/**
+ * ParamChange defines an individual parameter change, for use in
+ * ParameterChangeProposal.
+ */
 export interface ParamChangeSDKType {
   subspace: string;
   key: string;
@@ -49,6 +72,16 @@ function createBaseParameterChangeProposal(): ParameterChangeProposal {
 }
 export const ParameterChangeProposal = {
   typeUrl: "/cosmos.params.v1beta1.ParameterChangeProposal",
+  aminoType: "cosmos-sdk/ParameterChangeProposal",
+  is(o: any): o is ParameterChangeProposal {
+    return o && (o.$typeUrl === ParameterChangeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.changes) && (!o.changes.length || ParamChange.is(o.changes[0])));
+  },
+  isSDK(o: any): o is ParameterChangeProposalSDKType {
+    return o && (o.$typeUrl === ParameterChangeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.changes) && (!o.changes.length || ParamChange.isSDK(o.changes[0])));
+  },
+  isAmino(o: any): o is ParameterChangeProposalAmino {
+    return o && (o.$typeUrl === ParameterChangeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Array.isArray(o.changes) && (!o.changes.length || ParamChange.isAmino(o.changes[0])));
+  },
   encode(message: ParameterChangeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -176,6 +209,9 @@ export const ParameterChangeProposal = {
       typeUrl: "/cosmos.params.v1beta1.ParameterChangeProposal",
       value: ParameterChangeProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ParamChange.registerTypeUrl();
   }
 };
 function createBaseParamChange(): ParamChange {
@@ -187,6 +223,16 @@ function createBaseParamChange(): ParamChange {
 }
 export const ParamChange = {
   typeUrl: "/cosmos.params.v1beta1.ParamChange",
+  aminoType: "cosmos-sdk/ParamChange",
+  is(o: any): o is ParamChange {
+    return o && (o.$typeUrl === ParamChange.typeUrl || typeof o.subspace === "string" && typeof o.key === "string" && typeof o.value === "string");
+  },
+  isSDK(o: any): o is ParamChangeSDKType {
+    return o && (o.$typeUrl === ParamChange.typeUrl || typeof o.subspace === "string" && typeof o.key === "string" && typeof o.value === "string");
+  },
+  isAmino(o: any): o is ParamChangeAmino {
+    return o && (o.$typeUrl === ParamChange.typeUrl || typeof o.subspace === "string" && typeof o.key === "string" && typeof o.value === "string");
+  },
   encode(message: ParamChange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.subspace !== undefined) {
       writer.uint32(10).string(message.subspace);
@@ -304,5 +350,6 @@ export const ParamChange = {
       typeUrl: "/cosmos.params.v1beta1.ParamChange",
       value: ParamChange.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

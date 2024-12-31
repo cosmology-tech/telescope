@@ -17,6 +17,7 @@ export enum Property_PropertyType {
   UNRECOGNIZED = -1,
 }
 export const Property_PropertyTypeSDKType = Property_PropertyType;
+export const Property_PropertyTypeAmino = Property_PropertyType;
 export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
     case 0:
@@ -101,6 +102,32 @@ export interface ProjectPropertiesProtoMsg {
  *      - name: EXTENDED_TILE_CACHE_PERIOD
  *        type: INT64
  */
+export interface ProjectPropertiesAmino {
+  /** List of per consumer project-specific properties. */
+  properties?: PropertyAmino[];
+}
+export interface ProjectPropertiesAminoMsg {
+  type: "/google.api.ProjectProperties";
+  value: ProjectPropertiesAmino;
+}
+/**
+ * A descriptor for defining project properties for a service. One service may
+ * have many consumer projects, and the service may want to behave differently
+ * depending on some properties on the project. For example, a project may be
+ * associated with a school, or a business, or a government agency, a business
+ * type property on the project may affect how a service responds to the client.
+ * This descriptor defines which properties are allowed to be set on a project.
+ * 
+ * Example:
+ * 
+ *    project_properties:
+ *      properties:
+ *      - name: NO_WATERMARK
+ *        type: BOOL
+ *        description: Allows usage of the API without watermarks.
+ *      - name: EXTENDED_TILE_CACHE_PERIOD
+ *        type: INT64
+ */
 export interface ProjectPropertiesSDKType {
   properties: PropertySDKType[];
 }
@@ -140,6 +167,30 @@ export interface PropertyProtoMsg {
  * These values can be set via API producer console. Only API providers can
  * define and set these properties.
  */
+export interface PropertyAmino {
+  /** The name of the property (a.k.a key). */
+  name?: string;
+  /** The type of this property. */
+  type?: Property_PropertyType;
+  /** The description of the property */
+  description?: string;
+}
+export interface PropertyAminoMsg {
+  type: "/google.api.Property";
+  value: PropertyAmino;
+}
+/**
+ * Defines project properties.
+ * 
+ * API services can define properties that can be assigned to consumer projects
+ * so that backends can perform response customization without having to make
+ * additional calls or maintain additional storage. For example, Maps API
+ * defines properties that controls map tile cache period, or whether to embed a
+ * watermark in a result.
+ * 
+ * These values can be set via API producer console. Only API providers can
+ * define and set these properties.
+ */
 export interface PropertySDKType {
   name: string;
   type: Property_PropertyType;
@@ -152,6 +203,15 @@ function createBaseProjectProperties(): ProjectProperties {
 }
 export const ProjectProperties = {
   typeUrl: "/google.api.ProjectProperties",
+  is(o: any): o is ProjectProperties {
+    return o && (o.$typeUrl === ProjectProperties.typeUrl || Array.isArray(o.properties) && (!o.properties.length || Property.is(o.properties[0])));
+  },
+  isSDK(o: any): o is ProjectPropertiesSDKType {
+    return o && (o.$typeUrl === ProjectProperties.typeUrl || Array.isArray(o.properties) && (!o.properties.length || Property.isSDK(o.properties[0])));
+  },
+  isAmino(o: any): o is ProjectPropertiesAmino {
+    return o && (o.$typeUrl === ProjectProperties.typeUrl || Array.isArray(o.properties) && (!o.properties.length || Property.isAmino(o.properties[0])));
+  },
   encode(message: ProjectProperties, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.properties) {
       Property.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -241,6 +301,9 @@ export const ProjectProperties = {
       typeUrl: "/google.api.ProjectProperties",
       value: ProjectProperties.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Property.registerTypeUrl();
   }
 };
 function createBaseProperty(): Property {
@@ -252,6 +315,15 @@ function createBaseProperty(): Property {
 }
 export const Property = {
   typeUrl: "/google.api.Property",
+  is(o: any): o is Property {
+    return o && (o.$typeUrl === Property.typeUrl || typeof o.name === "string" && isSet(o.type) && typeof o.description === "string");
+  },
+  isSDK(o: any): o is PropertySDKType {
+    return o && (o.$typeUrl === Property.typeUrl || typeof o.name === "string" && isSet(o.type) && typeof o.description === "string");
+  },
+  isAmino(o: any): o is PropertyAmino {
+    return o && (o.$typeUrl === Property.typeUrl || typeof o.name === "string" && isSet(o.type) && typeof o.description === "string");
+  },
   encode(message: Property, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -363,5 +435,6 @@ export const Property = {
       typeUrl: "/google.api.Property",
       value: Property.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

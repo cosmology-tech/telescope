@@ -53,6 +53,7 @@ export interface TelescopeOpts {
   interfaces?: {
     enabled?: boolean;
     useGlobalDecoderRegistry?: boolean;
+    registerAllDecodersToGlobal?: boolean;
     useUseInterfacesParams?: boolean;
     useByDefault?: boolean;
     useByDefaultRpc?: boolean;
@@ -293,6 +294,7 @@ export interface TelescopeOpts {
   };
   helperFuncCreators?: {
     enabled: boolean;
+    useGlobalDecoderRegistry?: boolean;
     genCustomHooks?: boolean;
     include?: {
       // a group of types of service to include, undefined for All.
@@ -394,6 +396,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
   interfaces: {
     enabled: true,
+    registerAllDecodersToGlobal: true,
     useByDefault: true,
     useByDefaultRpc: true,
     useUnionTypes: false,

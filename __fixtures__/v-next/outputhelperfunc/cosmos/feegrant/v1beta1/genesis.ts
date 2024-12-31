@@ -1,4 +1,4 @@
-import { Grant, GrantSDKType } from "./feegrant";
+import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
@@ -12,6 +12,14 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState contains a set of fee allowances, persisted from the store */
+export interface GenesisStateAmino {
+  allowances?: GrantAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
+/** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisStateSDKType {
   allowances: GrantSDKType[];
 }
@@ -22,6 +30,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.feegrant.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.allowances) && (!o.allowances.length || Grant.is(o.allowances[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.allowances) && (!o.allowances.length || Grant.isSDK(o.allowances[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.allowances) && (!o.allowances.length || Grant.isAmino(o.allowances[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -117,5 +135,8 @@ export const GenesisState = {
       typeUrl: "/cosmos.feegrant.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Grant.registerTypeUrl();
   }
 };

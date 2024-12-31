@@ -1,4 +1,4 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
@@ -54,6 +54,47 @@ export interface TwapRecordProtoMsg {
  * than an optimal state storage format. The system bottleneck is elsewhere for
  * now.
  */
+export interface TwapRecordAmino {
+  pool_id?: string;
+  /** Lexicographically smaller denom of the pair */
+  asset0_denom?: string;
+  /** Lexicographically larger denom of the pair */
+  asset1_denom?: string;
+  /** height this record corresponds to, for debugging purposes */
+  height: string;
+  /**
+   * This field should only exist until we have a global registry in the state
+   * machine, mapping prior block heights within {TIME RANGE} to times.
+   */
+  time?: string;
+  /**
+   * We store the last spot prices in the struct, so that we can interpolate
+   * accumulator values for times between when accumulator records are stored.
+   */
+  p0_last_spot_price?: string;
+  p1_last_spot_price?: string;
+  p0_arithmetic_twap_accumulator?: string;
+  p1_arithmetic_twap_accumulator?: string;
+  /**
+   * This field contains the time in which the last spot price error occured.
+   * It is used to alert the caller if they are getting a potentially erroneous
+   * TWAP, due to an unforeseen underlying error.
+   */
+  last_error_time?: string;
+}
+export interface TwapRecordAminoMsg {
+  type: "osmosis/twap/twap-record";
+  value: TwapRecordAmino;
+}
+/**
+ * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
+ * The asset pair assets should be lexicographically sorted.
+ * Technically (pool_id, asset_0_denom, asset_1_denom, height) do not need to
+ * appear in the struct however we view this as the wrong performance tradeoff
+ * given SDK today. Would rather we optimize for readability and correctness,
+ * than an optimal state storage format. The system bottleneck is elsewhere for
+ * now.
+ */
 export interface TwapRecordSDKType {
   pool_id: bigint;
   asset0_denom: string;
@@ -82,6 +123,16 @@ function createBaseTwapRecord(): TwapRecord {
 }
 export const TwapRecord = {
   typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
+  aminoType: "osmosis/twap/twap-record",
+  is(o: any): o is TwapRecord {
+    return o && (o.$typeUrl === TwapRecord.typeUrl || typeof o.poolId === "bigint" && typeof o.asset0Denom === "string" && typeof o.asset1Denom === "string" && typeof o.height === "bigint" && Timestamp.is(o.time) && typeof o.p0LastSpotPrice === "string" && typeof o.p1LastSpotPrice === "string" && typeof o.p0ArithmeticTwapAccumulator === "string" && typeof o.p1ArithmeticTwapAccumulator === "string" && Timestamp.is(o.lastErrorTime));
+  },
+  isSDK(o: any): o is TwapRecordSDKType {
+    return o && (o.$typeUrl === TwapRecord.typeUrl || typeof o.pool_id === "bigint" && typeof o.asset0_denom === "string" && typeof o.asset1_denom === "string" && typeof o.height === "bigint" && Timestamp.isSDK(o.time) && typeof o.p0_last_spot_price === "string" && typeof o.p1_last_spot_price === "string" && typeof o.p0_arithmetic_twap_accumulator === "string" && typeof o.p1_arithmetic_twap_accumulator === "string" && Timestamp.isSDK(o.last_error_time));
+  },
+  isAmino(o: any): o is TwapRecordAmino {
+    return o && (o.$typeUrl === TwapRecord.typeUrl || typeof o.pool_id === "bigint" && typeof o.asset0_denom === "string" && typeof o.asset1_denom === "string" && typeof o.height === "bigint" && Timestamp.isAmino(o.time) && typeof o.p0_last_spot_price === "string" && typeof o.p1_last_spot_price === "string" && typeof o.p0_arithmetic_twap_accumulator === "string" && typeof o.p1_arithmetic_twap_accumulator === "string" && Timestamp.isAmino(o.last_error_time));
+  },
   encode(message: TwapRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -315,5 +366,6 @@ export const TwapRecord = {
       typeUrl: "/osmosis.twap.v1beta1.TwapRecord",
       value: TwapRecord.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

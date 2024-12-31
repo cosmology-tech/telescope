@@ -23,6 +23,23 @@ export interface DenomTraceProtoMsg {
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
  * source tracing information path.
  */
+export interface DenomTraceAmino {
+  /**
+   * path defines the chain of port/channel identifiers used for tracing the
+   * source of the fungible token.
+   */
+  path?: string;
+  /** base denomination of the relayed fungible token. */
+  base_denom?: string;
+}
+export interface DenomTraceAminoMsg {
+  type: "cosmos-sdk/DenomTrace";
+  value: DenomTraceAmino;
+}
+/**
+ * DenomTrace contains the base denomination for ICS20 fungible tokens and the
+ * source tracing information path.
+ */
 export interface DenomTraceSDKType {
   path: string;
   base_denom: string;
@@ -55,6 +72,28 @@ export interface ParamsProtoMsg {
  * TransfersEnabled parameter to true and then set the bank module's SendEnabled
  * parameter for the denomination to false.
  */
+export interface ParamsAmino {
+  /**
+   * send_enabled enables or disables all cross-chain token transfers from this
+   * chain.
+   */
+  send_enabled?: boolean;
+  /**
+   * receive_enabled enables or disables all cross-chain token transfers to this
+   * chain.
+   */
+  receive_enabled?: boolean;
+}
+export interface ParamsAminoMsg {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
+}
+/**
+ * Params defines the set of IBC transfer parameters.
+ * NOTE: To prevent a single token from being transferred, set the
+ * TransfersEnabled parameter to true and then set the bank module's SendEnabled
+ * parameter for the denomination to false.
+ */
 export interface ParamsSDKType {
   send_enabled: boolean;
   receive_enabled: boolean;
@@ -67,6 +106,16 @@ function createBaseDenomTrace(): DenomTrace {
 }
 export const DenomTrace = {
   typeUrl: "/ibc.applications.transfer.v1.DenomTrace",
+  aminoType: "cosmos-sdk/DenomTrace",
+  is(o: any): o is DenomTrace {
+    return o && (o.$typeUrl === DenomTrace.typeUrl || typeof o.path === "string" && typeof o.baseDenom === "string");
+  },
+  isSDK(o: any): o is DenomTraceSDKType {
+    return o && (o.$typeUrl === DenomTrace.typeUrl || typeof o.path === "string" && typeof o.base_denom === "string");
+  },
+  isAmino(o: any): o is DenomTraceAmino {
+    return o && (o.$typeUrl === DenomTrace.typeUrl || typeof o.path === "string" && typeof o.base_denom === "string");
+  },
   encode(message: DenomTrace, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.path !== undefined) {
       writer.uint32(10).string(message.path);
@@ -168,7 +217,8 @@ export const DenomTrace = {
       typeUrl: "/ibc.applications.transfer.v1.DenomTrace",
       value: DenomTrace.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseParams(): Params {
   return {
@@ -178,6 +228,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/ibc.applications.transfer.v1.Params",
+  aminoType: "cosmos-sdk/Params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.sendEnabled === "boolean" && typeof o.receiveEnabled === "boolean");
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.send_enabled === "boolean" && typeof o.receive_enabled === "boolean");
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.send_enabled === "boolean" && typeof o.receive_enabled === "boolean");
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sendEnabled !== undefined) {
       writer.uint32(8).bool(message.sendEnabled);
@@ -279,5 +339,6 @@ export const Params = {
       typeUrl: "/ibc.applications.transfer.v1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

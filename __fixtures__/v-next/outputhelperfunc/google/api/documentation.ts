@@ -160,6 +160,107 @@ export interface DocumentationProtoMsg {
  * The directive `suppress_warning` does not directly affect documentation
  * and is documented together with service config validation.
  */
+export interface DocumentationAmino {
+  /**
+   * A short summary of what the service does. Can only be provided by
+   * plain text.
+   */
+  summary?: string;
+  /** The top level pages for the documentation set. */
+  pages?: PageAmino[];
+  /**
+   * A list of documentation rules that apply to individual API elements.
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules?: DocumentationRuleAmino[];
+  /** The URL to the root of documentation. */
+  documentation_root_url?: string;
+  /**
+   * Specifies the service root url if the default one (the service name
+   * from the yaml file) is not suitable. This can be seen in any fully
+   * specified service urls as well as sections that show a base that other
+   * urls are relative to.
+   */
+  service_root_url?: string;
+  /**
+   * Declares a single overview page. For example:
+   * <pre><code>documentation:
+   *   summary: ...
+   *   overview: &#40;== include overview.md ==&#41;
+   * </code></pre>
+   * This is a shortcut for the following declaration (using pages style):
+   * <pre><code>documentation:
+   *   summary: ...
+   *   pages:
+   *   - name: Overview
+   *     content: &#40;== include overview.md ==&#41;
+   * </code></pre>
+   * Note: you cannot specify both `overview` field and `pages` field.
+   */
+  overview?: string;
+}
+export interface DocumentationAminoMsg {
+  type: "/google.api.Documentation";
+  value: DocumentationAmino;
+}
+/**
+ * `Documentation` provides the information for describing a service.
+ * 
+ * Example:
+ * <pre><code>documentation:
+ *   summary: >
+ *     The Google Calendar API gives access
+ *     to most calendar features.
+ *   pages:
+ *   - name: Overview
+ *     content: &#40;== include google/foo/overview.md ==&#41;
+ *   - name: Tutorial
+ *     content: &#40;== include google/foo/tutorial.md ==&#41;
+ *     subpages;
+ *     - name: Java
+ *       content: &#40;== include google/foo/tutorial_java.md ==&#41;
+ *   rules:
+ *   - selector: google.calendar.Calendar.Get
+ *     description: >
+ *       ...
+ *   - selector: google.calendar.Calendar.Put
+ *     description: >
+ *       ...
+ * </code></pre>
+ * Documentation is provided in markdown syntax. In addition to
+ * standard markdown features, definition lists, tables and fenced
+ * code blocks are supported. Section headers can be provided and are
+ * interpreted relative to the section nesting of the context where
+ * a documentation fragment is embedded.
+ * 
+ * Documentation from the IDL is merged with documentation defined
+ * via the config at normalization time, where documentation provided
+ * by config rules overrides IDL provided.
+ * 
+ * A number of constructs specific to the API platform are supported
+ * in documentation text.
+ * 
+ * In order to reference a proto element, the following
+ * notation can be used:
+ * <pre><code>&#91;fully.qualified.proto.name]&#91;]</code></pre>
+ * To override the display text used for the link, this can be used:
+ * <pre><code>&#91;display text]&#91;fully.qualified.proto.name]</code></pre>
+ * Text can be excluded from doc using the following notation:
+ * <pre><code>&#40;-- internal comment --&#41;</code></pre>
+ * 
+ * A few directives are available in documentation. Note that
+ * directives must appear on a single line to be properly
+ * identified. The `include` directive includes a markdown file from
+ * an external source:
+ * <pre><code>&#40;== include path/to/file ==&#41;</code></pre>
+ * The `resource_for` directive marks a message to be the resource of
+ * a collection in REST view. If it is not specified, tools attempt
+ * to infer the resource from the operations in a collection:
+ * <pre><code>&#40;== resource_for v1.shelves.books ==&#41;</code></pre>
+ * The directive `suppress_warning` does not directly affect documentation
+ * and is documented together with service config validation.
+ */
 export interface DocumentationSDKType {
   summary: string;
   pages: PageSDKType[];
@@ -190,6 +291,29 @@ export interface DocumentationRule {
 export interface DocumentationRuleProtoMsg {
   typeUrl: "/google.api.DocumentationRule";
   value: Uint8Array;
+}
+/** A documentation rule provides information about individual API elements. */
+export interface DocumentationRuleAmino {
+  /**
+   * The selector is a comma-separated list of patterns. Each pattern is a
+   * qualified name of the element which may end in "*", indicating a wildcard.
+   * Wildcards are only allowed at the end and for a whole component of the
+   * qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A
+   * wildcard will match one or more components. To specify a default for all
+   * applicable elements, the whole pattern "*" is used.
+   */
+  selector?: string;
+  /** Description of the selected API(s). */
+  description?: string;
+  /**
+   * Deprecation description of the selected element(s). It can be provided if
+   * an element is marked as `deprecated`.
+   */
+  deprecation_description?: string;
+}
+export interface DocumentationRuleAminoMsg {
+  type: "/google.api.DocumentationRule";
+  value: DocumentationRuleAmino;
 }
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
@@ -238,6 +362,43 @@ export interface PageProtoMsg {
  * Represents a documentation page. A page can contain subpages to represent
  * nested documentation set structure.
  */
+export interface PageAmino {
+  /**
+   * The name of the page. It will be used as an identity of the page to
+   * generate URI of the page, text of the link to this page in navigation,
+   * etc. The full page name (start from the root page name to this page
+   * concatenated with `.`) can be used as reference to the page in your
+   * documentation. For example:
+   * <pre><code>pages:
+   * - name: Tutorial
+   *   content: &#40;== include tutorial.md ==&#41;
+   *   subpages:
+   *   - name: Java
+   *     content: &#40;== include tutorial_java.md ==&#41;
+   * </code></pre>
+   * You can reference `Java` page using Markdown reference link syntax:
+   * `[Java][Tutorial.Java]`.
+   */
+  name?: string;
+  /**
+   * The Markdown content of the page. You can use <code>&#40;== include {path}
+   * ==&#41;</code> to include content from a Markdown file.
+   */
+  content?: string;
+  /**
+   * Subpages of this page. The order of subpages specified here will be
+   * honored in the generated docset.
+   */
+  subpages?: PageAmino[];
+}
+export interface PageAminoMsg {
+  type: "/google.api.Page";
+  value: PageAmino;
+}
+/**
+ * Represents a documentation page. A page can contain subpages to represent
+ * nested documentation set structure.
+ */
 export interface PageSDKType {
   name: string;
   content: string;
@@ -255,6 +416,15 @@ function createBaseDocumentation(): Documentation {
 }
 export const Documentation = {
   typeUrl: "/google.api.Documentation",
+  is(o: any): o is Documentation {
+    return o && (o.$typeUrl === Documentation.typeUrl || typeof o.summary === "string" && Array.isArray(o.pages) && (!o.pages.length || Page.is(o.pages[0])) && Array.isArray(o.rules) && (!o.rules.length || DocumentationRule.is(o.rules[0])) && typeof o.documentationRootUrl === "string" && typeof o.serviceRootUrl === "string" && typeof o.overview === "string");
+  },
+  isSDK(o: any): o is DocumentationSDKType {
+    return o && (o.$typeUrl === Documentation.typeUrl || typeof o.summary === "string" && Array.isArray(o.pages) && (!o.pages.length || Page.isSDK(o.pages[0])) && Array.isArray(o.rules) && (!o.rules.length || DocumentationRule.isSDK(o.rules[0])) && typeof o.documentation_root_url === "string" && typeof o.service_root_url === "string" && typeof o.overview === "string");
+  },
+  isAmino(o: any): o is DocumentationAmino {
+    return o && (o.$typeUrl === Documentation.typeUrl || typeof o.summary === "string" && Array.isArray(o.pages) && (!o.pages.length || Page.isAmino(o.pages[0])) && Array.isArray(o.rules) && (!o.rules.length || DocumentationRule.isAmino(o.rules[0])) && typeof o.documentation_root_url === "string" && typeof o.service_root_url === "string" && typeof o.overview === "string");
+  },
   encode(message: Documentation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.summary !== undefined) {
       writer.uint32(10).string(message.summary);
@@ -434,6 +604,10 @@ export const Documentation = {
       typeUrl: "/google.api.Documentation",
       value: Documentation.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Page.registerTypeUrl();
+    DocumentationRule.registerTypeUrl();
   }
 };
 function createBaseDocumentationRule(): DocumentationRule {
@@ -445,6 +619,15 @@ function createBaseDocumentationRule(): DocumentationRule {
 }
 export const DocumentationRule = {
   typeUrl: "/google.api.DocumentationRule",
+  is(o: any): o is DocumentationRule {
+    return o && (o.$typeUrl === DocumentationRule.typeUrl || typeof o.selector === "string" && typeof o.description === "string" && typeof o.deprecationDescription === "string");
+  },
+  isSDK(o: any): o is DocumentationRuleSDKType {
+    return o && (o.$typeUrl === DocumentationRule.typeUrl || typeof o.selector === "string" && typeof o.description === "string" && typeof o.deprecation_description === "string");
+  },
+  isAmino(o: any): o is DocumentationRuleAmino {
+    return o && (o.$typeUrl === DocumentationRule.typeUrl || typeof o.selector === "string" && typeof o.description === "string" && typeof o.deprecation_description === "string");
+  },
   encode(message: DocumentationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
@@ -556,7 +739,8 @@ export const DocumentationRule = {
       typeUrl: "/google.api.DocumentationRule",
       value: DocumentationRule.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBasePage(): Page {
   return {
@@ -567,6 +751,15 @@ function createBasePage(): Page {
 }
 export const Page = {
   typeUrl: "/google.api.Page",
+  is(o: any): o is Page {
+    return o && (o.$typeUrl === Page.typeUrl || typeof o.name === "string" && typeof o.content === "string" && Array.isArray(o.subpages) && (!o.subpages.length || Page.is(o.subpages[0])));
+  },
+  isSDK(o: any): o is PageSDKType {
+    return o && (o.$typeUrl === Page.typeUrl || typeof o.name === "string" && typeof o.content === "string" && Array.isArray(o.subpages) && (!o.subpages.length || Page.isSDK(o.subpages[0])));
+  },
+  isAmino(o: any): o is PageAmino {
+    return o && (o.$typeUrl === Page.typeUrl || typeof o.name === "string" && typeof o.content === "string" && Array.isArray(o.subpages) && (!o.subpages.length || Page.isAmino(o.subpages[0])));
+  },
   encode(message: Page, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -688,5 +881,8 @@ export const Page = {
       typeUrl: "/google.api.Page",
       value: Page.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Page.registerTypeUrl();
   }
 };

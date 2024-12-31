@@ -1,5 +1,6 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.recovery.v1";
@@ -11,6 +12,15 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.recovery.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the recovery module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.recovery.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisStateSDKType {
@@ -28,6 +38,17 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params holds parameters for the recovery module */
+export interface ParamsAmino {
+  /** enable recovery IBC middleware */
+  enable_recovery?: boolean;
+  /** duration added to timeout timestamp for balances recovered via IBC packets */
+  packet_timeout_duration?: DurationAmino;
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.recovery.v1.Params";
+  value: ParamsAmino;
+}
+/** Params holds parameters for the recovery module */
 export interface ParamsSDKType {
   enable_recovery: boolean;
   packet_timeout_duration: DurationSDKType;
@@ -39,6 +60,15 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/evmos.recovery.v1.GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -120,6 +150,9 @@ export const GenesisState = {
       typeUrl: "/evmos.recovery.v1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };
 function createBaseParams(): Params {
@@ -130,6 +163,15 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/evmos.recovery.v1.Params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enableRecovery === "boolean" && Duration.is(o.packetTimeoutDuration));
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enable_recovery === "boolean" && Duration.isSDK(o.packet_timeout_duration));
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enable_recovery === "boolean" && Duration.isAmino(o.packet_timeout_duration));
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.enableRecovery !== undefined) {
       writer.uint32(8).bool(message.enableRecovery);
@@ -227,5 +269,6 @@ export const Params = {
       typeUrl: "/evmos.recovery.v1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

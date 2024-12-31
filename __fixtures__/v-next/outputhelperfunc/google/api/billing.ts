@@ -83,6 +83,53 @@ export interface BillingProtoMsg {
  *         metrics:
  *         - library.googleapis.com/book/borrowed_count
  */
+export interface BillingAmino {
+  /**
+   * Billing configurations for sending metrics to the consumer project.
+   * There can be multiple consumer destinations per service, each one must have
+   * a different monitored resource type. A metric can be used in at most
+   * one consumer destination.
+   */
+  consumer_destinations?: Billing_BillingDestinationAmino[];
+}
+export interface BillingAminoMsg {
+  type: "/google.api.Billing";
+  value: BillingAmino;
+}
+/**
+ * Billing related configuration of the service.
+ * 
+ * The following example shows how to configure monitored resources and metrics
+ * for billing, `consumer_destinations` is the only supported destination and
+ * the monitored resources need at least one label key
+ * `cloud.googleapis.com/location` to indicate the location of the billing
+ * usage, using different monitored resources between monitoring and billing is
+ * recommended so they can be evolved independently:
+ * 
+ * 
+ *     monitored_resources:
+ *     - type: library.googleapis.com/billing_branch
+ *       labels:
+ *       - key: cloud.googleapis.com/location
+ *         description: |
+ *           Predefined label to support billing location restriction.
+ *       - key: city
+ *         description: |
+ *           Custom label to define the city where the library branch is located
+ *           in.
+ *       - key: name
+ *         description: Custom label to define the name of the library branch.
+ *     metrics:
+ *     - name: library.googleapis.com/book/borrowed_count
+ *       metric_kind: DELTA
+ *       value_type: INT64
+ *       unit: "1"
+ *     billing:
+ *       consumer_destinations:
+ *       - monitored_resource: library.googleapis.com/billing_branch
+ *         metrics:
+ *         - library.googleapis.com/book/borrowed_count
+ */
 export interface BillingSDKType {
   consumer_destinations: Billing_BillingDestinationSDKType[];
 }
@@ -110,6 +157,26 @@ export interface Billing_BillingDestinationProtoMsg {
  * Configuration of a specific billing destination (Currently only support
  * bill against consumer project).
  */
+export interface Billing_BillingDestinationAmino {
+  /**
+   * The monitored resource type. The type must be defined in
+   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+   */
+  monitored_resource?: string;
+  /**
+   * Names of the metrics to report to this billing destination.
+   * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
+   */
+  metrics?: string[];
+}
+export interface Billing_BillingDestinationAminoMsg {
+  type: "/google.api.BillingDestination";
+  value: Billing_BillingDestinationAmino;
+}
+/**
+ * Configuration of a specific billing destination (Currently only support
+ * bill against consumer project).
+ */
 export interface Billing_BillingDestinationSDKType {
   monitored_resource: string;
   metrics: string[];
@@ -121,6 +188,15 @@ function createBaseBilling(): Billing {
 }
 export const Billing = {
   typeUrl: "/google.api.Billing",
+  is(o: any): o is Billing {
+    return o && (o.$typeUrl === Billing.typeUrl || Array.isArray(o.consumerDestinations) && (!o.consumerDestinations.length || Billing_BillingDestination.is(o.consumerDestinations[0])));
+  },
+  isSDK(o: any): o is BillingSDKType {
+    return o && (o.$typeUrl === Billing.typeUrl || Array.isArray(o.consumer_destinations) && (!o.consumer_destinations.length || Billing_BillingDestination.isSDK(o.consumer_destinations[0])));
+  },
+  isAmino(o: any): o is BillingAmino {
+    return o && (o.$typeUrl === Billing.typeUrl || Array.isArray(o.consumer_destinations) && (!o.consumer_destinations.length || Billing_BillingDestination.isAmino(o.consumer_destinations[0])));
+  },
   encode(message: Billing, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.consumerDestinations) {
       Billing_BillingDestination.encode(v!, writer.uint32(66).fork()).ldelim();
@@ -210,6 +286,9 @@ export const Billing = {
       typeUrl: "/google.api.Billing",
       value: Billing.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Billing_BillingDestination.registerTypeUrl();
   }
 };
 function createBaseBilling_BillingDestination(): Billing_BillingDestination {
@@ -220,6 +299,15 @@ function createBaseBilling_BillingDestination(): Billing_BillingDestination {
 }
 export const Billing_BillingDestination = {
   typeUrl: "/google.api.BillingDestination",
+  is(o: any): o is Billing_BillingDestination {
+    return o && (o.$typeUrl === Billing_BillingDestination.typeUrl || typeof o.monitoredResource === "string" && Array.isArray(o.metrics) && (!o.metrics.length || typeof o.metrics[0] === "string"));
+  },
+  isSDK(o: any): o is Billing_BillingDestinationSDKType {
+    return o && (o.$typeUrl === Billing_BillingDestination.typeUrl || typeof o.monitored_resource === "string" && Array.isArray(o.metrics) && (!o.metrics.length || typeof o.metrics[0] === "string"));
+  },
+  isAmino(o: any): o is Billing_BillingDestinationAmino {
+    return o && (o.$typeUrl === Billing_BillingDestination.typeUrl || typeof o.monitored_resource === "string" && Array.isArray(o.metrics) && (!o.metrics.length || typeof o.metrics[0] === "string"));
+  },
   encode(message: Billing_BillingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
@@ -325,5 +413,6 @@ export const Billing_BillingDestination = {
       typeUrl: "/google.api.BillingDestination",
       value: Billing_BillingDestination.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

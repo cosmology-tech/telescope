@@ -1,4 +1,4 @@
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
@@ -14,6 +14,17 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.Params";
   value: Uint8Array;
+}
+/** Params defines the set of params for the distribution module. */
+export interface ParamsAmino {
+  community_tax?: string;
+  base_proposer_reward?: string;
+  bonus_proposer_reward?: string;
+  withdraw_addr_enabled?: boolean;
+}
+export interface ParamsAminoMsg {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 /** Params defines the set of params for the distribution module. */
 export interface ParamsSDKType {
@@ -58,6 +69,28 @@ export interface ValidatorHistoricalRewardsProtoMsg {
  *  read that record)
  *  + one per validator for the zeroeth period, set on initialization
  */
+export interface ValidatorHistoricalRewardsAmino {
+  cumulative_reward_ratio?: DecCoinAmino[];
+  reference_count?: number;
+}
+export interface ValidatorHistoricalRewardsAminoMsg {
+  type: "cosmos-sdk/ValidatorHistoricalRewards";
+  value: ValidatorHistoricalRewardsAmino;
+}
+/**
+ * ValidatorHistoricalRewards represents historical rewards for a validator.
+ * Height is implicit within the store key.
+ * Cumulative reward ratio is the sum from the zeroeth period
+ * until this period of rewards / tokens, per the spec.
+ * The reference count indicates the number of objects
+ * which might need to reference this historical entry at any point.
+ * ReferenceCount =
+ *    number of outstanding delegations which ended the associated period (and
+ *    might need to read that record)
+ *  + number of slashes which ended the associated period (and might need to
+ *  read that record)
+ *  + one per validator for the zeroeth period, set on initialization
+ */
 export interface ValidatorHistoricalRewardsSDKType {
   cumulative_reward_ratio: DecCoinSDKType[];
   reference_count: number;
@@ -74,6 +107,19 @@ export interface ValidatorCurrentRewards {
 export interface ValidatorCurrentRewardsProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewards";
   value: Uint8Array;
+}
+/**
+ * ValidatorCurrentRewards represents current rewards and current
+ * period for a validator kept as a running counter and incremented
+ * each block as long as the validator's tokens remain constant.
+ */
+export interface ValidatorCurrentRewardsAmino {
+  rewards?: DecCoinAmino[];
+  period?: string;
+}
+export interface ValidatorCurrentRewardsAminoMsg {
+  type: "cosmos-sdk/ValidatorCurrentRewards";
+  value: ValidatorCurrentRewardsAmino;
 }
 /**
  * ValidatorCurrentRewards represents current rewards and current
@@ -99,6 +145,17 @@ export interface ValidatorAccumulatedCommissionProtoMsg {
  * ValidatorAccumulatedCommission represents accumulated commission
  * for a validator kept as a running counter, can be withdrawn at any time.
  */
+export interface ValidatorAccumulatedCommissionAmino {
+  commission?: DecCoinAmino[];
+}
+export interface ValidatorAccumulatedCommissionAminoMsg {
+  type: "cosmos-sdk/ValidatorAccumulatedCommission";
+  value: ValidatorAccumulatedCommissionAmino;
+}
+/**
+ * ValidatorAccumulatedCommission represents accumulated commission
+ * for a validator kept as a running counter, can be withdrawn at any time.
+ */
 export interface ValidatorAccumulatedCommissionSDKType {
   commission: DecCoinSDKType[];
 }
@@ -112,6 +169,17 @@ export interface ValidatorOutstandingRewards {
 export interface ValidatorOutstandingRewardsProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorOutstandingRewards";
   value: Uint8Array;
+}
+/**
+ * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards
+ * for a validator inexpensive to track, allows simple sanity checks.
+ */
+export interface ValidatorOutstandingRewardsAmino {
+  rewards?: DecCoinAmino[];
+}
+export interface ValidatorOutstandingRewardsAminoMsg {
+  type: "cosmos-sdk/ValidatorOutstandingRewards";
+  value: ValidatorOutstandingRewardsAmino;
 }
 /**
  * ValidatorOutstandingRewards represents outstanding (un-withdrawn) rewards
@@ -140,6 +208,20 @@ export interface ValidatorSlashEventProtoMsg {
  * This is needed to calculate appropriate amount of staking tokens
  * for delegations which are withdrawn after a slash has occurred.
  */
+export interface ValidatorSlashEventAmino {
+  validator_period?: string;
+  fraction?: string;
+}
+export interface ValidatorSlashEventAminoMsg {
+  type: "cosmos-sdk/ValidatorSlashEvent";
+  value: ValidatorSlashEventAmino;
+}
+/**
+ * ValidatorSlashEvent represents a validator slash event.
+ * Height is implicit within the store key.
+ * This is needed to calculate appropriate amount of staking tokens
+ * for delegations which are withdrawn after a slash has occurred.
+ */
 export interface ValidatorSlashEventSDKType {
   validator_period: bigint;
   fraction: string;
@@ -153,6 +235,14 @@ export interface ValidatorSlashEventsProtoMsg {
   value: Uint8Array;
 }
 /** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
+export interface ValidatorSlashEventsAmino {
+  validator_slash_events?: ValidatorSlashEventAmino[];
+}
+export interface ValidatorSlashEventsAminoMsg {
+  type: "cosmos-sdk/ValidatorSlashEvents";
+  value: ValidatorSlashEventsAmino;
+}
+/** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
 export interface ValidatorSlashEventsSDKType {
   validator_slash_events: ValidatorSlashEventSDKType[];
 }
@@ -163,6 +253,14 @@ export interface FeePool {
 export interface FeePoolProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.FeePool";
   value: Uint8Array;
+}
+/** FeePool is the global fee pool for distribution. */
+export interface FeePoolAmino {
+  community_pool?: DecCoinAmino[];
+}
+export interface FeePoolAminoMsg {
+  type: "cosmos-sdk/FeePool";
+  value: FeePoolAmino;
 }
 /** FeePool is the global fee pool for distribution. */
 export interface FeePoolSDKType {
@@ -182,6 +280,21 @@ export interface CommunityPoolSpendProposal {
 export interface CommunityPoolSpendProposalProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal";
   value: Uint8Array;
+}
+/**
+ * CommunityPoolSpendProposal details a proposal for use of community funds,
+ * together with how many coins are proposed to be spent, and to which
+ * recipient account.
+ */
+export interface CommunityPoolSpendProposalAmino {
+  title?: string;
+  description?: string;
+  recipient?: string;
+  amount?: CoinAmino[];
+}
+export interface CommunityPoolSpendProposalAminoMsg {
+  type: "cosmos-sdk/CommunityPoolSpendProposal";
+  value: CommunityPoolSpendProposalAmino;
 }
 /**
  * CommunityPoolSpendProposal details a proposal for use of community funds,
@@ -219,6 +332,23 @@ export interface DelegatorStartingInfoProtoMsg {
  * the delegators within the validator may be left with less than a full token,
  * thus sdk.Dec is used.
  */
+export interface DelegatorStartingInfoAmino {
+  previous_period?: string;
+  stake?: string;
+  height: string;
+}
+export interface DelegatorStartingInfoAminoMsg {
+  type: "cosmos-sdk/DelegatorStartingInfo";
+  value: DelegatorStartingInfoAmino;
+}
+/**
+ * DelegatorStartingInfo represents the starting info for a delegator reward
+ * period. It tracks the previous validator period, the delegation's amount of
+ * staking token, and the creation height (to check later on if any slashes have
+ * occurred). NOTE: Even though validators are slashed to whole staking tokens,
+ * the delegators within the validator may be left with less than a full token,
+ * thus sdk.Dec is used.
+ */
 export interface DelegatorStartingInfoSDKType {
   previous_period: bigint;
   stake: string;
@@ -235,6 +365,18 @@ export interface DelegationDelegatorReward {
 export interface DelegationDelegatorRewardProtoMsg {
   typeUrl: "/cosmos.distribution.v1beta1.DelegationDelegatorReward";
   value: Uint8Array;
+}
+/**
+ * DelegationDelegatorReward represents the properties
+ * of a delegator's delegation reward.
+ */
+export interface DelegationDelegatorRewardAmino {
+  validator_address?: string;
+  reward?: DecCoinAmino[];
+}
+export interface DelegationDelegatorRewardAminoMsg {
+  type: "cosmos-sdk/DelegationDelegatorReward";
+  value: DelegationDelegatorRewardAmino;
 }
 /**
  * DelegationDelegatorReward represents the properties
@@ -263,6 +405,21 @@ export interface CommunityPoolSpendProposalWithDepositProtoMsg {
  * CommunityPoolSpendProposalWithDeposit defines a CommunityPoolSpendProposal
  * with a deposit
  */
+export interface CommunityPoolSpendProposalWithDepositAmino {
+  title?: string;
+  description?: string;
+  recipient?: string;
+  amount?: string;
+  deposit?: string;
+}
+export interface CommunityPoolSpendProposalWithDepositAminoMsg {
+  type: "cosmos-sdk/CommunityPoolSpendProposalWithDeposit";
+  value: CommunityPoolSpendProposalWithDepositAmino;
+}
+/**
+ * CommunityPoolSpendProposalWithDeposit defines a CommunityPoolSpendProposal
+ * with a deposit
+ */
 export interface CommunityPoolSpendProposalWithDepositSDKType {
   title: string;
   description: string;
@@ -280,6 +437,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/cosmos.distribution.v1beta1.Params",
+  aminoType: "cosmos-sdk/Params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.communityTax === "string" && typeof o.baseProposerReward === "string" && typeof o.bonusProposerReward === "string" && typeof o.withdrawAddrEnabled === "boolean");
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.community_tax === "string" && typeof o.base_proposer_reward === "string" && typeof o.bonus_proposer_reward === "string" && typeof o.withdraw_addr_enabled === "boolean");
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.community_tax === "string" && typeof o.base_proposer_reward === "string" && typeof o.bonus_proposer_reward === "string" && typeof o.withdraw_addr_enabled === "boolean");
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.communityTax !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.communityTax, 18).atomics);
@@ -413,7 +580,8 @@ export const Params = {
       typeUrl: "/cosmos.distribution.v1beta1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseValidatorHistoricalRewards(): ValidatorHistoricalRewards {
   return {
@@ -423,6 +591,16 @@ function createBaseValidatorHistoricalRewards(): ValidatorHistoricalRewards {
 }
 export const ValidatorHistoricalRewards = {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorHistoricalRewards",
+  aminoType: "cosmos-sdk/ValidatorHistoricalRewards",
+  is(o: any): o is ValidatorHistoricalRewards {
+    return o && (o.$typeUrl === ValidatorHistoricalRewards.typeUrl || Array.isArray(o.cumulativeRewardRatio) && (!o.cumulativeRewardRatio.length || DecCoin.is(o.cumulativeRewardRatio[0])) && typeof o.referenceCount === "number");
+  },
+  isSDK(o: any): o is ValidatorHistoricalRewardsSDKType {
+    return o && (o.$typeUrl === ValidatorHistoricalRewards.typeUrl || Array.isArray(o.cumulative_reward_ratio) && (!o.cumulative_reward_ratio.length || DecCoin.isSDK(o.cumulative_reward_ratio[0])) && typeof o.reference_count === "number");
+  },
+  isAmino(o: any): o is ValidatorHistoricalRewardsAmino {
+    return o && (o.$typeUrl === ValidatorHistoricalRewards.typeUrl || Array.isArray(o.cumulative_reward_ratio) && (!o.cumulative_reward_ratio.length || DecCoin.isAmino(o.cumulative_reward_ratio[0])) && typeof o.reference_count === "number");
+  },
   encode(message: ValidatorHistoricalRewards, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.cumulativeRewardRatio) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -534,6 +712,9 @@ export const ValidatorHistoricalRewards = {
       typeUrl: "/cosmos.distribution.v1beta1.ValidatorHistoricalRewards",
       value: ValidatorHistoricalRewards.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
@@ -544,6 +725,16 @@ function createBaseValidatorCurrentRewards(): ValidatorCurrentRewards {
 }
 export const ValidatorCurrentRewards = {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewards",
+  aminoType: "cosmos-sdk/ValidatorCurrentRewards",
+  is(o: any): o is ValidatorCurrentRewards {
+    return o && (o.$typeUrl === ValidatorCurrentRewards.typeUrl || Array.isArray(o.rewards) && (!o.rewards.length || DecCoin.is(o.rewards[0])) && typeof o.period === "bigint");
+  },
+  isSDK(o: any): o is ValidatorCurrentRewardsSDKType {
+    return o && (o.$typeUrl === ValidatorCurrentRewards.typeUrl || Array.isArray(o.rewards) && (!o.rewards.length || DecCoin.isSDK(o.rewards[0])) && typeof o.period === "bigint");
+  },
+  isAmino(o: any): o is ValidatorCurrentRewardsAmino {
+    return o && (o.$typeUrl === ValidatorCurrentRewards.typeUrl || Array.isArray(o.rewards) && (!o.rewards.length || DecCoin.isAmino(o.rewards[0])) && typeof o.period === "bigint");
+  },
   encode(message: ValidatorCurrentRewards, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -657,6 +848,9 @@ export const ValidatorCurrentRewards = {
       typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewards",
       value: ValidatorCurrentRewards.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseValidatorAccumulatedCommission(): ValidatorAccumulatedCommission {
@@ -666,6 +860,16 @@ function createBaseValidatorAccumulatedCommission(): ValidatorAccumulatedCommiss
 }
 export const ValidatorAccumulatedCommission = {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommission",
+  aminoType: "cosmos-sdk/ValidatorAccumulatedCommission",
+  is(o: any): o is ValidatorAccumulatedCommission {
+    return o && (o.$typeUrl === ValidatorAccumulatedCommission.typeUrl || Array.isArray(o.commission) && (!o.commission.length || DecCoin.is(o.commission[0])));
+  },
+  isSDK(o: any): o is ValidatorAccumulatedCommissionSDKType {
+    return o && (o.$typeUrl === ValidatorAccumulatedCommission.typeUrl || Array.isArray(o.commission) && (!o.commission.length || DecCoin.isSDK(o.commission[0])));
+  },
+  isAmino(o: any): o is ValidatorAccumulatedCommissionAmino {
+    return o && (o.$typeUrl === ValidatorAccumulatedCommission.typeUrl || Array.isArray(o.commission) && (!o.commission.length || DecCoin.isAmino(o.commission[0])));
+  },
   encode(message: ValidatorAccumulatedCommission, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.commission) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -761,6 +965,9 @@ export const ValidatorAccumulatedCommission = {
       typeUrl: "/cosmos.distribution.v1beta1.ValidatorAccumulatedCommission",
       value: ValidatorAccumulatedCommission.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseValidatorOutstandingRewards(): ValidatorOutstandingRewards {
@@ -770,6 +977,16 @@ function createBaseValidatorOutstandingRewards(): ValidatorOutstandingRewards {
 }
 export const ValidatorOutstandingRewards = {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorOutstandingRewards",
+  aminoType: "cosmos-sdk/ValidatorOutstandingRewards",
+  is(o: any): o is ValidatorOutstandingRewards {
+    return o && (o.$typeUrl === ValidatorOutstandingRewards.typeUrl || Array.isArray(o.rewards) && (!o.rewards.length || DecCoin.is(o.rewards[0])));
+  },
+  isSDK(o: any): o is ValidatorOutstandingRewardsSDKType {
+    return o && (o.$typeUrl === ValidatorOutstandingRewards.typeUrl || Array.isArray(o.rewards) && (!o.rewards.length || DecCoin.isSDK(o.rewards[0])));
+  },
+  isAmino(o: any): o is ValidatorOutstandingRewardsAmino {
+    return o && (o.$typeUrl === ValidatorOutstandingRewards.typeUrl || Array.isArray(o.rewards) && (!o.rewards.length || DecCoin.isAmino(o.rewards[0])));
+  },
   encode(message: ValidatorOutstandingRewards, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rewards) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -865,6 +1082,9 @@ export const ValidatorOutstandingRewards = {
       typeUrl: "/cosmos.distribution.v1beta1.ValidatorOutstandingRewards",
       value: ValidatorOutstandingRewards.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
@@ -875,6 +1095,16 @@ function createBaseValidatorSlashEvent(): ValidatorSlashEvent {
 }
 export const ValidatorSlashEvent = {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEvent",
+  aminoType: "cosmos-sdk/ValidatorSlashEvent",
+  is(o: any): o is ValidatorSlashEvent {
+    return o && (o.$typeUrl === ValidatorSlashEvent.typeUrl || typeof o.validatorPeriod === "bigint" && typeof o.fraction === "string");
+  },
+  isSDK(o: any): o is ValidatorSlashEventSDKType {
+    return o && (o.$typeUrl === ValidatorSlashEvent.typeUrl || typeof o.validator_period === "bigint" && typeof o.fraction === "string");
+  },
+  isAmino(o: any): o is ValidatorSlashEventAmino {
+    return o && (o.$typeUrl === ValidatorSlashEvent.typeUrl || typeof o.validator_period === "bigint" && typeof o.fraction === "string");
+  },
   encode(message: ValidatorSlashEvent, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorPeriod !== undefined) {
       writer.uint32(8).uint64(message.validatorPeriod);
@@ -978,7 +1208,8 @@ export const ValidatorSlashEvent = {
       typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEvent",
       value: ValidatorSlashEvent.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseValidatorSlashEvents(): ValidatorSlashEvents {
   return {
@@ -987,6 +1218,16 @@ function createBaseValidatorSlashEvents(): ValidatorSlashEvents {
 }
 export const ValidatorSlashEvents = {
   typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEvents",
+  aminoType: "cosmos-sdk/ValidatorSlashEvents",
+  is(o: any): o is ValidatorSlashEvents {
+    return o && (o.$typeUrl === ValidatorSlashEvents.typeUrl || Array.isArray(o.validatorSlashEvents) && (!o.validatorSlashEvents.length || ValidatorSlashEvent.is(o.validatorSlashEvents[0])));
+  },
+  isSDK(o: any): o is ValidatorSlashEventsSDKType {
+    return o && (o.$typeUrl === ValidatorSlashEvents.typeUrl || Array.isArray(o.validator_slash_events) && (!o.validator_slash_events.length || ValidatorSlashEvent.isSDK(o.validator_slash_events[0])));
+  },
+  isAmino(o: any): o is ValidatorSlashEventsAmino {
+    return o && (o.$typeUrl === ValidatorSlashEvents.typeUrl || Array.isArray(o.validator_slash_events) && (!o.validator_slash_events.length || ValidatorSlashEvent.isAmino(o.validator_slash_events[0])));
+  },
   encode(message: ValidatorSlashEvents, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.validatorSlashEvents) {
       ValidatorSlashEvent.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1082,6 +1323,9 @@ export const ValidatorSlashEvents = {
       typeUrl: "/cosmos.distribution.v1beta1.ValidatorSlashEvents",
       value: ValidatorSlashEvents.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ValidatorSlashEvent.registerTypeUrl();
   }
 };
 function createBaseFeePool(): FeePool {
@@ -1091,6 +1335,16 @@ function createBaseFeePool(): FeePool {
 }
 export const FeePool = {
   typeUrl: "/cosmos.distribution.v1beta1.FeePool",
+  aminoType: "cosmos-sdk/FeePool",
+  is(o: any): o is FeePool {
+    return o && (o.$typeUrl === FeePool.typeUrl || Array.isArray(o.communityPool) && (!o.communityPool.length || DecCoin.is(o.communityPool[0])));
+  },
+  isSDK(o: any): o is FeePoolSDKType {
+    return o && (o.$typeUrl === FeePool.typeUrl || Array.isArray(o.community_pool) && (!o.community_pool.length || DecCoin.isSDK(o.community_pool[0])));
+  },
+  isAmino(o: any): o is FeePoolAmino {
+    return o && (o.$typeUrl === FeePool.typeUrl || Array.isArray(o.community_pool) && (!o.community_pool.length || DecCoin.isAmino(o.community_pool[0])));
+  },
   encode(message: FeePool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.communityPool) {
       DecCoin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1186,6 +1440,9 @@ export const FeePool = {
       typeUrl: "/cosmos.distribution.v1beta1.FeePool",
       value: FeePool.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseCommunityPoolSpendProposal(): CommunityPoolSpendProposal {
@@ -1198,6 +1455,16 @@ function createBaseCommunityPoolSpendProposal(): CommunityPoolSpendProposal {
 }
 export const CommunityPoolSpendProposal = {
   typeUrl: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal",
+  aminoType: "cosmos-sdk/CommunityPoolSpendProposal",
+  is(o: any): o is CommunityPoolSpendProposal {
+    return o && (o.$typeUrl === CommunityPoolSpendProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.recipient === "string" && Array.isArray(o.amount) && (!o.amount.length || Coin.is(o.amount[0])));
+  },
+  isSDK(o: any): o is CommunityPoolSpendProposalSDKType {
+    return o && (o.$typeUrl === CommunityPoolSpendProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.recipient === "string" && Array.isArray(o.amount) && (!o.amount.length || Coin.isSDK(o.amount[0])));
+  },
+  isAmino(o: any): o is CommunityPoolSpendProposalAmino {
+    return o && (o.$typeUrl === CommunityPoolSpendProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.recipient === "string" && Array.isArray(o.amount) && (!o.amount.length || Coin.isAmino(o.amount[0])));
+  },
   encode(message: CommunityPoolSpendProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -1341,6 +1608,9 @@ export const CommunityPoolSpendProposal = {
       typeUrl: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal",
       value: CommunityPoolSpendProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
@@ -1352,6 +1622,16 @@ function createBaseDelegatorStartingInfo(): DelegatorStartingInfo {
 }
 export const DelegatorStartingInfo = {
   typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfo",
+  aminoType: "cosmos-sdk/DelegatorStartingInfo",
+  is(o: any): o is DelegatorStartingInfo {
+    return o && (o.$typeUrl === DelegatorStartingInfo.typeUrl || typeof o.previousPeriod === "bigint" && typeof o.stake === "string" && typeof o.height === "bigint");
+  },
+  isSDK(o: any): o is DelegatorStartingInfoSDKType {
+    return o && (o.$typeUrl === DelegatorStartingInfo.typeUrl || typeof o.previous_period === "bigint" && typeof o.stake === "string" && typeof o.height === "bigint");
+  },
+  isAmino(o: any): o is DelegatorStartingInfoAmino {
+    return o && (o.$typeUrl === DelegatorStartingInfo.typeUrl || typeof o.previous_period === "bigint" && typeof o.stake === "string" && typeof o.height === "bigint");
+  },
   encode(message: DelegatorStartingInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.previousPeriod !== undefined) {
       writer.uint32(8).uint64(message.previousPeriod);
@@ -1473,7 +1753,8 @@ export const DelegatorStartingInfo = {
       typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfo",
       value: DelegatorStartingInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDelegationDelegatorReward(): DelegationDelegatorReward {
   return {
@@ -1483,6 +1764,16 @@ function createBaseDelegationDelegatorReward(): DelegationDelegatorReward {
 }
 export const DelegationDelegatorReward = {
   typeUrl: "/cosmos.distribution.v1beta1.DelegationDelegatorReward",
+  aminoType: "cosmos-sdk/DelegationDelegatorReward",
+  is(o: any): o is DelegationDelegatorReward {
+    return o && (o.$typeUrl === DelegationDelegatorReward.typeUrl || typeof o.validatorAddress === "string" && Array.isArray(o.reward) && (!o.reward.length || DecCoin.is(o.reward[0])));
+  },
+  isSDK(o: any): o is DelegationDelegatorRewardSDKType {
+    return o && (o.$typeUrl === DelegationDelegatorReward.typeUrl || typeof o.validator_address === "string" && Array.isArray(o.reward) && (!o.reward.length || DecCoin.isSDK(o.reward[0])));
+  },
+  isAmino(o: any): o is DelegationDelegatorRewardAmino {
+    return o && (o.$typeUrl === DelegationDelegatorReward.typeUrl || typeof o.validator_address === "string" && Array.isArray(o.reward) && (!o.reward.length || DecCoin.isAmino(o.reward[0])));
+  },
   encode(message: DelegationDelegatorReward, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddress !== undefined) {
       writer.uint32(10).string(message.validatorAddress);
@@ -1594,6 +1885,9 @@ export const DelegationDelegatorReward = {
       typeUrl: "/cosmos.distribution.v1beta1.DelegationDelegatorReward",
       value: DelegationDelegatorReward.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendProposalWithDeposit {
@@ -1607,6 +1901,16 @@ function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendPr
 }
 export const CommunityPoolSpendProposalWithDeposit = {
   typeUrl: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit",
+  aminoType: "cosmos-sdk/CommunityPoolSpendProposalWithDeposit",
+  is(o: any): o is CommunityPoolSpendProposalWithDeposit {
+    return o && (o.$typeUrl === CommunityPoolSpendProposalWithDeposit.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.recipient === "string" && typeof o.amount === "string" && typeof o.deposit === "string");
+  },
+  isSDK(o: any): o is CommunityPoolSpendProposalWithDepositSDKType {
+    return o && (o.$typeUrl === CommunityPoolSpendProposalWithDeposit.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.recipient === "string" && typeof o.amount === "string" && typeof o.deposit === "string");
+  },
+  isAmino(o: any): o is CommunityPoolSpendProposalWithDepositAmino {
+    return o && (o.$typeUrl === CommunityPoolSpendProposalWithDeposit.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.recipient === "string" && typeof o.amount === "string" && typeof o.deposit === "string");
+  },
   encode(message: CommunityPoolSpendProposalWithDeposit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -1756,5 +2060,6 @@ export const CommunityPoolSpendProposalWithDeposit = {
       typeUrl: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit",
       value: CommunityPoolSpendProposalWithDeposit.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

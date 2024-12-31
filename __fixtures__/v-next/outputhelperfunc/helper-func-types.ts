@@ -9,13 +9,16 @@ import { HttpEndpoint } from "@interchainjs/types";
 import { BinaryReader, BinaryWriter } from "./binary";
 import { getRpcClient } from "./extern";
 import { isRpc, Rpc } from "./helpers";
+import { TelescopeGeneratedCodec } from "./types";
+import { GlobalDecoderRegistry } from "./registry";
 
 export interface QueryBuilderOptions<TReq, TRes> {
   encode: (request: TReq, writer?: BinaryWriter) => BinaryWriter
   decode: (input: BinaryReader | Uint8Array, length?: number) => TRes
   service: string,
   method: string,
-  clientResolver?: RpcResolver
+  clientResolver?: RpcResolver,
+  deps?: TelescopeGeneratedCodec<any, any, any>[],
 }
 
 export function buildQuery<TReq, TRes>(opts: QueryBuilderOptions<TReq, TRes>) {
@@ -29,6 +32,8 @@ export function buildQuery<TReq, TRes>(opts: QueryBuilderOptions<TReq, TRes>) {
       }
 
       if (!rpc) throw new Error("Query Rpc is not initialized");
+
+      registerDependencies(opts.deps ?? []);
 
       const data = opts.encode(request).finish();
       const response = await rpc.request(opts.service, opts.method, data);
@@ -73,6 +78,7 @@ export interface TxBuilderOptions {
   typeUrl: string,
   encoders?: Encoder[],
   converters?: AminoConverter[],
+  deps?: TelescopeGeneratedCodec<any, any, any>[],
 }
 
 export function buildTx<TMsg>(opts: TxBuilderOptions) {
@@ -94,6 +100,7 @@ export function buildTx<TMsg>(opts: TxBuilderOptions) {
     //register all related encoders and converters
     client.addEncoders(opts.encoders ?? []);
     client.addConverters(opts.converters ?? []);
+    registerDependencies(opts.deps ?? []);
 
     const data = [
       {
@@ -189,3 +196,9 @@ export interface AminoConverter {
 
 export type SigningClientResolver = string | HttpEndpoint | ISigningClient;
 export type RpcResolver = string | HttpEndpoint | Rpc ;
+
+function registerDependencies(deps: TelescopeGeneratedCodec<any, any, any>[]) {
+  for (const dep of deps) {
+    dep.registerTypeUrl?.();
+  }
+}

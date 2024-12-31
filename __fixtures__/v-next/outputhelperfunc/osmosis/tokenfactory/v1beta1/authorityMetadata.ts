@@ -20,6 +20,19 @@ export interface DenomAuthorityMetadataProtoMsg {
  * capabilities over a token factory denom. Right now there is only one Admin
  * permission, but is planned to be extended to the future.
  */
+export interface DenomAuthorityMetadataAmino {
+  /** Can be empty for no admin, or a valid osmosis address */
+  admin?: string;
+}
+export interface DenomAuthorityMetadataAminoMsg {
+  type: "osmosis/tokenfactory/denom-authority-metadata";
+  value: DenomAuthorityMetadataAmino;
+}
+/**
+ * DenomAuthorityMetadata specifies metadata for addresses that have specific
+ * capabilities over a token factory denom. Right now there is only one Admin
+ * permission, but is planned to be extended to the future.
+ */
 export interface DenomAuthorityMetadataSDKType {
   admin: string;
 }
@@ -30,6 +43,16 @@ function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
 }
 export const DenomAuthorityMetadata = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
+  aminoType: "osmosis/tokenfactory/denom-authority-metadata",
+  is(o: any): o is DenomAuthorityMetadata {
+    return o && (o.$typeUrl === DenomAuthorityMetadata.typeUrl || typeof o.admin === "string");
+  },
+  isSDK(o: any): o is DenomAuthorityMetadataSDKType {
+    return o && (o.$typeUrl === DenomAuthorityMetadata.typeUrl || typeof o.admin === "string");
+  },
+  isAmino(o: any): o is DenomAuthorityMetadataAmino {
+    return o && (o.$typeUrl === DenomAuthorityMetadata.typeUrl || typeof o.admin === "string");
+  },
   encode(message: DenomAuthorityMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== undefined) {
       writer.uint32(10).string(message.admin);
@@ -115,5 +138,6 @@ export const DenomAuthorityMetadata = {
       typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
       value: DenomAuthorityMetadata.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

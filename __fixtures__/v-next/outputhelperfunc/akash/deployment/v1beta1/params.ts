@@ -1,5 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -12,6 +13,14 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the parameters for the x/deployment package */
+export interface ParamsAmino {
+  deployment_min_deposit: CoinAmino | undefined;
+}
+export interface ParamsAminoMsg {
+  type: "akash/deployment/params";
+  value: ParamsAmino;
+}
+/** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
   deployment_min_deposit: CoinSDKType | undefined;
 }
@@ -22,6 +31,13 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/akash.deployment.v1beta1.Params",
+  aminoType: "akash/deployment/params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || Coin.is(o.deploymentMinDeposit));
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || Coin.isSDK(o.deployment_min_deposit));
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deploymentMinDeposit !== undefined) {
       Coin.encode(message.deploymentMinDeposit, writer.uint32(10).fork()).ldelim();
@@ -109,5 +125,8 @@ export const Params = {
       typeUrl: "/akash.deployment.v1beta1.Params",
       value: Params.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };

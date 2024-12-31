@@ -1,8 +1,8 @@
 import { EncodingTestForDontOmit, EncodingTestForDontOmitAmino, EncodingTestForDontOmitSDKType, EncodingTestForOmit, EncodingTestForOmitAmino, EncodingTestForOmitSDKType } from "./all_fields";
 import { BinaryReader, BinaryWriter } from "../binary";
+import { GlobalDecoderRegistry } from "../registry";
 import { isSet, DeepPartial } from "../helpers";
 import { JsonSafe } from "../json-safe";
-import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "misc";
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee

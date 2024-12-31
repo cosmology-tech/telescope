@@ -1,6 +1,6 @@
 import { buildTx, SigningClientResolver } from "../../../helper-func-types";
-import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
+import { buildUseMutation } from "../../../react-query";
 import { MsgSignProviderAttributes, MsgDeleteProviderAttributes } from "./audit";
 export const createSignProviderAttributes = (clientResolver?: SigningClientResolver) => buildTx<MsgSignProviderAttributes>({
   clientResolver,

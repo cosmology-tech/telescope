@@ -1,7 +1,8 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
@@ -16,6 +17,19 @@ export interface EpochInfo {
 export interface EpochInfoProtoMsg {
   typeUrl: "/evmos.epochs.v1.EpochInfo";
   value: Uint8Array;
+}
+export interface EpochInfoAmino {
+  identifier?: string;
+  start_time?: string;
+  duration?: DurationAmino;
+  current_epoch?: string;
+  current_epoch_start_time?: string;
+  epoch_counting_started?: boolean;
+  current_epoch_start_height?: string;
+}
+export interface EpochInfoAminoMsg {
+  type: "/evmos.epochs.v1.EpochInfo";
+  value: EpochInfoAmino;
 }
 export interface EpochInfoSDKType {
   identifier: string;
@@ -35,6 +49,14 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the epochs module's genesis state. */
+export interface GenesisStateAmino {
+  epochs?: EpochInfoAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.epochs.v1.GenesisState";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the epochs module's genesis state. */
 export interface GenesisStateSDKType {
   epochs: EpochInfoSDKType[];
 }
@@ -51,6 +73,15 @@ function createBaseEpochInfo(): EpochInfo {
 }
 export const EpochInfo = {
   typeUrl: "/evmos.epochs.v1.EpochInfo",
+  is(o: any): o is EpochInfo {
+    return o && (o.$typeUrl === EpochInfo.typeUrl || typeof o.identifier === "string" && Timestamp.is(o.startTime) && Duration.is(o.duration) && typeof o.currentEpoch === "bigint" && Timestamp.is(o.currentEpochStartTime) && typeof o.epochCountingStarted === "boolean" && typeof o.currentEpochStartHeight === "bigint");
+  },
+  isSDK(o: any): o is EpochInfoSDKType {
+    return o && (o.$typeUrl === EpochInfo.typeUrl || typeof o.identifier === "string" && Timestamp.isSDK(o.start_time) && Duration.isSDK(o.duration) && typeof o.current_epoch === "bigint" && Timestamp.isSDK(o.current_epoch_start_time) && typeof o.epoch_counting_started === "boolean" && typeof o.current_epoch_start_height === "bigint");
+  },
+  isAmino(o: any): o is EpochInfoAmino {
+    return o && (o.$typeUrl === EpochInfo.typeUrl || typeof o.identifier === "string" && Timestamp.isAmino(o.start_time) && Duration.isAmino(o.duration) && typeof o.current_epoch === "bigint" && Timestamp.isAmino(o.current_epoch_start_time) && typeof o.epoch_counting_started === "boolean" && typeof o.current_epoch_start_height === "bigint");
+  },
   encode(message: EpochInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
@@ -232,7 +263,8 @@ export const EpochInfo = {
       typeUrl: "/evmos.epochs.v1.EpochInfo",
       value: EpochInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseGenesisState(): GenesisState {
   return {
@@ -241,6 +273,15 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/evmos.epochs.v1.GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.epochs) && (!o.epochs.length || EpochInfo.is(o.epochs[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.epochs) && (!o.epochs.length || EpochInfo.isSDK(o.epochs[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.epochs) && (!o.epochs.length || EpochInfo.isAmino(o.epochs[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.epochs) {
       EpochInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -330,5 +371,8 @@ export const GenesisState = {
       typeUrl: "/evmos.epochs.v1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    EpochInfo.registerTypeUrl();
   }
 };

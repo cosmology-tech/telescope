@@ -1,6 +1,7 @@
-import { Params, ParamsSDKType, DistrInfo, DistrInfoSDKType, PoolToGauges, PoolToGaugesSDKType } from "./incentives";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Params, ParamsAmino, ParamsSDKType, DistrInfo, DistrInfoAmino, DistrInfoSDKType, PoolToGauges, PoolToGaugesAmino, PoolToGaugesSDKType } from "./incentives";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
@@ -15,6 +16,18 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the pool incentives module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of the module. */
+  params?: ParamsAmino;
+  lockable_durations?: DurationAmino[];
+  distr_info?: DistrInfoAmino;
+  pool_to_gauges?: PoolToGaugesAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "osmosis/poolincentives/genesis-state";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisStateSDKType {
@@ -33,6 +46,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState",
+  aminoType: "osmosis/poolincentives/genesis-state",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params) && Array.isArray(o.lockableDurations) && (!o.lockableDurations.length || Duration.is(o.lockableDurations[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params) && Array.isArray(o.lockable_durations) && (!o.lockable_durations.length || Duration.isSDK(o.lockable_durations[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params) && Array.isArray(o.lockable_durations) && (!o.lockable_durations.length || Duration.isAmino(o.lockable_durations[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -182,5 +205,10 @@ export const GenesisState = {
       typeUrl: "/osmosis.poolincentives.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
+    DistrInfo.registerTypeUrl();
+    PoolToGauges.registerTypeUrl();
   }
 };

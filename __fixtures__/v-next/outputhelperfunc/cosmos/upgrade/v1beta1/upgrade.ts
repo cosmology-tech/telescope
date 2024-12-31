@@ -1,7 +1,8 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /** Plan specifies information about a planned upgrade and when it should occur. */
@@ -46,6 +47,47 @@ export interface PlanProtoMsg {
   value: Uint8Array;
 }
 /** Plan specifies information about a planned upgrade and when it should occur. */
+export interface PlanAmino {
+  /**
+   * Sets the name for the upgrade. This name will be used by the upgraded
+   * version of the software to apply any special "on-upgrade" commands during
+   * the first BeginBlock method after the upgrade is applied. It is also used
+   * to detect whether a software version can handle a given upgrade. If no
+   * upgrade handler with this name has been set in the software, it will be
+   * assumed that the software is out-of-date when the upgrade Time or Height is
+   * reached and the software will exit.
+   */
+  name?: string;
+  /**
+   * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
+   * has been removed from the SDK.
+   * If this field is not empty, an error will be thrown.
+   */
+  /** @deprecated */
+  time?: string;
+  /**
+   * The height at which the upgrade must be performed.
+   * Only used if Time is not set.
+   */
+  height?: string;
+  /**
+   * Any application specific upgrade info to be included on-chain
+   * such as a git commit that validators could automatically upgrade to
+   */
+  info?: string;
+  /**
+   * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
+   * moved to the IBC module in the sub module 02-client.
+   * If this field is not empty, an error will be thrown.
+   */
+  /** @deprecated */
+  upgraded_client_state?: AnyAmino;
+}
+export interface PlanAminoMsg {
+  type: "cosmos-sdk/Plan";
+  value: PlanAmino;
+}
+/** Plan specifies information about a planned upgrade and when it should occur. */
 export interface PlanSDKType {
   name: string;
   /** @deprecated */
@@ -70,6 +112,22 @@ export interface SoftwareUpgradeProposal {
 export interface SoftwareUpgradeProposalProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal";
   value: Uint8Array;
+}
+/**
+ * SoftwareUpgradeProposal is a gov Content type for initiating a software
+ * upgrade.
+ * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ * proposals, see MsgSoftwareUpgrade.
+ */
+/** @deprecated */
+export interface SoftwareUpgradeProposalAmino {
+  title?: string;
+  description?: string;
+  plan?: PlanAmino;
+}
+export interface SoftwareUpgradeProposalAminoMsg {
+  type: "cosmos-sdk/SoftwareUpgradeProposal";
+  value: SoftwareUpgradeProposalAmino;
 }
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
@@ -105,6 +163,21 @@ export interface CancelSoftwareUpgradeProposalProtoMsg {
  * proposals, see MsgCancelUpgrade.
  */
 /** @deprecated */
+export interface CancelSoftwareUpgradeProposalAmino {
+  title?: string;
+  description?: string;
+}
+export interface CancelSoftwareUpgradeProposalAminoMsg {
+  type: "cosmos-sdk/CancelSoftwareUpgradeProposal";
+  value: CancelSoftwareUpgradeProposalAmino;
+}
+/**
+ * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
+ * upgrade.
+ * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ * proposals, see MsgCancelUpgrade.
+ */
+/** @deprecated */
 export interface CancelSoftwareUpgradeProposalSDKType {
   title: string;
   description: string;
@@ -129,6 +202,21 @@ export interface ModuleVersionProtoMsg {
  * 
  * Since: cosmos-sdk 0.43
  */
+export interface ModuleVersionAmino {
+  /** name of the app module */
+  name?: string;
+  /** consensus version of the app module */
+  version?: string;
+}
+export interface ModuleVersionAminoMsg {
+  type: "cosmos-sdk/ModuleVersion";
+  value: ModuleVersionAmino;
+}
+/**
+ * ModuleVersion specifies a module and its consensus version.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
 export interface ModuleVersionSDKType {
   name: string;
   version: bigint;
@@ -144,6 +232,16 @@ function createBasePlan(): Plan {
 }
 export const Plan = {
   typeUrl: "/cosmos.upgrade.v1beta1.Plan",
+  aminoType: "cosmos-sdk/Plan",
+  is(o: any): o is Plan {
+    return o && (o.$typeUrl === Plan.typeUrl || typeof o.name === "string" && Timestamp.is(o.time) && typeof o.height === "bigint" && typeof o.info === "string");
+  },
+  isSDK(o: any): o is PlanSDKType {
+    return o && (o.$typeUrl === Plan.typeUrl || typeof o.name === "string" && Timestamp.isSDK(o.time) && typeof o.height === "bigint" && typeof o.info === "string");
+  },
+  isAmino(o: any): o is PlanAmino {
+    return o && (o.$typeUrl === Plan.typeUrl || typeof o.name === "string" && Timestamp.isAmino(o.time) && typeof o.height === "bigint" && typeof o.info === "string");
+  },
   encode(message: Plan, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -297,7 +395,8 @@ export const Plan = {
       typeUrl: "/cosmos.upgrade.v1beta1.Plan",
       value: Plan.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
   return {
@@ -308,6 +407,16 @@ function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
 }
 export const SoftwareUpgradeProposal = {
   typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal",
+  aminoType: "cosmos-sdk/SoftwareUpgradeProposal",
+  is(o: any): o is SoftwareUpgradeProposal {
+    return o && (o.$typeUrl === SoftwareUpgradeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Plan.is(o.plan));
+  },
+  isSDK(o: any): o is SoftwareUpgradeProposalSDKType {
+    return o && (o.$typeUrl === SoftwareUpgradeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Plan.isSDK(o.plan));
+  },
+  isAmino(o: any): o is SoftwareUpgradeProposalAmino {
+    return o && (o.$typeUrl === SoftwareUpgradeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && Plan.isAmino(o.plan));
+  },
   encode(message: SoftwareUpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -427,6 +536,9 @@ export const SoftwareUpgradeProposal = {
       typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal",
       value: SoftwareUpgradeProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Plan.registerTypeUrl();
   }
 };
 function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposal {
@@ -437,6 +549,16 @@ function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposa
 }
 export const CancelSoftwareUpgradeProposal = {
   typeUrl: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal",
+  aminoType: "cosmos-sdk/CancelSoftwareUpgradeProposal",
+  is(o: any): o is CancelSoftwareUpgradeProposal {
+    return o && (o.$typeUrl === CancelSoftwareUpgradeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string");
+  },
+  isSDK(o: any): o is CancelSoftwareUpgradeProposalSDKType {
+    return o && (o.$typeUrl === CancelSoftwareUpgradeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string");
+  },
+  isAmino(o: any): o is CancelSoftwareUpgradeProposalAmino {
+    return o && (o.$typeUrl === CancelSoftwareUpgradeProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string");
+  },
   encode(message: CancelSoftwareUpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -538,7 +660,8 @@ export const CancelSoftwareUpgradeProposal = {
       typeUrl: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal",
       value: CancelSoftwareUpgradeProposal.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseModuleVersion(): ModuleVersion {
   return {
@@ -548,6 +671,16 @@ function createBaseModuleVersion(): ModuleVersion {
 }
 export const ModuleVersion = {
   typeUrl: "/cosmos.upgrade.v1beta1.ModuleVersion",
+  aminoType: "cosmos-sdk/ModuleVersion",
+  is(o: any): o is ModuleVersion {
+    return o && (o.$typeUrl === ModuleVersion.typeUrl || typeof o.name === "string" && typeof o.version === "bigint");
+  },
+  isSDK(o: any): o is ModuleVersionSDKType {
+    return o && (o.$typeUrl === ModuleVersion.typeUrl || typeof o.name === "string" && typeof o.version === "bigint");
+  },
+  isAmino(o: any): o is ModuleVersionAmino {
+    return o && (o.$typeUrl === ModuleVersion.typeUrl || typeof o.name === "string" && typeof o.version === "bigint");
+  },
   encode(message: ModuleVersion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -651,5 +784,6 @@ export const ModuleVersion = {
       typeUrl: "/cosmos.upgrade.v1beta1.ModuleVersion",
       value: ModuleVersion.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

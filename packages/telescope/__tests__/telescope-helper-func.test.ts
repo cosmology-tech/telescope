@@ -33,8 +33,10 @@ const options: TelescopeOptions = {
   },
 
   interfaces: {
-    enabled: false,
-    useUnionTypes: false,
+    enabled: true,
+    useGlobalDecoderRegistry: true,
+    registerAllDecodersToGlobal: false,
+    useUnionTypes: true,
   },
 
   prototypes: {
@@ -217,6 +219,7 @@ const options: TelescopeOptions = {
 
   helperFuncCreators: {
     enabled: true,
+    useGlobalDecoderRegistry: true,
     genCustomHooks: true,
     include: {
       // pattern matching is case sensitive
@@ -333,7 +336,7 @@ const options: TelescopeOptions = {
         }
       }
     },
-    useLegacyInlineEncoding: true,
+    useLegacyInlineEncoding: false,
   },
   packages: {
     akash: {

@@ -1,8 +1,8 @@
 import { MsgCreateBid, MsgCloseBid } from "./bid";
 import { MsgWithdrawLease, MsgCreateLease, MsgCloseLease } from "./lease";
 import { buildTx, SigningClientResolver } from "../../../helper-func-types";
-import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
+import { buildUseMutation } from "../../../react-query";
 export const createCreateBid = (clientResolver?: SigningClientResolver) => buildTx<MsgCreateBid>({
   clientResolver,
   typeUrl: MsgCreateBid.typeUrl,

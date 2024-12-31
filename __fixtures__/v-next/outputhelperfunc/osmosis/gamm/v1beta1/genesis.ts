@@ -1,8 +1,15 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
+import { PoolProtoMsg as Pool1ProtoMsg } from "../pool-models/balancer/balancerPool";
+import { PoolSDKType as Pool1SDKType } from "../pool-models/balancer/balancerPool";
+import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
+import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
+import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -13,12 +20,20 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params holds parameters for the incentives module */
+export interface ParamsAmino {
+  pool_creation_fee?: CoinAmino[];
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/gamm/params";
+  value: ParamsAmino;
+}
+/** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
   pool_creation_fee: CoinSDKType[];
 }
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisState {
-  pools: Any[];
+  pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** will be renamed to next_pool_id in an upcoming version */
   nextPoolNumber: bigint;
   params: Params;
@@ -27,9 +42,23 @@ export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.GenesisState";
   value: Uint8Array;
 }
+export type GenesisStateEncoded = Omit<GenesisState, "pools"> & {
+  pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
+};
+/** GenesisState defines the gamm module's genesis state. */
+export interface GenesisStateAmino {
+  pools?: AnyAmino[];
+  /** will be renamed to next_pool_id in an upcoming version */
+  next_pool_number?: string;
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "osmosis/gamm/genesis-state";
+  value: GenesisStateAmino;
+}
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
-  pools: AnySDKType[];
+  pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   next_pool_number: bigint;
   params: ParamsSDKType;
 }
@@ -40,6 +69,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.gamm.v1beta1.Params",
+  aminoType: "osmosis/gamm/params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || Array.isArray(o.poolCreationFee) && (!o.poolCreationFee.length || Coin.is(o.poolCreationFee[0])));
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || Array.isArray(o.pool_creation_fee) && (!o.pool_creation_fee.length || Coin.isSDK(o.pool_creation_fee[0])));
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || Array.isArray(o.pool_creation_fee) && (!o.pool_creation_fee.length || Coin.isAmino(o.pool_creation_fee[0])));
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.poolCreationFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -135,6 +174,9 @@ export const Params = {
       typeUrl: "/osmosis.gamm.v1beta1.Params",
       value: Params.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -146,9 +188,19 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/osmosis.gamm.v1beta1.GenesisState",
+  aminoType: "osmosis/gamm/genesis-state",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.is(o.pools[0]) || Pool2.is(o.pools[0]) || Any.is(o.pools[0])) && typeof o.nextPoolNumber === "bigint" && Params.is(o.params));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.isSDK(o.pools[0]) || Pool2.isSDK(o.pools[0]) || Any.isSDK(o.pools[0])) && typeof o.next_pool_number === "bigint" && Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.isAmino(o.pools[0]) || Pool2.isAmino(o.pools[0]) || Any.isAmino(o.pools[0])) && typeof o.next_pool_number === "bigint" && Params.isAmino(o.params));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pools) {
-      Any.encode(v!, writer.uint32(10).fork()).ldelim();
+      Any.encode(GlobalDecoderRegistry.wrapAny(v!), writer.uint32(10).fork()).ldelim();
     }
     if (message.nextPoolNumber !== undefined) {
       writer.uint32(16).uint64(message.nextPoolNumber);
@@ -166,7 +218,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pools.push(Any.decode(reader, reader.uint32()));
+          message.pools.push(GlobalDecoderRegistry.unwrapAny(reader));
           break;
         case 2:
           message.nextPoolNumber = reader.uint64();
@@ -183,7 +235,7 @@ export const GenesisState = {
   },
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
-    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
     if (isSet(object.nextPoolNumber)) obj.nextPoolNumber = BigInt(object.nextPoolNumber.toString());
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
@@ -191,7 +243,7 @@ export const GenesisState = {
   toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toJSON(e) : undefined);
     } else {
       obj.pools = [];
     }
@@ -201,7 +253,7 @@ export const GenesisState = {
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
+    message.pools = object.pools?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
     if (object.nextPoolNumber !== undefined && object.nextPoolNumber !== null) {
       message.nextPoolNumber = BigInt(object.nextPoolNumber.toString());
     }
@@ -212,14 +264,14 @@ export const GenesisState = {
   },
   fromSDK(object: GenesisStateSDKType): GenesisState {
     return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : [],
       nextPoolNumber: object?.next_pool_number,
       params: object.params ? Params.fromSDK(object.params) : undefined
     };
   },
   fromSDKJSON(object: any): GenesisStateSDKType {
     return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : [],
       next_pool_number: isSet(object.next_pool_number) ? BigInt(object.next_pool_number.toString()) : BigInt(0),
       params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
     };
@@ -227,7 +279,7 @@ export const GenesisState = {
   toSDK(message: GenesisState): GenesisStateSDKType {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toSDK(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toSDK(e) : undefined);
     } else {
       obj.pools = [];
     }
@@ -237,7 +289,7 @@ export const GenesisState = {
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();
-    message.pools = object.pools?.map(e => Any.fromAmino(e)) || [];
+    message.pools = object.pools?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
     if (object.next_pool_number !== undefined && object.next_pool_number !== null) {
       message.nextPoolNumber = BigInt(object.next_pool_number);
     }
@@ -249,7 +301,7 @@ export const GenesisState = {
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toAmino(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
     } else {
       obj.pools = message.pools;
     }
@@ -277,5 +329,14 @@ export const GenesisState = {
       typeUrl: "/osmosis.gamm.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GlobalDecoderRegistry.register(Pool1.typeUrl, Pool1);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool1.aminoType, Pool1.typeUrl);
+    Pool1.registerTypeUrl();
+    GlobalDecoderRegistry.register(Pool2.typeUrl, Pool2);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool2.aminoType, Pool2.typeUrl);
+    Pool2.registerTypeUrl();
+    Params.registerTypeUrl();
   }
 };
