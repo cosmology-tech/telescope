@@ -1,10 +1,11 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.gov.v1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -21,6 +22,7 @@ export enum VoteOption {
   UNRECOGNIZED = -1,
 }
 export const VoteOptionSDKType = VoteOption;
+export const VoteOptionAmino = VoteOption;
 export function voteOptionFromJSON(object: any): VoteOption {
   switch (object) {
     case 0:
@@ -93,6 +95,7 @@ export enum ProposalStatus {
   UNRECOGNIZED = -1,
 }
 export const ProposalStatusSDKType = ProposalStatus;
+export const ProposalStatusAmino = ProposalStatus;
 export function proposalStatusFromJSON(object: any): ProposalStatus {
   switch (object) {
     case 0:
@@ -148,6 +151,15 @@ export interface WeightedVoteOptionProtoMsg {
   value: Uint8Array;
 }
 /** WeightedVoteOption defines a unit of vote for vote split. */
+export interface WeightedVoteOptionAmino {
+  option?: VoteOption;
+  weight?: string;
+}
+export interface WeightedVoteOptionAminoMsg {
+  type: "cosmos-sdk/v1/WeightedVoteOption";
+  value: WeightedVoteOptionAmino;
+}
+/** WeightedVoteOption defines a unit of vote for vote split. */
 export interface WeightedVoteOptionSDKType {
   option: VoteOption;
   weight: string;
@@ -164,6 +176,19 @@ export interface Deposit {
 export interface DepositProtoMsg {
   typeUrl: "/cosmos.gov.v1.Deposit";
   value: Uint8Array;
+}
+/**
+ * Deposit defines an amount deposited by an account address to an active
+ * proposal.
+ */
+export interface DepositAmino {
+  proposal_id?: string;
+  depositor?: string;
+  amount?: CoinAmino[];
+}
+export interface DepositAminoMsg {
+  type: "cosmos-sdk/v1/Deposit";
+  value: DepositAmino;
 }
 /**
  * Deposit defines an amount deposited by an account address to an active
@@ -198,6 +223,29 @@ export interface ProposalProtoMsg {
   value: Uint8Array;
 }
 /** Proposal defines the core field members of a governance proposal. */
+export interface ProposalAmino {
+  id?: string;
+  messages?: AnyAmino[];
+  status?: ProposalStatus;
+  /**
+   * final_tally_result is the final tally result of the proposal. When
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
+   */
+  final_tally_result?: TallyResultAmino;
+  submit_time?: string;
+  deposit_end_time?: string;
+  total_deposit?: CoinAmino[];
+  voting_start_time?: string;
+  voting_end_time?: string;
+  /** metadata is any arbitrary metadata attached to the proposal. */
+  metadata?: string;
+}
+export interface ProposalAminoMsg {
+  type: "cosmos-sdk/v1/Proposal";
+  value: ProposalAmino;
+}
+/** Proposal defines the core field members of a governance proposal. */
 export interface ProposalSDKType {
   id: bigint;
   messages: AnySDKType[];
@@ -220,6 +268,17 @@ export interface TallyResult {
 export interface TallyResultProtoMsg {
   typeUrl: "/cosmos.gov.v1.TallyResult";
   value: Uint8Array;
+}
+/** TallyResult defines a standard tally for a governance proposal. */
+export interface TallyResultAmino {
+  yes_count?: string;
+  abstain_count?: string;
+  no_count?: string;
+  no_with_veto_count?: string;
+}
+export interface TallyResultAminoMsg {
+  type: "cosmos-sdk/v1/TallyResult";
+  value: TallyResultAmino;
 }
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResultSDKType {
@@ -247,6 +306,21 @@ export interface VoteProtoMsg {
  * Vote defines a vote on a governance proposal.
  * A Vote consists of a proposal ID, the voter, and the vote option.
  */
+export interface VoteAmino {
+  proposal_id?: string;
+  voter?: string;
+  options?: WeightedVoteOptionAmino[];
+  /** metadata is any  arbitrary metadata to attached to the vote. */
+  metadata?: string;
+}
+export interface VoteAminoMsg {
+  type: "cosmos-sdk/v1/Vote";
+  value: VoteAmino;
+}
+/**
+ * Vote defines a vote on a governance proposal.
+ * A Vote consists of a proposal ID, the voter, and the vote option.
+ */
 export interface VoteSDKType {
   proposal_id: bigint;
   voter: string;
@@ -268,6 +342,20 @@ export interface DepositParamsProtoMsg {
   value: Uint8Array;
 }
 /** DepositParams defines the params for deposits on governance proposals. */
+export interface DepositParamsAmino {
+  /** Minimum deposit for a proposal to enter voting period. */
+  min_deposit?: CoinAmino[];
+  /**
+   * Maximum period for Atom holders to deposit on a proposal. Initial value: 2
+   *  months.
+   */
+  max_deposit_period?: DurationAmino;
+}
+export interface DepositParamsAminoMsg {
+  type: "cosmos-sdk/v1/DepositParams";
+  value: DepositParamsAmino;
+}
+/** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParamsSDKType {
   min_deposit: CoinSDKType[];
   max_deposit_period?: DurationSDKType;
@@ -280,6 +368,15 @@ export interface VotingParams {
 export interface VotingParamsProtoMsg {
   typeUrl: "/cosmos.gov.v1.VotingParams";
   value: Uint8Array;
+}
+/** VotingParams defines the params for voting on governance proposals. */
+export interface VotingParamsAmino {
+  /** Length of the voting period. */
+  voting_period?: DurationAmino;
+}
+export interface VotingParamsAminoMsg {
+  type: "cosmos-sdk/v1/VotingParams";
+  value: VotingParamsAmino;
 }
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParamsSDKType {
@@ -305,6 +402,25 @@ export interface TallyParamsProtoMsg {
   value: Uint8Array;
 }
 /** TallyParams defines the params for tallying votes on governance proposals. */
+export interface TallyParamsAmino {
+  /**
+   * Minimum percentage of total stake needed to vote for a result to be
+   *  considered valid.
+   */
+  quorum?: string;
+  /** Minimum proportion of Yes votes for proposal to pass. Default value: 0.5. */
+  threshold?: string;
+  /**
+   * Minimum value of Veto votes to Total votes ratio for proposal to be
+   *  vetoed. Default value: 1/3.
+   */
+  veto_threshold?: string;
+}
+export interface TallyParamsAminoMsg {
+  type: "cosmos-sdk/v1/TallyParams";
+  value: TallyParamsAmino;
+}
+/** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParamsSDKType {
   quorum: string;
   threshold: string;
@@ -318,6 +434,16 @@ function createBaseWeightedVoteOption(): WeightedVoteOption {
 }
 export const WeightedVoteOption = {
   typeUrl: "/cosmos.gov.v1.WeightedVoteOption",
+  aminoType: "cosmos-sdk/v1/WeightedVoteOption",
+  is(o: any): o is WeightedVoteOption {
+    return o && (o.$typeUrl === WeightedVoteOption.typeUrl || isSet(o.option) && typeof o.weight === "string");
+  },
+  isSDK(o: any): o is WeightedVoteOptionSDKType {
+    return o && (o.$typeUrl === WeightedVoteOption.typeUrl || isSet(o.option) && typeof o.weight === "string");
+  },
+  isAmino(o: any): o is WeightedVoteOptionAmino {
+    return o && (o.$typeUrl === WeightedVoteOption.typeUrl || isSet(o.option) && typeof o.weight === "string");
+  },
   encode(message: WeightedVoteOption, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.option !== 0) {
       writer.uint32(8).int32(message.option);
@@ -419,7 +545,8 @@ export const WeightedVoteOption = {
       typeUrl: "/cosmos.gov.v1.WeightedVoteOption",
       value: WeightedVoteOption.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseDeposit(): Deposit {
   return {
@@ -430,6 +557,16 @@ function createBaseDeposit(): Deposit {
 }
 export const Deposit = {
   typeUrl: "/cosmos.gov.v1.Deposit",
+  aminoType: "cosmos-sdk/v1/Deposit",
+  is(o: any): o is Deposit {
+    return o && (o.$typeUrl === Deposit.typeUrl || typeof o.proposalId === "bigint" && typeof o.depositor === "string" && Array.isArray(o.amount) && (!o.amount.length || Coin.is(o.amount[0])));
+  },
+  isSDK(o: any): o is DepositSDKType {
+    return o && (o.$typeUrl === Deposit.typeUrl || typeof o.proposal_id === "bigint" && typeof o.depositor === "string" && Array.isArray(o.amount) && (!o.amount.length || Coin.isSDK(o.amount[0])));
+  },
+  isAmino(o: any): o is DepositAmino {
+    return o && (o.$typeUrl === Deposit.typeUrl || typeof o.proposal_id === "bigint" && typeof o.depositor === "string" && Array.isArray(o.amount) && (!o.amount.length || Coin.isAmino(o.amount[0])));
+  },
   encode(message: Deposit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== undefined) {
       writer.uint32(8).uint64(message.proposalId);
@@ -559,6 +696,9 @@ export const Deposit = {
       typeUrl: "/cosmos.gov.v1.Deposit",
       value: Deposit.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseProposal(): Proposal {
@@ -577,6 +717,16 @@ function createBaseProposal(): Proposal {
 }
 export const Proposal = {
   typeUrl: "/cosmos.gov.v1.Proposal",
+  aminoType: "cosmos-sdk/v1/Proposal",
+  is(o: any): o is Proposal {
+    return o && (o.$typeUrl === Proposal.typeUrl || typeof o.id === "bigint" && Array.isArray(o.messages) && (!o.messages.length || Any.is(o.messages[0])) && isSet(o.status) && Array.isArray(o.totalDeposit) && (!o.totalDeposit.length || Coin.is(o.totalDeposit[0])) && typeof o.metadata === "string");
+  },
+  isSDK(o: any): o is ProposalSDKType {
+    return o && (o.$typeUrl === Proposal.typeUrl || typeof o.id === "bigint" && Array.isArray(o.messages) && (!o.messages.length || Any.isSDK(o.messages[0])) && isSet(o.status) && Array.isArray(o.total_deposit) && (!o.total_deposit.length || Coin.isSDK(o.total_deposit[0])) && typeof o.metadata === "string");
+  },
+  isAmino(o: any): o is ProposalAmino {
+    return o && (o.$typeUrl === Proposal.typeUrl || typeof o.id === "bigint" && Array.isArray(o.messages) && (!o.messages.length || Any.isAmino(o.messages[0])) && isSet(o.status) && Array.isArray(o.total_deposit) && (!o.total_deposit.length || Coin.isAmino(o.total_deposit[0])) && typeof o.metadata === "string");
+  },
   encode(message: Proposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(8).uint64(message.id);
@@ -830,6 +980,10 @@ export const Proposal = {
       typeUrl: "/cosmos.gov.v1.Proposal",
       value: Proposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    TallyResult.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseTallyResult(): TallyResult {
@@ -842,6 +996,16 @@ function createBaseTallyResult(): TallyResult {
 }
 export const TallyResult = {
   typeUrl: "/cosmos.gov.v1.TallyResult",
+  aminoType: "cosmos-sdk/v1/TallyResult",
+  is(o: any): o is TallyResult {
+    return o && (o.$typeUrl === TallyResult.typeUrl || typeof o.yesCount === "string" && typeof o.abstainCount === "string" && typeof o.noCount === "string" && typeof o.noWithVetoCount === "string");
+  },
+  isSDK(o: any): o is TallyResultSDKType {
+    return o && (o.$typeUrl === TallyResult.typeUrl || typeof o.yes_count === "string" && typeof o.abstain_count === "string" && typeof o.no_count === "string" && typeof o.no_with_veto_count === "string");
+  },
+  isAmino(o: any): o is TallyResultAmino {
+    return o && (o.$typeUrl === TallyResult.typeUrl || typeof o.yes_count === "string" && typeof o.abstain_count === "string" && typeof o.no_count === "string" && typeof o.no_with_veto_count === "string");
+  },
   encode(message: TallyResult, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.yesCount !== undefined) {
       writer.uint32(10).string(message.yesCount);
@@ -975,7 +1139,8 @@ export const TallyResult = {
       typeUrl: "/cosmos.gov.v1.TallyResult",
       value: TallyResult.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseVote(): Vote {
   return {
@@ -987,6 +1152,16 @@ function createBaseVote(): Vote {
 }
 export const Vote = {
   typeUrl: "/cosmos.gov.v1.Vote",
+  aminoType: "cosmos-sdk/v1/Vote",
+  is(o: any): o is Vote {
+    return o && (o.$typeUrl === Vote.typeUrl || typeof o.proposalId === "bigint" && typeof o.voter === "string" && Array.isArray(o.options) && (!o.options.length || WeightedVoteOption.is(o.options[0])) && typeof o.metadata === "string");
+  },
+  isSDK(o: any): o is VoteSDKType {
+    return o && (o.$typeUrl === Vote.typeUrl || typeof o.proposal_id === "bigint" && typeof o.voter === "string" && Array.isArray(o.options) && (!o.options.length || WeightedVoteOption.isSDK(o.options[0])) && typeof o.metadata === "string");
+  },
+  isAmino(o: any): o is VoteAmino {
+    return o && (o.$typeUrl === Vote.typeUrl || typeof o.proposal_id === "bigint" && typeof o.voter === "string" && Array.isArray(o.options) && (!o.options.length || WeightedVoteOption.isAmino(o.options[0])) && typeof o.metadata === "string");
+  },
   encode(message: Vote, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.proposalId !== undefined) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1132,6 +1307,9 @@ export const Vote = {
       typeUrl: "/cosmos.gov.v1.Vote",
       value: Vote.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    WeightedVoteOption.registerTypeUrl();
   }
 };
 function createBaseDepositParams(): DepositParams {
@@ -1142,6 +1320,16 @@ function createBaseDepositParams(): DepositParams {
 }
 export const DepositParams = {
   typeUrl: "/cosmos.gov.v1.DepositParams",
+  aminoType: "cosmos-sdk/v1/DepositParams",
+  is(o: any): o is DepositParams {
+    return o && (o.$typeUrl === DepositParams.typeUrl || Array.isArray(o.minDeposit) && (!o.minDeposit.length || Coin.is(o.minDeposit[0])));
+  },
+  isSDK(o: any): o is DepositParamsSDKType {
+    return o && (o.$typeUrl === DepositParams.typeUrl || Array.isArray(o.min_deposit) && (!o.min_deposit.length || Coin.isSDK(o.min_deposit[0])));
+  },
+  isAmino(o: any): o is DepositParamsAmino {
+    return o && (o.$typeUrl === DepositParams.typeUrl || Array.isArray(o.min_deposit) && (!o.min_deposit.length || Coin.isAmino(o.min_deposit[0])));
+  },
   encode(message: DepositParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1255,6 +1443,9 @@ export const DepositParams = {
       typeUrl: "/cosmos.gov.v1.DepositParams",
       value: DepositParams.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseVotingParams(): VotingParams {
@@ -1264,6 +1455,16 @@ function createBaseVotingParams(): VotingParams {
 }
 export const VotingParams = {
   typeUrl: "/cosmos.gov.v1.VotingParams",
+  aminoType: "cosmos-sdk/v1/VotingParams",
+  is(o: any): o is VotingParams {
+    return o && o.$typeUrl === VotingParams.typeUrl;
+  },
+  isSDK(o: any): o is VotingParamsSDKType {
+    return o && o.$typeUrl === VotingParams.typeUrl;
+  },
+  isAmino(o: any): o is VotingParamsAmino {
+    return o && o.$typeUrl === VotingParams.typeUrl;
+  },
   encode(message: VotingParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.votingPeriod !== undefined) {
       Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
@@ -1351,7 +1552,8 @@ export const VotingParams = {
       typeUrl: "/cosmos.gov.v1.VotingParams",
       value: VotingParams.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseTallyParams(): TallyParams {
   return {
@@ -1362,6 +1564,16 @@ function createBaseTallyParams(): TallyParams {
 }
 export const TallyParams = {
   typeUrl: "/cosmos.gov.v1.TallyParams",
+  aminoType: "cosmos-sdk/v1/TallyParams",
+  is(o: any): o is TallyParams {
+    return o && (o.$typeUrl === TallyParams.typeUrl || typeof o.quorum === "string" && typeof o.threshold === "string" && typeof o.vetoThreshold === "string");
+  },
+  isSDK(o: any): o is TallyParamsSDKType {
+    return o && (o.$typeUrl === TallyParams.typeUrl || typeof o.quorum === "string" && typeof o.threshold === "string" && typeof o.veto_threshold === "string");
+  },
+  isAmino(o: any): o is TallyParamsAmino {
+    return o && (o.$typeUrl === TallyParams.typeUrl || typeof o.quorum === "string" && typeof o.threshold === "string" && typeof o.veto_threshold === "string");
+  },
   encode(message: TallyParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.quorum !== undefined) {
       writer.uint32(10).string(message.quorum);
@@ -1479,5 +1691,6 @@ export const TallyParams = {
       typeUrl: "/cosmos.gov.v1.TallyParams",
       value: TallyParams.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

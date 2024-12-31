@@ -1,9 +1,10 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
-import { Gauge, GaugeSDKType } from "../../incentives/gauge";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
+import { DistrInfo, DistrInfoAmino, DistrInfoSDKType, Params, ParamsAmino, ParamsSDKType } from "./incentives";
+import { Gauge, GaugeAmino, GaugeSDKType } from "../../incentives/gauge";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface QueryGaugeIdsRequest {
   poolId: bigint;
@@ -11,6 +12,13 @@ export interface QueryGaugeIdsRequest {
 export interface QueryGaugeIdsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest";
   value: Uint8Array;
+}
+export interface QueryGaugeIdsRequestAmino {
+  pool_id?: string;
+}
+export interface QueryGaugeIdsRequestAminoMsg {
+  type: "osmosis/poolincentives/query-gauge-ids-request";
+  value: QueryGaugeIdsRequestAmino;
 }
 export interface QueryGaugeIdsRequestSDKType {
   pool_id: bigint;
@@ -21,6 +29,13 @@ export interface QueryGaugeIdsResponse {
 export interface QueryGaugeIdsResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse";
   value: Uint8Array;
+}
+export interface QueryGaugeIdsResponseAmino {
+  gauge_ids_with_duration?: QueryGaugeIdsResponse_GaugeIdWithDurationAmino[];
+}
+export interface QueryGaugeIdsResponseAminoMsg {
+  type: "osmosis/poolincentives/query-gauge-ids-response";
+  value: QueryGaugeIdsResponseAmino;
 }
 export interface QueryGaugeIdsResponseSDKType {
   gauge_ids_with_duration: QueryGaugeIdsResponse_GaugeIdWithDurationSDKType[];
@@ -34,6 +49,15 @@ export interface QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration";
   value: Uint8Array;
 }
+export interface QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
+  gauge_id?: string;
+  duration?: DurationAmino;
+  gauge_incentive_percentage?: string;
+}
+export interface QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg {
+  type: "osmosis/poolincentives/gauge-id-with-duration";
+  value: QueryGaugeIdsResponse_GaugeIdWithDurationAmino;
+}
 export interface QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
   gauge_id: bigint;
   duration: DurationSDKType;
@@ -44,6 +68,11 @@ export interface QueryDistrInfoRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoRequest";
   value: Uint8Array;
 }
+export interface QueryDistrInfoRequestAmino {}
+export interface QueryDistrInfoRequestAminoMsg {
+  type: "osmosis/poolincentives/query-distr-info-request";
+  value: QueryDistrInfoRequestAmino;
+}
 export interface QueryDistrInfoRequestSDKType {}
 export interface QueryDistrInfoResponse {
   distrInfo: DistrInfo;
@@ -51,6 +80,13 @@ export interface QueryDistrInfoResponse {
 export interface QueryDistrInfoResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoResponse";
   value: Uint8Array;
+}
+export interface QueryDistrInfoResponseAmino {
+  distr_info?: DistrInfoAmino;
+}
+export interface QueryDistrInfoResponseAminoMsg {
+  type: "osmosis/poolincentives/query-distr-info-response";
+  value: QueryDistrInfoResponseAmino;
 }
 export interface QueryDistrInfoResponseSDKType {
   distr_info: DistrInfoSDKType;
@@ -60,6 +96,11 @@ export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsRequest";
   value: Uint8Array;
 }
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "osmosis/poolincentives/query-params-request";
+  value: QueryParamsRequestAmino;
+}
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   params: Params;
@@ -67,6 +108,13 @@ export interface QueryParamsResponse {
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsResponse";
   value: Uint8Array;
+}
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "osmosis/poolincentives/query-params-response";
+  value: QueryParamsResponseAmino;
 }
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
@@ -76,6 +124,11 @@ export interface QueryLockableDurationsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest";
   value: Uint8Array;
 }
+export interface QueryLockableDurationsRequestAmino {}
+export interface QueryLockableDurationsRequestAminoMsg {
+  type: "osmosis/poolincentives/query-lockable-durations-request";
+  value: QueryLockableDurationsRequestAmino;
+}
 export interface QueryLockableDurationsRequestSDKType {}
 export interface QueryLockableDurationsResponse {
   lockableDurations: Duration[];
@@ -84,6 +137,13 @@ export interface QueryLockableDurationsResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse";
   value: Uint8Array;
 }
+export interface QueryLockableDurationsResponseAmino {
+  lockable_durations?: DurationAmino[];
+}
+export interface QueryLockableDurationsResponseAminoMsg {
+  type: "osmosis/poolincentives/query-lockable-durations-response";
+  value: QueryLockableDurationsResponseAmino;
+}
 export interface QueryLockableDurationsResponseSDKType {
   lockable_durations: DurationSDKType[];
 }
@@ -91,6 +151,11 @@ export interface QueryIncentivizedPoolsRequest {}
 export interface QueryIncentivizedPoolsRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest";
   value: Uint8Array;
+}
+export interface QueryIncentivizedPoolsRequestAmino {}
+export interface QueryIncentivizedPoolsRequestAminoMsg {
+  type: "osmosis/poolincentives/query-incentivized-pools-request";
+  value: QueryIncentivizedPoolsRequestAmino;
 }
 export interface QueryIncentivizedPoolsRequestSDKType {}
 export interface IncentivizedPool {
@@ -101,6 +166,15 @@ export interface IncentivizedPool {
 export interface IncentivizedPoolProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool";
   value: Uint8Array;
+}
+export interface IncentivizedPoolAmino {
+  pool_id?: string;
+  lockable_duration?: DurationAmino;
+  gauge_id?: string;
+}
+export interface IncentivizedPoolAminoMsg {
+  type: "osmosis/poolincentives/incentivized-pool";
+  value: IncentivizedPoolAmino;
 }
 export interface IncentivizedPoolSDKType {
   pool_id: bigint;
@@ -114,6 +188,13 @@ export interface QueryIncentivizedPoolsResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse";
   value: Uint8Array;
 }
+export interface QueryIncentivizedPoolsResponseAmino {
+  incentivized_pools?: IncentivizedPoolAmino[];
+}
+export interface QueryIncentivizedPoolsResponseAminoMsg {
+  type: "osmosis/poolincentives/query-incentivized-pools-response";
+  value: QueryIncentivizedPoolsResponseAmino;
+}
 export interface QueryIncentivizedPoolsResponseSDKType {
   incentivized_pools: IncentivizedPoolSDKType[];
 }
@@ -122,6 +203,11 @@ export interface QueryExternalIncentiveGaugesRequestProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest";
   value: Uint8Array;
 }
+export interface QueryExternalIncentiveGaugesRequestAmino {}
+export interface QueryExternalIncentiveGaugesRequestAminoMsg {
+  type: "osmosis/poolincentives/query-external-incentive-gauges-request";
+  value: QueryExternalIncentiveGaugesRequestAmino;
+}
 export interface QueryExternalIncentiveGaugesRequestSDKType {}
 export interface QueryExternalIncentiveGaugesResponse {
   data: Gauge[];
@@ -129,6 +215,13 @@ export interface QueryExternalIncentiveGaugesResponse {
 export interface QueryExternalIncentiveGaugesResponseProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse";
   value: Uint8Array;
+}
+export interface QueryExternalIncentiveGaugesResponseAmino {
+  data?: GaugeAmino[];
+}
+export interface QueryExternalIncentiveGaugesResponseAminoMsg {
+  type: "osmosis/poolincentives/query-external-incentive-gauges-response";
+  value: QueryExternalIncentiveGaugesResponseAmino;
 }
 export interface QueryExternalIncentiveGaugesResponseSDKType {
   data: GaugeSDKType[];
@@ -140,6 +233,16 @@ function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
 }
 export const QueryGaugeIdsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest",
+  aminoType: "osmosis/poolincentives/query-gauge-ids-request",
+  is(o: any): o is QueryGaugeIdsRequest {
+    return o && (o.$typeUrl === QueryGaugeIdsRequest.typeUrl || typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is QueryGaugeIdsRequestSDKType {
+    return o && (o.$typeUrl === QueryGaugeIdsRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is QueryGaugeIdsRequestAmino {
+    return o && (o.$typeUrl === QueryGaugeIdsRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
   encode(message: QueryGaugeIdsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -227,7 +330,8 @@ export const QueryGaugeIdsRequest = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest",
       value: QueryGaugeIdsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
   return {
@@ -236,6 +340,16 @@ function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
 }
 export const QueryGaugeIdsResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse",
+  aminoType: "osmosis/poolincentives/query-gauge-ids-response",
+  is(o: any): o is QueryGaugeIdsResponse {
+    return o && (o.$typeUrl === QueryGaugeIdsResponse.typeUrl || Array.isArray(o.gaugeIdsWithDuration) && (!o.gaugeIdsWithDuration.length || QueryGaugeIdsResponse_GaugeIdWithDuration.is(o.gaugeIdsWithDuration[0])));
+  },
+  isSDK(o: any): o is QueryGaugeIdsResponseSDKType {
+    return o && (o.$typeUrl === QueryGaugeIdsResponse.typeUrl || Array.isArray(o.gauge_ids_with_duration) && (!o.gauge_ids_with_duration.length || QueryGaugeIdsResponse_GaugeIdWithDuration.isSDK(o.gauge_ids_with_duration[0])));
+  },
+  isAmino(o: any): o is QueryGaugeIdsResponseAmino {
+    return o && (o.$typeUrl === QueryGaugeIdsResponse.typeUrl || Array.isArray(o.gauge_ids_with_duration) && (!o.gauge_ids_with_duration.length || QueryGaugeIdsResponse_GaugeIdWithDuration.isAmino(o.gauge_ids_with_duration[0])));
+  },
   encode(message: QueryGaugeIdsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.gaugeIdsWithDuration) {
       QueryGaugeIdsResponse_GaugeIdWithDuration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -331,6 +445,9 @@ export const QueryGaugeIdsResponse = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse",
       value: QueryGaugeIdsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    QueryGaugeIdsResponse_GaugeIdWithDuration.registerTypeUrl();
   }
 };
 function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsResponse_GaugeIdWithDuration {
@@ -342,6 +459,16 @@ function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsRes
 }
 export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration",
+  aminoType: "osmosis/poolincentives/gauge-id-with-duration",
+  is(o: any): o is QueryGaugeIdsResponse_GaugeIdWithDuration {
+    return o && (o.$typeUrl === QueryGaugeIdsResponse_GaugeIdWithDuration.typeUrl || typeof o.gaugeId === "bigint" && Duration.is(o.duration) && typeof o.gaugeIncentivePercentage === "string");
+  },
+  isSDK(o: any): o is QueryGaugeIdsResponse_GaugeIdWithDurationSDKType {
+    return o && (o.$typeUrl === QueryGaugeIdsResponse_GaugeIdWithDuration.typeUrl || typeof o.gauge_id === "bigint" && Duration.isSDK(o.duration) && typeof o.gauge_incentive_percentage === "string");
+  },
+  isAmino(o: any): o is QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
+    return o && (o.$typeUrl === QueryGaugeIdsResponse_GaugeIdWithDuration.typeUrl || typeof o.gauge_id === "bigint" && Duration.isAmino(o.duration) && typeof o.gauge_incentive_percentage === "string");
+  },
   encode(message: QueryGaugeIdsResponse_GaugeIdWithDuration, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.gaugeId !== undefined) {
       writer.uint32(8).uint64(message.gaugeId);
@@ -463,13 +590,24 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
       typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration",
       value: QueryGaugeIdsResponse_GaugeIdWithDuration.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryDistrInfoRequest(): QueryDistrInfoRequest {
   return {};
 }
 export const QueryDistrInfoRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoRequest",
+  aminoType: "osmosis/poolincentives/query-distr-info-request",
+  is(o: any): o is QueryDistrInfoRequest {
+    return o && o.$typeUrl === QueryDistrInfoRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryDistrInfoRequestSDKType {
+    return o && o.$typeUrl === QueryDistrInfoRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryDistrInfoRequestAmino {
+    return o && o.$typeUrl === QueryDistrInfoRequest.typeUrl;
+  },
   encode(_: QueryDistrInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -537,7 +675,8 @@ export const QueryDistrInfoRequest = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoRequest",
       value: QueryDistrInfoRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
   return {
@@ -546,6 +685,16 @@ function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
 }
 export const QueryDistrInfoResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoResponse",
+  aminoType: "osmosis/poolincentives/query-distr-info-response",
+  is(o: any): o is QueryDistrInfoResponse {
+    return o && (o.$typeUrl === QueryDistrInfoResponse.typeUrl || DistrInfo.is(o.distrInfo));
+  },
+  isSDK(o: any): o is QueryDistrInfoResponseSDKType {
+    return o && (o.$typeUrl === QueryDistrInfoResponse.typeUrl || DistrInfo.isSDK(o.distr_info));
+  },
+  isAmino(o: any): o is QueryDistrInfoResponseAmino {
+    return o && (o.$typeUrl === QueryDistrInfoResponse.typeUrl || DistrInfo.isAmino(o.distr_info));
+  },
   encode(message: QueryDistrInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.distrInfo !== undefined) {
       DistrInfo.encode(message.distrInfo, writer.uint32(10).fork()).ldelim();
@@ -633,6 +782,9 @@ export const QueryDistrInfoResponse = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoResponse",
       value: QueryDistrInfoResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DistrInfo.registerTypeUrl();
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -640,6 +792,16 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsRequest",
+  aminoType: "osmosis/poolincentives/query-params-request",
+  is(o: any): o is QueryParamsRequest {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsRequestSDKType {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsRequestAmino {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -707,7 +869,8 @@ export const QueryParamsRequest = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsRequest",
       value: QueryParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -716,6 +879,16 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsResponse",
+  aminoType: "osmosis/poolincentives/query-params-response",
+  is(o: any): o is QueryParamsResponse {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.is(o.params));
+  },
+  isSDK(o: any): o is QueryParamsResponseSDKType {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is QueryParamsResponseAmino {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isAmino(o.params));
+  },
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -803,6 +976,9 @@ export const QueryParamsResponse = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsResponse",
       value: QueryParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };
 function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsRequest {
@@ -810,6 +986,16 @@ function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsReques
 }
 export const QueryLockableDurationsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest",
+  aminoType: "osmosis/poolincentives/query-lockable-durations-request",
+  is(o: any): o is QueryLockableDurationsRequest {
+    return o && o.$typeUrl === QueryLockableDurationsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryLockableDurationsRequestSDKType {
+    return o && o.$typeUrl === QueryLockableDurationsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryLockableDurationsRequestAmino {
+    return o && o.$typeUrl === QueryLockableDurationsRequest.typeUrl;
+  },
   encode(_: QueryLockableDurationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -877,7 +1063,8 @@ export const QueryLockableDurationsRequest = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest",
       value: QueryLockableDurationsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsResponse {
   return {
@@ -886,6 +1073,16 @@ function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsRespo
 }
 export const QueryLockableDurationsResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse",
+  aminoType: "osmosis/poolincentives/query-lockable-durations-response",
+  is(o: any): o is QueryLockableDurationsResponse {
+    return o && (o.$typeUrl === QueryLockableDurationsResponse.typeUrl || Array.isArray(o.lockableDurations) && (!o.lockableDurations.length || Duration.is(o.lockableDurations[0])));
+  },
+  isSDK(o: any): o is QueryLockableDurationsResponseSDKType {
+    return o && (o.$typeUrl === QueryLockableDurationsResponse.typeUrl || Array.isArray(o.lockable_durations) && (!o.lockable_durations.length || Duration.isSDK(o.lockable_durations[0])));
+  },
+  isAmino(o: any): o is QueryLockableDurationsResponseAmino {
+    return o && (o.$typeUrl === QueryLockableDurationsResponse.typeUrl || Array.isArray(o.lockable_durations) && (!o.lockable_durations.length || Duration.isAmino(o.lockable_durations[0])));
+  },
   encode(message: QueryLockableDurationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -981,13 +1178,24 @@ export const QueryLockableDurationsResponse = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse",
       value: QueryLockableDurationsResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryIncentivizedPoolsRequest(): QueryIncentivizedPoolsRequest {
   return {};
 }
 export const QueryIncentivizedPoolsRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest",
+  aminoType: "osmosis/poolincentives/query-incentivized-pools-request",
+  is(o: any): o is QueryIncentivizedPoolsRequest {
+    return o && o.$typeUrl === QueryIncentivizedPoolsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryIncentivizedPoolsRequestSDKType {
+    return o && o.$typeUrl === QueryIncentivizedPoolsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryIncentivizedPoolsRequestAmino {
+    return o && o.$typeUrl === QueryIncentivizedPoolsRequest.typeUrl;
+  },
   encode(_: QueryIncentivizedPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1055,7 +1263,8 @@ export const QueryIncentivizedPoolsRequest = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest",
       value: QueryIncentivizedPoolsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseIncentivizedPool(): IncentivizedPool {
   return {
@@ -1066,6 +1275,16 @@ function createBaseIncentivizedPool(): IncentivizedPool {
 }
 export const IncentivizedPool = {
   typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool",
+  aminoType: "osmosis/poolincentives/incentivized-pool",
+  is(o: any): o is IncentivizedPool {
+    return o && (o.$typeUrl === IncentivizedPool.typeUrl || typeof o.poolId === "bigint" && Duration.is(o.lockableDuration) && typeof o.gaugeId === "bigint");
+  },
+  isSDK(o: any): o is IncentivizedPoolSDKType {
+    return o && (o.$typeUrl === IncentivizedPool.typeUrl || typeof o.pool_id === "bigint" && Duration.isSDK(o.lockable_duration) && typeof o.gauge_id === "bigint");
+  },
+  isAmino(o: any): o is IncentivizedPoolAmino {
+    return o && (o.$typeUrl === IncentivizedPool.typeUrl || typeof o.pool_id === "bigint" && Duration.isAmino(o.lockable_duration) && typeof o.gauge_id === "bigint");
+  },
   encode(message: IncentivizedPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -1189,7 +1408,8 @@ export const IncentivizedPool = {
       typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool",
       value: IncentivizedPool.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryIncentivizedPoolsResponse(): QueryIncentivizedPoolsResponse {
   return {
@@ -1198,6 +1418,16 @@ function createBaseQueryIncentivizedPoolsResponse(): QueryIncentivizedPoolsRespo
 }
 export const QueryIncentivizedPoolsResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse",
+  aminoType: "osmosis/poolincentives/query-incentivized-pools-response",
+  is(o: any): o is QueryIncentivizedPoolsResponse {
+    return o && (o.$typeUrl === QueryIncentivizedPoolsResponse.typeUrl || Array.isArray(o.incentivizedPools) && (!o.incentivizedPools.length || IncentivizedPool.is(o.incentivizedPools[0])));
+  },
+  isSDK(o: any): o is QueryIncentivizedPoolsResponseSDKType {
+    return o && (o.$typeUrl === QueryIncentivizedPoolsResponse.typeUrl || Array.isArray(o.incentivized_pools) && (!o.incentivized_pools.length || IncentivizedPool.isSDK(o.incentivized_pools[0])));
+  },
+  isAmino(o: any): o is QueryIncentivizedPoolsResponseAmino {
+    return o && (o.$typeUrl === QueryIncentivizedPoolsResponse.typeUrl || Array.isArray(o.incentivized_pools) && (!o.incentivized_pools.length || IncentivizedPool.isAmino(o.incentivized_pools[0])));
+  },
   encode(message: QueryIncentivizedPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.incentivizedPools) {
       IncentivizedPool.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1293,6 +1523,9 @@ export const QueryIncentivizedPoolsResponse = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse",
       value: QueryIncentivizedPoolsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    IncentivizedPool.registerTypeUrl();
   }
 };
 function createBaseQueryExternalIncentiveGaugesRequest(): QueryExternalIncentiveGaugesRequest {
@@ -1300,6 +1533,16 @@ function createBaseQueryExternalIncentiveGaugesRequest(): QueryExternalIncentive
 }
 export const QueryExternalIncentiveGaugesRequest = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest",
+  aminoType: "osmosis/poolincentives/query-external-incentive-gauges-request",
+  is(o: any): o is QueryExternalIncentiveGaugesRequest {
+    return o && o.$typeUrl === QueryExternalIncentiveGaugesRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryExternalIncentiveGaugesRequestSDKType {
+    return o && o.$typeUrl === QueryExternalIncentiveGaugesRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryExternalIncentiveGaugesRequestAmino {
+    return o && o.$typeUrl === QueryExternalIncentiveGaugesRequest.typeUrl;
+  },
   encode(_: QueryExternalIncentiveGaugesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1367,7 +1610,8 @@ export const QueryExternalIncentiveGaugesRequest = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest",
       value: QueryExternalIncentiveGaugesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryExternalIncentiveGaugesResponse(): QueryExternalIncentiveGaugesResponse {
   return {
@@ -1376,6 +1620,16 @@ function createBaseQueryExternalIncentiveGaugesResponse(): QueryExternalIncentiv
 }
 export const QueryExternalIncentiveGaugesResponse = {
   typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse",
+  aminoType: "osmosis/poolincentives/query-external-incentive-gauges-response",
+  is(o: any): o is QueryExternalIncentiveGaugesResponse {
+    return o && (o.$typeUrl === QueryExternalIncentiveGaugesResponse.typeUrl || Array.isArray(o.data) && (!o.data.length || Gauge.is(o.data[0])));
+  },
+  isSDK(o: any): o is QueryExternalIncentiveGaugesResponseSDKType {
+    return o && (o.$typeUrl === QueryExternalIncentiveGaugesResponse.typeUrl || Array.isArray(o.data) && (!o.data.length || Gauge.isSDK(o.data[0])));
+  },
+  isAmino(o: any): o is QueryExternalIncentiveGaugesResponseAmino {
+    return o && (o.$typeUrl === QueryExternalIncentiveGaugesResponse.typeUrl || Array.isArray(o.data) && (!o.data.length || Gauge.isAmino(o.data[0])));
+  },
   encode(message: QueryExternalIncentiveGaugesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.data) {
       Gauge.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1471,5 +1725,8 @@ export const QueryExternalIncentiveGaugesResponse = {
       typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse",
       value: QueryExternalIncentiveGaugesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Gauge.registerTypeUrl();
   }
 };

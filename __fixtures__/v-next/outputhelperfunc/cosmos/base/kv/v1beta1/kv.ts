@@ -11,6 +11,14 @@ export interface PairsProtoMsg {
   value: Uint8Array;
 }
 /** Pairs defines a repeated slice of Pair objects. */
+export interface PairsAmino {
+  pairs?: PairAmino[];
+}
+export interface PairsAminoMsg {
+  type: "cosmos-sdk/Pairs";
+  value: PairsAmino;
+}
+/** Pairs defines a repeated slice of Pair objects. */
 export interface PairsSDKType {
   pairs: PairSDKType[];
 }
@@ -24,6 +32,15 @@ export interface PairProtoMsg {
   value: Uint8Array;
 }
 /** Pair defines a key/value bytes tuple. */
+export interface PairAmino {
+  key?: string;
+  value?: string;
+}
+export interface PairAminoMsg {
+  type: "cosmos-sdk/Pair";
+  value: PairAmino;
+}
+/** Pair defines a key/value bytes tuple. */
 export interface PairSDKType {
   key: Uint8Array;
   value: Uint8Array;
@@ -35,6 +52,16 @@ function createBasePairs(): Pairs {
 }
 export const Pairs = {
   typeUrl: "/cosmos.base.kv.v1beta1.Pairs",
+  aminoType: "cosmos-sdk/Pairs",
+  is(o: any): o is Pairs {
+    return o && (o.$typeUrl === Pairs.typeUrl || Array.isArray(o.pairs) && (!o.pairs.length || Pair.is(o.pairs[0])));
+  },
+  isSDK(o: any): o is PairsSDKType {
+    return o && (o.$typeUrl === Pairs.typeUrl || Array.isArray(o.pairs) && (!o.pairs.length || Pair.isSDK(o.pairs[0])));
+  },
+  isAmino(o: any): o is PairsAmino {
+    return o && (o.$typeUrl === Pairs.typeUrl || Array.isArray(o.pairs) && (!o.pairs.length || Pair.isAmino(o.pairs[0])));
+  },
   encode(message: Pairs, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pairs) {
       Pair.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -130,6 +157,9 @@ export const Pairs = {
       typeUrl: "/cosmos.base.kv.v1beta1.Pairs",
       value: Pairs.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Pair.registerTypeUrl();
   }
 };
 function createBasePair(): Pair {
@@ -140,6 +170,16 @@ function createBasePair(): Pair {
 }
 export const Pair = {
   typeUrl: "/cosmos.base.kv.v1beta1.Pair",
+  aminoType: "cosmos-sdk/Pair",
+  is(o: any): o is Pair {
+    return o && (o.$typeUrl === Pair.typeUrl || (o.key instanceof Uint8Array || typeof o.key === "string") && (o.value instanceof Uint8Array || typeof o.value === "string"));
+  },
+  isSDK(o: any): o is PairSDKType {
+    return o && (o.$typeUrl === Pair.typeUrl || (o.key instanceof Uint8Array || typeof o.key === "string") && (o.value instanceof Uint8Array || typeof o.value === "string"));
+  },
+  isAmino(o: any): o is PairAmino {
+    return o && (o.$typeUrl === Pair.typeUrl || (o.key instanceof Uint8Array || typeof o.key === "string") && (o.value instanceof Uint8Array || typeof o.value === "string"));
+  },
   encode(message: Pair, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -241,5 +281,6 @@ export const Pair = {
       typeUrl: "/cosmos.base.kv.v1beta1.Pair",
       value: Pair.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

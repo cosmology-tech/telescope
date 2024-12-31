@@ -1,8 +1,9 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -39,6 +40,37 @@ export interface ValidatorSigningInfoProtoMsg {
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
  */
+export interface ValidatorSigningInfoAmino {
+  address?: string;
+  /** Height at which validator was first a candidate OR was unjailed */
+  start_height?: string;
+  /**
+   * Index which is incremented each time the validator was a bonded
+   * in a block and may have signed a precommit or not. This in conjunction with the
+   * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
+   */
+  index_offset?: string;
+  /** Timestamp until which the validator is jailed due to liveness downtime. */
+  jailed_until?: string;
+  /**
+   * Whether or not a validator has been tombstoned (killed out of validator set). It is set
+   * once the validator commits an equivocation or for any other configured misbehiavor.
+   */
+  tombstoned?: boolean;
+  /**
+   * A counter kept to avoid unnecessary array reads.
+   * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
+   */
+  missed_blocks_counter?: string;
+}
+export interface ValidatorSigningInfoAminoMsg {
+  type: "cosmos-sdk/ValidatorSigningInfo";
+  value: ValidatorSigningInfoAmino;
+}
+/**
+ * ValidatorSigningInfo defines a validator's signing info for monitoring their
+ * liveness activity.
+ */
 export interface ValidatorSigningInfoSDKType {
   address: string;
   start_height: bigint;
@@ -60,6 +92,18 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params represents the parameters used for by the slashing module. */
+export interface ParamsAmino {
+  signed_blocks_window?: string;
+  min_signed_per_window?: string;
+  downtime_jail_duration?: DurationAmino;
+  slash_fraction_double_sign?: string;
+  slash_fraction_downtime?: string;
+}
+export interface ParamsAminoMsg {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
+}
+/** Params represents the parameters used for by the slashing module. */
 export interface ParamsSDKType {
   signed_blocks_window: bigint;
   min_signed_per_window: Uint8Array;
@@ -79,6 +123,16 @@ function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
 }
 export const ValidatorSigningInfo = {
   typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo",
+  aminoType: "cosmos-sdk/ValidatorSigningInfo",
+  is(o: any): o is ValidatorSigningInfo {
+    return o && (o.$typeUrl === ValidatorSigningInfo.typeUrl || typeof o.address === "string" && typeof o.startHeight === "bigint" && typeof o.indexOffset === "bigint" && Timestamp.is(o.jailedUntil) && typeof o.tombstoned === "boolean" && typeof o.missedBlocksCounter === "bigint");
+  },
+  isSDK(o: any): o is ValidatorSigningInfoSDKType {
+    return o && (o.$typeUrl === ValidatorSigningInfo.typeUrl || typeof o.address === "string" && typeof o.start_height === "bigint" && typeof o.index_offset === "bigint" && Timestamp.isSDK(o.jailed_until) && typeof o.tombstoned === "boolean" && typeof o.missed_blocks_counter === "bigint");
+  },
+  isAmino(o: any): o is ValidatorSigningInfoAmino {
+    return o && (o.$typeUrl === ValidatorSigningInfo.typeUrl || typeof o.address === "string" && typeof o.start_height === "bigint" && typeof o.index_offset === "bigint" && Timestamp.isAmino(o.jailed_until) && typeof o.tombstoned === "boolean" && typeof o.missed_blocks_counter === "bigint");
+  },
   encode(message: ValidatorSigningInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -250,7 +304,8 @@ export const ValidatorSigningInfo = {
       typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo",
       value: ValidatorSigningInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseParams(): Params {
   return {
@@ -263,6 +318,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/cosmos.slashing.v1beta1.Params",
+  aminoType: "cosmos-sdk/Params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.signedBlocksWindow === "bigint" && (o.minSignedPerWindow instanceof Uint8Array || typeof o.minSignedPerWindow === "string") && Duration.is(o.downtimeJailDuration) && (o.slashFractionDoubleSign instanceof Uint8Array || typeof o.slashFractionDoubleSign === "string") && (o.slashFractionDowntime instanceof Uint8Array || typeof o.slashFractionDowntime === "string"));
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.signed_blocks_window === "bigint" && (o.min_signed_per_window instanceof Uint8Array || typeof o.min_signed_per_window === "string") && Duration.isSDK(o.downtime_jail_duration) && (o.slash_fraction_double_sign instanceof Uint8Array || typeof o.slash_fraction_double_sign === "string") && (o.slash_fraction_downtime instanceof Uint8Array || typeof o.slash_fraction_downtime === "string"));
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.signed_blocks_window === "bigint" && (o.min_signed_per_window instanceof Uint8Array || typeof o.min_signed_per_window === "string") && Duration.isAmino(o.downtime_jail_duration) && (o.slash_fraction_double_sign instanceof Uint8Array || typeof o.slash_fraction_double_sign === "string") && (o.slash_fraction_downtime instanceof Uint8Array || typeof o.slash_fraction_downtime === "string"));
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.signedBlocksWindow !== undefined) {
       writer.uint32(8).int64(message.signedBlocksWindow);
@@ -416,5 +481,6 @@ export const Params = {
       typeUrl: "/cosmos.slashing.v1beta1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

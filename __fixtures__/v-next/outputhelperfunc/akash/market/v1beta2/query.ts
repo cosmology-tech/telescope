@@ -1,9 +1,10 @@
-import { OrderFilters, OrderFiltersSDKType, OrderID, OrderIDSDKType, Order, OrderSDKType } from "./order";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } from "./bid";
-import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease";
-import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
+import { OrderFilters, OrderFiltersAmino, OrderFiltersSDKType, OrderID, OrderIDAmino, OrderIDSDKType, Order, OrderAmino, OrderSDKType } from "./order";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { BidFilters, BidFiltersAmino, BidFiltersSDKType, BidID, BidIDAmino, BidIDSDKType, Bid, BidAmino, BidSDKType } from "./bid";
+import { LeaseFilters, LeaseFiltersAmino, LeaseFiltersSDKType, LeaseID, LeaseIDAmino, LeaseIDSDKType, Lease, LeaseAmino, LeaseSDKType } from "./lease";
+import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
@@ -15,6 +16,15 @@ export interface QueryOrdersRequest {
 export interface QueryOrdersRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrdersRequest";
   value: Uint8Array;
+}
+/** QueryOrdersRequest is request type for the Query/Orders RPC method */
+export interface QueryOrdersRequestAmino {
+  filters?: OrderFiltersAmino;
+  pagination?: PageRequestAmino;
+}
+export interface QueryOrdersRequestAminoMsg {
+  type: "akash/market/v1beta2/query-orders-request";
+  value: QueryOrdersRequestAmino;
 }
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequestSDKType {
@@ -31,6 +41,15 @@ export interface QueryOrdersResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
+export interface QueryOrdersResponseAmino {
+  orders?: OrderAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryOrdersResponseAminoMsg {
+  type: "akash/market/v1beta2/query-orders-response";
+  value: QueryOrdersResponseAmino;
+}
+/** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponseSDKType {
   orders: OrderSDKType[];
   pagination?: PageResponseSDKType;
@@ -42,6 +61,14 @@ export interface QueryOrderRequest {
 export interface QueryOrderRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryOrderRequest";
   value: Uint8Array;
+}
+/** QueryOrderRequest is request type for the Query/Order RPC method */
+export interface QueryOrderRequestAmino {
+  id?: OrderIDAmino;
+}
+export interface QueryOrderRequestAminoMsg {
+  type: "akash/market/v1beta2/query-order-request";
+  value: QueryOrderRequestAmino;
 }
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequestSDKType {
@@ -56,6 +83,14 @@ export interface QueryOrderResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryOrderResponse is response type for the Query/Order RPC method */
+export interface QueryOrderResponseAmino {
+  order?: OrderAmino;
+}
+export interface QueryOrderResponseAminoMsg {
+  type: "akash/market/v1beta2/query-order-response";
+  value: QueryOrderResponseAmino;
+}
+/** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponseSDKType {
   order: OrderSDKType;
 }
@@ -67,6 +102,15 @@ export interface QueryBidsRequest {
 export interface QueryBidsRequestProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidsRequest";
   value: Uint8Array;
+}
+/** QueryBidsRequest is request type for the Query/Bids RPC method */
+export interface QueryBidsRequestAmino {
+  filters?: BidFiltersAmino;
+  pagination?: PageRequestAmino;
+}
+export interface QueryBidsRequestAminoMsg {
+  type: "akash/market/v1beta2/query-bids-request";
+  value: QueryBidsRequestAmino;
 }
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequestSDKType {
@@ -83,6 +127,15 @@ export interface QueryBidsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
+export interface QueryBidsResponseAmino {
+  bids?: QueryBidResponseAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryBidsResponseAminoMsg {
+  type: "akash/market/v1beta2/query-bids-response";
+  value: QueryBidsResponseAmino;
+}
+/** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponseSDKType {
   bids: QueryBidResponseSDKType[];
   pagination?: PageResponseSDKType;
@@ -96,6 +149,14 @@ export interface QueryBidRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
+export interface QueryBidRequestAmino {
+  id?: BidIDAmino;
+}
+export interface QueryBidRequestAminoMsg {
+  type: "akash/market/v1beta2/query-bid-request";
+  value: QueryBidRequestAmino;
+}
+/** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequestSDKType {
   id: BidIDSDKType;
 }
@@ -107,6 +168,15 @@ export interface QueryBidResponse {
 export interface QueryBidResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryBidResponse";
   value: Uint8Array;
+}
+/** QueryBidResponse is response type for the Query/Bid RPC method */
+export interface QueryBidResponseAmino {
+  bid?: BidAmino;
+  escrow_account?: AccountAmino;
+}
+export interface QueryBidResponseAminoMsg {
+  type: "akash/market/v1beta2/query-bid-response";
+  value: QueryBidResponseAmino;
 }
 /** QueryBidResponse is response type for the Query/Bid RPC method */
 export interface QueryBidResponseSDKType {
@@ -123,6 +193,15 @@ export interface QueryLeasesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
+export interface QueryLeasesRequestAmino {
+  filters?: LeaseFiltersAmino;
+  pagination?: PageRequestAmino;
+}
+export interface QueryLeasesRequestAminoMsg {
+  type: "akash/market/v1beta2/query-leases-request";
+  value: QueryLeasesRequestAmino;
+}
+/** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequestSDKType {
   filters: LeaseFiltersSDKType;
   pagination?: PageRequestSDKType;
@@ -135,6 +214,15 @@ export interface QueryLeasesResponse {
 export interface QueryLeasesResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeasesResponse";
   value: Uint8Array;
+}
+/** QueryLeasesResponse is response type for the Query/Leases RPC method */
+export interface QueryLeasesResponseAmino {
+  leases?: QueryLeaseResponseAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryLeasesResponseAminoMsg {
+  type: "akash/market/v1beta2/query-leases-response";
+  value: QueryLeasesResponseAmino;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponseSDKType {
@@ -150,6 +238,14 @@ export interface QueryLeaseRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
+export interface QueryLeaseRequestAmino {
+  id?: LeaseIDAmino;
+}
+export interface QueryLeaseRequestAminoMsg {
+  type: "akash/market/v1beta2/query-lease-request";
+  value: QueryLeaseRequestAmino;
+}
+/** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequestSDKType {
   id: LeaseIDSDKType;
 }
@@ -161,6 +257,15 @@ export interface QueryLeaseResponse {
 export interface QueryLeaseResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.QueryLeaseResponse";
   value: Uint8Array;
+}
+/** QueryLeaseResponse is response type for the Query/Lease RPC method */
+export interface QueryLeaseResponseAmino {
+  lease?: LeaseAmino;
+  escrow_payment?: FractionalPaymentAmino;
+}
+export interface QueryLeaseResponseAminoMsg {
+  type: "akash/market/v1beta2/query-lease-response";
+  value: QueryLeaseResponseAmino;
 }
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
 export interface QueryLeaseResponseSDKType {
@@ -175,6 +280,16 @@ function createBaseQueryOrdersRequest(): QueryOrdersRequest {
 }
 export const QueryOrdersRequest = {
   typeUrl: "/akash.market.v1beta2.QueryOrdersRequest",
+  aminoType: "akash/market/v1beta2/query-orders-request",
+  is(o: any): o is QueryOrdersRequest {
+    return o && (o.$typeUrl === QueryOrdersRequest.typeUrl || OrderFilters.is(o.filters));
+  },
+  isSDK(o: any): o is QueryOrdersRequestSDKType {
+    return o && (o.$typeUrl === QueryOrdersRequest.typeUrl || OrderFilters.isSDK(o.filters));
+  },
+  isAmino(o: any): o is QueryOrdersRequestAmino {
+    return o && (o.$typeUrl === QueryOrdersRequest.typeUrl || OrderFilters.isAmino(o.filters));
+  },
   encode(message: QueryOrdersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filters !== undefined) {
       OrderFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -280,6 +395,10 @@ export const QueryOrdersRequest = {
       typeUrl: "/akash.market.v1beta2.QueryOrdersRequest",
       value: QueryOrdersRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    OrderFilters.registerTypeUrl();
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryOrdersResponse(): QueryOrdersResponse {
@@ -290,6 +409,16 @@ function createBaseQueryOrdersResponse(): QueryOrdersResponse {
 }
 export const QueryOrdersResponse = {
   typeUrl: "/akash.market.v1beta2.QueryOrdersResponse",
+  aminoType: "akash/market/v1beta2/query-orders-response",
+  is(o: any): o is QueryOrdersResponse {
+    return o && (o.$typeUrl === QueryOrdersResponse.typeUrl || Array.isArray(o.orders) && (!o.orders.length || Order.is(o.orders[0])));
+  },
+  isSDK(o: any): o is QueryOrdersResponseSDKType {
+    return o && (o.$typeUrl === QueryOrdersResponse.typeUrl || Array.isArray(o.orders) && (!o.orders.length || Order.isSDK(o.orders[0])));
+  },
+  isAmino(o: any): o is QueryOrdersResponseAmino {
+    return o && (o.$typeUrl === QueryOrdersResponse.typeUrl || Array.isArray(o.orders) && (!o.orders.length || Order.isAmino(o.orders[0])));
+  },
   encode(message: QueryOrdersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.orders) {
       Order.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -403,6 +532,10 @@ export const QueryOrdersResponse = {
       typeUrl: "/akash.market.v1beta2.QueryOrdersResponse",
       value: QueryOrdersResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Order.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryOrderRequest(): QueryOrderRequest {
@@ -412,6 +545,16 @@ function createBaseQueryOrderRequest(): QueryOrderRequest {
 }
 export const QueryOrderRequest = {
   typeUrl: "/akash.market.v1beta2.QueryOrderRequest",
+  aminoType: "akash/market/v1beta2/query-order-request",
+  is(o: any): o is QueryOrderRequest {
+    return o && (o.$typeUrl === QueryOrderRequest.typeUrl || OrderID.is(o.id));
+  },
+  isSDK(o: any): o is QueryOrderRequestSDKType {
+    return o && (o.$typeUrl === QueryOrderRequest.typeUrl || OrderID.isSDK(o.id));
+  },
+  isAmino(o: any): o is QueryOrderRequestAmino {
+    return o && (o.$typeUrl === QueryOrderRequest.typeUrl || OrderID.isAmino(o.id));
+  },
   encode(message: QueryOrderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       OrderID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -499,6 +642,9 @@ export const QueryOrderRequest = {
       typeUrl: "/akash.market.v1beta2.QueryOrderRequest",
       value: QueryOrderRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    OrderID.registerTypeUrl();
   }
 };
 function createBaseQueryOrderResponse(): QueryOrderResponse {
@@ -508,6 +654,16 @@ function createBaseQueryOrderResponse(): QueryOrderResponse {
 }
 export const QueryOrderResponse = {
   typeUrl: "/akash.market.v1beta2.QueryOrderResponse",
+  aminoType: "akash/market/v1beta2/query-order-response",
+  is(o: any): o is QueryOrderResponse {
+    return o && (o.$typeUrl === QueryOrderResponse.typeUrl || Order.is(o.order));
+  },
+  isSDK(o: any): o is QueryOrderResponseSDKType {
+    return o && (o.$typeUrl === QueryOrderResponse.typeUrl || Order.isSDK(o.order));
+  },
+  isAmino(o: any): o is QueryOrderResponseAmino {
+    return o && (o.$typeUrl === QueryOrderResponse.typeUrl || Order.isAmino(o.order));
+  },
   encode(message: QueryOrderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.order !== undefined) {
       Order.encode(message.order, writer.uint32(10).fork()).ldelim();
@@ -595,6 +751,9 @@ export const QueryOrderResponse = {
       typeUrl: "/akash.market.v1beta2.QueryOrderResponse",
       value: QueryOrderResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Order.registerTypeUrl();
   }
 };
 function createBaseQueryBidsRequest(): QueryBidsRequest {
@@ -605,6 +764,16 @@ function createBaseQueryBidsRequest(): QueryBidsRequest {
 }
 export const QueryBidsRequest = {
   typeUrl: "/akash.market.v1beta2.QueryBidsRequest",
+  aminoType: "akash/market/v1beta2/query-bids-request",
+  is(o: any): o is QueryBidsRequest {
+    return o && (o.$typeUrl === QueryBidsRequest.typeUrl || BidFilters.is(o.filters));
+  },
+  isSDK(o: any): o is QueryBidsRequestSDKType {
+    return o && (o.$typeUrl === QueryBidsRequest.typeUrl || BidFilters.isSDK(o.filters));
+  },
+  isAmino(o: any): o is QueryBidsRequestAmino {
+    return o && (o.$typeUrl === QueryBidsRequest.typeUrl || BidFilters.isAmino(o.filters));
+  },
   encode(message: QueryBidsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filters !== undefined) {
       BidFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -710,6 +879,10 @@ export const QueryBidsRequest = {
       typeUrl: "/akash.market.v1beta2.QueryBidsRequest",
       value: QueryBidsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    BidFilters.registerTypeUrl();
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryBidsResponse(): QueryBidsResponse {
@@ -720,6 +893,16 @@ function createBaseQueryBidsResponse(): QueryBidsResponse {
 }
 export const QueryBidsResponse = {
   typeUrl: "/akash.market.v1beta2.QueryBidsResponse",
+  aminoType: "akash/market/v1beta2/query-bids-response",
+  is(o: any): o is QueryBidsResponse {
+    return o && (o.$typeUrl === QueryBidsResponse.typeUrl || Array.isArray(o.bids) && (!o.bids.length || QueryBidResponse.is(o.bids[0])));
+  },
+  isSDK(o: any): o is QueryBidsResponseSDKType {
+    return o && (o.$typeUrl === QueryBidsResponse.typeUrl || Array.isArray(o.bids) && (!o.bids.length || QueryBidResponse.isSDK(o.bids[0])));
+  },
+  isAmino(o: any): o is QueryBidsResponseAmino {
+    return o && (o.$typeUrl === QueryBidsResponse.typeUrl || Array.isArray(o.bids) && (!o.bids.length || QueryBidResponse.isAmino(o.bids[0])));
+  },
   encode(message: QueryBidsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.bids) {
       QueryBidResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -833,6 +1016,10 @@ export const QueryBidsResponse = {
       typeUrl: "/akash.market.v1beta2.QueryBidsResponse",
       value: QueryBidsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    QueryBidResponse.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryBidRequest(): QueryBidRequest {
@@ -842,6 +1029,16 @@ function createBaseQueryBidRequest(): QueryBidRequest {
 }
 export const QueryBidRequest = {
   typeUrl: "/akash.market.v1beta2.QueryBidRequest",
+  aminoType: "akash/market/v1beta2/query-bid-request",
+  is(o: any): o is QueryBidRequest {
+    return o && (o.$typeUrl === QueryBidRequest.typeUrl || BidID.is(o.id));
+  },
+  isSDK(o: any): o is QueryBidRequestSDKType {
+    return o && (o.$typeUrl === QueryBidRequest.typeUrl || BidID.isSDK(o.id));
+  },
+  isAmino(o: any): o is QueryBidRequestAmino {
+    return o && (o.$typeUrl === QueryBidRequest.typeUrl || BidID.isAmino(o.id));
+  },
   encode(message: QueryBidRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       BidID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -929,6 +1126,9 @@ export const QueryBidRequest = {
       typeUrl: "/akash.market.v1beta2.QueryBidRequest",
       value: QueryBidRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    BidID.registerTypeUrl();
   }
 };
 function createBaseQueryBidResponse(): QueryBidResponse {
@@ -939,6 +1139,16 @@ function createBaseQueryBidResponse(): QueryBidResponse {
 }
 export const QueryBidResponse = {
   typeUrl: "/akash.market.v1beta2.QueryBidResponse",
+  aminoType: "akash/market/v1beta2/query-bid-response",
+  is(o: any): o is QueryBidResponse {
+    return o && (o.$typeUrl === QueryBidResponse.typeUrl || Bid.is(o.bid) && Account.is(o.escrowAccount));
+  },
+  isSDK(o: any): o is QueryBidResponseSDKType {
+    return o && (o.$typeUrl === QueryBidResponse.typeUrl || Bid.isSDK(o.bid) && Account.isSDK(o.escrow_account));
+  },
+  isAmino(o: any): o is QueryBidResponseAmino {
+    return o && (o.$typeUrl === QueryBidResponse.typeUrl || Bid.isAmino(o.bid) && Account.isAmino(o.escrow_account));
+  },
   encode(message: QueryBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bid !== undefined) {
       Bid.encode(message.bid, writer.uint32(10).fork()).ldelim();
@@ -1044,6 +1254,10 @@ export const QueryBidResponse = {
       typeUrl: "/akash.market.v1beta2.QueryBidResponse",
       value: QueryBidResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Bid.registerTypeUrl();
+    Account.registerTypeUrl();
   }
 };
 function createBaseQueryLeasesRequest(): QueryLeasesRequest {
@@ -1054,6 +1268,16 @@ function createBaseQueryLeasesRequest(): QueryLeasesRequest {
 }
 export const QueryLeasesRequest = {
   typeUrl: "/akash.market.v1beta2.QueryLeasesRequest",
+  aminoType: "akash/market/v1beta2/query-leases-request",
+  is(o: any): o is QueryLeasesRequest {
+    return o && (o.$typeUrl === QueryLeasesRequest.typeUrl || LeaseFilters.is(o.filters));
+  },
+  isSDK(o: any): o is QueryLeasesRequestSDKType {
+    return o && (o.$typeUrl === QueryLeasesRequest.typeUrl || LeaseFilters.isSDK(o.filters));
+  },
+  isAmino(o: any): o is QueryLeasesRequestAmino {
+    return o && (o.$typeUrl === QueryLeasesRequest.typeUrl || LeaseFilters.isAmino(o.filters));
+  },
   encode(message: QueryLeasesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filters !== undefined) {
       LeaseFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -1159,6 +1383,10 @@ export const QueryLeasesRequest = {
       typeUrl: "/akash.market.v1beta2.QueryLeasesRequest",
       value: QueryLeasesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    LeaseFilters.registerTypeUrl();
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryLeasesResponse(): QueryLeasesResponse {
@@ -1169,6 +1397,16 @@ function createBaseQueryLeasesResponse(): QueryLeasesResponse {
 }
 export const QueryLeasesResponse = {
   typeUrl: "/akash.market.v1beta2.QueryLeasesResponse",
+  aminoType: "akash/market/v1beta2/query-leases-response",
+  is(o: any): o is QueryLeasesResponse {
+    return o && (o.$typeUrl === QueryLeasesResponse.typeUrl || Array.isArray(o.leases) && (!o.leases.length || QueryLeaseResponse.is(o.leases[0])));
+  },
+  isSDK(o: any): o is QueryLeasesResponseSDKType {
+    return o && (o.$typeUrl === QueryLeasesResponse.typeUrl || Array.isArray(o.leases) && (!o.leases.length || QueryLeaseResponse.isSDK(o.leases[0])));
+  },
+  isAmino(o: any): o is QueryLeasesResponseAmino {
+    return o && (o.$typeUrl === QueryLeasesResponse.typeUrl || Array.isArray(o.leases) && (!o.leases.length || QueryLeaseResponse.isAmino(o.leases[0])));
+  },
   encode(message: QueryLeasesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.leases) {
       QueryLeaseResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1282,6 +1520,10 @@ export const QueryLeasesResponse = {
       typeUrl: "/akash.market.v1beta2.QueryLeasesResponse",
       value: QueryLeasesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    QueryLeaseResponse.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryLeaseRequest(): QueryLeaseRequest {
@@ -1291,6 +1533,16 @@ function createBaseQueryLeaseRequest(): QueryLeaseRequest {
 }
 export const QueryLeaseRequest = {
   typeUrl: "/akash.market.v1beta2.QueryLeaseRequest",
+  aminoType: "akash/market/v1beta2/query-lease-request",
+  is(o: any): o is QueryLeaseRequest {
+    return o && (o.$typeUrl === QueryLeaseRequest.typeUrl || LeaseID.is(o.id));
+  },
+  isSDK(o: any): o is QueryLeaseRequestSDKType {
+    return o && (o.$typeUrl === QueryLeaseRequest.typeUrl || LeaseID.isSDK(o.id));
+  },
+  isAmino(o: any): o is QueryLeaseRequestAmino {
+    return o && (o.$typeUrl === QueryLeaseRequest.typeUrl || LeaseID.isAmino(o.id));
+  },
   encode(message: QueryLeaseRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       LeaseID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -1378,6 +1630,9 @@ export const QueryLeaseRequest = {
       typeUrl: "/akash.market.v1beta2.QueryLeaseRequest",
       value: QueryLeaseRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    LeaseID.registerTypeUrl();
   }
 };
 function createBaseQueryLeaseResponse(): QueryLeaseResponse {
@@ -1388,6 +1643,16 @@ function createBaseQueryLeaseResponse(): QueryLeaseResponse {
 }
 export const QueryLeaseResponse = {
   typeUrl: "/akash.market.v1beta2.QueryLeaseResponse",
+  aminoType: "akash/market/v1beta2/query-lease-response",
+  is(o: any): o is QueryLeaseResponse {
+    return o && (o.$typeUrl === QueryLeaseResponse.typeUrl || Lease.is(o.lease) && FractionalPayment.is(o.escrowPayment));
+  },
+  isSDK(o: any): o is QueryLeaseResponseSDKType {
+    return o && (o.$typeUrl === QueryLeaseResponse.typeUrl || Lease.isSDK(o.lease) && FractionalPayment.isSDK(o.escrow_payment));
+  },
+  isAmino(o: any): o is QueryLeaseResponseAmino {
+    return o && (o.$typeUrl === QueryLeaseResponse.typeUrl || Lease.isAmino(o.lease) && FractionalPayment.isAmino(o.escrow_payment));
+  },
   encode(message: QueryLeaseResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.lease !== undefined) {
       Lease.encode(message.lease, writer.uint32(10).fork()).ldelim();
@@ -1493,5 +1758,9 @@ export const QueryLeaseResponse = {
       typeUrl: "/akash.market.v1beta2.QueryLeaseResponse",
       value: QueryLeaseResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Lease.registerTypeUrl();
+    FractionalPayment.registerTypeUrl();
   }
 };

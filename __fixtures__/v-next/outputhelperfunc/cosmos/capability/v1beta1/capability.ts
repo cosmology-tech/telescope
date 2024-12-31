@@ -17,6 +17,17 @@ export interface CapabilityProtoMsg {
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
  */
+export interface CapabilityAmino {
+  index?: string;
+}
+export interface CapabilityAminoMsg {
+  type: "cosmos-sdk/Capability";
+  value: CapabilityAmino;
+}
+/**
+ * Capability defines an implementation of an object capability. The index
+ * provided to a Capability must be globally unique.
+ */
 export interface CapabilitySDKType {
   index: bigint;
 }
@@ -31,6 +42,18 @@ export interface Owner {
 export interface OwnerProtoMsg {
   typeUrl: "/cosmos.capability.v1beta1.Owner";
   value: Uint8Array;
+}
+/**
+ * Owner defines a single capability owner. An owner is defined by the name of
+ * capability and the module name.
+ */
+export interface OwnerAmino {
+  module?: string;
+  name?: string;
+}
+export interface OwnerAminoMsg {
+  type: "cosmos-sdk/Owner";
+  value: OwnerAmino;
 }
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
@@ -55,6 +78,17 @@ export interface CapabilityOwnersProtoMsg {
  * CapabilityOwners defines a set of owners of a single Capability. The set of
  * owners must be unique.
  */
+export interface CapabilityOwnersAmino {
+  owners?: OwnerAmino[];
+}
+export interface CapabilityOwnersAminoMsg {
+  type: "cosmos-sdk/CapabilityOwners";
+  value: CapabilityOwnersAmino;
+}
+/**
+ * CapabilityOwners defines a set of owners of a single Capability. The set of
+ * owners must be unique.
+ */
 export interface CapabilityOwnersSDKType {
   owners: OwnerSDKType[];
 }
@@ -65,6 +99,16 @@ function createBaseCapability(): Capability {
 }
 export const Capability = {
   typeUrl: "/cosmos.capability.v1beta1.Capability",
+  aminoType: "cosmos-sdk/Capability",
+  is(o: any): o is Capability {
+    return o && (o.$typeUrl === Capability.typeUrl || typeof o.index === "bigint");
+  },
+  isSDK(o: any): o is CapabilitySDKType {
+    return o && (o.$typeUrl === Capability.typeUrl || typeof o.index === "bigint");
+  },
+  isAmino(o: any): o is CapabilityAmino {
+    return o && (o.$typeUrl === Capability.typeUrl || typeof o.index === "bigint");
+  },
   encode(message: Capability, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.index !== undefined) {
       writer.uint32(8).uint64(message.index);
@@ -152,7 +196,8 @@ export const Capability = {
       typeUrl: "/cosmos.capability.v1beta1.Capability",
       value: Capability.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseOwner(): Owner {
   return {
@@ -162,6 +207,16 @@ function createBaseOwner(): Owner {
 }
 export const Owner = {
   typeUrl: "/cosmos.capability.v1beta1.Owner",
+  aminoType: "cosmos-sdk/Owner",
+  is(o: any): o is Owner {
+    return o && (o.$typeUrl === Owner.typeUrl || typeof o.module === "string" && typeof o.name === "string");
+  },
+  isSDK(o: any): o is OwnerSDKType {
+    return o && (o.$typeUrl === Owner.typeUrl || typeof o.module === "string" && typeof o.name === "string");
+  },
+  isAmino(o: any): o is OwnerAmino {
+    return o && (o.$typeUrl === Owner.typeUrl || typeof o.module === "string" && typeof o.name === "string");
+  },
   encode(message: Owner, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.module !== undefined) {
       writer.uint32(10).string(message.module);
@@ -263,7 +318,8 @@ export const Owner = {
       typeUrl: "/cosmos.capability.v1beta1.Owner",
       value: Owner.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseCapabilityOwners(): CapabilityOwners {
   return {
@@ -272,6 +328,16 @@ function createBaseCapabilityOwners(): CapabilityOwners {
 }
 export const CapabilityOwners = {
   typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners",
+  aminoType: "cosmos-sdk/CapabilityOwners",
+  is(o: any): o is CapabilityOwners {
+    return o && (o.$typeUrl === CapabilityOwners.typeUrl || Array.isArray(o.owners) && (!o.owners.length || Owner.is(o.owners[0])));
+  },
+  isSDK(o: any): o is CapabilityOwnersSDKType {
+    return o && (o.$typeUrl === CapabilityOwners.typeUrl || Array.isArray(o.owners) && (!o.owners.length || Owner.isSDK(o.owners[0])));
+  },
+  isAmino(o: any): o is CapabilityOwnersAmino {
+    return o && (o.$typeUrl === CapabilityOwners.typeUrl || Array.isArray(o.owners) && (!o.owners.length || Owner.isAmino(o.owners[0])));
+  },
   encode(message: CapabilityOwners, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.owners) {
       Owner.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -367,5 +433,8 @@ export const CapabilityOwners = {
       typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners",
       value: CapabilityOwners.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Owner.registerTypeUrl();
   }
 };

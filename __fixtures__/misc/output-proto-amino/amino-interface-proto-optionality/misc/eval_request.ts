@@ -2,9 +2,9 @@ import { ExprValue, ExprValueAmino, ExprValueSDKType, IdRef, IdRefAmino, IdRefSD
 import { FeatureSet_Utf8Validation, FeatureSet_Utf8ValidationSDKType, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
 import { TestNest_Graph, TestNest_GraphAmino, TestNest_GraphSDKType } from "./nest";
 import { BinaryReader, BinaryWriter } from "../binary";
+import { GlobalDecoderRegistry } from "../registry";
 import { isSet, DeepPartial, isObject } from "../helpers";
 import { JsonSafe } from "../json-safe";
-import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "misc";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {

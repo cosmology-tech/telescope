@@ -1,15 +1,22 @@
-import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./params";
+import { Action, ActionSDKType, ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType, actionFromJSON, actionToJSON } from "./claim";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequest {}
 export interface QueryModuleAccountBalanceRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryModuleAccountBalanceRequestAmino {}
+export interface QueryModuleAccountBalanceRequestAminoMsg {
+  type: "osmosis/claim/query-module-account-balance-request";
+  value: QueryModuleAccountBalanceRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceRequestSDKType {}
@@ -23,6 +30,15 @@ export interface QueryModuleAccountBalanceResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryModuleAccountBalanceResponseAmino {
+  /** params defines the parameters of the module. */
+  moduleAccountBalance?: CoinAmino[];
+}
+export interface QueryModuleAccountBalanceResponseAminoMsg {
+  type: "osmosis/claim/query-module-account-balance-response";
+  value: QueryModuleAccountBalanceResponseAmino;
+}
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryModuleAccountBalanceResponseSDKType {
   moduleAccountBalance: CoinSDKType[];
 }
@@ -31,6 +47,12 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "osmosis/claim/query-params-request";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -44,6 +66,15 @@ export interface QueryParamsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "osmosis/claim/query-params-response";
+  value: QueryParamsResponseAmino;
+}
+/** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
 }
@@ -54,6 +85,13 @@ export interface QueryClaimRecordRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest";
   value: Uint8Array;
 }
+export interface QueryClaimRecordRequestAmino {
+  address?: string;
+}
+export interface QueryClaimRecordRequestAminoMsg {
+  type: "osmosis/claim/query-claim-record-request";
+  value: QueryClaimRecordRequestAmino;
+}
 export interface QueryClaimRecordRequestSDKType {
   address: string;
 }
@@ -63,6 +101,13 @@ export interface QueryClaimRecordResponse {
 export interface QueryClaimRecordResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse";
   value: Uint8Array;
+}
+export interface QueryClaimRecordResponseAmino {
+  claim_record?: ClaimRecordAmino;
+}
+export interface QueryClaimRecordResponseAminoMsg {
+  type: "osmosis/claim/query-claim-record-response";
+  value: QueryClaimRecordResponseAmino;
 }
 export interface QueryClaimRecordResponseSDKType {
   claim_record: ClaimRecordSDKType;
@@ -75,6 +120,14 @@ export interface QueryClaimableForActionRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest";
   value: Uint8Array;
 }
+export interface QueryClaimableForActionRequestAmino {
+  address?: string;
+  action?: Action;
+}
+export interface QueryClaimableForActionRequestAminoMsg {
+  type: "osmosis/claim/query-claimable-for-action-request";
+  value: QueryClaimableForActionRequestAmino;
+}
 export interface QueryClaimableForActionRequestSDKType {
   address: string;
   action: Action;
@@ -86,6 +139,13 @@ export interface QueryClaimableForActionResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse";
   value: Uint8Array;
 }
+export interface QueryClaimableForActionResponseAmino {
+  coins?: CoinAmino[];
+}
+export interface QueryClaimableForActionResponseAminoMsg {
+  type: "osmosis/claim/query-claimable-for-action-response";
+  value: QueryClaimableForActionResponseAmino;
+}
 export interface QueryClaimableForActionResponseSDKType {
   coins: CoinSDKType[];
 }
@@ -95,6 +155,13 @@ export interface QueryTotalClaimableRequest {
 export interface QueryTotalClaimableRequestProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest";
   value: Uint8Array;
+}
+export interface QueryTotalClaimableRequestAmino {
+  address?: string;
+}
+export interface QueryTotalClaimableRequestAminoMsg {
+  type: "osmosis/claim/query-total-claimable-request";
+  value: QueryTotalClaimableRequestAmino;
 }
 export interface QueryTotalClaimableRequestSDKType {
   address: string;
@@ -106,6 +173,13 @@ export interface QueryTotalClaimableResponseProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse";
   value: Uint8Array;
 }
+export interface QueryTotalClaimableResponseAmino {
+  coins?: CoinAmino[];
+}
+export interface QueryTotalClaimableResponseAminoMsg {
+  type: "osmosis/claim/query-total-claimable-response";
+  value: QueryTotalClaimableResponseAmino;
+}
 export interface QueryTotalClaimableResponseSDKType {
   coins: CoinSDKType[];
 }
@@ -114,6 +188,16 @@ function createBaseQueryModuleAccountBalanceRequest(): QueryModuleAccountBalance
 }
 export const QueryModuleAccountBalanceRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest",
+  aminoType: "osmosis/claim/query-module-account-balance-request",
+  is(o: any): o is QueryModuleAccountBalanceRequest {
+    return o && o.$typeUrl === QueryModuleAccountBalanceRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryModuleAccountBalanceRequestSDKType {
+    return o && o.$typeUrl === QueryModuleAccountBalanceRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryModuleAccountBalanceRequestAmino {
+    return o && o.$typeUrl === QueryModuleAccountBalanceRequest.typeUrl;
+  },
   encode(_: QueryModuleAccountBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -181,7 +265,8 @@ export const QueryModuleAccountBalanceRequest = {
       typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceRequest",
       value: QueryModuleAccountBalanceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanceResponse {
   return {
@@ -190,6 +275,16 @@ function createBaseQueryModuleAccountBalanceResponse(): QueryModuleAccountBalanc
 }
 export const QueryModuleAccountBalanceResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse",
+  aminoType: "osmosis/claim/query-module-account-balance-response",
+  is(o: any): o is QueryModuleAccountBalanceResponse {
+    return o && (o.$typeUrl === QueryModuleAccountBalanceResponse.typeUrl || Array.isArray(o.moduleAccountBalance) && (!o.moduleAccountBalance.length || Coin.is(o.moduleAccountBalance[0])));
+  },
+  isSDK(o: any): o is QueryModuleAccountBalanceResponseSDKType {
+    return o && (o.$typeUrl === QueryModuleAccountBalanceResponse.typeUrl || Array.isArray(o.moduleAccountBalance) && (!o.moduleAccountBalance.length || Coin.isSDK(o.moduleAccountBalance[0])));
+  },
+  isAmino(o: any): o is QueryModuleAccountBalanceResponseAmino {
+    return o && (o.$typeUrl === QueryModuleAccountBalanceResponse.typeUrl || Array.isArray(o.moduleAccountBalance) && (!o.moduleAccountBalance.length || Coin.isAmino(o.moduleAccountBalance[0])));
+  },
   encode(message: QueryModuleAccountBalanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.moduleAccountBalance) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -285,6 +380,9 @@ export const QueryModuleAccountBalanceResponse = {
       typeUrl: "/osmosis.claim.v1beta1.QueryModuleAccountBalanceResponse",
       value: QueryModuleAccountBalanceResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -292,6 +390,16 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest",
+  aminoType: "osmosis/claim/query-params-request",
+  is(o: any): o is QueryParamsRequest {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsRequestSDKType {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsRequestAmino {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -359,7 +467,8 @@ export const QueryParamsRequest = {
       typeUrl: "/osmosis.claim.v1beta1.QueryParamsRequest",
       value: QueryParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -368,6 +477,16 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse",
+  aminoType: "osmosis/claim/query-params-response",
+  is(o: any): o is QueryParamsResponse {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.is(o.params));
+  },
+  isSDK(o: any): o is QueryParamsResponseSDKType {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is QueryParamsResponseAmino {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isAmino(o.params));
+  },
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -455,6 +574,9 @@ export const QueryParamsResponse = {
       typeUrl: "/osmosis.claim.v1beta1.QueryParamsResponse",
       value: QueryParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };
 function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
@@ -464,6 +586,16 @@ function createBaseQueryClaimRecordRequest(): QueryClaimRecordRequest {
 }
 export const QueryClaimRecordRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
+  aminoType: "osmosis/claim/query-claim-record-request",
+  is(o: any): o is QueryClaimRecordRequest {
+    return o && (o.$typeUrl === QueryClaimRecordRequest.typeUrl || typeof o.address === "string");
+  },
+  isSDK(o: any): o is QueryClaimRecordRequestSDKType {
+    return o && (o.$typeUrl === QueryClaimRecordRequest.typeUrl || typeof o.address === "string");
+  },
+  isAmino(o: any): o is QueryClaimRecordRequestAmino {
+    return o && (o.$typeUrl === QueryClaimRecordRequest.typeUrl || typeof o.address === "string");
+  },
   encode(message: QueryClaimRecordRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -549,7 +681,8 @@ export const QueryClaimRecordRequest = {
       typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordRequest",
       value: QueryClaimRecordRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
   return {
@@ -558,6 +691,16 @@ function createBaseQueryClaimRecordResponse(): QueryClaimRecordResponse {
 }
 export const QueryClaimRecordResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse",
+  aminoType: "osmosis/claim/query-claim-record-response",
+  is(o: any): o is QueryClaimRecordResponse {
+    return o && (o.$typeUrl === QueryClaimRecordResponse.typeUrl || ClaimRecord.is(o.claimRecord));
+  },
+  isSDK(o: any): o is QueryClaimRecordResponseSDKType {
+    return o && (o.$typeUrl === QueryClaimRecordResponse.typeUrl || ClaimRecord.isSDK(o.claim_record));
+  },
+  isAmino(o: any): o is QueryClaimRecordResponseAmino {
+    return o && (o.$typeUrl === QueryClaimRecordResponse.typeUrl || ClaimRecord.isAmino(o.claim_record));
+  },
   encode(message: QueryClaimRecordResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.claimRecord !== undefined) {
       ClaimRecord.encode(message.claimRecord, writer.uint32(10).fork()).ldelim();
@@ -645,6 +788,9 @@ export const QueryClaimRecordResponse = {
       typeUrl: "/osmosis.claim.v1beta1.QueryClaimRecordResponse",
       value: QueryClaimRecordResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ClaimRecord.registerTypeUrl();
   }
 };
 function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequest {
@@ -655,6 +801,16 @@ function createBaseQueryClaimableForActionRequest(): QueryClaimableForActionRequ
 }
 export const QueryClaimableForActionRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
+  aminoType: "osmosis/claim/query-claimable-for-action-request",
+  is(o: any): o is QueryClaimableForActionRequest {
+    return o && (o.$typeUrl === QueryClaimableForActionRequest.typeUrl || typeof o.address === "string" && isSet(o.action));
+  },
+  isSDK(o: any): o is QueryClaimableForActionRequestSDKType {
+    return o && (o.$typeUrl === QueryClaimableForActionRequest.typeUrl || typeof o.address === "string" && isSet(o.action));
+  },
+  isAmino(o: any): o is QueryClaimableForActionRequestAmino {
+    return o && (o.$typeUrl === QueryClaimableForActionRequest.typeUrl || typeof o.address === "string" && isSet(o.action));
+  },
   encode(message: QueryClaimableForActionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -756,7 +912,8 @@ export const QueryClaimableForActionRequest = {
       typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionRequest",
       value: QueryClaimableForActionRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionResponse {
   return {
@@ -765,6 +922,16 @@ function createBaseQueryClaimableForActionResponse(): QueryClaimableForActionRes
 }
 export const QueryClaimableForActionResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse",
+  aminoType: "osmosis/claim/query-claimable-for-action-response",
+  is(o: any): o is QueryClaimableForActionResponse {
+    return o && (o.$typeUrl === QueryClaimableForActionResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.is(o.coins[0])));
+  },
+  isSDK(o: any): o is QueryClaimableForActionResponseSDKType {
+    return o && (o.$typeUrl === QueryClaimableForActionResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.isSDK(o.coins[0])));
+  },
+  isAmino(o: any): o is QueryClaimableForActionResponseAmino {
+    return o && (o.$typeUrl === QueryClaimableForActionResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.isAmino(o.coins[0])));
+  },
   encode(message: QueryClaimableForActionResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -860,6 +1027,9 @@ export const QueryClaimableForActionResponse = {
       typeUrl: "/osmosis.claim.v1beta1.QueryClaimableForActionResponse",
       value: QueryClaimableForActionResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
@@ -869,6 +1039,16 @@ function createBaseQueryTotalClaimableRequest(): QueryTotalClaimableRequest {
 }
 export const QueryTotalClaimableRequest = {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
+  aminoType: "osmosis/claim/query-total-claimable-request",
+  is(o: any): o is QueryTotalClaimableRequest {
+    return o && (o.$typeUrl === QueryTotalClaimableRequest.typeUrl || typeof o.address === "string");
+  },
+  isSDK(o: any): o is QueryTotalClaimableRequestSDKType {
+    return o && (o.$typeUrl === QueryTotalClaimableRequest.typeUrl || typeof o.address === "string");
+  },
+  isAmino(o: any): o is QueryTotalClaimableRequestAmino {
+    return o && (o.$typeUrl === QueryTotalClaimableRequest.typeUrl || typeof o.address === "string");
+  },
   encode(message: QueryTotalClaimableRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -954,7 +1134,8 @@ export const QueryTotalClaimableRequest = {
       typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableRequest",
       value: QueryTotalClaimableRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
   return {
@@ -963,6 +1144,16 @@ function createBaseQueryTotalClaimableResponse(): QueryTotalClaimableResponse {
 }
 export const QueryTotalClaimableResponse = {
   typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse",
+  aminoType: "osmosis/claim/query-total-claimable-response",
+  is(o: any): o is QueryTotalClaimableResponse {
+    return o && (o.$typeUrl === QueryTotalClaimableResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.is(o.coins[0])));
+  },
+  isSDK(o: any): o is QueryTotalClaimableResponseSDKType {
+    return o && (o.$typeUrl === QueryTotalClaimableResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.isSDK(o.coins[0])));
+  },
+  isAmino(o: any): o is QueryTotalClaimableResponseAmino {
+    return o && (o.$typeUrl === QueryTotalClaimableResponse.typeUrl || Array.isArray(o.coins) && (!o.coins.length || Coin.isAmino(o.coins[0])));
+  },
   encode(message: QueryTotalClaimableResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1058,5 +1249,8 @@ export const QueryTotalClaimableResponse = {
       typeUrl: "/osmosis.claim.v1beta1.QueryTotalClaimableResponse",
       value: QueryTotalClaimableResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };

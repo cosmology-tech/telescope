@@ -4,11 +4,11 @@ import { Duration, DurationAmino, DurationSDKType } from "../google/protobuf/dur
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../google/protobuf/timestamp";
 import { isSet, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
 import { BinaryReader, BinaryWriter } from "../binary";
+import { GlobalDecoderRegistry } from "../registry";
 import { Decimal } from "@cosmjs/math";
 import { JsonSafe } from "../json-safe";
 import { toUtf8, fromBase64, fromUtf8, toBase64 } from "@cosmjs/encoding";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
-import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "misc";
 export interface EncodingTestForDontOmit {
   /** scalar */

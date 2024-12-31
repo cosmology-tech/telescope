@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
@@ -11,6 +11,7 @@ export enum Action {
   UNRECOGNIZED = -1,
 }
 export const ActionSDKType = Action;
+export const ActionAmino = Action;
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:
@@ -63,6 +64,22 @@ export interface ClaimRecordProtoMsg {
   value: Uint8Array;
 }
 /** A Claim Records is the metadata of claim data per address */
+export interface ClaimRecordAmino {
+  /** address of claim user */
+  address?: string;
+  /** total initial claimable amount for the user */
+  initial_claimable_amount?: CoinAmino[];
+  /**
+   * true if action is completed
+   * index of bool in array refers to action enum #
+   */
+  action_completed?: boolean[];
+}
+export interface ClaimRecordAminoMsg {
+  type: "osmosis/claim/claim-record";
+  value: ClaimRecordAmino;
+}
+/** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {
   address: string;
   initial_claimable_amount: CoinSDKType[];
@@ -77,6 +94,16 @@ function createBaseClaimRecord(): ClaimRecord {
 }
 export const ClaimRecord = {
   typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
+  aminoType: "osmosis/claim/claim-record",
+  is(o: any): o is ClaimRecord {
+    return o && (o.$typeUrl === ClaimRecord.typeUrl || typeof o.address === "string" && Array.isArray(o.initialClaimableAmount) && (!o.initialClaimableAmount.length || Coin.is(o.initialClaimableAmount[0])) && Array.isArray(o.actionCompleted) && (!o.actionCompleted.length || typeof o.actionCompleted[0] === "boolean"));
+  },
+  isSDK(o: any): o is ClaimRecordSDKType {
+    return o && (o.$typeUrl === ClaimRecord.typeUrl || typeof o.address === "string" && Array.isArray(o.initial_claimable_amount) && (!o.initial_claimable_amount.length || Coin.isSDK(o.initial_claimable_amount[0])) && Array.isArray(o.action_completed) && (!o.action_completed.length || typeof o.action_completed[0] === "boolean"));
+  },
+  isAmino(o: any): o is ClaimRecordAmino {
+    return o && (o.$typeUrl === ClaimRecord.typeUrl || typeof o.address === "string" && Array.isArray(o.initial_claimable_amount) && (!o.initial_claimable_amount.length || Coin.isAmino(o.initial_claimable_amount[0])) && Array.isArray(o.action_completed) && (!o.action_completed.length || typeof o.action_completed[0] === "boolean"));
+  },
   encode(message: ClaimRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -223,5 +250,8 @@ export const ClaimRecord = {
       typeUrl: "/osmosis.claim.v1beta1.ClaimRecord",
       value: ClaimRecord.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };

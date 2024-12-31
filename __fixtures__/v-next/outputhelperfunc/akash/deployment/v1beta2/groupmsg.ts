@@ -1,5 +1,6 @@
-import { GroupID, GroupIDSDKType } from "./groupid";
+import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -12,6 +13,14 @@ export interface MsgCloseGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgCloseGroupAmino {
+  id: GroupIDAmino;
+}
+export interface MsgCloseGroupAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-close-group";
+  value: MsgCloseGroupAmino;
+}
+/** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
   id: GroupIDSDKType;
 }
@@ -20,6 +29,12 @@ export interface MsgCloseGroupResponse {}
 export interface MsgCloseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgCloseGroupResponse";
   value: Uint8Array;
+}
+/** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
+export interface MsgCloseGroupResponseAmino {}
+export interface MsgCloseGroupResponseAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-close-group-response";
+  value: MsgCloseGroupResponseAmino;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
@@ -32,6 +47,14 @@ export interface MsgPauseGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgPauseGroupAmino {
+  id: GroupIDAmino;
+}
+export interface MsgPauseGroupAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-pause-group";
+  value: MsgPauseGroupAmino;
+}
+/** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
   id: GroupIDSDKType;
 }
@@ -40,6 +63,12 @@ export interface MsgPauseGroupResponse {}
 export interface MsgPauseGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.MsgPauseGroupResponse";
   value: Uint8Array;
+}
+/** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
+export interface MsgPauseGroupResponseAmino {}
+export interface MsgPauseGroupResponseAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-pause-group-response";
+  value: MsgPauseGroupResponseAmino;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
@@ -52,6 +81,14 @@ export interface MsgStartGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
+export interface MsgStartGroupAmino {
+  id: GroupIDAmino;
+}
+export interface MsgStartGroupAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-start-group";
+  value: MsgStartGroupAmino;
+}
+/** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
   id: GroupIDSDKType;
 }
@@ -62,6 +99,12 @@ export interface MsgStartGroupResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
+export interface MsgStartGroupResponseAmino {}
+export interface MsgStartGroupResponseAminoMsg {
+  type: "akash/deployment/v1beta2/testonly-start-group-response";
+  value: MsgStartGroupResponseAmino;
+}
+/** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {
@@ -70,6 +113,16 @@ function createBaseMsgCloseGroup(): MsgCloseGroup {
 }
 export const MsgCloseGroup = {
   typeUrl: "/akash.deployment.v1beta2.MsgCloseGroup",
+  aminoType: "akash/deployment/v1beta2/testonly-close-group",
+  is(o: any): o is MsgCloseGroup {
+    return o && (o.$typeUrl === MsgCloseGroup.typeUrl || GroupID.is(o.id));
+  },
+  isSDK(o: any): o is MsgCloseGroupSDKType {
+    return o && (o.$typeUrl === MsgCloseGroup.typeUrl || GroupID.isSDK(o.id));
+  },
+  isAmino(o: any): o is MsgCloseGroupAmino {
+    return o && (o.$typeUrl === MsgCloseGroup.typeUrl || GroupID.isAmino(o.id));
+  },
   encode(message: MsgCloseGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -157,6 +210,9 @@ export const MsgCloseGroup = {
       typeUrl: "/akash.deployment.v1beta2.MsgCloseGroup",
       value: MsgCloseGroup.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GroupID.registerTypeUrl();
   }
 };
 function createBaseMsgCloseGroupResponse(): MsgCloseGroupResponse {
@@ -164,6 +220,16 @@ function createBaseMsgCloseGroupResponse(): MsgCloseGroupResponse {
 }
 export const MsgCloseGroupResponse = {
   typeUrl: "/akash.deployment.v1beta2.MsgCloseGroupResponse",
+  aminoType: "akash/deployment/v1beta2/testonly-close-group-response",
+  is(o: any): o is MsgCloseGroupResponse {
+    return o && o.$typeUrl === MsgCloseGroupResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCloseGroupResponseSDKType {
+    return o && o.$typeUrl === MsgCloseGroupResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgCloseGroupResponseAmino {
+    return o && o.$typeUrl === MsgCloseGroupResponse.typeUrl;
+  },
   encode(_: MsgCloseGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -231,7 +297,8 @@ export const MsgCloseGroupResponse = {
       typeUrl: "/akash.deployment.v1beta2.MsgCloseGroupResponse",
       value: MsgCloseGroupResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgPauseGroup(): MsgPauseGroup {
   return {
@@ -240,6 +307,16 @@ function createBaseMsgPauseGroup(): MsgPauseGroup {
 }
 export const MsgPauseGroup = {
   typeUrl: "/akash.deployment.v1beta2.MsgPauseGroup",
+  aminoType: "akash/deployment/v1beta2/testonly-pause-group",
+  is(o: any): o is MsgPauseGroup {
+    return o && (o.$typeUrl === MsgPauseGroup.typeUrl || GroupID.is(o.id));
+  },
+  isSDK(o: any): o is MsgPauseGroupSDKType {
+    return o && (o.$typeUrl === MsgPauseGroup.typeUrl || GroupID.isSDK(o.id));
+  },
+  isAmino(o: any): o is MsgPauseGroupAmino {
+    return o && (o.$typeUrl === MsgPauseGroup.typeUrl || GroupID.isAmino(o.id));
+  },
   encode(message: MsgPauseGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -327,6 +404,9 @@ export const MsgPauseGroup = {
       typeUrl: "/akash.deployment.v1beta2.MsgPauseGroup",
       value: MsgPauseGroup.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GroupID.registerTypeUrl();
   }
 };
 function createBaseMsgPauseGroupResponse(): MsgPauseGroupResponse {
@@ -334,6 +414,16 @@ function createBaseMsgPauseGroupResponse(): MsgPauseGroupResponse {
 }
 export const MsgPauseGroupResponse = {
   typeUrl: "/akash.deployment.v1beta2.MsgPauseGroupResponse",
+  aminoType: "akash/deployment/v1beta2/testonly-pause-group-response",
+  is(o: any): o is MsgPauseGroupResponse {
+    return o && o.$typeUrl === MsgPauseGroupResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgPauseGroupResponseSDKType {
+    return o && o.$typeUrl === MsgPauseGroupResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgPauseGroupResponseAmino {
+    return o && o.$typeUrl === MsgPauseGroupResponse.typeUrl;
+  },
   encode(_: MsgPauseGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -401,7 +491,8 @@ export const MsgPauseGroupResponse = {
       typeUrl: "/akash.deployment.v1beta2.MsgPauseGroupResponse",
       value: MsgPauseGroupResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgStartGroup(): MsgStartGroup {
   return {
@@ -410,6 +501,16 @@ function createBaseMsgStartGroup(): MsgStartGroup {
 }
 export const MsgStartGroup = {
   typeUrl: "/akash.deployment.v1beta2.MsgStartGroup",
+  aminoType: "akash/deployment/v1beta2/testonly-start-group",
+  is(o: any): o is MsgStartGroup {
+    return o && (o.$typeUrl === MsgStartGroup.typeUrl || GroupID.is(o.id));
+  },
+  isSDK(o: any): o is MsgStartGroupSDKType {
+    return o && (o.$typeUrl === MsgStartGroup.typeUrl || GroupID.isSDK(o.id));
+  },
+  isAmino(o: any): o is MsgStartGroupAmino {
+    return o && (o.$typeUrl === MsgStartGroup.typeUrl || GroupID.isAmino(o.id));
+  },
   encode(message: MsgStartGroup, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -497,6 +598,9 @@ export const MsgStartGroup = {
       typeUrl: "/akash.deployment.v1beta2.MsgStartGroup",
       value: MsgStartGroup.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GroupID.registerTypeUrl();
   }
 };
 function createBaseMsgStartGroupResponse(): MsgStartGroupResponse {
@@ -504,6 +608,16 @@ function createBaseMsgStartGroupResponse(): MsgStartGroupResponse {
 }
 export const MsgStartGroupResponse = {
   typeUrl: "/akash.deployment.v1beta2.MsgStartGroupResponse",
+  aminoType: "akash/deployment/v1beta2/testonly-start-group-response",
+  is(o: any): o is MsgStartGroupResponse {
+    return o && o.$typeUrl === MsgStartGroupResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgStartGroupResponseSDKType {
+    return o && o.$typeUrl === MsgStartGroupResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgStartGroupResponseAmino {
+    return o && o.$typeUrl === MsgStartGroupResponse.typeUrl;
+  },
   encode(_: MsgStartGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -571,5 +685,6 @@ export const MsgStartGroupResponse = {
       typeUrl: "/akash.deployment.v1beta2.MsgStartGroupResponse",
       value: MsgStartGroupResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

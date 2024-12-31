@@ -1,5 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -8,6 +9,7 @@ export const protobufPackage = "akash.deployment.v1beta2";
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorization {
+  $typeUrl?: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
@@ -22,16 +24,43 @@ export interface DepositDeploymentAuthorizationProtoMsg {
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
  * the granter's account for a deployment.
  */
+export interface DepositDeploymentAuthorizationAmino {
+  /**
+   * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
+   * the purpose of deployment.
+   */
+  spend_limit: CoinAmino;
+}
+export interface DepositDeploymentAuthorizationAminoMsg {
+  type: "akash/deployment/v1beta2/deposit-deployment-authorization";
+  value: DepositDeploymentAuthorizationAmino;
+}
+/**
+ * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
+ * the granter's account for a deployment.
+ */
 export interface DepositDeploymentAuthorizationSDKType {
+  $typeUrl?: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
   spend_limit: CoinSDKType;
 }
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
   return {
+    $typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization",
     spendLimit: Coin.fromPartial({})
   };
 }
 export const DepositDeploymentAuthorization = {
   typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization",
+  aminoType: "akash/deployment/v1beta2/deposit-deployment-authorization",
+  is(o: any): o is DepositDeploymentAuthorization {
+    return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.is(o.spendLimit));
+  },
+  isSDK(o: any): o is DepositDeploymentAuthorizationSDKType {
+    return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.isSDK(o.spend_limit));
+  },
+  isAmino(o: any): o is DepositDeploymentAuthorizationAmino {
+    return o && (o.$typeUrl === DepositDeploymentAuthorization.typeUrl || Coin.isAmino(o.spend_limit));
+  },
   encode(message: DepositDeploymentAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spendLimit !== undefined) {
       Coin.encode(message.spendLimit, writer.uint32(10).fork()).ldelim();
@@ -119,5 +148,8 @@ export const DepositDeploymentAuthorization = {
       typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization",
       value: DepositDeploymentAuthorization.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };

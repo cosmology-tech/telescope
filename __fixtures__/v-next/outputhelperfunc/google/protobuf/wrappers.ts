@@ -20,6 +20,19 @@ export interface DoubleValueProtoMsg {
  * 
  * The JSON representation for `DoubleValue` is JSON number.
  */
+export interface DoubleValueAmino {
+  /** The double value. */
+  value?: number;
+}
+export interface DoubleValueAminoMsg {
+  type: "/google.protobuf.DoubleValue";
+  value: DoubleValueAmino;
+}
+/**
+ * Wrapper message for `double`.
+ * 
+ * The JSON representation for `DoubleValue` is JSON number.
+ */
 export interface DoubleValueSDKType {
   value: number;
 }
@@ -35,6 +48,19 @@ export interface FloatValue {
 export interface FloatValueProtoMsg {
   typeUrl: "/google.protobuf.FloatValue";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `float`.
+ * 
+ * The JSON representation for `FloatValue` is JSON number.
+ */
+export interface FloatValueAmino {
+  /** The float value. */
+  value?: number;
+}
+export interface FloatValueAminoMsg {
+  type: "/google.protobuf.FloatValue";
+  value: FloatValueAmino;
 }
 /**
  * Wrapper message for `float`.
@@ -62,6 +88,19 @@ export interface Int64ValueProtoMsg {
  * 
  * The JSON representation for `Int64Value` is JSON string.
  */
+export interface Int64ValueAmino {
+  /** The int64 value. */
+  value?: string;
+}
+export interface Int64ValueAminoMsg {
+  type: "/google.protobuf.Int64Value";
+  value: Int64ValueAmino;
+}
+/**
+ * Wrapper message for `int64`.
+ * 
+ * The JSON representation for `Int64Value` is JSON string.
+ */
 export interface Int64ValueSDKType {
   value: bigint;
 }
@@ -77,6 +116,19 @@ export interface UInt64Value {
 export interface UInt64ValueProtoMsg {
   typeUrl: "/google.protobuf.UInt64Value";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `uint64`.
+ * 
+ * The JSON representation for `UInt64Value` is JSON string.
+ */
+export interface UInt64ValueAmino {
+  /** The uint64 value. */
+  value?: string;
+}
+export interface UInt64ValueAminoMsg {
+  type: "/google.protobuf.UInt64Value";
+  value: UInt64ValueAmino;
 }
 /**
  * Wrapper message for `uint64`.
@@ -104,6 +156,19 @@ export interface Int32ValueProtoMsg {
  * 
  * The JSON representation for `Int32Value` is JSON number.
  */
+export interface Int32ValueAmino {
+  /** The int32 value. */
+  value?: number;
+}
+export interface Int32ValueAminoMsg {
+  type: "/google.protobuf.Int32Value";
+  value: Int32ValueAmino;
+}
+/**
+ * Wrapper message for `int32`.
+ * 
+ * The JSON representation for `Int32Value` is JSON number.
+ */
 export interface Int32ValueSDKType {
   value: number;
 }
@@ -119,6 +184,19 @@ export interface UInt32Value {
 export interface UInt32ValueProtoMsg {
   typeUrl: "/google.protobuf.UInt32Value";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `uint32`.
+ * 
+ * The JSON representation for `UInt32Value` is JSON number.
+ */
+export interface UInt32ValueAmino {
+  /** The uint32 value. */
+  value?: number;
+}
+export interface UInt32ValueAminoMsg {
+  type: "/google.protobuf.UInt32Value";
+  value: UInt32ValueAmino;
 }
 /**
  * Wrapper message for `uint32`.
@@ -146,6 +224,19 @@ export interface BoolValueProtoMsg {
  * 
  * The JSON representation for `BoolValue` is JSON `true` and `false`.
  */
+export interface BoolValueAmino {
+  /** The bool value. */
+  value?: boolean;
+}
+export interface BoolValueAminoMsg {
+  type: "/google.protobuf.BoolValue";
+  value: BoolValueAmino;
+}
+/**
+ * Wrapper message for `bool`.
+ * 
+ * The JSON representation for `BoolValue` is JSON `true` and `false`.
+ */
 export interface BoolValueSDKType {
   value: boolean;
 }
@@ -161,6 +252,19 @@ export interface StringValue {
 export interface StringValueProtoMsg {
   typeUrl: "/google.protobuf.StringValue";
   value: Uint8Array;
+}
+/**
+ * Wrapper message for `string`.
+ * 
+ * The JSON representation for `StringValue` is JSON string.
+ */
+export interface StringValueAmino {
+  /** The string value. */
+  value?: string;
+}
+export interface StringValueAminoMsg {
+  type: "/google.protobuf.StringValue";
+  value: StringValueAmino;
 }
 /**
  * Wrapper message for `string`.
@@ -188,6 +292,19 @@ export interface BytesValueProtoMsg {
  * 
  * The JSON representation for `BytesValue` is JSON string.
  */
+export interface BytesValueAmino {
+  /** The bytes value. */
+  value?: string;
+}
+export interface BytesValueAminoMsg {
+  type: "/google.protobuf.BytesValue";
+  value: BytesValueAmino;
+}
+/**
+ * Wrapper message for `bytes`.
+ * 
+ * The JSON representation for `BytesValue` is JSON string.
+ */
 export interface BytesValueSDKType {
   value: Uint8Array;
 }
@@ -198,6 +315,15 @@ function createBaseDoubleValue(): DoubleValue {
 }
 export const DoubleValue = {
   typeUrl: "/google.protobuf.DoubleValue",
+  is(o: any): o is DoubleValue {
+    return o && (o.$typeUrl === DoubleValue.typeUrl || typeof o.value === "number");
+  },
+  isSDK(o: any): o is DoubleValueSDKType {
+    return o && (o.$typeUrl === DoubleValue.typeUrl || typeof o.value === "number");
+  },
+  isAmino(o: any): o is DoubleValueAmino {
+    return o && (o.$typeUrl === DoubleValue.typeUrl || typeof o.value === "number");
+  },
   encode(message: DoubleValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       writer.uint32(9).double(message.value);
@@ -277,7 +403,8 @@ export const DoubleValue = {
       typeUrl: "/google.protobuf.DoubleValue",
       value: DoubleValue.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseFloatValue(): FloatValue {
   return {
@@ -286,6 +413,15 @@ function createBaseFloatValue(): FloatValue {
 }
 export const FloatValue = {
   typeUrl: "/google.protobuf.FloatValue",
+  is(o: any): o is FloatValue {
+    return o && (o.$typeUrl === FloatValue.typeUrl || typeof o.value === "number");
+  },
+  isSDK(o: any): o is FloatValueSDKType {
+    return o && (o.$typeUrl === FloatValue.typeUrl || typeof o.value === "number");
+  },
+  isAmino(o: any): o is FloatValueAmino {
+    return o && (o.$typeUrl === FloatValue.typeUrl || typeof o.value === "number");
+  },
   encode(message: FloatValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       writer.uint32(13).float(message.value);
@@ -365,7 +501,8 @@ export const FloatValue = {
       typeUrl: "/google.protobuf.FloatValue",
       value: FloatValue.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseInt64Value(): Int64Value {
   return {
@@ -374,6 +511,15 @@ function createBaseInt64Value(): Int64Value {
 }
 export const Int64Value = {
   typeUrl: "/google.protobuf.Int64Value",
+  is(o: any): o is Int64Value {
+    return o && (o.$typeUrl === Int64Value.typeUrl || typeof o.value === "bigint");
+  },
+  isSDK(o: any): o is Int64ValueSDKType {
+    return o && (o.$typeUrl === Int64Value.typeUrl || typeof o.value === "bigint");
+  },
+  isAmino(o: any): o is Int64ValueAmino {
+    return o && (o.$typeUrl === Int64Value.typeUrl || typeof o.value === "bigint");
+  },
   encode(message: Int64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       writer.uint32(8).int64(message.value);
@@ -455,7 +601,8 @@ export const Int64Value = {
       typeUrl: "/google.protobuf.Int64Value",
       value: Int64Value.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseUInt64Value(): UInt64Value {
   return {
@@ -464,6 +611,15 @@ function createBaseUInt64Value(): UInt64Value {
 }
 export const UInt64Value = {
   typeUrl: "/google.protobuf.UInt64Value",
+  is(o: any): o is UInt64Value {
+    return o && (o.$typeUrl === UInt64Value.typeUrl || typeof o.value === "bigint");
+  },
+  isSDK(o: any): o is UInt64ValueSDKType {
+    return o && (o.$typeUrl === UInt64Value.typeUrl || typeof o.value === "bigint");
+  },
+  isAmino(o: any): o is UInt64ValueAmino {
+    return o && (o.$typeUrl === UInt64Value.typeUrl || typeof o.value === "bigint");
+  },
   encode(message: UInt64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       writer.uint32(8).uint64(message.value);
@@ -545,7 +701,8 @@ export const UInt64Value = {
       typeUrl: "/google.protobuf.UInt64Value",
       value: UInt64Value.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseInt32Value(): Int32Value {
   return {
@@ -554,6 +711,15 @@ function createBaseInt32Value(): Int32Value {
 }
 export const Int32Value = {
   typeUrl: "/google.protobuf.Int32Value",
+  is(o: any): o is Int32Value {
+    return o && (o.$typeUrl === Int32Value.typeUrl || typeof o.value === "number");
+  },
+  isSDK(o: any): o is Int32ValueSDKType {
+    return o && (o.$typeUrl === Int32Value.typeUrl || typeof o.value === "number");
+  },
+  isAmino(o: any): o is Int32ValueAmino {
+    return o && (o.$typeUrl === Int32Value.typeUrl || typeof o.value === "number");
+  },
   encode(message: Int32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       writer.uint32(8).int32(message.value);
@@ -633,7 +799,8 @@ export const Int32Value = {
       typeUrl: "/google.protobuf.Int32Value",
       value: Int32Value.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseUInt32Value(): UInt32Value {
   return {
@@ -642,6 +809,15 @@ function createBaseUInt32Value(): UInt32Value {
 }
 export const UInt32Value = {
   typeUrl: "/google.protobuf.UInt32Value",
+  is(o: any): o is UInt32Value {
+    return o && (o.$typeUrl === UInt32Value.typeUrl || typeof o.value === "number");
+  },
+  isSDK(o: any): o is UInt32ValueSDKType {
+    return o && (o.$typeUrl === UInt32Value.typeUrl || typeof o.value === "number");
+  },
+  isAmino(o: any): o is UInt32ValueAmino {
+    return o && (o.$typeUrl === UInt32Value.typeUrl || typeof o.value === "number");
+  },
   encode(message: UInt32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       writer.uint32(8).uint32(message.value);
@@ -721,7 +897,8 @@ export const UInt32Value = {
       typeUrl: "/google.protobuf.UInt32Value",
       value: UInt32Value.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseBoolValue(): BoolValue {
   return {
@@ -730,6 +907,15 @@ function createBaseBoolValue(): BoolValue {
 }
 export const BoolValue = {
   typeUrl: "/google.protobuf.BoolValue",
+  is(o: any): o is BoolValue {
+    return o && (o.$typeUrl === BoolValue.typeUrl || typeof o.value === "boolean");
+  },
+  isSDK(o: any): o is BoolValueSDKType {
+    return o && (o.$typeUrl === BoolValue.typeUrl || typeof o.value === "boolean");
+  },
+  isAmino(o: any): o is BoolValueAmino {
+    return o && (o.$typeUrl === BoolValue.typeUrl || typeof o.value === "boolean");
+  },
   encode(message: BoolValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       writer.uint32(8).bool(message.value);
@@ -809,7 +995,8 @@ export const BoolValue = {
       typeUrl: "/google.protobuf.BoolValue",
       value: BoolValue.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseStringValue(): StringValue {
   return {
@@ -818,6 +1005,15 @@ function createBaseStringValue(): StringValue {
 }
 export const StringValue = {
   typeUrl: "/google.protobuf.StringValue",
+  is(o: any): o is StringValue {
+    return o && (o.$typeUrl === StringValue.typeUrl || typeof o.value === "string");
+  },
+  isSDK(o: any): o is StringValueSDKType {
+    return o && (o.$typeUrl === StringValue.typeUrl || typeof o.value === "string");
+  },
+  isAmino(o: any): o is StringValueAmino {
+    return o && (o.$typeUrl === StringValue.typeUrl || typeof o.value === "string");
+  },
   encode(message: StringValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       writer.uint32(10).string(message.value);
@@ -897,7 +1093,8 @@ export const StringValue = {
       typeUrl: "/google.protobuf.StringValue",
       value: StringValue.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseBytesValue(): BytesValue {
   return {
@@ -906,6 +1103,15 @@ function createBaseBytesValue(): BytesValue {
 }
 export const BytesValue = {
   typeUrl: "/google.protobuf.BytesValue",
+  is(o: any): o is BytesValue {
+    return o && (o.$typeUrl === BytesValue.typeUrl || o.value instanceof Uint8Array || typeof o.value === "string");
+  },
+  isSDK(o: any): o is BytesValueSDKType {
+    return o && (o.$typeUrl === BytesValue.typeUrl || o.value instanceof Uint8Array || typeof o.value === "string");
+  },
+  isAmino(o: any): o is BytesValueAmino {
+    return o && (o.$typeUrl === BytesValue.typeUrl || o.value instanceof Uint8Array || typeof o.value === "string");
+  },
   encode(message: BytesValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value.length !== 0) {
       writer.uint32(10).bytes(message.value);
@@ -985,5 +1191,6 @@ export const BytesValue = {
       typeUrl: "/google.protobuf.BytesValue",
       value: BytesValue.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

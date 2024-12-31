@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
@@ -40,6 +40,34 @@ export interface StatusProtoMsg {
  * You can find out more about this error model and how to work with it in the
  * [API Design Guide](https://cloud.google.com/apis/design/errors).
  */
+export interface StatusAmino {
+  /** The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]. */
+  code?: number;
+  /**
+   * A developer-facing error message, which should be in English. Any
+   * user-facing error message should be localized and sent in the
+   * [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+   */
+  message?: string;
+  /**
+   * A list of messages that carry the error details.  There is a common set of
+   * message types for APIs to use.
+   */
+  details?: AnyAmino[];
+}
+export interface StatusAminoMsg {
+  type: "/google.rpc.Status";
+  value: StatusAmino;
+}
+/**
+ * The `Status` type defines a logical error model that is suitable for
+ * different programming environments, including REST APIs and RPC APIs. It is
+ * used by [gRPC](https://github.com/grpc). Each `Status` message contains
+ * three pieces of data: error code, error message, and error details.
+ * 
+ * You can find out more about this error model and how to work with it in the
+ * [API Design Guide](https://cloud.google.com/apis/design/errors).
+ */
 export interface StatusSDKType {
   code: number;
   message: string;
@@ -54,6 +82,15 @@ function createBaseStatus(): Status {
 }
 export const Status = {
   typeUrl: "/google.rpc.Status",
+  is(o: any): o is Status {
+    return o && (o.$typeUrl === Status.typeUrl || typeof o.code === "number" && typeof o.message === "string" && Array.isArray(o.details) && (!o.details.length || Any.is(o.details[0])));
+  },
+  isSDK(o: any): o is StatusSDKType {
+    return o && (o.$typeUrl === Status.typeUrl || typeof o.code === "number" && typeof o.message === "string" && Array.isArray(o.details) && (!o.details.length || Any.isSDK(o.details[0])));
+  },
+  isAmino(o: any): o is StatusAmino {
+    return o && (o.$typeUrl === Status.typeUrl || typeof o.code === "number" && typeof o.message === "string" && Array.isArray(o.details) && (!o.details.length || Any.isAmino(o.details[0])));
+  },
   encode(message: Status, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.code !== undefined) {
       writer.uint32(8).int32(message.code);
@@ -175,5 +212,6 @@ export const Status = {
       typeUrl: "/google.rpc.Status",
       value: Status.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

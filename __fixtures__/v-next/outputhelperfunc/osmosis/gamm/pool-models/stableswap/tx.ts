@@ -1,6 +1,7 @@
-import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { PoolParams, PoolParamsAmino, PoolParamsSDKType } from "./stableswap_pool";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
@@ -18,6 +19,19 @@ export interface MsgCreateStableswapPoolProtoMsg {
   value: Uint8Array;
 }
 /** ===================== MsgCreatePool */
+export interface MsgCreateStableswapPoolAmino {
+  sender?: string;
+  pool_params?: PoolParamsAmino;
+  initial_pool_liquidity?: CoinAmino[];
+  scaling_factors?: string[];
+  future_pool_governor?: string;
+  scaling_factor_controller?: string;
+}
+export interface MsgCreateStableswapPoolAminoMsg {
+  type: "osmosis/gamm/create-stableswap-pool";
+  value: MsgCreateStableswapPoolAmino;
+}
+/** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPoolSDKType {
   sender: string;
   pool_params?: PoolParamsSDKType;
@@ -33,6 +47,14 @@ export interface MsgCreateStableswapPoolResponse {
 export interface MsgCreateStableswapPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPoolResponse";
   value: Uint8Array;
+}
+/** Returns a poolID with custom poolName. */
+export interface MsgCreateStableswapPoolResponseAmino {
+  pool_id?: string;
+}
+export interface MsgCreateStableswapPoolResponseAminoMsg {
+  type: "osmosis/gamm/create-stableswap-pool-response";
+  value: MsgCreateStableswapPoolResponseAmino;
 }
 /** Returns a poolID with custom poolName. */
 export interface MsgCreateStableswapPoolResponseSDKType {
@@ -55,6 +77,19 @@ export interface MsgStableSwapAdjustScalingFactorsProtoMsg {
  * Sender must be the pool's scaling_factor_governor in order for the tx to
  * succeed. Adjusts stableswap scaling factors.
  */
+export interface MsgStableSwapAdjustScalingFactorsAmino {
+  sender?: string;
+  pool_id?: string;
+  scaling_factors?: string[];
+}
+export interface MsgStableSwapAdjustScalingFactorsAminoMsg {
+  type: "osmosis/gamm/stable-swap-adjust-scaling-factors";
+  value: MsgStableSwapAdjustScalingFactorsAmino;
+}
+/**
+ * Sender must be the pool's scaling_factor_governor in order for the tx to
+ * succeed. Adjusts stableswap scaling factors.
+ */
 export interface MsgStableSwapAdjustScalingFactorsSDKType {
   sender: string;
   pool_id: bigint;
@@ -64,6 +99,11 @@ export interface MsgStableSwapAdjustScalingFactorsResponse {}
 export interface MsgStableSwapAdjustScalingFactorsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactorsResponse";
   value: Uint8Array;
+}
+export interface MsgStableSwapAdjustScalingFactorsResponseAmino {}
+export interface MsgStableSwapAdjustScalingFactorsResponseAminoMsg {
+  type: "osmosis/gamm/stable-swap-adjust-scaling-factors-response";
+  value: MsgStableSwapAdjustScalingFactorsResponseAmino;
 }
 export interface MsgStableSwapAdjustScalingFactorsResponseSDKType {}
 function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
@@ -78,6 +118,16 @@ function createBaseMsgCreateStableswapPool(): MsgCreateStableswapPool {
 }
 export const MsgCreateStableswapPool = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool",
+  aminoType: "osmosis/gamm/create-stableswap-pool",
+  is(o: any): o is MsgCreateStableswapPool {
+    return o && (o.$typeUrl === MsgCreateStableswapPool.typeUrl || typeof o.sender === "string" && Array.isArray(o.initialPoolLiquidity) && (!o.initialPoolLiquidity.length || Coin.is(o.initialPoolLiquidity[0])) && Array.isArray(o.scalingFactors) && (!o.scalingFactors.length || typeof o.scalingFactors[0] === "bigint") && typeof o.futurePoolGovernor === "string" && typeof o.scalingFactorController === "string");
+  },
+  isSDK(o: any): o is MsgCreateStableswapPoolSDKType {
+    return o && (o.$typeUrl === MsgCreateStableswapPool.typeUrl || typeof o.sender === "string" && Array.isArray(o.initial_pool_liquidity) && (!o.initial_pool_liquidity.length || Coin.isSDK(o.initial_pool_liquidity[0])) && Array.isArray(o.scaling_factors) && (!o.scaling_factors.length || typeof o.scaling_factors[0] === "bigint") && typeof o.future_pool_governor === "string" && typeof o.scaling_factor_controller === "string");
+  },
+  isAmino(o: any): o is MsgCreateStableswapPoolAmino {
+    return o && (o.$typeUrl === MsgCreateStableswapPool.typeUrl || typeof o.sender === "string" && Array.isArray(o.initial_pool_liquidity) && (!o.initial_pool_liquidity.length || Coin.isAmino(o.initial_pool_liquidity[0])) && Array.isArray(o.scaling_factors) && (!o.scaling_factors.length || typeof o.scaling_factors[0] === "bigint") && typeof o.future_pool_governor === "string" && typeof o.scaling_factor_controller === "string");
+  },
   encode(message: MsgCreateStableswapPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -274,6 +324,10 @@ export const MsgCreateStableswapPool = {
       typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPool",
       value: MsgCreateStableswapPool.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PoolParams.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgCreateStableswapPoolResponse(): MsgCreateStableswapPoolResponse {
@@ -283,6 +337,16 @@ function createBaseMsgCreateStableswapPoolResponse(): MsgCreateStableswapPoolRes
 }
 export const MsgCreateStableswapPoolResponse = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPoolResponse",
+  aminoType: "osmosis/gamm/create-stableswap-pool-response",
+  is(o: any): o is MsgCreateStableswapPoolResponse {
+    return o && (o.$typeUrl === MsgCreateStableswapPoolResponse.typeUrl || typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is MsgCreateStableswapPoolResponseSDKType {
+    return o && (o.$typeUrl === MsgCreateStableswapPoolResponse.typeUrl || typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is MsgCreateStableswapPoolResponseAmino {
+    return o && (o.$typeUrl === MsgCreateStableswapPoolResponse.typeUrl || typeof o.pool_id === "bigint");
+  },
   encode(message: MsgCreateStableswapPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -370,7 +434,8 @@ export const MsgCreateStableswapPoolResponse = {
       typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgCreateStableswapPoolResponse",
       value: MsgCreateStableswapPoolResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgStableSwapAdjustScalingFactors(): MsgStableSwapAdjustScalingFactors {
   return {
@@ -381,6 +446,16 @@ function createBaseMsgStableSwapAdjustScalingFactors(): MsgStableSwapAdjustScali
 }
 export const MsgStableSwapAdjustScalingFactors = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors",
+  aminoType: "osmosis/gamm/stable-swap-adjust-scaling-factors",
+  is(o: any): o is MsgStableSwapAdjustScalingFactors {
+    return o && (o.$typeUrl === MsgStableSwapAdjustScalingFactors.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && Array.isArray(o.scalingFactors) && (!o.scalingFactors.length || typeof o.scalingFactors[0] === "bigint"));
+  },
+  isSDK(o: any): o is MsgStableSwapAdjustScalingFactorsSDKType {
+    return o && (o.$typeUrl === MsgStableSwapAdjustScalingFactors.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && Array.isArray(o.scaling_factors) && (!o.scaling_factors.length || typeof o.scaling_factors[0] === "bigint"));
+  },
+  isAmino(o: any): o is MsgStableSwapAdjustScalingFactorsAmino {
+    return o && (o.$typeUrl === MsgStableSwapAdjustScalingFactors.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && Array.isArray(o.scaling_factors) && (!o.scaling_factors.length || typeof o.scaling_factors[0] === "bigint"));
+  },
   encode(message: MsgStableSwapAdjustScalingFactors, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -519,13 +594,24 @@ export const MsgStableSwapAdjustScalingFactors = {
       typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactors",
       value: MsgStableSwapAdjustScalingFactors.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgStableSwapAdjustScalingFactorsResponse(): MsgStableSwapAdjustScalingFactorsResponse {
   return {};
 }
 export const MsgStableSwapAdjustScalingFactorsResponse = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactorsResponse",
+  aminoType: "osmosis/gamm/stable-swap-adjust-scaling-factors-response",
+  is(o: any): o is MsgStableSwapAdjustScalingFactorsResponse {
+    return o && o.$typeUrl === MsgStableSwapAdjustScalingFactorsResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgStableSwapAdjustScalingFactorsResponseSDKType {
+    return o && o.$typeUrl === MsgStableSwapAdjustScalingFactorsResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgStableSwapAdjustScalingFactorsResponseAmino {
+    return o && o.$typeUrl === MsgStableSwapAdjustScalingFactorsResponse.typeUrl;
+  },
   encode(_: MsgStableSwapAdjustScalingFactorsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -593,5 +679,6 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
       typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.MsgStableSwapAdjustScalingFactorsResponse",
       value: MsgStableSwapAdjustScalingFactorsResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

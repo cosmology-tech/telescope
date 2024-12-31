@@ -1,10 +1,11 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { Channel, ChannelSDKType, IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
-import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType } from "../../client/v1/client";
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Channel, ChannelAmino, ChannelSDKType, IdentifiedChannel, IdentifiedChannelAmino, IdentifiedChannelSDKType, PacketState, PacketStateAmino, PacketStateSDKType } from "./channel";
+import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType } from "../../client/v1/client";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "ibc.core.channel.v1";
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequest {
@@ -16,6 +17,17 @@ export interface QueryChannelRequest {
 export interface QueryChannelRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelRequest";
   value: Uint8Array;
+}
+/** QueryChannelRequest is the request type for the Query/Channel RPC method */
+export interface QueryChannelRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+}
+export interface QueryChannelRequestAminoMsg {
+  type: "cosmos-sdk/QueryChannelRequest";
+  value: QueryChannelRequestAmino;
 }
 /** QueryChannelRequest is the request type for the Query/Channel RPC method */
 export interface QueryChannelRequestSDKType {
@@ -44,6 +56,23 @@ export interface QueryChannelResponseProtoMsg {
  * Besides the Channel end, it includes a proof and the height from which the
  * proof was retrieved.
  */
+export interface QueryChannelResponseAmino {
+  /** channel associated with the request identifiers */
+  channel?: ChannelAmino;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryChannelResponseAminoMsg {
+  type: "cosmos-sdk/QueryChannelResponse";
+  value: QueryChannelResponseAmino;
+}
+/**
+ * QueryChannelResponse is the response type for the Query/Channel RPC method.
+ * Besides the Channel end, it includes a proof and the height from which the
+ * proof was retrieved.
+ */
 export interface QueryChannelResponseSDKType {
   channel?: ChannelSDKType;
   proof: Uint8Array;
@@ -57,6 +86,15 @@ export interface QueryChannelsRequest {
 export interface QueryChannelsRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest";
   value: Uint8Array;
+}
+/** QueryChannelsRequest is the request type for the Query/Channels RPC method */
+export interface QueryChannelsRequestAmino {
+  /** pagination request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryChannelsRequestAminoMsg {
+  type: "cosmos-sdk/QueryChannelsRequest";
+  value: QueryChannelsRequestAmino;
 }
 /** QueryChannelsRequest is the request type for the Query/Channels RPC method */
 export interface QueryChannelsRequestSDKType {
@@ -74,6 +112,19 @@ export interface QueryChannelsResponse {
 export interface QueryChannelsResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse";
   value: Uint8Array;
+}
+/** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
+export interface QueryChannelsResponseAmino {
+  /** list of stored channels of the chain. */
+  channels?: IdentifiedChannelAmino[];
+  /** pagination response */
+  pagination?: PageResponseAmino;
+  /** query block height */
+  height?: HeightAmino;
+}
+export interface QueryChannelsResponseAminoMsg {
+  type: "cosmos-sdk/QueryChannelsResponse";
+  value: QueryChannelsResponseAmino;
 }
 /** QueryChannelsResponse is the response type for the Query/Channels RPC method. */
 export interface QueryChannelsResponseSDKType {
@@ -94,6 +145,20 @@ export interface QueryConnectionChannelsRequest {
 export interface QueryConnectionChannelsRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest";
   value: Uint8Array;
+}
+/**
+ * QueryConnectionChannelsRequest is the request type for the
+ * Query/QueryConnectionChannels RPC method
+ */
+export interface QueryConnectionChannelsRequestAmino {
+  /** connection unique identifier */
+  connection?: string;
+  /** pagination request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryConnectionChannelsRequestAminoMsg {
+  type: "cosmos-sdk/QueryConnectionChannelsRequest";
+  value: QueryConnectionChannelsRequestAmino;
 }
 /**
  * QueryConnectionChannelsRequest is the request type for the
@@ -123,6 +188,22 @@ export interface QueryConnectionChannelsResponseProtoMsg {
  * QueryConnectionChannelsResponse is the Response type for the
  * Query/QueryConnectionChannels RPC method
  */
+export interface QueryConnectionChannelsResponseAmino {
+  /** list of channels associated with a connection. */
+  channels?: IdentifiedChannelAmino[];
+  /** pagination response */
+  pagination?: PageResponseAmino;
+  /** query block height */
+  height?: HeightAmino;
+}
+export interface QueryConnectionChannelsResponseAminoMsg {
+  type: "cosmos-sdk/QueryConnectionChannelsResponse";
+  value: QueryConnectionChannelsResponseAmino;
+}
+/**
+ * QueryConnectionChannelsResponse is the Response type for the
+ * Query/QueryConnectionChannels RPC method
+ */
 export interface QueryConnectionChannelsResponseSDKType {
   channels: IdentifiedChannelSDKType[];
   pagination?: PageResponseSDKType;
@@ -141,6 +222,20 @@ export interface QueryChannelClientStateRequest {
 export interface QueryChannelClientStateRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest";
   value: Uint8Array;
+}
+/**
+ * QueryChannelClientStateRequest is the request type for the Query/ClientState
+ * RPC method
+ */
+export interface QueryChannelClientStateRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+}
+export interface QueryChannelClientStateRequestAminoMsg {
+  type: "cosmos-sdk/QueryChannelClientStateRequest";
+  value: QueryChannelClientStateRequestAmino;
 }
 /**
  * QueryChannelClientStateRequest is the request type for the Query/ClientState
@@ -170,6 +265,22 @@ export interface QueryChannelClientStateResponseProtoMsg {
  * QueryChannelClientStateResponse is the Response type for the
  * Query/QueryChannelClientState RPC method
  */
+export interface QueryChannelClientStateResponseAmino {
+  /** client state associated with the channel */
+  identified_client_state?: IdentifiedClientStateAmino;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryChannelClientStateResponseAminoMsg {
+  type: "cosmos-sdk/QueryChannelClientStateResponse";
+  value: QueryChannelClientStateResponseAmino;
+}
+/**
+ * QueryChannelClientStateResponse is the Response type for the
+ * Query/QueryChannelClientState RPC method
+ */
 export interface QueryChannelClientStateResponseSDKType {
   identified_client_state?: IdentifiedClientStateSDKType;
   proof: Uint8Array;
@@ -192,6 +303,24 @@ export interface QueryChannelConsensusStateRequest {
 export interface QueryChannelConsensusStateRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest";
   value: Uint8Array;
+}
+/**
+ * QueryChannelConsensusStateRequest is the request type for the
+ * Query/ConsensusState RPC method
+ */
+export interface QueryChannelConsensusStateRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+  /** revision number of the consensus state */
+  revision_number?: string;
+  /** revision height of the consensus state */
+  revision_height?: string;
+}
+export interface QueryChannelConsensusStateRequestAminoMsg {
+  type: "cosmos-sdk/QueryChannelConsensusStateRequest";
+  value: QueryChannelConsensusStateRequestAmino;
 }
 /**
  * QueryChannelConsensusStateRequest is the request type for the
@@ -225,6 +354,24 @@ export interface QueryChannelConsensusStateResponseProtoMsg {
  * QueryChannelClientStateResponse is the Response type for the
  * Query/QueryChannelClientState RPC method
  */
+export interface QueryChannelConsensusStateResponseAmino {
+  /** consensus state associated with the channel */
+  consensus_state?: AnyAmino;
+  /** client ID associated with the consensus state */
+  client_id?: string;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryChannelConsensusStateResponseAminoMsg {
+  type: "cosmos-sdk/QueryChannelConsensusStateResponse";
+  value: QueryChannelConsensusStateResponseAmino;
+}
+/**
+ * QueryChannelClientStateResponse is the Response type for the
+ * Query/QueryChannelClientState RPC method
+ */
 export interface QueryChannelConsensusStateResponseSDKType {
   consensus_state?: AnySDKType;
   client_id: string;
@@ -246,6 +393,22 @@ export interface QueryPacketCommitmentRequest {
 export interface QueryPacketCommitmentRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest";
   value: Uint8Array;
+}
+/**
+ * QueryPacketCommitmentRequest is the request type for the
+ * Query/PacketCommitment RPC method
+ */
+export interface QueryPacketCommitmentRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+  /** packet sequence */
+  sequence?: string;
+}
+export interface QueryPacketCommitmentRequestAminoMsg {
+  type: "cosmos-sdk/QueryPacketCommitmentRequest";
+  value: QueryPacketCommitmentRequestAmino;
 }
 /**
  * QueryPacketCommitmentRequest is the request type for the
@@ -278,6 +441,23 @@ export interface QueryPacketCommitmentResponseProtoMsg {
  * which also includes a proof and the height from which the proof was
  * retrieved
  */
+export interface QueryPacketCommitmentResponseAmino {
+  /** packet associated with the request fields */
+  commitment?: string;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryPacketCommitmentResponseAminoMsg {
+  type: "cosmos-sdk/QueryPacketCommitmentResponse";
+  value: QueryPacketCommitmentResponseAmino;
+}
+/**
+ * QueryPacketCommitmentResponse defines the client query response for a packet
+ * which also includes a proof and the height from which the proof was
+ * retrieved
+ */
 export interface QueryPacketCommitmentResponseSDKType {
   commitment: Uint8Array;
   proof: Uint8Array;
@@ -298,6 +478,22 @@ export interface QueryPacketCommitmentsRequest {
 export interface QueryPacketCommitmentsRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest";
   value: Uint8Array;
+}
+/**
+ * QueryPacketCommitmentsRequest is the request type for the
+ * Query/QueryPacketCommitments RPC method
+ */
+export interface QueryPacketCommitmentsRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+  /** pagination request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryPacketCommitmentsRequestAminoMsg {
+  type: "cosmos-sdk/QueryPacketCommitmentsRequest";
+  value: QueryPacketCommitmentsRequestAmino;
 }
 /**
  * QueryPacketCommitmentsRequest is the request type for the
@@ -327,6 +523,21 @@ export interface QueryPacketCommitmentsResponseProtoMsg {
  * QueryPacketCommitmentsResponse is the request type for the
  * Query/QueryPacketCommitments RPC method
  */
+export interface QueryPacketCommitmentsResponseAmino {
+  commitments?: PacketStateAmino[];
+  /** pagination response */
+  pagination?: PageResponseAmino;
+  /** query block height */
+  height?: HeightAmino;
+}
+export interface QueryPacketCommitmentsResponseAminoMsg {
+  type: "cosmos-sdk/QueryPacketCommitmentsResponse";
+  value: QueryPacketCommitmentsResponseAmino;
+}
+/**
+ * QueryPacketCommitmentsResponse is the request type for the
+ * Query/QueryPacketCommitments RPC method
+ */
 export interface QueryPacketCommitmentsResponseSDKType {
   commitments: PacketStateSDKType[];
   pagination?: PageResponseSDKType;
@@ -347,6 +558,22 @@ export interface QueryPacketReceiptRequest {
 export interface QueryPacketReceiptRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest";
   value: Uint8Array;
+}
+/**
+ * QueryPacketReceiptRequest is the request type for the
+ * Query/PacketReceipt RPC method
+ */
+export interface QueryPacketReceiptRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+  /** packet sequence */
+  sequence?: string;
+}
+export interface QueryPacketReceiptRequestAminoMsg {
+  type: "cosmos-sdk/QueryPacketReceiptRequest";
+  value: QueryPacketReceiptRequestAmino;
 }
 /**
  * QueryPacketReceiptRequest is the request type for the
@@ -379,6 +606,23 @@ export interface QueryPacketReceiptResponseProtoMsg {
  * receipt which also includes a proof, and the height from which the proof was
  * retrieved
  */
+export interface QueryPacketReceiptResponseAmino {
+  /** success flag for if receipt exists */
+  received?: boolean;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryPacketReceiptResponseAminoMsg {
+  type: "cosmos-sdk/QueryPacketReceiptResponse";
+  value: QueryPacketReceiptResponseAmino;
+}
+/**
+ * QueryPacketReceiptResponse defines the client query response for a packet
+ * receipt which also includes a proof, and the height from which the proof was
+ * retrieved
+ */
 export interface QueryPacketReceiptResponseSDKType {
   received: boolean;
   proof: Uint8Array;
@@ -399,6 +643,22 @@ export interface QueryPacketAcknowledgementRequest {
 export interface QueryPacketAcknowledgementRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest";
   value: Uint8Array;
+}
+/**
+ * QueryPacketAcknowledgementRequest is the request type for the
+ * Query/PacketAcknowledgement RPC method
+ */
+export interface QueryPacketAcknowledgementRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+  /** packet sequence */
+  sequence?: string;
+}
+export interface QueryPacketAcknowledgementRequestAminoMsg {
+  type: "cosmos-sdk/QueryPacketAcknowledgementRequest";
+  value: QueryPacketAcknowledgementRequestAmino;
 }
 /**
  * QueryPacketAcknowledgementRequest is the request type for the
@@ -425,6 +685,23 @@ export interface QueryPacketAcknowledgementResponse {
 export interface QueryPacketAcknowledgementResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse";
   value: Uint8Array;
+}
+/**
+ * QueryPacketAcknowledgementResponse defines the client query response for a
+ * packet which also includes a proof and the height from which the
+ * proof was retrieved
+ */
+export interface QueryPacketAcknowledgementResponseAmino {
+  /** packet associated with the request fields */
+  acknowledgement?: string;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryPacketAcknowledgementResponseAminoMsg {
+  type: "cosmos-sdk/QueryPacketAcknowledgementResponse";
+  value: QueryPacketAcknowledgementResponseAmino;
 }
 /**
  * QueryPacketAcknowledgementResponse defines the client query response for a
@@ -458,6 +735,24 @@ export interface QueryPacketAcknowledgementsRequestProtoMsg {
  * QueryPacketAcknowledgementsRequest is the request type for the
  * Query/QueryPacketCommitments RPC method
  */
+export interface QueryPacketAcknowledgementsRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+  /** pagination request */
+  pagination?: PageRequestAmino;
+  /** list of packet sequences */
+  packet_commitment_sequences?: string[];
+}
+export interface QueryPacketAcknowledgementsRequestAminoMsg {
+  type: "cosmos-sdk/QueryPacketAcknowledgementsRequest";
+  value: QueryPacketAcknowledgementsRequestAmino;
+}
+/**
+ * QueryPacketAcknowledgementsRequest is the request type for the
+ * Query/QueryPacketCommitments RPC method
+ */
 export interface QueryPacketAcknowledgementsRequestSDKType {
   port_id: string;
   channel_id: string;
@@ -478,6 +773,21 @@ export interface QueryPacketAcknowledgementsResponse {
 export interface QueryPacketAcknowledgementsResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryPacketAcknowledgemetsResponse is the request type for the
+ * Query/QueryPacketAcknowledgements RPC method
+ */
+export interface QueryPacketAcknowledgementsResponseAmino {
+  acknowledgements?: PacketStateAmino[];
+  /** pagination response */
+  pagination?: PageResponseAmino;
+  /** query block height */
+  height?: HeightAmino;
+}
+export interface QueryPacketAcknowledgementsResponseAminoMsg {
+  type: "cosmos-sdk/QueryPacketAcknowledgementsResponse";
+  value: QueryPacketAcknowledgementsResponseAmino;
 }
 /**
  * QueryPacketAcknowledgemetsResponse is the request type for the
@@ -508,6 +818,22 @@ export interface QueryUnreceivedPacketsRequestProtoMsg {
  * QueryUnreceivedPacketsRequest is the request type for the
  * Query/UnreceivedPackets RPC method
  */
+export interface QueryUnreceivedPacketsRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+  /** list of packet sequences */
+  packet_commitment_sequences?: string[];
+}
+export interface QueryUnreceivedPacketsRequestAminoMsg {
+  type: "cosmos-sdk/QueryUnreceivedPacketsRequest";
+  value: QueryUnreceivedPacketsRequestAmino;
+}
+/**
+ * QueryUnreceivedPacketsRequest is the request type for the
+ * Query/UnreceivedPackets RPC method
+ */
 export interface QueryUnreceivedPacketsRequestSDKType {
   port_id: string;
   channel_id: string;
@@ -526,6 +852,20 @@ export interface QueryUnreceivedPacketsResponse {
 export interface QueryUnreceivedPacketsResponseProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryUnreceivedPacketsResponse is the response type for the
+ * Query/UnreceivedPacketCommitments RPC method
+ */
+export interface QueryUnreceivedPacketsResponseAmino {
+  /** list of unreceived packet sequences */
+  sequences?: string[];
+  /** query block height */
+  height?: HeightAmino;
+}
+export interface QueryUnreceivedPacketsResponseAminoMsg {
+  type: "cosmos-sdk/QueryUnreceivedPacketsResponse";
+  value: QueryUnreceivedPacketsResponseAmino;
 }
 /**
  * QueryUnreceivedPacketsResponse is the response type for the
@@ -555,6 +895,22 @@ export interface QueryUnreceivedAcksRequestProtoMsg {
  * QueryUnreceivedAcks is the request type for the
  * Query/UnreceivedAcks RPC method
  */
+export interface QueryUnreceivedAcksRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+  /** list of acknowledgement sequences */
+  packet_ack_sequences?: string[];
+}
+export interface QueryUnreceivedAcksRequestAminoMsg {
+  type: "cosmos-sdk/QueryUnreceivedAcksRequest";
+  value: QueryUnreceivedAcksRequestAmino;
+}
+/**
+ * QueryUnreceivedAcks is the request type for the
+ * Query/UnreceivedAcks RPC method
+ */
 export interface QueryUnreceivedAcksRequestSDKType {
   port_id: string;
   channel_id: string;
@@ -578,6 +934,20 @@ export interface QueryUnreceivedAcksResponseProtoMsg {
  * QueryUnreceivedAcksResponse is the response type for the
  * Query/UnreceivedAcks RPC method
  */
+export interface QueryUnreceivedAcksResponseAmino {
+  /** list of unreceived acknowledgement sequences */
+  sequences?: string[];
+  /** query block height */
+  height?: HeightAmino;
+}
+export interface QueryUnreceivedAcksResponseAminoMsg {
+  type: "cosmos-sdk/QueryUnreceivedAcksResponse";
+  value: QueryUnreceivedAcksResponseAmino;
+}
+/**
+ * QueryUnreceivedAcksResponse is the response type for the
+ * Query/UnreceivedAcks RPC method
+ */
 export interface QueryUnreceivedAcksResponseSDKType {
   sequences: bigint[];
   height: HeightSDKType;
@@ -595,6 +965,20 @@ export interface QueryNextSequenceReceiveRequest {
 export interface QueryNextSequenceReceiveRequestProtoMsg {
   typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest";
   value: Uint8Array;
+}
+/**
+ * QueryNextSequenceReceiveRequest is the request type for the
+ * Query/QueryNextSequenceReceiveRequest RPC method
+ */
+export interface QueryNextSequenceReceiveRequestAmino {
+  /** port unique identifier */
+  port_id?: string;
+  /** channel unique identifier */
+  channel_id?: string;
+}
+export interface QueryNextSequenceReceiveRequestAminoMsg {
+  type: "cosmos-sdk/QueryNextSequenceReceiveRequest";
+  value: QueryNextSequenceReceiveRequestAmino;
 }
 /**
  * QueryNextSequenceReceiveRequest is the request type for the
@@ -624,6 +1008,22 @@ export interface QueryNextSequenceReceiveResponseProtoMsg {
  * QuerySequenceResponse is the request type for the
  * Query/QueryNextSequenceReceiveResponse RPC method
  */
+export interface QueryNextSequenceReceiveResponseAmino {
+  /** next sequence receive number */
+  next_sequence_receive?: string;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryNextSequenceReceiveResponseAminoMsg {
+  type: "cosmos-sdk/QueryNextSequenceReceiveResponse";
+  value: QueryNextSequenceReceiveResponseAmino;
+}
+/**
+ * QuerySequenceResponse is the request type for the
+ * Query/QueryNextSequenceReceiveResponse RPC method
+ */
 export interface QueryNextSequenceReceiveResponseSDKType {
   next_sequence_receive: bigint;
   proof: Uint8Array;
@@ -637,6 +1037,16 @@ function createBaseQueryChannelRequest(): QueryChannelRequest {
 }
 export const QueryChannelRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryChannelRequest",
+  aminoType: "cosmos-sdk/QueryChannelRequest",
+  is(o: any): o is QueryChannelRequest {
+    return o && (o.$typeUrl === QueryChannelRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string");
+  },
+  isSDK(o: any): o is QueryChannelRequestSDKType {
+    return o && (o.$typeUrl === QueryChannelRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string");
+  },
+  isAmino(o: any): o is QueryChannelRequestAmino {
+    return o && (o.$typeUrl === QueryChannelRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string");
+  },
   encode(message: QueryChannelRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -738,7 +1148,8 @@ export const QueryChannelRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryChannelRequest",
       value: QueryChannelRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryChannelResponse(): QueryChannelResponse {
   return {
@@ -749,6 +1160,16 @@ function createBaseQueryChannelResponse(): QueryChannelResponse {
 }
 export const QueryChannelResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryChannelResponse",
+  aminoType: "cosmos-sdk/QueryChannelResponse",
+  is(o: any): o is QueryChannelResponse {
+    return o && (o.$typeUrl === QueryChannelResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryChannelResponseSDKType {
+    return o && (o.$typeUrl === QueryChannelResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryChannelResponseAmino {
+    return o && (o.$typeUrl === QueryChannelResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryChannelResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.channel !== undefined) {
       Channel.encode(message.channel, writer.uint32(10).fork()).ldelim();
@@ -870,6 +1291,10 @@ export const QueryChannelResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryChannelResponse",
       value: QueryChannelResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Channel.registerTypeUrl();
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryChannelsRequest(): QueryChannelsRequest {
@@ -879,6 +1304,16 @@ function createBaseQueryChannelsRequest(): QueryChannelsRequest {
 }
 export const QueryChannelsRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest",
+  aminoType: "cosmos-sdk/QueryChannelsRequest",
+  is(o: any): o is QueryChannelsRequest {
+    return o && o.$typeUrl === QueryChannelsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryChannelsRequestSDKType {
+    return o && o.$typeUrl === QueryChannelsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryChannelsRequestAmino {
+    return o && o.$typeUrl === QueryChannelsRequest.typeUrl;
+  },
   encode(message: QueryChannelsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -966,6 +1401,9 @@ export const QueryChannelsRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryChannelsRequest",
       value: QueryChannelsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryChannelsResponse(): QueryChannelsResponse {
@@ -977,6 +1415,16 @@ function createBaseQueryChannelsResponse(): QueryChannelsResponse {
 }
 export const QueryChannelsResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse",
+  aminoType: "cosmos-sdk/QueryChannelsResponse",
+  is(o: any): o is QueryChannelsResponse {
+    return o && (o.$typeUrl === QueryChannelsResponse.typeUrl || Array.isArray(o.channels) && (!o.channels.length || IdentifiedChannel.is(o.channels[0])) && Height.is(o.height));
+  },
+  isSDK(o: any): o is QueryChannelsResponseSDKType {
+    return o && (o.$typeUrl === QueryChannelsResponse.typeUrl || Array.isArray(o.channels) && (!o.channels.length || IdentifiedChannel.isSDK(o.channels[0])) && Height.isSDK(o.height));
+  },
+  isAmino(o: any): o is QueryChannelsResponseAmino {
+    return o && (o.$typeUrl === QueryChannelsResponse.typeUrl || Array.isArray(o.channels) && (!o.channels.length || IdentifiedChannel.isAmino(o.channels[0])) && Height.isAmino(o.height));
+  },
   encode(message: QueryChannelsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1108,6 +1556,11 @@ export const QueryChannelsResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryChannelsResponse",
       value: QueryChannelsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    IdentifiedChannel.registerTypeUrl();
+    PageResponse.registerTypeUrl();
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryConnectionChannelsRequest(): QueryConnectionChannelsRequest {
@@ -1118,6 +1571,16 @@ function createBaseQueryConnectionChannelsRequest(): QueryConnectionChannelsRequ
 }
 export const QueryConnectionChannelsRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest",
+  aminoType: "cosmos-sdk/QueryConnectionChannelsRequest",
+  is(o: any): o is QueryConnectionChannelsRequest {
+    return o && (o.$typeUrl === QueryConnectionChannelsRequest.typeUrl || typeof o.connection === "string");
+  },
+  isSDK(o: any): o is QueryConnectionChannelsRequestSDKType {
+    return o && (o.$typeUrl === QueryConnectionChannelsRequest.typeUrl || typeof o.connection === "string");
+  },
+  isAmino(o: any): o is QueryConnectionChannelsRequestAmino {
+    return o && (o.$typeUrl === QueryConnectionChannelsRequest.typeUrl || typeof o.connection === "string");
+  },
   encode(message: QueryConnectionChannelsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.connection !== undefined) {
       writer.uint32(10).string(message.connection);
@@ -1221,6 +1684,9 @@ export const QueryConnectionChannelsRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsRequest",
       value: QueryConnectionChannelsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryConnectionChannelsResponse(): QueryConnectionChannelsResponse {
@@ -1232,6 +1698,16 @@ function createBaseQueryConnectionChannelsResponse(): QueryConnectionChannelsRes
 }
 export const QueryConnectionChannelsResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse",
+  aminoType: "cosmos-sdk/QueryConnectionChannelsResponse",
+  is(o: any): o is QueryConnectionChannelsResponse {
+    return o && (o.$typeUrl === QueryConnectionChannelsResponse.typeUrl || Array.isArray(o.channels) && (!o.channels.length || IdentifiedChannel.is(o.channels[0])) && Height.is(o.height));
+  },
+  isSDK(o: any): o is QueryConnectionChannelsResponseSDKType {
+    return o && (o.$typeUrl === QueryConnectionChannelsResponse.typeUrl || Array.isArray(o.channels) && (!o.channels.length || IdentifiedChannel.isSDK(o.channels[0])) && Height.isSDK(o.height));
+  },
+  isAmino(o: any): o is QueryConnectionChannelsResponseAmino {
+    return o && (o.$typeUrl === QueryConnectionChannelsResponse.typeUrl || Array.isArray(o.channels) && (!o.channels.length || IdentifiedChannel.isAmino(o.channels[0])) && Height.isAmino(o.height));
+  },
   encode(message: QueryConnectionChannelsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.channels) {
       IdentifiedChannel.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1363,6 +1839,11 @@ export const QueryConnectionChannelsResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryConnectionChannelsResponse",
       value: QueryConnectionChannelsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    IdentifiedChannel.registerTypeUrl();
+    PageResponse.registerTypeUrl();
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryChannelClientStateRequest(): QueryChannelClientStateRequest {
@@ -1373,6 +1854,16 @@ function createBaseQueryChannelClientStateRequest(): QueryChannelClientStateRequ
 }
 export const QueryChannelClientStateRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest",
+  aminoType: "cosmos-sdk/QueryChannelClientStateRequest",
+  is(o: any): o is QueryChannelClientStateRequest {
+    return o && (o.$typeUrl === QueryChannelClientStateRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string");
+  },
+  isSDK(o: any): o is QueryChannelClientStateRequestSDKType {
+    return o && (o.$typeUrl === QueryChannelClientStateRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string");
+  },
+  isAmino(o: any): o is QueryChannelClientStateRequestAmino {
+    return o && (o.$typeUrl === QueryChannelClientStateRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string");
+  },
   encode(message: QueryChannelClientStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -1474,7 +1965,8 @@ export const QueryChannelClientStateRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateRequest",
       value: QueryChannelClientStateRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryChannelClientStateResponse(): QueryChannelClientStateResponse {
   return {
@@ -1485,6 +1977,16 @@ function createBaseQueryChannelClientStateResponse(): QueryChannelClientStateRes
 }
 export const QueryChannelClientStateResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse",
+  aminoType: "cosmos-sdk/QueryChannelClientStateResponse",
+  is(o: any): o is QueryChannelClientStateResponse {
+    return o && (o.$typeUrl === QueryChannelClientStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryChannelClientStateResponseSDKType {
+    return o && (o.$typeUrl === QueryChannelClientStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryChannelClientStateResponseAmino {
+    return o && (o.$typeUrl === QueryChannelClientStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryChannelClientStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.identifiedClientState !== undefined) {
       IdentifiedClientState.encode(message.identifiedClientState, writer.uint32(10).fork()).ldelim();
@@ -1606,6 +2108,10 @@ export const QueryChannelClientStateResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryChannelClientStateResponse",
       value: QueryChannelClientStateResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    IdentifiedClientState.registerTypeUrl();
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryChannelConsensusStateRequest(): QueryChannelConsensusStateRequest {
@@ -1618,6 +2124,16 @@ function createBaseQueryChannelConsensusStateRequest(): QueryChannelConsensusSta
 }
 export const QueryChannelConsensusStateRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest",
+  aminoType: "cosmos-sdk/QueryChannelConsensusStateRequest",
+  is(o: any): o is QueryChannelConsensusStateRequest {
+    return o && (o.$typeUrl === QueryChannelConsensusStateRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string" && typeof o.revisionNumber === "bigint" && typeof o.revisionHeight === "bigint");
+  },
+  isSDK(o: any): o is QueryChannelConsensusStateRequestSDKType {
+    return o && (o.$typeUrl === QueryChannelConsensusStateRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && typeof o.revision_number === "bigint" && typeof o.revision_height === "bigint");
+  },
+  isAmino(o: any): o is QueryChannelConsensusStateRequestAmino {
+    return o && (o.$typeUrl === QueryChannelConsensusStateRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && typeof o.revision_number === "bigint" && typeof o.revision_height === "bigint");
+  },
   encode(message: QueryChannelConsensusStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -1755,7 +2271,8 @@ export const QueryChannelConsensusStateRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateRequest",
       value: QueryChannelConsensusStateRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryChannelConsensusStateResponse(): QueryChannelConsensusStateResponse {
   return {
@@ -1767,6 +2284,16 @@ function createBaseQueryChannelConsensusStateResponse(): QueryChannelConsensusSt
 }
 export const QueryChannelConsensusStateResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse",
+  aminoType: "cosmos-sdk/QueryChannelConsensusStateResponse",
+  is(o: any): o is QueryChannelConsensusStateResponse {
+    return o && (o.$typeUrl === QueryChannelConsensusStateResponse.typeUrl || typeof o.clientId === "string" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryChannelConsensusStateResponseSDKType {
+    return o && (o.$typeUrl === QueryChannelConsensusStateResponse.typeUrl || typeof o.client_id === "string" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryChannelConsensusStateResponseAmino {
+    return o && (o.$typeUrl === QueryChannelConsensusStateResponse.typeUrl || typeof o.client_id === "string" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryChannelConsensusStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -1904,6 +2431,9 @@ export const QueryChannelConsensusStateResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryChannelConsensusStateResponse",
       value: QueryChannelConsensusStateResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryPacketCommitmentRequest(): QueryPacketCommitmentRequest {
@@ -1915,6 +2445,16 @@ function createBaseQueryPacketCommitmentRequest(): QueryPacketCommitmentRequest 
 }
 export const QueryPacketCommitmentRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentRequest",
+  is(o: any): o is QueryPacketCommitmentRequest {
+    return o && (o.$typeUrl === QueryPacketCommitmentRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string" && typeof o.sequence === "bigint");
+  },
+  isSDK(o: any): o is QueryPacketCommitmentRequestSDKType {
+    return o && (o.$typeUrl === QueryPacketCommitmentRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && typeof o.sequence === "bigint");
+  },
+  isAmino(o: any): o is QueryPacketCommitmentRequestAmino {
+    return o && (o.$typeUrl === QueryPacketCommitmentRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && typeof o.sequence === "bigint");
+  },
   encode(message: QueryPacketCommitmentRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -2034,7 +2574,8 @@ export const QueryPacketCommitmentRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentRequest",
       value: QueryPacketCommitmentRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPacketCommitmentResponse(): QueryPacketCommitmentResponse {
   return {
@@ -2045,6 +2586,16 @@ function createBaseQueryPacketCommitmentResponse(): QueryPacketCommitmentRespons
 }
 export const QueryPacketCommitmentResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentResponse",
+  is(o: any): o is QueryPacketCommitmentResponse {
+    return o && (o.$typeUrl === QueryPacketCommitmentResponse.typeUrl || (o.commitment instanceof Uint8Array || typeof o.commitment === "string") && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryPacketCommitmentResponseSDKType {
+    return o && (o.$typeUrl === QueryPacketCommitmentResponse.typeUrl || (o.commitment instanceof Uint8Array || typeof o.commitment === "string") && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryPacketCommitmentResponseAmino {
+    return o && (o.$typeUrl === QueryPacketCommitmentResponse.typeUrl || (o.commitment instanceof Uint8Array || typeof o.commitment === "string") && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryPacketCommitmentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.commitment.length !== 0) {
       writer.uint32(10).bytes(message.commitment);
@@ -2164,6 +2715,9 @@ export const QueryPacketCommitmentResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentResponse",
       value: QueryPacketCommitmentResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryPacketCommitmentsRequest(): QueryPacketCommitmentsRequest {
@@ -2175,6 +2729,16 @@ function createBaseQueryPacketCommitmentsRequest(): QueryPacketCommitmentsReques
 }
 export const QueryPacketCommitmentsRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentsRequest",
+  is(o: any): o is QueryPacketCommitmentsRequest {
+    return o && (o.$typeUrl === QueryPacketCommitmentsRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string");
+  },
+  isSDK(o: any): o is QueryPacketCommitmentsRequestSDKType {
+    return o && (o.$typeUrl === QueryPacketCommitmentsRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string");
+  },
+  isAmino(o: any): o is QueryPacketCommitmentsRequestAmino {
+    return o && (o.$typeUrl === QueryPacketCommitmentsRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string");
+  },
   encode(message: QueryPacketCommitmentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -2294,6 +2858,9 @@ export const QueryPacketCommitmentsRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsRequest",
       value: QueryPacketCommitmentsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryPacketCommitmentsResponse(): QueryPacketCommitmentsResponse {
@@ -2305,6 +2872,16 @@ function createBaseQueryPacketCommitmentsResponse(): QueryPacketCommitmentsRespo
 }
 export const QueryPacketCommitmentsResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse",
+  aminoType: "cosmos-sdk/QueryPacketCommitmentsResponse",
+  is(o: any): o is QueryPacketCommitmentsResponse {
+    return o && (o.$typeUrl === QueryPacketCommitmentsResponse.typeUrl || Array.isArray(o.commitments) && (!o.commitments.length || PacketState.is(o.commitments[0])) && Height.is(o.height));
+  },
+  isSDK(o: any): o is QueryPacketCommitmentsResponseSDKType {
+    return o && (o.$typeUrl === QueryPacketCommitmentsResponse.typeUrl || Array.isArray(o.commitments) && (!o.commitments.length || PacketState.isSDK(o.commitments[0])) && Height.isSDK(o.height));
+  },
+  isAmino(o: any): o is QueryPacketCommitmentsResponseAmino {
+    return o && (o.$typeUrl === QueryPacketCommitmentsResponse.typeUrl || Array.isArray(o.commitments) && (!o.commitments.length || PacketState.isAmino(o.commitments[0])) && Height.isAmino(o.height));
+  },
   encode(message: QueryPacketCommitmentsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.commitments) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2436,6 +3013,11 @@ export const QueryPacketCommitmentsResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketCommitmentsResponse",
       value: QueryPacketCommitmentsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PacketState.registerTypeUrl();
+    PageResponse.registerTypeUrl();
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryPacketReceiptRequest(): QueryPacketReceiptRequest {
@@ -2447,6 +3029,16 @@ function createBaseQueryPacketReceiptRequest(): QueryPacketReceiptRequest {
 }
 export const QueryPacketReceiptRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest",
+  aminoType: "cosmos-sdk/QueryPacketReceiptRequest",
+  is(o: any): o is QueryPacketReceiptRequest {
+    return o && (o.$typeUrl === QueryPacketReceiptRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string" && typeof o.sequence === "bigint");
+  },
+  isSDK(o: any): o is QueryPacketReceiptRequestSDKType {
+    return o && (o.$typeUrl === QueryPacketReceiptRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && typeof o.sequence === "bigint");
+  },
+  isAmino(o: any): o is QueryPacketReceiptRequestAmino {
+    return o && (o.$typeUrl === QueryPacketReceiptRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && typeof o.sequence === "bigint");
+  },
   encode(message: QueryPacketReceiptRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -2566,7 +3158,8 @@ export const QueryPacketReceiptRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptRequest",
       value: QueryPacketReceiptRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPacketReceiptResponse(): QueryPacketReceiptResponse {
   return {
@@ -2577,6 +3170,16 @@ function createBaseQueryPacketReceiptResponse(): QueryPacketReceiptResponse {
 }
 export const QueryPacketReceiptResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse",
+  aminoType: "cosmos-sdk/QueryPacketReceiptResponse",
+  is(o: any): o is QueryPacketReceiptResponse {
+    return o && (o.$typeUrl === QueryPacketReceiptResponse.typeUrl || typeof o.received === "boolean" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryPacketReceiptResponseSDKType {
+    return o && (o.$typeUrl === QueryPacketReceiptResponse.typeUrl || typeof o.received === "boolean" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryPacketReceiptResponseAmino {
+    return o && (o.$typeUrl === QueryPacketReceiptResponse.typeUrl || typeof o.received === "boolean" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryPacketReceiptResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.received !== undefined) {
       writer.uint32(16).bool(message.received);
@@ -2696,6 +3299,9 @@ export const QueryPacketReceiptResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketReceiptResponse",
       value: QueryPacketReceiptResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryPacketAcknowledgementRequest(): QueryPacketAcknowledgementRequest {
@@ -2707,6 +3313,16 @@ function createBaseQueryPacketAcknowledgementRequest(): QueryPacketAcknowledgeme
 }
 export const QueryPacketAcknowledgementRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementRequest",
+  is(o: any): o is QueryPacketAcknowledgementRequest {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string" && typeof o.sequence === "bigint");
+  },
+  isSDK(o: any): o is QueryPacketAcknowledgementRequestSDKType {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && typeof o.sequence === "bigint");
+  },
+  isAmino(o: any): o is QueryPacketAcknowledgementRequestAmino {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && typeof o.sequence === "bigint");
+  },
   encode(message: QueryPacketAcknowledgementRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -2826,7 +3442,8 @@ export const QueryPacketAcknowledgementRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementRequest",
       value: QueryPacketAcknowledgementRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPacketAcknowledgementResponse(): QueryPacketAcknowledgementResponse {
   return {
@@ -2837,6 +3454,16 @@ function createBaseQueryPacketAcknowledgementResponse(): QueryPacketAcknowledgem
 }
 export const QueryPacketAcknowledgementResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementResponse",
+  is(o: any): o is QueryPacketAcknowledgementResponse {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementResponse.typeUrl || (o.acknowledgement instanceof Uint8Array || typeof o.acknowledgement === "string") && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryPacketAcknowledgementResponseSDKType {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementResponse.typeUrl || (o.acknowledgement instanceof Uint8Array || typeof o.acknowledgement === "string") && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryPacketAcknowledgementResponseAmino {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementResponse.typeUrl || (o.acknowledgement instanceof Uint8Array || typeof o.acknowledgement === "string") && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryPacketAcknowledgementResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.acknowledgement.length !== 0) {
       writer.uint32(10).bytes(message.acknowledgement);
@@ -2956,6 +3583,9 @@ export const QueryPacketAcknowledgementResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementResponse",
       value: QueryPacketAcknowledgementResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryPacketAcknowledgementsRequest(): QueryPacketAcknowledgementsRequest {
@@ -2968,6 +3598,16 @@ function createBaseQueryPacketAcknowledgementsRequest(): QueryPacketAcknowledgem
 }
 export const QueryPacketAcknowledgementsRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementsRequest",
+  is(o: any): o is QueryPacketAcknowledgementsRequest {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementsRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string" && Array.isArray(o.packetCommitmentSequences) && (!o.packetCommitmentSequences.length || typeof o.packetCommitmentSequences[0] === "bigint"));
+  },
+  isSDK(o: any): o is QueryPacketAcknowledgementsRequestSDKType {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementsRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && Array.isArray(o.packet_commitment_sequences) && (!o.packet_commitment_sequences.length || typeof o.packet_commitment_sequences[0] === "bigint"));
+  },
+  isAmino(o: any): o is QueryPacketAcknowledgementsRequestAmino {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementsRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && Array.isArray(o.packet_commitment_sequences) && (!o.packet_commitment_sequences.length || typeof o.packet_commitment_sequences[0] === "bigint"));
+  },
   encode(message: QueryPacketAcknowledgementsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -3122,6 +3762,9 @@ export const QueryPacketAcknowledgementsRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsRequest",
       value: QueryPacketAcknowledgementsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryPacketAcknowledgementsResponse(): QueryPacketAcknowledgementsResponse {
@@ -3133,6 +3776,16 @@ function createBaseQueryPacketAcknowledgementsResponse(): QueryPacketAcknowledge
 }
 export const QueryPacketAcknowledgementsResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse",
+  aminoType: "cosmos-sdk/QueryPacketAcknowledgementsResponse",
+  is(o: any): o is QueryPacketAcknowledgementsResponse {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementsResponse.typeUrl || Array.isArray(o.acknowledgements) && (!o.acknowledgements.length || PacketState.is(o.acknowledgements[0])) && Height.is(o.height));
+  },
+  isSDK(o: any): o is QueryPacketAcknowledgementsResponseSDKType {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementsResponse.typeUrl || Array.isArray(o.acknowledgements) && (!o.acknowledgements.length || PacketState.isSDK(o.acknowledgements[0])) && Height.isSDK(o.height));
+  },
+  isAmino(o: any): o is QueryPacketAcknowledgementsResponseAmino {
+    return o && (o.$typeUrl === QueryPacketAcknowledgementsResponse.typeUrl || Array.isArray(o.acknowledgements) && (!o.acknowledgements.length || PacketState.isAmino(o.acknowledgements[0])) && Height.isAmino(o.height));
+  },
   encode(message: QueryPacketAcknowledgementsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.acknowledgements) {
       PacketState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3264,6 +3917,11 @@ export const QueryPacketAcknowledgementsResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryPacketAcknowledgementsResponse",
       value: QueryPacketAcknowledgementsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PacketState.registerTypeUrl();
+    PageResponse.registerTypeUrl();
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryUnreceivedPacketsRequest(): QueryUnreceivedPacketsRequest {
@@ -3275,6 +3933,16 @@ function createBaseQueryUnreceivedPacketsRequest(): QueryUnreceivedPacketsReques
 }
 export const QueryUnreceivedPacketsRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest",
+  aminoType: "cosmos-sdk/QueryUnreceivedPacketsRequest",
+  is(o: any): o is QueryUnreceivedPacketsRequest {
+    return o && (o.$typeUrl === QueryUnreceivedPacketsRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string" && Array.isArray(o.packetCommitmentSequences) && (!o.packetCommitmentSequences.length || typeof o.packetCommitmentSequences[0] === "bigint"));
+  },
+  isSDK(o: any): o is QueryUnreceivedPacketsRequestSDKType {
+    return o && (o.$typeUrl === QueryUnreceivedPacketsRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && Array.isArray(o.packet_commitment_sequences) && (!o.packet_commitment_sequences.length || typeof o.packet_commitment_sequences[0] === "bigint"));
+  },
+  isAmino(o: any): o is QueryUnreceivedPacketsRequestAmino {
+    return o && (o.$typeUrl === QueryUnreceivedPacketsRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && Array.isArray(o.packet_commitment_sequences) && (!o.packet_commitment_sequences.length || typeof o.packet_commitment_sequences[0] === "bigint"));
+  },
   encode(message: QueryUnreceivedPacketsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -3411,7 +4079,8 @@ export const QueryUnreceivedPacketsRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsRequest",
       value: QueryUnreceivedPacketsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsResponse {
   return {
@@ -3421,6 +4090,16 @@ function createBaseQueryUnreceivedPacketsResponse(): QueryUnreceivedPacketsRespo
 }
 export const QueryUnreceivedPacketsResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse",
+  aminoType: "cosmos-sdk/QueryUnreceivedPacketsResponse",
+  is(o: any): o is QueryUnreceivedPacketsResponse {
+    return o && (o.$typeUrl === QueryUnreceivedPacketsResponse.typeUrl || Array.isArray(o.sequences) && (!o.sequences.length || typeof o.sequences[0] === "bigint") && Height.is(o.height));
+  },
+  isSDK(o: any): o is QueryUnreceivedPacketsResponseSDKType {
+    return o && (o.$typeUrl === QueryUnreceivedPacketsResponse.typeUrl || Array.isArray(o.sequences) && (!o.sequences.length || typeof o.sequences[0] === "bigint") && Height.isSDK(o.height));
+  },
+  isAmino(o: any): o is QueryUnreceivedPacketsResponseAmino {
+    return o && (o.$typeUrl === QueryUnreceivedPacketsResponse.typeUrl || Array.isArray(o.sequences) && (!o.sequences.length || typeof o.sequences[0] === "bigint") && Height.isAmino(o.height));
+  },
   encode(message: QueryUnreceivedPacketsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.sequences) {
@@ -3543,6 +4222,9 @@ export const QueryUnreceivedPacketsResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryUnreceivedPacketsResponse",
       value: QueryUnreceivedPacketsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryUnreceivedAcksRequest(): QueryUnreceivedAcksRequest {
@@ -3554,6 +4236,16 @@ function createBaseQueryUnreceivedAcksRequest(): QueryUnreceivedAcksRequest {
 }
 export const QueryUnreceivedAcksRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest",
+  aminoType: "cosmos-sdk/QueryUnreceivedAcksRequest",
+  is(o: any): o is QueryUnreceivedAcksRequest {
+    return o && (o.$typeUrl === QueryUnreceivedAcksRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string" && Array.isArray(o.packetAckSequences) && (!o.packetAckSequences.length || typeof o.packetAckSequences[0] === "bigint"));
+  },
+  isSDK(o: any): o is QueryUnreceivedAcksRequestSDKType {
+    return o && (o.$typeUrl === QueryUnreceivedAcksRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && Array.isArray(o.packet_ack_sequences) && (!o.packet_ack_sequences.length || typeof o.packet_ack_sequences[0] === "bigint"));
+  },
+  isAmino(o: any): o is QueryUnreceivedAcksRequestAmino {
+    return o && (o.$typeUrl === QueryUnreceivedAcksRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string" && Array.isArray(o.packet_ack_sequences) && (!o.packet_ack_sequences.length || typeof o.packet_ack_sequences[0] === "bigint"));
+  },
   encode(message: QueryUnreceivedAcksRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -3690,7 +4382,8 @@ export const QueryUnreceivedAcksRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksRequest",
       value: QueryUnreceivedAcksRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
   return {
@@ -3700,6 +4393,16 @@ function createBaseQueryUnreceivedAcksResponse(): QueryUnreceivedAcksResponse {
 }
 export const QueryUnreceivedAcksResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse",
+  aminoType: "cosmos-sdk/QueryUnreceivedAcksResponse",
+  is(o: any): o is QueryUnreceivedAcksResponse {
+    return o && (o.$typeUrl === QueryUnreceivedAcksResponse.typeUrl || Array.isArray(o.sequences) && (!o.sequences.length || typeof o.sequences[0] === "bigint") && Height.is(o.height));
+  },
+  isSDK(o: any): o is QueryUnreceivedAcksResponseSDKType {
+    return o && (o.$typeUrl === QueryUnreceivedAcksResponse.typeUrl || Array.isArray(o.sequences) && (!o.sequences.length || typeof o.sequences[0] === "bigint") && Height.isSDK(o.height));
+  },
+  isAmino(o: any): o is QueryUnreceivedAcksResponseAmino {
+    return o && (o.$typeUrl === QueryUnreceivedAcksResponse.typeUrl || Array.isArray(o.sequences) && (!o.sequences.length || typeof o.sequences[0] === "bigint") && Height.isAmino(o.height));
+  },
   encode(message: QueryUnreceivedAcksResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.sequences) {
@@ -3822,6 +4525,9 @@ export const QueryUnreceivedAcksResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryUnreceivedAcksResponse",
       value: QueryUnreceivedAcksResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryNextSequenceReceiveRequest(): QueryNextSequenceReceiveRequest {
@@ -3832,6 +4538,16 @@ function createBaseQueryNextSequenceReceiveRequest(): QueryNextSequenceReceiveRe
 }
 export const QueryNextSequenceReceiveRequest = {
   typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest",
+  aminoType: "cosmos-sdk/QueryNextSequenceReceiveRequest",
+  is(o: any): o is QueryNextSequenceReceiveRequest {
+    return o && (o.$typeUrl === QueryNextSequenceReceiveRequest.typeUrl || typeof o.portId === "string" && typeof o.channelId === "string");
+  },
+  isSDK(o: any): o is QueryNextSequenceReceiveRequestSDKType {
+    return o && (o.$typeUrl === QueryNextSequenceReceiveRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string");
+  },
+  isAmino(o: any): o is QueryNextSequenceReceiveRequestAmino {
+    return o && (o.$typeUrl === QueryNextSequenceReceiveRequest.typeUrl || typeof o.port_id === "string" && typeof o.channel_id === "string");
+  },
   encode(message: QueryNextSequenceReceiveRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
@@ -3933,7 +4649,8 @@ export const QueryNextSequenceReceiveRequest = {
       typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveRequest",
       value: QueryNextSequenceReceiveRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryNextSequenceReceiveResponse(): QueryNextSequenceReceiveResponse {
   return {
@@ -3944,6 +4661,16 @@ function createBaseQueryNextSequenceReceiveResponse(): QueryNextSequenceReceiveR
 }
 export const QueryNextSequenceReceiveResponse = {
   typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse",
+  aminoType: "cosmos-sdk/QueryNextSequenceReceiveResponse",
+  is(o: any): o is QueryNextSequenceReceiveResponse {
+    return o && (o.$typeUrl === QueryNextSequenceReceiveResponse.typeUrl || typeof o.nextSequenceReceive === "bigint" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryNextSequenceReceiveResponseSDKType {
+    return o && (o.$typeUrl === QueryNextSequenceReceiveResponse.typeUrl || typeof o.next_sequence_receive === "bigint" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryNextSequenceReceiveResponseAmino {
+    return o && (o.$typeUrl === QueryNextSequenceReceiveResponse.typeUrl || typeof o.next_sequence_receive === "bigint" && (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryNextSequenceReceiveResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nextSequenceReceive !== undefined) {
       writer.uint32(8).uint64(message.nextSequenceReceive);
@@ -4065,5 +4792,8 @@ export const QueryNextSequenceReceiveResponse = {
       typeUrl: "/ibc.core.channel.v1.QueryNextSequenceReceiveResponse",
       value: QueryNextSequenceReceiveResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };

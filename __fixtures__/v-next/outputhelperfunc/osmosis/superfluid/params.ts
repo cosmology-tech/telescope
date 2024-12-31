@@ -18,6 +18,20 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params holds parameters for the superfluid module */
+export interface ParamsAmino {
+  /**
+   * minimum_risk_factor is to be cut on OSMO equivalent value of lp tokens for
+   * superfluid staking, default: 5%. The minimum risk factor works
+   * to counter-balance the staked amount on chain's exposure to various asset
+   * volatilities, and have base staking be 'resistant' to volatility.
+   */
+  minimum_risk_factor?: string;
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/params";
+  value: ParamsAmino;
+}
+/** Params holds parameters for the superfluid module */
 export interface ParamsSDKType {
   minimum_risk_factor: string;
 }
@@ -28,6 +42,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.superfluid.Params",
+  aminoType: "osmosis/params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.minimumRiskFactor === "string");
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.minimum_risk_factor === "string");
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.minimum_risk_factor === "string");
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.minimumRiskFactor !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.minimumRiskFactor, 18).atomics);
@@ -113,5 +137,6 @@ export const Params = {
       typeUrl: "/osmosis.superfluid.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

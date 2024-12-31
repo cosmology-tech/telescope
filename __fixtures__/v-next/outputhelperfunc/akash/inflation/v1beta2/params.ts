@@ -23,6 +23,25 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the parameters for the x/deployment package */
+export interface ParamsAmino {
+  /** InflationDecayFactor is the number of years it takes inflation to halve. */
+  inflation_decay_factor: string;
+  /**
+   * InitialInflation is the rate at which inflation starts at genesis.
+   * It is a decimal value in the range [0.0, 100.0].
+   */
+  initial_inflation: string;
+  /**
+   * Variance defines the fraction by which inflation can vary from ideal inflation in a block.
+   * It is a decimal value in the range [0.0, 1.0].
+   */
+  variance: string;
+}
+export interface ParamsAminoMsg {
+  type: "akash/inflation/v1beta2/params";
+  value: ParamsAmino;
+}
+/** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
   inflation_decay_factor: string;
   initial_inflation: string;
@@ -37,6 +56,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/akash.inflation.v1beta2.Params",
+  aminoType: "akash/inflation/v1beta2/params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.inflationDecayFactor === "string" && typeof o.initialInflation === "string" && typeof o.variance === "string");
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.inflation_decay_factor === "string" && typeof o.initial_inflation === "string" && typeof o.variance === "string");
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.inflation_decay_factor === "string" && typeof o.initial_inflation === "string" && typeof o.variance === "string");
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.inflationDecayFactor !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflationDecayFactor, 18).atomics);
@@ -154,5 +183,6 @@ export const Params = {
       typeUrl: "/akash.inflation.v1beta2.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

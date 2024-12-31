@@ -1,7 +1,8 @@
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
+import { GlobalDecoderRegistry } from "../../registry";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: bigint;
@@ -11,6 +12,15 @@ export interface ProtocolVersion {
 export interface ProtocolVersionProtoMsg {
   typeUrl: "/tendermint.p2p.ProtocolVersion";
   value: Uint8Array;
+}
+export interface ProtocolVersionAmino {
+  p2p?: string;
+  block?: string;
+  app?: string;
+}
+export interface ProtocolVersionAminoMsg {
+  type: "/tendermint.p2p.ProtocolVersion";
+  value: ProtocolVersionAmino;
 }
 export interface ProtocolVersionSDKType {
   p2p: bigint;
@@ -31,6 +41,20 @@ export interface NodeInfoProtoMsg {
   typeUrl: "/tendermint.p2p.NodeInfo";
   value: Uint8Array;
 }
+export interface NodeInfoAmino {
+  protocol_version?: ProtocolVersionAmino;
+  node_id?: string;
+  listen_addr?: string;
+  network?: string;
+  version?: string;
+  channels?: string;
+  moniker?: string;
+  other?: NodeInfoOtherAmino;
+}
+export interface NodeInfoAminoMsg {
+  type: "/tendermint.p2p.NodeInfo";
+  value: NodeInfoAmino;
+}
 export interface NodeInfoSDKType {
   protocol_version: ProtocolVersionSDKType;
   node_id: string;
@@ -49,6 +73,14 @@ export interface NodeInfoOtherProtoMsg {
   typeUrl: "/tendermint.p2p.NodeInfoOther";
   value: Uint8Array;
 }
+export interface NodeInfoOtherAmino {
+  tx_index?: string;
+  rpc_address?: string;
+}
+export interface NodeInfoOtherAminoMsg {
+  type: "/tendermint.p2p.NodeInfoOther";
+  value: NodeInfoOtherAmino;
+}
 export interface NodeInfoOtherSDKType {
   tx_index: string;
   rpc_address: string;
@@ -61,6 +93,15 @@ export interface PeerInfo {
 export interface PeerInfoProtoMsg {
   typeUrl: "/tendermint.p2p.PeerInfo";
   value: Uint8Array;
+}
+export interface PeerInfoAmino {
+  id?: string;
+  address_info?: PeerAddressInfoAmino[];
+  last_connected?: string;
+}
+export interface PeerInfoAminoMsg {
+  type: "/tendermint.p2p.PeerInfo";
+  value: PeerInfoAmino;
 }
 export interface PeerInfoSDKType {
   id: string;
@@ -77,6 +118,16 @@ export interface PeerAddressInfoProtoMsg {
   typeUrl: "/tendermint.p2p.PeerAddressInfo";
   value: Uint8Array;
 }
+export interface PeerAddressInfoAmino {
+  address?: string;
+  last_dial_success?: string;
+  last_dial_failure?: string;
+  dial_failures?: number;
+}
+export interface PeerAddressInfoAminoMsg {
+  type: "/tendermint.p2p.PeerAddressInfo";
+  value: PeerAddressInfoAmino;
+}
 export interface PeerAddressInfoSDKType {
   address: string;
   last_dial_success?: Date;
@@ -92,6 +143,15 @@ function createBaseProtocolVersion(): ProtocolVersion {
 }
 export const ProtocolVersion = {
   typeUrl: "/tendermint.p2p.ProtocolVersion",
+  is(o: any): o is ProtocolVersion {
+    return o && (o.$typeUrl === ProtocolVersion.typeUrl || typeof o.p2p === "bigint" && typeof o.block === "bigint" && typeof o.app === "bigint");
+  },
+  isSDK(o: any): o is ProtocolVersionSDKType {
+    return o && (o.$typeUrl === ProtocolVersion.typeUrl || typeof o.p2p === "bigint" && typeof o.block === "bigint" && typeof o.app === "bigint");
+  },
+  isAmino(o: any): o is ProtocolVersionAmino {
+    return o && (o.$typeUrl === ProtocolVersion.typeUrl || typeof o.p2p === "bigint" && typeof o.block === "bigint" && typeof o.app === "bigint");
+  },
   encode(message: ProtocolVersion, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.p2p !== undefined) {
       writer.uint32(8).uint64(message.p2p);
@@ -209,7 +269,8 @@ export const ProtocolVersion = {
       typeUrl: "/tendermint.p2p.ProtocolVersion",
       value: ProtocolVersion.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseNodeInfo(): NodeInfo {
   return {
@@ -225,6 +286,15 @@ function createBaseNodeInfo(): NodeInfo {
 }
 export const NodeInfo = {
   typeUrl: "/tendermint.p2p.NodeInfo",
+  is(o: any): o is NodeInfo {
+    return o && (o.$typeUrl === NodeInfo.typeUrl || ProtocolVersion.is(o.protocolVersion) && typeof o.nodeId === "string" && typeof o.listenAddr === "string" && typeof o.network === "string" && typeof o.version === "string" && (o.channels instanceof Uint8Array || typeof o.channels === "string") && typeof o.moniker === "string" && NodeInfoOther.is(o.other));
+  },
+  isSDK(o: any): o is NodeInfoSDKType {
+    return o && (o.$typeUrl === NodeInfo.typeUrl || ProtocolVersion.isSDK(o.protocol_version) && typeof o.node_id === "string" && typeof o.listen_addr === "string" && typeof o.network === "string" && typeof o.version === "string" && (o.channels instanceof Uint8Array || typeof o.channels === "string") && typeof o.moniker === "string" && NodeInfoOther.isSDK(o.other));
+  },
+  isAmino(o: any): o is NodeInfoAmino {
+    return o && (o.$typeUrl === NodeInfo.typeUrl || ProtocolVersion.isAmino(o.protocol_version) && typeof o.node_id === "string" && typeof o.listen_addr === "string" && typeof o.network === "string" && typeof o.version === "string" && (o.channels instanceof Uint8Array || typeof o.channels === "string") && typeof o.moniker === "string" && NodeInfoOther.isAmino(o.other));
+  },
   encode(message: NodeInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.protocolVersion !== undefined) {
       ProtocolVersion.encode(message.protocolVersion, writer.uint32(10).fork()).ldelim();
@@ -420,6 +490,10 @@ export const NodeInfo = {
       typeUrl: "/tendermint.p2p.NodeInfo",
       value: NodeInfo.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ProtocolVersion.registerTypeUrl();
+    NodeInfoOther.registerTypeUrl();
   }
 };
 function createBaseNodeInfoOther(): NodeInfoOther {
@@ -430,6 +504,15 @@ function createBaseNodeInfoOther(): NodeInfoOther {
 }
 export const NodeInfoOther = {
   typeUrl: "/tendermint.p2p.NodeInfoOther",
+  is(o: any): o is NodeInfoOther {
+    return o && (o.$typeUrl === NodeInfoOther.typeUrl || typeof o.txIndex === "string" && typeof o.rpcAddress === "string");
+  },
+  isSDK(o: any): o is NodeInfoOtherSDKType {
+    return o && (o.$typeUrl === NodeInfoOther.typeUrl || typeof o.tx_index === "string" && typeof o.rpc_address === "string");
+  },
+  isAmino(o: any): o is NodeInfoOtherAmino {
+    return o && (o.$typeUrl === NodeInfoOther.typeUrl || typeof o.tx_index === "string" && typeof o.rpc_address === "string");
+  },
   encode(message: NodeInfoOther, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.txIndex !== undefined) {
       writer.uint32(10).string(message.txIndex);
@@ -525,7 +608,8 @@ export const NodeInfoOther = {
       typeUrl: "/tendermint.p2p.NodeInfoOther",
       value: NodeInfoOther.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBasePeerInfo(): PeerInfo {
   return {
@@ -536,6 +620,15 @@ function createBasePeerInfo(): PeerInfo {
 }
 export const PeerInfo = {
   typeUrl: "/tendermint.p2p.PeerInfo",
+  is(o: any): o is PeerInfo {
+    return o && (o.$typeUrl === PeerInfo.typeUrl || typeof o.id === "string" && Array.isArray(o.addressInfo) && (!o.addressInfo.length || PeerAddressInfo.is(o.addressInfo[0])));
+  },
+  isSDK(o: any): o is PeerInfoSDKType {
+    return o && (o.$typeUrl === PeerInfo.typeUrl || typeof o.id === "string" && Array.isArray(o.address_info) && (!o.address_info.length || PeerAddressInfo.isSDK(o.address_info[0])));
+  },
+  isAmino(o: any): o is PeerInfoAmino {
+    return o && (o.$typeUrl === PeerInfo.typeUrl || typeof o.id === "string" && Array.isArray(o.address_info) && (!o.address_info.length || PeerAddressInfo.isAmino(o.address_info[0])));
+  },
   encode(message: PeerInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
@@ -657,6 +750,9 @@ export const PeerInfo = {
       typeUrl: "/tendermint.p2p.PeerInfo",
       value: PeerInfo.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PeerAddressInfo.registerTypeUrl();
   }
 };
 function createBasePeerAddressInfo(): PeerAddressInfo {
@@ -669,6 +765,15 @@ function createBasePeerAddressInfo(): PeerAddressInfo {
 }
 export const PeerAddressInfo = {
   typeUrl: "/tendermint.p2p.PeerAddressInfo",
+  is(o: any): o is PeerAddressInfo {
+    return o && (o.$typeUrl === PeerAddressInfo.typeUrl || typeof o.address === "string" && typeof o.dialFailures === "number");
+  },
+  isSDK(o: any): o is PeerAddressInfoSDKType {
+    return o && (o.$typeUrl === PeerAddressInfo.typeUrl || typeof o.address === "string" && typeof o.dial_failures === "number");
+  },
+  isAmino(o: any): o is PeerAddressInfoAmino {
+    return o && (o.$typeUrl === PeerAddressInfo.typeUrl || typeof o.address === "string" && typeof o.dial_failures === "number");
+  },
   encode(message: PeerAddressInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -796,5 +901,6 @@ export const PeerAddressInfo = {
       typeUrl: "/tendermint.p2p.PeerAddressInfo",
       value: PeerAddressInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

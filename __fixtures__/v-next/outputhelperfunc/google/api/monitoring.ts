@@ -134,6 +134,84 @@ export interface MonitoringProtoMsg {
  *         - library.googleapis.com/book/returned_count
  *         - library.googleapis.com/book/num_overdue
  */
+export interface MonitoringAmino {
+  /**
+   * Monitoring configurations for sending metrics to the producer project.
+   * There can be multiple producer destinations. A monitored resource type may
+   * appear in multiple monitoring destinations if different aggregations are
+   * needed for different sets of metrics associated with that monitored
+   * resource type. A monitored resource and metric pair may only be used once
+   * in the Monitoring configuration.
+   */
+  producer_destinations?: Monitoring_MonitoringDestinationAmino[];
+  /**
+   * Monitoring configurations for sending metrics to the consumer project.
+   * There can be multiple consumer destinations. A monitored resource type may
+   * appear in multiple monitoring destinations if different aggregations are
+   * needed for different sets of metrics associated with that monitored
+   * resource type. A monitored resource and metric pair may only be used once
+   * in the Monitoring configuration.
+   */
+  consumer_destinations?: Monitoring_MonitoringDestinationAmino[];
+}
+export interface MonitoringAminoMsg {
+  type: "/google.api.Monitoring";
+  value: MonitoringAmino;
+}
+/**
+ * Monitoring configuration of the service.
+ * 
+ * The example below shows how to configure monitored resources and metrics
+ * for monitoring. In the example, a monitored resource and two metrics are
+ * defined. The `library.googleapis.com/book/returned_count` metric is sent
+ * to both producer and consumer projects, whereas the
+ * `library.googleapis.com/book/num_overdue` metric is only sent to the
+ * consumer project.
+ * 
+ *     monitored_resources:
+ *     - type: library.googleapis.com/Branch
+ *       display_name: "Library Branch"
+ *       description: "A branch of a library."
+ *       launch_stage: GA
+ *       labels:
+ *       - key: resource_container
+ *         description: "The Cloud container (ie. project id) for the Branch."
+ *       - key: location
+ *         description: "The location of the library branch."
+ *       - key: branch_id
+ *         description: "The id of the branch."
+ *     metrics:
+ *     - name: library.googleapis.com/book/returned_count
+ *       display_name: "Books Returned"
+ *       description: "The count of books that have been returned."
+ *       launch_stage: GA
+ *       metric_kind: DELTA
+ *       value_type: INT64
+ *       unit: "1"
+ *       labels:
+ *       - key: customer_id
+ *         description: "The id of the customer."
+ *     - name: library.googleapis.com/book/num_overdue
+ *       display_name: "Books Overdue"
+ *       description: "The current number of overdue books."
+ *       launch_stage: GA
+ *       metric_kind: GAUGE
+ *       value_type: INT64
+ *       unit: "1"
+ *       labels:
+ *       - key: customer_id
+ *         description: "The id of the customer."
+ *     monitoring:
+ *       producer_destinations:
+ *       - monitored_resource: library.googleapis.com/Branch
+ *         metrics:
+ *         - library.googleapis.com/book/returned_count
+ *       consumer_destinations:
+ *       - monitored_resource: library.googleapis.com/Branch
+ *         metrics:
+ *         - library.googleapis.com/book/returned_count
+ *         - library.googleapis.com/book/num_overdue
+ */
 export interface MonitoringSDKType {
   producer_destinations: Monitoring_MonitoringDestinationSDKType[];
   consumer_destinations: Monitoring_MonitoringDestinationSDKType[];
@@ -162,6 +240,26 @@ export interface Monitoring_MonitoringDestinationProtoMsg {
  * Configuration of a specific monitoring destination (the producer project
  * or the consumer project).
  */
+export interface Monitoring_MonitoringDestinationAmino {
+  /**
+   * The monitored resource type. The type must be defined in
+   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+   */
+  monitored_resource?: string;
+  /**
+   * Types of the metrics to report to this monitoring destination.
+   * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
+   */
+  metrics?: string[];
+}
+export interface Monitoring_MonitoringDestinationAminoMsg {
+  type: "/google.api.MonitoringDestination";
+  value: Monitoring_MonitoringDestinationAmino;
+}
+/**
+ * Configuration of a specific monitoring destination (the producer project
+ * or the consumer project).
+ */
 export interface Monitoring_MonitoringDestinationSDKType {
   monitored_resource: string;
   metrics: string[];
@@ -174,6 +272,15 @@ function createBaseMonitoring(): Monitoring {
 }
 export const Monitoring = {
   typeUrl: "/google.api.Monitoring",
+  is(o: any): o is Monitoring {
+    return o && (o.$typeUrl === Monitoring.typeUrl || Array.isArray(o.producerDestinations) && (!o.producerDestinations.length || Monitoring_MonitoringDestination.is(o.producerDestinations[0])) && Array.isArray(o.consumerDestinations) && (!o.consumerDestinations.length || Monitoring_MonitoringDestination.is(o.consumerDestinations[0])));
+  },
+  isSDK(o: any): o is MonitoringSDKType {
+    return o && (o.$typeUrl === Monitoring.typeUrl || Array.isArray(o.producer_destinations) && (!o.producer_destinations.length || Monitoring_MonitoringDestination.isSDK(o.producer_destinations[0])) && Array.isArray(o.consumer_destinations) && (!o.consumer_destinations.length || Monitoring_MonitoringDestination.isSDK(o.consumer_destinations[0])));
+  },
+  isAmino(o: any): o is MonitoringAmino {
+    return o && (o.$typeUrl === Monitoring.typeUrl || Array.isArray(o.producer_destinations) && (!o.producer_destinations.length || Monitoring_MonitoringDestination.isAmino(o.producer_destinations[0])) && Array.isArray(o.consumer_destinations) && (!o.consumer_destinations.length || Monitoring_MonitoringDestination.isAmino(o.consumer_destinations[0])));
+  },
   encode(message: Monitoring, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.producerDestinations) {
       Monitoring_MonitoringDestination.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -289,6 +396,10 @@ export const Monitoring = {
       typeUrl: "/google.api.Monitoring",
       value: Monitoring.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Monitoring_MonitoringDestination.registerTypeUrl();
+    Monitoring_MonitoringDestination.registerTypeUrl();
   }
 };
 function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDestination {
@@ -299,6 +410,15 @@ function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDest
 }
 export const Monitoring_MonitoringDestination = {
   typeUrl: "/google.api.MonitoringDestination",
+  is(o: any): o is Monitoring_MonitoringDestination {
+    return o && (o.$typeUrl === Monitoring_MonitoringDestination.typeUrl || typeof o.monitoredResource === "string" && Array.isArray(o.metrics) && (!o.metrics.length || typeof o.metrics[0] === "string"));
+  },
+  isSDK(o: any): o is Monitoring_MonitoringDestinationSDKType {
+    return o && (o.$typeUrl === Monitoring_MonitoringDestination.typeUrl || typeof o.monitored_resource === "string" && Array.isArray(o.metrics) && (!o.metrics.length || typeof o.metrics[0] === "string"));
+  },
+  isAmino(o: any): o is Monitoring_MonitoringDestinationAmino {
+    return o && (o.$typeUrl === Monitoring_MonitoringDestination.typeUrl || typeof o.monitored_resource === "string" && Array.isArray(o.metrics) && (!o.metrics.length || typeof o.metrics[0] === "string"));
+  },
   encode(message: Monitoring_MonitoringDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
@@ -404,5 +524,6 @@ export const Monitoring_MonitoringDestination = {
       typeUrl: "/google.api.MonitoringDestination",
       value: Monitoring_MonitoringDestination.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

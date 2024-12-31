@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
@@ -12,6 +12,14 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the parameters for the tokenfactory module. */
+export interface ParamsAmino {
+  denom_creation_fee?: CoinAmino[];
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/tokenfactory/params";
+  value: ParamsAmino;
+}
+/** Params defines the parameters for the tokenfactory module. */
 export interface ParamsSDKType {
   denom_creation_fee: CoinSDKType[];
 }
@@ -22,6 +30,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.Params",
+  aminoType: "osmosis/tokenfactory/params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || Array.isArray(o.denomCreationFee) && (!o.denomCreationFee.length || Coin.is(o.denomCreationFee[0])));
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || Array.isArray(o.denom_creation_fee) && (!o.denom_creation_fee.length || Coin.isSDK(o.denom_creation_fee[0])));
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || Array.isArray(o.denom_creation_fee) && (!o.denom_creation_fee.length || Coin.isAmino(o.denom_creation_fee[0])));
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.denomCreationFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -117,5 +135,8 @@ export const Params = {
       typeUrl: "/osmosis.tokenfactory.v1beta1.Params",
       value: Params.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };

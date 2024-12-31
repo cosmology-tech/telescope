@@ -1,6 +1,7 @@
-import { AttributeContext, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
-import { Status, StatusSDKType } from "../../../rpc/status";
+import { AttributeContext, AttributeContextAmino, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
+import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v2";
@@ -31,6 +32,34 @@ export interface CheckRequest {
 export interface CheckRequestProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest";
   value: Uint8Array;
+}
+/** Request message for the Check method. */
+export interface CheckRequestAmino {
+  /**
+   * The service name as specified in its service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
+   */
+  service_name?: string;
+  /**
+   * Specifies the version of the service configuration that should be used to
+   * process the request. Must not be empty. Set this field to 'latest' to
+   * specify using the latest configuration.
+   */
+  service_config_id?: string;
+  /** Describes attributes about the operation being executed by the service. */
+  attributes?: AttributeContextAmino;
+  /** Describes the resources and the policies applied to each resource. */
+  resources?: ResourceInfoAmino[];
+  /** Optional. Contains a comma-separated list of flags. */
+  flags?: string;
+}
+export interface CheckRequestAminoMsg {
+  type: "/google.api.servicecontrol.v2.CheckRequest";
+  value: CheckRequestAmino;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
@@ -74,6 +103,39 @@ export interface ResourceInfoProtoMsg {
   value: Uint8Array;
 }
 /** Describes a resource referenced in the request. */
+export interface ResourceInfoAmino {
+  /** The name of the resource referenced in the request. */
+  name?: string;
+  /** The resource type in the format of "{service}/{kind}". */
+  type?: string;
+  /**
+   * The resource permission needed for this request.
+   * The format must be "{service}/{plural}.{verb}".
+   */
+  permission?: string;
+  /**
+   * Optional. The identifier of the container of this resource. For Google
+   * Cloud APIs, the resource container must be one of the following formats:
+   *     - `projects/<project-id or project-number>`
+   *     - `folders/<folder-id>`
+   *     - `organizations/<organization-id>`
+   * For the policy enforcement on the container level (VPCSC and Location
+   * Policy check), this field takes precedence on the container extracted from
+   * name when presents.
+   */
+  container?: string;
+  /**
+   * Optional. The location of the resource. The value must be a valid zone,
+   * region or multiregion. For example: "europe-west4" or
+   * "northamerica-northeast1-a"
+   */
+  location?: string;
+}
+export interface ResourceInfoAminoMsg {
+  type: "/google.api.servicecontrol.v2.ResourceInfo";
+  value: ResourceInfoAmino;
+}
+/** Describes a resource referenced in the request. */
 export interface ResourceInfoSDKType {
   name: string;
   type: string;
@@ -88,6 +150,14 @@ export interface CheckResponse_HeadersEntry {
 export interface CheckResponse_HeadersEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface CheckResponse_HeadersEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface CheckResponse_HeadersEntryAminoMsg {
+  type: string;
+  value: CheckResponse_HeadersEntryAmino;
 }
 export interface CheckResponse_HeadersEntrySDKType {
   key: string;
@@ -109,6 +179,23 @@ export interface CheckResponse {
 export interface CheckResponseProtoMsg {
   typeUrl: "/google.api.servicecontrol.v2.CheckResponse";
   value: Uint8Array;
+}
+/** Response message for the Check method. */
+export interface CheckResponseAmino {
+  /**
+   * Operation is allowed when this field is not set. Any non-'OK' status
+   * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
+   * would contain additional details about the denial.
+   */
+  status?: StatusAmino;
+  /** Returns a set of request contexts generated from the `CheckRequest`. */
+  headers?: {
+    [key: string]: string;
+  };
+}
+export interface CheckResponseAminoMsg {
+  type: "/google.api.servicecontrol.v2.CheckResponse";
+  value: CheckResponseAmino;
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
@@ -146,6 +233,34 @@ export interface ReportRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the Report method. */
+export interface ReportRequestAmino {
+  /**
+   * The service name as specified in its service configuration. For example,
+   * `"pubsub.googleapis.com"`.
+   * 
+   * See
+   * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+   * for the definition of a service name.
+   */
+  service_name?: string;
+  /**
+   * Specifies the version of the service configuration that should be used to
+   * process the request. Must not be empty. Set this field to 'latest' to
+   * specify using the latest configuration.
+   */
+  service_config_id?: string;
+  /**
+   * Describes the list of operations to be reported. Each operation is
+   * represented as an AttributeContext, and contains all attributes around an
+   * API access.
+   */
+  operations?: AttributeContextAmino[];
+}
+export interface ReportRequestAminoMsg {
+  type: "/google.api.servicecontrol.v2.ReportRequest";
+  value: ReportRequestAmino;
+}
+/** Request message for the Report method. */
 export interface ReportRequestSDKType {
   service_name: string;
   service_config_id: string;
@@ -164,6 +279,15 @@ export interface ReportResponseProtoMsg {
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
  */
+export interface ReportResponseAmino {}
+export interface ReportResponseAminoMsg {
+  type: "/google.api.servicecontrol.v2.ReportResponse";
+  value: ReportResponseAmino;
+}
+/**
+ * Response message for the Report method.
+ * If the request contains any invalid data, the server returns an RPC error.
+ */
 export interface ReportResponseSDKType {}
 function createBaseCheckRequest(): CheckRequest {
   return {
@@ -176,6 +300,15 @@ function createBaseCheckRequest(): CheckRequest {
 }
 export const CheckRequest = {
   typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
+  is(o: any): o is CheckRequest {
+    return o && (o.$typeUrl === CheckRequest.typeUrl || typeof o.serviceName === "string" && typeof o.serviceConfigId === "string" && Array.isArray(o.resources) && (!o.resources.length || ResourceInfo.is(o.resources[0])) && typeof o.flags === "string");
+  },
+  isSDK(o: any): o is CheckRequestSDKType {
+    return o && (o.$typeUrl === CheckRequest.typeUrl || typeof o.service_name === "string" && typeof o.service_config_id === "string" && Array.isArray(o.resources) && (!o.resources.length || ResourceInfo.isSDK(o.resources[0])) && typeof o.flags === "string");
+  },
+  isAmino(o: any): o is CheckRequestAmino {
+    return o && (o.$typeUrl === CheckRequest.typeUrl || typeof o.service_name === "string" && typeof o.service_config_id === "string" && Array.isArray(o.resources) && (!o.resources.length || ResourceInfo.isAmino(o.resources[0])) && typeof o.flags === "string");
+  },
   encode(message: CheckRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -331,6 +464,10 @@ export const CheckRequest = {
       typeUrl: "/google.api.servicecontrol.v2.CheckRequest",
       value: CheckRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    AttributeContext.registerTypeUrl();
+    ResourceInfo.registerTypeUrl();
   }
 };
 function createBaseResourceInfo(): ResourceInfo {
@@ -344,6 +481,15 @@ function createBaseResourceInfo(): ResourceInfo {
 }
 export const ResourceInfo = {
   typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
+  is(o: any): o is ResourceInfo {
+    return o && (o.$typeUrl === ResourceInfo.typeUrl || typeof o.name === "string" && typeof o.type === "string" && typeof o.permission === "string" && typeof o.container === "string" && typeof o.location === "string");
+  },
+  isSDK(o: any): o is ResourceInfoSDKType {
+    return o && (o.$typeUrl === ResourceInfo.typeUrl || typeof o.name === "string" && typeof o.type === "string" && typeof o.permission === "string" && typeof o.container === "string" && typeof o.location === "string");
+  },
+  isAmino(o: any): o is ResourceInfoAmino {
+    return o && (o.$typeUrl === ResourceInfo.typeUrl || typeof o.name === "string" && typeof o.type === "string" && typeof o.permission === "string" && typeof o.container === "string" && typeof o.location === "string");
+  },
   encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -487,7 +633,8 @@ export const ResourceInfo = {
       typeUrl: "/google.api.servicecontrol.v2.ResourceInfo",
       value: ResourceInfo.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseCheckResponse_HeadersEntry(): CheckResponse_HeadersEntry {
   return {
@@ -585,7 +732,8 @@ export const CheckResponse_HeadersEntry = {
   },
   toProto(message: CheckResponse_HeadersEntry): Uint8Array {
     return CheckResponse_HeadersEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
@@ -595,6 +743,15 @@ function createBaseCheckResponse(): CheckResponse {
 }
 export const CheckResponse = {
   typeUrl: "/google.api.servicecontrol.v2.CheckResponse",
+  is(o: any): o is CheckResponse {
+    return o && (o.$typeUrl === CheckResponse.typeUrl || isSet(o.headers));
+  },
+  isSDK(o: any): o is CheckResponseSDKType {
+    return o && (o.$typeUrl === CheckResponse.typeUrl || isSet(o.headers));
+  },
+  isAmino(o: any): o is CheckResponseAmino {
+    return o && (o.$typeUrl === CheckResponse.typeUrl || isSet(o.headers));
+  },
   encode(message: CheckResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.status !== undefined) {
       Status.encode(message.status, writer.uint32(10).fork()).ldelim();
@@ -740,6 +897,9 @@ export const CheckResponse = {
       typeUrl: "/google.api.servicecontrol.v2.CheckResponse",
       value: CheckResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Status.registerTypeUrl();
   }
 };
 function createBaseReportRequest(): ReportRequest {
@@ -751,6 +911,15 @@ function createBaseReportRequest(): ReportRequest {
 }
 export const ReportRequest = {
   typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
+  is(o: any): o is ReportRequest {
+    return o && (o.$typeUrl === ReportRequest.typeUrl || typeof o.serviceName === "string" && typeof o.serviceConfigId === "string" && Array.isArray(o.operations) && (!o.operations.length || AttributeContext.is(o.operations[0])));
+  },
+  isSDK(o: any): o is ReportRequestSDKType {
+    return o && (o.$typeUrl === ReportRequest.typeUrl || typeof o.service_name === "string" && typeof o.service_config_id === "string" && Array.isArray(o.operations) && (!o.operations.length || AttributeContext.isSDK(o.operations[0])));
+  },
+  isAmino(o: any): o is ReportRequestAmino {
+    return o && (o.$typeUrl === ReportRequest.typeUrl || typeof o.service_name === "string" && typeof o.service_config_id === "string" && Array.isArray(o.operations) && (!o.operations.length || AttributeContext.isAmino(o.operations[0])));
+  },
   encode(message: ReportRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -872,6 +1041,9 @@ export const ReportRequest = {
       typeUrl: "/google.api.servicecontrol.v2.ReportRequest",
       value: ReportRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    AttributeContext.registerTypeUrl();
   }
 };
 function createBaseReportResponse(): ReportResponse {
@@ -879,6 +1051,15 @@ function createBaseReportResponse(): ReportResponse {
 }
 export const ReportResponse = {
   typeUrl: "/google.api.servicecontrol.v2.ReportResponse",
+  is(o: any): o is ReportResponse {
+    return o && o.$typeUrl === ReportResponse.typeUrl;
+  },
+  isSDK(o: any): o is ReportResponseSDKType {
+    return o && o.$typeUrl === ReportResponse.typeUrl;
+  },
+  isAmino(o: any): o is ReportResponseAmino {
+    return o && o.$typeUrl === ReportResponse.typeUrl;
+  },
   encode(_: ReportResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -940,5 +1121,6 @@ export const ReportResponse = {
       typeUrl: "/google.api.servicecontrol.v2.ReportResponse",
       value: ReportResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

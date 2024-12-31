@@ -1,6 +1,7 @@
-import { ResourceValue, ResourceValueSDKType } from "./resourcevalue";
-import { Attribute, AttributeSDKType } from "./attribute";
+import { ResourceValue, ResourceValueAmino, ResourceValueSDKType } from "./resourcevalue";
+import { Attribute, AttributeAmino, AttributeSDKType } from "./attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta2";
@@ -12,6 +13,15 @@ export interface CPU {
 export interface CPUProtoMsg {
   typeUrl: "/akash.base.v1beta2.CPU";
   value: Uint8Array;
+}
+/** CPU stores resource units and cpu config attributes */
+export interface CPUAmino {
+  units?: ResourceValueAmino;
+  attributes?: AttributeAmino[];
+}
+export interface CPUAminoMsg {
+  type: "akash/base/v1beta2/cpu";
+  value: CPUAmino;
 }
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
@@ -26,6 +36,15 @@ export interface Memory {
 export interface MemoryProtoMsg {
   typeUrl: "/akash.base.v1beta2.Memory";
   value: Uint8Array;
+}
+/** Memory stores resource quantity and memory attributes */
+export interface MemoryAmino {
+  quantity: ResourceValueAmino;
+  attributes?: AttributeAmino[];
+}
+export interface MemoryAminoMsg {
+  type: "akash/base/v1beta2/memory";
+  value: MemoryAmino;
 }
 /** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
@@ -43,6 +62,16 @@ export interface StorageProtoMsg {
   value: Uint8Array;
 }
 /** Storage stores resource quantity and storage attributes */
+export interface StorageAmino {
+  name: string;
+  quantity: ResourceValueAmino;
+  attributes?: AttributeAmino[];
+}
+export interface StorageAminoMsg {
+  type: "akash/base/v1beta2/storage";
+  value: StorageAmino;
+}
+/** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
   name: string;
   quantity: ResourceValueSDKType;
@@ -56,6 +85,16 @@ function createBaseCPU(): CPU {
 }
 export const CPU = {
   typeUrl: "/akash.base.v1beta2.CPU",
+  aminoType: "akash/base/v1beta2/cpu",
+  is(o: any): o is CPU {
+    return o && (o.$typeUrl === CPU.typeUrl || ResourceValue.is(o.units) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.is(o.attributes[0])));
+  },
+  isSDK(o: any): o is CPUSDKType {
+    return o && (o.$typeUrl === CPU.typeUrl || ResourceValue.isSDK(o.units) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.isSDK(o.attributes[0])));
+  },
+  isAmino(o: any): o is CPUAmino {
+    return o && (o.$typeUrl === CPU.typeUrl || ResourceValue.isAmino(o.units) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.isAmino(o.attributes[0])));
+  },
   encode(message: CPU, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.units !== undefined) {
       ResourceValue.encode(message.units, writer.uint32(10).fork()).ldelim();
@@ -169,6 +208,10 @@ export const CPU = {
       typeUrl: "/akash.base.v1beta2.CPU",
       value: CPU.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ResourceValue.registerTypeUrl();
+    Attribute.registerTypeUrl();
   }
 };
 function createBaseMemory(): Memory {
@@ -179,6 +222,16 @@ function createBaseMemory(): Memory {
 }
 export const Memory = {
   typeUrl: "/akash.base.v1beta2.Memory",
+  aminoType: "akash/base/v1beta2/memory",
+  is(o: any): o is Memory {
+    return o && (o.$typeUrl === Memory.typeUrl || ResourceValue.is(o.quantity) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.is(o.attributes[0])));
+  },
+  isSDK(o: any): o is MemorySDKType {
+    return o && (o.$typeUrl === Memory.typeUrl || ResourceValue.isSDK(o.quantity) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.isSDK(o.attributes[0])));
+  },
+  isAmino(o: any): o is MemoryAmino {
+    return o && (o.$typeUrl === Memory.typeUrl || ResourceValue.isAmino(o.quantity) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.isAmino(o.attributes[0])));
+  },
   encode(message: Memory, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.quantity !== undefined) {
       ResourceValue.encode(message.quantity, writer.uint32(10).fork()).ldelim();
@@ -292,6 +345,10 @@ export const Memory = {
       typeUrl: "/akash.base.v1beta2.Memory",
       value: Memory.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ResourceValue.registerTypeUrl();
+    Attribute.registerTypeUrl();
   }
 };
 function createBaseStorage(): Storage {
@@ -303,6 +360,16 @@ function createBaseStorage(): Storage {
 }
 export const Storage = {
   typeUrl: "/akash.base.v1beta2.Storage",
+  aminoType: "akash/base/v1beta2/storage",
+  is(o: any): o is Storage {
+    return o && (o.$typeUrl === Storage.typeUrl || typeof o.name === "string" && ResourceValue.is(o.quantity) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.is(o.attributes[0])));
+  },
+  isSDK(o: any): o is StorageSDKType {
+    return o && (o.$typeUrl === Storage.typeUrl || typeof o.name === "string" && ResourceValue.isSDK(o.quantity) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.isSDK(o.attributes[0])));
+  },
+  isAmino(o: any): o is StorageAmino {
+    return o && (o.$typeUrl === Storage.typeUrl || typeof o.name === "string" && ResourceValue.isAmino(o.quantity) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.isAmino(o.attributes[0])));
+  },
   encode(message: Storage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -432,5 +499,9 @@ export const Storage = {
       typeUrl: "/akash.base.v1beta2.Storage",
       value: Storage.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ResourceValue.registerTypeUrl();
+    Attribute.registerTypeUrl();
   }
 };

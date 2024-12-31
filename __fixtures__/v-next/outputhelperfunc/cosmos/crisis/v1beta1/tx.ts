@@ -13,6 +13,16 @@ export interface MsgVerifyInvariantProtoMsg {
   value: Uint8Array;
 }
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
+export interface MsgVerifyInvariantAmino {
+  sender?: string;
+  invariant_module_name?: string;
+  invariant_route?: string;
+}
+export interface MsgVerifyInvariantAminoMsg {
+  type: "cosmos-sdk/MsgVerifyInvariant";
+  value: MsgVerifyInvariantAmino;
+}
+/** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariantSDKType {
   sender: string;
   invariant_module_name: string;
@@ -25,6 +35,12 @@ export interface MsgVerifyInvariantResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
+export interface MsgVerifyInvariantResponseAmino {}
+export interface MsgVerifyInvariantResponseAminoMsg {
+  type: "cosmos-sdk/MsgVerifyInvariantResponse";
+  value: MsgVerifyInvariantResponseAmino;
+}
+/** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponseSDKType {}
 function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
   return {
@@ -35,6 +51,16 @@ function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
 }
 export const MsgVerifyInvariant = {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
+  aminoType: "cosmos-sdk/MsgVerifyInvariant",
+  is(o: any): o is MsgVerifyInvariant {
+    return o && (o.$typeUrl === MsgVerifyInvariant.typeUrl || typeof o.sender === "string" && typeof o.invariantModuleName === "string" && typeof o.invariantRoute === "string");
+  },
+  isSDK(o: any): o is MsgVerifyInvariantSDKType {
+    return o && (o.$typeUrl === MsgVerifyInvariant.typeUrl || typeof o.sender === "string" && typeof o.invariant_module_name === "string" && typeof o.invariant_route === "string");
+  },
+  isAmino(o: any): o is MsgVerifyInvariantAmino {
+    return o && (o.$typeUrl === MsgVerifyInvariant.typeUrl || typeof o.sender === "string" && typeof o.invariant_module_name === "string" && typeof o.invariant_route === "string");
+  },
   encode(message: MsgVerifyInvariant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -152,13 +178,24 @@ export const MsgVerifyInvariant = {
       typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariant",
       value: MsgVerifyInvariant.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgVerifyInvariantResponse(): MsgVerifyInvariantResponse {
   return {};
 }
 export const MsgVerifyInvariantResponse = {
   typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse",
+  aminoType: "cosmos-sdk/MsgVerifyInvariantResponse",
+  is(o: any): o is MsgVerifyInvariantResponse {
+    return o && o.$typeUrl === MsgVerifyInvariantResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgVerifyInvariantResponseSDKType {
+    return o && o.$typeUrl === MsgVerifyInvariantResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgVerifyInvariantResponseAmino {
+    return o && o.$typeUrl === MsgVerifyInvariantResponse.typeUrl;
+  },
   encode(_: MsgVerifyInvariantResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -226,5 +263,6 @@ export const MsgVerifyInvariantResponse = {
       typeUrl: "/cosmos.crisis.v1beta1.MsgVerifyInvariantResponse",
       value: MsgVerifyInvariantResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

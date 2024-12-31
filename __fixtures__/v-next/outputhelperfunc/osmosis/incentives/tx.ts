@@ -1,7 +1,8 @@
-import { QueryCondition, QueryConditionSDKType } from "../lockup/lock";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { QueryCondition, QueryConditionAmino, QueryConditionSDKType } from "../lockup/lock";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { GlobalDecoderRegistry } from "../../registry";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
@@ -37,6 +38,37 @@ export interface MsgCreateGaugeProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateGauge creates a gague to distribute rewards to users */
+export interface MsgCreateGaugeAmino {
+  /**
+   * is_perpetual shows if it's a perpetual or non-perpetual gauge
+   * Non-perpetual gauges distribute their tokens equally per epoch while the
+   * gauge is in the active period. Perpetual gauges distribute all their tokens
+   * at a single time and only distribute their tokens again once the gauge is
+   * refilled
+   */
+  is_perpetual?: boolean;
+  /** owner is the address of gauge creator */
+  owner?: string;
+  /**
+   * distribute_to show which lock the gauge should distribute to by time
+   * duration or by timestamp
+   */
+  distribute_to?: QueryConditionAmino;
+  /** coins are coin(s) to be distributed by the gauge */
+  coins?: CoinAmino[];
+  /** start_time is the distribution start time */
+  start_time?: string;
+  /**
+   * num_epochs_paid_over is the number of epochs distribution will be completed
+   * over
+   */
+  num_epochs_paid_over?: string;
+}
+export interface MsgCreateGaugeAminoMsg {
+  type: "osmosis/incentives/create-gauge";
+  value: MsgCreateGaugeAmino;
+}
+/** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGaugeSDKType {
   is_perpetual: boolean;
   owner: string;
@@ -49,6 +81,11 @@ export interface MsgCreateGaugeResponse {}
 export interface MsgCreateGaugeResponseProtoMsg {
   typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse";
   value: Uint8Array;
+}
+export interface MsgCreateGaugeResponseAmino {}
+export interface MsgCreateGaugeResponseAminoMsg {
+  type: "osmosis/incentives/create-gauge-response";
+  value: MsgCreateGaugeResponseAmino;
 }
 export interface MsgCreateGaugeResponseSDKType {}
 /** MsgAddToGauge adds coins to a previously created gauge */
@@ -65,6 +102,19 @@ export interface MsgAddToGaugeProtoMsg {
   value: Uint8Array;
 }
 /** MsgAddToGauge adds coins to a previously created gauge */
+export interface MsgAddToGaugeAmino {
+  /** owner is the gauge owner's address */
+  owner?: string;
+  /** gauge_id is the ID of gauge that rewards are getting added to */
+  gauge_id?: string;
+  /** rewards are the coin(s) to add to gauge */
+  rewards?: CoinAmino[];
+}
+export interface MsgAddToGaugeAminoMsg {
+  type: "osmosis/incentives/add-to-gauge";
+  value: MsgAddToGaugeAmino;
+}
+/** MsgAddToGauge adds coins to a previously created gauge */
 export interface MsgAddToGaugeSDKType {
   owner: string;
   gauge_id: bigint;
@@ -74,6 +124,11 @@ export interface MsgAddToGaugeResponse {}
 export interface MsgAddToGaugeResponseProtoMsg {
   typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse";
   value: Uint8Array;
+}
+export interface MsgAddToGaugeResponseAmino {}
+export interface MsgAddToGaugeResponseAminoMsg {
+  type: "osmosis/incentives/add-to-gauge-response";
+  value: MsgAddToGaugeResponseAmino;
 }
 export interface MsgAddToGaugeResponseSDKType {}
 function createBaseMsgCreateGauge(): MsgCreateGauge {
@@ -88,6 +143,16 @@ function createBaseMsgCreateGauge(): MsgCreateGauge {
 }
 export const MsgCreateGauge = {
   typeUrl: "/osmosis.incentives.MsgCreateGauge",
+  aminoType: "osmosis/incentives/create-gauge",
+  is(o: any): o is MsgCreateGauge {
+    return o && (o.$typeUrl === MsgCreateGauge.typeUrl || typeof o.isPerpetual === "boolean" && typeof o.owner === "string" && QueryCondition.is(o.distributeTo) && Array.isArray(o.coins) && (!o.coins.length || Coin.is(o.coins[0])) && Timestamp.is(o.startTime) && typeof o.numEpochsPaidOver === "bigint");
+  },
+  isSDK(o: any): o is MsgCreateGaugeSDKType {
+    return o && (o.$typeUrl === MsgCreateGauge.typeUrl || typeof o.is_perpetual === "boolean" && typeof o.owner === "string" && QueryCondition.isSDK(o.distribute_to) && Array.isArray(o.coins) && (!o.coins.length || Coin.isSDK(o.coins[0])) && Timestamp.isSDK(o.start_time) && typeof o.num_epochs_paid_over === "bigint");
+  },
+  isAmino(o: any): o is MsgCreateGaugeAmino {
+    return o && (o.$typeUrl === MsgCreateGauge.typeUrl || typeof o.is_perpetual === "boolean" && typeof o.owner === "string" && QueryCondition.isAmino(o.distribute_to) && Array.isArray(o.coins) && (!o.coins.length || Coin.isAmino(o.coins[0])) && Timestamp.isAmino(o.start_time) && typeof o.num_epochs_paid_over === "bigint");
+  },
   encode(message: MsgCreateGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.isPerpetual !== undefined) {
       writer.uint32(8).bool(message.isPerpetual);
@@ -267,6 +332,10 @@ export const MsgCreateGauge = {
       typeUrl: "/osmosis.incentives.MsgCreateGauge",
       value: MsgCreateGauge.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    QueryCondition.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgCreateGaugeResponse(): MsgCreateGaugeResponse {
@@ -274,6 +343,16 @@ function createBaseMsgCreateGaugeResponse(): MsgCreateGaugeResponse {
 }
 export const MsgCreateGaugeResponse = {
   typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse",
+  aminoType: "osmosis/incentives/create-gauge-response",
+  is(o: any): o is MsgCreateGaugeResponse {
+    return o && o.$typeUrl === MsgCreateGaugeResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCreateGaugeResponseSDKType {
+    return o && o.$typeUrl === MsgCreateGaugeResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgCreateGaugeResponseAmino {
+    return o && o.$typeUrl === MsgCreateGaugeResponse.typeUrl;
+  },
   encode(_: MsgCreateGaugeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -341,7 +420,8 @@ export const MsgCreateGaugeResponse = {
       typeUrl: "/osmosis.incentives.MsgCreateGaugeResponse",
       value: MsgCreateGaugeResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgAddToGauge(): MsgAddToGauge {
   return {
@@ -352,6 +432,16 @@ function createBaseMsgAddToGauge(): MsgAddToGauge {
 }
 export const MsgAddToGauge = {
   typeUrl: "/osmosis.incentives.MsgAddToGauge",
+  aminoType: "osmosis/incentives/add-to-gauge",
+  is(o: any): o is MsgAddToGauge {
+    return o && (o.$typeUrl === MsgAddToGauge.typeUrl || typeof o.owner === "string" && typeof o.gaugeId === "bigint" && Array.isArray(o.rewards) && (!o.rewards.length || Coin.is(o.rewards[0])));
+  },
+  isSDK(o: any): o is MsgAddToGaugeSDKType {
+    return o && (o.$typeUrl === MsgAddToGauge.typeUrl || typeof o.owner === "string" && typeof o.gauge_id === "bigint" && Array.isArray(o.rewards) && (!o.rewards.length || Coin.isSDK(o.rewards[0])));
+  },
+  isAmino(o: any): o is MsgAddToGaugeAmino {
+    return o && (o.$typeUrl === MsgAddToGauge.typeUrl || typeof o.owner === "string" && typeof o.gauge_id === "bigint" && Array.isArray(o.rewards) && (!o.rewards.length || Coin.isAmino(o.rewards[0])));
+  },
   encode(message: MsgAddToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -481,6 +571,9 @@ export const MsgAddToGauge = {
       typeUrl: "/osmosis.incentives.MsgAddToGauge",
       value: MsgAddToGauge.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgAddToGaugeResponse(): MsgAddToGaugeResponse {
@@ -488,6 +581,16 @@ function createBaseMsgAddToGaugeResponse(): MsgAddToGaugeResponse {
 }
 export const MsgAddToGaugeResponse = {
   typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse",
+  aminoType: "osmosis/incentives/add-to-gauge-response",
+  is(o: any): o is MsgAddToGaugeResponse {
+    return o && o.$typeUrl === MsgAddToGaugeResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgAddToGaugeResponseSDKType {
+    return o && o.$typeUrl === MsgAddToGaugeResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgAddToGaugeResponseAmino {
+    return o && o.$typeUrl === MsgAddToGaugeResponse.typeUrl;
+  },
   encode(_: MsgAddToGaugeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -555,5 +658,6 @@ export const MsgAddToGaugeResponse = {
       typeUrl: "/osmosis.incentives.MsgAddToGaugeResponse",
       value: MsgAddToGaugeResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

@@ -1,5 +1,6 @@
-import { Params, ParamsSDKType, Validator, ValidatorSDKType, Delegation, DelegationSDKType, UnbondingDelegation, UnbondingDelegationSDKType, Redelegation, RedelegationSDKType } from "./staking";
+import { Params, ParamsAmino, ParamsSDKType, Validator, ValidatorAmino, ValidatorSDKType, Delegation, DelegationAmino, DelegationSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationSDKType, Redelegation, RedelegationAmino, RedelegationSDKType } from "./staking";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -32,6 +33,34 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the staking module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the paramaters of related to deposit. */
+  params?: ParamsAmino;
+  /**
+   * last_total_power tracks the total amounts of bonded tokens recorded during
+   * the previous end block.
+   */
+  last_total_power?: string;
+  /**
+   * last_validator_powers is a special index that provides a historical list
+   * of the last-block's bonded validators.
+   */
+  last_validator_powers?: LastValidatorPowerAmino[];
+  /** delegations defines the validator set at genesis. */
+  validators?: ValidatorAmino[];
+  /** delegations defines the delegations active at genesis. */
+  delegations?: DelegationAmino[];
+  /** unbonding_delegations defines the unbonding delegations active at genesis. */
+  unbonding_delegations?: UnbondingDelegationAmino[];
+  /** redelegations defines the redelegations active at genesis. */
+  redelegations?: RedelegationAmino[];
+  exported?: boolean;
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the staking module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
   last_total_power: Uint8Array;
@@ -54,6 +83,17 @@ export interface LastValidatorPowerProtoMsg {
   value: Uint8Array;
 }
 /** LastValidatorPower required for validator set update logic. */
+export interface LastValidatorPowerAmino {
+  /** address is the address of the validator. */
+  address?: string;
+  /** power defines the power of the validator. */
+  power?: string;
+}
+export interface LastValidatorPowerAminoMsg {
+  type: "cosmos-sdk/LastValidatorPower";
+  value: LastValidatorPowerAmino;
+}
+/** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerSDKType {
   address: string;
   power: bigint;
@@ -72,6 +112,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.staking.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params) && (o.lastTotalPower instanceof Uint8Array || typeof o.lastTotalPower === "string") && Array.isArray(o.lastValidatorPowers) && (!o.lastValidatorPowers.length || LastValidatorPower.is(o.lastValidatorPowers[0])) && Array.isArray(o.validators) && (!o.validators.length || Validator.is(o.validators[0])) && Array.isArray(o.delegations) && (!o.delegations.length || Delegation.is(o.delegations[0])) && Array.isArray(o.unbondingDelegations) && (!o.unbondingDelegations.length || UnbondingDelegation.is(o.unbondingDelegations[0])) && Array.isArray(o.redelegations) && (!o.redelegations.length || Redelegation.is(o.redelegations[0])) && typeof o.exported === "boolean");
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params) && (o.last_total_power instanceof Uint8Array || typeof o.last_total_power === "string") && Array.isArray(o.last_validator_powers) && (!o.last_validator_powers.length || LastValidatorPower.isSDK(o.last_validator_powers[0])) && Array.isArray(o.validators) && (!o.validators.length || Validator.isSDK(o.validators[0])) && Array.isArray(o.delegations) && (!o.delegations.length || Delegation.isSDK(o.delegations[0])) && Array.isArray(o.unbonding_delegations) && (!o.unbonding_delegations.length || UnbondingDelegation.isSDK(o.unbonding_delegations[0])) && Array.isArray(o.redelegations) && (!o.redelegations.length || Redelegation.isSDK(o.redelegations[0])) && typeof o.exported === "boolean");
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params) && (o.last_total_power instanceof Uint8Array || typeof o.last_total_power === "string") && Array.isArray(o.last_validator_powers) && (!o.last_validator_powers.length || LastValidatorPower.isAmino(o.last_validator_powers[0])) && Array.isArray(o.validators) && (!o.validators.length || Validator.isAmino(o.validators[0])) && Array.isArray(o.delegations) && (!o.delegations.length || Delegation.isAmino(o.delegations[0])) && Array.isArray(o.unbonding_delegations) && (!o.unbonding_delegations.length || UnbondingDelegation.isAmino(o.unbonding_delegations[0])) && Array.isArray(o.redelegations) && (!o.redelegations.length || Redelegation.isAmino(o.redelegations[0])) && typeof o.exported === "boolean");
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -321,6 +371,14 @@ export const GenesisState = {
       typeUrl: "/cosmos.staking.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
+    LastValidatorPower.registerTypeUrl();
+    Validator.registerTypeUrl();
+    Delegation.registerTypeUrl();
+    UnbondingDelegation.registerTypeUrl();
+    Redelegation.registerTypeUrl();
   }
 };
 function createBaseLastValidatorPower(): LastValidatorPower {
@@ -331,6 +389,16 @@ function createBaseLastValidatorPower(): LastValidatorPower {
 }
 export const LastValidatorPower = {
   typeUrl: "/cosmos.staking.v1beta1.LastValidatorPower",
+  aminoType: "cosmos-sdk/LastValidatorPower",
+  is(o: any): o is LastValidatorPower {
+    return o && (o.$typeUrl === LastValidatorPower.typeUrl || typeof o.address === "string" && typeof o.power === "bigint");
+  },
+  isSDK(o: any): o is LastValidatorPowerSDKType {
+    return o && (o.$typeUrl === LastValidatorPower.typeUrl || typeof o.address === "string" && typeof o.power === "bigint");
+  },
+  isAmino(o: any): o is LastValidatorPowerAmino {
+    return o && (o.$typeUrl === LastValidatorPower.typeUrl || typeof o.address === "string" && typeof o.power === "bigint");
+  },
   encode(message: LastValidatorPower, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -434,5 +502,6 @@ export const LastValidatorPower = {
       typeUrl: "/cosmos.staking.v1beta1.LastValidatorPower",
       value: LastValidatorPower.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

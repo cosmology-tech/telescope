@@ -1,10 +1,11 @@
-import { Tx, TxSDKType } from "./tx";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { TxResponse, TxResponseSDKType, GasInfo, GasInfoSDKType, Result, ResultSDKType } from "../../base/abci/v1beta1/abci";
-import { BlockID, BlockIDSDKType } from "../../../tendermint/types/types";
-import { Block, BlockSDKType } from "../../../tendermint/types/block";
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { Tx, TxAmino, TxSDKType } from "./tx";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { TxResponse, TxResponseAmino, TxResponseSDKType, GasInfo, GasInfoAmino, GasInfoSDKType, Result, ResultAmino, ResultSDKType } from "../../base/abci/v1beta1/abci";
+import { BlockID, BlockIDAmino, BlockIDSDKType } from "../../../tendermint/types/types";
+import { Block, BlockAmino, BlockSDKType } from "../../../tendermint/types/block";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** OrderBy defines the sorting order */
@@ -18,6 +19,7 @@ export enum OrderBy {
   UNRECOGNIZED = -1,
 }
 export const OrderBySDKType = OrderBy;
+export const OrderByAmino = OrderBy;
 export function orderByFromJSON(object: any): OrderBy {
   switch (object) {
     case 0:
@@ -70,6 +72,7 @@ export enum BroadcastMode {
   UNRECOGNIZED = -1,
 }
 export const BroadcastModeSDKType = BroadcastMode;
+export const BroadcastModeAmino = BroadcastMode;
 export function broadcastModeFromJSON(object: any): BroadcastMode {
   switch (object) {
     case 0:
@@ -124,6 +127,21 @@ export interface GetTxsEventRequestProtoMsg {
  * GetTxsEventRequest is the request type for the Service.TxsByEvents
  * RPC method.
  */
+export interface GetTxsEventRequestAmino {
+  /** events is the list of transaction event type. */
+  events?: string[];
+  /** pagination defines a pagination for the request. */
+  pagination?: PageRequestAmino;
+  order_by?: OrderBy;
+}
+export interface GetTxsEventRequestAminoMsg {
+  type: "cosmos-sdk/GetTxsEventRequest";
+  value: GetTxsEventRequestAmino;
+}
+/**
+ * GetTxsEventRequest is the request type for the Service.TxsByEvents
+ * RPC method.
+ */
 export interface GetTxsEventRequestSDKType {
   events: string[];
   pagination?: PageRequestSDKType;
@@ -144,6 +162,22 @@ export interface GetTxsEventResponse {
 export interface GetTxsEventResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse";
   value: Uint8Array;
+}
+/**
+ * GetTxsEventResponse is the response type for the Service.TxsByEvents
+ * RPC method.
+ */
+export interface GetTxsEventResponseAmino {
+  /** txs is the list of queried transactions. */
+  txs?: TxAmino[];
+  /** tx_responses is the list of queried TxResponses. */
+  tx_responses?: TxResponseAmino[];
+  /** pagination defines a pagination for the response. */
+  pagination?: PageResponseAmino;
+}
+export interface GetTxsEventResponseAminoMsg {
+  type: "cosmos-sdk/GetTxsEventResponse";
+  value: GetTxsEventResponseAmino;
 }
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents
@@ -171,6 +205,19 @@ export interface BroadcastTxRequestProtoMsg {
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
  * RPC method.
  */
+export interface BroadcastTxRequestAmino {
+  /** tx_bytes is the raw transaction. */
+  tx_bytes?: string;
+  mode?: BroadcastMode;
+}
+export interface BroadcastTxRequestAminoMsg {
+  type: "cosmos-sdk/BroadcastTxRequest";
+  value: BroadcastTxRequestAmino;
+}
+/**
+ * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
+ * RPC method.
+ */
 export interface BroadcastTxRequestSDKType {
   tx_bytes: Uint8Array;
   mode: BroadcastMode;
@@ -186,6 +233,18 @@ export interface BroadcastTxResponse {
 export interface BroadcastTxResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse";
   value: Uint8Array;
+}
+/**
+ * BroadcastTxResponse is the response type for the
+ * Service.BroadcastTx method.
+ */
+export interface BroadcastTxResponseAmino {
+  /** tx_response is the queried TxResponses. */
+  tx_response?: TxResponseAmino;
+}
+export interface BroadcastTxResponseAminoMsg {
+  type: "cosmos-sdk/BroadcastTxResponse";
+  value: BroadcastTxResponseAmino;
 }
 /**
  * BroadcastTxResponse is the response type for the
@@ -220,6 +279,28 @@ export interface SimulateRequestProtoMsg {
  * SimulateRequest is the request type for the Service.Simulate
  * RPC method.
  */
+export interface SimulateRequestAmino {
+  /**
+   * tx is the transaction to simulate.
+   * Deprecated. Send raw tx bytes instead.
+   */
+  /** @deprecated */
+  tx?: TxAmino;
+  /**
+   * tx_bytes is the raw transaction.
+   * 
+   * Since: cosmos-sdk 0.43
+   */
+  tx_bytes?: string;
+}
+export interface SimulateRequestAminoMsg {
+  type: "cosmos-sdk/SimulateRequest";
+  value: SimulateRequestAmino;
+}
+/**
+ * SimulateRequest is the request type for the Service.Simulate
+ * RPC method.
+ */
 export interface SimulateRequestSDKType {
   /** @deprecated */
   tx?: TxSDKType;
@@ -238,6 +319,20 @@ export interface SimulateResponse {
 export interface SimulateResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.SimulateResponse";
   value: Uint8Array;
+}
+/**
+ * SimulateResponse is the response type for the
+ * Service.SimulateRPC method.
+ */
+export interface SimulateResponseAmino {
+  /** gas_info is the information about gas used in the simulation. */
+  gas_info?: GasInfoAmino;
+  /** result is the result of the simulation. */
+  result?: ResultAmino;
+}
+export interface SimulateResponseAminoMsg {
+  type: "cosmos-sdk/SimulateResponse";
+  value: SimulateResponseAmino;
 }
 /**
  * SimulateResponse is the response type for the
@@ -263,6 +358,18 @@ export interface GetTxRequestProtoMsg {
  * GetTxRequest is the request type for the Service.GetTx
  * RPC method.
  */
+export interface GetTxRequestAmino {
+  /** hash is the tx hash to query, encoded as a hex string. */
+  hash?: string;
+}
+export interface GetTxRequestAminoMsg {
+  type: "cosmos-sdk/GetTxRequest";
+  value: GetTxRequestAmino;
+}
+/**
+ * GetTxRequest is the request type for the Service.GetTx
+ * RPC method.
+ */
 export interface GetTxRequestSDKType {
   hash: string;
 }
@@ -276,6 +383,17 @@ export interface GetTxResponse {
 export interface GetTxResponseProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetTxResponse";
   value: Uint8Array;
+}
+/** GetTxResponse is the response type for the Service.GetTx method. */
+export interface GetTxResponseAmino {
+  /** tx is the queried transaction. */
+  tx?: TxAmino;
+  /** tx_response is the queried TxResponses. */
+  tx_response?: TxResponseAmino;
+}
+export interface GetTxResponseAminoMsg {
+  type: "cosmos-sdk/GetTxResponse";
+  value: GetTxResponseAmino;
 }
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponseSDKType {
@@ -297,6 +415,22 @@ export interface GetBlockWithTxsRequest {
 export interface GetBlockWithTxsRequestProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest";
   value: Uint8Array;
+}
+/**
+ * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
+ * RPC method.
+ * 
+ * Since: cosmos-sdk 0.45.2
+ */
+export interface GetBlockWithTxsRequestAmino {
+  /** height is the height of the block to query. */
+  height?: string;
+  /** pagination defines a pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface GetBlockWithTxsRequestAminoMsg {
+  type: "cosmos-sdk/GetBlockWithTxsRequest";
+  value: GetBlockWithTxsRequestAmino;
 }
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
@@ -330,6 +464,23 @@ export interface GetBlockWithTxsResponseProtoMsg {
  * 
  * Since: cosmos-sdk 0.45.2
  */
+export interface GetBlockWithTxsResponseAmino {
+  /** txs are the transactions in the block. */
+  txs?: TxAmino[];
+  block_id?: BlockIDAmino;
+  block?: BlockAmino;
+  /** pagination defines a pagination for the response. */
+  pagination?: PageResponseAmino;
+}
+export interface GetBlockWithTxsResponseAminoMsg {
+  type: "cosmos-sdk/GetBlockWithTxsResponse";
+  value: GetBlockWithTxsResponseAmino;
+}
+/**
+ * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
+ * 
+ * Since: cosmos-sdk 0.45.2
+ */
 export interface GetBlockWithTxsResponseSDKType {
   txs: TxSDKType[];
   block_id?: BlockIDSDKType;
@@ -345,6 +496,16 @@ function createBaseGetTxsEventRequest(): GetTxsEventRequest {
 }
 export const GetTxsEventRequest = {
   typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest",
+  aminoType: "cosmos-sdk/GetTxsEventRequest",
+  is(o: any): o is GetTxsEventRequest {
+    return o && (o.$typeUrl === GetTxsEventRequest.typeUrl || Array.isArray(o.events) && (!o.events.length || typeof o.events[0] === "string") && isSet(o.orderBy));
+  },
+  isSDK(o: any): o is GetTxsEventRequestSDKType {
+    return o && (o.$typeUrl === GetTxsEventRequest.typeUrl || Array.isArray(o.events) && (!o.events.length || typeof o.events[0] === "string") && isSet(o.order_by));
+  },
+  isAmino(o: any): o is GetTxsEventRequestAmino {
+    return o && (o.$typeUrl === GetTxsEventRequest.typeUrl || Array.isArray(o.events) && (!o.events.length || typeof o.events[0] === "string") && isSet(o.order_by));
+  },
   encode(message: GetTxsEventRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.events) {
       writer.uint32(10).string(v!);
@@ -474,6 +635,9 @@ export const GetTxsEventRequest = {
       typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest",
       value: GetTxsEventRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseGetTxsEventResponse(): GetTxsEventResponse {
@@ -485,6 +649,16 @@ function createBaseGetTxsEventResponse(): GetTxsEventResponse {
 }
 export const GetTxsEventResponse = {
   typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse",
+  aminoType: "cosmos-sdk/GetTxsEventResponse",
+  is(o: any): o is GetTxsEventResponse {
+    return o && (o.$typeUrl === GetTxsEventResponse.typeUrl || Array.isArray(o.txs) && (!o.txs.length || Tx.is(o.txs[0])) && Array.isArray(o.txResponses) && (!o.txResponses.length || TxResponse.is(o.txResponses[0])));
+  },
+  isSDK(o: any): o is GetTxsEventResponseSDKType {
+    return o && (o.$typeUrl === GetTxsEventResponse.typeUrl || Array.isArray(o.txs) && (!o.txs.length || Tx.isSDK(o.txs[0])) && Array.isArray(o.tx_responses) && (!o.tx_responses.length || TxResponse.isSDK(o.tx_responses[0])));
+  },
+  isAmino(o: any): o is GetTxsEventResponseAmino {
+    return o && (o.$typeUrl === GetTxsEventResponse.typeUrl || Array.isArray(o.txs) && (!o.txs.length || Tx.isAmino(o.txs[0])) && Array.isArray(o.tx_responses) && (!o.tx_responses.length || TxResponse.isAmino(o.tx_responses[0])));
+  },
   encode(message: GetTxsEventResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.txs) {
       Tx.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -624,6 +798,11 @@ export const GetTxsEventResponse = {
       typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse",
       value: GetTxsEventResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Tx.registerTypeUrl();
+    TxResponse.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseBroadcastTxRequest(): BroadcastTxRequest {
@@ -634,6 +813,16 @@ function createBaseBroadcastTxRequest(): BroadcastTxRequest {
 }
 export const BroadcastTxRequest = {
   typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest",
+  aminoType: "cosmos-sdk/BroadcastTxRequest",
+  is(o: any): o is BroadcastTxRequest {
+    return o && (o.$typeUrl === BroadcastTxRequest.typeUrl || (o.txBytes instanceof Uint8Array || typeof o.txBytes === "string") && isSet(o.mode));
+  },
+  isSDK(o: any): o is BroadcastTxRequestSDKType {
+    return o && (o.$typeUrl === BroadcastTxRequest.typeUrl || (o.tx_bytes instanceof Uint8Array || typeof o.tx_bytes === "string") && isSet(o.mode));
+  },
+  isAmino(o: any): o is BroadcastTxRequestAmino {
+    return o && (o.$typeUrl === BroadcastTxRequest.typeUrl || (o.tx_bytes instanceof Uint8Array || typeof o.tx_bytes === "string") && isSet(o.mode));
+  },
   encode(message: BroadcastTxRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.txBytes.length !== 0) {
       writer.uint32(10).bytes(message.txBytes);
@@ -735,7 +924,8 @@ export const BroadcastTxRequest = {
       typeUrl: "/cosmos.tx.v1beta1.BroadcastTxRequest",
       value: BroadcastTxRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseBroadcastTxResponse(): BroadcastTxResponse {
   return {
@@ -744,6 +934,16 @@ function createBaseBroadcastTxResponse(): BroadcastTxResponse {
 }
 export const BroadcastTxResponse = {
   typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse",
+  aminoType: "cosmos-sdk/BroadcastTxResponse",
+  is(o: any): o is BroadcastTxResponse {
+    return o && o.$typeUrl === BroadcastTxResponse.typeUrl;
+  },
+  isSDK(o: any): o is BroadcastTxResponseSDKType {
+    return o && o.$typeUrl === BroadcastTxResponse.typeUrl;
+  },
+  isAmino(o: any): o is BroadcastTxResponseAmino {
+    return o && o.$typeUrl === BroadcastTxResponse.typeUrl;
+  },
   encode(message: BroadcastTxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.txResponse !== undefined) {
       TxResponse.encode(message.txResponse, writer.uint32(10).fork()).ldelim();
@@ -831,6 +1031,9 @@ export const BroadcastTxResponse = {
       typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse",
       value: BroadcastTxResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    TxResponse.registerTypeUrl();
   }
 };
 function createBaseSimulateRequest(): SimulateRequest {
@@ -841,6 +1044,16 @@ function createBaseSimulateRequest(): SimulateRequest {
 }
 export const SimulateRequest = {
   typeUrl: "/cosmos.tx.v1beta1.SimulateRequest",
+  aminoType: "cosmos-sdk/SimulateRequest",
+  is(o: any): o is SimulateRequest {
+    return o && (o.$typeUrl === SimulateRequest.typeUrl || o.txBytes instanceof Uint8Array || typeof o.txBytes === "string");
+  },
+  isSDK(o: any): o is SimulateRequestSDKType {
+    return o && (o.$typeUrl === SimulateRequest.typeUrl || o.tx_bytes instanceof Uint8Array || typeof o.tx_bytes === "string");
+  },
+  isAmino(o: any): o is SimulateRequestAmino {
+    return o && (o.$typeUrl === SimulateRequest.typeUrl || o.tx_bytes instanceof Uint8Array || typeof o.tx_bytes === "string");
+  },
   encode(message: SimulateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -944,6 +1157,9 @@ export const SimulateRequest = {
       typeUrl: "/cosmos.tx.v1beta1.SimulateRequest",
       value: SimulateRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Tx.registerTypeUrl();
   }
 };
 function createBaseSimulateResponse(): SimulateResponse {
@@ -954,6 +1170,16 @@ function createBaseSimulateResponse(): SimulateResponse {
 }
 export const SimulateResponse = {
   typeUrl: "/cosmos.tx.v1beta1.SimulateResponse",
+  aminoType: "cosmos-sdk/SimulateResponse",
+  is(o: any): o is SimulateResponse {
+    return o && o.$typeUrl === SimulateResponse.typeUrl;
+  },
+  isSDK(o: any): o is SimulateResponseSDKType {
+    return o && o.$typeUrl === SimulateResponse.typeUrl;
+  },
+  isAmino(o: any): o is SimulateResponseAmino {
+    return o && o.$typeUrl === SimulateResponse.typeUrl;
+  },
   encode(message: SimulateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.gasInfo !== undefined) {
       GasInfo.encode(message.gasInfo, writer.uint32(10).fork()).ldelim();
@@ -1059,6 +1285,10 @@ export const SimulateResponse = {
       typeUrl: "/cosmos.tx.v1beta1.SimulateResponse",
       value: SimulateResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GasInfo.registerTypeUrl();
+    Result.registerTypeUrl();
   }
 };
 function createBaseGetTxRequest(): GetTxRequest {
@@ -1068,6 +1298,16 @@ function createBaseGetTxRequest(): GetTxRequest {
 }
 export const GetTxRequest = {
   typeUrl: "/cosmos.tx.v1beta1.GetTxRequest",
+  aminoType: "cosmos-sdk/GetTxRequest",
+  is(o: any): o is GetTxRequest {
+    return o && (o.$typeUrl === GetTxRequest.typeUrl || typeof o.hash === "string");
+  },
+  isSDK(o: any): o is GetTxRequestSDKType {
+    return o && (o.$typeUrl === GetTxRequest.typeUrl || typeof o.hash === "string");
+  },
+  isAmino(o: any): o is GetTxRequestAmino {
+    return o && (o.$typeUrl === GetTxRequest.typeUrl || typeof o.hash === "string");
+  },
   encode(message: GetTxRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hash !== undefined) {
       writer.uint32(10).string(message.hash);
@@ -1153,7 +1393,8 @@ export const GetTxRequest = {
       typeUrl: "/cosmos.tx.v1beta1.GetTxRequest",
       value: GetTxRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseGetTxResponse(): GetTxResponse {
   return {
@@ -1163,6 +1404,16 @@ function createBaseGetTxResponse(): GetTxResponse {
 }
 export const GetTxResponse = {
   typeUrl: "/cosmos.tx.v1beta1.GetTxResponse",
+  aminoType: "cosmos-sdk/GetTxResponse",
+  is(o: any): o is GetTxResponse {
+    return o && o.$typeUrl === GetTxResponse.typeUrl;
+  },
+  isSDK(o: any): o is GetTxResponseSDKType {
+    return o && o.$typeUrl === GetTxResponse.typeUrl;
+  },
+  isAmino(o: any): o is GetTxResponseAmino {
+    return o && o.$typeUrl === GetTxResponse.typeUrl;
+  },
   encode(message: GetTxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
@@ -1268,6 +1519,10 @@ export const GetTxResponse = {
       typeUrl: "/cosmos.tx.v1beta1.GetTxResponse",
       value: GetTxResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Tx.registerTypeUrl();
+    TxResponse.registerTypeUrl();
   }
 };
 function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
@@ -1278,6 +1533,16 @@ function createBaseGetBlockWithTxsRequest(): GetBlockWithTxsRequest {
 }
 export const GetBlockWithTxsRequest = {
   typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest",
+  aminoType: "cosmos-sdk/GetBlockWithTxsRequest",
+  is(o: any): o is GetBlockWithTxsRequest {
+    return o && (o.$typeUrl === GetBlockWithTxsRequest.typeUrl || typeof o.height === "bigint");
+  },
+  isSDK(o: any): o is GetBlockWithTxsRequestSDKType {
+    return o && (o.$typeUrl === GetBlockWithTxsRequest.typeUrl || typeof o.height === "bigint");
+  },
+  isAmino(o: any): o is GetBlockWithTxsRequestAmino {
+    return o && (o.$typeUrl === GetBlockWithTxsRequest.typeUrl || typeof o.height === "bigint");
+  },
   encode(message: GetBlockWithTxsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
@@ -1383,6 +1648,9 @@ export const GetBlockWithTxsRequest = {
       typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest",
       value: GetBlockWithTxsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
@@ -1395,6 +1663,16 @@ function createBaseGetBlockWithTxsResponse(): GetBlockWithTxsResponse {
 }
 export const GetBlockWithTxsResponse = {
   typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse",
+  aminoType: "cosmos-sdk/GetBlockWithTxsResponse",
+  is(o: any): o is GetBlockWithTxsResponse {
+    return o && (o.$typeUrl === GetBlockWithTxsResponse.typeUrl || Array.isArray(o.txs) && (!o.txs.length || Tx.is(o.txs[0])));
+  },
+  isSDK(o: any): o is GetBlockWithTxsResponseSDKType {
+    return o && (o.$typeUrl === GetBlockWithTxsResponse.typeUrl || Array.isArray(o.txs) && (!o.txs.length || Tx.isSDK(o.txs[0])));
+  },
+  isAmino(o: any): o is GetBlockWithTxsResponseAmino {
+    return o && (o.$typeUrl === GetBlockWithTxsResponse.typeUrl || Array.isArray(o.txs) && (!o.txs.length || Tx.isAmino(o.txs[0])));
+  },
   encode(message: GetBlockWithTxsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.txs) {
       Tx.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1544,5 +1822,11 @@ export const GetBlockWithTxsResponse = {
       typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse",
       value: GetBlockWithTxsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Tx.registerTypeUrl();
+    BlockID.registerTypeUrl();
+    Block.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };

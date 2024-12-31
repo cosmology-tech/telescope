@@ -1,4 +1,4 @@
-import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
+import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
@@ -52,6 +52,45 @@ export interface LogDescriptorProtoMsg {
  *       - key: /customer_id
  *         description: Identifier of a library customer
  */
+export interface LogDescriptorAmino {
+  /**
+   * The name of the log. It must be less than 512 characters long and can
+   * include the following characters: upper- and lower-case alphanumeric
+   * characters [A-Za-z0-9], and punctuation characters including
+   * slash, underscore, hyphen, period [/_-.].
+   */
+  name?: string;
+  /**
+   * The set of labels that are available to describe a specific log entry.
+   * Runtime requests that contain labels not specified here are
+   * considered invalid.
+   */
+  labels?: LabelDescriptorAmino[];
+  /**
+   * A human-readable description of this log. This information appears in
+   * the documentation and can contain details.
+   */
+  description?: string;
+  /**
+   * The human-readable name for this log. This information appears on
+   * the user interface and should be concise.
+   */
+  display_name?: string;
+}
+export interface LogDescriptorAminoMsg {
+  type: "/google.api.LogDescriptor";
+  value: LogDescriptorAmino;
+}
+/**
+ * A description of a log type. Example in YAML format:
+ * 
+ *     - name: library.googleapis.com/activity_history
+ *       description: The history of borrowing and returning library items.
+ *       display_name: Activity
+ *       labels:
+ *       - key: /customer_id
+ *         description: Identifier of a library customer
+ */
 export interface LogDescriptorSDKType {
   name: string;
   labels: LabelDescriptorSDKType[];
@@ -68,6 +107,15 @@ function createBaseLogDescriptor(): LogDescriptor {
 }
 export const LogDescriptor = {
   typeUrl: "/google.api.LogDescriptor",
+  is(o: any): o is LogDescriptor {
+    return o && (o.$typeUrl === LogDescriptor.typeUrl || typeof o.name === "string" && Array.isArray(o.labels) && (!o.labels.length || LabelDescriptor.is(o.labels[0])) && typeof o.description === "string" && typeof o.displayName === "string");
+  },
+  isSDK(o: any): o is LogDescriptorSDKType {
+    return o && (o.$typeUrl === LogDescriptor.typeUrl || typeof o.name === "string" && Array.isArray(o.labels) && (!o.labels.length || LabelDescriptor.isSDK(o.labels[0])) && typeof o.description === "string" && typeof o.display_name === "string");
+  },
+  isAmino(o: any): o is LogDescriptorAmino {
+    return o && (o.$typeUrl === LogDescriptor.typeUrl || typeof o.name === "string" && Array.isArray(o.labels) && (!o.labels.length || LabelDescriptor.isAmino(o.labels[0])) && typeof o.description === "string" && typeof o.display_name === "string");
+  },
   encode(message: LogDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -205,5 +253,8 @@ export const LogDescriptor = {
       typeUrl: "/google.api.LogDescriptor",
       value: LogDescriptor.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    LabelDescriptor.registerTypeUrl();
   }
 };

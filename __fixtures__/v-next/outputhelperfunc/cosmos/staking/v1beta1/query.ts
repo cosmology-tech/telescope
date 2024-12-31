@@ -1,6 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Validator, ValidatorSDKType, DelegationResponse, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoSDKType, Pool, PoolSDKType, Params, ParamsSDKType } from "./staking";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
+import { Validator, ValidatorAmino, ValidatorSDKType, DelegationResponse, DelegationResponseAmino, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseAmino, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoAmino, HistoricalInfoSDKType, Pool, PoolAmino, PoolSDKType, Params, ParamsAmino, ParamsSDKType } from "./staking";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -14,6 +15,17 @@ export interface QueryValidatorsRequest {
 export interface QueryValidatorsRequestProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorsRequest";
   value: Uint8Array;
+}
+/** QueryValidatorsRequest is request type for Query/Validators RPC method. */
+export interface QueryValidatorsRequestAmino {
+  /** status enables to query for validators matching a given status. */
+  status?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryValidatorsRequestAminoMsg {
+  type: "cosmos-sdk/QueryValidatorsRequest";
+  value: QueryValidatorsRequestAmino;
 }
 /** QueryValidatorsRequest is request type for Query/Validators RPC method. */
 export interface QueryValidatorsRequestSDKType {
@@ -32,6 +44,17 @@ export interface QueryValidatorsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryValidatorsResponse is response type for the Query/Validators RPC method */
+export interface QueryValidatorsResponseAmino {
+  /** validators contains all the queried validators. */
+  validators?: ValidatorAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryValidatorsResponseAminoMsg {
+  type: "cosmos-sdk/QueryValidatorsResponse";
+  value: QueryValidatorsResponseAmino;
+}
+/** QueryValidatorsResponse is response type for the Query/Validators RPC method */
 export interface QueryValidatorsResponseSDKType {
   validators: ValidatorSDKType[];
   pagination?: PageResponseSDKType;
@@ -46,6 +69,15 @@ export interface QueryValidatorRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryValidatorRequest is response type for the Query/Validator RPC method */
+export interface QueryValidatorRequestAmino {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr?: string;
+}
+export interface QueryValidatorRequestAminoMsg {
+  type: "cosmos-sdk/QueryValidatorRequest";
+  value: QueryValidatorRequestAmino;
+}
+/** QueryValidatorRequest is response type for the Query/Validator RPC method */
 export interface QueryValidatorRequestSDKType {
   validator_addr: string;
 }
@@ -57,6 +89,15 @@ export interface QueryValidatorResponse {
 export interface QueryValidatorResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorResponse";
   value: Uint8Array;
+}
+/** QueryValidatorResponse is response type for the Query/Validator RPC method */
+export interface QueryValidatorResponseAmino {
+  /** validator defines the the validator info. */
+  validator?: ValidatorAmino;
+}
+export interface QueryValidatorResponseAminoMsg {
+  type: "cosmos-sdk/QueryValidatorResponse";
+  value: QueryValidatorResponseAmino;
 }
 /** QueryValidatorResponse is response type for the Query/Validator RPC method */
 export interface QueryValidatorResponseSDKType {
@@ -80,6 +121,20 @@ export interface QueryValidatorDelegationsRequestProtoMsg {
  * QueryValidatorDelegationsRequest is request type for the
  * Query/ValidatorDelegations RPC method
  */
+export interface QueryValidatorDelegationsRequestAmino {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryValidatorDelegationsRequestAminoMsg {
+  type: "cosmos-sdk/QueryValidatorDelegationsRequest";
+  value: QueryValidatorDelegationsRequestAmino;
+}
+/**
+ * QueryValidatorDelegationsRequest is request type for the
+ * Query/ValidatorDelegations RPC method
+ */
 export interface QueryValidatorDelegationsRequestSDKType {
   validator_addr: string;
   pagination?: PageRequestSDKType;
@@ -96,6 +151,19 @@ export interface QueryValidatorDelegationsResponse {
 export interface QueryValidatorDelegationsResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorDelegationsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryValidatorDelegationsResponse is response type for the
+ * Query/ValidatorDelegations RPC method
+ */
+export interface QueryValidatorDelegationsResponseAmino {
+  delegation_responses?: DelegationResponseAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryValidatorDelegationsResponseAminoMsg {
+  type: "cosmos-sdk/QueryValidatorDelegationsResponse";
+  value: QueryValidatorDelegationsResponseAmino;
 }
 /**
  * QueryValidatorDelegationsResponse is response type for the
@@ -123,6 +191,20 @@ export interface QueryValidatorUnbondingDelegationsRequestProtoMsg {
  * QueryValidatorUnbondingDelegationsRequest is required type for the
  * Query/ValidatorUnbondingDelegations RPC method
  */
+export interface QueryValidatorUnbondingDelegationsRequestAmino {
+  /** validator_addr defines the validator address to query for. */
+  validator_addr?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryValidatorUnbondingDelegationsRequestAminoMsg {
+  type: "cosmos-sdk/QueryValidatorUnbondingDelegationsRequest";
+  value: QueryValidatorUnbondingDelegationsRequestAmino;
+}
+/**
+ * QueryValidatorUnbondingDelegationsRequest is required type for the
+ * Query/ValidatorUnbondingDelegations RPC method
+ */
 export interface QueryValidatorUnbondingDelegationsRequestSDKType {
   validator_addr: string;
   pagination?: PageRequestSDKType;
@@ -144,6 +226,19 @@ export interface QueryValidatorUnbondingDelegationsResponseProtoMsg {
  * QueryValidatorUnbondingDelegationsResponse is response type for the
  * Query/ValidatorUnbondingDelegations RPC method.
  */
+export interface QueryValidatorUnbondingDelegationsResponseAmino {
+  unbonding_responses?: UnbondingDelegationAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryValidatorUnbondingDelegationsResponseAminoMsg {
+  type: "cosmos-sdk/QueryValidatorUnbondingDelegationsResponse";
+  value: QueryValidatorUnbondingDelegationsResponseAmino;
+}
+/**
+ * QueryValidatorUnbondingDelegationsResponse is response type for the
+ * Query/ValidatorUnbondingDelegations RPC method.
+ */
 export interface QueryValidatorUnbondingDelegationsResponseSDKType {
   unbonding_responses: UnbondingDelegationSDKType[];
   pagination?: PageResponseSDKType;
@@ -160,6 +255,17 @@ export interface QueryDelegationRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryDelegationRequest is request type for the Query/Delegation RPC method. */
+export interface QueryDelegationRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr?: string;
+  /** validator_addr defines the validator address to query for. */
+  validator_addr?: string;
+}
+export interface QueryDelegationRequestAminoMsg {
+  type: "cosmos-sdk/QueryDelegationRequest";
+  value: QueryDelegationRequestAmino;
+}
+/** QueryDelegationRequest is request type for the Query/Delegation RPC method. */
 export interface QueryDelegationRequestSDKType {
   delegator_addr: string;
   validator_addr: string;
@@ -172,6 +278,15 @@ export interface QueryDelegationResponse {
 export interface QueryDelegationResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegationResponse";
   value: Uint8Array;
+}
+/** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
+export interface QueryDelegationResponseAmino {
+  /** delegation_responses defines the delegation info of a delegation. */
+  delegation_response?: DelegationResponseAmino;
+}
+export interface QueryDelegationResponseAminoMsg {
+  type: "cosmos-sdk/QueryDelegationResponse";
+  value: QueryDelegationResponseAmino;
 }
 /** QueryDelegationResponse is response type for the Query/Delegation RPC method. */
 export interface QueryDelegationResponseSDKType {
@@ -190,6 +305,20 @@ export interface QueryUnbondingDelegationRequest {
 export interface QueryUnbondingDelegationRequestProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryUnbondingDelegationRequest";
   value: Uint8Array;
+}
+/**
+ * QueryUnbondingDelegationRequest is request type for the
+ * Query/UnbondingDelegation RPC method.
+ */
+export interface QueryUnbondingDelegationRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr?: string;
+  /** validator_addr defines the validator address to query for. */
+  validator_addr?: string;
+}
+export interface QueryUnbondingDelegationRequestAminoMsg {
+  type: "cosmos-sdk/QueryUnbondingDelegationRequest";
+  value: QueryUnbondingDelegationRequestAmino;
 }
 /**
  * QueryUnbondingDelegationRequest is request type for the
@@ -215,6 +344,18 @@ export interface QueryUnbondingDelegationResponseProtoMsg {
  * QueryDelegationResponse is response type for the Query/UnbondingDelegation
  * RPC method.
  */
+export interface QueryUnbondingDelegationResponseAmino {
+  /** unbond defines the unbonding information of a delegation. */
+  unbond?: UnbondingDelegationAmino;
+}
+export interface QueryUnbondingDelegationResponseAminoMsg {
+  type: "cosmos-sdk/QueryUnbondingDelegationResponse";
+  value: QueryUnbondingDelegationResponseAmino;
+}
+/**
+ * QueryDelegationResponse is response type for the Query/UnbondingDelegation
+ * RPC method.
+ */
 export interface QueryUnbondingDelegationResponseSDKType {
   unbond: UnbondingDelegationSDKType;
 }
@@ -231,6 +372,20 @@ export interface QueryDelegatorDelegationsRequest {
 export interface QueryDelegatorDelegationsRequestProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorDelegationsRequest";
   value: Uint8Array;
+}
+/**
+ * QueryDelegatorDelegationsRequest is request type for the
+ * Query/DelegatorDelegations RPC method.
+ */
+export interface QueryDelegatorDelegationsRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDelegatorDelegationsRequestAminoMsg {
+  type: "cosmos-sdk/QueryDelegatorDelegationsRequest";
+  value: QueryDelegatorDelegationsRequestAmino;
 }
 /**
  * QueryDelegatorDelegationsRequest is request type for the
@@ -258,6 +413,20 @@ export interface QueryDelegatorDelegationsResponseProtoMsg {
  * QueryDelegatorDelegationsResponse is response type for the
  * Query/DelegatorDelegations RPC method.
  */
+export interface QueryDelegatorDelegationsResponseAmino {
+  /** delegation_responses defines all the delegations' info of a delegator. */
+  delegation_responses?: DelegationResponseAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryDelegatorDelegationsResponseAminoMsg {
+  type: "cosmos-sdk/QueryDelegatorDelegationsResponse";
+  value: QueryDelegatorDelegationsResponseAmino;
+}
+/**
+ * QueryDelegatorDelegationsResponse is response type for the
+ * Query/DelegatorDelegations RPC method.
+ */
 export interface QueryDelegatorDelegationsResponseSDKType {
   delegation_responses: DelegationResponseSDKType[];
   pagination?: PageResponseSDKType;
@@ -280,6 +449,20 @@ export interface QueryDelegatorUnbondingDelegationsRequestProtoMsg {
  * QueryDelegatorUnbondingDelegationsRequest is request type for the
  * Query/DelegatorUnbondingDelegations RPC method.
  */
+export interface QueryDelegatorUnbondingDelegationsRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDelegatorUnbondingDelegationsRequestAminoMsg {
+  type: "cosmos-sdk/QueryDelegatorUnbondingDelegationsRequest";
+  value: QueryDelegatorUnbondingDelegationsRequestAmino;
+}
+/**
+ * QueryDelegatorUnbondingDelegationsRequest is request type for the
+ * Query/DelegatorUnbondingDelegations RPC method.
+ */
 export interface QueryDelegatorUnbondingDelegationsRequestSDKType {
   delegator_addr: string;
   pagination?: PageRequestSDKType;
@@ -296,6 +479,19 @@ export interface QueryDelegatorUnbondingDelegationsResponse {
 export interface QueryDelegatorUnbondingDelegationsResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryUnbondingDelegatorDelegationsResponse is response type for the
+ * Query/UnbondingDelegatorDelegations RPC method.
+ */
+export interface QueryDelegatorUnbondingDelegationsResponseAmino {
+  unbonding_responses?: UnbondingDelegationAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryDelegatorUnbondingDelegationsResponseAminoMsg {
+  type: "cosmos-sdk/QueryDelegatorUnbondingDelegationsResponse";
+  value: QueryDelegatorUnbondingDelegationsResponseAmino;
 }
 /**
  * QueryUnbondingDelegatorDelegationsResponse is response type for the
@@ -327,6 +523,24 @@ export interface QueryRedelegationsRequestProtoMsg {
  * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
  * method.
  */
+export interface QueryRedelegationsRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr?: string;
+  /** src_validator_addr defines the validator address to redelegate from. */
+  src_validator_addr?: string;
+  /** dst_validator_addr defines the validator address to redelegate to. */
+  dst_validator_addr?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryRedelegationsRequestAminoMsg {
+  type: "cosmos-sdk/QueryRedelegationsRequest";
+  value: QueryRedelegationsRequestAmino;
+}
+/**
+ * QueryRedelegationsRequest is request type for the Query/Redelegations RPC
+ * method.
+ */
 export interface QueryRedelegationsRequestSDKType {
   delegator_addr: string;
   src_validator_addr: string;
@@ -345,6 +559,19 @@ export interface QueryRedelegationsResponse {
 export interface QueryRedelegationsResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryRedelegationsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
+ * method.
+ */
+export interface QueryRedelegationsResponseAmino {
+  redelegation_responses?: RedelegationResponseAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryRedelegationsResponseAminoMsg {
+  type: "cosmos-sdk/QueryRedelegationsResponse";
+  value: QueryRedelegationsResponseAmino;
 }
 /**
  * QueryRedelegationsResponse is response type for the Query/Redelegations RPC
@@ -372,6 +599,20 @@ export interface QueryDelegatorValidatorsRequestProtoMsg {
  * QueryDelegatorValidatorsRequest is request type for the
  * Query/DelegatorValidators RPC method.
  */
+export interface QueryDelegatorValidatorsRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDelegatorValidatorsRequestAminoMsg {
+  type: "cosmos-sdk/QueryDelegatorValidatorsRequest";
+  value: QueryDelegatorValidatorsRequestAmino;
+}
+/**
+ * QueryDelegatorValidatorsRequest is request type for the
+ * Query/DelegatorValidators RPC method.
+ */
 export interface QueryDelegatorValidatorsRequestSDKType {
   delegator_addr: string;
   pagination?: PageRequestSDKType;
@@ -389,6 +630,20 @@ export interface QueryDelegatorValidatorsResponse {
 export interface QueryDelegatorValidatorsResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryDelegatorValidatorsResponse is response type for the
+ * Query/DelegatorValidators RPC method.
+ */
+export interface QueryDelegatorValidatorsResponseAmino {
+  /** validators defines the the validators' info of a delegator. */
+  validators?: ValidatorAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryDelegatorValidatorsResponseAminoMsg {
+  type: "cosmos-sdk/QueryDelegatorValidatorsResponse";
+  value: QueryDelegatorValidatorsResponseAmino;
 }
 /**
  * QueryDelegatorValidatorsResponse is response type for the
@@ -416,6 +671,20 @@ export interface QueryDelegatorValidatorRequestProtoMsg {
  * QueryDelegatorValidatorRequest is request type for the
  * Query/DelegatorValidator RPC method.
  */
+export interface QueryDelegatorValidatorRequestAmino {
+  /** delegator_addr defines the delegator address to query for. */
+  delegator_addr?: string;
+  /** validator_addr defines the validator address to query for. */
+  validator_addr?: string;
+}
+export interface QueryDelegatorValidatorRequestAminoMsg {
+  type: "cosmos-sdk/QueryDelegatorValidatorRequest";
+  value: QueryDelegatorValidatorRequestAmino;
+}
+/**
+ * QueryDelegatorValidatorRequest is request type for the
+ * Query/DelegatorValidator RPC method.
+ */
 export interface QueryDelegatorValidatorRequestSDKType {
   delegator_addr: string;
   validator_addr: string;
@@ -431,6 +700,18 @@ export interface QueryDelegatorValidatorResponse {
 export interface QueryDelegatorValidatorResponseProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorResponse";
   value: Uint8Array;
+}
+/**
+ * QueryDelegatorValidatorResponse response type for the
+ * Query/DelegatorValidator RPC method.
+ */
+export interface QueryDelegatorValidatorResponseAmino {
+  /** validator defines the the validator info. */
+  validator?: ValidatorAmino;
+}
+export interface QueryDelegatorValidatorResponseAminoMsg {
+  type: "cosmos-sdk/QueryDelegatorValidatorResponse";
+  value: QueryDelegatorValidatorResponseAmino;
 }
 /**
  * QueryDelegatorValidatorResponse response type for the
@@ -455,6 +736,18 @@ export interface QueryHistoricalInfoRequestProtoMsg {
  * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
  * method.
  */
+export interface QueryHistoricalInfoRequestAmino {
+  /** height defines at which height to query the historical info. */
+  height?: string;
+}
+export interface QueryHistoricalInfoRequestAminoMsg {
+  type: "cosmos-sdk/QueryHistoricalInfoRequest";
+  value: QueryHistoricalInfoRequestAmino;
+}
+/**
+ * QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
+ * method.
+ */
 export interface QueryHistoricalInfoRequestSDKType {
   height: bigint;
 }
@@ -474,6 +767,18 @@ export interface QueryHistoricalInfoResponseProtoMsg {
  * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
  * method.
  */
+export interface QueryHistoricalInfoResponseAmino {
+  /** hist defines the historical info at the given height. */
+  hist?: HistoricalInfoAmino;
+}
+export interface QueryHistoricalInfoResponseAminoMsg {
+  type: "cosmos-sdk/QueryHistoricalInfoResponse";
+  value: QueryHistoricalInfoResponseAmino;
+}
+/**
+ * QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
+ * method.
+ */
 export interface QueryHistoricalInfoResponseSDKType {
   hist?: HistoricalInfoSDKType;
 }
@@ -482,6 +787,12 @@ export interface QueryPoolRequest {}
 export interface QueryPoolRequestProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryPoolRequest";
   value: Uint8Array;
+}
+/** QueryPoolRequest is request type for the Query/Pool RPC method. */
+export interface QueryPoolRequestAmino {}
+export interface QueryPoolRequestAminoMsg {
+  type: "cosmos-sdk/QueryPoolRequest";
+  value: QueryPoolRequestAmino;
 }
 /** QueryPoolRequest is request type for the Query/Pool RPC method. */
 export interface QueryPoolRequestSDKType {}
@@ -495,6 +806,15 @@ export interface QueryPoolResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryPoolResponse is response type for the Query/Pool RPC method. */
+export interface QueryPoolResponseAmino {
+  /** pool defines the pool info. */
+  pool?: PoolAmino;
+}
+export interface QueryPoolResponseAminoMsg {
+  type: "cosmos-sdk/QueryPoolResponse";
+  value: QueryPoolResponseAmino;
+}
+/** QueryPoolResponse is response type for the Query/Pool RPC method. */
 export interface QueryPoolResponseSDKType {
   pool: PoolSDKType;
 }
@@ -503,6 +823,12 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/cosmos.staking.v1beta1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "cosmos-sdk/QueryParamsRequest";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -516,6 +842,15 @@ export interface QueryParamsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
+export interface QueryParamsResponseAmino {
+  /** params holds all the parameters of this module. */
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "cosmos-sdk/QueryParamsResponse";
+  value: QueryParamsResponseAmino;
+}
+/** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
 }
@@ -527,6 +862,16 @@ function createBaseQueryValidatorsRequest(): QueryValidatorsRequest {
 }
 export const QueryValidatorsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorsRequest",
+  aminoType: "cosmos-sdk/QueryValidatorsRequest",
+  is(o: any): o is QueryValidatorsRequest {
+    return o && (o.$typeUrl === QueryValidatorsRequest.typeUrl || typeof o.status === "string");
+  },
+  isSDK(o: any): o is QueryValidatorsRequestSDKType {
+    return o && (o.$typeUrl === QueryValidatorsRequest.typeUrl || typeof o.status === "string");
+  },
+  isAmino(o: any): o is QueryValidatorsRequestAmino {
+    return o && (o.$typeUrl === QueryValidatorsRequest.typeUrl || typeof o.status === "string");
+  },
   encode(message: QueryValidatorsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.status !== undefined) {
       writer.uint32(10).string(message.status);
@@ -630,6 +975,9 @@ export const QueryValidatorsRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryValidatorsRequest",
       value: QueryValidatorsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryValidatorsResponse(): QueryValidatorsResponse {
@@ -640,6 +988,16 @@ function createBaseQueryValidatorsResponse(): QueryValidatorsResponse {
 }
 export const QueryValidatorsResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorsResponse",
+  aminoType: "cosmos-sdk/QueryValidatorsResponse",
+  is(o: any): o is QueryValidatorsResponse {
+    return o && (o.$typeUrl === QueryValidatorsResponse.typeUrl || Array.isArray(o.validators) && (!o.validators.length || Validator.is(o.validators[0])));
+  },
+  isSDK(o: any): o is QueryValidatorsResponseSDKType {
+    return o && (o.$typeUrl === QueryValidatorsResponse.typeUrl || Array.isArray(o.validators) && (!o.validators.length || Validator.isSDK(o.validators[0])));
+  },
+  isAmino(o: any): o is QueryValidatorsResponseAmino {
+    return o && (o.$typeUrl === QueryValidatorsResponse.typeUrl || Array.isArray(o.validators) && (!o.validators.length || Validator.isAmino(o.validators[0])));
+  },
   encode(message: QueryValidatorsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -753,6 +1111,10 @@ export const QueryValidatorsResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryValidatorsResponse",
       value: QueryValidatorsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Validator.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryValidatorRequest(): QueryValidatorRequest {
@@ -762,6 +1124,16 @@ function createBaseQueryValidatorRequest(): QueryValidatorRequest {
 }
 export const QueryValidatorRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorRequest",
+  aminoType: "cosmos-sdk/QueryValidatorRequest",
+  is(o: any): o is QueryValidatorRequest {
+    return o && (o.$typeUrl === QueryValidatorRequest.typeUrl || typeof o.validatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryValidatorRequestSDKType {
+    return o && (o.$typeUrl === QueryValidatorRequest.typeUrl || typeof o.validator_addr === "string");
+  },
+  isAmino(o: any): o is QueryValidatorRequestAmino {
+    return o && (o.$typeUrl === QueryValidatorRequest.typeUrl || typeof o.validator_addr === "string");
+  },
   encode(message: QueryValidatorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
@@ -847,7 +1219,8 @@ export const QueryValidatorRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryValidatorRequest",
       value: QueryValidatorRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryValidatorResponse(): QueryValidatorResponse {
   return {
@@ -856,6 +1229,16 @@ function createBaseQueryValidatorResponse(): QueryValidatorResponse {
 }
 export const QueryValidatorResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorResponse",
+  aminoType: "cosmos-sdk/QueryValidatorResponse",
+  is(o: any): o is QueryValidatorResponse {
+    return o && (o.$typeUrl === QueryValidatorResponse.typeUrl || Validator.is(o.validator));
+  },
+  isSDK(o: any): o is QueryValidatorResponseSDKType {
+    return o && (o.$typeUrl === QueryValidatorResponse.typeUrl || Validator.isSDK(o.validator));
+  },
+  isAmino(o: any): o is QueryValidatorResponseAmino {
+    return o && (o.$typeUrl === QueryValidatorResponse.typeUrl || Validator.isAmino(o.validator));
+  },
   encode(message: QueryValidatorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
@@ -943,6 +1326,9 @@ export const QueryValidatorResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryValidatorResponse",
       value: QueryValidatorResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Validator.registerTypeUrl();
   }
 };
 function createBaseQueryValidatorDelegationsRequest(): QueryValidatorDelegationsRequest {
@@ -953,6 +1339,16 @@ function createBaseQueryValidatorDelegationsRequest(): QueryValidatorDelegations
 }
 export const QueryValidatorDelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorDelegationsRequest",
+  aminoType: "cosmos-sdk/QueryValidatorDelegationsRequest",
+  is(o: any): o is QueryValidatorDelegationsRequest {
+    return o && (o.$typeUrl === QueryValidatorDelegationsRequest.typeUrl || typeof o.validatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryValidatorDelegationsRequestSDKType {
+    return o && (o.$typeUrl === QueryValidatorDelegationsRequest.typeUrl || typeof o.validator_addr === "string");
+  },
+  isAmino(o: any): o is QueryValidatorDelegationsRequestAmino {
+    return o && (o.$typeUrl === QueryValidatorDelegationsRequest.typeUrl || typeof o.validator_addr === "string");
+  },
   encode(message: QueryValidatorDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
@@ -1056,6 +1452,9 @@ export const QueryValidatorDelegationsRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryValidatorDelegationsRequest",
       value: QueryValidatorDelegationsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryValidatorDelegationsResponse(): QueryValidatorDelegationsResponse {
@@ -1066,6 +1465,16 @@ function createBaseQueryValidatorDelegationsResponse(): QueryValidatorDelegation
 }
 export const QueryValidatorDelegationsResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorDelegationsResponse",
+  aminoType: "cosmos-sdk/QueryValidatorDelegationsResponse",
+  is(o: any): o is QueryValidatorDelegationsResponse {
+    return o && (o.$typeUrl === QueryValidatorDelegationsResponse.typeUrl || Array.isArray(o.delegationResponses) && (!o.delegationResponses.length || DelegationResponse.is(o.delegationResponses[0])));
+  },
+  isSDK(o: any): o is QueryValidatorDelegationsResponseSDKType {
+    return o && (o.$typeUrl === QueryValidatorDelegationsResponse.typeUrl || Array.isArray(o.delegation_responses) && (!o.delegation_responses.length || DelegationResponse.isSDK(o.delegation_responses[0])));
+  },
+  isAmino(o: any): o is QueryValidatorDelegationsResponseAmino {
+    return o && (o.$typeUrl === QueryValidatorDelegationsResponse.typeUrl || Array.isArray(o.delegation_responses) && (!o.delegation_responses.length || DelegationResponse.isAmino(o.delegation_responses[0])));
+  },
   encode(message: QueryValidatorDelegationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.delegationResponses) {
       DelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1179,6 +1588,10 @@ export const QueryValidatorDelegationsResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryValidatorDelegationsResponse",
       value: QueryValidatorDelegationsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DelegationResponse.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryValidatorUnbondingDelegationsRequest(): QueryValidatorUnbondingDelegationsRequest {
@@ -1189,6 +1602,16 @@ function createBaseQueryValidatorUnbondingDelegationsRequest(): QueryValidatorUn
 }
 export const QueryValidatorUnbondingDelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsRequest",
+  aminoType: "cosmos-sdk/QueryValidatorUnbondingDelegationsRequest",
+  is(o: any): o is QueryValidatorUnbondingDelegationsRequest {
+    return o && (o.$typeUrl === QueryValidatorUnbondingDelegationsRequest.typeUrl || typeof o.validatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryValidatorUnbondingDelegationsRequestSDKType {
+    return o && (o.$typeUrl === QueryValidatorUnbondingDelegationsRequest.typeUrl || typeof o.validator_addr === "string");
+  },
+  isAmino(o: any): o is QueryValidatorUnbondingDelegationsRequestAmino {
+    return o && (o.$typeUrl === QueryValidatorUnbondingDelegationsRequest.typeUrl || typeof o.validator_addr === "string");
+  },
   encode(message: QueryValidatorUnbondingDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
@@ -1292,6 +1715,9 @@ export const QueryValidatorUnbondingDelegationsRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsRequest",
       value: QueryValidatorUnbondingDelegationsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryValidatorUnbondingDelegationsResponse(): QueryValidatorUnbondingDelegationsResponse {
@@ -1302,6 +1728,16 @@ function createBaseQueryValidatorUnbondingDelegationsResponse(): QueryValidatorU
 }
 export const QueryValidatorUnbondingDelegationsResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsResponse",
+  aminoType: "cosmos-sdk/QueryValidatorUnbondingDelegationsResponse",
+  is(o: any): o is QueryValidatorUnbondingDelegationsResponse {
+    return o && (o.$typeUrl === QueryValidatorUnbondingDelegationsResponse.typeUrl || Array.isArray(o.unbondingResponses) && (!o.unbondingResponses.length || UnbondingDelegation.is(o.unbondingResponses[0])));
+  },
+  isSDK(o: any): o is QueryValidatorUnbondingDelegationsResponseSDKType {
+    return o && (o.$typeUrl === QueryValidatorUnbondingDelegationsResponse.typeUrl || Array.isArray(o.unbonding_responses) && (!o.unbonding_responses.length || UnbondingDelegation.isSDK(o.unbonding_responses[0])));
+  },
+  isAmino(o: any): o is QueryValidatorUnbondingDelegationsResponseAmino {
+    return o && (o.$typeUrl === QueryValidatorUnbondingDelegationsResponse.typeUrl || Array.isArray(o.unbonding_responses) && (!o.unbonding_responses.length || UnbondingDelegation.isAmino(o.unbonding_responses[0])));
+  },
   encode(message: QueryValidatorUnbondingDelegationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.unbondingResponses) {
       UnbondingDelegation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1415,6 +1851,10 @@ export const QueryValidatorUnbondingDelegationsResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsResponse",
       value: QueryValidatorUnbondingDelegationsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    UnbondingDelegation.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryDelegationRequest(): QueryDelegationRequest {
@@ -1425,6 +1865,16 @@ function createBaseQueryDelegationRequest(): QueryDelegationRequest {
 }
 export const QueryDelegationRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegationRequest",
+  aminoType: "cosmos-sdk/QueryDelegationRequest",
+  is(o: any): o is QueryDelegationRequest {
+    return o && (o.$typeUrl === QueryDelegationRequest.typeUrl || typeof o.delegatorAddr === "string" && typeof o.validatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryDelegationRequestSDKType {
+    return o && (o.$typeUrl === QueryDelegationRequest.typeUrl || typeof o.delegator_addr === "string" && typeof o.validator_addr === "string");
+  },
+  isAmino(o: any): o is QueryDelegationRequestAmino {
+    return o && (o.$typeUrl === QueryDelegationRequest.typeUrl || typeof o.delegator_addr === "string" && typeof o.validator_addr === "string");
+  },
   encode(message: QueryDelegationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1526,7 +1976,8 @@ export const QueryDelegationRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegationRequest",
       value: QueryDelegationRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryDelegationResponse(): QueryDelegationResponse {
   return {
@@ -1535,6 +1986,16 @@ function createBaseQueryDelegationResponse(): QueryDelegationResponse {
 }
 export const QueryDelegationResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegationResponse",
+  aminoType: "cosmos-sdk/QueryDelegationResponse",
+  is(o: any): o is QueryDelegationResponse {
+    return o && o.$typeUrl === QueryDelegationResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryDelegationResponseSDKType {
+    return o && o.$typeUrl === QueryDelegationResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryDelegationResponseAmino {
+    return o && o.$typeUrl === QueryDelegationResponse.typeUrl;
+  },
   encode(message: QueryDelegationResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegationResponse !== undefined) {
       DelegationResponse.encode(message.delegationResponse, writer.uint32(10).fork()).ldelim();
@@ -1622,6 +2083,9 @@ export const QueryDelegationResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegationResponse",
       value: QueryDelegationResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DelegationResponse.registerTypeUrl();
   }
 };
 function createBaseQueryUnbondingDelegationRequest(): QueryUnbondingDelegationRequest {
@@ -1632,6 +2096,16 @@ function createBaseQueryUnbondingDelegationRequest(): QueryUnbondingDelegationRe
 }
 export const QueryUnbondingDelegationRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryUnbondingDelegationRequest",
+  aminoType: "cosmos-sdk/QueryUnbondingDelegationRequest",
+  is(o: any): o is QueryUnbondingDelegationRequest {
+    return o && (o.$typeUrl === QueryUnbondingDelegationRequest.typeUrl || typeof o.delegatorAddr === "string" && typeof o.validatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryUnbondingDelegationRequestSDKType {
+    return o && (o.$typeUrl === QueryUnbondingDelegationRequest.typeUrl || typeof o.delegator_addr === "string" && typeof o.validator_addr === "string");
+  },
+  isAmino(o: any): o is QueryUnbondingDelegationRequestAmino {
+    return o && (o.$typeUrl === QueryUnbondingDelegationRequest.typeUrl || typeof o.delegator_addr === "string" && typeof o.validator_addr === "string");
+  },
   encode(message: QueryUnbondingDelegationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1733,7 +2207,8 @@ export const QueryUnbondingDelegationRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryUnbondingDelegationRequest",
       value: QueryUnbondingDelegationRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryUnbondingDelegationResponse(): QueryUnbondingDelegationResponse {
   return {
@@ -1742,6 +2217,16 @@ function createBaseQueryUnbondingDelegationResponse(): QueryUnbondingDelegationR
 }
 export const QueryUnbondingDelegationResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryUnbondingDelegationResponse",
+  aminoType: "cosmos-sdk/QueryUnbondingDelegationResponse",
+  is(o: any): o is QueryUnbondingDelegationResponse {
+    return o && (o.$typeUrl === QueryUnbondingDelegationResponse.typeUrl || UnbondingDelegation.is(o.unbond));
+  },
+  isSDK(o: any): o is QueryUnbondingDelegationResponseSDKType {
+    return o && (o.$typeUrl === QueryUnbondingDelegationResponse.typeUrl || UnbondingDelegation.isSDK(o.unbond));
+  },
+  isAmino(o: any): o is QueryUnbondingDelegationResponseAmino {
+    return o && (o.$typeUrl === QueryUnbondingDelegationResponse.typeUrl || UnbondingDelegation.isAmino(o.unbond));
+  },
   encode(message: QueryUnbondingDelegationResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.unbond !== undefined) {
       UnbondingDelegation.encode(message.unbond, writer.uint32(10).fork()).ldelim();
@@ -1829,6 +2314,9 @@ export const QueryUnbondingDelegationResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryUnbondingDelegationResponse",
       value: QueryUnbondingDelegationResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    UnbondingDelegation.registerTypeUrl();
   }
 };
 function createBaseQueryDelegatorDelegationsRequest(): QueryDelegatorDelegationsRequest {
@@ -1839,6 +2327,16 @@ function createBaseQueryDelegatorDelegationsRequest(): QueryDelegatorDelegations
 }
 export const QueryDelegatorDelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorDelegationsRequest",
+  aminoType: "cosmos-sdk/QueryDelegatorDelegationsRequest",
+  is(o: any): o is QueryDelegatorDelegationsRequest {
+    return o && (o.$typeUrl === QueryDelegatorDelegationsRequest.typeUrl || typeof o.delegatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryDelegatorDelegationsRequestSDKType {
+    return o && (o.$typeUrl === QueryDelegatorDelegationsRequest.typeUrl || typeof o.delegator_addr === "string");
+  },
+  isAmino(o: any): o is QueryDelegatorDelegationsRequestAmino {
+    return o && (o.$typeUrl === QueryDelegatorDelegationsRequest.typeUrl || typeof o.delegator_addr === "string");
+  },
   encode(message: QueryDelegatorDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
@@ -1942,6 +2440,9 @@ export const QueryDelegatorDelegationsRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorDelegationsRequest",
       value: QueryDelegatorDelegationsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryDelegatorDelegationsResponse(): QueryDelegatorDelegationsResponse {
@@ -1952,6 +2453,16 @@ function createBaseQueryDelegatorDelegationsResponse(): QueryDelegatorDelegation
 }
 export const QueryDelegatorDelegationsResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorDelegationsResponse",
+  aminoType: "cosmos-sdk/QueryDelegatorDelegationsResponse",
+  is(o: any): o is QueryDelegatorDelegationsResponse {
+    return o && (o.$typeUrl === QueryDelegatorDelegationsResponse.typeUrl || Array.isArray(o.delegationResponses) && (!o.delegationResponses.length || DelegationResponse.is(o.delegationResponses[0])));
+  },
+  isSDK(o: any): o is QueryDelegatorDelegationsResponseSDKType {
+    return o && (o.$typeUrl === QueryDelegatorDelegationsResponse.typeUrl || Array.isArray(o.delegation_responses) && (!o.delegation_responses.length || DelegationResponse.isSDK(o.delegation_responses[0])));
+  },
+  isAmino(o: any): o is QueryDelegatorDelegationsResponseAmino {
+    return o && (o.$typeUrl === QueryDelegatorDelegationsResponse.typeUrl || Array.isArray(o.delegation_responses) && (!o.delegation_responses.length || DelegationResponse.isAmino(o.delegation_responses[0])));
+  },
   encode(message: QueryDelegatorDelegationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.delegationResponses) {
       DelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2065,6 +2576,10 @@ export const QueryDelegatorDelegationsResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorDelegationsResponse",
       value: QueryDelegatorDelegationsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DelegationResponse.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryDelegatorUnbondingDelegationsRequest(): QueryDelegatorUnbondingDelegationsRequest {
@@ -2075,6 +2590,16 @@ function createBaseQueryDelegatorUnbondingDelegationsRequest(): QueryDelegatorUn
 }
 export const QueryDelegatorUnbondingDelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsRequest",
+  aminoType: "cosmos-sdk/QueryDelegatorUnbondingDelegationsRequest",
+  is(o: any): o is QueryDelegatorUnbondingDelegationsRequest {
+    return o && (o.$typeUrl === QueryDelegatorUnbondingDelegationsRequest.typeUrl || typeof o.delegatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryDelegatorUnbondingDelegationsRequestSDKType {
+    return o && (o.$typeUrl === QueryDelegatorUnbondingDelegationsRequest.typeUrl || typeof o.delegator_addr === "string");
+  },
+  isAmino(o: any): o is QueryDelegatorUnbondingDelegationsRequestAmino {
+    return o && (o.$typeUrl === QueryDelegatorUnbondingDelegationsRequest.typeUrl || typeof o.delegator_addr === "string");
+  },
   encode(message: QueryDelegatorUnbondingDelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
@@ -2178,6 +2703,9 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsRequest",
       value: QueryDelegatorUnbondingDelegationsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryDelegatorUnbondingDelegationsResponse(): QueryDelegatorUnbondingDelegationsResponse {
@@ -2188,6 +2716,16 @@ function createBaseQueryDelegatorUnbondingDelegationsResponse(): QueryDelegatorU
 }
 export const QueryDelegatorUnbondingDelegationsResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsResponse",
+  aminoType: "cosmos-sdk/QueryDelegatorUnbondingDelegationsResponse",
+  is(o: any): o is QueryDelegatorUnbondingDelegationsResponse {
+    return o && (o.$typeUrl === QueryDelegatorUnbondingDelegationsResponse.typeUrl || Array.isArray(o.unbondingResponses) && (!o.unbondingResponses.length || UnbondingDelegation.is(o.unbondingResponses[0])));
+  },
+  isSDK(o: any): o is QueryDelegatorUnbondingDelegationsResponseSDKType {
+    return o && (o.$typeUrl === QueryDelegatorUnbondingDelegationsResponse.typeUrl || Array.isArray(o.unbonding_responses) && (!o.unbonding_responses.length || UnbondingDelegation.isSDK(o.unbonding_responses[0])));
+  },
+  isAmino(o: any): o is QueryDelegatorUnbondingDelegationsResponseAmino {
+    return o && (o.$typeUrl === QueryDelegatorUnbondingDelegationsResponse.typeUrl || Array.isArray(o.unbonding_responses) && (!o.unbonding_responses.length || UnbondingDelegation.isAmino(o.unbonding_responses[0])));
+  },
   encode(message: QueryDelegatorUnbondingDelegationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.unbondingResponses) {
       UnbondingDelegation.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2301,6 +2839,10 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsResponse",
       value: QueryDelegatorUnbondingDelegationsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    UnbondingDelegation.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryRedelegationsRequest(): QueryRedelegationsRequest {
@@ -2313,6 +2855,16 @@ function createBaseQueryRedelegationsRequest(): QueryRedelegationsRequest {
 }
 export const QueryRedelegationsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryRedelegationsRequest",
+  aminoType: "cosmos-sdk/QueryRedelegationsRequest",
+  is(o: any): o is QueryRedelegationsRequest {
+    return o && (o.$typeUrl === QueryRedelegationsRequest.typeUrl || typeof o.delegatorAddr === "string" && typeof o.srcValidatorAddr === "string" && typeof o.dstValidatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryRedelegationsRequestSDKType {
+    return o && (o.$typeUrl === QueryRedelegationsRequest.typeUrl || typeof o.delegator_addr === "string" && typeof o.src_validator_addr === "string" && typeof o.dst_validator_addr === "string");
+  },
+  isAmino(o: any): o is QueryRedelegationsRequestAmino {
+    return o && (o.$typeUrl === QueryRedelegationsRequest.typeUrl || typeof o.delegator_addr === "string" && typeof o.src_validator_addr === "string" && typeof o.dst_validator_addr === "string");
+  },
   encode(message: QueryRedelegationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
@@ -2448,6 +3000,9 @@ export const QueryRedelegationsRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryRedelegationsRequest",
       value: QueryRedelegationsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryRedelegationsResponse(): QueryRedelegationsResponse {
@@ -2458,6 +3013,16 @@ function createBaseQueryRedelegationsResponse(): QueryRedelegationsResponse {
 }
 export const QueryRedelegationsResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryRedelegationsResponse",
+  aminoType: "cosmos-sdk/QueryRedelegationsResponse",
+  is(o: any): o is QueryRedelegationsResponse {
+    return o && (o.$typeUrl === QueryRedelegationsResponse.typeUrl || Array.isArray(o.redelegationResponses) && (!o.redelegationResponses.length || RedelegationResponse.is(o.redelegationResponses[0])));
+  },
+  isSDK(o: any): o is QueryRedelegationsResponseSDKType {
+    return o && (o.$typeUrl === QueryRedelegationsResponse.typeUrl || Array.isArray(o.redelegation_responses) && (!o.redelegation_responses.length || RedelegationResponse.isSDK(o.redelegation_responses[0])));
+  },
+  isAmino(o: any): o is QueryRedelegationsResponseAmino {
+    return o && (o.$typeUrl === QueryRedelegationsResponse.typeUrl || Array.isArray(o.redelegation_responses) && (!o.redelegation_responses.length || RedelegationResponse.isAmino(o.redelegation_responses[0])));
+  },
   encode(message: QueryRedelegationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.redelegationResponses) {
       RedelegationResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2571,6 +3136,10 @@ export const QueryRedelegationsResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryRedelegationsResponse",
       value: QueryRedelegationsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    RedelegationResponse.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRequest {
@@ -2581,6 +3150,16 @@ function createBaseQueryDelegatorValidatorsRequest(): QueryDelegatorValidatorsRe
 }
 export const QueryDelegatorValidatorsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorsRequest",
+  aminoType: "cosmos-sdk/QueryDelegatorValidatorsRequest",
+  is(o: any): o is QueryDelegatorValidatorsRequest {
+    return o && (o.$typeUrl === QueryDelegatorValidatorsRequest.typeUrl || typeof o.delegatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryDelegatorValidatorsRequestSDKType {
+    return o && (o.$typeUrl === QueryDelegatorValidatorsRequest.typeUrl || typeof o.delegator_addr === "string");
+  },
+  isAmino(o: any): o is QueryDelegatorValidatorsRequestAmino {
+    return o && (o.$typeUrl === QueryDelegatorValidatorsRequest.typeUrl || typeof o.delegator_addr === "string");
+  },
   encode(message: QueryDelegatorValidatorsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
@@ -2684,6 +3263,9 @@ export const QueryDelegatorValidatorsRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorsRequest",
       value: QueryDelegatorValidatorsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsResponse {
@@ -2694,6 +3276,16 @@ function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsR
 }
 export const QueryDelegatorValidatorsResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorsResponse",
+  aminoType: "cosmos-sdk/QueryDelegatorValidatorsResponse",
+  is(o: any): o is QueryDelegatorValidatorsResponse {
+    return o && (o.$typeUrl === QueryDelegatorValidatorsResponse.typeUrl || Array.isArray(o.validators) && (!o.validators.length || Validator.is(o.validators[0])));
+  },
+  isSDK(o: any): o is QueryDelegatorValidatorsResponseSDKType {
+    return o && (o.$typeUrl === QueryDelegatorValidatorsResponse.typeUrl || Array.isArray(o.validators) && (!o.validators.length || Validator.isSDK(o.validators[0])));
+  },
+  isAmino(o: any): o is QueryDelegatorValidatorsResponseAmino {
+    return o && (o.$typeUrl === QueryDelegatorValidatorsResponse.typeUrl || Array.isArray(o.validators) && (!o.validators.length || Validator.isAmino(o.validators[0])));
+  },
   encode(message: QueryDelegatorValidatorsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2807,6 +3399,10 @@ export const QueryDelegatorValidatorsResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorsResponse",
       value: QueryDelegatorValidatorsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Validator.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryDelegatorValidatorRequest(): QueryDelegatorValidatorRequest {
@@ -2817,6 +3413,16 @@ function createBaseQueryDelegatorValidatorRequest(): QueryDelegatorValidatorRequ
 }
 export const QueryDelegatorValidatorRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorRequest",
+  aminoType: "cosmos-sdk/QueryDelegatorValidatorRequest",
+  is(o: any): o is QueryDelegatorValidatorRequest {
+    return o && (o.$typeUrl === QueryDelegatorValidatorRequest.typeUrl || typeof o.delegatorAddr === "string" && typeof o.validatorAddr === "string");
+  },
+  isSDK(o: any): o is QueryDelegatorValidatorRequestSDKType {
+    return o && (o.$typeUrl === QueryDelegatorValidatorRequest.typeUrl || typeof o.delegator_addr === "string" && typeof o.validator_addr === "string");
+  },
+  isAmino(o: any): o is QueryDelegatorValidatorRequestAmino {
+    return o && (o.$typeUrl === QueryDelegatorValidatorRequest.typeUrl || typeof o.delegator_addr === "string" && typeof o.validator_addr === "string");
+  },
   encode(message: QueryDelegatorValidatorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddr !== undefined) {
       writer.uint32(10).string(message.delegatorAddr);
@@ -2918,7 +3524,8 @@ export const QueryDelegatorValidatorRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorRequest",
       value: QueryDelegatorValidatorRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryDelegatorValidatorResponse(): QueryDelegatorValidatorResponse {
   return {
@@ -2927,6 +3534,16 @@ function createBaseQueryDelegatorValidatorResponse(): QueryDelegatorValidatorRes
 }
 export const QueryDelegatorValidatorResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorResponse",
+  aminoType: "cosmos-sdk/QueryDelegatorValidatorResponse",
+  is(o: any): o is QueryDelegatorValidatorResponse {
+    return o && (o.$typeUrl === QueryDelegatorValidatorResponse.typeUrl || Validator.is(o.validator));
+  },
+  isSDK(o: any): o is QueryDelegatorValidatorResponseSDKType {
+    return o && (o.$typeUrl === QueryDelegatorValidatorResponse.typeUrl || Validator.isSDK(o.validator));
+  },
+  isAmino(o: any): o is QueryDelegatorValidatorResponseAmino {
+    return o && (o.$typeUrl === QueryDelegatorValidatorResponse.typeUrl || Validator.isAmino(o.validator));
+  },
   encode(message: QueryDelegatorValidatorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
@@ -3014,6 +3631,9 @@ export const QueryDelegatorValidatorResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryDelegatorValidatorResponse",
       value: QueryDelegatorValidatorResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Validator.registerTypeUrl();
   }
 };
 function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
@@ -3023,6 +3643,16 @@ function createBaseQueryHistoricalInfoRequest(): QueryHistoricalInfoRequest {
 }
 export const QueryHistoricalInfoRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryHistoricalInfoRequest",
+  aminoType: "cosmos-sdk/QueryHistoricalInfoRequest",
+  is(o: any): o is QueryHistoricalInfoRequest {
+    return o && (o.$typeUrl === QueryHistoricalInfoRequest.typeUrl || typeof o.height === "bigint");
+  },
+  isSDK(o: any): o is QueryHistoricalInfoRequestSDKType {
+    return o && (o.$typeUrl === QueryHistoricalInfoRequest.typeUrl || typeof o.height === "bigint");
+  },
+  isAmino(o: any): o is QueryHistoricalInfoRequestAmino {
+    return o && (o.$typeUrl === QueryHistoricalInfoRequest.typeUrl || typeof o.height === "bigint");
+  },
   encode(message: QueryHistoricalInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
@@ -3110,7 +3740,8 @@ export const QueryHistoricalInfoRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryHistoricalInfoRequest",
       value: QueryHistoricalInfoRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryHistoricalInfoResponse(): QueryHistoricalInfoResponse {
   return {
@@ -3119,6 +3750,16 @@ function createBaseQueryHistoricalInfoResponse(): QueryHistoricalInfoResponse {
 }
 export const QueryHistoricalInfoResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryHistoricalInfoResponse",
+  aminoType: "cosmos-sdk/QueryHistoricalInfoResponse",
+  is(o: any): o is QueryHistoricalInfoResponse {
+    return o && o.$typeUrl === QueryHistoricalInfoResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryHistoricalInfoResponseSDKType {
+    return o && o.$typeUrl === QueryHistoricalInfoResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryHistoricalInfoResponseAmino {
+    return o && o.$typeUrl === QueryHistoricalInfoResponse.typeUrl;
+  },
   encode(message: QueryHistoricalInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hist !== undefined) {
       HistoricalInfo.encode(message.hist, writer.uint32(10).fork()).ldelim();
@@ -3206,6 +3847,9 @@ export const QueryHistoricalInfoResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryHistoricalInfoResponse",
       value: QueryHistoricalInfoResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    HistoricalInfo.registerTypeUrl();
   }
 };
 function createBaseQueryPoolRequest(): QueryPoolRequest {
@@ -3213,6 +3857,16 @@ function createBaseQueryPoolRequest(): QueryPoolRequest {
 }
 export const QueryPoolRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryPoolRequest",
+  aminoType: "cosmos-sdk/QueryPoolRequest",
+  is(o: any): o is QueryPoolRequest {
+    return o && o.$typeUrl === QueryPoolRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryPoolRequestSDKType {
+    return o && o.$typeUrl === QueryPoolRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryPoolRequestAmino {
+    return o && o.$typeUrl === QueryPoolRequest.typeUrl;
+  },
   encode(_: QueryPoolRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -3280,7 +3934,8 @@ export const QueryPoolRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryPoolRequest",
       value: QueryPoolRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPoolResponse(): QueryPoolResponse {
   return {
@@ -3289,6 +3944,16 @@ function createBaseQueryPoolResponse(): QueryPoolResponse {
 }
 export const QueryPoolResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryPoolResponse",
+  aminoType: "cosmos-sdk/QueryPoolResponse",
+  is(o: any): o is QueryPoolResponse {
+    return o && (o.$typeUrl === QueryPoolResponse.typeUrl || Pool.is(o.pool));
+  },
+  isSDK(o: any): o is QueryPoolResponseSDKType {
+    return o && (o.$typeUrl === QueryPoolResponse.typeUrl || Pool.isSDK(o.pool));
+  },
+  isAmino(o: any): o is QueryPoolResponseAmino {
+    return o && (o.$typeUrl === QueryPoolResponse.typeUrl || Pool.isAmino(o.pool));
+  },
   encode(message: QueryPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== undefined) {
       Pool.encode(message.pool, writer.uint32(10).fork()).ldelim();
@@ -3376,6 +4041,9 @@ export const QueryPoolResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryPoolResponse",
       value: QueryPoolResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Pool.registerTypeUrl();
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -3383,6 +4051,16 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/cosmos.staking.v1beta1.QueryParamsRequest",
+  aminoType: "cosmos-sdk/QueryParamsRequest",
+  is(o: any): o is QueryParamsRequest {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsRequestSDKType {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsRequestAmino {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -3450,7 +4128,8 @@ export const QueryParamsRequest = {
       typeUrl: "/cosmos.staking.v1beta1.QueryParamsRequest",
       value: QueryParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -3459,6 +4138,16 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/cosmos.staking.v1beta1.QueryParamsResponse",
+  aminoType: "cosmos-sdk/QueryParamsResponse",
+  is(o: any): o is QueryParamsResponse {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.is(o.params));
+  },
+  isSDK(o: any): o is QueryParamsResponseSDKType {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is QueryParamsResponseAmino {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isAmino(o.params));
+  },
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -3546,5 +4235,8 @@ export const QueryParamsResponse = {
       typeUrl: "/cosmos.staking.v1beta1.QueryParamsResponse",
       value: QueryParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };

@@ -1,6 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderSDKType } from "./provider";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.provider.v1beta2";
@@ -11,6 +12,14 @@ export interface QueryProvidersRequest {
 export interface QueryProvidersRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest";
   value: Uint8Array;
+}
+/** QueryProvidersRequest is request type for the Query/Providers RPC method */
+export interface QueryProvidersRequestAmino {
+  pagination?: PageRequestAmino;
+}
+export interface QueryProvidersRequestAminoMsg {
+  type: "akash/provider/v1beta2/query-providers-request";
+  value: QueryProvidersRequestAmino;
 }
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequestSDKType {
@@ -26,6 +35,15 @@ export interface QueryProvidersResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
+export interface QueryProvidersResponseAmino {
+  providers?: ProviderAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryProvidersResponseAminoMsg {
+  type: "akash/provider/v1beta2/query-providers-response";
+  value: QueryProvidersResponseAmino;
+}
+/** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseSDKType {
   providers: ProviderSDKType[];
   pagination?: PageResponseSDKType;
@@ -37,6 +55,14 @@ export interface QueryProviderRequest {
 export interface QueryProviderRequestProtoMsg {
   typeUrl: "/akash.provider.v1beta2.QueryProviderRequest";
   value: Uint8Array;
+}
+/** QueryProviderRequest is request type for the Query/Provider RPC method */
+export interface QueryProviderRequestAmino {
+  owner?: string;
+}
+export interface QueryProviderRequestAminoMsg {
+  type: "akash/provider/v1beta2/query-provider-request";
+  value: QueryProviderRequestAmino;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestSDKType {
@@ -51,6 +77,14 @@ export interface QueryProviderResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
+export interface QueryProviderResponseAmino {
+  provider?: ProviderAmino;
+}
+export interface QueryProviderResponseAminoMsg {
+  type: "akash/provider/v1beta2/query-provider-response";
+  value: QueryProviderResponseAmino;
+}
+/** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponseSDKType {
   provider: ProviderSDKType;
 }
@@ -61,6 +95,16 @@ function createBaseQueryProvidersRequest(): QueryProvidersRequest {
 }
 export const QueryProvidersRequest = {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest",
+  aminoType: "akash/provider/v1beta2/query-providers-request",
+  is(o: any): o is QueryProvidersRequest {
+    return o && o.$typeUrl === QueryProvidersRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryProvidersRequestSDKType {
+    return o && o.$typeUrl === QueryProvidersRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryProvidersRequestAmino {
+    return o && o.$typeUrl === QueryProvidersRequest.typeUrl;
+  },
   encode(message: QueryProvidersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -148,6 +192,9 @@ export const QueryProvidersRequest = {
       typeUrl: "/akash.provider.v1beta2.QueryProvidersRequest",
       value: QueryProvidersRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
@@ -158,6 +205,16 @@ function createBaseQueryProvidersResponse(): QueryProvidersResponse {
 }
 export const QueryProvidersResponse = {
   typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse",
+  aminoType: "akash/provider/v1beta2/query-providers-response",
+  is(o: any): o is QueryProvidersResponse {
+    return o && (o.$typeUrl === QueryProvidersResponse.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.is(o.providers[0])));
+  },
+  isSDK(o: any): o is QueryProvidersResponseSDKType {
+    return o && (o.$typeUrl === QueryProvidersResponse.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.isSDK(o.providers[0])));
+  },
+  isAmino(o: any): o is QueryProvidersResponseAmino {
+    return o && (o.$typeUrl === QueryProvidersResponse.typeUrl || Array.isArray(o.providers) && (!o.providers.length || Provider.isAmino(o.providers[0])));
+  },
   encode(message: QueryProvidersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.providers) {
       Provider.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -271,6 +328,10 @@ export const QueryProvidersResponse = {
       typeUrl: "/akash.provider.v1beta2.QueryProvidersResponse",
       value: QueryProvidersResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Provider.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryProviderRequest(): QueryProviderRequest {
@@ -280,6 +341,16 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
 }
 export const QueryProviderRequest = {
   typeUrl: "/akash.provider.v1beta2.QueryProviderRequest",
+  aminoType: "akash/provider/v1beta2/query-provider-request",
+  is(o: any): o is QueryProviderRequest {
+    return o && (o.$typeUrl === QueryProviderRequest.typeUrl || typeof o.owner === "string");
+  },
+  isSDK(o: any): o is QueryProviderRequestSDKType {
+    return o && (o.$typeUrl === QueryProviderRequest.typeUrl || typeof o.owner === "string");
+  },
+  isAmino(o: any): o is QueryProviderRequestAmino {
+    return o && (o.$typeUrl === QueryProviderRequest.typeUrl || typeof o.owner === "string");
+  },
   encode(message: QueryProviderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -365,7 +436,8 @@ export const QueryProviderRequest = {
       typeUrl: "/akash.provider.v1beta2.QueryProviderRequest",
       value: QueryProviderRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryProviderResponse(): QueryProviderResponse {
   return {
@@ -374,6 +446,16 @@ function createBaseQueryProviderResponse(): QueryProviderResponse {
 }
 export const QueryProviderResponse = {
   typeUrl: "/akash.provider.v1beta2.QueryProviderResponse",
+  aminoType: "akash/provider/v1beta2/query-provider-response",
+  is(o: any): o is QueryProviderResponse {
+    return o && (o.$typeUrl === QueryProviderResponse.typeUrl || Provider.is(o.provider));
+  },
+  isSDK(o: any): o is QueryProviderResponseSDKType {
+    return o && (o.$typeUrl === QueryProviderResponse.typeUrl || Provider.isSDK(o.provider));
+  },
+  isAmino(o: any): o is QueryProviderResponseAmino {
+    return o && (o.$typeUrl === QueryProviderResponse.typeUrl || Provider.isAmino(o.provider));
+  },
   encode(message: QueryProviderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.provider !== undefined) {
       Provider.encode(message.provider, writer.uint32(10).fork()).ldelim();
@@ -461,5 +543,8 @@ export const QueryProviderResponse = {
       typeUrl: "/akash.provider.v1beta2.QueryProviderResponse",
       value: QueryProviderResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Provider.registerTypeUrl();
   }
 };

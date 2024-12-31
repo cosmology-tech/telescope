@@ -1,9 +1,10 @@
-import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID, GroupIDSDKType } from "./groupid";
-import { Group, GroupSDKType } from "./group";
-import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
+import { DeploymentFilters, DeploymentFiltersAmino, DeploymentFiltersSDKType, DeploymentID, DeploymentIDAmino, DeploymentIDSDKType, Deployment, DeploymentAmino, DeploymentSDKType } from "./deployment";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
+import { Group, GroupAmino, GroupSDKType } from "./group";
+import { Account, AccountAmino, AccountSDKType } from "../../escrow/v1beta2/types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -15,6 +16,15 @@ export interface QueryDeploymentsRequest {
 export interface QueryDeploymentsRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
   value: Uint8Array;
+}
+/** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+export interface QueryDeploymentsRequestAmino {
+  filters?: DeploymentFiltersAmino;
+  pagination?: PageRequestAmino;
+}
+export interface QueryDeploymentsRequestAminoMsg {
+  type: "akash/deployment/v1beta2/query-deployments-request";
+  value: QueryDeploymentsRequestAmino;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
@@ -31,6 +41,15 @@ export interface QueryDeploymentsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
+export interface QueryDeploymentsResponseAmino {
+  deployments?: QueryDeploymentResponseAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryDeploymentsResponseAminoMsg {
+  type: "akash/deployment/v1beta2/query-deployments-response";
+  value: QueryDeploymentsResponseAmino;
+}
+/** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
   pagination?: PageResponseSDKType;
@@ -42,6 +61,14 @@ export interface QueryDeploymentRequest {
 export interface QueryDeploymentRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest";
   value: Uint8Array;
+}
+/** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
+export interface QueryDeploymentRequestAmino {
+  id?: DeploymentIDAmino;
+}
+export interface QueryDeploymentRequestAminoMsg {
+  type: "akash/deployment/v1beta2/query-deployment-request";
+  value: QueryDeploymentRequestAmino;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
@@ -58,6 +85,16 @@ export interface QueryDeploymentResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
+export interface QueryDeploymentResponseAmino {
+  deployment: DeploymentAmino;
+  groups: GroupAmino[];
+  escrow_account?: AccountAmino;
+}
+export interface QueryDeploymentResponseAminoMsg {
+  type: "akash/deployment/v1beta2/query-deployment-response";
+  value: QueryDeploymentResponseAmino;
+}
+/** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
   deployment: DeploymentSDKType;
   groups: GroupSDKType[];
@@ -72,6 +109,14 @@ export interface QueryGroupRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
+export interface QueryGroupRequestAmino {
+  id?: GroupIDAmino;
+}
+export interface QueryGroupRequestAminoMsg {
+  type: "akash/deployment/v1beta2/query-group-request";
+  value: QueryGroupRequestAmino;
+}
+/** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
   id: GroupIDSDKType;
 }
@@ -82,6 +127,14 @@ export interface QueryGroupResponse {
 export interface QueryGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse";
   value: Uint8Array;
+}
+/** QueryGroupResponse is response type for the Query/Group RPC method */
+export interface QueryGroupResponseAmino {
+  group?: GroupAmino;
+}
+export interface QueryGroupResponseAminoMsg {
+  type: "akash/deployment/v1beta2/query-group-response";
+  value: QueryGroupResponseAmino;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
@@ -95,6 +148,16 @@ function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
 }
 export const QueryDeploymentsRequest = {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest",
+  aminoType: "akash/deployment/v1beta2/query-deployments-request",
+  is(o: any): o is QueryDeploymentsRequest {
+    return o && (o.$typeUrl === QueryDeploymentsRequest.typeUrl || DeploymentFilters.is(o.filters));
+  },
+  isSDK(o: any): o is QueryDeploymentsRequestSDKType {
+    return o && (o.$typeUrl === QueryDeploymentsRequest.typeUrl || DeploymentFilters.isSDK(o.filters));
+  },
+  isAmino(o: any): o is QueryDeploymentsRequestAmino {
+    return o && (o.$typeUrl === QueryDeploymentsRequest.typeUrl || DeploymentFilters.isAmino(o.filters));
+  },
   encode(message: QueryDeploymentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filters !== undefined) {
       DeploymentFilters.encode(message.filters, writer.uint32(10).fork()).ldelim();
@@ -200,6 +263,10 @@ export const QueryDeploymentsRequest = {
       typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest",
       value: QueryDeploymentsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeploymentFilters.registerTypeUrl();
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
@@ -210,6 +277,16 @@ function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
 }
 export const QueryDeploymentsResponse = {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse",
+  aminoType: "akash/deployment/v1beta2/query-deployments-response",
+  is(o: any): o is QueryDeploymentsResponse {
+    return o && (o.$typeUrl === QueryDeploymentsResponse.typeUrl || Array.isArray(o.deployments) && (!o.deployments.length || QueryDeploymentResponse.is(o.deployments[0])));
+  },
+  isSDK(o: any): o is QueryDeploymentsResponseSDKType {
+    return o && (o.$typeUrl === QueryDeploymentsResponse.typeUrl || Array.isArray(o.deployments) && (!o.deployments.length || QueryDeploymentResponse.isSDK(o.deployments[0])));
+  },
+  isAmino(o: any): o is QueryDeploymentsResponseAmino {
+    return o && (o.$typeUrl === QueryDeploymentsResponse.typeUrl || Array.isArray(o.deployments) && (!o.deployments.length || QueryDeploymentResponse.isAmino(o.deployments[0])));
+  },
   encode(message: QueryDeploymentsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.deployments) {
       QueryDeploymentResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -323,6 +400,10 @@ export const QueryDeploymentsResponse = {
       typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse",
       value: QueryDeploymentsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    QueryDeploymentResponse.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryDeploymentRequest(): QueryDeploymentRequest {
@@ -332,6 +413,16 @@ function createBaseQueryDeploymentRequest(): QueryDeploymentRequest {
 }
 export const QueryDeploymentRequest = {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest",
+  aminoType: "akash/deployment/v1beta2/query-deployment-request",
+  is(o: any): o is QueryDeploymentRequest {
+    return o && (o.$typeUrl === QueryDeploymentRequest.typeUrl || DeploymentID.is(o.id));
+  },
+  isSDK(o: any): o is QueryDeploymentRequestSDKType {
+    return o && (o.$typeUrl === QueryDeploymentRequest.typeUrl || DeploymentID.isSDK(o.id));
+  },
+  isAmino(o: any): o is QueryDeploymentRequestAmino {
+    return o && (o.$typeUrl === QueryDeploymentRequest.typeUrl || DeploymentID.isAmino(o.id));
+  },
   encode(message: QueryDeploymentRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       DeploymentID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -419,6 +510,9 @@ export const QueryDeploymentRequest = {
       typeUrl: "/akash.deployment.v1beta2.QueryDeploymentRequest",
       value: QueryDeploymentRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DeploymentID.registerTypeUrl();
   }
 };
 function createBaseQueryDeploymentResponse(): QueryDeploymentResponse {
@@ -430,6 +524,16 @@ function createBaseQueryDeploymentResponse(): QueryDeploymentResponse {
 }
 export const QueryDeploymentResponse = {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentResponse",
+  aminoType: "akash/deployment/v1beta2/query-deployment-response",
+  is(o: any): o is QueryDeploymentResponse {
+    return o && (o.$typeUrl === QueryDeploymentResponse.typeUrl || Deployment.is(o.deployment) && Array.isArray(o.groups) && (!o.groups.length || Group.is(o.groups[0])) && Account.is(o.escrowAccount));
+  },
+  isSDK(o: any): o is QueryDeploymentResponseSDKType {
+    return o && (o.$typeUrl === QueryDeploymentResponse.typeUrl || Deployment.isSDK(o.deployment) && Array.isArray(o.groups) && (!o.groups.length || Group.isSDK(o.groups[0])) && Account.isSDK(o.escrow_account));
+  },
+  isAmino(o: any): o is QueryDeploymentResponseAmino {
+    return o && (o.$typeUrl === QueryDeploymentResponse.typeUrl || Deployment.isAmino(o.deployment) && Array.isArray(o.groups) && (!o.groups.length || Group.isAmino(o.groups[0])) && Account.isAmino(o.escrow_account));
+  },
   encode(message: QueryDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deployment !== undefined) {
       Deployment.encode(message.deployment, writer.uint32(10).fork()).ldelim();
@@ -561,6 +665,11 @@ export const QueryDeploymentResponse = {
       typeUrl: "/akash.deployment.v1beta2.QueryDeploymentResponse",
       value: QueryDeploymentResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Deployment.registerTypeUrl();
+    Group.registerTypeUrl();
+    Account.registerTypeUrl();
   }
 };
 function createBaseQueryGroupRequest(): QueryGroupRequest {
@@ -570,6 +679,16 @@ function createBaseQueryGroupRequest(): QueryGroupRequest {
 }
 export const QueryGroupRequest = {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupRequest",
+  aminoType: "akash/deployment/v1beta2/query-group-request",
+  is(o: any): o is QueryGroupRequest {
+    return o && (o.$typeUrl === QueryGroupRequest.typeUrl || GroupID.is(o.id));
+  },
+  isSDK(o: any): o is QueryGroupRequestSDKType {
+    return o && (o.$typeUrl === QueryGroupRequest.typeUrl || GroupID.isSDK(o.id));
+  },
+  isAmino(o: any): o is QueryGroupRequestAmino {
+    return o && (o.$typeUrl === QueryGroupRequest.typeUrl || GroupID.isAmino(o.id));
+  },
   encode(message: QueryGroupRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       GroupID.encode(message.id, writer.uint32(10).fork()).ldelim();
@@ -657,6 +776,9 @@ export const QueryGroupRequest = {
       typeUrl: "/akash.deployment.v1beta2.QueryGroupRequest",
       value: QueryGroupRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GroupID.registerTypeUrl();
   }
 };
 function createBaseQueryGroupResponse(): QueryGroupResponse {
@@ -666,6 +788,16 @@ function createBaseQueryGroupResponse(): QueryGroupResponse {
 }
 export const QueryGroupResponse = {
   typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse",
+  aminoType: "akash/deployment/v1beta2/query-group-response",
+  is(o: any): o is QueryGroupResponse {
+    return o && (o.$typeUrl === QueryGroupResponse.typeUrl || Group.is(o.group));
+  },
+  isSDK(o: any): o is QueryGroupResponseSDKType {
+    return o && (o.$typeUrl === QueryGroupResponse.typeUrl || Group.isSDK(o.group));
+  },
+  isAmino(o: any): o is QueryGroupResponseAmino {
+    return o && (o.$typeUrl === QueryGroupResponse.typeUrl || Group.isAmino(o.group));
+  },
   encode(message: QueryGroupResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.group !== undefined) {
       Group.encode(message.group, writer.uint32(10).fork()).ldelim();
@@ -753,5 +885,8 @@ export const QueryGroupResponse = {
       typeUrl: "/akash.deployment.v1beta2.QueryGroupResponse",
       value: QueryGroupResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Group.registerTypeUrl();
   }
 };

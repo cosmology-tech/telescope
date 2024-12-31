@@ -1,5 +1,5 @@
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
@@ -28,6 +28,26 @@ export interface IncentiveProtoMsg {
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
  */
+export interface IncentiveAmino {
+  /** contract address */
+  contract?: string;
+  /** denoms and percentage of rewards to be allocated */
+  allocations?: DecCoinAmino[];
+  /** number of remaining epochs */
+  epochs?: number;
+  /** distribution start time */
+  start_time?: string;
+  /** cumulative gas spent by all gasmeters of the incentive during the epoch */
+  total_gas?: string;
+}
+export interface IncentiveAminoMsg {
+  type: "/evmos.incentives.v1.Incentive";
+  value: IncentiveAmino;
+}
+/**
+ * Incentive defines an instance that organizes distribution conditions for a
+ * given smart contract
+ */
 export interface IncentiveSDKType {
   contract: string;
   allocations: DecCoinSDKType[];
@@ -49,6 +69,19 @@ export interface GasMeterProtoMsg {
   value: Uint8Array;
 }
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
+export interface GasMeterAmino {
+  /** hex address of the incentivized contract */
+  contract?: string;
+  /** participant address that interacts with the incentive */
+  participant?: string;
+  /** cumulative gas spent during the epoch */
+  cumulative_gas?: string;
+}
+export interface GasMeterAminoMsg {
+  type: "/evmos.incentives.v1.GasMeter";
+  value: GasMeterAmino;
+}
+/** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeterSDKType {
   contract: string;
   participant: string;
@@ -56,6 +89,7 @@ export interface GasMeterSDKType {
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposal {
+  $typeUrl?: "/evmos.incentives.v1.RegisterIncentiveProposal";
   /** title of the proposal */
   title: string;
   /** proposal description */
@@ -72,7 +106,25 @@ export interface RegisterIncentiveProposalProtoMsg {
   value: Uint8Array;
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
+export interface RegisterIncentiveProposalAmino {
+  /** title of the proposal */
+  title?: string;
+  /** proposal description */
+  description?: string;
+  /** contract address */
+  contract?: string;
+  /** denoms and percentage of rewards to be allocated */
+  allocations?: DecCoinAmino[];
+  /** number of remaining epochs */
+  epochs?: number;
+}
+export interface RegisterIncentiveProposalAminoMsg {
+  type: "/evmos.incentives.v1.RegisterIncentiveProposal";
+  value: RegisterIncentiveProposalAmino;
+}
+/** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposalSDKType {
+  $typeUrl?: "/evmos.incentives.v1.RegisterIncentiveProposal";
   title: string;
   description: string;
   contract: string;
@@ -93,6 +145,19 @@ export interface CancelIncentiveProposalProtoMsg {
   value: Uint8Array;
 }
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
+export interface CancelIncentiveProposalAmino {
+  /** title of the proposal */
+  title?: string;
+  /** proposal description */
+  description?: string;
+  /** contract address */
+  contract?: string;
+}
+export interface CancelIncentiveProposalAminoMsg {
+  type: "/evmos.incentives.v1.CancelIncentiveProposal";
+  value: CancelIncentiveProposalAmino;
+}
+/** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposalSDKType {
   title: string;
   description: string;
@@ -109,6 +174,15 @@ function createBaseIncentive(): Incentive {
 }
 export const Incentive = {
   typeUrl: "/evmos.incentives.v1.Incentive",
+  is(o: any): o is Incentive {
+    return o && (o.$typeUrl === Incentive.typeUrl || typeof o.contract === "string" && Array.isArray(o.allocations) && (!o.allocations.length || DecCoin.is(o.allocations[0])) && typeof o.epochs === "number" && Timestamp.is(o.startTime) && typeof o.totalGas === "bigint");
+  },
+  isSDK(o: any): o is IncentiveSDKType {
+    return o && (o.$typeUrl === Incentive.typeUrl || typeof o.contract === "string" && Array.isArray(o.allocations) && (!o.allocations.length || DecCoin.isSDK(o.allocations[0])) && typeof o.epochs === "number" && Timestamp.isSDK(o.start_time) && typeof o.total_gas === "bigint");
+  },
+  isAmino(o: any): o is IncentiveAmino {
+    return o && (o.$typeUrl === Incentive.typeUrl || typeof o.contract === "string" && Array.isArray(o.allocations) && (!o.allocations.length || DecCoin.isAmino(o.allocations[0])) && typeof o.epochs === "number" && Timestamp.isAmino(o.start_time) && typeof o.total_gas === "bigint");
+  },
   encode(message: Incentive, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
@@ -264,6 +338,9 @@ export const Incentive = {
       typeUrl: "/evmos.incentives.v1.Incentive",
       value: Incentive.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseGasMeter(): GasMeter {
@@ -275,6 +352,15 @@ function createBaseGasMeter(): GasMeter {
 }
 export const GasMeter = {
   typeUrl: "/evmos.incentives.v1.GasMeter",
+  is(o: any): o is GasMeter {
+    return o && (o.$typeUrl === GasMeter.typeUrl || typeof o.contract === "string" && typeof o.participant === "string" && typeof o.cumulativeGas === "bigint");
+  },
+  isSDK(o: any): o is GasMeterSDKType {
+    return o && (o.$typeUrl === GasMeter.typeUrl || typeof o.contract === "string" && typeof o.participant === "string" && typeof o.cumulative_gas === "bigint");
+  },
+  isAmino(o: any): o is GasMeterAmino {
+    return o && (o.$typeUrl === GasMeter.typeUrl || typeof o.contract === "string" && typeof o.participant === "string" && typeof o.cumulative_gas === "bigint");
+  },
   encode(message: GasMeter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
@@ -388,10 +474,12 @@ export const GasMeter = {
       typeUrl: "/evmos.incentives.v1.GasMeter",
       value: GasMeter.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
   return {
+    $typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
     title: "",
     description: "",
     contract: "",
@@ -401,6 +489,15 @@ function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
 }
 export const RegisterIncentiveProposal = {
   typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
+  is(o: any): o is RegisterIncentiveProposal {
+    return o && (o.$typeUrl === RegisterIncentiveProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && Array.isArray(o.allocations) && (!o.allocations.length || DecCoin.is(o.allocations[0])) && typeof o.epochs === "number");
+  },
+  isSDK(o: any): o is RegisterIncentiveProposalSDKType {
+    return o && (o.$typeUrl === RegisterIncentiveProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && Array.isArray(o.allocations) && (!o.allocations.length || DecCoin.isSDK(o.allocations[0])) && typeof o.epochs === "number");
+  },
+  isAmino(o: any): o is RegisterIncentiveProposalAmino {
+    return o && (o.$typeUrl === RegisterIncentiveProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string" && Array.isArray(o.allocations) && (!o.allocations.length || DecCoin.isAmino(o.allocations[0])) && typeof o.epochs === "number");
+  },
   encode(message: RegisterIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -554,6 +651,9 @@ export const RegisterIncentiveProposal = {
       typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
       value: RegisterIncentiveProposal.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
@@ -565,6 +665,15 @@ function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
 }
 export const CancelIncentiveProposal = {
   typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
+  is(o: any): o is CancelIncentiveProposal {
+    return o && (o.$typeUrl === CancelIncentiveProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string");
+  },
+  isSDK(o: any): o is CancelIncentiveProposalSDKType {
+    return o && (o.$typeUrl === CancelIncentiveProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string");
+  },
+  isAmino(o: any): o is CancelIncentiveProposalAmino {
+    return o && (o.$typeUrl === CancelIncentiveProposal.typeUrl || typeof o.title === "string" && typeof o.description === "string" && typeof o.contract === "string");
+  },
   encode(message: CancelIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
@@ -676,5 +785,6 @@ export const CancelIncentiveProposal = {
       typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
       value: CancelIncentiveProposal.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

@@ -12,6 +12,15 @@ export interface PublicKeyProtoMsg {
   value: Uint8Array;
 }
 /** PublicKey defines the keys available for use with Tendermint Validators */
+export interface PublicKeyAmino {
+  ed25519?: string;
+  secp256k1?: string;
+}
+export interface PublicKeyAminoMsg {
+  type: "/tendermint.crypto.PublicKey";
+  value: PublicKeyAmino;
+}
+/** PublicKey defines the keys available for use with Tendermint Validators */
 export interface PublicKeySDKType {
   ed25519?: Uint8Array;
   secp256k1?: Uint8Array;
@@ -24,6 +33,15 @@ function createBasePublicKey(): PublicKey {
 }
 export const PublicKey = {
   typeUrl: "/tendermint.crypto.PublicKey",
+  is(o: any): o is PublicKey {
+    return o && o.$typeUrl === PublicKey.typeUrl;
+  },
+  isSDK(o: any): o is PublicKeySDKType {
+    return o && o.$typeUrl === PublicKey.typeUrl;
+  },
+  isAmino(o: any): o is PublicKeyAmino {
+    return o && o.$typeUrl === PublicKey.typeUrl;
+  },
   encode(message: PublicKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.ed25519 !== undefined) {
       writer.uint32(10).bytes(message.ed25519);
@@ -119,5 +137,6 @@ export const PublicKey = {
       typeUrl: "/tendermint.crypto.PublicKey",
       value: PublicKey.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

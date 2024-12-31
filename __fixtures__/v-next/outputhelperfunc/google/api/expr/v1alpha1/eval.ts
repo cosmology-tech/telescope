@@ -1,8 +1,9 @@
-import { Value, ValueSDKType } from "./value";
-import { Status, StatusSDKType } from "../../../rpc/status";
+import { Value, ValueAmino, ValueSDKType } from "./value";
+import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
+import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * The state of an evaluation.
@@ -29,6 +30,26 @@ export interface EvalStateProtoMsg {
  * 
  * Can represent an inital, partial, or completed state of evaluation.
  */
+export interface EvalStateAmino {
+  /** The unique values referenced in this message. */
+  values?: ExprValueAmino[];
+  /**
+   * An ordered list of results.
+   * 
+   * Tracks the flow of evaluation through the expression.
+   * May be sparse.
+   */
+  results?: EvalState_ResultAmino[];
+}
+export interface EvalStateAminoMsg {
+  type: "/google.api.expr.v1alpha1.EvalState";
+  value: EvalStateAmino;
+}
+/**
+ * The state of an evaluation.
+ * 
+ * Can represent an inital, partial, or completed state of evaluation.
+ */
 export interface EvalStateSDKType {
   values: ExprValueSDKType[];
   results: EvalState_ResultSDKType[];
@@ -43,6 +64,17 @@ export interface EvalState_Result {
 export interface EvalState_ResultProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Result";
   value: Uint8Array;
+}
+/** A single evalution result. */
+export interface EvalState_ResultAmino {
+  /** The id of the expression this result if for. */
+  expr?: string;
+  /** The index in `values` of the resulting value. */
+  value?: string;
+}
+export interface EvalState_ResultAminoMsg {
+  type: "/google.api.expr.v1alpha1.Result";
+  value: EvalState_ResultAmino;
 }
 /** A single evalution result. */
 export interface EvalState_ResultSDKType {
@@ -105,6 +137,61 @@ export interface ExprValueProtoMsg {
   value: Uint8Array;
 }
 /** The value of an evaluated expression. */
+export interface ExprValueAmino {
+  /** A concrete value. */
+  value?: ValueAmino;
+  /**
+   * The set of errors in the critical path of evalution.
+   * 
+   * Only errors in the critical path are included. For example,
+   * `(<error1> || true) && <error2>` will only result in `<error2>`,
+   * while `<error1> || <error2>` will result in both `<error1>` and
+   * `<error2>`.
+   * 
+   * Errors cause by the presence of other errors are not included in the
+   * set. For example `<error1>.foo`, `foo(<error1>)`, and `<error1> + 1` will
+   * only result in `<error1>`.
+   * 
+   * Multiple errors *might* be included when evaluation could result
+   * in different errors. For example `<error1> + <error2>` and
+   * `foo(<error1>, <error2>)` may result in `<error1>`, `<error2>` or both.
+   * The exact subset of errors included for this case is unspecified and
+   * depends on the implementation details of the evaluator.
+   */
+  error?: ErrorSetAmino;
+  /**
+   * The set of unknowns in the critical path of evaluation.
+   * 
+   * Unknown behaves identically to Error with regards to propagation.
+   * Specifically, only unknowns in the critical path are included, unknowns
+   * caused by the presence of other unknowns are not included, and multiple
+   * unknowns *might* be included included when evaluation could result in
+   * different unknowns. For example:
+   * 
+   *     (<unknown[1]> || true) && <unknown[2]> -> <unknown[2]>
+   *     <unknown[1]> || <unknown[2]> -> <unknown[1,2]>
+   *     <unknown[1]>.foo -> <unknown[1]>
+   *     foo(<unknown[1]>) -> <unknown[1]>
+   *     <unknown[1]> + <unknown[2]> -> <unknown[1]> or <unknown[2[>
+   * 
+   * Unknown takes precidence over Error in cases where a `Value` can short
+   * circuit the result:
+   * 
+   *     <error> || <unknown> -> <unknown>
+   *     <error> && <unknown> -> <unknown>
+   * 
+   * Errors take precidence in all other cases:
+   * 
+   *     <unknown> + <error> -> <error>
+   *     foo(<unknown>, <error>) -> <error>
+   */
+  unknown?: UnknownSetAmino;
+}
+export interface ExprValueAminoMsg {
+  type: "/google.api.expr.v1alpha1.ExprValue";
+  value: ExprValueAmino;
+}
+/** The value of an evaluated expression. */
 export interface ExprValueSDKType {
   value?: ValueSDKType;
   error?: ErrorSetSDKType;
@@ -122,6 +209,19 @@ export interface ErrorSet {
 export interface ErrorSetProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ErrorSet";
   value: Uint8Array;
+}
+/**
+ * A set of errors.
+ * 
+ * The errors included depend on the context. See `ExprValue.error`.
+ */
+export interface ErrorSetAmino {
+  /** The errors in the set. */
+  errors?: StatusAmino[];
+}
+export interface ErrorSetAminoMsg {
+  type: "/google.api.expr.v1alpha1.ErrorSet";
+  value: ErrorSetAmino;
 }
 /**
  * A set of errors.
@@ -149,6 +249,19 @@ export interface UnknownSetProtoMsg {
  * 
  * The unknowns included depend on the context. See `ExprValue.unknown`.
  */
+export interface UnknownSetAmino {
+  /** The ids of the expressions with unknown values. */
+  exprs?: string[];
+}
+export interface UnknownSetAminoMsg {
+  type: "/google.api.expr.v1alpha1.UnknownSet";
+  value: UnknownSetAmino;
+}
+/**
+ * A set of expressions for which the value is unknown.
+ * 
+ * The unknowns included depend on the context. See `ExprValue.unknown`.
+ */
 export interface UnknownSetSDKType {
   exprs: bigint[];
 }
@@ -160,6 +273,15 @@ function createBaseEvalState(): EvalState {
 }
 export const EvalState = {
   typeUrl: "/google.api.expr.v1alpha1.EvalState",
+  is(o: any): o is EvalState {
+    return o && (o.$typeUrl === EvalState.typeUrl || Array.isArray(o.values) && (!o.values.length || ExprValue.is(o.values[0])) && Array.isArray(o.results) && (!o.results.length || EvalState_Result.is(o.results[0])));
+  },
+  isSDK(o: any): o is EvalStateSDKType {
+    return o && (o.$typeUrl === EvalState.typeUrl || Array.isArray(o.values) && (!o.values.length || ExprValue.isSDK(o.values[0])) && Array.isArray(o.results) && (!o.results.length || EvalState_Result.isSDK(o.results[0])));
+  },
+  isAmino(o: any): o is EvalStateAmino {
+    return o && (o.$typeUrl === EvalState.typeUrl || Array.isArray(o.values) && (!o.values.length || ExprValue.isAmino(o.values[0])) && Array.isArray(o.results) && (!o.results.length || EvalState_Result.isAmino(o.results[0])));
+  },
   encode(message: EvalState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.values) {
       ExprValue.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -275,6 +397,10 @@ export const EvalState = {
       typeUrl: "/google.api.expr.v1alpha1.EvalState",
       value: EvalState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ExprValue.registerTypeUrl();
+    EvalState_Result.registerTypeUrl();
   }
 };
 function createBaseEvalState_Result(): EvalState_Result {
@@ -285,6 +411,15 @@ function createBaseEvalState_Result(): EvalState_Result {
 }
 export const EvalState_Result = {
   typeUrl: "/google.api.expr.v1alpha1.Result",
+  is(o: any): o is EvalState_Result {
+    return o && (o.$typeUrl === EvalState_Result.typeUrl || typeof o.expr === "bigint" && typeof o.value === "bigint");
+  },
+  isSDK(o: any): o is EvalState_ResultSDKType {
+    return o && (o.$typeUrl === EvalState_Result.typeUrl || typeof o.expr === "bigint" && typeof o.value === "bigint");
+  },
+  isAmino(o: any): o is EvalState_ResultAmino {
+    return o && (o.$typeUrl === EvalState_Result.typeUrl || typeof o.expr === "bigint" && typeof o.value === "bigint");
+  },
   encode(message: EvalState_Result, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.expr !== undefined) {
       writer.uint32(8).int64(message.expr);
@@ -384,7 +519,8 @@ export const EvalState_Result = {
       typeUrl: "/google.api.expr.v1alpha1.Result",
       value: EvalState_Result.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseExprValue(): ExprValue {
   return {
@@ -395,6 +531,15 @@ function createBaseExprValue(): ExprValue {
 }
 export const ExprValue = {
   typeUrl: "/google.api.expr.v1alpha1.ExprValue",
+  is(o: any): o is ExprValue {
+    return o && o.$typeUrl === ExprValue.typeUrl;
+  },
+  isSDK(o: any): o is ExprValueSDKType {
+    return o && o.$typeUrl === ExprValue.typeUrl;
+  },
+  isAmino(o: any): o is ExprValueAmino {
+    return o && o.$typeUrl === ExprValue.typeUrl;
+  },
   encode(message: ExprValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.value !== undefined) {
       Value.encode(message.value, writer.uint32(10).fork()).ldelim();
@@ -512,6 +657,11 @@ export const ExprValue = {
       typeUrl: "/google.api.expr.v1alpha1.ExprValue",
       value: ExprValue.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Value.registerTypeUrl();
+    ErrorSet.registerTypeUrl();
+    UnknownSet.registerTypeUrl();
   }
 };
 function createBaseErrorSet(): ErrorSet {
@@ -521,6 +671,15 @@ function createBaseErrorSet(): ErrorSet {
 }
 export const ErrorSet = {
   typeUrl: "/google.api.expr.v1alpha1.ErrorSet",
+  is(o: any): o is ErrorSet {
+    return o && (o.$typeUrl === ErrorSet.typeUrl || Array.isArray(o.errors) && (!o.errors.length || Status.is(o.errors[0])));
+  },
+  isSDK(o: any): o is ErrorSetSDKType {
+    return o && (o.$typeUrl === ErrorSet.typeUrl || Array.isArray(o.errors) && (!o.errors.length || Status.isSDK(o.errors[0])));
+  },
+  isAmino(o: any): o is ErrorSetAmino {
+    return o && (o.$typeUrl === ErrorSet.typeUrl || Array.isArray(o.errors) && (!o.errors.length || Status.isAmino(o.errors[0])));
+  },
   encode(message: ErrorSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.errors) {
       Status.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -610,6 +769,9 @@ export const ErrorSet = {
       typeUrl: "/google.api.expr.v1alpha1.ErrorSet",
       value: ErrorSet.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Status.registerTypeUrl();
   }
 };
 function createBaseUnknownSet(): UnknownSet {
@@ -619,6 +781,15 @@ function createBaseUnknownSet(): UnknownSet {
 }
 export const UnknownSet = {
   typeUrl: "/google.api.expr.v1alpha1.UnknownSet",
+  is(o: any): o is UnknownSet {
+    return o && (o.$typeUrl === UnknownSet.typeUrl || Array.isArray(o.exprs) && (!o.exprs.length || typeof o.exprs[0] === "bigint"));
+  },
+  isSDK(o: any): o is UnknownSetSDKType {
+    return o && (o.$typeUrl === UnknownSet.typeUrl || Array.isArray(o.exprs) && (!o.exprs.length || typeof o.exprs[0] === "bigint"));
+  },
+  isAmino(o: any): o is UnknownSetAmino {
+    return o && (o.$typeUrl === UnknownSet.typeUrl || Array.isArray(o.exprs) && (!o.exprs.length || typeof o.exprs[0] === "bigint"));
+  },
   encode(message: UnknownSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.exprs) {
@@ -717,5 +888,6 @@ export const UnknownSet = {
       typeUrl: "/google.api.expr.v1alpha1.UnknownSet",
       value: UnknownSet.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

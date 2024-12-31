@@ -1,5 +1,5 @@
 import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./connection";
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { TelescopeGeneratedType } from "../../../../types";
 import { Registry } from "@cosmjs/proto-signing";

@@ -1,7 +1,8 @@
-import { ClaimsRecordAddress, ClaimsRecordAddressSDKType } from "./claims";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
+import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKType } from "./claims";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.claims.v1";
@@ -15,6 +16,17 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/evmos.claims.v1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState define the claims module's genesis state. */
+export interface GenesisStateAmino {
+  /** params defines all the parameters of the module. */
+  params?: ParamsAmino;
+  /** list of claim records with the corresponding airdrop recipient */
+  claims_records?: ClaimsRecordAddressAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.claims.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisStateSDKType {
@@ -46,6 +58,30 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the claims module's parameters. */
+export interface ParamsAmino {
+  /** enable claiming process */
+  enable_claims?: boolean;
+  /** timestamp of the airdrop start */
+  airdrop_start_time?: string;
+  /** duration until decay of claimable tokens begin */
+  duration_until_decay?: DurationAmino;
+  /** duration of the token claim decay period */
+  duration_of_decay?: DurationAmino;
+  /** denom of claimable coin */
+  claims_denom?: string;
+  /**
+   * list of authorized channel identifiers that can perform address
+   * attestations via IBC.
+   */
+  authorized_channels?: string[];
+  /** list of channel identifiers from EVM compatible chains */
+  evm_channels?: string[];
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.claims.v1.Params";
+  value: ParamsAmino;
+}
+/** Params defines the claims module's parameters. */
 export interface ParamsSDKType {
   enable_claims: boolean;
   airdrop_start_time: Date;
@@ -63,6 +99,15 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/evmos.claims.v1.GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.is(o.params) && Array.isArray(o.claimsRecords) && (!o.claimsRecords.length || ClaimsRecordAddress.is(o.claimsRecords[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isSDK(o.params) && Array.isArray(o.claims_records) && (!o.claims_records.length || ClaimsRecordAddress.isSDK(o.claims_records[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Params.isAmino(o.params) && Array.isArray(o.claims_records) && (!o.claims_records.length || ClaimsRecordAddress.isAmino(o.claims_records[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -170,6 +215,10 @@ export const GenesisState = {
       typeUrl: "/evmos.claims.v1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
+    ClaimsRecordAddress.registerTypeUrl();
   }
 };
 function createBaseParams(): Params {
@@ -185,6 +234,15 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/evmos.claims.v1.Params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enableClaims === "boolean" && Timestamp.is(o.airdropStartTime) && Duration.is(o.durationUntilDecay) && Duration.is(o.durationOfDecay) && typeof o.claimsDenom === "string" && Array.isArray(o.authorizedChannels) && (!o.authorizedChannels.length || typeof o.authorizedChannels[0] === "string") && Array.isArray(o.evmChannels) && (!o.evmChannels.length || typeof o.evmChannels[0] === "string"));
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enable_claims === "boolean" && Timestamp.isSDK(o.airdrop_start_time) && Duration.isSDK(o.duration_until_decay) && Duration.isSDK(o.duration_of_decay) && typeof o.claims_denom === "string" && Array.isArray(o.authorized_channels) && (!o.authorized_channels.length || typeof o.authorized_channels[0] === "string") && Array.isArray(o.evm_channels) && (!o.evm_channels.length || typeof o.evm_channels[0] === "string"));
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.enable_claims === "boolean" && Timestamp.isAmino(o.airdrop_start_time) && Duration.isAmino(o.duration_until_decay) && Duration.isAmino(o.duration_of_decay) && typeof o.claims_denom === "string" && Array.isArray(o.authorized_channels) && (!o.authorized_channels.length || typeof o.authorized_channels[0] === "string") && Array.isArray(o.evm_channels) && (!o.evm_channels.length || typeof o.evm_channels[0] === "string"));
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.enableClaims !== undefined) {
       writer.uint32(8).bool(message.enableClaims);
@@ -384,5 +442,6 @@ export const Params = {
       typeUrl: "/evmos.claims.v1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

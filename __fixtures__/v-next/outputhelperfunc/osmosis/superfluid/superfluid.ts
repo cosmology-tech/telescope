@@ -1,8 +1,9 @@
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../binary";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { JsonSafe } from "../../json-safe";
 import { Decimal } from "@cosmjs/math";
+import { GlobalDecoderRegistry } from "../../registry";
 export const protobufPackage = "osmosis.superfluid";
 /**
  * SuperfluidAssetType indicates whether the superfluid asset is
@@ -14,6 +15,7 @@ export enum SuperfluidAssetType {
   UNRECOGNIZED = -1,
 }
 export const SuperfluidAssetTypeSDKType = SuperfluidAssetType;
+export const SuperfluidAssetTypeAmino = SuperfluidAssetType;
 export function superfluidAssetTypeFromJSON(object: any): SuperfluidAssetType {
   switch (object) {
     case 0:
@@ -53,6 +55,19 @@ export interface SuperfluidAssetProtoMsg {
   value: Uint8Array;
 }
 /** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
+export interface SuperfluidAssetAmino {
+  denom?: string;
+  /**
+   * AssetType indicates whether the superfluid asset is a native token or an lp
+   * share
+   */
+  asset_type?: SuperfluidAssetType;
+}
+export interface SuperfluidAssetAminoMsg {
+  type: "osmosis/superfluid-asset";
+  value: SuperfluidAssetAmino;
+}
+/** SuperfluidAsset stores the pair of superfluid asset type and denom pair */
 export interface SuperfluidAssetSDKType {
   denom: string;
   asset_type: SuperfluidAssetType;
@@ -72,6 +87,22 @@ export interface SuperfluidIntermediaryAccount {
 export interface SuperfluidIntermediaryAccountProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount";
   value: Uint8Array;
+}
+/**
+ * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
+ * and OSMO tokens for superfluid staking. The intermediary account is the
+ * actual account responsible for delegation, not the validator account itself.
+ */
+export interface SuperfluidIntermediaryAccountAmino {
+  /** Denom indicates the denom of the superfluid asset. */
+  denom?: string;
+  val_addr?: string;
+  /** perpetual gauge for rewards distribution */
+  gauge_id?: string;
+}
+export interface SuperfluidIntermediaryAccountAminoMsg {
+  type: "osmosis/superfluid-intermediary-account";
+  value: SuperfluidIntermediaryAccountAmino;
 }
 /**
  * SuperfluidIntermediaryAccount takes the role of intermediary between LP token
@@ -111,6 +142,25 @@ export interface OsmoEquivalentMultiplierRecordProtoMsg {
  * price at the boundary. For different types of assets in the future, it could
  * change.
  */
+export interface OsmoEquivalentMultiplierRecordAmino {
+  epoch_number?: string;
+  /** superfluid asset denom, can be LP token or native token */
+  denom?: string;
+  multiplier?: string;
+}
+export interface OsmoEquivalentMultiplierRecordAminoMsg {
+  type: "osmosis/osmo-equivalent-multiplier-record";
+  value: OsmoEquivalentMultiplierRecordAmino;
+}
+/**
+ * The Osmo-Equivalent-Multiplier Record for epoch N refers to the osmo worth we
+ * treat an LP share as having, for all of epoch N. Eventually this is intended
+ * to be set as the Time-weighted-average-osmo-backing for the entire duration
+ * of epoch N-1. (Thereby locking whats in use for epoch N as based on the prior
+ * epochs rewards) However for now, this is not the TWAP but instead the spot
+ * price at the boundary. For different types of assets in the future, it could
+ * change.
+ */
 export interface OsmoEquivalentMultiplierRecordSDKType {
   epoch_number: bigint;
   denom: string;
@@ -129,6 +179,20 @@ export interface SuperfluidDelegationRecord {
 export interface SuperfluidDelegationRecordProtoMsg {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord";
   value: Uint8Array;
+}
+/**
+ * SuperfluidDelegationRecord is a struct used to indicate superfluid
+ * delegations of an account in the state machine in a user friendly form.
+ */
+export interface SuperfluidDelegationRecordAmino {
+  delegator_address?: string;
+  validator_address?: string;
+  delegation_amount?: CoinAmino;
+  equivalent_staked_amount?: CoinAmino;
+}
+export interface SuperfluidDelegationRecordAminoMsg {
+  type: "osmosis/superfluid-delegation-record";
+  value: SuperfluidDelegationRecordAmino;
 }
 /**
  * SuperfluidDelegationRecord is a struct used to indicate superfluid
@@ -158,6 +222,19 @@ export interface LockIdIntermediaryAccountConnectionProtoMsg {
  * relationship between the underlying lock id and superfluid delegation done
  * via lp shares.
  */
+export interface LockIdIntermediaryAccountConnectionAmino {
+  lock_id?: string;
+  intermediary_account?: string;
+}
+export interface LockIdIntermediaryAccountConnectionAminoMsg {
+  type: "osmosis/lock-id-intermediary-account-connection";
+  value: LockIdIntermediaryAccountConnectionAmino;
+}
+/**
+ * LockIdIntermediaryAccountConnection is a struct used to indicate the
+ * relationship between the underlying lock id and superfluid delegation done
+ * via lp shares.
+ */
 export interface LockIdIntermediaryAccountConnectionSDKType {
   lock_id: bigint;
   intermediary_account: string;
@@ -168,6 +245,13 @@ export interface UnpoolWhitelistedPools {
 export interface UnpoolWhitelistedPoolsProtoMsg {
   typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools";
   value: Uint8Array;
+}
+export interface UnpoolWhitelistedPoolsAmino {
+  ids?: string[];
+}
+export interface UnpoolWhitelistedPoolsAminoMsg {
+  type: "osmosis/unpool-whitelisted-pools";
+  value: UnpoolWhitelistedPoolsAmino;
 }
 export interface UnpoolWhitelistedPoolsSDKType {
   ids: bigint[];
@@ -180,6 +264,16 @@ function createBaseSuperfluidAsset(): SuperfluidAsset {
 }
 export const SuperfluidAsset = {
   typeUrl: "/osmosis.superfluid.SuperfluidAsset",
+  aminoType: "osmosis/superfluid-asset",
+  is(o: any): o is SuperfluidAsset {
+    return o && (o.$typeUrl === SuperfluidAsset.typeUrl || typeof o.denom === "string" && isSet(o.assetType));
+  },
+  isSDK(o: any): o is SuperfluidAssetSDKType {
+    return o && (o.$typeUrl === SuperfluidAsset.typeUrl || typeof o.denom === "string" && isSet(o.asset_type));
+  },
+  isAmino(o: any): o is SuperfluidAssetAmino {
+    return o && (o.$typeUrl === SuperfluidAsset.typeUrl || typeof o.denom === "string" && isSet(o.asset_type));
+  },
   encode(message: SuperfluidAsset, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
@@ -281,7 +375,8 @@ export const SuperfluidAsset = {
       typeUrl: "/osmosis.superfluid.SuperfluidAsset",
       value: SuperfluidAsset.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccount {
   return {
@@ -292,6 +387,16 @@ function createBaseSuperfluidIntermediaryAccount(): SuperfluidIntermediaryAccoun
 }
 export const SuperfluidIntermediaryAccount = {
   typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount",
+  aminoType: "osmosis/superfluid-intermediary-account",
+  is(o: any): o is SuperfluidIntermediaryAccount {
+    return o && (o.$typeUrl === SuperfluidIntermediaryAccount.typeUrl || typeof o.denom === "string" && typeof o.valAddr === "string" && typeof o.gaugeId === "bigint");
+  },
+  isSDK(o: any): o is SuperfluidIntermediaryAccountSDKType {
+    return o && (o.$typeUrl === SuperfluidIntermediaryAccount.typeUrl || typeof o.denom === "string" && typeof o.val_addr === "string" && typeof o.gauge_id === "bigint");
+  },
+  isAmino(o: any): o is SuperfluidIntermediaryAccountAmino {
+    return o && (o.$typeUrl === SuperfluidIntermediaryAccount.typeUrl || typeof o.denom === "string" && typeof o.val_addr === "string" && typeof o.gauge_id === "bigint");
+  },
   encode(message: SuperfluidIntermediaryAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
@@ -411,7 +516,8 @@ export const SuperfluidIntermediaryAccount = {
       typeUrl: "/osmosis.superfluid.SuperfluidIntermediaryAccount",
       value: SuperfluidIntermediaryAccount.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRecord {
   return {
@@ -422,6 +528,16 @@ function createBaseOsmoEquivalentMultiplierRecord(): OsmoEquivalentMultiplierRec
 }
 export const OsmoEquivalentMultiplierRecord = {
   typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord",
+  aminoType: "osmosis/osmo-equivalent-multiplier-record",
+  is(o: any): o is OsmoEquivalentMultiplierRecord {
+    return o && (o.$typeUrl === OsmoEquivalentMultiplierRecord.typeUrl || typeof o.epochNumber === "bigint" && typeof o.denom === "string" && typeof o.multiplier === "string");
+  },
+  isSDK(o: any): o is OsmoEquivalentMultiplierRecordSDKType {
+    return o && (o.$typeUrl === OsmoEquivalentMultiplierRecord.typeUrl || typeof o.epoch_number === "bigint" && typeof o.denom === "string" && typeof o.multiplier === "string");
+  },
+  isAmino(o: any): o is OsmoEquivalentMultiplierRecordAmino {
+    return o && (o.$typeUrl === OsmoEquivalentMultiplierRecord.typeUrl || typeof o.epoch_number === "bigint" && typeof o.denom === "string" && typeof o.multiplier === "string");
+  },
   encode(message: OsmoEquivalentMultiplierRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.epochNumber !== undefined) {
       writer.uint32(8).int64(message.epochNumber);
@@ -541,7 +657,8 @@ export const OsmoEquivalentMultiplierRecord = {
       typeUrl: "/osmosis.superfluid.OsmoEquivalentMultiplierRecord",
       value: OsmoEquivalentMultiplierRecord.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
   return {
@@ -553,6 +670,16 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
 }
 export const SuperfluidDelegationRecord = {
   typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord",
+  aminoType: "osmosis/superfluid-delegation-record",
+  is(o: any): o is SuperfluidDelegationRecord {
+    return o && (o.$typeUrl === SuperfluidDelegationRecord.typeUrl || typeof o.delegatorAddress === "string" && typeof o.validatorAddress === "string" && Coin.is(o.delegationAmount));
+  },
+  isSDK(o: any): o is SuperfluidDelegationRecordSDKType {
+    return o && (o.$typeUrl === SuperfluidDelegationRecord.typeUrl || typeof o.delegator_address === "string" && typeof o.validator_address === "string" && Coin.isSDK(o.delegation_amount));
+  },
+  isAmino(o: any): o is SuperfluidDelegationRecordAmino {
+    return o && (o.$typeUrl === SuperfluidDelegationRecord.typeUrl || typeof o.delegator_address === "string" && typeof o.validator_address === "string" && Coin.isAmino(o.delegation_amount));
+  },
   encode(message: SuperfluidDelegationRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.delegatorAddress !== undefined) {
       writer.uint32(10).string(message.delegatorAddress);
@@ -690,6 +817,10 @@ export const SuperfluidDelegationRecord = {
       typeUrl: "/osmosis.superfluid.SuperfluidDelegationRecord",
       value: SuperfluidDelegationRecord.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAccountConnection {
@@ -700,6 +831,16 @@ function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAcco
 }
 export const LockIdIntermediaryAccountConnection = {
   typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection",
+  aminoType: "osmosis/lock-id-intermediary-account-connection",
+  is(o: any): o is LockIdIntermediaryAccountConnection {
+    return o && (o.$typeUrl === LockIdIntermediaryAccountConnection.typeUrl || typeof o.lockId === "bigint" && typeof o.intermediaryAccount === "string");
+  },
+  isSDK(o: any): o is LockIdIntermediaryAccountConnectionSDKType {
+    return o && (o.$typeUrl === LockIdIntermediaryAccountConnection.typeUrl || typeof o.lock_id === "bigint" && typeof o.intermediary_account === "string");
+  },
+  isAmino(o: any): o is LockIdIntermediaryAccountConnectionAmino {
+    return o && (o.$typeUrl === LockIdIntermediaryAccountConnection.typeUrl || typeof o.lock_id === "bigint" && typeof o.intermediary_account === "string");
+  },
   encode(message: LockIdIntermediaryAccountConnection, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.lockId !== undefined) {
       writer.uint32(8).uint64(message.lockId);
@@ -803,7 +944,8 @@ export const LockIdIntermediaryAccountConnection = {
       typeUrl: "/osmosis.superfluid.LockIdIntermediaryAccountConnection",
       value: LockIdIntermediaryAccountConnection.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseUnpoolWhitelistedPools(): UnpoolWhitelistedPools {
   return {
@@ -812,6 +954,16 @@ function createBaseUnpoolWhitelistedPools(): UnpoolWhitelistedPools {
 }
 export const UnpoolWhitelistedPools = {
   typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools",
+  aminoType: "osmosis/unpool-whitelisted-pools",
+  is(o: any): o is UnpoolWhitelistedPools {
+    return o && (o.$typeUrl === UnpoolWhitelistedPools.typeUrl || Array.isArray(o.ids) && (!o.ids.length || typeof o.ids[0] === "bigint"));
+  },
+  isSDK(o: any): o is UnpoolWhitelistedPoolsSDKType {
+    return o && (o.$typeUrl === UnpoolWhitelistedPools.typeUrl || Array.isArray(o.ids) && (!o.ids.length || typeof o.ids[0] === "bigint"));
+  },
+  isAmino(o: any): o is UnpoolWhitelistedPoolsAmino {
+    return o && (o.$typeUrl === UnpoolWhitelistedPools.typeUrl || Array.isArray(o.ids) && (!o.ids.length || typeof o.ids[0] === "bigint"));
+  },
   encode(message: UnpoolWhitelistedPools, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.ids) {
@@ -916,5 +1068,6 @@ export const UnpoolWhitelistedPools = {
       typeUrl: "/osmosis.superfluid.UnpoolWhitelistedPools",
       value: UnpoolWhitelistedPools.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

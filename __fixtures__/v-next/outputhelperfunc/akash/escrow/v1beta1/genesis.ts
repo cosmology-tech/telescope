@@ -1,4 +1,4 @@
-import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
+import { Account, AccountAmino, AccountSDKType, Payment, PaymentAmino, PaymentSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, Exact } from "../../../helpers";
@@ -13,6 +13,15 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the basic genesis state used by escrow module */
+export interface GenesisStateAmino {
+  accounts: AccountAmino[];
+  payments: PaymentAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "akash/escrow/genesis-state";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateSDKType {
   accounts: AccountSDKType[];
   payments: PaymentSDKType[];
@@ -25,6 +34,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/akash.escrow.v1beta1.GenesisState",
+  aminoType: "akash/escrow/genesis-state",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.accounts) && (!o.accounts.length || Account.is(o.accounts[0])) && Array.isArray(o.payments) && (!o.payments.length || Payment.is(o.payments[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.accounts) && (!o.accounts.length || Account.isSDK(o.accounts[0])) && Array.isArray(o.payments) && (!o.payments.length || Payment.isSDK(o.payments[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.accounts) && (!o.accounts.length || Account.isAmino(o.accounts[0])) && Array.isArray(o.payments) && (!o.payments.length || Payment.isAmino(o.payments[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.accounts) {
       Account.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -146,5 +165,9 @@ export const GenesisState = {
       typeUrl: "/akash.escrow.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Account.registerTypeUrl();
+    Payment.registerTypeUrl();
   }
 };

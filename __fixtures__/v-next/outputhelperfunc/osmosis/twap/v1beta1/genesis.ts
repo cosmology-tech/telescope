@@ -1,6 +1,7 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { TwapRecord, TwapRecordSDKType } from "./twap_record";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
+import { TwapRecord, TwapRecordAmino, TwapRecordSDKType } from "./twap_record";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.twap.v1beta1";
@@ -12,6 +13,15 @@ export interface Params {
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.twap.v1beta1.Params";
   value: Uint8Array;
+}
+/** Params holds parameters for the twap module */
+export interface ParamsAmino {
+  prune_epoch_identifier?: string;
+  record_history_keep_period?: DurationAmino;
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/twap/params";
+  value: ParamsAmino;
 }
 /** Params holds parameters for the twap module */
 export interface ParamsSDKType {
@@ -30,6 +40,17 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the twap module's genesis state. */
+export interface GenesisStateAmino {
+  /** twaps is the collection of all twap records. */
+  twaps?: TwapRecordAmino[];
+  /** params is the container of twap parameters. */
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "osmosis/twap/genesis-state";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines the twap module's genesis state. */
 export interface GenesisStateSDKType {
   twaps: TwapRecordSDKType[];
   params: ParamsSDKType;
@@ -42,6 +63,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.twap.v1beta1.Params",
+  aminoType: "osmosis/twap/params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.pruneEpochIdentifier === "string" && Duration.is(o.recordHistoryKeepPeriod));
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.prune_epoch_identifier === "string" && Duration.isSDK(o.record_history_keep_period));
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.prune_epoch_identifier === "string" && Duration.isAmino(o.record_history_keep_period));
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pruneEpochIdentifier !== undefined) {
       writer.uint32(10).string(message.pruneEpochIdentifier);
@@ -145,7 +176,8 @@ export const Params = {
       typeUrl: "/osmosis.twap.v1beta1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseGenesisState(): GenesisState {
   return {
@@ -155,6 +187,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/osmosis.twap.v1beta1.GenesisState",
+  aminoType: "osmosis/twap/genesis-state",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.twaps) && (!o.twaps.length || TwapRecord.is(o.twaps[0])) && Params.is(o.params));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.twaps) && (!o.twaps.length || TwapRecord.isSDK(o.twaps[0])) && Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.twaps) && (!o.twaps.length || TwapRecord.isAmino(o.twaps[0])) && Params.isAmino(o.params));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.twaps) {
       TwapRecord.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -268,5 +310,9 @@ export const GenesisState = {
       typeUrl: "/osmosis.twap.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    TwapRecord.registerTypeUrl();
+    Params.registerTypeUrl();
   }
 };

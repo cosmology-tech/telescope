@@ -1,9 +1,10 @@
-import { ManagedService, ManagedServiceSDKType, ConfigSource, ConfigSourceSDKType, Rollout, RolloutSDKType, ChangeReport, ChangeReportSDKType, Diagnostic, DiagnosticSDKType } from "./resources";
-import { Service, ServiceSDKType } from "../../service";
-import { Any, AnySDKType } from "../../../protobuf/any";
+import { ManagedService, ManagedServiceAmino, ManagedServiceSDKType, ConfigSource, ConfigSourceAmino, ConfigSourceSDKType, Rollout, RolloutAmino, RolloutSDKType, ChangeReport, ChangeReportAmino, ChangeReportSDKType, Diagnostic, DiagnosticAmino, DiagnosticSDKType } from "./resources";
+import { Service, ServiceAmino, ServiceSDKType } from "../../service";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "google.api.servicemanagement.v1";
 export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */
@@ -18,6 +19,7 @@ export enum GetServiceConfigRequest_ConfigView {
   UNRECOGNIZED = -1,
 }
 export const GetServiceConfigRequest_ConfigViewSDKType = GetServiceConfigRequest_ConfigView;
+export const GetServiceConfigRequest_ConfigViewAmino = GetServiceConfigRequest_ConfigView;
 export function getServiceConfigRequest_ConfigViewFromJSON(object: any): GetServiceConfigRequest_ConfigView {
   switch (object) {
     case 0:
@@ -72,6 +74,34 @@ export interface ListServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for `ListServices` method. */
+export interface ListServicesRequestAmino {
+  /** Include services produced by the specified project. */
+  producer_project_id?: string;
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size?: number;
+  /**
+   * Token identifying which result to start with; returned by a previous list
+   * call.
+   */
+  page_token?: string;
+  /**
+   * Include services consumed by the specified consumer.
+   * 
+   * The Google Service Management implementation accepts the following
+   * forms:
+   * - project:<project_id>
+   */
+  /** @deprecated */
+  consumer_id?: string;
+}
+export interface ListServicesRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServicesRequest";
+  value: ListServicesRequestAmino;
+}
+/** Request message for `ListServices` method. */
 export interface ListServicesRequestSDKType {
   producer_project_id: string;
   page_size: number;
@@ -91,6 +121,17 @@ export interface ListServicesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for `ListServices` method. */
+export interface ListServicesResponseAmino {
+  /** The returned services will only have the name field set. */
+  services?: ManagedServiceAmino[];
+  /** Token that can be passed to `ListServices` to resume a paginated query. */
+  next_page_token?: string;
+}
+export interface ListServicesResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServicesResponse";
+  value: ListServicesResponseAmino;
+}
+/** Response message for `ListServices` method. */
 export interface ListServicesResponseSDKType {
   services: ManagedServiceSDKType[];
   next_page_token: string;
@@ -108,6 +149,18 @@ export interface GetServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for `GetService` method. */
+export interface GetServiceRequestAmino {
+  /**
+   * Required. The name of the service.  See the `ServiceManager` overview for naming
+   * requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+}
+export interface GetServiceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.GetServiceRequest";
+  value: GetServiceRequestAmino;
+}
+/** Request message for `GetService` method. */
 export interface GetServiceRequestSDKType {
   service_name: string;
 }
@@ -119,6 +172,15 @@ export interface CreateServiceRequest {
 export interface CreateServiceRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest";
   value: Uint8Array;
+}
+/** Request message for CreateService method. */
+export interface CreateServiceRequestAmino {
+  /** Required. Initial values for the service resource. */
+  service?: ManagedServiceAmino;
+}
+export interface CreateServiceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.CreateServiceRequest";
+  value: CreateServiceRequestAmino;
 }
 /** Request message for CreateService method. */
 export interface CreateServiceRequestSDKType {
@@ -137,6 +199,18 @@ export interface DeleteServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for DeleteService method. */
+export interface DeleteServiceRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+}
+export interface DeleteServiceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.DeleteServiceRequest";
+  value: DeleteServiceRequestAmino;
+}
+/** Request message for DeleteService method. */
 export interface DeleteServiceRequestSDKType {
   service_name: string;
 }
@@ -153,6 +227,18 @@ export interface UndeleteServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for UndeleteService method. */
+export interface UndeleteServiceRequestAmino {
+  /**
+   * Required. The name of the service. See the [overview](/service-management/overview)
+   * for naming requirements. For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+}
+export interface UndeleteServiceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.UndeleteServiceRequest";
+  value: UndeleteServiceRequestAmino;
+}
+/** Request message for UndeleteService method. */
 export interface UndeleteServiceRequestSDKType {
   service_name: string;
 }
@@ -164,6 +250,15 @@ export interface UndeleteServiceResponse {
 export interface UndeleteServiceResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
   value: Uint8Array;
+}
+/** Response message for UndeleteService method. */
+export interface UndeleteServiceResponseAmino {
+  /** Revived service resource. */
+  service?: ManagedServiceAmino;
+}
+export interface UndeleteServiceResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.UndeleteServiceResponse";
+  value: UndeleteServiceResponseAmino;
 }
 /** Response message for UndeleteService method. */
 export interface UndeleteServiceResponseSDKType {
@@ -194,6 +289,30 @@ export interface GetServiceConfigRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for GetServiceConfig method. */
+export interface GetServiceConfigRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+  /**
+   * Required. The id of the service configuration resource.
+   * 
+   * This field must be specified for the server to return all fields, including
+   * `SourceInfo`.
+   */
+  config_id?: string;
+  /**
+   * Specifies which parts of the Service Config should be returned in the
+   * response.
+   */
+  view?: GetServiceConfigRequest_ConfigView;
+}
+export interface GetServiceConfigRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.GetServiceConfigRequest";
+  value: GetServiceConfigRequestAmino;
+}
+/** Request message for GetServiceConfig method. */
 export interface GetServiceConfigRequestSDKType {
   service_name: string;
   config_id: string;
@@ -219,6 +338,25 @@ export interface ListServiceConfigsRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for ListServiceConfigs method. */
+export interface ListServiceConfigsRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+  /** The token of the page to retrieve. */
+  page_token?: string;
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size?: number;
+}
+export interface ListServiceConfigsRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServiceConfigsRequest";
+  value: ListServiceConfigsRequestAmino;
+}
+/** Request message for ListServiceConfigs method. */
 export interface ListServiceConfigsRequestSDKType {
   service_name: string;
   page_token: string;
@@ -234,6 +372,17 @@ export interface ListServiceConfigsResponse {
 export interface ListServiceConfigsResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
   value: Uint8Array;
+}
+/** Response message for ListServiceConfigs method. */
+export interface ListServiceConfigsResponseAmino {
+  /** The list of service configuration resources. */
+  service_configs?: ServiceAmino[];
+  /** The token of the next page of results. */
+  next_page_token?: string;
+}
+export interface ListServiceConfigsResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServiceConfigsResponse";
+  value: ListServiceConfigsResponseAmino;
 }
 /** Response message for ListServiceConfigs method. */
 export interface ListServiceConfigsResponseSDKType {
@@ -253,6 +402,20 @@ export interface CreateServiceConfigRequest {
 export interface CreateServiceConfigRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
   value: Uint8Array;
+}
+/** Request message for CreateServiceConfig method. */
+export interface CreateServiceConfigRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+  /** Required. The service configuration resource. */
+  service_config?: ServiceAmino;
+}
+export interface CreateServiceConfigRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.CreateServiceConfigRequest";
+  value: CreateServiceConfigRequestAmino;
 }
 /** Request message for CreateServiceConfig method. */
 export interface CreateServiceConfigRequestSDKType {
@@ -280,6 +443,26 @@ export interface SubmitConfigSourceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for SubmitConfigSource method. */
+export interface SubmitConfigSourceRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+  /** Required. The source configuration for the service. */
+  config_source?: ConfigSourceAmino;
+  /**
+   * Optional. If set, this will result in the generation of a
+   * `google.api.Service` configuration based on the `ConfigSource` provided,
+   * but the generated config and the sources will NOT be persisted.
+   */
+  validate_only?: boolean;
+}
+export interface SubmitConfigSourceRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest";
+  value: SubmitConfigSourceRequestAmino;
+}
+/** Request message for SubmitConfigSource method. */
 export interface SubmitConfigSourceRequestSDKType {
   service_name: string;
   config_source?: ConfigSourceSDKType;
@@ -293,6 +476,15 @@ export interface SubmitConfigSourceResponse {
 export interface SubmitConfigSourceResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
   value: Uint8Array;
+}
+/** Response message for SubmitConfigSource method. */
+export interface SubmitConfigSourceResponseAmino {
+  /** The generated service configuration. */
+  service_config?: ServiceAmino;
+}
+export interface SubmitConfigSourceResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse";
+  value: SubmitConfigSourceResponseAmino;
 }
 /** Response message for SubmitConfigSource method. */
 export interface SubmitConfigSourceResponseSDKType {
@@ -311,6 +503,20 @@ export interface CreateServiceRolloutRequest {
 export interface CreateServiceRolloutRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
   value: Uint8Array;
+}
+/** Request message for 'CreateServiceRollout' */
+export interface CreateServiceRolloutRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+  /** Required. The rollout resource. The `service_name` field is output only. */
+  rollout?: RolloutAmino;
+}
+export interface CreateServiceRolloutRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest";
+  value: CreateServiceRolloutRequestAmino;
 }
 /** Request message for 'CreateServiceRollout' */
 export interface CreateServiceRolloutRequestSDKType {
@@ -348,6 +554,36 @@ export interface ListServiceRolloutsRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for 'ListServiceRollouts' */
+export interface ListServiceRolloutsRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+  /** The token of the page to retrieve. */
+  page_token?: string;
+  /**
+   * The max number of items to include in the response list. Page size is 50
+   * if not specified. Maximum value is 100.
+   */
+  page_size?: number;
+  /**
+   * Required. Use `filter` to return subset of rollouts.
+   * The following filters are supported:
+   *   -- To limit the results to only those in
+   *      [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+   *      use filter='status=SUCCESS'
+   *   -- To limit the results to those in
+   *      [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+   *      or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
+   */
+  filter?: string;
+}
+export interface ListServiceRolloutsRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest";
+  value: ListServiceRolloutsRequestAmino;
+}
+/** Request message for 'ListServiceRollouts' */
 export interface ListServiceRolloutsRequestSDKType {
   service_name: string;
   page_token: string;
@@ -364,6 +600,17 @@ export interface ListServiceRolloutsResponse {
 export interface ListServiceRolloutsResponseProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
   value: Uint8Array;
+}
+/** Response message for ListServiceRollouts method. */
+export interface ListServiceRolloutsResponseAmino {
+  /** The list of rollout resources. */
+  rollouts?: RolloutAmino[];
+  /** The token of the next page of results. */
+  next_page_token?: string;
+}
+export interface ListServiceRolloutsResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse";
+  value: ListServiceRolloutsResponseAmino;
 }
 /** Response message for ListServiceRollouts method. */
 export interface ListServiceRolloutsResponseSDKType {
@@ -383,6 +630,20 @@ export interface GetServiceRolloutRequest {
 export interface GetServiceRolloutRequestProtoMsg {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
   value: Uint8Array;
+}
+/** Request message for GetServiceRollout method. */
+export interface GetServiceRolloutRequestAmino {
+  /**
+   * Required. The name of the service.  See the [overview](/service-management/overview)
+   * for naming requirements.  For example: `example.googleapis.com`.
+   */
+  service_name?: string;
+  /** Required. The id of the rollout resource. */
+  rollout_id?: string;
+}
+export interface GetServiceRolloutRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.GetServiceRolloutRequest";
+  value: GetServiceRolloutRequestAmino;
 }
 /** Request message for GetServiceRollout method. */
 export interface GetServiceRolloutRequestSDKType {
@@ -413,6 +674,29 @@ export interface GenerateConfigReportRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for GenerateConfigReport method. */
+export interface GenerateConfigReportRequestAmino {
+  /**
+   * Required. Service configuration for which we want to generate the report.
+   * For this version of API, the supported types are
+   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
+   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
+   * and [google.api.Service][google.api.Service]
+   */
+  new_config?: AnyAmino;
+  /**
+   * Optional. Service configuration against which the comparison will be done.
+   * For this version of API, the supported types are
+   * [google.api.servicemanagement.v1.ConfigRef][google.api.servicemanagement.v1.ConfigRef],
+   * [google.api.servicemanagement.v1.ConfigSource][google.api.servicemanagement.v1.ConfigSource],
+   * and [google.api.Service][google.api.Service]
+   */
+  old_config?: AnyAmino;
+}
+export interface GenerateConfigReportRequestAminoMsg {
+  type: "/google.api.servicemanagement.v1.GenerateConfigReportRequest";
+  value: GenerateConfigReportRequestAmino;
+}
+/** Request message for GenerateConfigReport method. */
 export interface GenerateConfigReportRequestSDKType {
   new_config?: AnySDKType;
   old_config?: AnySDKType;
@@ -440,6 +724,28 @@ export interface GenerateConfigReportResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for GenerateConfigReport method. */
+export interface GenerateConfigReportResponseAmino {
+  /** Name of the service this report belongs to. */
+  service_name?: string;
+  /** ID of the service configuration this report belongs to. */
+  id?: string;
+  /**
+   * list of ChangeReport, each corresponding to comparison between two
+   * service configurations.
+   */
+  change_reports?: ChangeReportAmino[];
+  /**
+   * Errors / Linter warnings associated with the service definition this
+   * report
+   * belongs to.
+   */
+  diagnostics?: DiagnosticAmino[];
+}
+export interface GenerateConfigReportResponseAminoMsg {
+  type: "/google.api.servicemanagement.v1.GenerateConfigReportResponse";
+  value: GenerateConfigReportResponseAmino;
+}
+/** Response message for GenerateConfigReport method. */
 export interface GenerateConfigReportResponseSDKType {
   service_name: string;
   id: string;
@@ -456,6 +762,15 @@ function createBaseListServicesRequest(): ListServicesRequest {
 }
 export const ListServicesRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest",
+  is(o: any): o is ListServicesRequest {
+    return o && (o.$typeUrl === ListServicesRequest.typeUrl || typeof o.producerProjectId === "string" && typeof o.pageSize === "number" && typeof o.pageToken === "string" && typeof o.consumerId === "string");
+  },
+  isSDK(o: any): o is ListServicesRequestSDKType {
+    return o && (o.$typeUrl === ListServicesRequest.typeUrl || typeof o.producer_project_id === "string" && typeof o.page_size === "number" && typeof o.page_token === "string" && typeof o.consumer_id === "string");
+  },
+  isAmino(o: any): o is ListServicesRequestAmino {
+    return o && (o.$typeUrl === ListServicesRequest.typeUrl || typeof o.producer_project_id === "string" && typeof o.page_size === "number" && typeof o.page_token === "string" && typeof o.consumer_id === "string");
+  },
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.producerProjectId !== undefined) {
       writer.uint32(10).string(message.producerProjectId);
@@ -583,7 +898,8 @@ export const ListServicesRequest = {
       typeUrl: "/google.api.servicemanagement.v1.ListServicesRequest",
       value: ListServicesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListServicesResponse(): ListServicesResponse {
   return {
@@ -593,6 +909,15 @@ function createBaseListServicesResponse(): ListServicesResponse {
 }
 export const ListServicesResponse = {
   typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse",
+  is(o: any): o is ListServicesResponse {
+    return o && (o.$typeUrl === ListServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || ManagedService.is(o.services[0])) && typeof o.nextPageToken === "string");
+  },
+  isSDK(o: any): o is ListServicesResponseSDKType {
+    return o && (o.$typeUrl === ListServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || ManagedService.isSDK(o.services[0])) && typeof o.next_page_token === "string");
+  },
+  isAmino(o: any): o is ListServicesResponseAmino {
+    return o && (o.$typeUrl === ListServicesResponse.typeUrl || Array.isArray(o.services) && (!o.services.length || ManagedService.isAmino(o.services[0])) && typeof o.next_page_token === "string");
+  },
   encode(message: ListServicesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.services) {
       ManagedService.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -698,6 +1023,9 @@ export const ListServicesResponse = {
       typeUrl: "/google.api.servicemanagement.v1.ListServicesResponse",
       value: ListServicesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ManagedService.registerTypeUrl();
   }
 };
 function createBaseGetServiceRequest(): GetServiceRequest {
@@ -707,6 +1035,15 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 }
 export const GetServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest",
+  is(o: any): o is GetServiceRequest {
+    return o && (o.$typeUrl === GetServiceRequest.typeUrl || typeof o.serviceName === "string");
+  },
+  isSDK(o: any): o is GetServiceRequestSDKType {
+    return o && (o.$typeUrl === GetServiceRequest.typeUrl || typeof o.service_name === "string");
+  },
+  isAmino(o: any): o is GetServiceRequestAmino {
+    return o && (o.$typeUrl === GetServiceRequest.typeUrl || typeof o.service_name === "string");
+  },
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -786,7 +1123,8 @@ export const GetServiceRequest = {
       typeUrl: "/google.api.servicemanagement.v1.GetServiceRequest",
       value: GetServiceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseCreateServiceRequest(): CreateServiceRequest {
   return {
@@ -795,6 +1133,15 @@ function createBaseCreateServiceRequest(): CreateServiceRequest {
 }
 export const CreateServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest",
+  is(o: any): o is CreateServiceRequest {
+    return o && o.$typeUrl === CreateServiceRequest.typeUrl;
+  },
+  isSDK(o: any): o is CreateServiceRequestSDKType {
+    return o && o.$typeUrl === CreateServiceRequest.typeUrl;
+  },
+  isAmino(o: any): o is CreateServiceRequestAmino {
+    return o && o.$typeUrl === CreateServiceRequest.typeUrl;
+  },
   encode(message: CreateServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.service !== undefined) {
       ManagedService.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -876,6 +1223,9 @@ export const CreateServiceRequest = {
       typeUrl: "/google.api.servicemanagement.v1.CreateServiceRequest",
       value: CreateServiceRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ManagedService.registerTypeUrl();
   }
 };
 function createBaseDeleteServiceRequest(): DeleteServiceRequest {
@@ -885,6 +1235,15 @@ function createBaseDeleteServiceRequest(): DeleteServiceRequest {
 }
 export const DeleteServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest",
+  is(o: any): o is DeleteServiceRequest {
+    return o && (o.$typeUrl === DeleteServiceRequest.typeUrl || typeof o.serviceName === "string");
+  },
+  isSDK(o: any): o is DeleteServiceRequestSDKType {
+    return o && (o.$typeUrl === DeleteServiceRequest.typeUrl || typeof o.service_name === "string");
+  },
+  isAmino(o: any): o is DeleteServiceRequestAmino {
+    return o && (o.$typeUrl === DeleteServiceRequest.typeUrl || typeof o.service_name === "string");
+  },
   encode(message: DeleteServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -964,7 +1323,8 @@ export const DeleteServiceRequest = {
       typeUrl: "/google.api.servicemanagement.v1.DeleteServiceRequest",
       value: DeleteServiceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseUndeleteServiceRequest(): UndeleteServiceRequest {
   return {
@@ -973,6 +1333,15 @@ function createBaseUndeleteServiceRequest(): UndeleteServiceRequest {
 }
 export const UndeleteServiceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest",
+  is(o: any): o is UndeleteServiceRequest {
+    return o && (o.$typeUrl === UndeleteServiceRequest.typeUrl || typeof o.serviceName === "string");
+  },
+  isSDK(o: any): o is UndeleteServiceRequestSDKType {
+    return o && (o.$typeUrl === UndeleteServiceRequest.typeUrl || typeof o.service_name === "string");
+  },
+  isAmino(o: any): o is UndeleteServiceRequestAmino {
+    return o && (o.$typeUrl === UndeleteServiceRequest.typeUrl || typeof o.service_name === "string");
+  },
   encode(message: UndeleteServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -1052,7 +1421,8 @@ export const UndeleteServiceRequest = {
       typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceRequest",
       value: UndeleteServiceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseUndeleteServiceResponse(): UndeleteServiceResponse {
   return {
@@ -1061,6 +1431,15 @@ function createBaseUndeleteServiceResponse(): UndeleteServiceResponse {
 }
 export const UndeleteServiceResponse = {
   typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse",
+  is(o: any): o is UndeleteServiceResponse {
+    return o && o.$typeUrl === UndeleteServiceResponse.typeUrl;
+  },
+  isSDK(o: any): o is UndeleteServiceResponseSDKType {
+    return o && o.$typeUrl === UndeleteServiceResponse.typeUrl;
+  },
+  isAmino(o: any): o is UndeleteServiceResponseAmino {
+    return o && o.$typeUrl === UndeleteServiceResponse.typeUrl;
+  },
   encode(message: UndeleteServiceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.service !== undefined) {
       ManagedService.encode(message.service, writer.uint32(10).fork()).ldelim();
@@ -1142,6 +1521,9 @@ export const UndeleteServiceResponse = {
       typeUrl: "/google.api.servicemanagement.v1.UndeleteServiceResponse",
       value: UndeleteServiceResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ManagedService.registerTypeUrl();
   }
 };
 function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
@@ -1153,6 +1535,15 @@ function createBaseGetServiceConfigRequest(): GetServiceConfigRequest {
 }
 export const GetServiceConfigRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest",
+  is(o: any): o is GetServiceConfigRequest {
+    return o && (o.$typeUrl === GetServiceConfigRequest.typeUrl || typeof o.serviceName === "string" && typeof o.configId === "string" && isSet(o.view));
+  },
+  isSDK(o: any): o is GetServiceConfigRequestSDKType {
+    return o && (o.$typeUrl === GetServiceConfigRequest.typeUrl || typeof o.service_name === "string" && typeof o.config_id === "string" && isSet(o.view));
+  },
+  isAmino(o: any): o is GetServiceConfigRequestAmino {
+    return o && (o.$typeUrl === GetServiceConfigRequest.typeUrl || typeof o.service_name === "string" && typeof o.config_id === "string" && isSet(o.view));
+  },
   encode(message: GetServiceConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -1264,7 +1655,8 @@ export const GetServiceConfigRequest = {
       typeUrl: "/google.api.servicemanagement.v1.GetServiceConfigRequest",
       value: GetServiceConfigRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListServiceConfigsRequest(): ListServiceConfigsRequest {
   return {
@@ -1275,6 +1667,15 @@ function createBaseListServiceConfigsRequest(): ListServiceConfigsRequest {
 }
 export const ListServiceConfigsRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest",
+  is(o: any): o is ListServiceConfigsRequest {
+    return o && (o.$typeUrl === ListServiceConfigsRequest.typeUrl || typeof o.serviceName === "string" && typeof o.pageToken === "string" && typeof o.pageSize === "number");
+  },
+  isSDK(o: any): o is ListServiceConfigsRequestSDKType {
+    return o && (o.$typeUrl === ListServiceConfigsRequest.typeUrl || typeof o.service_name === "string" && typeof o.page_token === "string" && typeof o.page_size === "number");
+  },
+  isAmino(o: any): o is ListServiceConfigsRequestAmino {
+    return o && (o.$typeUrl === ListServiceConfigsRequest.typeUrl || typeof o.service_name === "string" && typeof o.page_token === "string" && typeof o.page_size === "number");
+  },
   encode(message: ListServiceConfigsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -1386,7 +1787,8 @@ export const ListServiceConfigsRequest = {
       typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsRequest",
       value: ListServiceConfigsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListServiceConfigsResponse(): ListServiceConfigsResponse {
   return {
@@ -1396,6 +1798,15 @@ function createBaseListServiceConfigsResponse(): ListServiceConfigsResponse {
 }
 export const ListServiceConfigsResponse = {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse",
+  is(o: any): o is ListServiceConfigsResponse {
+    return o && (o.$typeUrl === ListServiceConfigsResponse.typeUrl || Array.isArray(o.serviceConfigs) && (!o.serviceConfigs.length || Service.is(o.serviceConfigs[0])) && typeof o.nextPageToken === "string");
+  },
+  isSDK(o: any): o is ListServiceConfigsResponseSDKType {
+    return o && (o.$typeUrl === ListServiceConfigsResponse.typeUrl || Array.isArray(o.service_configs) && (!o.service_configs.length || Service.isSDK(o.service_configs[0])) && typeof o.next_page_token === "string");
+  },
+  isAmino(o: any): o is ListServiceConfigsResponseAmino {
+    return o && (o.$typeUrl === ListServiceConfigsResponse.typeUrl || Array.isArray(o.service_configs) && (!o.service_configs.length || Service.isAmino(o.service_configs[0])) && typeof o.next_page_token === "string");
+  },
   encode(message: ListServiceConfigsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.serviceConfigs) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1501,6 +1912,9 @@ export const ListServiceConfigsResponse = {
       typeUrl: "/google.api.servicemanagement.v1.ListServiceConfigsResponse",
       value: ListServiceConfigsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Service.registerTypeUrl();
   }
 };
 function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
@@ -1511,6 +1925,15 @@ function createBaseCreateServiceConfigRequest(): CreateServiceConfigRequest {
 }
 export const CreateServiceConfigRequest = {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest",
+  is(o: any): o is CreateServiceConfigRequest {
+    return o && (o.$typeUrl === CreateServiceConfigRequest.typeUrl || typeof o.serviceName === "string");
+  },
+  isSDK(o: any): o is CreateServiceConfigRequestSDKType {
+    return o && (o.$typeUrl === CreateServiceConfigRequest.typeUrl || typeof o.service_name === "string");
+  },
+  isAmino(o: any): o is CreateServiceConfigRequestAmino {
+    return o && (o.$typeUrl === CreateServiceConfigRequest.typeUrl || typeof o.service_name === "string");
+  },
   encode(message: CreateServiceConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -1608,6 +2031,9 @@ export const CreateServiceConfigRequest = {
       typeUrl: "/google.api.servicemanagement.v1.CreateServiceConfigRequest",
       value: CreateServiceConfigRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Service.registerTypeUrl();
   }
 };
 function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
@@ -1619,6 +2045,15 @@ function createBaseSubmitConfigSourceRequest(): SubmitConfigSourceRequest {
 }
 export const SubmitConfigSourceRequest = {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest",
+  is(o: any): o is SubmitConfigSourceRequest {
+    return o && (o.$typeUrl === SubmitConfigSourceRequest.typeUrl || typeof o.serviceName === "string" && typeof o.validateOnly === "boolean");
+  },
+  isSDK(o: any): o is SubmitConfigSourceRequestSDKType {
+    return o && (o.$typeUrl === SubmitConfigSourceRequest.typeUrl || typeof o.service_name === "string" && typeof o.validate_only === "boolean");
+  },
+  isAmino(o: any): o is SubmitConfigSourceRequestAmino {
+    return o && (o.$typeUrl === SubmitConfigSourceRequest.typeUrl || typeof o.service_name === "string" && typeof o.validate_only === "boolean");
+  },
   encode(message: SubmitConfigSourceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -1732,6 +2167,9 @@ export const SubmitConfigSourceRequest = {
       typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceRequest",
       value: SubmitConfigSourceRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ConfigSource.registerTypeUrl();
   }
 };
 function createBaseSubmitConfigSourceResponse(): SubmitConfigSourceResponse {
@@ -1741,6 +2179,15 @@ function createBaseSubmitConfigSourceResponse(): SubmitConfigSourceResponse {
 }
 export const SubmitConfigSourceResponse = {
   typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse",
+  is(o: any): o is SubmitConfigSourceResponse {
+    return o && o.$typeUrl === SubmitConfigSourceResponse.typeUrl;
+  },
+  isSDK(o: any): o is SubmitConfigSourceResponseSDKType {
+    return o && o.$typeUrl === SubmitConfigSourceResponse.typeUrl;
+  },
+  isAmino(o: any): o is SubmitConfigSourceResponseAmino {
+    return o && o.$typeUrl === SubmitConfigSourceResponse.typeUrl;
+  },
   encode(message: SubmitConfigSourceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceConfig !== undefined) {
       Service.encode(message.serviceConfig, writer.uint32(10).fork()).ldelim();
@@ -1822,6 +2269,9 @@ export const SubmitConfigSourceResponse = {
       typeUrl: "/google.api.servicemanagement.v1.SubmitConfigSourceResponse",
       value: SubmitConfigSourceResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Service.registerTypeUrl();
   }
 };
 function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
@@ -1832,6 +2282,15 @@ function createBaseCreateServiceRolloutRequest(): CreateServiceRolloutRequest {
 }
 export const CreateServiceRolloutRequest = {
   typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest",
+  is(o: any): o is CreateServiceRolloutRequest {
+    return o && (o.$typeUrl === CreateServiceRolloutRequest.typeUrl || typeof o.serviceName === "string");
+  },
+  isSDK(o: any): o is CreateServiceRolloutRequestSDKType {
+    return o && (o.$typeUrl === CreateServiceRolloutRequest.typeUrl || typeof o.service_name === "string");
+  },
+  isAmino(o: any): o is CreateServiceRolloutRequestAmino {
+    return o && (o.$typeUrl === CreateServiceRolloutRequest.typeUrl || typeof o.service_name === "string");
+  },
   encode(message: CreateServiceRolloutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -1929,6 +2388,9 @@ export const CreateServiceRolloutRequest = {
       typeUrl: "/google.api.servicemanagement.v1.CreateServiceRolloutRequest",
       value: CreateServiceRolloutRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Rollout.registerTypeUrl();
   }
 };
 function createBaseListServiceRolloutsRequest(): ListServiceRolloutsRequest {
@@ -1941,6 +2403,15 @@ function createBaseListServiceRolloutsRequest(): ListServiceRolloutsRequest {
 }
 export const ListServiceRolloutsRequest = {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest",
+  is(o: any): o is ListServiceRolloutsRequest {
+    return o && (o.$typeUrl === ListServiceRolloutsRequest.typeUrl || typeof o.serviceName === "string" && typeof o.pageToken === "string" && typeof o.pageSize === "number" && typeof o.filter === "string");
+  },
+  isSDK(o: any): o is ListServiceRolloutsRequestSDKType {
+    return o && (o.$typeUrl === ListServiceRolloutsRequest.typeUrl || typeof o.service_name === "string" && typeof o.page_token === "string" && typeof o.page_size === "number" && typeof o.filter === "string");
+  },
+  isAmino(o: any): o is ListServiceRolloutsRequestAmino {
+    return o && (o.$typeUrl === ListServiceRolloutsRequest.typeUrl || typeof o.service_name === "string" && typeof o.page_token === "string" && typeof o.page_size === "number" && typeof o.filter === "string");
+  },
   encode(message: ListServiceRolloutsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -2068,7 +2539,8 @@ export const ListServiceRolloutsRequest = {
       typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsRequest",
       value: ListServiceRolloutsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListServiceRolloutsResponse(): ListServiceRolloutsResponse {
   return {
@@ -2078,6 +2550,15 @@ function createBaseListServiceRolloutsResponse(): ListServiceRolloutsResponse {
 }
 export const ListServiceRolloutsResponse = {
   typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse",
+  is(o: any): o is ListServiceRolloutsResponse {
+    return o && (o.$typeUrl === ListServiceRolloutsResponse.typeUrl || Array.isArray(o.rollouts) && (!o.rollouts.length || Rollout.is(o.rollouts[0])) && typeof o.nextPageToken === "string");
+  },
+  isSDK(o: any): o is ListServiceRolloutsResponseSDKType {
+    return o && (o.$typeUrl === ListServiceRolloutsResponse.typeUrl || Array.isArray(o.rollouts) && (!o.rollouts.length || Rollout.isSDK(o.rollouts[0])) && typeof o.next_page_token === "string");
+  },
+  isAmino(o: any): o is ListServiceRolloutsResponseAmino {
+    return o && (o.$typeUrl === ListServiceRolloutsResponse.typeUrl || Array.isArray(o.rollouts) && (!o.rollouts.length || Rollout.isAmino(o.rollouts[0])) && typeof o.next_page_token === "string");
+  },
   encode(message: ListServiceRolloutsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rollouts) {
       Rollout.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2183,6 +2664,9 @@ export const ListServiceRolloutsResponse = {
       typeUrl: "/google.api.servicemanagement.v1.ListServiceRolloutsResponse",
       value: ListServiceRolloutsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Rollout.registerTypeUrl();
   }
 };
 function createBaseGetServiceRolloutRequest(): GetServiceRolloutRequest {
@@ -2193,6 +2677,15 @@ function createBaseGetServiceRolloutRequest(): GetServiceRolloutRequest {
 }
 export const GetServiceRolloutRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest",
+  is(o: any): o is GetServiceRolloutRequest {
+    return o && (o.$typeUrl === GetServiceRolloutRequest.typeUrl || typeof o.serviceName === "string" && typeof o.rolloutId === "string");
+  },
+  isSDK(o: any): o is GetServiceRolloutRequestSDKType {
+    return o && (o.$typeUrl === GetServiceRolloutRequest.typeUrl || typeof o.service_name === "string" && typeof o.rollout_id === "string");
+  },
+  isAmino(o: any): o is GetServiceRolloutRequestAmino {
+    return o && (o.$typeUrl === GetServiceRolloutRequest.typeUrl || typeof o.service_name === "string" && typeof o.rollout_id === "string");
+  },
   encode(message: GetServiceRolloutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -2288,7 +2781,8 @@ export const GetServiceRolloutRequest = {
       typeUrl: "/google.api.servicemanagement.v1.GetServiceRolloutRequest",
       value: GetServiceRolloutRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
   return {
@@ -2298,6 +2792,15 @@ function createBaseGenerateConfigReportRequest(): GenerateConfigReportRequest {
 }
 export const GenerateConfigReportRequest = {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest",
+  is(o: any): o is GenerateConfigReportRequest {
+    return o && o.$typeUrl === GenerateConfigReportRequest.typeUrl;
+  },
+  isSDK(o: any): o is GenerateConfigReportRequestSDKType {
+    return o && o.$typeUrl === GenerateConfigReportRequest.typeUrl;
+  },
+  isAmino(o: any): o is GenerateConfigReportRequestAmino {
+    return o && o.$typeUrl === GenerateConfigReportRequest.typeUrl;
+  },
   encode(message: GenerateConfigReportRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.newConfig !== undefined) {
       Any.encode(message.newConfig, writer.uint32(10).fork()).ldelim();
@@ -2397,7 +2900,8 @@ export const GenerateConfigReportRequest = {
       typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportRequest",
       value: GenerateConfigReportRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse {
   return {
@@ -2409,6 +2913,15 @@ function createBaseGenerateConfigReportResponse(): GenerateConfigReportResponse 
 }
 export const GenerateConfigReportResponse = {
   typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse",
+  is(o: any): o is GenerateConfigReportResponse {
+    return o && (o.$typeUrl === GenerateConfigReportResponse.typeUrl || typeof o.serviceName === "string" && typeof o.id === "string" && Array.isArray(o.changeReports) && (!o.changeReports.length || ChangeReport.is(o.changeReports[0])) && Array.isArray(o.diagnostics) && (!o.diagnostics.length || Diagnostic.is(o.diagnostics[0])));
+  },
+  isSDK(o: any): o is GenerateConfigReportResponseSDKType {
+    return o && (o.$typeUrl === GenerateConfigReportResponse.typeUrl || typeof o.service_name === "string" && typeof o.id === "string" && Array.isArray(o.change_reports) && (!o.change_reports.length || ChangeReport.isSDK(o.change_reports[0])) && Array.isArray(o.diagnostics) && (!o.diagnostics.length || Diagnostic.isSDK(o.diagnostics[0])));
+  },
+  isAmino(o: any): o is GenerateConfigReportResponseAmino {
+    return o && (o.$typeUrl === GenerateConfigReportResponse.typeUrl || typeof o.service_name === "string" && typeof o.id === "string" && Array.isArray(o.change_reports) && (!o.change_reports.length || ChangeReport.isAmino(o.change_reports[0])) && Array.isArray(o.diagnostics) && (!o.diagnostics.length || Diagnostic.isAmino(o.diagnostics[0])));
+  },
   encode(message: GenerateConfigReportResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.serviceName !== undefined) {
       writer.uint32(10).string(message.serviceName);
@@ -2556,5 +3069,9 @@ export const GenerateConfigReportResponse = {
       typeUrl: "/google.api.servicemanagement.v1.GenerateConfigReportResponse",
       value: GenerateConfigReportResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ChangeReport.registerTypeUrl();
+    Diagnostic.registerTypeUrl();
   }
 };

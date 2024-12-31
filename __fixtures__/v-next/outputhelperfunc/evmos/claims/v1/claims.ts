@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
@@ -17,6 +17,7 @@ export enum Action {
   UNRECOGNIZED = -1,
 }
 export const ActionSDKType = Action;
+export const ActionAmino = Action;
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:
@@ -77,6 +78,22 @@ export interface ClaimProtoMsg {
  * Claim defines the action, completed flag and the remaining claimable amount
  * for a given user. This is only used during client queries.
  */
+export interface ClaimAmino {
+  /** action enum */
+  action?: Action;
+  /** true if the action has been completed */
+  completed?: boolean;
+  /** claimable token amount for the action. Zero if completed */
+  claimable_amount?: string;
+}
+export interface ClaimAminoMsg {
+  type: "/evmos.claims.v1.Claim";
+  value: ClaimAmino;
+}
+/**
+ * Claim defines the action, completed flag and the remaining claimable amount
+ * for a given user. This is only used during client queries.
+ */
 export interface ClaimSDKType {
   action: Action;
   completed: boolean;
@@ -94,6 +111,19 @@ export interface ClaimsRecordAddress {
 export interface ClaimsRecordAddressProtoMsg {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress";
   value: Uint8Array;
+}
+/** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
+export interface ClaimsRecordAddressAmino {
+  /** bech32 or hex address of claim user */
+  address?: string;
+  /** total initial claimable amount for the user */
+  initial_claimable_amount?: string;
+  /** slice of the available actions completed */
+  actions_completed?: boolean[];
+}
+export interface ClaimsRecordAddressAminoMsg {
+  type: "/evmos.claims.v1.ClaimsRecordAddress";
+  value: ClaimsRecordAddressAmino;
 }
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddressSDKType {
@@ -119,6 +149,20 @@ export interface ClaimsRecordProtoMsg {
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
  * completed actions to claim the tokens.
  */
+export interface ClaimsRecordAmino {
+  /** total initial claimable amount for the user */
+  initial_claimable_amount?: string;
+  /** slice of the available actions completed */
+  actions_completed?: boolean[];
+}
+export interface ClaimsRecordAminoMsg {
+  type: "/evmos.claims.v1.ClaimsRecord";
+  value: ClaimsRecordAmino;
+}
+/**
+ * ClaimsRecord defines the initial claimable airdrop amount and the list of
+ * completed actions to claim the tokens.
+ */
 export interface ClaimsRecordSDKType {
   initial_claimable_amount: string;
   actions_completed: boolean[];
@@ -132,6 +176,15 @@ function createBaseClaim(): Claim {
 }
 export const Claim = {
   typeUrl: "/evmos.claims.v1.Claim",
+  is(o: any): o is Claim {
+    return o && (o.$typeUrl === Claim.typeUrl || isSet(o.action) && typeof o.completed === "boolean" && typeof o.claimableAmount === "string");
+  },
+  isSDK(o: any): o is ClaimSDKType {
+    return o && (o.$typeUrl === Claim.typeUrl || isSet(o.action) && typeof o.completed === "boolean" && typeof o.claimable_amount === "string");
+  },
+  isAmino(o: any): o is ClaimAmino {
+    return o && (o.$typeUrl === Claim.typeUrl || isSet(o.action) && typeof o.completed === "boolean" && typeof o.claimable_amount === "string");
+  },
   encode(message: Claim, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.action !== 0) {
       writer.uint32(8).int32(message.action);
@@ -243,7 +296,8 @@ export const Claim = {
       typeUrl: "/evmos.claims.v1.Claim",
       value: Claim.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
   return {
@@ -254,6 +308,15 @@ function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
 }
 export const ClaimsRecordAddress = {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
+  is(o: any): o is ClaimsRecordAddress {
+    return o && (o.$typeUrl === ClaimsRecordAddress.typeUrl || typeof o.address === "string" && typeof o.initialClaimableAmount === "string" && Array.isArray(o.actionsCompleted) && (!o.actionsCompleted.length || typeof o.actionsCompleted[0] === "boolean"));
+  },
+  isSDK(o: any): o is ClaimsRecordAddressSDKType {
+    return o && (o.$typeUrl === ClaimsRecordAddress.typeUrl || typeof o.address === "string" && typeof o.initial_claimable_amount === "string" && Array.isArray(o.actions_completed) && (!o.actions_completed.length || typeof o.actions_completed[0] === "boolean"));
+  },
+  isAmino(o: any): o is ClaimsRecordAddressAmino {
+    return o && (o.$typeUrl === ClaimsRecordAddress.typeUrl || typeof o.address === "string" && typeof o.initial_claimable_amount === "string" && Array.isArray(o.actions_completed) && (!o.actions_completed.length || typeof o.actions_completed[0] === "boolean"));
+  },
   encode(message: ClaimsRecordAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
@@ -384,7 +447,8 @@ export const ClaimsRecordAddress = {
       typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
       value: ClaimsRecordAddress.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseClaimsRecord(): ClaimsRecord {
   return {
@@ -394,6 +458,15 @@ function createBaseClaimsRecord(): ClaimsRecord {
 }
 export const ClaimsRecord = {
   typeUrl: "/evmos.claims.v1.ClaimsRecord",
+  is(o: any): o is ClaimsRecord {
+    return o && (o.$typeUrl === ClaimsRecord.typeUrl || typeof o.initialClaimableAmount === "string" && Array.isArray(o.actionsCompleted) && (!o.actionsCompleted.length || typeof o.actionsCompleted[0] === "boolean"));
+  },
+  isSDK(o: any): o is ClaimsRecordSDKType {
+    return o && (o.$typeUrl === ClaimsRecord.typeUrl || typeof o.initial_claimable_amount === "string" && Array.isArray(o.actions_completed) && (!o.actions_completed.length || typeof o.actions_completed[0] === "boolean"));
+  },
+  isAmino(o: any): o is ClaimsRecordAmino {
+    return o && (o.$typeUrl === ClaimsRecord.typeUrl || typeof o.initial_claimable_amount === "string" && Array.isArray(o.actions_completed) && (!o.actions_completed.length || typeof o.actions_completed[0] === "boolean"));
+  },
   encode(message: ClaimsRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.initialClaimableAmount !== undefined) {
       writer.uint32(10).string(message.initialClaimableAmount);
@@ -508,5 +581,6 @@ export const ClaimsRecord = {
       typeUrl: "/evmos.claims.v1.ClaimsRecord",
       value: ClaimsRecord.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

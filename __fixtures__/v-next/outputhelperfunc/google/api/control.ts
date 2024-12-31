@@ -23,6 +23,22 @@ export interface ControlProtoMsg {
  * service controller handles features like abuse, quota, billing, logging,
  * monitoring, etc.
  */
+export interface ControlAmino {
+  /**
+   * The service control environment to use. If empty, no control plane
+   * feature (like quota and billing) will be enabled.
+   */
+  environment?: string;
+}
+export interface ControlAminoMsg {
+  type: "/google.api.Control";
+  value: ControlAmino;
+}
+/**
+ * Selects and configures the service controller used by the service.  The
+ * service controller handles features like abuse, quota, billing, logging,
+ * monitoring, etc.
+ */
 export interface ControlSDKType {
   environment: string;
 }
@@ -33,6 +49,15 @@ function createBaseControl(): Control {
 }
 export const Control = {
   typeUrl: "/google.api.Control",
+  is(o: any): o is Control {
+    return o && (o.$typeUrl === Control.typeUrl || typeof o.environment === "string");
+  },
+  isSDK(o: any): o is ControlSDKType {
+    return o && (o.$typeUrl === Control.typeUrl || typeof o.environment === "string");
+  },
+  isAmino(o: any): o is ControlAmino {
+    return o && (o.$typeUrl === Control.typeUrl || typeof o.environment === "string");
+  },
   encode(message: Control, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.environment !== undefined) {
       writer.uint32(10).string(message.environment);
@@ -112,5 +137,6 @@ export const Control = {
       typeUrl: "/google.api.Control",
       value: Control.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

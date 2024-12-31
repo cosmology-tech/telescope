@@ -1,6 +1,7 @@
-import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { CertificateFilter, CertificateFilterAmino, CertificateFilterSDKType, Certificate, CertificateAmino, CertificateSDKType } from "./cert";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.cert.v1beta2";
@@ -12,6 +13,15 @@ export interface CertificateResponse {
 export interface CertificateResponseProtoMsg {
   typeUrl: "/akash.cert.v1beta2.CertificateResponse";
   value: Uint8Array;
+}
+/** CertificateResponse contains a single X509 certificate and its serial number */
+export interface CertificateResponseAmino {
+  certificate: CertificateAmino;
+  serial: string;
+}
+export interface CertificateResponseAminoMsg {
+  type: "akash/cert/v1beta2/certificate-response";
+  value: CertificateResponseAmino;
 }
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
@@ -28,6 +38,15 @@ export interface QueryCertificatesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
+export interface QueryCertificatesRequestAmino {
+  filter?: CertificateFilterAmino;
+  pagination?: PageRequestAmino;
+}
+export interface QueryCertificatesRequestAminoMsg {
+  type: "akash/cert/v1beta2/query-certificates-request";
+  value: QueryCertificatesRequestAmino;
+}
+/** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestSDKType {
   filter: CertificateFilterSDKType;
   pagination?: PageRequestSDKType;
@@ -42,6 +61,15 @@ export interface QueryCertificatesResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
+export interface QueryCertificatesResponseAmino {
+  certificates?: CertificateResponseAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryCertificatesResponseAminoMsg {
+  type: "akash/cert/v1beta2/query-certificates-response";
+  value: QueryCertificatesResponseAmino;
+}
+/** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseSDKType {
   certificates: CertificateResponseSDKType[];
   pagination?: PageResponseSDKType;
@@ -54,6 +82,16 @@ function createBaseCertificateResponse(): CertificateResponse {
 }
 export const CertificateResponse = {
   typeUrl: "/akash.cert.v1beta2.CertificateResponse",
+  aminoType: "akash/cert/v1beta2/certificate-response",
+  is(o: any): o is CertificateResponse {
+    return o && (o.$typeUrl === CertificateResponse.typeUrl || Certificate.is(o.certificate) && typeof o.serial === "string");
+  },
+  isSDK(o: any): o is CertificateResponseSDKType {
+    return o && (o.$typeUrl === CertificateResponse.typeUrl || Certificate.isSDK(o.certificate) && typeof o.serial === "string");
+  },
+  isAmino(o: any): o is CertificateResponseAmino {
+    return o && (o.$typeUrl === CertificateResponse.typeUrl || Certificate.isAmino(o.certificate) && typeof o.serial === "string");
+  },
   encode(message: CertificateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.certificate !== undefined) {
       Certificate.encode(message.certificate, writer.uint32(10).fork()).ldelim();
@@ -157,6 +195,9 @@ export const CertificateResponse = {
       typeUrl: "/akash.cert.v1beta2.CertificateResponse",
       value: CertificateResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Certificate.registerTypeUrl();
   }
 };
 function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
@@ -167,6 +208,16 @@ function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
 }
 export const QueryCertificatesRequest = {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest",
+  aminoType: "akash/cert/v1beta2/query-certificates-request",
+  is(o: any): o is QueryCertificatesRequest {
+    return o && (o.$typeUrl === QueryCertificatesRequest.typeUrl || CertificateFilter.is(o.filter));
+  },
+  isSDK(o: any): o is QueryCertificatesRequestSDKType {
+    return o && (o.$typeUrl === QueryCertificatesRequest.typeUrl || CertificateFilter.isSDK(o.filter));
+  },
+  isAmino(o: any): o is QueryCertificatesRequestAmino {
+    return o && (o.$typeUrl === QueryCertificatesRequest.typeUrl || CertificateFilter.isAmino(o.filter));
+  },
   encode(message: QueryCertificatesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.filter !== undefined) {
       CertificateFilter.encode(message.filter, writer.uint32(10).fork()).ldelim();
@@ -272,6 +323,10 @@ export const QueryCertificatesRequest = {
       typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest",
       value: QueryCertificatesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    CertificateFilter.registerTypeUrl();
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
@@ -282,6 +337,16 @@ function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
 }
 export const QueryCertificatesResponse = {
   typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse",
+  aminoType: "akash/cert/v1beta2/query-certificates-response",
+  is(o: any): o is QueryCertificatesResponse {
+    return o && (o.$typeUrl === QueryCertificatesResponse.typeUrl || Array.isArray(o.certificates) && (!o.certificates.length || CertificateResponse.is(o.certificates[0])));
+  },
+  isSDK(o: any): o is QueryCertificatesResponseSDKType {
+    return o && (o.$typeUrl === QueryCertificatesResponse.typeUrl || Array.isArray(o.certificates) && (!o.certificates.length || CertificateResponse.isSDK(o.certificates[0])));
+  },
+  isAmino(o: any): o is QueryCertificatesResponseAmino {
+    return o && (o.$typeUrl === QueryCertificatesResponse.typeUrl || Array.isArray(o.certificates) && (!o.certificates.length || CertificateResponse.isAmino(o.certificates[0])));
+  },
   encode(message: QueryCertificatesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.certificates) {
       CertificateResponse.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -395,5 +460,9 @@ export const QueryCertificatesResponse = {
       typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse",
       value: QueryCertificatesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    CertificateResponse.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };

@@ -22,6 +22,20 @@ export interface FeeTokenProtoMsg {
  * Its price in osmo is derived through looking at the provided pool ID.
  * The pool ID must have osmo as one of its assets.
  */
+export interface FeeTokenAmino {
+  denom?: string;
+  poolID?: string;
+}
+export interface FeeTokenAminoMsg {
+  type: "osmosis/txfees/fee-token";
+  value: FeeTokenAmino;
+}
+/**
+ * FeeToken is a struct that specifies a coin denom, and pool ID pair.
+ * This marks the token as eligible for use as a tx fee asset in Osmosis.
+ * Its price in osmo is derived through looking at the provided pool ID.
+ * The pool ID must have osmo as one of its assets.
+ */
 export interface FeeTokenSDKType {
   denom: string;
   poolID: bigint;
@@ -34,6 +48,16 @@ function createBaseFeeToken(): FeeToken {
 }
 export const FeeToken = {
   typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
+  aminoType: "osmosis/txfees/fee-token",
+  is(o: any): o is FeeToken {
+    return o && (o.$typeUrl === FeeToken.typeUrl || typeof o.denom === "string" && typeof o.poolID === "bigint");
+  },
+  isSDK(o: any): o is FeeTokenSDKType {
+    return o && (o.$typeUrl === FeeToken.typeUrl || typeof o.denom === "string" && typeof o.poolID === "bigint");
+  },
+  isAmino(o: any): o is FeeTokenAmino {
+    return o && (o.$typeUrl === FeeToken.typeUrl || typeof o.denom === "string" && typeof o.poolID === "bigint");
+  },
   encode(message: FeeToken, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
@@ -137,5 +161,6 @@ export const FeeToken = {
       typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
       value: FeeToken.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

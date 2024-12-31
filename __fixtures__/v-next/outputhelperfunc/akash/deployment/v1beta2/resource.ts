@@ -1,6 +1,7 @@
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
-import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
+import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
@@ -13,6 +14,16 @@ export interface Resource {
 export interface ResourceProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Resource";
   value: Uint8Array;
+}
+/** Resource stores unit, total count and price of resource */
+export interface ResourceAmino {
+  resources: ResourceUnitsAmino;
+  count: number;
+  price: DecCoinAmino;
+}
+export interface ResourceAminoMsg {
+  type: "akash/deployment/v1beta2/resource";
+  value: ResourceAmino;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
@@ -29,6 +40,16 @@ function createBaseResource(): Resource {
 }
 export const Resource = {
   typeUrl: "/akash.deployment.v1beta2.Resource",
+  aminoType: "akash/deployment/v1beta2/resource",
+  is(o: any): o is Resource {
+    return o && (o.$typeUrl === Resource.typeUrl || ResourceUnits.is(o.resources) && typeof o.count === "number" && DecCoin.is(o.price));
+  },
+  isSDK(o: any): o is ResourceSDKType {
+    return o && (o.$typeUrl === Resource.typeUrl || ResourceUnits.isSDK(o.resources) && typeof o.count === "number" && DecCoin.isSDK(o.price));
+  },
+  isAmino(o: any): o is ResourceAmino {
+    return o && (o.$typeUrl === Resource.typeUrl || ResourceUnits.isAmino(o.resources) && typeof o.count === "number" && DecCoin.isAmino(o.price));
+  },
   encode(message: Resource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.resources !== undefined) {
       ResourceUnits.encode(message.resources, writer.uint32(10).fork()).ldelim();
@@ -150,5 +171,9 @@ export const Resource = {
       typeUrl: "/akash.deployment.v1beta2.Resource",
       value: Resource.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ResourceUnits.registerTypeUrl();
+    DecCoin.registerTypeUrl();
   }
 };

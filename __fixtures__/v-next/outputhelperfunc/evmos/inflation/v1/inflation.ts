@@ -42,6 +42,36 @@ export interface InflationDistributionProtoMsg {
  * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
  * 0.5333333         = 40%           / (1 - 25%)
  */
+export interface InflationDistributionAmino {
+  /**
+   * staking_rewards defines the proportion of the minted minted_denom that is
+   * to be allocated as staking rewards
+   */
+  staking_rewards?: string;
+  /**
+   * usage_incentives defines the proportion of the minted minted_denom that is
+   * to be allocated to the incentives module address
+   */
+  usage_incentives?: string;
+  /**
+   * community_pool defines the proportion of the minted minted_denom that is to
+   * be allocated to the community pool
+   */
+  community_pool?: string;
+}
+export interface InflationDistributionAminoMsg {
+  type: "/evmos.inflation.v1.InflationDistribution";
+  value: InflationDistributionAmino;
+}
+/**
+ * InflationDistribution defines the distribution in which inflation is
+ * allocated through minting on each epoch (staking, incentives, community). It
+ * excludes the team vesting distribution, as this is minted once at genesis.
+ * The initial InflationDistribution can be calculated from the Evmos Token
+ * Model like this:
+ * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
+ * 0.5333333         = 40%           / (1 - 25%)
+ */
 export interface InflationDistributionSDKType {
   staking_rewards: string;
   usage_incentives: string;
@@ -77,6 +107,29 @@ export interface ExponentialCalculationProtoMsg {
  * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
  * (max_variance / bonding_target))
  */
+export interface ExponentialCalculationAmino {
+  /** initial value */
+  a?: string;
+  /** reduction factor */
+  r?: string;
+  /** long term inflation */
+  c?: string;
+  /** bonding target */
+  bonding_target?: string;
+  /** max variance */
+  max_variance?: string;
+}
+export interface ExponentialCalculationAminoMsg {
+  type: "/evmos.inflation.v1.ExponentialCalculation";
+  value: ExponentialCalculationAmino;
+}
+/**
+ * ExponentialCalculation holds factors to calculate exponential inflation on
+ * each period. Calculation reference:
+ * periodProvision = exponentialDecay       *  bondingIncentive
+ * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
+ * (max_variance / bonding_target))
+ */
 export interface ExponentialCalculationSDKType {
   a: string;
   r: string;
@@ -93,6 +146,15 @@ function createBaseInflationDistribution(): InflationDistribution {
 }
 export const InflationDistribution = {
   typeUrl: "/evmos.inflation.v1.InflationDistribution",
+  is(o: any): o is InflationDistribution {
+    return o && (o.$typeUrl === InflationDistribution.typeUrl || typeof o.stakingRewards === "string" && typeof o.usageIncentives === "string" && typeof o.communityPool === "string");
+  },
+  isSDK(o: any): o is InflationDistributionSDKType {
+    return o && (o.$typeUrl === InflationDistribution.typeUrl || typeof o.staking_rewards === "string" && typeof o.usage_incentives === "string" && typeof o.community_pool === "string");
+  },
+  isAmino(o: any): o is InflationDistributionAmino {
+    return o && (o.$typeUrl === InflationDistribution.typeUrl || typeof o.staking_rewards === "string" && typeof o.usage_incentives === "string" && typeof o.community_pool === "string");
+  },
   encode(message: InflationDistribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.stakingRewards !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.stakingRewards, 18).atomics);
@@ -204,7 +266,8 @@ export const InflationDistribution = {
       typeUrl: "/evmos.inflation.v1.InflationDistribution",
       value: InflationDistribution.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseExponentialCalculation(): ExponentialCalculation {
   return {
@@ -217,6 +280,15 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
 }
 export const ExponentialCalculation = {
   typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
+  is(o: any): o is ExponentialCalculation {
+    return o && (o.$typeUrl === ExponentialCalculation.typeUrl || typeof o.a === "string" && typeof o.r === "string" && typeof o.c === "string" && typeof o.bondingTarget === "string" && typeof o.maxVariance === "string");
+  },
+  isSDK(o: any): o is ExponentialCalculationSDKType {
+    return o && (o.$typeUrl === ExponentialCalculation.typeUrl || typeof o.a === "string" && typeof o.r === "string" && typeof o.c === "string" && typeof o.bonding_target === "string" && typeof o.max_variance === "string");
+  },
+  isAmino(o: any): o is ExponentialCalculationAmino {
+    return o && (o.$typeUrl === ExponentialCalculation.typeUrl || typeof o.a === "string" && typeof o.r === "string" && typeof o.c === "string" && typeof o.bonding_target === "string" && typeof o.max_variance === "string");
+  },
   encode(message: ExponentialCalculation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.a !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.a, 18).atomics);
@@ -360,5 +432,6 @@ export const ExponentialCalculation = {
       typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
       value: ExponentialCalculation.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

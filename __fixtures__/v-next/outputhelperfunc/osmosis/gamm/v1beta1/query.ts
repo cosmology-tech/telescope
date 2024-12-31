@@ -1,10 +1,17 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { SwapAmountInRoute, SwapAmountInRouteAmino, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteAmino, SwapAmountOutRouteSDKType } from "./tx";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Pool as Pool1 } from "../pool-models/balancer/balancerPool";
+import { PoolProtoMsg as Pool1ProtoMsg } from "../pool-models/balancer/balancerPool";
+import { PoolSDKType as Pool1SDKType } from "../pool-models/balancer/balancerPool";
+import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
+import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
+import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** =============================== Pool */
 export interface QueryPoolRequest {
@@ -15,18 +22,36 @@ export interface QueryPoolRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== Pool */
+export interface QueryPoolRequestAmino {
+  pool_id?: string;
+}
+export interface QueryPoolRequestAminoMsg {
+  type: "osmosis/gamm/query-pool-request";
+  value: QueryPoolRequestAmino;
+}
+/** =============================== Pool */
 export interface QueryPoolRequestSDKType {
   pool_id: bigint;
 }
 export interface QueryPoolResponse {
-  pool?: Any;
+  pool?: Pool1 | Pool2 | Any | undefined;
 }
 export interface QueryPoolResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse";
   value: Uint8Array;
 }
+export type QueryPoolResponseEncoded = Omit<QueryPoolResponse, "pool"> & {
+  pool?: Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg | undefined;
+};
+export interface QueryPoolResponseAmino {
+  pool?: AnyAmino;
+}
+export interface QueryPoolResponseAminoMsg {
+  type: "osmosis/gamm/query-pool-response";
+  value: QueryPoolResponseAmino;
+}
 export interface QueryPoolResponseSDKType {
-  pool?: AnySDKType;
+  pool?: Pool1SDKType | Pool2SDKType | AnySDKType | undefined;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequest {
@@ -38,11 +63,20 @@ export interface QueryPoolsRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== Pools */
+export interface QueryPoolsRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryPoolsRequestAminoMsg {
+  type: "osmosis/gamm/query-pools-request";
+  value: QueryPoolsRequestAmino;
+}
+/** =============================== Pools */
 export interface QueryPoolsRequestSDKType {
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
-  pools: Any[];
+  pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
@@ -50,8 +84,20 @@ export interface QueryPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse";
   value: Uint8Array;
 }
+export type QueryPoolsResponseEncoded = Omit<QueryPoolsResponse, "pools"> & {
+  pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
+};
+export interface QueryPoolsResponseAmino {
+  pools?: AnyAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryPoolsResponseAminoMsg {
+  type: "osmosis/gamm/query-pools-response";
+  value: QueryPoolsResponseAmino;
+}
 export interface QueryPoolsResponseSDKType {
-  pools: AnySDKType[];
+  pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   pagination?: PageResponseSDKType;
 }
 /** =============================== NumPools */
@@ -61,6 +107,12 @@ export interface QueryNumPoolsRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== NumPools */
+export interface QueryNumPoolsRequestAmino {}
+export interface QueryNumPoolsRequestAminoMsg {
+  type: "osmosis/gamm/query-num-pools-request";
+  value: QueryNumPoolsRequestAmino;
+}
+/** =============================== NumPools */
 export interface QueryNumPoolsRequestSDKType {}
 export interface QueryNumPoolsResponse {
   numPools: bigint;
@@ -68,6 +120,13 @@ export interface QueryNumPoolsResponse {
 export interface QueryNumPoolsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse";
   value: Uint8Array;
+}
+export interface QueryNumPoolsResponseAmino {
+  num_pools?: string;
+}
+export interface QueryNumPoolsResponseAminoMsg {
+  type: "osmosis/gamm/query-num-pools-response";
+  value: QueryNumPoolsResponseAmino;
 }
 export interface QueryNumPoolsResponseSDKType {
   num_pools: bigint;
@@ -81,6 +140,14 @@ export interface QueryPoolTypeRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== PoolType */
+export interface QueryPoolTypeRequestAmino {
+  pool_id?: string;
+}
+export interface QueryPoolTypeRequestAminoMsg {
+  type: "osmosis/gamm/query-pool-type-request";
+  value: QueryPoolTypeRequestAmino;
+}
+/** =============================== PoolType */
 export interface QueryPoolTypeRequestSDKType {
   pool_id: bigint;
 }
@@ -90,6 +157,13 @@ export interface QueryPoolTypeResponse {
 export interface QueryPoolTypeResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse";
   value: Uint8Array;
+}
+export interface QueryPoolTypeResponseAmino {
+  pool_type?: string;
+}
+export interface QueryPoolTypeResponseAminoMsg {
+  type: "osmosis/gamm/query-pool-type-response";
+  value: QueryPoolTypeResponseAmino;
 }
 export interface QueryPoolTypeResponseSDKType {
   pool_type: string;
@@ -104,6 +178,15 @@ export interface QueryCalcJoinPoolSharesRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== CalcJoinPoolShares */
+export interface QueryCalcJoinPoolSharesRequestAmino {
+  pool_id?: string;
+  tokens_in?: CoinAmino[];
+}
+export interface QueryCalcJoinPoolSharesRequestAminoMsg {
+  type: "osmosis/gamm/query-calc-join-pool-shares-request";
+  value: QueryCalcJoinPoolSharesRequestAmino;
+}
+/** =============================== CalcJoinPoolShares */
 export interface QueryCalcJoinPoolSharesRequestSDKType {
   pool_id: bigint;
   tokens_in: CoinSDKType[];
@@ -115,6 +198,14 @@ export interface QueryCalcJoinPoolSharesResponse {
 export interface QueryCalcJoinPoolSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse";
   value: Uint8Array;
+}
+export interface QueryCalcJoinPoolSharesResponseAmino {
+  share_out_amount?: string;
+  tokens_out?: CoinAmino[];
+}
+export interface QueryCalcJoinPoolSharesResponseAminoMsg {
+  type: "osmosis/gamm/query-calc-join-pool-shares-response";
+  value: QueryCalcJoinPoolSharesResponseAmino;
 }
 export interface QueryCalcJoinPoolSharesResponseSDKType {
   share_out_amount: string;
@@ -130,6 +221,15 @@ export interface QueryCalcExitPoolCoinsFromSharesRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== CalcExitPoolCoinsFromShares */
+export interface QueryCalcExitPoolCoinsFromSharesRequestAmino {
+  pool_id?: string;
+  share_in_amount?: string;
+}
+export interface QueryCalcExitPoolCoinsFromSharesRequestAminoMsg {
+  type: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-request";
+  value: QueryCalcExitPoolCoinsFromSharesRequestAmino;
+}
+/** =============================== CalcExitPoolCoinsFromShares */
 export interface QueryCalcExitPoolCoinsFromSharesRequestSDKType {
   pool_id: bigint;
   share_in_amount: string;
@@ -140,6 +240,13 @@ export interface QueryCalcExitPoolCoinsFromSharesResponse {
 export interface QueryCalcExitPoolCoinsFromSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse";
   value: Uint8Array;
+}
+export interface QueryCalcExitPoolCoinsFromSharesResponseAmino {
+  tokens_out?: CoinAmino[];
+}
+export interface QueryCalcExitPoolCoinsFromSharesResponseAminoMsg {
+  type: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-response";
+  value: QueryCalcExitPoolCoinsFromSharesResponseAmino;
 }
 export interface QueryCalcExitPoolCoinsFromSharesResponseSDKType {
   tokens_out: CoinSDKType[];
@@ -153,6 +260,14 @@ export interface QueryPoolParamsRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== PoolParams */
+export interface QueryPoolParamsRequestAmino {
+  pool_id?: string;
+}
+export interface QueryPoolParamsRequestAminoMsg {
+  type: "osmosis/gamm/query-pool-params-request";
+  value: QueryPoolParamsRequestAmino;
+}
+/** =============================== PoolParams */
 export interface QueryPoolParamsRequestSDKType {
   pool_id: bigint;
 }
@@ -162,6 +277,13 @@ export interface QueryPoolParamsResponse {
 export interface QueryPoolParamsResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse";
   value: Uint8Array;
+}
+export interface QueryPoolParamsResponseAmino {
+  params?: AnyAmino;
+}
+export interface QueryPoolParamsResponseAminoMsg {
+  type: "osmosis/gamm/query-pool-params-response";
+  value: QueryPoolParamsResponseAmino;
 }
 export interface QueryPoolParamsResponseSDKType {
   params?: AnySDKType;
@@ -175,6 +297,14 @@ export interface QueryTotalPoolLiquidityRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== PoolLiquidity */
+export interface QueryTotalPoolLiquidityRequestAmino {
+  pool_id?: string;
+}
+export interface QueryTotalPoolLiquidityRequestAminoMsg {
+  type: "osmosis/gamm/query-total-pool-liquidity-request";
+  value: QueryTotalPoolLiquidityRequestAmino;
+}
+/** =============================== PoolLiquidity */
 export interface QueryTotalPoolLiquidityRequestSDKType {
   pool_id: bigint;
 }
@@ -184,6 +314,13 @@ export interface QueryTotalPoolLiquidityResponse {
 export interface QueryTotalPoolLiquidityResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse";
   value: Uint8Array;
+}
+export interface QueryTotalPoolLiquidityResponseAmino {
+  liquidity?: CoinAmino[];
+}
+export interface QueryTotalPoolLiquidityResponseAminoMsg {
+  type: "osmosis/gamm/query-total-pool-liquidity-response";
+  value: QueryTotalPoolLiquidityResponseAmino;
 }
 export interface QueryTotalPoolLiquidityResponseSDKType {
   liquidity: CoinSDKType[];
@@ -197,6 +334,14 @@ export interface QueryTotalSharesRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== TotalShares */
+export interface QueryTotalSharesRequestAmino {
+  pool_id?: string;
+}
+export interface QueryTotalSharesRequestAminoMsg {
+  type: "osmosis/gamm/query-total-shares-request";
+  value: QueryTotalSharesRequestAmino;
+}
+/** =============================== TotalShares */
 export interface QueryTotalSharesRequestSDKType {
   pool_id: bigint;
 }
@@ -206,6 +351,13 @@ export interface QueryTotalSharesResponse {
 export interface QueryTotalSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse";
   value: Uint8Array;
+}
+export interface QueryTotalSharesResponseAmino {
+  total_shares?: CoinAmino;
+}
+export interface QueryTotalSharesResponseAminoMsg {
+  type: "osmosis/gamm/query-total-shares-response";
+  value: QueryTotalSharesResponseAmino;
 }
 export interface QueryTotalSharesResponseSDKType {
   total_shares: CoinSDKType;
@@ -220,6 +372,15 @@ export interface QueryCalcJoinPoolNoSwapSharesRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== CalcJoinPoolNoSwapShares */
+export interface QueryCalcJoinPoolNoSwapSharesRequestAmino {
+  pool_id?: string;
+  tokens_in?: CoinAmino[];
+}
+export interface QueryCalcJoinPoolNoSwapSharesRequestAminoMsg {
+  type: "osmosis/gamm/query-calc-join-pool-no-swap-shares-request";
+  value: QueryCalcJoinPoolNoSwapSharesRequestAmino;
+}
+/** =============================== CalcJoinPoolNoSwapShares */
 export interface QueryCalcJoinPoolNoSwapSharesRequestSDKType {
   pool_id: bigint;
   tokens_in: CoinSDKType[];
@@ -231,6 +392,14 @@ export interface QueryCalcJoinPoolNoSwapSharesResponse {
 export interface QueryCalcJoinPoolNoSwapSharesResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse";
   value: Uint8Array;
+}
+export interface QueryCalcJoinPoolNoSwapSharesResponseAmino {
+  tokens_out?: CoinAmino[];
+  shares_out?: string;
+}
+export interface QueryCalcJoinPoolNoSwapSharesResponseAminoMsg {
+  type: "osmosis/gamm/query-calc-join-pool-no-swap-shares-response";
+  value: QueryCalcJoinPoolNoSwapSharesResponseAmino;
 }
 export interface QueryCalcJoinPoolNoSwapSharesResponseSDKType {
   tokens_out: CoinSDKType[];
@@ -255,6 +424,20 @@ export interface QuerySpotPriceRequestProtoMsg {
  * query.
  */
 /** @deprecated */
+export interface QuerySpotPriceRequestAmino {
+  pool_id?: string;
+  base_asset_denom?: string;
+  quote_asset_denom?: string;
+}
+export interface QuerySpotPriceRequestAminoMsg {
+  type: "osmosis/gamm/query-spot-price-request";
+  value: QuerySpotPriceRequestAmino;
+}
+/**
+ * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
+ * query.
+ */
+/** @deprecated */
 export interface QuerySpotPriceRequestSDKType {
   pool_id: bigint;
   base_asset_denom: string;
@@ -269,13 +452,22 @@ export interface QueryPoolsWithFilterRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest";
   value: Uint8Array;
 }
+export interface QueryPoolsWithFilterRequestAmino {
+  min_liquidity?: CoinAmino[];
+  pool_type?: string;
+  pagination?: PageRequestAmino;
+}
+export interface QueryPoolsWithFilterRequestAminoMsg {
+  type: "osmosis/gamm/query-pools-with-filter-request";
+  value: QueryPoolsWithFilterRequestAmino;
+}
 export interface QueryPoolsWithFilterRequestSDKType {
   min_liquidity: CoinSDKType[];
   pool_type: string;
   pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsWithFilterResponse {
-  pools: Any[];
+  pools: (Pool1 | Pool2 | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
@@ -283,8 +475,20 @@ export interface QueryPoolsWithFilterResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse";
   value: Uint8Array;
 }
+export type QueryPoolsWithFilterResponseEncoded = Omit<QueryPoolsWithFilterResponse, "pools"> & {
+  pools: (Pool1ProtoMsg | Pool2ProtoMsg | AnyProtoMsg)[];
+};
+export interface QueryPoolsWithFilterResponseAmino {
+  pools?: AnyAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryPoolsWithFilterResponseAminoMsg {
+  type: "osmosis/gamm/query-pools-with-filter-response";
+  value: QueryPoolsWithFilterResponseAmino;
+}
 export interface QueryPoolsWithFilterResponseSDKType {
-  pools: AnySDKType[];
+  pools: (Pool1SDKType | Pool2SDKType | AnySDKType)[];
   pagination?: PageResponseSDKType;
 }
 /**
@@ -299,6 +503,19 @@ export interface QuerySpotPriceResponse {
 export interface QuerySpotPriceResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse";
   value: Uint8Array;
+}
+/**
+ * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
+ * query.
+ */
+/** @deprecated */
+export interface QuerySpotPriceResponseAmino {
+  /** String of the Dec. Ex) 10.203uatom */
+  spot_price?: string;
+}
+export interface QuerySpotPriceResponseAminoMsg {
+  type: "osmosis/gamm/query-spot-price-response";
+  value: QuerySpotPriceResponseAmino;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -321,6 +538,18 @@ export interface QuerySwapExactAmountInRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== EstimateSwapExactAmountIn */
+export interface QuerySwapExactAmountInRequestAmino {
+  /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
+  sender?: string;
+  pool_id?: string;
+  token_in?: string;
+  routes?: SwapAmountInRouteAmino[];
+}
+export interface QuerySwapExactAmountInRequestAminoMsg {
+  type: "osmosis/gamm/query-swap-exact-amount-in-request";
+  value: QuerySwapExactAmountInRequestAmino;
+}
+/** =============================== EstimateSwapExactAmountIn */
 export interface QuerySwapExactAmountInRequestSDKType {
   sender: string;
   pool_id: bigint;
@@ -333,6 +562,13 @@ export interface QuerySwapExactAmountInResponse {
 export interface QuerySwapExactAmountInResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse";
   value: Uint8Array;
+}
+export interface QuerySwapExactAmountInResponseAmino {
+  token_out_amount?: string;
+}
+export interface QuerySwapExactAmountInResponseAminoMsg {
+  type: "osmosis/gamm/query-swap-exact-amount-in-response";
+  value: QuerySwapExactAmountInResponseAmino;
 }
 export interface QuerySwapExactAmountInResponseSDKType {
   token_out_amount: string;
@@ -350,6 +586,18 @@ export interface QuerySwapExactAmountOutRequestProtoMsg {
   value: Uint8Array;
 }
 /** =============================== EstimateSwapExactAmountOut */
+export interface QuerySwapExactAmountOutRequestAmino {
+  /** TODO: CHANGE THIS TO RESERVED IN A PATCH RELEASE */
+  sender?: string;
+  pool_id?: string;
+  routes?: SwapAmountOutRouteAmino[];
+  token_out?: string;
+}
+export interface QuerySwapExactAmountOutRequestAminoMsg {
+  type: "osmosis/gamm/query-swap-exact-amount-out-request";
+  value: QuerySwapExactAmountOutRequestAmino;
+}
+/** =============================== EstimateSwapExactAmountOut */
 export interface QuerySwapExactAmountOutRequestSDKType {
   sender: string;
   pool_id: bigint;
@@ -363,6 +611,13 @@ export interface QuerySwapExactAmountOutResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse";
   value: Uint8Array;
 }
+export interface QuerySwapExactAmountOutResponseAmino {
+  token_in_amount?: string;
+}
+export interface QuerySwapExactAmountOutResponseAminoMsg {
+  type: "osmosis/gamm/query-swap-exact-amount-out-response";
+  value: QuerySwapExactAmountOutResponseAmino;
+}
 export interface QuerySwapExactAmountOutResponseSDKType {
   token_in_amount: string;
 }
@@ -371,6 +626,11 @@ export interface QueryTotalLiquidityRequestProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest";
   value: Uint8Array;
 }
+export interface QueryTotalLiquidityRequestAmino {}
+export interface QueryTotalLiquidityRequestAminoMsg {
+  type: "osmosis/gamm/query-total-liquidity-request";
+  value: QueryTotalLiquidityRequestAmino;
+}
 export interface QueryTotalLiquidityRequestSDKType {}
 export interface QueryTotalLiquidityResponse {
   liquidity: Coin[];
@@ -378,6 +638,13 @@ export interface QueryTotalLiquidityResponse {
 export interface QueryTotalLiquidityResponseProtoMsg {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse";
   value: Uint8Array;
+}
+export interface QueryTotalLiquidityResponseAmino {
+  liquidity?: CoinAmino[];
+}
+export interface QueryTotalLiquidityResponseAminoMsg {
+  type: "osmosis/gamm/query-total-liquidity-response";
+  value: QueryTotalLiquidityResponseAmino;
 }
 export interface QueryTotalLiquidityResponseSDKType {
   liquidity: CoinSDKType[];
@@ -389,6 +656,16 @@ function createBaseQueryPoolRequest(): QueryPoolRequest {
 }
 export const QueryPoolRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest",
+  aminoType: "osmosis/gamm/query-pool-request",
+  is(o: any): o is QueryPoolRequest {
+    return o && (o.$typeUrl === QueryPoolRequest.typeUrl || typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is QueryPoolRequestSDKType {
+    return o && (o.$typeUrl === QueryPoolRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is QueryPoolRequestAmino {
+    return o && (o.$typeUrl === QueryPoolRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
   encode(message: QueryPoolRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -476,7 +753,8 @@ export const QueryPoolRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolRequest",
       value: QueryPoolRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPoolResponse(): QueryPoolResponse {
   return {
@@ -485,9 +763,19 @@ function createBaseQueryPoolResponse(): QueryPoolResponse {
 }
 export const QueryPoolResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse",
+  aminoType: "osmosis/gamm/query-pool-response",
+  is(o: any): o is QueryPoolResponse {
+    return o && o.$typeUrl === QueryPoolResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryPoolResponseSDKType {
+    return o && o.$typeUrl === QueryPoolResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryPoolResponseAmino {
+    return o && o.$typeUrl === QueryPoolResponse.typeUrl;
+  },
   encode(message: QueryPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pool !== undefined) {
-      Any.encode(message.pool, writer.uint32(10).fork()).ldelim();
+      Any.encode(GlobalDecoderRegistry.wrapAny(message.pool), writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -499,7 +787,7 @@ export const QueryPoolResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pool = Any.decode(reader, reader.uint32());
+          message.pool = GlobalDecoderRegistry.unwrapAny(reader);
           break;
         default:
           reader.skipType(tag & 7);
@@ -510,46 +798,46 @@ export const QueryPoolResponse = {
   },
   fromJSON(object: any): QueryPoolResponse {
     const obj = createBaseQueryPoolResponse();
-    if (isSet(object.pool)) obj.pool = Any.fromJSON(object.pool);
+    if (isSet(object.pool)) obj.pool = GlobalDecoderRegistry.fromJSON(object.pool);
     return obj;
   },
   toJSON(message: QueryPoolResponse): JsonSafe<QueryPoolResponse> {
     const obj: any = {};
-    message.pool !== undefined && (obj.pool = message.pool ? Any.toJSON(message.pool) : undefined);
+    message.pool !== undefined && (obj.pool = message.pool ? GlobalDecoderRegistry.toJSON(message.pool) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPoolResponse>): QueryPoolResponse {
     const message = createBaseQueryPoolResponse();
     if (object.pool !== undefined && object.pool !== null) {
-      message.pool = Any.fromPartial(object.pool);
+      message.pool = GlobalDecoderRegistry.fromPartial(object.pool);
     }
     return message;
   },
   fromSDK(object: QueryPoolResponseSDKType): QueryPoolResponse {
     return {
-      pool: object.pool ? Any.fromSDK(object.pool) : undefined
+      pool: object.pool ? GlobalDecoderRegistry.fromSDK(object.pool) : undefined
     };
   },
   fromSDKJSON(object: any): QueryPoolResponseSDKType {
     return {
-      pool: isSet(object.pool) ? Any.fromSDKJSON(object.pool) : undefined
+      pool: isSet(object.pool) ? GlobalDecoderRegistry.fromSDKJSON(object.pool) : undefined
     };
   },
   toSDK(message: QueryPoolResponse): QueryPoolResponseSDKType {
     const obj: any = {};
-    message.pool !== undefined && (obj.pool = message.pool ? Any.toSDK(message.pool) : undefined);
+    message.pool !== undefined && (obj.pool = message.pool ? GlobalDecoderRegistry.toSDK(message.pool) : undefined);
     return obj;
   },
   fromAmino(object: QueryPoolResponseAmino): QueryPoolResponse {
     const message = createBaseQueryPoolResponse();
     if (object.pool !== undefined && object.pool !== null) {
-      message.pool = Any.fromAmino(object.pool);
+      message.pool = GlobalDecoderRegistry.fromAminoMsg(object.pool);
     }
     return message;
   },
   toAmino(message: QueryPoolResponse): QueryPoolResponseAmino {
     const obj: any = {};
-    obj.pool = message.pool ? Any.toAmino(message.pool) : undefined;
+    obj.pool = message.pool ? GlobalDecoderRegistry.toAminoMsg(message.pool) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryPoolResponseAminoMsg): QueryPoolResponse {
@@ -572,6 +860,14 @@ export const QueryPoolResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolResponse",
       value: QueryPoolResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GlobalDecoderRegistry.register(Pool1.typeUrl, Pool1);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool1.aminoType, Pool1.typeUrl);
+    Pool1.registerTypeUrl();
+    GlobalDecoderRegistry.register(Pool2.typeUrl, Pool2);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool2.aminoType, Pool2.typeUrl);
+    Pool2.registerTypeUrl();
   }
 };
 function createBaseQueryPoolsRequest(): QueryPoolsRequest {
@@ -581,6 +877,16 @@ function createBaseQueryPoolsRequest(): QueryPoolsRequest {
 }
 export const QueryPoolsRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest",
+  aminoType: "osmosis/gamm/query-pools-request",
+  is(o: any): o is QueryPoolsRequest {
+    return o && o.$typeUrl === QueryPoolsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryPoolsRequestSDKType {
+    return o && o.$typeUrl === QueryPoolsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryPoolsRequestAmino {
+    return o && o.$typeUrl === QueryPoolsRequest.typeUrl;
+  },
   encode(message: QueryPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -668,6 +974,9 @@ export const QueryPoolsRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsRequest",
       value: QueryPoolsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
@@ -678,9 +987,19 @@ function createBaseQueryPoolsResponse(): QueryPoolsResponse {
 }
 export const QueryPoolsResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse",
+  aminoType: "osmosis/gamm/query-pools-response",
+  is(o: any): o is QueryPoolsResponse {
+    return o && (o.$typeUrl === QueryPoolsResponse.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.is(o.pools[0]) || Pool2.is(o.pools[0]) || Any.is(o.pools[0])));
+  },
+  isSDK(o: any): o is QueryPoolsResponseSDKType {
+    return o && (o.$typeUrl === QueryPoolsResponse.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.isSDK(o.pools[0]) || Pool2.isSDK(o.pools[0]) || Any.isSDK(o.pools[0])));
+  },
+  isAmino(o: any): o is QueryPoolsResponseAmino {
+    return o && (o.$typeUrl === QueryPoolsResponse.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.isAmino(o.pools[0]) || Pool2.isAmino(o.pools[0]) || Any.isAmino(o.pools[0])));
+  },
   encode(message: QueryPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pools) {
-      Any.encode(v!, writer.uint32(10).fork()).ldelim();
+      Any.encode(GlobalDecoderRegistry.wrapAny(v!), writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
       PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -695,7 +1014,7 @@ export const QueryPoolsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pools.push(Any.decode(reader, reader.uint32()));
+          message.pools.push(GlobalDecoderRegistry.unwrapAny(reader));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -709,14 +1028,14 @@ export const QueryPoolsResponse = {
   },
   fromJSON(object: any): QueryPoolsResponse {
     const obj = createBaseQueryPoolsResponse();
-    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
   toJSON(message: QueryPoolsResponse): JsonSafe<QueryPoolsResponse> {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toJSON(e) : undefined);
     } else {
       obj.pools = [];
     }
@@ -725,7 +1044,7 @@ export const QueryPoolsResponse = {
   },
   fromPartial(object: DeepPartial<QueryPoolsResponse>): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
-    message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
+    message.pools = object.pools?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageResponse.fromPartial(object.pagination);
     }
@@ -733,20 +1052,20 @@ export const QueryPoolsResponse = {
   },
   fromSDK(object: QueryPoolsResponseSDKType): QueryPoolsResponse {
     return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
   fromSDKJSON(object: any): QueryPoolsResponseSDKType {
     return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
   toSDK(message: QueryPoolsResponse): QueryPoolsResponseSDKType {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toSDK(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toSDK(e) : undefined);
     } else {
       obj.pools = [];
     }
@@ -755,7 +1074,7 @@ export const QueryPoolsResponse = {
   },
   fromAmino(object: QueryPoolsResponseAmino): QueryPoolsResponse {
     const message = createBaseQueryPoolsResponse();
-    message.pools = object.pools?.map(e => Any.fromAmino(e)) || [];
+    message.pools = object.pools?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageResponse.fromAmino(object.pagination);
     }
@@ -764,7 +1083,7 @@ export const QueryPoolsResponse = {
   toAmino(message: QueryPoolsResponse): QueryPoolsResponseAmino {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toAmino(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
     } else {
       obj.pools = message.pools;
     }
@@ -791,6 +1110,15 @@ export const QueryPoolsResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsResponse",
       value: QueryPoolsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GlobalDecoderRegistry.register(Pool1.typeUrl, Pool1);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool1.aminoType, Pool1.typeUrl);
+    Pool1.registerTypeUrl();
+    GlobalDecoderRegistry.register(Pool2.typeUrl, Pool2);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool2.aminoType, Pool2.typeUrl);
+    Pool2.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryNumPoolsRequest(): QueryNumPoolsRequest {
@@ -798,6 +1126,16 @@ function createBaseQueryNumPoolsRequest(): QueryNumPoolsRequest {
 }
 export const QueryNumPoolsRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest",
+  aminoType: "osmosis/gamm/query-num-pools-request",
+  is(o: any): o is QueryNumPoolsRequest {
+    return o && o.$typeUrl === QueryNumPoolsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryNumPoolsRequestSDKType {
+    return o && o.$typeUrl === QueryNumPoolsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryNumPoolsRequestAmino {
+    return o && o.$typeUrl === QueryNumPoolsRequest.typeUrl;
+  },
   encode(_: QueryNumPoolsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -865,7 +1203,8 @@ export const QueryNumPoolsRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsRequest",
       value: QueryNumPoolsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
   return {
@@ -874,6 +1213,16 @@ function createBaseQueryNumPoolsResponse(): QueryNumPoolsResponse {
 }
 export const QueryNumPoolsResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse",
+  aminoType: "osmosis/gamm/query-num-pools-response",
+  is(o: any): o is QueryNumPoolsResponse {
+    return o && (o.$typeUrl === QueryNumPoolsResponse.typeUrl || typeof o.numPools === "bigint");
+  },
+  isSDK(o: any): o is QueryNumPoolsResponseSDKType {
+    return o && (o.$typeUrl === QueryNumPoolsResponse.typeUrl || typeof o.num_pools === "bigint");
+  },
+  isAmino(o: any): o is QueryNumPoolsResponseAmino {
+    return o && (o.$typeUrl === QueryNumPoolsResponse.typeUrl || typeof o.num_pools === "bigint");
+  },
   encode(message: QueryNumPoolsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.numPools !== undefined) {
       writer.uint32(8).uint64(message.numPools);
@@ -961,7 +1310,8 @@ export const QueryNumPoolsResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryNumPoolsResponse",
       value: QueryNumPoolsResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPoolTypeRequest(): QueryPoolTypeRequest {
   return {
@@ -970,6 +1320,16 @@ function createBaseQueryPoolTypeRequest(): QueryPoolTypeRequest {
 }
 export const QueryPoolTypeRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest",
+  aminoType: "osmosis/gamm/query-pool-type-request",
+  is(o: any): o is QueryPoolTypeRequest {
+    return o && (o.$typeUrl === QueryPoolTypeRequest.typeUrl || typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is QueryPoolTypeRequestSDKType {
+    return o && (o.$typeUrl === QueryPoolTypeRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is QueryPoolTypeRequestAmino {
+    return o && (o.$typeUrl === QueryPoolTypeRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
   encode(message: QueryPoolTypeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -1057,7 +1417,8 @@ export const QueryPoolTypeRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeRequest",
       value: QueryPoolTypeRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPoolTypeResponse(): QueryPoolTypeResponse {
   return {
@@ -1066,6 +1427,16 @@ function createBaseQueryPoolTypeResponse(): QueryPoolTypeResponse {
 }
 export const QueryPoolTypeResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse",
+  aminoType: "osmosis/gamm/query-pool-type-response",
+  is(o: any): o is QueryPoolTypeResponse {
+    return o && (o.$typeUrl === QueryPoolTypeResponse.typeUrl || typeof o.poolType === "string");
+  },
+  isSDK(o: any): o is QueryPoolTypeResponseSDKType {
+    return o && (o.$typeUrl === QueryPoolTypeResponse.typeUrl || typeof o.pool_type === "string");
+  },
+  isAmino(o: any): o is QueryPoolTypeResponseAmino {
+    return o && (o.$typeUrl === QueryPoolTypeResponse.typeUrl || typeof o.pool_type === "string");
+  },
   encode(message: QueryPoolTypeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolType !== undefined) {
       writer.uint32(10).string(message.poolType);
@@ -1151,7 +1522,8 @@ export const QueryPoolTypeResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolTypeResponse",
       value: QueryPoolTypeResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryCalcJoinPoolSharesRequest(): QueryCalcJoinPoolSharesRequest {
   return {
@@ -1161,6 +1533,16 @@ function createBaseQueryCalcJoinPoolSharesRequest(): QueryCalcJoinPoolSharesRequ
 }
 export const QueryCalcJoinPoolSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest",
+  aminoType: "osmosis/gamm/query-calc-join-pool-shares-request",
+  is(o: any): o is QueryCalcJoinPoolSharesRequest {
+    return o && (o.$typeUrl === QueryCalcJoinPoolSharesRequest.typeUrl || typeof o.poolId === "bigint" && Array.isArray(o.tokensIn) && (!o.tokensIn.length || Coin.is(o.tokensIn[0])));
+  },
+  isSDK(o: any): o is QueryCalcJoinPoolSharesRequestSDKType {
+    return o && (o.$typeUrl === QueryCalcJoinPoolSharesRequest.typeUrl || typeof o.pool_id === "bigint" && Array.isArray(o.tokens_in) && (!o.tokens_in.length || Coin.isSDK(o.tokens_in[0])));
+  },
+  isAmino(o: any): o is QueryCalcJoinPoolSharesRequestAmino {
+    return o && (o.$typeUrl === QueryCalcJoinPoolSharesRequest.typeUrl || typeof o.pool_id === "bigint" && Array.isArray(o.tokens_in) && (!o.tokens_in.length || Coin.isAmino(o.tokens_in[0])));
+  },
   encode(message: QueryCalcJoinPoolSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -1274,6 +1656,9 @@ export const QueryCalcJoinPoolSharesRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesRequest",
       value: QueryCalcJoinPoolSharesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryCalcJoinPoolSharesResponse(): QueryCalcJoinPoolSharesResponse {
@@ -1284,6 +1669,16 @@ function createBaseQueryCalcJoinPoolSharesResponse(): QueryCalcJoinPoolSharesRes
 }
 export const QueryCalcJoinPoolSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse",
+  aminoType: "osmosis/gamm/query-calc-join-pool-shares-response",
+  is(o: any): o is QueryCalcJoinPoolSharesResponse {
+    return o && (o.$typeUrl === QueryCalcJoinPoolSharesResponse.typeUrl || typeof o.shareOutAmount === "string" && Array.isArray(o.tokensOut) && (!o.tokensOut.length || Coin.is(o.tokensOut[0])));
+  },
+  isSDK(o: any): o is QueryCalcJoinPoolSharesResponseSDKType {
+    return o && (o.$typeUrl === QueryCalcJoinPoolSharesResponse.typeUrl || typeof o.share_out_amount === "string" && Array.isArray(o.tokens_out) && (!o.tokens_out.length || Coin.isSDK(o.tokens_out[0])));
+  },
+  isAmino(o: any): o is QueryCalcJoinPoolSharesResponseAmino {
+    return o && (o.$typeUrl === QueryCalcJoinPoolSharesResponse.typeUrl || typeof o.share_out_amount === "string" && Array.isArray(o.tokens_out) && (!o.tokens_out.length || Coin.isAmino(o.tokens_out[0])));
+  },
   encode(message: QueryCalcJoinPoolSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.shareOutAmount !== undefined) {
       writer.uint32(10).string(message.shareOutAmount);
@@ -1395,6 +1790,9 @@ export const QueryCalcJoinPoolSharesResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolSharesResponse",
       value: QueryCalcJoinPoolSharesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryCalcExitPoolCoinsFromSharesRequest(): QueryCalcExitPoolCoinsFromSharesRequest {
@@ -1405,6 +1803,16 @@ function createBaseQueryCalcExitPoolCoinsFromSharesRequest(): QueryCalcExitPoolC
 }
 export const QueryCalcExitPoolCoinsFromSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest",
+  aminoType: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-request",
+  is(o: any): o is QueryCalcExitPoolCoinsFromSharesRequest {
+    return o && (o.$typeUrl === QueryCalcExitPoolCoinsFromSharesRequest.typeUrl || typeof o.poolId === "bigint" && typeof o.shareInAmount === "string");
+  },
+  isSDK(o: any): o is QueryCalcExitPoolCoinsFromSharesRequestSDKType {
+    return o && (o.$typeUrl === QueryCalcExitPoolCoinsFromSharesRequest.typeUrl || typeof o.pool_id === "bigint" && typeof o.share_in_amount === "string");
+  },
+  isAmino(o: any): o is QueryCalcExitPoolCoinsFromSharesRequestAmino {
+    return o && (o.$typeUrl === QueryCalcExitPoolCoinsFromSharesRequest.typeUrl || typeof o.pool_id === "bigint" && typeof o.share_in_amount === "string");
+  },
   encode(message: QueryCalcExitPoolCoinsFromSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -1508,7 +1916,8 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesRequest",
       value: QueryCalcExitPoolCoinsFromSharesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryCalcExitPoolCoinsFromSharesResponse(): QueryCalcExitPoolCoinsFromSharesResponse {
   return {
@@ -1517,6 +1926,16 @@ function createBaseQueryCalcExitPoolCoinsFromSharesResponse(): QueryCalcExitPool
 }
 export const QueryCalcExitPoolCoinsFromSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse",
+  aminoType: "osmosis/gamm/query-calc-exit-pool-coins-from-shares-response",
+  is(o: any): o is QueryCalcExitPoolCoinsFromSharesResponse {
+    return o && (o.$typeUrl === QueryCalcExitPoolCoinsFromSharesResponse.typeUrl || Array.isArray(o.tokensOut) && (!o.tokensOut.length || Coin.is(o.tokensOut[0])));
+  },
+  isSDK(o: any): o is QueryCalcExitPoolCoinsFromSharesResponseSDKType {
+    return o && (o.$typeUrl === QueryCalcExitPoolCoinsFromSharesResponse.typeUrl || Array.isArray(o.tokens_out) && (!o.tokens_out.length || Coin.isSDK(o.tokens_out[0])));
+  },
+  isAmino(o: any): o is QueryCalcExitPoolCoinsFromSharesResponseAmino {
+    return o && (o.$typeUrl === QueryCalcExitPoolCoinsFromSharesResponse.typeUrl || Array.isArray(o.tokens_out) && (!o.tokens_out.length || Coin.isAmino(o.tokens_out[0])));
+  },
   encode(message: QueryCalcExitPoolCoinsFromSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.tokensOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1612,6 +2031,9 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryCalcExitPoolCoinsFromSharesResponse",
       value: QueryCalcExitPoolCoinsFromSharesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
@@ -1621,6 +2043,16 @@ function createBaseQueryPoolParamsRequest(): QueryPoolParamsRequest {
 }
 export const QueryPoolParamsRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest",
+  aminoType: "osmosis/gamm/query-pool-params-request",
+  is(o: any): o is QueryPoolParamsRequest {
+    return o && (o.$typeUrl === QueryPoolParamsRequest.typeUrl || typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is QueryPoolParamsRequestSDKType {
+    return o && (o.$typeUrl === QueryPoolParamsRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is QueryPoolParamsRequestAmino {
+    return o && (o.$typeUrl === QueryPoolParamsRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
   encode(message: QueryPoolParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -1708,7 +2140,8 @@ export const QueryPoolParamsRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsRequest",
       value: QueryPoolParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
   return {
@@ -1717,6 +2150,16 @@ function createBaseQueryPoolParamsResponse(): QueryPoolParamsResponse {
 }
 export const QueryPoolParamsResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse",
+  aminoType: "osmosis/gamm/query-pool-params-response",
+  is(o: any): o is QueryPoolParamsResponse {
+    return o && o.$typeUrl === QueryPoolParamsResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryPoolParamsResponseSDKType {
+    return o && o.$typeUrl === QueryPoolParamsResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryPoolParamsResponseAmino {
+    return o && o.$typeUrl === QueryPoolParamsResponse.typeUrl;
+  },
   encode(message: QueryPoolParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Any.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1804,7 +2247,8 @@ export const QueryPoolParamsResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolParamsResponse",
       value: QueryPoolParamsResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequest {
   return {
@@ -1813,6 +2257,16 @@ function createBaseQueryTotalPoolLiquidityRequest(): QueryTotalPoolLiquidityRequ
 }
 export const QueryTotalPoolLiquidityRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest",
+  aminoType: "osmosis/gamm/query-total-pool-liquidity-request",
+  is(o: any): o is QueryTotalPoolLiquidityRequest {
+    return o && (o.$typeUrl === QueryTotalPoolLiquidityRequest.typeUrl || typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is QueryTotalPoolLiquidityRequestSDKType {
+    return o && (o.$typeUrl === QueryTotalPoolLiquidityRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is QueryTotalPoolLiquidityRequestAmino {
+    return o && (o.$typeUrl === QueryTotalPoolLiquidityRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
   encode(message: QueryTotalPoolLiquidityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -1900,7 +2354,8 @@ export const QueryTotalPoolLiquidityRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityRequest",
       value: QueryTotalPoolLiquidityRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryTotalPoolLiquidityResponse(): QueryTotalPoolLiquidityResponse {
   return {
@@ -1909,6 +2364,16 @@ function createBaseQueryTotalPoolLiquidityResponse(): QueryTotalPoolLiquidityRes
 }
 export const QueryTotalPoolLiquidityResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse",
+  aminoType: "osmosis/gamm/query-total-pool-liquidity-response",
+  is(o: any): o is QueryTotalPoolLiquidityResponse {
+    return o && (o.$typeUrl === QueryTotalPoolLiquidityResponse.typeUrl || Array.isArray(o.liquidity) && (!o.liquidity.length || Coin.is(o.liquidity[0])));
+  },
+  isSDK(o: any): o is QueryTotalPoolLiquidityResponseSDKType {
+    return o && (o.$typeUrl === QueryTotalPoolLiquidityResponse.typeUrl || Array.isArray(o.liquidity) && (!o.liquidity.length || Coin.isSDK(o.liquidity[0])));
+  },
+  isAmino(o: any): o is QueryTotalPoolLiquidityResponseAmino {
+    return o && (o.$typeUrl === QueryTotalPoolLiquidityResponse.typeUrl || Array.isArray(o.liquidity) && (!o.liquidity.length || Coin.isAmino(o.liquidity[0])));
+  },
   encode(message: QueryTotalPoolLiquidityResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.liquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2004,6 +2469,9 @@ export const QueryTotalPoolLiquidityResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryTotalPoolLiquidityResponse",
       value: QueryTotalPoolLiquidityResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
@@ -2013,6 +2481,16 @@ function createBaseQueryTotalSharesRequest(): QueryTotalSharesRequest {
 }
 export const QueryTotalSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest",
+  aminoType: "osmosis/gamm/query-total-shares-request",
+  is(o: any): o is QueryTotalSharesRequest {
+    return o && (o.$typeUrl === QueryTotalSharesRequest.typeUrl || typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is QueryTotalSharesRequestSDKType {
+    return o && (o.$typeUrl === QueryTotalSharesRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is QueryTotalSharesRequestAmino {
+    return o && (o.$typeUrl === QueryTotalSharesRequest.typeUrl || typeof o.pool_id === "bigint");
+  },
   encode(message: QueryTotalSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -2100,7 +2578,8 @@ export const QueryTotalSharesRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesRequest",
       value: QueryTotalSharesRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
   return {
@@ -2109,6 +2588,16 @@ function createBaseQueryTotalSharesResponse(): QueryTotalSharesResponse {
 }
 export const QueryTotalSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse",
+  aminoType: "osmosis/gamm/query-total-shares-response",
+  is(o: any): o is QueryTotalSharesResponse {
+    return o && (o.$typeUrl === QueryTotalSharesResponse.typeUrl || Coin.is(o.totalShares));
+  },
+  isSDK(o: any): o is QueryTotalSharesResponseSDKType {
+    return o && (o.$typeUrl === QueryTotalSharesResponse.typeUrl || Coin.isSDK(o.total_shares));
+  },
+  isAmino(o: any): o is QueryTotalSharesResponseAmino {
+    return o && (o.$typeUrl === QueryTotalSharesResponse.typeUrl || Coin.isAmino(o.total_shares));
+  },
   encode(message: QueryTotalSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.totalShares !== undefined) {
       Coin.encode(message.totalShares, writer.uint32(10).fork()).ldelim();
@@ -2196,6 +2685,9 @@ export const QueryTotalSharesResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryTotalSharesResponse",
       value: QueryTotalSharesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryCalcJoinPoolNoSwapSharesRequest(): QueryCalcJoinPoolNoSwapSharesRequest {
@@ -2206,6 +2698,16 @@ function createBaseQueryCalcJoinPoolNoSwapSharesRequest(): QueryCalcJoinPoolNoSw
 }
 export const QueryCalcJoinPoolNoSwapSharesRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest",
+  aminoType: "osmosis/gamm/query-calc-join-pool-no-swap-shares-request",
+  is(o: any): o is QueryCalcJoinPoolNoSwapSharesRequest {
+    return o && (o.$typeUrl === QueryCalcJoinPoolNoSwapSharesRequest.typeUrl || typeof o.poolId === "bigint" && Array.isArray(o.tokensIn) && (!o.tokensIn.length || Coin.is(o.tokensIn[0])));
+  },
+  isSDK(o: any): o is QueryCalcJoinPoolNoSwapSharesRequestSDKType {
+    return o && (o.$typeUrl === QueryCalcJoinPoolNoSwapSharesRequest.typeUrl || typeof o.pool_id === "bigint" && Array.isArray(o.tokens_in) && (!o.tokens_in.length || Coin.isSDK(o.tokens_in[0])));
+  },
+  isAmino(o: any): o is QueryCalcJoinPoolNoSwapSharesRequestAmino {
+    return o && (o.$typeUrl === QueryCalcJoinPoolNoSwapSharesRequest.typeUrl || typeof o.pool_id === "bigint" && Array.isArray(o.tokens_in) && (!o.tokens_in.length || Coin.isAmino(o.tokens_in[0])));
+  },
   encode(message: QueryCalcJoinPoolNoSwapSharesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -2319,6 +2821,9 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesRequest",
       value: QueryCalcJoinPoolNoSwapSharesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQueryCalcJoinPoolNoSwapSharesResponse(): QueryCalcJoinPoolNoSwapSharesResponse {
@@ -2329,6 +2834,16 @@ function createBaseQueryCalcJoinPoolNoSwapSharesResponse(): QueryCalcJoinPoolNoS
 }
 export const QueryCalcJoinPoolNoSwapSharesResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse",
+  aminoType: "osmosis/gamm/query-calc-join-pool-no-swap-shares-response",
+  is(o: any): o is QueryCalcJoinPoolNoSwapSharesResponse {
+    return o && (o.$typeUrl === QueryCalcJoinPoolNoSwapSharesResponse.typeUrl || Array.isArray(o.tokensOut) && (!o.tokensOut.length || Coin.is(o.tokensOut[0])) && typeof o.sharesOut === "string");
+  },
+  isSDK(o: any): o is QueryCalcJoinPoolNoSwapSharesResponseSDKType {
+    return o && (o.$typeUrl === QueryCalcJoinPoolNoSwapSharesResponse.typeUrl || Array.isArray(o.tokens_out) && (!o.tokens_out.length || Coin.isSDK(o.tokens_out[0])) && typeof o.shares_out === "string");
+  },
+  isAmino(o: any): o is QueryCalcJoinPoolNoSwapSharesResponseAmino {
+    return o && (o.$typeUrl === QueryCalcJoinPoolNoSwapSharesResponse.typeUrl || Array.isArray(o.tokens_out) && (!o.tokens_out.length || Coin.isAmino(o.tokens_out[0])) && typeof o.shares_out === "string");
+  },
   encode(message: QueryCalcJoinPoolNoSwapSharesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.tokensOut) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2440,6 +2955,9 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryCalcJoinPoolNoSwapSharesResponse",
       value: QueryCalcJoinPoolNoSwapSharesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
@@ -2451,6 +2969,16 @@ function createBaseQuerySpotPriceRequest(): QuerySpotPriceRequest {
 }
 export const QuerySpotPriceRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest",
+  aminoType: "osmosis/gamm/query-spot-price-request",
+  is(o: any): o is QuerySpotPriceRequest {
+    return o && (o.$typeUrl === QuerySpotPriceRequest.typeUrl || typeof o.poolId === "bigint" && typeof o.baseAssetDenom === "string" && typeof o.quoteAssetDenom === "string");
+  },
+  isSDK(o: any): o is QuerySpotPriceRequestSDKType {
+    return o && (o.$typeUrl === QuerySpotPriceRequest.typeUrl || typeof o.pool_id === "bigint" && typeof o.base_asset_denom === "string" && typeof o.quote_asset_denom === "string");
+  },
+  isAmino(o: any): o is QuerySpotPriceRequestAmino {
+    return o && (o.$typeUrl === QuerySpotPriceRequest.typeUrl || typeof o.pool_id === "bigint" && typeof o.base_asset_denom === "string" && typeof o.quote_asset_denom === "string");
+  },
   encode(message: QuerySpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -2570,7 +3098,8 @@ export const QuerySpotPriceRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceRequest",
       value: QuerySpotPriceRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryPoolsWithFilterRequest(): QueryPoolsWithFilterRequest {
   return {
@@ -2581,6 +3110,16 @@ function createBaseQueryPoolsWithFilterRequest(): QueryPoolsWithFilterRequest {
 }
 export const QueryPoolsWithFilterRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest",
+  aminoType: "osmosis/gamm/query-pools-with-filter-request",
+  is(o: any): o is QueryPoolsWithFilterRequest {
+    return o && (o.$typeUrl === QueryPoolsWithFilterRequest.typeUrl || Array.isArray(o.minLiquidity) && (!o.minLiquidity.length || Coin.is(o.minLiquidity[0])) && typeof o.poolType === "string");
+  },
+  isSDK(o: any): o is QueryPoolsWithFilterRequestSDKType {
+    return o && (o.$typeUrl === QueryPoolsWithFilterRequest.typeUrl || Array.isArray(o.min_liquidity) && (!o.min_liquidity.length || Coin.isSDK(o.min_liquidity[0])) && typeof o.pool_type === "string");
+  },
+  isAmino(o: any): o is QueryPoolsWithFilterRequestAmino {
+    return o && (o.$typeUrl === QueryPoolsWithFilterRequest.typeUrl || Array.isArray(o.min_liquidity) && (!o.min_liquidity.length || Coin.isAmino(o.min_liquidity[0])) && typeof o.pool_type === "string");
+  },
   encode(message: QueryPoolsWithFilterRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.minLiquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2710,6 +3249,10 @@ export const QueryPoolsWithFilterRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterRequest",
       value: QueryPoolsWithFilterRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse {
@@ -2720,9 +3263,19 @@ function createBaseQueryPoolsWithFilterResponse(): QueryPoolsWithFilterResponse 
 }
 export const QueryPoolsWithFilterResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse",
+  aminoType: "osmosis/gamm/query-pools-with-filter-response",
+  is(o: any): o is QueryPoolsWithFilterResponse {
+    return o && (o.$typeUrl === QueryPoolsWithFilterResponse.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.is(o.pools[0]) || Pool2.is(o.pools[0]) || Any.is(o.pools[0])));
+  },
+  isSDK(o: any): o is QueryPoolsWithFilterResponseSDKType {
+    return o && (o.$typeUrl === QueryPoolsWithFilterResponse.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.isSDK(o.pools[0]) || Pool2.isSDK(o.pools[0]) || Any.isSDK(o.pools[0])));
+  },
+  isAmino(o: any): o is QueryPoolsWithFilterResponseAmino {
+    return o && (o.$typeUrl === QueryPoolsWithFilterResponse.typeUrl || Array.isArray(o.pools) && (!o.pools.length || Pool1.isAmino(o.pools[0]) || Pool2.isAmino(o.pools[0]) || Any.isAmino(o.pools[0])));
+  },
   encode(message: QueryPoolsWithFilterResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.pools) {
-      Any.encode(v!, writer.uint32(10).fork()).ldelim();
+      Any.encode(GlobalDecoderRegistry.wrapAny(v!), writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
       PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
@@ -2737,7 +3290,7 @@ export const QueryPoolsWithFilterResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pools.push(Any.decode(reader, reader.uint32()));
+          message.pools.push(GlobalDecoderRegistry.unwrapAny(reader));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -2751,14 +3304,14 @@ export const QueryPoolsWithFilterResponse = {
   },
   fromJSON(object: any): QueryPoolsWithFilterResponse {
     const obj = createBaseQueryPoolsWithFilterResponse();
-    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
+    if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
   toJSON(message: QueryPoolsWithFilterResponse): JsonSafe<QueryPoolsWithFilterResponse> {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toJSON(e) : undefined);
     } else {
       obj.pools = [];
     }
@@ -2767,7 +3320,7 @@ export const QueryPoolsWithFilterResponse = {
   },
   fromPartial(object: DeepPartial<QueryPoolsWithFilterResponse>): QueryPoolsWithFilterResponse {
     const message = createBaseQueryPoolsWithFilterResponse();
-    message.pools = object.pools?.map(e => Any.fromPartial(e)) || [];
+    message.pools = object.pools?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageResponse.fromPartial(object.pagination);
     }
@@ -2775,20 +3328,20 @@ export const QueryPoolsWithFilterResponse = {
   },
   fromSDK(object: QueryPoolsWithFilterResponseSDKType): QueryPoolsWithFilterResponse {
     return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDK(e)) : [],
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : [],
       pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
     };
   },
   fromSDKJSON(object: any): QueryPoolsWithFilterResponseSDKType {
     return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
     };
   },
   toSDK(message: QueryPoolsWithFilterResponse): QueryPoolsWithFilterResponseSDKType {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toSDK(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toSDK(e) : undefined);
     } else {
       obj.pools = [];
     }
@@ -2797,7 +3350,7 @@ export const QueryPoolsWithFilterResponse = {
   },
   fromAmino(object: QueryPoolsWithFilterResponseAmino): QueryPoolsWithFilterResponse {
     const message = createBaseQueryPoolsWithFilterResponse();
-    message.pools = object.pools?.map(e => Any.fromAmino(e)) || [];
+    message.pools = object.pools?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageResponse.fromAmino(object.pagination);
     }
@@ -2806,7 +3359,7 @@ export const QueryPoolsWithFilterResponse = {
   toAmino(message: QueryPoolsWithFilterResponse): QueryPoolsWithFilterResponseAmino {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toAmino(e) : undefined);
+      obj.pools = message.pools.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
     } else {
       obj.pools = message.pools;
     }
@@ -2833,6 +3386,15 @@ export const QueryPoolsWithFilterResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryPoolsWithFilterResponse",
       value: QueryPoolsWithFilterResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GlobalDecoderRegistry.register(Pool1.typeUrl, Pool1);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool1.aminoType, Pool1.typeUrl);
+    Pool1.registerTypeUrl();
+    GlobalDecoderRegistry.register(Pool2.typeUrl, Pool2);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool2.aminoType, Pool2.typeUrl);
+    Pool2.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
@@ -2842,6 +3404,16 @@ function createBaseQuerySpotPriceResponse(): QuerySpotPriceResponse {
 }
 export const QuerySpotPriceResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse",
+  aminoType: "osmosis/gamm/query-spot-price-response",
+  is(o: any): o is QuerySpotPriceResponse {
+    return o && (o.$typeUrl === QuerySpotPriceResponse.typeUrl || typeof o.spotPrice === "string");
+  },
+  isSDK(o: any): o is QuerySpotPriceResponseSDKType {
+    return o && (o.$typeUrl === QuerySpotPriceResponse.typeUrl || typeof o.spot_price === "string");
+  },
+  isAmino(o: any): o is QuerySpotPriceResponseAmino {
+    return o && (o.$typeUrl === QuerySpotPriceResponse.typeUrl || typeof o.spot_price === "string");
+  },
   encode(message: QuerySpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.spotPrice !== undefined) {
       writer.uint32(10).string(message.spotPrice);
@@ -2927,7 +3499,8 @@ export const QuerySpotPriceResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QuerySpotPriceResponse",
       value: QuerySpotPriceResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInRequest {
   return {
@@ -2939,6 +3512,16 @@ function createBaseQuerySwapExactAmountInRequest(): QuerySwapExactAmountInReques
 }
 export const QuerySwapExactAmountInRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest",
+  aminoType: "osmosis/gamm/query-swap-exact-amount-in-request",
+  is(o: any): o is QuerySwapExactAmountInRequest {
+    return o && (o.$typeUrl === QuerySwapExactAmountInRequest.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && typeof o.tokenIn === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountInRoute.is(o.routes[0])));
+  },
+  isSDK(o: any): o is QuerySwapExactAmountInRequestSDKType {
+    return o && (o.$typeUrl === QuerySwapExactAmountInRequest.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.token_in === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountInRoute.isSDK(o.routes[0])));
+  },
+  isAmino(o: any): o is QuerySwapExactAmountInRequestAmino {
+    return o && (o.$typeUrl === QuerySwapExactAmountInRequest.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && typeof o.token_in === "string" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountInRoute.isAmino(o.routes[0])));
+  },
   encode(message: QuerySwapExactAmountInRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -3084,6 +3667,9 @@ export const QuerySwapExactAmountInRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInRequest",
       value: QuerySwapExactAmountInRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    SwapAmountInRoute.registerTypeUrl();
   }
 };
 function createBaseQuerySwapExactAmountInResponse(): QuerySwapExactAmountInResponse {
@@ -3093,6 +3679,16 @@ function createBaseQuerySwapExactAmountInResponse(): QuerySwapExactAmountInRespo
 }
 export const QuerySwapExactAmountInResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse",
+  aminoType: "osmosis/gamm/query-swap-exact-amount-in-response",
+  is(o: any): o is QuerySwapExactAmountInResponse {
+    return o && (o.$typeUrl === QuerySwapExactAmountInResponse.typeUrl || typeof o.tokenOutAmount === "string");
+  },
+  isSDK(o: any): o is QuerySwapExactAmountInResponseSDKType {
+    return o && (o.$typeUrl === QuerySwapExactAmountInResponse.typeUrl || typeof o.token_out_amount === "string");
+  },
+  isAmino(o: any): o is QuerySwapExactAmountInResponseAmino {
+    return o && (o.$typeUrl === QuerySwapExactAmountInResponse.typeUrl || typeof o.token_out_amount === "string");
+  },
   encode(message: QuerySwapExactAmountInResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenOutAmount !== undefined) {
       writer.uint32(10).string(message.tokenOutAmount);
@@ -3178,7 +3774,8 @@ export const QuerySwapExactAmountInResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountInResponse",
       value: QuerySwapExactAmountInResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequest {
   return {
@@ -3190,6 +3787,16 @@ function createBaseQuerySwapExactAmountOutRequest(): QuerySwapExactAmountOutRequ
 }
 export const QuerySwapExactAmountOutRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest",
+  aminoType: "osmosis/gamm/query-swap-exact-amount-out-request",
+  is(o: any): o is QuerySwapExactAmountOutRequest {
+    return o && (o.$typeUrl === QuerySwapExactAmountOutRequest.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountOutRoute.is(o.routes[0])) && typeof o.tokenOut === "string");
+  },
+  isSDK(o: any): o is QuerySwapExactAmountOutRequestSDKType {
+    return o && (o.$typeUrl === QuerySwapExactAmountOutRequest.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountOutRoute.isSDK(o.routes[0])) && typeof o.token_out === "string");
+  },
+  isAmino(o: any): o is QuerySwapExactAmountOutRequestAmino {
+    return o && (o.$typeUrl === QuerySwapExactAmountOutRequest.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint" && Array.isArray(o.routes) && (!o.routes.length || SwapAmountOutRoute.isAmino(o.routes[0])) && typeof o.token_out === "string");
+  },
   encode(message: QuerySwapExactAmountOutRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -3335,6 +3942,9 @@ export const QuerySwapExactAmountOutRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutRequest",
       value: QuerySwapExactAmountOutRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    SwapAmountOutRoute.registerTypeUrl();
   }
 };
 function createBaseQuerySwapExactAmountOutResponse(): QuerySwapExactAmountOutResponse {
@@ -3344,6 +3954,16 @@ function createBaseQuerySwapExactAmountOutResponse(): QuerySwapExactAmountOutRes
 }
 export const QuerySwapExactAmountOutResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse",
+  aminoType: "osmosis/gamm/query-swap-exact-amount-out-response",
+  is(o: any): o is QuerySwapExactAmountOutResponse {
+    return o && (o.$typeUrl === QuerySwapExactAmountOutResponse.typeUrl || typeof o.tokenInAmount === "string");
+  },
+  isSDK(o: any): o is QuerySwapExactAmountOutResponseSDKType {
+    return o && (o.$typeUrl === QuerySwapExactAmountOutResponse.typeUrl || typeof o.token_in_amount === "string");
+  },
+  isAmino(o: any): o is QuerySwapExactAmountOutResponseAmino {
+    return o && (o.$typeUrl === QuerySwapExactAmountOutResponse.typeUrl || typeof o.token_in_amount === "string");
+  },
   encode(message: QuerySwapExactAmountOutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenInAmount !== undefined) {
       writer.uint32(10).string(message.tokenInAmount);
@@ -3429,13 +4049,24 @@ export const QuerySwapExactAmountOutResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QuerySwapExactAmountOutResponse",
       value: QuerySwapExactAmountOutResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryTotalLiquidityRequest(): QueryTotalLiquidityRequest {
   return {};
 }
 export const QueryTotalLiquidityRequest = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest",
+  aminoType: "osmosis/gamm/query-total-liquidity-request",
+  is(o: any): o is QueryTotalLiquidityRequest {
+    return o && o.$typeUrl === QueryTotalLiquidityRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryTotalLiquidityRequestSDKType {
+    return o && o.$typeUrl === QueryTotalLiquidityRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryTotalLiquidityRequestAmino {
+    return o && o.$typeUrl === QueryTotalLiquidityRequest.typeUrl;
+  },
   encode(_: QueryTotalLiquidityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -3503,7 +4134,8 @@ export const QueryTotalLiquidityRequest = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityRequest",
       value: QueryTotalLiquidityRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryTotalLiquidityResponse(): QueryTotalLiquidityResponse {
   return {
@@ -3512,6 +4144,16 @@ function createBaseQueryTotalLiquidityResponse(): QueryTotalLiquidityResponse {
 }
 export const QueryTotalLiquidityResponse = {
   typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse",
+  aminoType: "osmosis/gamm/query-total-liquidity-response",
+  is(o: any): o is QueryTotalLiquidityResponse {
+    return o && (o.$typeUrl === QueryTotalLiquidityResponse.typeUrl || Array.isArray(o.liquidity) && (!o.liquidity.length || Coin.is(o.liquidity[0])));
+  },
+  isSDK(o: any): o is QueryTotalLiquidityResponseSDKType {
+    return o && (o.$typeUrl === QueryTotalLiquidityResponse.typeUrl || Array.isArray(o.liquidity) && (!o.liquidity.length || Coin.isSDK(o.liquidity[0])));
+  },
+  isAmino(o: any): o is QueryTotalLiquidityResponseAmino {
+    return o && (o.$typeUrl === QueryTotalLiquidityResponse.typeUrl || Array.isArray(o.liquidity) && (!o.liquidity.length || Coin.isAmino(o.liquidity[0])));
+  },
   encode(message: QueryTotalLiquidityResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.liquidity) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -3607,5 +4249,8 @@ export const QueryTotalLiquidityResponse = {
       typeUrl: "/osmosis.gamm.v1beta1.QueryTotalLiquidityResponse",
       value: QueryTotalLiquidityResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };

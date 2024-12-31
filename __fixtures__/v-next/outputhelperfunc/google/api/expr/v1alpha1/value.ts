@@ -1,6 +1,7 @@
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import { Any, AnySDKType } from "../../../protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1alpha1";
@@ -46,6 +47,42 @@ export interface ValueProtoMsg {
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
+export interface ValueAmino {
+  /** Null value. */
+  null_value?: NullValue;
+  /** Boolean value. */
+  bool_value?: boolean;
+  /** Signed integer value. */
+  int64_value?: string;
+  /** Unsigned integer value. */
+  uint64_value?: string;
+  /** Floating point value. */
+  double_value?: number;
+  /** UTF-8 string value. */
+  string_value?: string;
+  /** Byte string value. */
+  bytes_value?: string;
+  /** An enum value. */
+  enum_value?: EnumValueAmino;
+  /** The proto message backing an object value. */
+  object_value?: AnyAmino;
+  /** Map value. */
+  map_value?: MapValueAmino;
+  /** List value. */
+  list_value?: ListValueAmino;
+  /** Type value. */
+  type_value?: string;
+}
+export interface ValueAminoMsg {
+  type: "/google.api.expr.v1alpha1.Value";
+  value: ValueAmino;
+}
+/**
+ * Represents a CEL value.
+ * 
+ * This is similar to `google.protobuf.Value`, but can represent CEL's full
+ * range of values.
+ */
 export interface ValueSDKType {
   null_value?: NullValue;
   bool_value?: boolean;
@@ -72,6 +109,17 @@ export interface EnumValueProtoMsg {
   value: Uint8Array;
 }
 /** An enum value. */
+export interface EnumValueAmino {
+  /** The fully qualified name of the enum type. */
+  type?: string;
+  /** The value of the enum. */
+  value?: number;
+}
+export interface EnumValueAminoMsg {
+  type: "/google.api.expr.v1alpha1.EnumValue";
+  value: EnumValueAmino;
+}
+/** An enum value. */
 export interface EnumValueSDKType {
   type: string;
   value: number;
@@ -89,6 +137,20 @@ export interface ListValue {
 export interface ListValueProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ListValue";
   value: Uint8Array;
+}
+/**
+ * A list.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
+export interface ListValueAmino {
+  /** The ordered values in the list. */
+  values?: ValueAmino[];
+}
+export interface ListValueAminoMsg {
+  type: "/google.api.expr.v1alpha1.ListValue";
+  value: ListValueAmino;
 }
 /**
  * A list.
@@ -124,6 +186,25 @@ export interface MapValueProtoMsg {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
+export interface MapValueAmino {
+  /**
+   * The set of map entries.
+   * 
+   * CEL has fewer restrictions on keys, so a protobuf map represenation
+   * cannot be used.
+   */
+  entries?: MapValue_EntryAmino[];
+}
+export interface MapValueAminoMsg {
+  type: "/google.api.expr.v1alpha1.MapValue";
+  value: MapValueAmino;
+}
+/**
+ * A map.
+ * 
+ * Wrapped in a message so 'not set' and empty can be differentiated, which is
+ * required for use in a 'oneof'.
+ */
 export interface MapValueSDKType {
   entries: MapValue_EntrySDKType[];
 }
@@ -142,6 +223,22 @@ export interface MapValue_Entry {
 export interface MapValue_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Entry";
   value: Uint8Array;
+}
+/** An entry in the map. */
+export interface MapValue_EntryAmino {
+  /**
+   * The key.
+   * 
+   * Must be unique with in the map.
+   * Currently only boolean, int, uint, and string values can be keys.
+   */
+  key?: ValueAmino;
+  /** The value. */
+  value?: ValueAmino;
+}
+export interface MapValue_EntryAminoMsg {
+  type: "/google.api.expr.v1alpha1.Entry";
+  value: MapValue_EntryAmino;
 }
 /** An entry in the map. */
 export interface MapValue_EntrySDKType {
@@ -166,6 +263,15 @@ function createBaseValue(): Value {
 }
 export const Value = {
   typeUrl: "/google.api.expr.v1alpha1.Value",
+  is(o: any): o is Value {
+    return o && o.$typeUrl === Value.typeUrl;
+  },
+  isSDK(o: any): o is ValueSDKType {
+    return o && o.$typeUrl === Value.typeUrl;
+  },
+  isAmino(o: any): o is ValueAmino {
+    return o && o.$typeUrl === Value.typeUrl;
+  },
   encode(message: Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -437,6 +543,10 @@ export const Value = {
       typeUrl: "/google.api.expr.v1alpha1.Value",
       value: Value.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    MapValue.registerTypeUrl();
+    ListValue.registerTypeUrl();
   }
 };
 function createBaseEnumValue(): EnumValue {
@@ -447,6 +557,15 @@ function createBaseEnumValue(): EnumValue {
 }
 export const EnumValue = {
   typeUrl: "/google.api.expr.v1alpha1.EnumValue",
+  is(o: any): o is EnumValue {
+    return o && (o.$typeUrl === EnumValue.typeUrl || typeof o.type === "string" && typeof o.value === "number");
+  },
+  isSDK(o: any): o is EnumValueSDKType {
+    return o && (o.$typeUrl === EnumValue.typeUrl || typeof o.type === "string" && typeof o.value === "number");
+  },
+  isAmino(o: any): o is EnumValueAmino {
+    return o && (o.$typeUrl === EnumValue.typeUrl || typeof o.type === "string" && typeof o.value === "number");
+  },
   encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
@@ -542,7 +661,8 @@ export const EnumValue = {
       typeUrl: "/google.api.expr.v1alpha1.EnumValue",
       value: EnumValue.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseListValue(): ListValue {
   return {
@@ -551,6 +671,15 @@ function createBaseListValue(): ListValue {
 }
 export const ListValue = {
   typeUrl: "/google.api.expr.v1alpha1.ListValue",
+  is(o: any): o is ListValue {
+    return o && (o.$typeUrl === ListValue.typeUrl || Array.isArray(o.values) && (!o.values.length || Value.is(o.values[0])));
+  },
+  isSDK(o: any): o is ListValueSDKType {
+    return o && (o.$typeUrl === ListValue.typeUrl || Array.isArray(o.values) && (!o.values.length || Value.isSDK(o.values[0])));
+  },
+  isAmino(o: any): o is ListValueAmino {
+    return o && (o.$typeUrl === ListValue.typeUrl || Array.isArray(o.values) && (!o.values.length || Value.isAmino(o.values[0])));
+  },
   encode(message: ListValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -640,6 +769,9 @@ export const ListValue = {
       typeUrl: "/google.api.expr.v1alpha1.ListValue",
       value: ListValue.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Value.registerTypeUrl();
   }
 };
 function createBaseMapValue(): MapValue {
@@ -649,6 +781,15 @@ function createBaseMapValue(): MapValue {
 }
 export const MapValue = {
   typeUrl: "/google.api.expr.v1alpha1.MapValue",
+  is(o: any): o is MapValue {
+    return o && (o.$typeUrl === MapValue.typeUrl || Array.isArray(o.entries) && (!o.entries.length || MapValue_Entry.is(o.entries[0])));
+  },
+  isSDK(o: any): o is MapValueSDKType {
+    return o && (o.$typeUrl === MapValue.typeUrl || Array.isArray(o.entries) && (!o.entries.length || MapValue_Entry.isSDK(o.entries[0])));
+  },
+  isAmino(o: any): o is MapValueAmino {
+    return o && (o.$typeUrl === MapValue.typeUrl || Array.isArray(o.entries) && (!o.entries.length || MapValue_Entry.isAmino(o.entries[0])));
+  },
   encode(message: MapValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.entries) {
       MapValue_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -738,6 +879,9 @@ export const MapValue = {
       typeUrl: "/google.api.expr.v1alpha1.MapValue",
       value: MapValue.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    MapValue_Entry.registerTypeUrl();
   }
 };
 function createBaseMapValue_Entry(): MapValue_Entry {
@@ -748,6 +892,15 @@ function createBaseMapValue_Entry(): MapValue_Entry {
 }
 export const MapValue_Entry = {
   typeUrl: "/google.api.expr.v1alpha1.Entry",
+  is(o: any): o is MapValue_Entry {
+    return o && o.$typeUrl === MapValue_Entry.typeUrl;
+  },
+  isSDK(o: any): o is MapValue_EntrySDKType {
+    return o && o.$typeUrl === MapValue_Entry.typeUrl;
+  },
+  isAmino(o: any): o is MapValue_EntryAmino {
+    return o && o.$typeUrl === MapValue_Entry.typeUrl;
+  },
   encode(message: MapValue_Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== undefined) {
       Value.encode(message.key, writer.uint32(10).fork()).ldelim();
@@ -847,5 +1000,9 @@ export const MapValue_Entry = {
       typeUrl: "/google.api.expr.v1alpha1.Entry",
       value: MapValue_Entry.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Value.registerTypeUrl();
+    Value.registerTypeUrl();
   }
 };

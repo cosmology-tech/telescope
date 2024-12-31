@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
+import { GlobalDecoderRegistry } from "../../registry";
 export const protobufPackage = "google.api";
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -35,6 +36,40 @@ export interface Authentication {
 export interface AuthenticationProtoMsg {
   typeUrl: "/google.api.Authentication";
   value: Uint8Array;
+}
+/**
+ * `Authentication` defines the authentication configuration for API methods
+ * provided by an API service.
+ * 
+ * Example:
+ * 
+ *     name: calendar.googleapis.com
+ *     authentication:
+ *       providers:
+ *       - id: google_calendar_auth
+ *         jwks_uri: https://www.googleapis.com/oauth2/v1/certs
+ *         issuer: https://securetoken.google.com
+ *       rules:
+ *       - selector: "*"
+ *         requirements:
+ *           provider_id: google_calendar_auth
+ *       - selector: google.calendar.Delegate
+ *         oauth:
+ *           canonical_scopes: https://www.googleapis.com/auth/calendar.read
+ */
+export interface AuthenticationAmino {
+  /**
+   * A list of authentication rules that apply to individual API methods.
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules?: AuthenticationRuleAmino[];
+  /** Defines a set of authentication providers that a service supports. */
+  providers?: AuthProviderAmino[];
+}
+export interface AuthenticationAminoMsg {
+  type: "/google.api.Authentication";
+  value: AuthenticationAmino;
 }
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -103,6 +138,38 @@ export interface AuthenticationRuleProtoMsg {
  * If a method doesn't have any auth requirements, request credentials will be
  * ignored.
  */
+export interface AuthenticationRuleAmino {
+  /**
+   * Selects the methods to which this rule applies.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector?: string;
+  /** The requirements for OAuth credentials. */
+  oauth?: OAuthRequirementsAmino;
+  /**
+   * If true, the service accepts API keys without any other credential.
+   * This flag only applies to HTTP and gRPC requests.
+   */
+  allow_without_credential?: boolean;
+  /** Requirements for additional authentication providers. */
+  requirements?: AuthRequirementAmino[];
+}
+export interface AuthenticationRuleAminoMsg {
+  type: "/google.api.AuthenticationRule";
+  value: AuthenticationRuleAmino;
+}
+/**
+ * Authentication rules for the service.
+ * 
+ * By default, if a method has any authentication requirements, every request
+ * must include a valid credential matching one of the requirements.
+ * It's an error to include more than one kind of credential in a single
+ * request.
+ * 
+ * If a method doesn't have any auth requirements, request credentials will be
+ * ignored.
+ */
 export interface AuthenticationRuleSDKType {
   selector: string;
   oauth?: OAuthRequirementsSDKType;
@@ -130,6 +197,28 @@ export interface JwtLocation {
 export interface JwtLocationProtoMsg {
   typeUrl: "/google.api.JwtLocation";
   value: Uint8Array;
+}
+/** Specifies a location to extract JWT from an API request. */
+export interface JwtLocationAmino {
+  /** Specifies HTTP header name to extract JWT token. */
+  header?: string;
+  /** Specifies URL query parameter name to extract JWT token. */
+  query?: string;
+  /**
+   * The value prefix. The value format is "value_prefix{token}"
+   * Only applies to "in" header type. Must be empty for "in" query type.
+   * If not empty, the header value has to match (case sensitive) this prefix.
+   * If not matched, JWT will not be extracted. If matched, JWT will be
+   * extracted after the prefix is removed.
+   * 
+   * For example, for "Authorization: Bearer {JWT}",
+   * value_prefix="Bearer " with a space at the end.
+   */
+  value_prefix?: string;
+}
+export interface JwtLocationAminoMsg {
+  type: "/google.api.JwtLocation";
+  value: JwtLocationAmino;
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationSDKType {
@@ -229,6 +318,93 @@ export interface AuthProviderProtoMsg {
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
+export interface AuthProviderAmino {
+  /**
+   * The unique identifier of the auth provider. It will be referred to by
+   * `AuthRequirement.provider_id`.
+   * 
+   * Example: "bookstore_auth".
+   */
+  id?: string;
+  /**
+   * Identifies the principal that issued the JWT. See
+   * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
+   * Usually a URL or an email address.
+   * 
+   * Example: https://securetoken.google.com
+   * Example: 1234567-compute@developer.gserviceaccount.com
+   */
+  issuer?: string;
+  /**
+   * URL of the provider's public key set to validate signature of the JWT. See
+   * [OpenID
+   * Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
+   * Optional if the key set document:
+   *  - can be retrieved from
+   *    [OpenID
+   *    Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html)
+   *    of the issuer.
+   *  - can be inferred from the email domain of the issuer (e.g. a Google
+   *  service account).
+   * 
+   * Example: https://www.googleapis.com/oauth2/v1/certs
+   */
+  jwks_uri?: string;
+  /**
+   * The list of JWT
+   * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
+   * that are allowed to access. A JWT containing any of these audiences will
+   * be accepted. When this setting is absent, JWTs with audiences:
+   *   - "https://[service.name]/[google.protobuf.Api.name]"
+   *   - "https://[service.name]/"
+   * will be accepted.
+   * For example, if no audiences are in the setting, LibraryService API will
+   * accept JWTs with the following audiences:
+   *   -
+   *   https://library-example.googleapis.com/google.example.library.v1.LibraryService
+   *   - https://library-example.googleapis.com/
+   * 
+   * Example:
+   * 
+   *     audiences: bookstore_android.apps.googleusercontent.com,
+   *                bookstore_web.apps.googleusercontent.com
+   */
+  audiences?: string;
+  /**
+   * Redirect URL if JWT token is required but not present or is expired.
+   * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
+   */
+  authorization_url?: string;
+  /**
+   * Defines the locations to extract the JWT.
+   * 
+   * JWT locations can be either from HTTP headers or URL query parameters.
+   * The rule is that the first match wins. The checking order is: checking
+   * all headers first, then URL query parameters.
+   * 
+   * If not specified,  default to use following 3 locations:
+   *    1) Authorization: Bearer
+   *    2) x-goog-iap-jwt-assertion
+   *    3) access_token query parameter
+   * 
+   * Default locations can be specified as followings:
+   *    jwt_locations:
+   *    - header: Authorization
+   *      value_prefix: "Bearer "
+   *    - header: x-goog-iap-jwt-assertion
+   *    - query: access_token
+   */
+  jwt_locations?: JwtLocationAmino[];
+}
+export interface AuthProviderAminoMsg {
+  type: "/google.api.AuthProvider";
+  value: AuthProviderAmino;
+}
+/**
+ * Configuration for an authentication provider, including support for
+ * [JSON Web Token
+ * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
+ */
 export interface AuthProviderSDKType {
   id: string;
   issuer: string;
@@ -272,6 +448,42 @@ export interface OAuthRequirements {
 export interface OAuthRequirementsProtoMsg {
   typeUrl: "/google.api.OAuthRequirements";
   value: Uint8Array;
+}
+/**
+ * OAuth scopes are a way to define data and permissions on data. For example,
+ * there are scopes defined for "Read-only access to Google Calendar" and
+ * "Access to Cloud Platform". Users can consent to a scope for an application,
+ * giving it permission to access that data on their behalf.
+ * 
+ * OAuth scope specifications should be fairly coarse grained; a user will need
+ * to see and understand the text description of what your scope means.
+ * 
+ * In most cases: use one or at most two OAuth scopes for an entire family of
+ * products. If your product has multiple APIs, you should probably be sharing
+ * the OAuth scope across all of those APIs.
+ * 
+ * When you need finer grained OAuth consent screens: talk with your product
+ * management about how developers will use them in practice.
+ * 
+ * Please note that even though each of the canonical scopes is enough for a
+ * request to be accepted and passed to the backend, a request can still fail
+ * due to the backend requiring additional scopes or permissions.
+ */
+export interface OAuthRequirementsAmino {
+  /**
+   * The list of publicly documented OAuth scopes that are allowed access. An
+   * OAuth token containing any of these scopes will be accepted.
+   * 
+   * Example:
+   * 
+   *      canonical_scopes: https://www.googleapis.com/auth/calendar,
+   *                        https://www.googleapis.com/auth/calendar.read
+   */
+  canonical_scopes?: string;
+}
+export interface OAuthRequirementsAminoMsg {
+  type: "/google.api.OAuthRequirements";
+  value: OAuthRequirementsAmino;
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -339,6 +551,44 @@ export interface AuthRequirementProtoMsg {
  * [JSON Web Token
  * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
  */
+export interface AuthRequirementAmino {
+  /**
+   * [id][google.api.AuthProvider.id] from authentication provider.
+   * 
+   * Example:
+   * 
+   *     provider_id: bookstore_auth
+   */
+  provider_id?: string;
+  /**
+   * NOTE: This will be deprecated soon, once AuthProvider.audiences is
+   * implemented and accepted in all the runtime components.
+   * 
+   * The list of JWT
+   * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
+   * that are allowed to access. A JWT containing any of these audiences will
+   * be accepted. When this setting is absent, only JWTs with audience
+   * "https://[Service_name][google.api.Service.name]/[API_name][google.protobuf.Api.name]"
+   * will be accepted. For example, if no audiences are in the setting,
+   * LibraryService API will only accept JWTs with the following audience
+   * "https://library-example.googleapis.com/google.example.library.v1.LibraryService".
+   * 
+   * Example:
+   * 
+   *     audiences: bookstore_android.apps.googleusercontent.com,
+   *                bookstore_web.apps.googleusercontent.com
+   */
+  audiences?: string;
+}
+export interface AuthRequirementAminoMsg {
+  type: "/google.api.AuthRequirement";
+  value: AuthRequirementAmino;
+}
+/**
+ * User-defined authentication requirements, including support for
+ * [JSON Web Token
+ * (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
+ */
 export interface AuthRequirementSDKType {
   provider_id: string;
   audiences: string;
@@ -351,6 +601,15 @@ function createBaseAuthentication(): Authentication {
 }
 export const Authentication = {
   typeUrl: "/google.api.Authentication",
+  is(o: any): o is Authentication {
+    return o && (o.$typeUrl === Authentication.typeUrl || Array.isArray(o.rules) && (!o.rules.length || AuthenticationRule.is(o.rules[0])) && Array.isArray(o.providers) && (!o.providers.length || AuthProvider.is(o.providers[0])));
+  },
+  isSDK(o: any): o is AuthenticationSDKType {
+    return o && (o.$typeUrl === Authentication.typeUrl || Array.isArray(o.rules) && (!o.rules.length || AuthenticationRule.isSDK(o.rules[0])) && Array.isArray(o.providers) && (!o.providers.length || AuthProvider.isSDK(o.providers[0])));
+  },
+  isAmino(o: any): o is AuthenticationAmino {
+    return o && (o.$typeUrl === Authentication.typeUrl || Array.isArray(o.rules) && (!o.rules.length || AuthenticationRule.isAmino(o.rules[0])) && Array.isArray(o.providers) && (!o.providers.length || AuthProvider.isAmino(o.providers[0])));
+  },
   encode(message: Authentication, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.rules) {
       AuthenticationRule.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -466,6 +725,10 @@ export const Authentication = {
       typeUrl: "/google.api.Authentication",
       value: Authentication.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    AuthenticationRule.registerTypeUrl();
+    AuthProvider.registerTypeUrl();
   }
 };
 function createBaseAuthenticationRule(): AuthenticationRule {
@@ -478,6 +741,15 @@ function createBaseAuthenticationRule(): AuthenticationRule {
 }
 export const AuthenticationRule = {
   typeUrl: "/google.api.AuthenticationRule",
+  is(o: any): o is AuthenticationRule {
+    return o && (o.$typeUrl === AuthenticationRule.typeUrl || typeof o.selector === "string" && typeof o.allowWithoutCredential === "boolean" && Array.isArray(o.requirements) && (!o.requirements.length || AuthRequirement.is(o.requirements[0])));
+  },
+  isSDK(o: any): o is AuthenticationRuleSDKType {
+    return o && (o.$typeUrl === AuthenticationRule.typeUrl || typeof o.selector === "string" && typeof o.allow_without_credential === "boolean" && Array.isArray(o.requirements) && (!o.requirements.length || AuthRequirement.isSDK(o.requirements[0])));
+  },
+  isAmino(o: any): o is AuthenticationRuleAmino {
+    return o && (o.$typeUrl === AuthenticationRule.typeUrl || typeof o.selector === "string" && typeof o.allow_without_credential === "boolean" && Array.isArray(o.requirements) && (!o.requirements.length || AuthRequirement.isAmino(o.requirements[0])));
+  },
   encode(message: AuthenticationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
@@ -617,6 +889,10 @@ export const AuthenticationRule = {
       typeUrl: "/google.api.AuthenticationRule",
       value: AuthenticationRule.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    OAuthRequirements.registerTypeUrl();
+    AuthRequirement.registerTypeUrl();
   }
 };
 function createBaseJwtLocation(): JwtLocation {
@@ -628,6 +904,15 @@ function createBaseJwtLocation(): JwtLocation {
 }
 export const JwtLocation = {
   typeUrl: "/google.api.JwtLocation",
+  is(o: any): o is JwtLocation {
+    return o && (o.$typeUrl === JwtLocation.typeUrl || typeof o.valuePrefix === "string");
+  },
+  isSDK(o: any): o is JwtLocationSDKType {
+    return o && (o.$typeUrl === JwtLocation.typeUrl || typeof o.value_prefix === "string");
+  },
+  isAmino(o: any): o is JwtLocationAmino {
+    return o && (o.$typeUrl === JwtLocation.typeUrl || typeof o.value_prefix === "string");
+  },
   encode(message: JwtLocation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.header !== undefined) {
       writer.uint32(10).string(message.header);
@@ -739,7 +1024,8 @@ export const JwtLocation = {
       typeUrl: "/google.api.JwtLocation",
       value: JwtLocation.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAuthProvider(): AuthProvider {
   return {
@@ -753,6 +1039,15 @@ function createBaseAuthProvider(): AuthProvider {
 }
 export const AuthProvider = {
   typeUrl: "/google.api.AuthProvider",
+  is(o: any): o is AuthProvider {
+    return o && (o.$typeUrl === AuthProvider.typeUrl || typeof o.id === "string" && typeof o.issuer === "string" && typeof o.jwksUri === "string" && typeof o.audiences === "string" && typeof o.authorizationUrl === "string" && Array.isArray(o.jwtLocations) && (!o.jwtLocations.length || JwtLocation.is(o.jwtLocations[0])));
+  },
+  isSDK(o: any): o is AuthProviderSDKType {
+    return o && (o.$typeUrl === AuthProvider.typeUrl || typeof o.id === "string" && typeof o.issuer === "string" && typeof o.jwks_uri === "string" && typeof o.audiences === "string" && typeof o.authorization_url === "string" && Array.isArray(o.jwt_locations) && (!o.jwt_locations.length || JwtLocation.isSDK(o.jwt_locations[0])));
+  },
+  isAmino(o: any): o is AuthProviderAmino {
+    return o && (o.$typeUrl === AuthProvider.typeUrl || typeof o.id === "string" && typeof o.issuer === "string" && typeof o.jwks_uri === "string" && typeof o.audiences === "string" && typeof o.authorization_url === "string" && Array.isArray(o.jwt_locations) && (!o.jwt_locations.length || JwtLocation.isAmino(o.jwt_locations[0])));
+  },
   encode(message: AuthProvider, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
@@ -922,6 +1217,9 @@ export const AuthProvider = {
       typeUrl: "/google.api.AuthProvider",
       value: AuthProvider.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    JwtLocation.registerTypeUrl();
   }
 };
 function createBaseOAuthRequirements(): OAuthRequirements {
@@ -931,6 +1229,15 @@ function createBaseOAuthRequirements(): OAuthRequirements {
 }
 export const OAuthRequirements = {
   typeUrl: "/google.api.OAuthRequirements",
+  is(o: any): o is OAuthRequirements {
+    return o && (o.$typeUrl === OAuthRequirements.typeUrl || typeof o.canonicalScopes === "string");
+  },
+  isSDK(o: any): o is OAuthRequirementsSDKType {
+    return o && (o.$typeUrl === OAuthRequirements.typeUrl || typeof o.canonical_scopes === "string");
+  },
+  isAmino(o: any): o is OAuthRequirementsAmino {
+    return o && (o.$typeUrl === OAuthRequirements.typeUrl || typeof o.canonical_scopes === "string");
+  },
   encode(message: OAuthRequirements, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.canonicalScopes !== undefined) {
       writer.uint32(10).string(message.canonicalScopes);
@@ -1010,7 +1317,8 @@ export const OAuthRequirements = {
       typeUrl: "/google.api.OAuthRequirements",
       value: OAuthRequirements.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseAuthRequirement(): AuthRequirement {
   return {
@@ -1020,6 +1328,15 @@ function createBaseAuthRequirement(): AuthRequirement {
 }
 export const AuthRequirement = {
   typeUrl: "/google.api.AuthRequirement",
+  is(o: any): o is AuthRequirement {
+    return o && (o.$typeUrl === AuthRequirement.typeUrl || typeof o.providerId === "string" && typeof o.audiences === "string");
+  },
+  isSDK(o: any): o is AuthRequirementSDKType {
+    return o && (o.$typeUrl === AuthRequirement.typeUrl || typeof o.provider_id === "string" && typeof o.audiences === "string");
+  },
+  isAmino(o: any): o is AuthRequirementAmino {
+    return o && (o.$typeUrl === AuthRequirement.typeUrl || typeof o.provider_id === "string" && typeof o.audiences === "string");
+  },
   encode(message: AuthRequirement, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.providerId !== undefined) {
       writer.uint32(10).string(message.providerId);
@@ -1115,5 +1432,6 @@ export const AuthRequirement = {
       typeUrl: "/google.api.AuthRequirement",
       value: AuthRequirement.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

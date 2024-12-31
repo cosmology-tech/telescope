@@ -1,4 +1,4 @@
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
@@ -12,6 +12,15 @@ export interface MsgSuperfluidDelegateProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate";
   value: Uint8Array;
 }
+export interface MsgSuperfluidDelegateAmino {
+  sender?: string;
+  lock_id?: string;
+  val_addr?: string;
+}
+export interface MsgSuperfluidDelegateAminoMsg {
+  type: "osmosis/superfluid-delegate";
+  value: MsgSuperfluidDelegateAmino;
+}
 export interface MsgSuperfluidDelegateSDKType {
   sender: string;
   lock_id: bigint;
@@ -22,6 +31,11 @@ export interface MsgSuperfluidDelegateResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse";
   value: Uint8Array;
 }
+export interface MsgSuperfluidDelegateResponseAmino {}
+export interface MsgSuperfluidDelegateResponseAminoMsg {
+  type: "osmosis/superfluid-delegate-response";
+  value: MsgSuperfluidDelegateResponseAmino;
+}
 export interface MsgSuperfluidDelegateResponseSDKType {}
 export interface MsgSuperfluidUndelegate {
   sender: string;
@@ -30,6 +44,14 @@ export interface MsgSuperfluidUndelegate {
 export interface MsgSuperfluidUndelegateProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate";
   value: Uint8Array;
+}
+export interface MsgSuperfluidUndelegateAmino {
+  sender?: string;
+  lock_id?: string;
+}
+export interface MsgSuperfluidUndelegateAminoMsg {
+  type: "osmosis/superfluid-undelegate";
+  value: MsgSuperfluidUndelegateAmino;
 }
 export interface MsgSuperfluidUndelegateSDKType {
   sender: string;
@@ -40,6 +62,11 @@ export interface MsgSuperfluidUndelegateResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse";
   value: Uint8Array;
 }
+export interface MsgSuperfluidUndelegateResponseAmino {}
+export interface MsgSuperfluidUndelegateResponseAminoMsg {
+  type: "osmosis/superfluid-undelegate-response";
+  value: MsgSuperfluidUndelegateResponseAmino;
+}
 export interface MsgSuperfluidUndelegateResponseSDKType {}
 export interface MsgSuperfluidUnbondLock {
   sender: string;
@@ -49,6 +76,14 @@ export interface MsgSuperfluidUnbondLockProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock";
   value: Uint8Array;
 }
+export interface MsgSuperfluidUnbondLockAmino {
+  sender?: string;
+  lock_id?: string;
+}
+export interface MsgSuperfluidUnbondLockAminoMsg {
+  type: "osmosis/superfluid-unbond-lock";
+  value: MsgSuperfluidUnbondLockAmino;
+}
 export interface MsgSuperfluidUnbondLockSDKType {
   sender: string;
   lock_id: bigint;
@@ -57,6 +92,11 @@ export interface MsgSuperfluidUnbondLockResponse {}
 export interface MsgSuperfluidUnbondLockResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse";
   value: Uint8Array;
+}
+export interface MsgSuperfluidUnbondLockResponseAmino {}
+export interface MsgSuperfluidUnbondLockResponseAminoMsg {
+  type: "osmosis/superfluid-unbond-lock-response";
+  value: MsgSuperfluidUnbondLockResponseAmino;
 }
 export interface MsgSuperfluidUnbondLockResponseSDKType {}
 /**
@@ -78,6 +118,20 @@ export interface MsgLockAndSuperfluidDelegateProtoMsg {
  * and then does a superfluid lock from the newly created lockup, to the
  * specified validator addr.
  */
+export interface MsgLockAndSuperfluidDelegateAmino {
+  sender?: string;
+  coins?: CoinAmino[];
+  val_addr?: string;
+}
+export interface MsgLockAndSuperfluidDelegateAminoMsg {
+  type: "osmosis/lock-and-superfluid-delegate";
+  value: MsgLockAndSuperfluidDelegateAmino;
+}
+/**
+ * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
+ * and then does a superfluid lock from the newly created lockup, to the
+ * specified validator addr.
+ */
 export interface MsgLockAndSuperfluidDelegateSDKType {
   sender: string;
   coins: CoinSDKType[];
@@ -89,6 +143,13 @@ export interface MsgLockAndSuperfluidDelegateResponse {
 export interface MsgLockAndSuperfluidDelegateResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse";
   value: Uint8Array;
+}
+export interface MsgLockAndSuperfluidDelegateResponseAmino {
+  ID?: string;
+}
+export interface MsgLockAndSuperfluidDelegateResponseAminoMsg {
+  type: "osmosis/lock-and-superfluid-delegate-response";
+  value: MsgLockAndSuperfluidDelegateResponseAmino;
 }
 export interface MsgLockAndSuperfluidDelegateResponseSDKType {
   ID: bigint;
@@ -121,6 +182,24 @@ export interface MsgUnPoolWhitelistedPoolProtoMsg {
  * If the lock was unbonding, the new lockup durations should be the time left
  * until unbond completion.
  */
+export interface MsgUnPoolWhitelistedPoolAmino {
+  sender?: string;
+  pool_id?: string;
+}
+export interface MsgUnPoolWhitelistedPoolAminoMsg {
+  type: "osmosis/unpool-whitelisted-pool";
+  value: MsgUnPoolWhitelistedPoolAmino;
+}
+/**
+ * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
+ * associated with pool pool_id. If pool_id is not approved for unpooling by
+ * governance, this is a no-op. Unpooling takes the locked gamm shares, and runs
+ * "ExitPool" on it, to get the constituent tokens. e.g. z gamm/pool/1 tokens
+ * ExitPools into constituent tokens x uatom, y uosmo. Then it creates a new
+ * lock for every constituent token, with the duration associated with the lock.
+ * If the lock was unbonding, the new lockup durations should be the time left
+ * until unbond completion.
+ */
 export interface MsgUnPoolWhitelistedPoolSDKType {
   sender: string;
   pool_id: bigint;
@@ -131,6 +210,13 @@ export interface MsgUnPoolWhitelistedPoolResponse {
 export interface MsgUnPoolWhitelistedPoolResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse";
   value: Uint8Array;
+}
+export interface MsgUnPoolWhitelistedPoolResponseAmino {
+  exited_lock_ids?: string[];
+}
+export interface MsgUnPoolWhitelistedPoolResponseAminoMsg {
+  type: "osmosis/un-pool-whitelisted-pool-response";
+  value: MsgUnPoolWhitelistedPoolResponseAmino;
 }
 export interface MsgUnPoolWhitelistedPoolResponseSDKType {
   exited_lock_ids: bigint[];
@@ -144,6 +230,16 @@ function createBaseMsgSuperfluidDelegate(): MsgSuperfluidDelegate {
 }
 export const MsgSuperfluidDelegate = {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate",
+  aminoType: "osmosis/superfluid-delegate",
+  is(o: any): o is MsgSuperfluidDelegate {
+    return o && (o.$typeUrl === MsgSuperfluidDelegate.typeUrl || typeof o.sender === "string" && typeof o.lockId === "bigint" && typeof o.valAddr === "string");
+  },
+  isSDK(o: any): o is MsgSuperfluidDelegateSDKType {
+    return o && (o.$typeUrl === MsgSuperfluidDelegate.typeUrl || typeof o.sender === "string" && typeof o.lock_id === "bigint" && typeof o.val_addr === "string");
+  },
+  isAmino(o: any): o is MsgSuperfluidDelegateAmino {
+    return o && (o.$typeUrl === MsgSuperfluidDelegate.typeUrl || typeof o.sender === "string" && typeof o.lock_id === "bigint" && typeof o.val_addr === "string");
+  },
   encode(message: MsgSuperfluidDelegate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -263,13 +359,24 @@ export const MsgSuperfluidDelegate = {
       typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate",
       value: MsgSuperfluidDelegate.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgSuperfluidDelegateResponse(): MsgSuperfluidDelegateResponse {
   return {};
 }
 export const MsgSuperfluidDelegateResponse = {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse",
+  aminoType: "osmosis/superfluid-delegate-response",
+  is(o: any): o is MsgSuperfluidDelegateResponse {
+    return o && o.$typeUrl === MsgSuperfluidDelegateResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgSuperfluidDelegateResponseSDKType {
+    return o && o.$typeUrl === MsgSuperfluidDelegateResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgSuperfluidDelegateResponseAmino {
+    return o && o.$typeUrl === MsgSuperfluidDelegateResponse.typeUrl;
+  },
   encode(_: MsgSuperfluidDelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -337,7 +444,8 @@ export const MsgSuperfluidDelegateResponse = {
       typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse",
       value: MsgSuperfluidDelegateResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
   return {
@@ -347,6 +455,16 @@ function createBaseMsgSuperfluidUndelegate(): MsgSuperfluidUndelegate {
 }
 export const MsgSuperfluidUndelegate = {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate",
+  aminoType: "osmosis/superfluid-undelegate",
+  is(o: any): o is MsgSuperfluidUndelegate {
+    return o && (o.$typeUrl === MsgSuperfluidUndelegate.typeUrl || typeof o.sender === "string" && typeof o.lockId === "bigint");
+  },
+  isSDK(o: any): o is MsgSuperfluidUndelegateSDKType {
+    return o && (o.$typeUrl === MsgSuperfluidUndelegate.typeUrl || typeof o.sender === "string" && typeof o.lock_id === "bigint");
+  },
+  isAmino(o: any): o is MsgSuperfluidUndelegateAmino {
+    return o && (o.$typeUrl === MsgSuperfluidUndelegate.typeUrl || typeof o.sender === "string" && typeof o.lock_id === "bigint");
+  },
   encode(message: MsgSuperfluidUndelegate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -450,13 +568,24 @@ export const MsgSuperfluidUndelegate = {
       typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate",
       value: MsgSuperfluidUndelegate.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgSuperfluidUndelegateResponse(): MsgSuperfluidUndelegateResponse {
   return {};
 }
 export const MsgSuperfluidUndelegateResponse = {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse",
+  aminoType: "osmosis/superfluid-undelegate-response",
+  is(o: any): o is MsgSuperfluidUndelegateResponse {
+    return o && o.$typeUrl === MsgSuperfluidUndelegateResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgSuperfluidUndelegateResponseSDKType {
+    return o && o.$typeUrl === MsgSuperfluidUndelegateResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgSuperfluidUndelegateResponseAmino {
+    return o && o.$typeUrl === MsgSuperfluidUndelegateResponse.typeUrl;
+  },
   encode(_: MsgSuperfluidUndelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -524,7 +653,8 @@ export const MsgSuperfluidUndelegateResponse = {
       typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse",
       value: MsgSuperfluidUndelegateResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
   return {
@@ -534,6 +664,16 @@ function createBaseMsgSuperfluidUnbondLock(): MsgSuperfluidUnbondLock {
 }
 export const MsgSuperfluidUnbondLock = {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock",
+  aminoType: "osmosis/superfluid-unbond-lock",
+  is(o: any): o is MsgSuperfluidUnbondLock {
+    return o && (o.$typeUrl === MsgSuperfluidUnbondLock.typeUrl || typeof o.sender === "string" && typeof o.lockId === "bigint");
+  },
+  isSDK(o: any): o is MsgSuperfluidUnbondLockSDKType {
+    return o && (o.$typeUrl === MsgSuperfluidUnbondLock.typeUrl || typeof o.sender === "string" && typeof o.lock_id === "bigint");
+  },
+  isAmino(o: any): o is MsgSuperfluidUnbondLockAmino {
+    return o && (o.$typeUrl === MsgSuperfluidUnbondLock.typeUrl || typeof o.sender === "string" && typeof o.lock_id === "bigint");
+  },
   encode(message: MsgSuperfluidUnbondLock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -637,13 +777,24 @@ export const MsgSuperfluidUnbondLock = {
       typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock",
       value: MsgSuperfluidUnbondLock.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgSuperfluidUnbondLockResponse(): MsgSuperfluidUnbondLockResponse {
   return {};
 }
 export const MsgSuperfluidUnbondLockResponse = {
   typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse",
+  aminoType: "osmosis/superfluid-unbond-lock-response",
+  is(o: any): o is MsgSuperfluidUnbondLockResponse {
+    return o && o.$typeUrl === MsgSuperfluidUnbondLockResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgSuperfluidUnbondLockResponseSDKType {
+    return o && o.$typeUrl === MsgSuperfluidUnbondLockResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgSuperfluidUnbondLockResponseAmino {
+    return o && o.$typeUrl === MsgSuperfluidUnbondLockResponse.typeUrl;
+  },
   encode(_: MsgSuperfluidUnbondLockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -711,7 +862,8 @@ export const MsgSuperfluidUnbondLockResponse = {
       typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse",
       value: MsgSuperfluidUnbondLockResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate {
   return {
@@ -722,6 +874,16 @@ function createBaseMsgLockAndSuperfluidDelegate(): MsgLockAndSuperfluidDelegate 
 }
 export const MsgLockAndSuperfluidDelegate = {
   typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
+  aminoType: "osmosis/lock-and-superfluid-delegate",
+  is(o: any): o is MsgLockAndSuperfluidDelegate {
+    return o && (o.$typeUrl === MsgLockAndSuperfluidDelegate.typeUrl || typeof o.sender === "string" && Array.isArray(o.coins) && (!o.coins.length || Coin.is(o.coins[0])) && typeof o.valAddr === "string");
+  },
+  isSDK(o: any): o is MsgLockAndSuperfluidDelegateSDKType {
+    return o && (o.$typeUrl === MsgLockAndSuperfluidDelegate.typeUrl || typeof o.sender === "string" && Array.isArray(o.coins) && (!o.coins.length || Coin.isSDK(o.coins[0])) && typeof o.val_addr === "string");
+  },
+  isAmino(o: any): o is MsgLockAndSuperfluidDelegateAmino {
+    return o && (o.$typeUrl === MsgLockAndSuperfluidDelegate.typeUrl || typeof o.sender === "string" && Array.isArray(o.coins) && (!o.coins.length || Coin.isAmino(o.coins[0])) && typeof o.val_addr === "string");
+  },
   encode(message: MsgLockAndSuperfluidDelegate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -849,6 +1011,9 @@ export const MsgLockAndSuperfluidDelegate = {
       typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate",
       value: MsgLockAndSuperfluidDelegate.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidDelegateResponse {
@@ -858,6 +1023,16 @@ function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidD
 }
 export const MsgLockAndSuperfluidDelegateResponse = {
   typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse",
+  aminoType: "osmosis/lock-and-superfluid-delegate-response",
+  is(o: any): o is MsgLockAndSuperfluidDelegateResponse {
+    return o && (o.$typeUrl === MsgLockAndSuperfluidDelegateResponse.typeUrl || typeof o.iD === "bigint");
+  },
+  isSDK(o: any): o is MsgLockAndSuperfluidDelegateResponseSDKType {
+    return o && (o.$typeUrl === MsgLockAndSuperfluidDelegateResponse.typeUrl || typeof o.ID === "bigint");
+  },
+  isAmino(o: any): o is MsgLockAndSuperfluidDelegateResponseAmino {
+    return o && (o.$typeUrl === MsgLockAndSuperfluidDelegateResponse.typeUrl || typeof o.ID === "bigint");
+  },
   encode(message: MsgLockAndSuperfluidDelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iD !== undefined) {
       writer.uint32(8).uint64(message.iD);
@@ -945,7 +1120,8 @@ export const MsgLockAndSuperfluidDelegateResponse = {
       typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse",
       value: MsgLockAndSuperfluidDelegateResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgUnPoolWhitelistedPool(): MsgUnPoolWhitelistedPool {
   return {
@@ -955,6 +1131,16 @@ function createBaseMsgUnPoolWhitelistedPool(): MsgUnPoolWhitelistedPool {
 }
 export const MsgUnPoolWhitelistedPool = {
   typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool",
+  aminoType: "osmosis/unpool-whitelisted-pool",
+  is(o: any): o is MsgUnPoolWhitelistedPool {
+    return o && (o.$typeUrl === MsgUnPoolWhitelistedPool.typeUrl || typeof o.sender === "string" && typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is MsgUnPoolWhitelistedPoolSDKType {
+    return o && (o.$typeUrl === MsgUnPoolWhitelistedPool.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is MsgUnPoolWhitelistedPoolAmino {
+    return o && (o.$typeUrl === MsgUnPoolWhitelistedPool.typeUrl || typeof o.sender === "string" && typeof o.pool_id === "bigint");
+  },
   encode(message: MsgUnPoolWhitelistedPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -1058,7 +1244,8 @@ export const MsgUnPoolWhitelistedPool = {
       typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool",
       value: MsgUnPoolWhitelistedPool.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgUnPoolWhitelistedPoolResponse(): MsgUnPoolWhitelistedPoolResponse {
   return {
@@ -1067,6 +1254,16 @@ function createBaseMsgUnPoolWhitelistedPoolResponse(): MsgUnPoolWhitelistedPoolR
 }
 export const MsgUnPoolWhitelistedPoolResponse = {
   typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse",
+  aminoType: "osmosis/un-pool-whitelisted-pool-response",
+  is(o: any): o is MsgUnPoolWhitelistedPoolResponse {
+    return o && (o.$typeUrl === MsgUnPoolWhitelistedPoolResponse.typeUrl || Array.isArray(o.exitedLockIds) && (!o.exitedLockIds.length || typeof o.exitedLockIds[0] === "bigint"));
+  },
+  isSDK(o: any): o is MsgUnPoolWhitelistedPoolResponseSDKType {
+    return o && (o.$typeUrl === MsgUnPoolWhitelistedPoolResponse.typeUrl || Array.isArray(o.exited_lock_ids) && (!o.exited_lock_ids.length || typeof o.exited_lock_ids[0] === "bigint"));
+  },
+  isAmino(o: any): o is MsgUnPoolWhitelistedPoolResponseAmino {
+    return o && (o.$typeUrl === MsgUnPoolWhitelistedPoolResponse.typeUrl || Array.isArray(o.exited_lock_ids) && (!o.exited_lock_ids.length || typeof o.exited_lock_ids[0] === "bigint"));
+  },
   encode(message: MsgUnPoolWhitelistedPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.exitedLockIds) {
@@ -1171,5 +1368,6 @@ export const MsgUnPoolWhitelistedPoolResponse = {
       typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse",
       value: MsgUnPoolWhitelistedPoolResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

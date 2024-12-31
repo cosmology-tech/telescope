@@ -1,7 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
-import { Params, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.fees.v1";
@@ -16,6 +17,18 @@ export interface QueryDevFeeInfosRequest {
 export interface QueryDevFeeInfosRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest";
   value: Uint8Array;
+}
+/**
+ * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
+ * method.
+ */
+export interface QueryDevFeeInfosRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDevFeeInfosRequestAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfosRequest";
+  value: QueryDevFeeInfosRequestAmino;
 }
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -41,6 +54,19 @@ export interface QueryDevFeeInfosResponseProtoMsg {
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
  * RPC method.
  */
+export interface QueryDevFeeInfosResponseAmino {
+  fees?: DevFeeInfoAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryDevFeeInfosResponseAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfosResponse";
+  value: QueryDevFeeInfosResponseAmino;
+}
+/**
+ * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
+ * RPC method.
+ */
 export interface QueryDevFeeInfosResponseSDKType {
   fees: DevFeeInfoSDKType[];
   pagination?: PageResponseSDKType;
@@ -56,6 +82,18 @@ export interface QueryDevFeeInfoRequest {
 export interface QueryDevFeeInfoRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest";
   value: Uint8Array;
+}
+/**
+ * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
+ * method.
+ */
+export interface QueryDevFeeInfoRequestAmino {
+  /** contract identifier is the hex contract address of a contract */
+  contract_address?: string;
+}
+export interface QueryDevFeeInfoRequestAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfoRequest";
+  value: QueryDevFeeInfoRequestAmino;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -79,6 +117,17 @@ export interface QueryDevFeeInfoResponseProtoMsg {
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
  * method.
  */
+export interface QueryDevFeeInfoResponseAmino {
+  fee?: DevFeeInfoAmino;
+}
+export interface QueryDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfoResponse";
+  value: QueryDevFeeInfoResponseAmino;
+}
+/**
+ * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
+ * method.
+ */
 export interface QueryDevFeeInfoResponseSDKType {
   fee: DevFeeInfoSDKType;
 }
@@ -87,6 +136,12 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "/evmos.fees.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -100,6 +155,17 @@ export interface QueryParamsResponse {
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/evmos.fees.v1.QueryParamsResponse";
   value: Uint8Array;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "/evmos.fees.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -126,6 +192,20 @@ export interface QueryDevFeeInfosPerDeployerRequestProtoMsg {
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
  * Query/DevFeeInfosPerDeployer RPC method.
  */
+export interface QueryDevFeeInfosPerDeployerRequestAmino {
+  /** deployer bech32 address */
+  deployer_address?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDevFeeInfosPerDeployerRequestAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
+  value: QueryDevFeeInfosPerDeployerRequestAmino;
+}
+/**
+ * QueryDevFeeInfosPerDeployerRequest is the request type for the
+ * Query/DevFeeInfosPerDeployer RPC method.
+ */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
   deployer_address: string;
   pagination?: PageRequestSDKType;
@@ -147,6 +227,19 @@ export interface QueryDevFeeInfosPerDeployerResponseProtoMsg {
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
  * Query/DevFeeInfosPerDeployer RPC method.
  */
+export interface QueryDevFeeInfosPerDeployerResponseAmino {
+  fees?: DevFeeInfoAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryDevFeeInfosPerDeployerResponseAminoMsg {
+  type: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
+  value: QueryDevFeeInfosPerDeployerResponseAmino;
+}
+/**
+ * QueryDevFeeInfosPerDeployerResponse is the response type for the
+ * Query/DevFeeInfosPerDeployer RPC method.
+ */
 export interface QueryDevFeeInfosPerDeployerResponseSDKType {
   fees: DevFeeInfoSDKType[];
   pagination?: PageResponseSDKType;
@@ -158,6 +251,15 @@ function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
 }
 export const QueryDevFeeInfosRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest",
+  is(o: any): o is QueryDevFeeInfosRequest {
+    return o && o.$typeUrl === QueryDevFeeInfosRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryDevFeeInfosRequestSDKType {
+    return o && o.$typeUrl === QueryDevFeeInfosRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryDevFeeInfosRequestAmino {
+    return o && o.$typeUrl === QueryDevFeeInfosRequest.typeUrl;
+  },
   encode(message: QueryDevFeeInfosRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -239,6 +341,9 @@ export const QueryDevFeeInfosRequest = {
       typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest",
       value: QueryDevFeeInfosRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryDevFeeInfosResponse(): QueryDevFeeInfosResponse {
@@ -249,6 +354,15 @@ function createBaseQueryDevFeeInfosResponse(): QueryDevFeeInfosResponse {
 }
 export const QueryDevFeeInfosResponse = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse",
+  is(o: any): o is QueryDevFeeInfosResponse {
+    return o && (o.$typeUrl === QueryDevFeeInfosResponse.typeUrl || Array.isArray(o.fees) && (!o.fees.length || DevFeeInfo.is(o.fees[0])));
+  },
+  isSDK(o: any): o is QueryDevFeeInfosResponseSDKType {
+    return o && (o.$typeUrl === QueryDevFeeInfosResponse.typeUrl || Array.isArray(o.fees) && (!o.fees.length || DevFeeInfo.isSDK(o.fees[0])));
+  },
+  isAmino(o: any): o is QueryDevFeeInfosResponseAmino {
+    return o && (o.$typeUrl === QueryDevFeeInfosResponse.typeUrl || Array.isArray(o.fees) && (!o.fees.length || DevFeeInfo.isAmino(o.fees[0])));
+  },
   encode(message: QueryDevFeeInfosResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.fees) {
       DevFeeInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -356,6 +470,10 @@ export const QueryDevFeeInfosResponse = {
       typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse",
       value: QueryDevFeeInfosResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DevFeeInfo.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryDevFeeInfoRequest(): QueryDevFeeInfoRequest {
@@ -365,6 +483,15 @@ function createBaseQueryDevFeeInfoRequest(): QueryDevFeeInfoRequest {
 }
 export const QueryDevFeeInfoRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest",
+  is(o: any): o is QueryDevFeeInfoRequest {
+    return o && (o.$typeUrl === QueryDevFeeInfoRequest.typeUrl || typeof o.contractAddress === "string");
+  },
+  isSDK(o: any): o is QueryDevFeeInfoRequestSDKType {
+    return o && (o.$typeUrl === QueryDevFeeInfoRequest.typeUrl || typeof o.contract_address === "string");
+  },
+  isAmino(o: any): o is QueryDevFeeInfoRequestAmino {
+    return o && (o.$typeUrl === QueryDevFeeInfoRequest.typeUrl || typeof o.contract_address === "string");
+  },
   encode(message: QueryDevFeeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
@@ -444,7 +571,8 @@ export const QueryDevFeeInfoRequest = {
       typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest",
       value: QueryDevFeeInfoRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryDevFeeInfoResponse(): QueryDevFeeInfoResponse {
   return {
@@ -453,6 +581,15 @@ function createBaseQueryDevFeeInfoResponse(): QueryDevFeeInfoResponse {
 }
 export const QueryDevFeeInfoResponse = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse",
+  is(o: any): o is QueryDevFeeInfoResponse {
+    return o && (o.$typeUrl === QueryDevFeeInfoResponse.typeUrl || DevFeeInfo.is(o.fee));
+  },
+  isSDK(o: any): o is QueryDevFeeInfoResponseSDKType {
+    return o && (o.$typeUrl === QueryDevFeeInfoResponse.typeUrl || DevFeeInfo.isSDK(o.fee));
+  },
+  isAmino(o: any): o is QueryDevFeeInfoResponseAmino {
+    return o && (o.$typeUrl === QueryDevFeeInfoResponse.typeUrl || DevFeeInfo.isAmino(o.fee));
+  },
   encode(message: QueryDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fee !== undefined) {
       DevFeeInfo.encode(message.fee, writer.uint32(10).fork()).ldelim();
@@ -534,6 +671,9 @@ export const QueryDevFeeInfoResponse = {
       typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse",
       value: QueryDevFeeInfoResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DevFeeInfo.registerTypeUrl();
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -541,6 +681,15 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/evmos.fees.v1.QueryParamsRequest",
+  is(o: any): o is QueryParamsRequest {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsRequestSDKType {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsRequestAmino {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -602,7 +751,8 @@ export const QueryParamsRequest = {
       typeUrl: "/evmos.fees.v1.QueryParamsRequest",
       value: QueryParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -611,6 +761,15 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/evmos.fees.v1.QueryParamsResponse",
+  is(o: any): o is QueryParamsResponse {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.is(o.params));
+  },
+  isSDK(o: any): o is QueryParamsResponseSDKType {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is QueryParamsResponseAmino {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isAmino(o.params));
+  },
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -692,6 +851,9 @@ export const QueryParamsResponse = {
       typeUrl: "/evmos.fees.v1.QueryParamsResponse",
       value: QueryParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };
 function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDeployerRequest {
@@ -702,6 +864,15 @@ function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDepl
 }
 export const QueryDevFeeInfosPerDeployerRequest = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest",
+  is(o: any): o is QueryDevFeeInfosPerDeployerRequest {
+    return o && (o.$typeUrl === QueryDevFeeInfosPerDeployerRequest.typeUrl || typeof o.deployerAddress === "string");
+  },
+  isSDK(o: any): o is QueryDevFeeInfosPerDeployerRequestSDKType {
+    return o && (o.$typeUrl === QueryDevFeeInfosPerDeployerRequest.typeUrl || typeof o.deployer_address === "string");
+  },
+  isAmino(o: any): o is QueryDevFeeInfosPerDeployerRequestAmino {
+    return o && (o.$typeUrl === QueryDevFeeInfosPerDeployerRequest.typeUrl || typeof o.deployer_address === "string");
+  },
   encode(message: QueryDevFeeInfosPerDeployerRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deployerAddress !== undefined) {
       writer.uint32(10).string(message.deployerAddress);
@@ -799,6 +970,9 @@ export const QueryDevFeeInfosPerDeployerRequest = {
       typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest",
       value: QueryDevFeeInfosPerDeployerRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryDevFeeInfosPerDeployerResponse(): QueryDevFeeInfosPerDeployerResponse {
@@ -809,6 +983,15 @@ function createBaseQueryDevFeeInfosPerDeployerResponse(): QueryDevFeeInfosPerDep
 }
 export const QueryDevFeeInfosPerDeployerResponse = {
   typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse",
+  is(o: any): o is QueryDevFeeInfosPerDeployerResponse {
+    return o && (o.$typeUrl === QueryDevFeeInfosPerDeployerResponse.typeUrl || Array.isArray(o.fees) && (!o.fees.length || DevFeeInfo.is(o.fees[0])));
+  },
+  isSDK(o: any): o is QueryDevFeeInfosPerDeployerResponseSDKType {
+    return o && (o.$typeUrl === QueryDevFeeInfosPerDeployerResponse.typeUrl || Array.isArray(o.fees) && (!o.fees.length || DevFeeInfo.isSDK(o.fees[0])));
+  },
+  isAmino(o: any): o is QueryDevFeeInfosPerDeployerResponseAmino {
+    return o && (o.$typeUrl === QueryDevFeeInfosPerDeployerResponse.typeUrl || Array.isArray(o.fees) && (!o.fees.length || DevFeeInfo.isAmino(o.fees[0])));
+  },
   encode(message: QueryDevFeeInfosPerDeployerResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.fees) {
       DevFeeInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -916,5 +1099,9 @@ export const QueryDevFeeInfosPerDeployerResponse = {
       typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse",
       value: QueryDevFeeInfosPerDeployerResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    DevFeeInfo.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };

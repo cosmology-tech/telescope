@@ -1,7 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { TokenPair, TokenPairSDKType } from "./erc20";
-import { Params, ParamsSDKType } from "./genesis";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
+import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
@@ -16,6 +17,18 @@ export interface QueryTokenPairsRequest {
 export interface QueryTokenPairsRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest";
   value: Uint8Array;
+}
+/**
+ * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
+ * method.
+ */
+export interface QueryTokenPairsRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryTokenPairsRequestAminoMsg {
+  type: "/evmos.erc20.v1.QueryTokenPairsRequest";
+  value: QueryTokenPairsRequestAmino;
 }
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -41,6 +54,19 @@ export interface QueryTokenPairsResponseProtoMsg {
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
  * method.
  */
+export interface QueryTokenPairsResponseAmino {
+  token_pairs?: TokenPairAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryTokenPairsResponseAminoMsg {
+  type: "/evmos.erc20.v1.QueryTokenPairsResponse";
+  value: QueryTokenPairsResponseAmino;
+}
+/**
+ * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
+ * method.
+ */
 export interface QueryTokenPairsResponseSDKType {
   token_pairs: TokenPairSDKType[];
   pagination?: PageResponseSDKType;
@@ -56,6 +82,18 @@ export interface QueryTokenPairRequest {
 export interface QueryTokenPairRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest";
   value: Uint8Array;
+}
+/** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
+export interface QueryTokenPairRequestAmino {
+  /**
+   * token identifier can be either the hex contract address of the ERC20 or the
+   * Cosmos base denomination
+   */
+  token?: string;
+}
+export interface QueryTokenPairRequestAminoMsg {
+  type: "/evmos.erc20.v1.QueryTokenPairRequest";
+  value: QueryTokenPairRequestAmino;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequestSDKType {
@@ -76,6 +114,17 @@ export interface QueryTokenPairResponseProtoMsg {
  * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
  * method.
  */
+export interface QueryTokenPairResponseAmino {
+  token_pair?: TokenPairAmino;
+}
+export interface QueryTokenPairResponseAminoMsg {
+  type: "/evmos.erc20.v1.QueryTokenPairResponse";
+  value: QueryTokenPairResponseAmino;
+}
+/**
+ * QueryTokenPairResponse is the response type for the Query/TokenPair RPC
+ * method.
+ */
 export interface QueryTokenPairResponseSDKType {
   token_pair: TokenPairSDKType;
 }
@@ -84,6 +133,12 @@ export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryParamsRequest";
   value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method. */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "/evmos.erc20.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
@@ -102,6 +157,17 @@ export interface QueryParamsResponseProtoMsg {
  * QueryParamsResponse is the response type for the Query/Params RPC
  * method.
  */
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "/evmos.erc20.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
+}
+/**
+ * QueryParamsResponse is the response type for the Query/Params RPC
+ * method.
+ */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
 }
@@ -112,6 +178,15 @@ function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
 }
 export const QueryTokenPairsRequest = {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest",
+  is(o: any): o is QueryTokenPairsRequest {
+    return o && o.$typeUrl === QueryTokenPairsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryTokenPairsRequestSDKType {
+    return o && o.$typeUrl === QueryTokenPairsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryTokenPairsRequestAmino {
+    return o && o.$typeUrl === QueryTokenPairsRequest.typeUrl;
+  },
   encode(message: QueryTokenPairsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -193,6 +268,9 @@ export const QueryTokenPairsRequest = {
       typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest",
       value: QueryTokenPairsRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
@@ -203,6 +281,15 @@ function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
 }
 export const QueryTokenPairsResponse = {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse",
+  is(o: any): o is QueryTokenPairsResponse {
+    return o && (o.$typeUrl === QueryTokenPairsResponse.typeUrl || Array.isArray(o.tokenPairs) && (!o.tokenPairs.length || TokenPair.is(o.tokenPairs[0])));
+  },
+  isSDK(o: any): o is QueryTokenPairsResponseSDKType {
+    return o && (o.$typeUrl === QueryTokenPairsResponse.typeUrl || Array.isArray(o.token_pairs) && (!o.token_pairs.length || TokenPair.isSDK(o.token_pairs[0])));
+  },
+  isAmino(o: any): o is QueryTokenPairsResponseAmino {
+    return o && (o.$typeUrl === QueryTokenPairsResponse.typeUrl || Array.isArray(o.token_pairs) && (!o.token_pairs.length || TokenPair.isAmino(o.token_pairs[0])));
+  },
   encode(message: QueryTokenPairsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.tokenPairs) {
       TokenPair.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -310,6 +397,10 @@ export const QueryTokenPairsResponse = {
       typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse",
       value: QueryTokenPairsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    TokenPair.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
@@ -319,6 +410,15 @@ function createBaseQueryTokenPairRequest(): QueryTokenPairRequest {
 }
 export const QueryTokenPairRequest = {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
+  is(o: any): o is QueryTokenPairRequest {
+    return o && (o.$typeUrl === QueryTokenPairRequest.typeUrl || typeof o.token === "string");
+  },
+  isSDK(o: any): o is QueryTokenPairRequestSDKType {
+    return o && (o.$typeUrl === QueryTokenPairRequest.typeUrl || typeof o.token === "string");
+  },
+  isAmino(o: any): o is QueryTokenPairRequestAmino {
+    return o && (o.$typeUrl === QueryTokenPairRequest.typeUrl || typeof o.token === "string");
+  },
   encode(message: QueryTokenPairRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.token !== undefined) {
       writer.uint32(10).string(message.token);
@@ -398,7 +498,8 @@ export const QueryTokenPairRequest = {
       typeUrl: "/evmos.erc20.v1.QueryTokenPairRequest",
       value: QueryTokenPairRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryTokenPairResponse(): QueryTokenPairResponse {
   return {
@@ -407,6 +508,15 @@ function createBaseQueryTokenPairResponse(): QueryTokenPairResponse {
 }
 export const QueryTokenPairResponse = {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse",
+  is(o: any): o is QueryTokenPairResponse {
+    return o && (o.$typeUrl === QueryTokenPairResponse.typeUrl || TokenPair.is(o.tokenPair));
+  },
+  isSDK(o: any): o is QueryTokenPairResponseSDKType {
+    return o && (o.$typeUrl === QueryTokenPairResponse.typeUrl || TokenPair.isSDK(o.token_pair));
+  },
+  isAmino(o: any): o is QueryTokenPairResponseAmino {
+    return o && (o.$typeUrl === QueryTokenPairResponse.typeUrl || TokenPair.isAmino(o.token_pair));
+  },
   encode(message: QueryTokenPairResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tokenPair !== undefined) {
       TokenPair.encode(message.tokenPair, writer.uint32(10).fork()).ldelim();
@@ -488,6 +598,9 @@ export const QueryTokenPairResponse = {
       typeUrl: "/evmos.erc20.v1.QueryTokenPairResponse",
       value: QueryTokenPairResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    TokenPair.registerTypeUrl();
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -495,6 +608,15 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/evmos.erc20.v1.QueryParamsRequest",
+  is(o: any): o is QueryParamsRequest {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryParamsRequestSDKType {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryParamsRequestAmino {
+    return o && o.$typeUrl === QueryParamsRequest.typeUrl;
+  },
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -556,7 +678,8 @@ export const QueryParamsRequest = {
       typeUrl: "/evmos.erc20.v1.QueryParamsRequest",
       value: QueryParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
@@ -565,6 +688,15 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/evmos.erc20.v1.QueryParamsResponse",
+  is(o: any): o is QueryParamsResponse {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.is(o.params));
+  },
+  isSDK(o: any): o is QueryParamsResponseSDKType {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isSDK(o.params));
+  },
+  isAmino(o: any): o is QueryParamsResponseAmino {
+    return o && (o.$typeUrl === QueryParamsResponse.typeUrl || Params.isAmino(o.params));
+  },
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -646,5 +778,8 @@ export const QueryParamsResponse = {
       typeUrl: "/evmos.erc20.v1.QueryParamsResponse",
       value: QueryParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };

@@ -15,6 +15,17 @@ export interface MinterProtoMsg {
   value: Uint8Array;
 }
 /** Minter represents the minting state. */
+export interface MinterAmino {
+  /** current annual inflation rate */
+  inflation?: string;
+  /** current annual expected provisions */
+  annual_provisions?: string;
+}
+export interface MinterAminoMsg {
+  type: "cosmos-sdk/Minter";
+  value: MinterAmino;
+}
+/** Minter represents the minting state. */
 export interface MinterSDKType {
   inflation: string;
   annual_provisions: string;
@@ -39,6 +50,25 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params holds parameters for the mint module. */
+export interface ParamsAmino {
+  /** type of coin to mint */
+  mint_denom?: string;
+  /** maximum annual change in inflation rate */
+  inflation_rate_change?: string;
+  /** maximum inflation rate */
+  inflation_max?: string;
+  /** minimum inflation rate */
+  inflation_min?: string;
+  /** goal of percent bonded atoms */
+  goal_bonded?: string;
+  /** expected blocks per year */
+  blocks_per_year?: string;
+}
+export interface ParamsAminoMsg {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
+}
+/** Params holds parameters for the mint module. */
 export interface ParamsSDKType {
   mint_denom: string;
   inflation_rate_change: string;
@@ -55,6 +85,16 @@ function createBaseMinter(): Minter {
 }
 export const Minter = {
   typeUrl: "/cosmos.mint.v1beta1.Minter",
+  aminoType: "cosmos-sdk/Minter",
+  is(o: any): o is Minter {
+    return o && (o.$typeUrl === Minter.typeUrl || typeof o.inflation === "string" && typeof o.annualProvisions === "string");
+  },
+  isSDK(o: any): o is MinterSDKType {
+    return o && (o.$typeUrl === Minter.typeUrl || typeof o.inflation === "string" && typeof o.annual_provisions === "string");
+  },
+  isAmino(o: any): o is MinterAmino {
+    return o && (o.$typeUrl === Minter.typeUrl || typeof o.inflation === "string" && typeof o.annual_provisions === "string");
+  },
   encode(message: Minter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.inflation !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.inflation, 18).atomics);
@@ -156,7 +196,8 @@ export const Minter = {
       typeUrl: "/cosmos.mint.v1beta1.Minter",
       value: Minter.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseParams(): Params {
   return {
@@ -170,6 +211,16 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/cosmos.mint.v1beta1.Params",
+  aminoType: "cosmos-sdk/Params",
+  is(o: any): o is Params {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.mintDenom === "string" && typeof o.inflationRateChange === "string" && typeof o.inflationMax === "string" && typeof o.inflationMin === "string" && typeof o.goalBonded === "string" && typeof o.blocksPerYear === "bigint");
+  },
+  isSDK(o: any): o is ParamsSDKType {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.mint_denom === "string" && typeof o.inflation_rate_change === "string" && typeof o.inflation_max === "string" && typeof o.inflation_min === "string" && typeof o.goal_bonded === "string" && typeof o.blocks_per_year === "bigint");
+  },
+  isAmino(o: any): o is ParamsAmino {
+    return o && (o.$typeUrl === Params.typeUrl || typeof o.mint_denom === "string" && typeof o.inflation_rate_change === "string" && typeof o.inflation_max === "string" && typeof o.inflation_min === "string" && typeof o.goal_bonded === "string" && typeof o.blocks_per_year === "bigint");
+  },
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.mintDenom !== undefined) {
       writer.uint32(10).string(message.mintDenom);
@@ -337,5 +388,6 @@ export const Params = {
       typeUrl: "/cosmos.mint.v1beta1.Params",
       value: Params.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

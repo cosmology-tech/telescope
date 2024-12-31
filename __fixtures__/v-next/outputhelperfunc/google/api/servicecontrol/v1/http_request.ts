@@ -1,5 +1,6 @@
-import { Duration, DurationSDKType } from "../../../protobuf/duration";
+import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
@@ -89,6 +90,87 @@ export interface HttpRequestProtoMsg {
  * defined by the HTTP specification. Product-specific logging
  * information MUST be defined in a separate message.
  */
+export interface HttpRequestAmino {
+  /** The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`. */
+  request_method?: string;
+  /**
+   * The scheme (http, https), the host name, the path, and the query
+   * portion of the URL that was requested.
+   * Example: `"http://example.com/some/info?color=red"`.
+   */
+  request_url?: string;
+  /**
+   * The size of the HTTP request message in bytes, including the request
+   * headers and the request body.
+   */
+  request_size?: string;
+  /**
+   * The response code indicating the status of the response.
+   * Examples: 200, 404.
+   */
+  status?: number;
+  /**
+   * The size of the HTTP response message sent back to the client, in bytes,
+   * including the response headers and the response body.
+   */
+  response_size?: string;
+  /**
+   * The user agent sent by the client. Example:
+   * `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
+   * CLR 1.0.3705)"`.
+   */
+  user_agent?: string;
+  /**
+   * The IP address (IPv4 or IPv6) of the client that issued the HTTP
+   * request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.
+   */
+  remote_ip?: string;
+  /**
+   * The IP address (IPv4 or IPv6) of the origin server that the request was
+   * sent to.
+   */
+  server_ip?: string;
+  /**
+   * The referer URL of the request, as defined in
+   * [HTTP/1.1 Header Field
+   * Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+   */
+  referer?: string;
+  /**
+   * The request processing latency on the server, from the time the request was
+   * received until the response was sent.
+   */
+  latency?: DurationAmino;
+  /** Whether or not a cache lookup was attempted. */
+  cache_lookup?: boolean;
+  /**
+   * Whether or not an entity was served from cache
+   * (with or without validation).
+   */
+  cache_hit?: boolean;
+  /**
+   * Whether or not the response was validated with the origin server before
+   * being served from cache. This field is only meaningful if `cache_hit` is
+   * True.
+   */
+  cache_validated_with_origin_server?: boolean;
+  /**
+   * The number of HTTP response bytes inserted into cache. Set only when a
+   * cache fill was attempted.
+   */
+  cache_fill_bytes?: string;
+  /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
+  protocol?: string;
+}
+export interface HttpRequestAminoMsg {
+  type: "/google.api.servicecontrol.v1.HttpRequest";
+  value: HttpRequestAmino;
+}
+/**
+ * A common proto for logging HTTP requests. Only contains semantics
+ * defined by the HTTP specification. Product-specific logging
+ * information MUST be defined in a separate message.
+ */
 export interface HttpRequestSDKType {
   request_method: string;
   request_url: string;
@@ -127,6 +209,15 @@ function createBaseHttpRequest(): HttpRequest {
 }
 export const HttpRequest = {
   typeUrl: "/google.api.servicecontrol.v1.HttpRequest",
+  is(o: any): o is HttpRequest {
+    return o && (o.$typeUrl === HttpRequest.typeUrl || typeof o.requestMethod === "string" && typeof o.requestUrl === "string" && typeof o.requestSize === "bigint" && typeof o.status === "number" && typeof o.responseSize === "bigint" && typeof o.userAgent === "string" && typeof o.remoteIp === "string" && typeof o.serverIp === "string" && typeof o.referer === "string" && typeof o.cacheLookup === "boolean" && typeof o.cacheHit === "boolean" && typeof o.cacheValidatedWithOriginServer === "boolean" && typeof o.cacheFillBytes === "bigint" && typeof o.protocol === "string");
+  },
+  isSDK(o: any): o is HttpRequestSDKType {
+    return o && (o.$typeUrl === HttpRequest.typeUrl || typeof o.request_method === "string" && typeof o.request_url === "string" && typeof o.request_size === "bigint" && typeof o.status === "number" && typeof o.response_size === "bigint" && typeof o.user_agent === "string" && typeof o.remote_ip === "string" && typeof o.server_ip === "string" && typeof o.referer === "string" && typeof o.cache_lookup === "boolean" && typeof o.cache_hit === "boolean" && typeof o.cache_validated_with_origin_server === "boolean" && typeof o.cache_fill_bytes === "bigint" && typeof o.protocol === "string");
+  },
+  isAmino(o: any): o is HttpRequestAmino {
+    return o && (o.$typeUrl === HttpRequest.typeUrl || typeof o.request_method === "string" && typeof o.request_url === "string" && typeof o.request_size === "bigint" && typeof o.status === "number" && typeof o.response_size === "bigint" && typeof o.user_agent === "string" && typeof o.remote_ip === "string" && typeof o.server_ip === "string" && typeof o.referer === "string" && typeof o.cache_lookup === "boolean" && typeof o.cache_hit === "boolean" && typeof o.cache_validated_with_origin_server === "boolean" && typeof o.cache_fill_bytes === "bigint" && typeof o.protocol === "string");
+  },
   encode(message: HttpRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.requestMethod !== undefined) {
       writer.uint32(10).string(message.requestMethod);
@@ -438,5 +529,6 @@ export const HttpRequest = {
       typeUrl: "/google.api.servicecontrol.v1.HttpRequest",
       value: HttpRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

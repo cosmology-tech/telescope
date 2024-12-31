@@ -1,5 +1,6 @@
-import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
+import { PoolParams, PoolParamsAmino, PoolParamsSDKType, PoolAsset, PoolAssetAmino, PoolAssetSDKType } from "../balancerPool";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../../registry";
 import { isSet, DeepPartial } from "../../../../../helpers";
 import { JsonSafe } from "../../../../../json-safe";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
@@ -13,6 +14,17 @@ export interface MsgCreateBalancerPool {
 export interface MsgCreateBalancerPoolProtoMsg {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool";
   value: Uint8Array;
+}
+/** ===================== MsgCreatePool */
+export interface MsgCreateBalancerPoolAmino {
+  sender?: string;
+  pool_params?: PoolParamsAmino;
+  pool_assets?: PoolAssetAmino[];
+  future_pool_governor?: string;
+}
+export interface MsgCreateBalancerPoolAminoMsg {
+  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool";
+  value: MsgCreateBalancerPoolAmino;
 }
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPoolSDKType {
@@ -30,6 +42,14 @@ export interface MsgCreateBalancerPoolResponseProtoMsg {
   value: Uint8Array;
 }
 /** Returns the poolID */
+export interface MsgCreateBalancerPoolResponseAmino {
+  pool_id?: string;
+}
+export interface MsgCreateBalancerPoolResponseAminoMsg {
+  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response";
+  value: MsgCreateBalancerPoolResponseAmino;
+}
+/** Returns the poolID */
 export interface MsgCreateBalancerPoolResponseSDKType {
   pool_id: bigint;
 }
@@ -43,6 +63,16 @@ function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
 }
 export const MsgCreateBalancerPool = {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool",
+  aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
+  is(o: any): o is MsgCreateBalancerPool {
+    return o && (o.$typeUrl === MsgCreateBalancerPool.typeUrl || typeof o.sender === "string" && Array.isArray(o.poolAssets) && (!o.poolAssets.length || PoolAsset.is(o.poolAssets[0])) && typeof o.futurePoolGovernor === "string");
+  },
+  isSDK(o: any): o is MsgCreateBalancerPoolSDKType {
+    return o && (o.$typeUrl === MsgCreateBalancerPool.typeUrl || typeof o.sender === "string" && Array.isArray(o.pool_assets) && (!o.pool_assets.length || PoolAsset.isSDK(o.pool_assets[0])) && typeof o.future_pool_governor === "string");
+  },
+  isAmino(o: any): o is MsgCreateBalancerPoolAmino {
+    return o && (o.$typeUrl === MsgCreateBalancerPool.typeUrl || typeof o.sender === "string" && Array.isArray(o.pool_assets) && (!o.pool_assets.length || PoolAsset.isAmino(o.pool_assets[0])) && typeof o.future_pool_governor === "string");
+  },
   encode(message: MsgCreateBalancerPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
@@ -188,6 +218,10 @@ export const MsgCreateBalancerPool = {
       typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool",
       value: MsgCreateBalancerPool.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PoolParams.registerTypeUrl();
+    PoolAsset.registerTypeUrl();
   }
 };
 function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolResponse {
@@ -197,6 +231,16 @@ function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolRespons
 }
 export const MsgCreateBalancerPoolResponse = {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse",
+  aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
+  is(o: any): o is MsgCreateBalancerPoolResponse {
+    return o && (o.$typeUrl === MsgCreateBalancerPoolResponse.typeUrl || typeof o.poolId === "bigint");
+  },
+  isSDK(o: any): o is MsgCreateBalancerPoolResponseSDKType {
+    return o && (o.$typeUrl === MsgCreateBalancerPoolResponse.typeUrl || typeof o.pool_id === "bigint");
+  },
+  isAmino(o: any): o is MsgCreateBalancerPoolResponseAmino {
+    return o && (o.$typeUrl === MsgCreateBalancerPoolResponse.typeUrl || typeof o.pool_id === "bigint");
+  },
   encode(message: MsgCreateBalancerPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
@@ -284,5 +328,6 @@ export const MsgCreateBalancerPoolResponse = {
       typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse",
       value: MsgCreateBalancerPoolResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

@@ -20,6 +20,19 @@ export interface AppProtoMsg {
  * This information is included in ResponseInfo. The App.Protocol can be
  * updated in ResponseEndBlock.
  */
+export interface AppAmino {
+  protocol?: string;
+  software?: string;
+}
+export interface AppAminoMsg {
+  type: "/tendermint.version.App";
+  value: AppAmino;
+}
+/**
+ * App includes the protocol and software version for the application.
+ * This information is included in ResponseInfo. The App.Protocol can be
+ * updated in ResponseEndBlock.
+ */
 export interface AppSDKType {
   protocol: bigint;
   software: string;
@@ -42,6 +55,19 @@ export interface ConsensusProtoMsg {
  * including all blockchain data structures and the rules of the application's
  * state transition machine.
  */
+export interface ConsensusAmino {
+  block?: string;
+  app?: string;
+}
+export interface ConsensusAminoMsg {
+  type: "/tendermint.version.Consensus";
+  value: ConsensusAmino;
+}
+/**
+ * Consensus captures the consensus rules for processing a block in the blockchain,
+ * including all blockchain data structures and the rules of the application's
+ * state transition machine.
+ */
 export interface ConsensusSDKType {
   block: bigint;
   app: bigint;
@@ -54,6 +80,15 @@ function createBaseApp(): App {
 }
 export const App = {
   typeUrl: "/tendermint.version.App",
+  is(o: any): o is App {
+    return o && (o.$typeUrl === App.typeUrl || typeof o.protocol === "bigint" && typeof o.software === "string");
+  },
+  isSDK(o: any): o is AppSDKType {
+    return o && (o.$typeUrl === App.typeUrl || typeof o.protocol === "bigint" && typeof o.software === "string");
+  },
+  isAmino(o: any): o is AppAmino {
+    return o && (o.$typeUrl === App.typeUrl || typeof o.protocol === "bigint" && typeof o.software === "string");
+  },
   encode(message: App, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.protocol !== undefined) {
       writer.uint32(8).uint64(message.protocol);
@@ -151,7 +186,8 @@ export const App = {
       typeUrl: "/tendermint.version.App",
       value: App.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseConsensus(): Consensus {
   return {
@@ -161,6 +197,15 @@ function createBaseConsensus(): Consensus {
 }
 export const Consensus = {
   typeUrl: "/tendermint.version.Consensus",
+  is(o: any): o is Consensus {
+    return o && (o.$typeUrl === Consensus.typeUrl || typeof o.block === "bigint" && typeof o.app === "bigint");
+  },
+  isSDK(o: any): o is ConsensusSDKType {
+    return o && (o.$typeUrl === Consensus.typeUrl || typeof o.block === "bigint" && typeof o.app === "bigint");
+  },
+  isAmino(o: any): o is ConsensusAmino {
+    return o && (o.$typeUrl === Consensus.typeUrl || typeof o.block === "bigint" && typeof o.app === "bigint");
+  },
   encode(message: Consensus, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.block !== undefined) {
       writer.uint32(8).uint64(message.block);
@@ -260,5 +305,6 @@ export const Consensus = {
       typeUrl: "/tendermint.version.Consensus",
       value: Consensus.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

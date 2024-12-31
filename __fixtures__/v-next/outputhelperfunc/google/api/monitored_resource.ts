@@ -1,9 +1,10 @@
-import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
+import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
-import { Struct, StructSDKType } from "../protobuf/struct";
-import { BinaryReader, BinaryWriter } from "../../binary";
+import { Struct, StructAmino, StructSDKType } from "../protobuf/struct";
 import { isSet, DeepPartial, isObject } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary";
 import { JsonSafe } from "../../json-safe";
+import { GlobalDecoderRegistry } from "../../registry";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -67,6 +68,57 @@ export interface MonitoredResourceDescriptorProtoMsg {
  * provide a `list` method that returns the monitored resource descriptors used
  * by the API.
  */
+export interface MonitoredResourceDescriptorAmino {
+  /**
+   * Optional. The resource name of the monitored resource descriptor:
+   * `"projects/{project_id}/monitoredResourceDescriptors/{type}"` where
+   * {type} is the value of the `type` field in this object and
+   * {project_id} is a project ID that provides API-specific context for
+   * accessing the type.  APIs that do not use project information can use the
+   * resource name format `"monitoredResourceDescriptors/{type}"`.
+   */
+  name?: string;
+  /**
+   * Required. The monitored resource type. For example, the type
+   * `"cloudsql_database"` represents databases in Google Cloud SQL.
+   */
+  type?: string;
+  /**
+   * Optional. A concise name for the monitored resource type that might be
+   * displayed in user interfaces. It should be a Title Cased Noun Phrase,
+   * without any article or other determiners. For example,
+   * `"Google Cloud SQL Database"`.
+   */
+  display_name?: string;
+  /**
+   * Optional. A detailed description of the monitored resource type that might
+   * be used in documentation.
+   */
+  description?: string;
+  /**
+   * Required. A set of labels used to describe instances of this monitored
+   * resource type. For example, an individual Google Cloud SQL database is
+   * identified by values for the labels `"database_id"` and `"zone"`.
+   */
+  labels?: LabelDescriptorAmino[];
+  /** Optional. The launch stage of the monitored resource definition. */
+  launch_stage?: LaunchStage;
+}
+export interface MonitoredResourceDescriptorAminoMsg {
+  type: "/google.api.MonitoredResourceDescriptor";
+  value: MonitoredResourceDescriptorAmino;
+}
+/**
+ * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
+ * type name and a set of labels.  For example, the monitored resource
+ * descriptor for Google Compute Engine VM instances has a type of
+ * `"gce_instance"` and specifies the use of the labels `"instance_id"` and
+ * `"zone"` to identify particular VM instances.
+ * 
+ * Different APIs can support different monitored resource types. APIs generally
+ * provide a `list` method that returns the monitored resource descriptors used
+ * by the API.
+ */
 export interface MonitoredResourceDescriptorSDKType {
   name: string;
   type: string;
@@ -82,6 +134,14 @@ export interface MonitoredResource_LabelsEntry {
 export interface MonitoredResource_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface MonitoredResource_LabelsEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface MonitoredResource_LabelsEntryAminoMsg {
+  type: string;
+  value: MonitoredResource_LabelsEntryAmino;
 }
 export interface MonitoredResource_LabelsEntrySDKType {
   key: string;
@@ -137,6 +197,41 @@ export interface MonitoredResourceProtoMsg {
  *       "labels": { "instance_id": "12345678901234",
  *                   "zone": "us-central1-a" }}
  */
+export interface MonitoredResourceAmino {
+  /**
+   * Required. The monitored resource type. This field must match
+   * the `type` field of a [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object. For
+   * example, the type of a Compute Engine VM instance is `gce_instance`.
+   */
+  type?: string;
+  /**
+   * Required. Values for all of the labels listed in the associated monitored
+   * resource descriptor. For example, Compute Engine VM instances use the
+   * labels `"project_id"`, `"instance_id"`, and `"zone"`.
+   */
+  labels?: {
+    [key: string]: string;
+  };
+}
+export interface MonitoredResourceAminoMsg {
+  type: "/google.api.MonitoredResource";
+  value: MonitoredResourceAmino;
+}
+/**
+ * An object representing a resource that can be used for monitoring, logging,
+ * billing, or other purposes. Examples include virtual machine instances,
+ * databases, and storage devices such as disks. The `type` field identifies a
+ * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] object that describes the resource's
+ * schema. Information in the `labels` field identifies the actual resource and
+ * its attributes according to the schema. For example, a particular Compute
+ * Engine VM instance could be represented by the following object, because the
+ * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor] for `"gce_instance"` has labels
+ * `"instance_id"` and `"zone"`:
+ * 
+ *     { "type": "gce_instance",
+ *       "labels": { "instance_id": "12345678901234",
+ *                   "zone": "us-central1-a" }}
+ */
 export interface MonitoredResourceSDKType {
   type: string;
   labels: {
@@ -150,6 +245,14 @@ export interface MonitoredResourceMetadata_UserLabelsEntry {
 export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface MonitoredResourceMetadata_UserLabelsEntryAmino {
+  key?: string;
+  value?: string;
+}
+export interface MonitoredResourceMetadata_UserLabelsEntryAminoMsg {
+  type: string;
+  value: MonitoredResourceMetadata_UserLabelsEntryAmino;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
   key: string;
@@ -194,6 +297,37 @@ export interface MonitoredResourceMetadataProtoMsg {
  * pipeline to extract metadata for cloud resources of all types, and store
  * the metadata in this message.
  */
+export interface MonitoredResourceMetadataAmino {
+  /**
+   * Output only. Values for predefined system metadata labels.
+   * System labels are a kind of metadata extracted by Google, including
+   * "machine_image", "vpc", "subnet_id",
+   * "security_group", "name", etc.
+   * System label values can be only strings, Boolean values, or a list of
+   * strings. For example:
+   * 
+   *     { "name": "my-test-instance",
+   *       "security_group": ["a", "b", "c"],
+   *       "spot_instance": false }
+   */
+  system_labels?: StructAmino;
+  /** Output only. A map of user-defined metadata labels. */
+  user_labels?: {
+    [key: string]: string;
+  };
+}
+export interface MonitoredResourceMetadataAminoMsg {
+  type: "/google.api.MonitoredResourceMetadata";
+  value: MonitoredResourceMetadataAmino;
+}
+/**
+ * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
+ * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
+ * uniquely identify a monitored resource instance. There is some other useful
+ * auxiliary metadata. Monitoring and Logging use an ingestion
+ * pipeline to extract metadata for cloud resources of all types, and store
+ * the metadata in this message.
+ */
 export interface MonitoredResourceMetadataSDKType {
   system_labels?: StructSDKType;
   user_labels: {
@@ -212,6 +346,15 @@ function createBaseMonitoredResourceDescriptor(): MonitoredResourceDescriptor {
 }
 export const MonitoredResourceDescriptor = {
   typeUrl: "/google.api.MonitoredResourceDescriptor",
+  is(o: any): o is MonitoredResourceDescriptor {
+    return o && (o.$typeUrl === MonitoredResourceDescriptor.typeUrl || typeof o.name === "string" && typeof o.type === "string" && typeof o.displayName === "string" && typeof o.description === "string" && Array.isArray(o.labels) && (!o.labels.length || LabelDescriptor.is(o.labels[0])) && isSet(o.launchStage));
+  },
+  isSDK(o: any): o is MonitoredResourceDescriptorSDKType {
+    return o && (o.$typeUrl === MonitoredResourceDescriptor.typeUrl || typeof o.name === "string" && typeof o.type === "string" && typeof o.display_name === "string" && typeof o.description === "string" && Array.isArray(o.labels) && (!o.labels.length || LabelDescriptor.isSDK(o.labels[0])) && isSet(o.launch_stage));
+  },
+  isAmino(o: any): o is MonitoredResourceDescriptorAmino {
+    return o && (o.$typeUrl === MonitoredResourceDescriptor.typeUrl || typeof o.name === "string" && typeof o.type === "string" && typeof o.display_name === "string" && typeof o.description === "string" && Array.isArray(o.labels) && (!o.labels.length || LabelDescriptor.isAmino(o.labels[0])) && isSet(o.launch_stage));
+  },
   encode(message: MonitoredResourceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(42).string(message.name);
@@ -381,6 +524,9 @@ export const MonitoredResourceDescriptor = {
       typeUrl: "/google.api.MonitoredResourceDescriptor",
       value: MonitoredResourceDescriptor.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    LabelDescriptor.registerTypeUrl();
   }
 };
 function createBaseMonitoredResource_LabelsEntry(): MonitoredResource_LabelsEntry {
@@ -479,7 +625,8 @@ export const MonitoredResource_LabelsEntry = {
   },
   toProto(message: MonitoredResource_LabelsEntry): Uint8Array {
     return MonitoredResource_LabelsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMonitoredResource(): MonitoredResource {
   return {
@@ -489,6 +636,15 @@ function createBaseMonitoredResource(): MonitoredResource {
 }
 export const MonitoredResource = {
   typeUrl: "/google.api.MonitoredResource",
+  is(o: any): o is MonitoredResource {
+    return o && (o.$typeUrl === MonitoredResource.typeUrl || typeof o.type === "string" && isSet(o.labels));
+  },
+  isSDK(o: any): o is MonitoredResourceSDKType {
+    return o && (o.$typeUrl === MonitoredResource.typeUrl || typeof o.type === "string" && isSet(o.labels));
+  },
+  isAmino(o: any): o is MonitoredResourceAmino {
+    return o && (o.$typeUrl === MonitoredResource.typeUrl || typeof o.type === "string" && isSet(o.labels));
+  },
   encode(message: MonitoredResource, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
@@ -632,7 +788,8 @@ export const MonitoredResource = {
       typeUrl: "/google.api.MonitoredResource",
       value: MonitoredResource.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMonitoredResourceMetadata_UserLabelsEntry(): MonitoredResourceMetadata_UserLabelsEntry {
   return {
@@ -730,7 +887,8 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
   },
   toProto(message: MonitoredResourceMetadata_UserLabelsEntry): Uint8Array {
     return MonitoredResourceMetadata_UserLabelsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
   return {
@@ -740,6 +898,15 @@ function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
 }
 export const MonitoredResourceMetadata = {
   typeUrl: "/google.api.MonitoredResourceMetadata",
+  is(o: any): o is MonitoredResourceMetadata {
+    return o && (o.$typeUrl === MonitoredResourceMetadata.typeUrl || isSet(o.userLabels));
+  },
+  isSDK(o: any): o is MonitoredResourceMetadataSDKType {
+    return o && (o.$typeUrl === MonitoredResourceMetadata.typeUrl || isSet(o.user_labels));
+  },
+  isAmino(o: any): o is MonitoredResourceMetadataAmino {
+    return o && (o.$typeUrl === MonitoredResourceMetadata.typeUrl || isSet(o.user_labels));
+  },
   encode(message: MonitoredResourceMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.systemLabels !== undefined) {
       Struct.encode(message.systemLabels, writer.uint32(10).fork()).ldelim();
@@ -885,5 +1052,8 @@ export const MonitoredResourceMetadata = {
       typeUrl: "/google.api.MonitoredResourceMetadata",
       value: MonitoredResourceMetadata.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Struct.registerTypeUrl();
   }
 };

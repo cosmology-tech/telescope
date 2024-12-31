@@ -18,6 +18,21 @@ export interface MsgSendProtoMsg {
   value: Uint8Array;
 }
 /** MsgSend represents a message to send a nft from one account to another account. */
+export interface MsgSendAmino {
+  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+  class_id?: string;
+  /** id defines the unique identification of nft */
+  id?: string;
+  /** sender is the address of the owner of nft */
+  sender?: string;
+  /** receiver is the receiver address of nft */
+  receiver?: string;
+}
+export interface MsgSendAminoMsg {
+  type: "cosmos-sdk/MsgNFTSend";
+  value: MsgSendAmino;
+}
+/** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendSDKType {
   class_id: string;
   id: string;
@@ -31,6 +46,12 @@ export interface MsgSendResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgSendResponse defines the Msg/Send response type. */
+export interface MsgSendResponseAmino {}
+export interface MsgSendResponseAminoMsg {
+  type: "cosmos-sdk/MsgSendResponse";
+  value: MsgSendResponseAmino;
+}
+/** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
 function createBaseMsgSend(): MsgSend {
   return {
@@ -42,6 +63,16 @@ function createBaseMsgSend(): MsgSend {
 }
 export const MsgSend = {
   typeUrl: "/cosmos.nft.v1beta1.MsgSend",
+  aminoType: "cosmos-sdk/MsgNFTSend",
+  is(o: any): o is MsgSend {
+    return o && (o.$typeUrl === MsgSend.typeUrl || typeof o.classId === "string" && typeof o.id === "string" && typeof o.sender === "string" && typeof o.receiver === "string");
+  },
+  isSDK(o: any): o is MsgSendSDKType {
+    return o && (o.$typeUrl === MsgSend.typeUrl || typeof o.class_id === "string" && typeof o.id === "string" && typeof o.sender === "string" && typeof o.receiver === "string");
+  },
+  isAmino(o: any): o is MsgSendAmino {
+    return o && (o.$typeUrl === MsgSend.typeUrl || typeof o.class_id === "string" && typeof o.id === "string" && typeof o.sender === "string" && typeof o.receiver === "string");
+  },
   encode(message: MsgSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
@@ -175,13 +206,24 @@ export const MsgSend = {
       typeUrl: "/cosmos.nft.v1beta1.MsgSend",
       value: MsgSend.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgSendResponse(): MsgSendResponse {
   return {};
 }
 export const MsgSendResponse = {
   typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse",
+  aminoType: "cosmos-sdk/MsgSendResponse",
+  is(o: any): o is MsgSendResponse {
+    return o && o.$typeUrl === MsgSendResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgSendResponseSDKType {
+    return o && o.$typeUrl === MsgSendResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgSendResponseAmino {
+    return o && o.$typeUrl === MsgSendResponse.typeUrl;
+  },
   encode(_: MsgSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -249,5 +291,6 @@ export const MsgSendResponse = {
       typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse",
       value: MsgSendResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

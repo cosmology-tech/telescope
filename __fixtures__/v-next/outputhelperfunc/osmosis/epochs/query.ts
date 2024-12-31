@@ -1,4 +1,4 @@
-import { EpochInfo, EpochInfoSDKType } from "./genesis";
+import { EpochInfo, EpochInfoAmino, EpochInfoSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
@@ -8,6 +8,11 @@ export interface QueryEpochsInfoRequestProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest";
   value: Uint8Array;
 }
+export interface QueryEpochsInfoRequestAmino {}
+export interface QueryEpochsInfoRequestAminoMsg {
+  type: "osmosis/epochs/query-epochs-info-request";
+  value: QueryEpochsInfoRequestAmino;
+}
 export interface QueryEpochsInfoRequestSDKType {}
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
@@ -15,6 +20,13 @@ export interface QueryEpochsInfoResponse {
 export interface QueryEpochsInfoResponseProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse";
   value: Uint8Array;
+}
+export interface QueryEpochsInfoResponseAmino {
+  epochs?: EpochInfoAmino[];
+}
+export interface QueryEpochsInfoResponseAminoMsg {
+  type: "osmosis/epochs/query-epochs-info-response";
+  value: QueryEpochsInfoResponseAmino;
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
@@ -26,6 +38,13 @@ export interface QueryCurrentEpochRequestProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest";
   value: Uint8Array;
 }
+export interface QueryCurrentEpochRequestAmino {
+  identifier?: string;
+}
+export interface QueryCurrentEpochRequestAminoMsg {
+  type: "osmosis/epochs/query-current-epoch-request";
+  value: QueryCurrentEpochRequestAmino;
+}
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
 }
@@ -36,6 +55,13 @@ export interface QueryCurrentEpochResponseProtoMsg {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse";
   value: Uint8Array;
 }
+export interface QueryCurrentEpochResponseAmino {
+  current_epoch?: string;
+}
+export interface QueryCurrentEpochResponseAminoMsg {
+  type: "osmosis/epochs/query-current-epoch-response";
+  value: QueryCurrentEpochResponseAmino;
+}
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: bigint;
 }
@@ -44,6 +70,16 @@ function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
 }
 export const QueryEpochsInfoRequest = {
   typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest",
+  aminoType: "osmosis/epochs/query-epochs-info-request",
+  is(o: any): o is QueryEpochsInfoRequest {
+    return o && o.$typeUrl === QueryEpochsInfoRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryEpochsInfoRequestSDKType {
+    return o && o.$typeUrl === QueryEpochsInfoRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryEpochsInfoRequestAmino {
+    return o && o.$typeUrl === QueryEpochsInfoRequest.typeUrl;
+  },
   encode(_: QueryEpochsInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -111,7 +147,8 @@ export const QueryEpochsInfoRequest = {
       typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoRequest",
       value: QueryEpochsInfoRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
   return {
@@ -120,6 +157,16 @@ function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
 }
 export const QueryEpochsInfoResponse = {
   typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse",
+  aminoType: "osmosis/epochs/query-epochs-info-response",
+  is(o: any): o is QueryEpochsInfoResponse {
+    return o && (o.$typeUrl === QueryEpochsInfoResponse.typeUrl || Array.isArray(o.epochs) && (!o.epochs.length || EpochInfo.is(o.epochs[0])));
+  },
+  isSDK(o: any): o is QueryEpochsInfoResponseSDKType {
+    return o && (o.$typeUrl === QueryEpochsInfoResponse.typeUrl || Array.isArray(o.epochs) && (!o.epochs.length || EpochInfo.isSDK(o.epochs[0])));
+  },
+  isAmino(o: any): o is QueryEpochsInfoResponseAmino {
+    return o && (o.$typeUrl === QueryEpochsInfoResponse.typeUrl || Array.isArray(o.epochs) && (!o.epochs.length || EpochInfo.isAmino(o.epochs[0])));
+  },
   encode(message: QueryEpochsInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.epochs) {
       EpochInfo.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -215,6 +262,9 @@ export const QueryEpochsInfoResponse = {
       typeUrl: "/osmosis.epochs.v1beta1.QueryEpochsInfoResponse",
       value: QueryEpochsInfoResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    EpochInfo.registerTypeUrl();
   }
 };
 function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
@@ -224,6 +274,16 @@ function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
 }
 export const QueryCurrentEpochRequest = {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest",
+  aminoType: "osmosis/epochs/query-current-epoch-request",
+  is(o: any): o is QueryCurrentEpochRequest {
+    return o && (o.$typeUrl === QueryCurrentEpochRequest.typeUrl || typeof o.identifier === "string");
+  },
+  isSDK(o: any): o is QueryCurrentEpochRequestSDKType {
+    return o && (o.$typeUrl === QueryCurrentEpochRequest.typeUrl || typeof o.identifier === "string");
+  },
+  isAmino(o: any): o is QueryCurrentEpochRequestAmino {
+    return o && (o.$typeUrl === QueryCurrentEpochRequest.typeUrl || typeof o.identifier === "string");
+  },
   encode(message: QueryCurrentEpochRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
@@ -309,7 +369,8 @@ export const QueryCurrentEpochRequest = {
       typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochRequest",
       value: QueryCurrentEpochRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
   return {
@@ -318,6 +379,16 @@ function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
 }
 export const QueryCurrentEpochResponse = {
   typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse",
+  aminoType: "osmosis/epochs/query-current-epoch-response",
+  is(o: any): o is QueryCurrentEpochResponse {
+    return o && (o.$typeUrl === QueryCurrentEpochResponse.typeUrl || typeof o.currentEpoch === "bigint");
+  },
+  isSDK(o: any): o is QueryCurrentEpochResponseSDKType {
+    return o && (o.$typeUrl === QueryCurrentEpochResponse.typeUrl || typeof o.current_epoch === "bigint");
+  },
+  isAmino(o: any): o is QueryCurrentEpochResponseAmino {
+    return o && (o.$typeUrl === QueryCurrentEpochResponse.typeUrl || typeof o.current_epoch === "bigint");
+  },
   encode(message: QueryCurrentEpochResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.currentEpoch !== undefined) {
       writer.uint32(8).int64(message.currentEpoch);
@@ -405,5 +476,6 @@ export const QueryCurrentEpochResponse = {
       typeUrl: "/osmosis.epochs.v1beta1.QueryCurrentEpochResponse",
       value: QueryCurrentEpochResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

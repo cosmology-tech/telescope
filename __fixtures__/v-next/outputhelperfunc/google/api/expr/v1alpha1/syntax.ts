@@ -1,7 +1,8 @@
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import { Duration, DurationSDKType } from "../../../protobuf/duration";
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/duration";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { GlobalDecoderRegistry } from "../../../../registry";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1alpha1";
@@ -15,6 +16,17 @@ export interface ParsedExpr {
 export interface ParsedExprProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ParsedExpr";
   value: Uint8Array;
+}
+/** An expression together with source information as returned by the parser. */
+export interface ParsedExprAmino {
+  /** The parsed expression. */
+  expr?: ExprAmino;
+  /** The source info derived from input that generated the parsed `expr`. */
+  source_info?: SourceInfoAmino;
+}
+export interface ParsedExprAminoMsg {
+  type: "/google.api.expr.v1alpha1.ParsedExpr";
+  value: ParsedExprAmino;
 }
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
@@ -81,6 +93,49 @@ export interface ExprProtoMsg {
  * the declaration `google.api.name` within a [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression, and
  * the function declaration `startsWith`.
  */
+export interface ExprAmino {
+  /**
+   * Required. An id assigned to this node by the parser which is unique in a
+   * given expression tree. This is used to associate type information and other
+   * attributes to a node in the parse tree.
+   */
+  id?: string;
+  /** A literal expression. */
+  const_expr?: ConstantAmino;
+  /** An identifier expression. */
+  ident_expr?: Expr_IdentAmino;
+  /** A field selection expression, e.g. `request.auth`. */
+  select_expr?: Expr_SelectAmino;
+  /** A call expression, including calls to predefined functions and operators. */
+  call_expr?: Expr_CallAmino;
+  /** A list creation expression. */
+  list_expr?: Expr_CreateListAmino;
+  /** A map or message creation expression. */
+  struct_expr?: Expr_CreateStructAmino;
+  /** A comprehension expression. */
+  comprehension_expr?: Expr_ComprehensionAmino;
+}
+export interface ExprAminoMsg {
+  type: "/google.api.expr.v1alpha1.Expr";
+  value: ExprAmino;
+}
+/**
+ * An abstract representation of a common expression.
+ * 
+ * Expressions are abstractly represented as a collection of identifiers,
+ * select statements, function calls, literals, and comprehensions. All
+ * operators with the exception of the '.' operator are modelled as function
+ * calls. This makes it easy to represent new operators into the existing AST.
+ * 
+ * All references within expressions must resolve to a [Decl][google.api.expr.v1alpha1.Decl] provided at
+ * type-check for an expression to be valid. A reference may either be a bare
+ * identifier `name` or a qualified identifier `google.api.name`. References
+ * may either refer to a value or a function declaration.
+ * 
+ * For example, the expression `google.api.name.startsWith('expr')` references
+ * the declaration `google.api.name` within a [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression, and
+ * the function declaration `startsWith`.
+ */
 export interface ExprSDKType {
   id: bigint;
   const_expr?: ConstantSDKType;
@@ -104,6 +159,20 @@ export interface Expr_Ident {
 export interface Expr_IdentProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Ident";
   value: Uint8Array;
+}
+/** An identifier expression. e.g. `request`. */
+export interface Expr_IdentAmino {
+  /**
+   * Required. Holds a single, unqualified identifier, possibly preceded by a
+   * '.'.
+   * 
+   * Qualified names are represented by the [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression.
+   */
+  name?: string;
+}
+export interface Expr_IdentAminoMsg {
+  type: "/google.api.expr.v1alpha1.Ident";
+  value: Expr_IdentAmino;
 }
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
@@ -137,6 +206,33 @@ export interface Expr_SelectProtoMsg {
   value: Uint8Array;
 }
 /** A field selection expression. e.g. `request.auth`. */
+export interface Expr_SelectAmino {
+  /**
+   * Required. The target of the selection expression.
+   * 
+   * For example, in the select expression `request.auth`, the `request`
+   * portion of the expression is the `operand`.
+   */
+  operand?: ExprAmino;
+  /**
+   * Required. The name of the field to select.
+   * 
+   * For example, in the select expression `request.auth`, the `auth` portion
+   * of the expression would be the `field`.
+   */
+  field?: string;
+  /**
+   * Whether the select is to be interpreted as a field presence test.
+   * 
+   * This results from the macro `has(request.auth)`.
+   */
+  test_only?: boolean;
+}
+export interface Expr_SelectAminoMsg {
+  type: "/google.api.expr.v1alpha1.Select";
+  value: Expr_SelectAmino;
+}
+/** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
   operand?: ExprSDKType;
   field: string;
@@ -167,6 +263,26 @@ export interface Expr_CallProtoMsg {
  * 
  * For example, `value == 10`, `size(map_value)`.
  */
+export interface Expr_CallAmino {
+  /**
+   * The target of an method call-style expression. For example, `x` in
+   * `x.f()`.
+   */
+  target?: ExprAmino;
+  /** Required. The name of the function or method being called. */
+  function?: string;
+  /** The arguments. */
+  args?: ExprAmino[];
+}
+export interface Expr_CallAminoMsg {
+  type: "/google.api.expr.v1alpha1.Call";
+  value: Expr_CallAmino;
+}
+/**
+ * A call expression, including calls to predefined functions and operators.
+ * 
+ * For example, `value == 10`, `size(map_value)`.
+ */
 export interface Expr_CallSDKType {
   target?: ExprSDKType;
   function: string;
@@ -185,6 +301,20 @@ export interface Expr_CreateList {
 export interface Expr_CreateListProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.CreateList";
   value: Uint8Array;
+}
+/**
+ * A list creation expression.
+ * 
+ * Lists may either be homogenous, e.g. `[1, 2, 3]`, or heterogeneous, e.g.
+ * `dyn([1, 'hello', 2.0])`
+ */
+export interface Expr_CreateListAmino {
+  /** The elements part of the list. */
+  elements?: ExprAmino[];
+}
+export interface Expr_CreateListAminoMsg {
+  type: "/google.api.expr.v1alpha1.CreateList";
+  value: Expr_CreateListAmino;
 }
 /**
  * A list creation expression.
@@ -222,6 +352,26 @@ export interface Expr_CreateStructProtoMsg {
  * similar, but prefixed with a type name and composed of field ids:
  * `types.MyType{field_id: 'value'}`.
  */
+export interface Expr_CreateStructAmino {
+  /**
+   * The type name of the message to be created, empty when creating map
+   * literals.
+   */
+  message_name?: string;
+  /** The entries in the creation expression. */
+  entries?: Expr_CreateStruct_EntryAmino[];
+}
+export interface Expr_CreateStructAminoMsg {
+  type: "/google.api.expr.v1alpha1.CreateStruct";
+  value: Expr_CreateStructAmino;
+}
+/**
+ * A map or message creation expression.
+ * 
+ * Maps are constructed as `{'key_name': 'value'}`. Message construction is
+ * similar, but prefixed with a type name and composed of field ids:
+ * `types.MyType{field_id: 'value'}`.
+ */
 export interface Expr_CreateStructSDKType {
   message_name: string;
   entries: Expr_CreateStruct_EntrySDKType[];
@@ -244,6 +394,25 @@ export interface Expr_CreateStruct_Entry {
 export interface Expr_CreateStruct_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Entry";
   value: Uint8Array;
+}
+/** Represents an entry. */
+export interface Expr_CreateStruct_EntryAmino {
+  /**
+   * Required. An id assigned to this node by the parser which is unique
+   * in a given expression tree. This is used to associate type
+   * information and other attributes to the node.
+   */
+  id?: string;
+  /** The field key for a message creator statement. */
+  field_key?: string;
+  /** The key expression for a map creation statement. */
+  map_key?: ExprAmino;
+  /** Required. The value assigned to the key. */
+  value?: ExprAmino;
+}
+export interface Expr_CreateStruct_EntryAminoMsg {
+  type: "/google.api.expr.v1alpha1.Entry";
+  value: Expr_CreateStruct_EntryAmino;
 }
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
@@ -312,6 +481,67 @@ export interface Expr_Comprehension {
 export interface Expr_ComprehensionProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Comprehension";
   value: Uint8Array;
+}
+/**
+ * A comprehension expression applied to a list or map.
+ * 
+ * Comprehensions are not part of the core syntax, but enabled with macros.
+ * A macro matches a specific call signature within a parsed AST and replaces
+ * the call with an alternate AST block. Macro expansion happens at parse
+ * time.
+ * 
+ * The following macros are supported within CEL:
+ * 
+ * Aggregate type macros may be applied to all elements in a list or all keys
+ * in a map:
+ * 
+ * *  `all`, `exists`, `exists_one` -  test a predicate expression against
+ *    the inputs and return `true` if the predicate is satisfied for all,
+ *    any, or only one value `list.all(x, x < 10)`.
+ * *  `filter` - test a predicate expression against the inputs and return
+ *    the subset of elements which satisfy the predicate:
+ *    `payments.filter(p, p > 1000)`.
+ * *  `map` - apply an expression to all elements in the input and return the
+ *    output aggregate type: `[1, 2, 3].map(i, i * i)`.
+ * 
+ * The `has(m.x)` macro tests whether the property `x` is present in struct
+ * `m`. The semantics of this macro depend on the type of `m`. For proto2
+ * messages `has(m.x)` is defined as 'defined, but not set`. For proto3, the
+ * macro tests whether the property is set to its default. For map and struct
+ * types, the macro tests whether the property `x` is defined on `m`.
+ */
+export interface Expr_ComprehensionAmino {
+  /** The name of the iteration variable. */
+  iter_var?: string;
+  /** The range over which var iterates. */
+  iter_range?: ExprAmino;
+  /** The name of the variable used for accumulation of the result. */
+  accu_var?: string;
+  /** The initial value of the accumulator. */
+  accu_init?: ExprAmino;
+  /**
+   * An expression which can contain iter_var and accu_var.
+   * 
+   * Returns false when the result has been computed and may be used as
+   * a hint to short-circuit the remainder of the comprehension.
+   */
+  loop_condition?: ExprAmino;
+  /**
+   * An expression which can contain iter_var and accu_var.
+   * 
+   * Computes the next value of accu_var.
+   */
+  loop_step?: ExprAmino;
+  /**
+   * An expression which can contain accu_var.
+   * 
+   * Computes the result.
+   */
+  result?: ExprAmino;
+}
+export interface Expr_ComprehensionAminoMsg {
+  type: "/google.api.expr.v1alpha1.Comprehension";
+  value: Expr_ComprehensionAmino;
 }
 /**
  * A comprehension expression applied to a list or map.
@@ -414,6 +644,55 @@ export interface ConstantProtoMsg {
  * Examples of literals include: `"hello"`, `b'bytes'`, `1u`, `4.2`, `-2`,
  * `true`, `null`.
  */
+export interface ConstantAmino {
+  /** null value. */
+  null_value?: NullValue;
+  /** boolean value. */
+  bool_value?: boolean;
+  /** int64 value. */
+  int64_value?: string;
+  /** uint64 value. */
+  uint64_value?: string;
+  /** double value. */
+  double_value?: number;
+  /** string value. */
+  string_value?: string;
+  /** bytes value. */
+  bytes_value?: string;
+  /**
+   * protobuf.Duration value.
+   * 
+   * Deprecated: duration is no longer considered a builtin cel type.
+   */
+  /** @deprecated */
+  duration_value?: DurationAmino;
+  /**
+   * protobuf.Timestamp value.
+   * 
+   * Deprecated: timestamp is no longer considered a builtin cel type.
+   */
+  /** @deprecated */
+  timestamp_value?: string;
+}
+export interface ConstantAminoMsg {
+  type: "/google.api.expr.v1alpha1.Constant";
+  value: ConstantAmino;
+}
+/**
+ * Represents a primitive literal.
+ * 
+ * Named 'Constant' here for backwards compatibility.
+ * 
+ * This is similar as the primitives supported in the well-known type
+ * `google.protobuf.Value`, but richer so it can represent CEL's full range of
+ * primitives.
+ * 
+ * Lists and structs are not included as constants as these aggregate types may
+ * contain [Expr][google.api.expr.v1alpha1.Expr] elements which require evaluation and are thus not constant.
+ * 
+ * Examples of literals include: `"hello"`, `b'bytes'`, `1u`, `4.2`, `-2`,
+ * `true`, `null`.
+ */
 export interface ConstantSDKType {
   null_value?: NullValue;
   bool_value?: boolean;
@@ -435,6 +714,14 @@ export interface SourceInfo_PositionsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface SourceInfo_PositionsEntryAmino {
+  key?: string;
+  value?: number;
+}
+export interface SourceInfo_PositionsEntryAminoMsg {
+  type: string;
+  value: SourceInfo_PositionsEntryAmino;
+}
 export interface SourceInfo_PositionsEntrySDKType {
   key: bigint;
   value: number;
@@ -446,6 +733,14 @@ export interface SourceInfo_MacroCallsEntry {
 export interface SourceInfo_MacroCallsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
+}
+export interface SourceInfo_MacroCallsEntryAmino {
+  key?: string;
+  value?: ExprAmino;
+}
+export interface SourceInfo_MacroCallsEntryAminoMsg {
+  type: string;
+  value: SourceInfo_MacroCallsEntryAmino;
 }
 export interface SourceInfo_MacroCallsEntrySDKType {
   key: bigint;
@@ -498,6 +793,52 @@ export interface SourceInfoProtoMsg {
   value: Uint8Array;
 }
 /** Source information collected at parse time. */
+export interface SourceInfoAmino {
+  /** The syntax version of the source, e.g. `cel1`. */
+  syntax_version?: string;
+  /**
+   * The location name. All position information attached to an expression is
+   * relative to this location.
+   * 
+   * The location could be a file, UI element, or similar. For example,
+   * `acme/app/AnvilPolicy.cel`.
+   */
+  location?: string;
+  /**
+   * Monotonically increasing list of code point offsets where newlines
+   * `\n` appear.
+   * 
+   * The line number of a given position is the index `i` where for a given
+   * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
+   * column may be derivd from `id_positions[id] - line_offsets[i]`.
+   */
+  line_offsets?: number[];
+  /**
+   * A map from the parse node id (e.g. `Expr.id`) to the code point offset
+   * within the source.
+   */
+  positions?: {
+    [key: string]: number;
+  };
+  /**
+   * A map from the parse node id where a macro replacement was made to the
+   * call `Expr` that resulted in a macro expansion.
+   * 
+   * For example, `has(value.field)` is a function call that is replaced by a
+   * `test_only` field selection in the AST. Likewise, the call
+   * `list.exists(e, e > 10)` translates to a comprehension expression. The key
+   * in the map corresponds to the expression id of the expanded macro, and the
+   * value is the call `Expr` that was replaced.
+   */
+  macro_calls?: {
+    [key: string]: ExprAmino;
+  };
+}
+export interface SourceInfoAminoMsg {
+  type: "/google.api.expr.v1alpha1.SourceInfo";
+  value: SourceInfoAmino;
+}
+/** Source information collected at parse time. */
 export interface SourceInfoSDKType {
   syntax_version: string;
   location: string;
@@ -531,6 +872,27 @@ export interface SourcePositionProtoMsg {
   value: Uint8Array;
 }
 /** A specific position in source. */
+export interface SourcePositionAmino {
+  /** The soucre location name (e.g. file name). */
+  location?: string;
+  /** The UTF-8 code unit offset. */
+  offset?: number;
+  /**
+   * The 1-based index of the starting line in the source text
+   * where the issue occurs, or 0 if unknown.
+   */
+  line?: number;
+  /**
+   * The 0-based index of the starting position within the line of source text
+   * where the issue occurs.  Only meaningful if line is nonzero.
+   */
+  column?: number;
+}
+export interface SourcePositionAminoMsg {
+  type: "/google.api.expr.v1alpha1.SourcePosition";
+  value: SourcePositionAmino;
+}
+/** A specific position in source. */
 export interface SourcePositionSDKType {
   location: string;
   offset: number;
@@ -545,6 +907,15 @@ function createBaseParsedExpr(): ParsedExpr {
 }
 export const ParsedExpr = {
   typeUrl: "/google.api.expr.v1alpha1.ParsedExpr",
+  is(o: any): o is ParsedExpr {
+    return o && o.$typeUrl === ParsedExpr.typeUrl;
+  },
+  isSDK(o: any): o is ParsedExprSDKType {
+    return o && o.$typeUrl === ParsedExpr.typeUrl;
+  },
+  isAmino(o: any): o is ParsedExprAmino {
+    return o && o.$typeUrl === ParsedExpr.typeUrl;
+  },
   encode(message: ParsedExpr, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.expr !== undefined) {
       Expr.encode(message.expr, writer.uint32(18).fork()).ldelim();
@@ -644,6 +1015,10 @@ export const ParsedExpr = {
       typeUrl: "/google.api.expr.v1alpha1.ParsedExpr",
       value: ParsedExpr.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Expr.registerTypeUrl();
+    SourceInfo.registerTypeUrl();
   }
 };
 function createBaseExpr(): Expr {
@@ -660,6 +1035,15 @@ function createBaseExpr(): Expr {
 }
 export const Expr = {
   typeUrl: "/google.api.expr.v1alpha1.Expr",
+  is(o: any): o is Expr {
+    return o && (o.$typeUrl === Expr.typeUrl || typeof o.id === "bigint");
+  },
+  isSDK(o: any): o is ExprSDKType {
+    return o && (o.$typeUrl === Expr.typeUrl || typeof o.id === "bigint");
+  },
+  isAmino(o: any): o is ExprAmino {
+    return o && (o.$typeUrl === Expr.typeUrl || typeof o.id === "bigint");
+  },
   encode(message: Expr, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(16).int64(message.id);
@@ -867,6 +1251,15 @@ export const Expr = {
       typeUrl: "/google.api.expr.v1alpha1.Expr",
       value: Expr.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Constant.registerTypeUrl();
+    Expr_Ident.registerTypeUrl();
+    Expr_Select.registerTypeUrl();
+    Expr_Call.registerTypeUrl();
+    Expr_CreateList.registerTypeUrl();
+    Expr_CreateStruct.registerTypeUrl();
+    Expr_Comprehension.registerTypeUrl();
   }
 };
 function createBaseExpr_Ident(): Expr_Ident {
@@ -876,6 +1269,15 @@ function createBaseExpr_Ident(): Expr_Ident {
 }
 export const Expr_Ident = {
   typeUrl: "/google.api.expr.v1alpha1.Ident",
+  is(o: any): o is Expr_Ident {
+    return o && (o.$typeUrl === Expr_Ident.typeUrl || typeof o.name === "string");
+  },
+  isSDK(o: any): o is Expr_IdentSDKType {
+    return o && (o.$typeUrl === Expr_Ident.typeUrl || typeof o.name === "string");
+  },
+  isAmino(o: any): o is Expr_IdentAmino {
+    return o && (o.$typeUrl === Expr_Ident.typeUrl || typeof o.name === "string");
+  },
   encode(message: Expr_Ident, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
@@ -955,7 +1357,8 @@ export const Expr_Ident = {
       typeUrl: "/google.api.expr.v1alpha1.Ident",
       value: Expr_Ident.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseExpr_Select(): Expr_Select {
   return {
@@ -966,6 +1369,15 @@ function createBaseExpr_Select(): Expr_Select {
 }
 export const Expr_Select = {
   typeUrl: "/google.api.expr.v1alpha1.Select",
+  is(o: any): o is Expr_Select {
+    return o && (o.$typeUrl === Expr_Select.typeUrl || typeof o.field === "string" && typeof o.testOnly === "boolean");
+  },
+  isSDK(o: any): o is Expr_SelectSDKType {
+    return o && (o.$typeUrl === Expr_Select.typeUrl || typeof o.field === "string" && typeof o.test_only === "boolean");
+  },
+  isAmino(o: any): o is Expr_SelectAmino {
+    return o && (o.$typeUrl === Expr_Select.typeUrl || typeof o.field === "string" && typeof o.test_only === "boolean");
+  },
   encode(message: Expr_Select, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.operand !== undefined) {
       Expr.encode(message.operand, writer.uint32(10).fork()).ldelim();
@@ -1079,6 +1491,9 @@ export const Expr_Select = {
       typeUrl: "/google.api.expr.v1alpha1.Select",
       value: Expr_Select.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Expr.registerTypeUrl();
   }
 };
 function createBaseExpr_Call(): Expr_Call {
@@ -1090,6 +1505,15 @@ function createBaseExpr_Call(): Expr_Call {
 }
 export const Expr_Call = {
   typeUrl: "/google.api.expr.v1alpha1.Call",
+  is(o: any): o is Expr_Call {
+    return o && (o.$typeUrl === Expr_Call.typeUrl || typeof o.function === "string" && Array.isArray(o.args) && (!o.args.length || Expr.is(o.args[0])));
+  },
+  isSDK(o: any): o is Expr_CallSDKType {
+    return o && (o.$typeUrl === Expr_Call.typeUrl || typeof o.function === "string" && Array.isArray(o.args) && (!o.args.length || Expr.isSDK(o.args[0])));
+  },
+  isAmino(o: any): o is Expr_CallAmino {
+    return o && (o.$typeUrl === Expr_Call.typeUrl || typeof o.function === "string" && Array.isArray(o.args) && (!o.args.length || Expr.isAmino(o.args[0])));
+  },
   encode(message: Expr_Call, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.target !== undefined) {
       Expr.encode(message.target, writer.uint32(10).fork()).ldelim();
@@ -1213,6 +1637,10 @@ export const Expr_Call = {
       typeUrl: "/google.api.expr.v1alpha1.Call",
       value: Expr_Call.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Expr.registerTypeUrl();
+    Expr.registerTypeUrl();
   }
 };
 function createBaseExpr_CreateList(): Expr_CreateList {
@@ -1222,6 +1650,15 @@ function createBaseExpr_CreateList(): Expr_CreateList {
 }
 export const Expr_CreateList = {
   typeUrl: "/google.api.expr.v1alpha1.CreateList",
+  is(o: any): o is Expr_CreateList {
+    return o && (o.$typeUrl === Expr_CreateList.typeUrl || Array.isArray(o.elements) && (!o.elements.length || Expr.is(o.elements[0])));
+  },
+  isSDK(o: any): o is Expr_CreateListSDKType {
+    return o && (o.$typeUrl === Expr_CreateList.typeUrl || Array.isArray(o.elements) && (!o.elements.length || Expr.isSDK(o.elements[0])));
+  },
+  isAmino(o: any): o is Expr_CreateListAmino {
+    return o && (o.$typeUrl === Expr_CreateList.typeUrl || Array.isArray(o.elements) && (!o.elements.length || Expr.isAmino(o.elements[0])));
+  },
   encode(message: Expr_CreateList, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.elements) {
       Expr.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1311,6 +1748,9 @@ export const Expr_CreateList = {
       typeUrl: "/google.api.expr.v1alpha1.CreateList",
       value: Expr_CreateList.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Expr.registerTypeUrl();
   }
 };
 function createBaseExpr_CreateStruct(): Expr_CreateStruct {
@@ -1321,6 +1761,15 @@ function createBaseExpr_CreateStruct(): Expr_CreateStruct {
 }
 export const Expr_CreateStruct = {
   typeUrl: "/google.api.expr.v1alpha1.CreateStruct",
+  is(o: any): o is Expr_CreateStruct {
+    return o && (o.$typeUrl === Expr_CreateStruct.typeUrl || typeof o.messageName === "string" && Array.isArray(o.entries) && (!o.entries.length || Expr_CreateStruct_Entry.is(o.entries[0])));
+  },
+  isSDK(o: any): o is Expr_CreateStructSDKType {
+    return o && (o.$typeUrl === Expr_CreateStruct.typeUrl || typeof o.message_name === "string" && Array.isArray(o.entries) && (!o.entries.length || Expr_CreateStruct_Entry.isSDK(o.entries[0])));
+  },
+  isAmino(o: any): o is Expr_CreateStructAmino {
+    return o && (o.$typeUrl === Expr_CreateStruct.typeUrl || typeof o.message_name === "string" && Array.isArray(o.entries) && (!o.entries.length || Expr_CreateStruct_Entry.isAmino(o.entries[0])));
+  },
   encode(message: Expr_CreateStruct, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.messageName !== undefined) {
       writer.uint32(10).string(message.messageName);
@@ -1426,6 +1875,9 @@ export const Expr_CreateStruct = {
       typeUrl: "/google.api.expr.v1alpha1.CreateStruct",
       value: Expr_CreateStruct.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Expr_CreateStruct_Entry.registerTypeUrl();
   }
 };
 function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
@@ -1438,6 +1890,15 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
 }
 export const Expr_CreateStruct_Entry = {
   typeUrl: "/google.api.expr.v1alpha1.Entry",
+  is(o: any): o is Expr_CreateStruct_Entry {
+    return o && (o.$typeUrl === Expr_CreateStruct_Entry.typeUrl || typeof o.id === "bigint");
+  },
+  isSDK(o: any): o is Expr_CreateStruct_EntrySDKType {
+    return o && (o.$typeUrl === Expr_CreateStruct_Entry.typeUrl || typeof o.id === "bigint");
+  },
+  isAmino(o: any): o is Expr_CreateStruct_EntryAmino {
+    return o && (o.$typeUrl === Expr_CreateStruct_Entry.typeUrl || typeof o.id === "bigint");
+  },
   encode(message: Expr_CreateStruct_Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== undefined) {
       writer.uint32(8).int64(message.id);
@@ -1571,6 +2032,10 @@ export const Expr_CreateStruct_Entry = {
       typeUrl: "/google.api.expr.v1alpha1.Entry",
       value: Expr_CreateStruct_Entry.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Expr.registerTypeUrl();
+    Expr.registerTypeUrl();
   }
 };
 function createBaseExpr_Comprehension(): Expr_Comprehension {
@@ -1586,6 +2051,15 @@ function createBaseExpr_Comprehension(): Expr_Comprehension {
 }
 export const Expr_Comprehension = {
   typeUrl: "/google.api.expr.v1alpha1.Comprehension",
+  is(o: any): o is Expr_Comprehension {
+    return o && (o.$typeUrl === Expr_Comprehension.typeUrl || typeof o.iterVar === "string" && typeof o.accuVar === "string");
+  },
+  isSDK(o: any): o is Expr_ComprehensionSDKType {
+    return o && (o.$typeUrl === Expr_Comprehension.typeUrl || typeof o.iter_var === "string" && typeof o.accu_var === "string");
+  },
+  isAmino(o: any): o is Expr_ComprehensionAmino {
+    return o && (o.$typeUrl === Expr_Comprehension.typeUrl || typeof o.iter_var === "string" && typeof o.accu_var === "string");
+  },
   encode(message: Expr_Comprehension, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iterVar !== undefined) {
       writer.uint32(10).string(message.iterVar);
@@ -1771,6 +2245,13 @@ export const Expr_Comprehension = {
       typeUrl: "/google.api.expr.v1alpha1.Comprehension",
       value: Expr_Comprehension.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Expr.registerTypeUrl();
+    Expr.registerTypeUrl();
+    Expr.registerTypeUrl();
+    Expr.registerTypeUrl();
+    Expr.registerTypeUrl();
   }
 };
 function createBaseConstant(): Constant {
@@ -1788,6 +2269,15 @@ function createBaseConstant(): Constant {
 }
 export const Constant = {
   typeUrl: "/google.api.expr.v1alpha1.Constant",
+  is(o: any): o is Constant {
+    return o && o.$typeUrl === Constant.typeUrl;
+  },
+  isSDK(o: any): o is ConstantSDKType {
+    return o && o.$typeUrl === Constant.typeUrl;
+  },
+  isAmino(o: any): o is ConstantAmino {
+    return o && o.$typeUrl === Constant.typeUrl;
+  },
   encode(message: Constant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -2005,7 +2495,8 @@ export const Constant = {
       typeUrl: "/google.api.expr.v1alpha1.Constant",
       value: Constant.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSourceInfo_PositionsEntry(): SourceInfo_PositionsEntry {
   return {
@@ -2105,7 +2596,8 @@ export const SourceInfo_PositionsEntry = {
   },
   toProto(message: SourceInfo_PositionsEntry): Uint8Array {
     return SourceInfo_PositionsEntry.encode(message).finish();
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
   return {
@@ -2207,6 +2699,9 @@ export const SourceInfo_MacroCallsEntry = {
   },
   toProto(message: SourceInfo_MacroCallsEntry): Uint8Array {
     return SourceInfo_MacroCallsEntry.encode(message).finish();
+  },
+  registerTypeUrl() {
+    Expr.registerTypeUrl();
   }
 };
 function createBaseSourceInfo(): SourceInfo {
@@ -2220,6 +2715,15 @@ function createBaseSourceInfo(): SourceInfo {
 }
 export const SourceInfo = {
   typeUrl: "/google.api.expr.v1alpha1.SourceInfo",
+  is(o: any): o is SourceInfo {
+    return o && (o.$typeUrl === SourceInfo.typeUrl || typeof o.syntaxVersion === "string" && typeof o.location === "string" && Array.isArray(o.lineOffsets) && (!o.lineOffsets.length || typeof o.lineOffsets[0] === "number") && isSet(o.positions) && isSet(o.macroCalls));
+  },
+  isSDK(o: any): o is SourceInfoSDKType {
+    return o && (o.$typeUrl === SourceInfo.typeUrl || typeof o.syntax_version === "string" && typeof o.location === "string" && Array.isArray(o.line_offsets) && (!o.line_offsets.length || typeof o.line_offsets[0] === "number") && isSet(o.positions) && isSet(o.macro_calls));
+  },
+  isAmino(o: any): o is SourceInfoAmino {
+    return o && (o.$typeUrl === SourceInfo.typeUrl || typeof o.syntax_version === "string" && typeof o.location === "string" && Array.isArray(o.line_offsets) && (!o.line_offsets.length || typeof o.line_offsets[0] === "number") && isSet(o.positions) && isSet(o.macro_calls));
+  },
   encode(message: SourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.syntaxVersion !== undefined) {
       writer.uint32(10).string(message.syntaxVersion);
@@ -2478,6 +2982,9 @@ export const SourceInfo = {
       typeUrl: "/google.api.expr.v1alpha1.SourceInfo",
       value: SourceInfo.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Expr.registerTypeUrl();
   }
 };
 function createBaseSourcePosition(): SourcePosition {
@@ -2490,6 +2997,15 @@ function createBaseSourcePosition(): SourcePosition {
 }
 export const SourcePosition = {
   typeUrl: "/google.api.expr.v1alpha1.SourcePosition",
+  is(o: any): o is SourcePosition {
+    return o && (o.$typeUrl === SourcePosition.typeUrl || typeof o.location === "string" && typeof o.offset === "number" && typeof o.line === "number" && typeof o.column === "number");
+  },
+  isSDK(o: any): o is SourcePositionSDKType {
+    return o && (o.$typeUrl === SourcePosition.typeUrl || typeof o.location === "string" && typeof o.offset === "number" && typeof o.line === "number" && typeof o.column === "number");
+  },
+  isAmino(o: any): o is SourcePositionAmino {
+    return o && (o.$typeUrl === SourcePosition.typeUrl || typeof o.location === "string" && typeof o.offset === "number" && typeof o.line === "number" && typeof o.column === "number");
+  },
   encode(message: SourcePosition, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.location !== undefined) {
       writer.uint32(10).string(message.location);
@@ -2617,5 +3133,6 @@ export const SourcePosition = {
       typeUrl: "/google.api.expr.v1alpha1.SourcePosition",
       value: SourcePosition.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

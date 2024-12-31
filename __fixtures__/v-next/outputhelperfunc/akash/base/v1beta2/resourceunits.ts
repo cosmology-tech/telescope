@@ -1,6 +1,7 @@
-import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "./resource";
-import { Endpoint, EndpointSDKType } from "./endpoint";
+import { CPU, CPUAmino, CPUSDKType, Memory, MemoryAmino, MemorySDKType, Storage, StorageAmino, StorageSDKType } from "./resource";
+import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta2";
@@ -22,6 +23,20 @@ export interface ResourceUnitsProtoMsg {
  * ResourceUnits describes all available resources types for deployment/node etc
  * if field is nil resource is not present in the given data-structure
  */
+export interface ResourceUnitsAmino {
+  cpu?: CPUAmino;
+  memory?: MemoryAmino;
+  storage?: StorageAmino[];
+  endpoints: EndpointAmino[];
+}
+export interface ResourceUnitsAminoMsg {
+  type: "akash/base/v1beta2/resource-units";
+  value: ResourceUnitsAmino;
+}
+/**
+ * ResourceUnits describes all available resources types for deployment/node etc
+ * if field is nil resource is not present in the given data-structure
+ */
 export interface ResourceUnitsSDKType {
   cpu?: CPUSDKType;
   memory?: MemorySDKType;
@@ -38,6 +53,16 @@ function createBaseResourceUnits(): ResourceUnits {
 }
 export const ResourceUnits = {
   typeUrl: "/akash.base.v1beta2.ResourceUnits",
+  aminoType: "akash/base/v1beta2/resource-units",
+  is(o: any): o is ResourceUnits {
+    return o && (o.$typeUrl === ResourceUnits.typeUrl || Array.isArray(o.storage) && (!o.storage.length || Storage.is(o.storage[0])) && Array.isArray(o.endpoints) && (!o.endpoints.length || Endpoint.is(o.endpoints[0])));
+  },
+  isSDK(o: any): o is ResourceUnitsSDKType {
+    return o && (o.$typeUrl === ResourceUnits.typeUrl || Array.isArray(o.storage) && (!o.storage.length || Storage.isSDK(o.storage[0])) && Array.isArray(o.endpoints) && (!o.endpoints.length || Endpoint.isSDK(o.endpoints[0])));
+  },
+  isAmino(o: any): o is ResourceUnitsAmino {
+    return o && (o.$typeUrl === ResourceUnits.typeUrl || Array.isArray(o.storage) && (!o.storage.length || Storage.isAmino(o.storage[0])) && Array.isArray(o.endpoints) && (!o.endpoints.length || Endpoint.isAmino(o.endpoints[0])));
+  },
   encode(message: ResourceUnits, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.cpu !== undefined) {
       CPU.encode(message.cpu, writer.uint32(10).fork()).ldelim();
@@ -195,5 +220,11 @@ export const ResourceUnits = {
       typeUrl: "/akash.base.v1beta2.ResourceUnits",
       value: ResourceUnits.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    CPU.registerTypeUrl();
+    Memory.registerTypeUrl();
+    Storage.registerTypeUrl();
+    Endpoint.registerTypeUrl();
   }
 };

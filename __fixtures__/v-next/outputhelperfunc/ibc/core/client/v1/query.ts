@@ -1,9 +1,10 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
+import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightAmino, ConsensusStateWithHeightSDKType, Params, ParamsAmino, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import { JsonSafe } from "../../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -16,6 +17,18 @@ export interface QueryClientStateRequest {
 export interface QueryClientStateRequestProtoMsg {
   typeUrl: "/ibc.core.client.v1.QueryClientStateRequest";
   value: Uint8Array;
+}
+/**
+ * QueryClientStateRequest is the request type for the Query/ClientState RPC
+ * method
+ */
+export interface QueryClientStateRequestAmino {
+  /** client state unique identifier */
+  client_id?: string;
+}
+export interface QueryClientStateRequestAminoMsg {
+  type: "cosmos-sdk/QueryClientStateRequest";
+  value: QueryClientStateRequestAmino;
 }
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -46,6 +59,23 @@ export interface QueryClientStateResponseProtoMsg {
  * method. Besides the client state, it includes a proof and the height from
  * which the proof was retrieved.
  */
+export interface QueryClientStateResponseAmino {
+  /** client state associated with the request identifier */
+  client_state?: AnyAmino;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryClientStateResponseAminoMsg {
+  type: "cosmos-sdk/QueryClientStateResponse";
+  value: QueryClientStateResponseAmino;
+}
+/**
+ * QueryClientStateResponse is the response type for the Query/ClientState RPC
+ * method. Besides the client state, it includes a proof and the height from
+ * which the proof was retrieved.
+ */
 export interface QueryClientStateResponseSDKType {
   client_state?: AnySDKType;
   proof: Uint8Array;
@@ -67,6 +97,18 @@ export interface QueryClientStatesRequestProtoMsg {
  * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
  * method
  */
+export interface QueryClientStatesRequestAmino {
+  /** pagination request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryClientStatesRequestAminoMsg {
+  type: "cosmos-sdk/QueryClientStatesRequest";
+  value: QueryClientStatesRequestAmino;
+}
+/**
+ * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
+ * method
+ */
 export interface QueryClientStatesRequestSDKType {
   pagination?: PageRequestSDKType;
 }
@@ -83,6 +125,20 @@ export interface QueryClientStatesResponse {
 export interface QueryClientStatesResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse";
   value: Uint8Array;
+}
+/**
+ * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
+ * method.
+ */
+export interface QueryClientStatesResponseAmino {
+  /** list of stored ClientStates of the chain. */
+  client_states?: IdentifiedClientStateAmino[];
+  /** pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryClientStatesResponseAminoMsg {
+  type: "cosmos-sdk/QueryClientStatesResponse";
+  value: QueryClientStatesResponseAmino;
 }
 /**
  * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
@@ -119,6 +175,28 @@ export interface QueryConsensusStateRequestProtoMsg {
  * RPC method. Besides the consensus state, it includes a proof and the height
  * from which the proof was retrieved.
  */
+export interface QueryConsensusStateRequestAmino {
+  /** client identifier */
+  client_id?: string;
+  /** consensus state revision number */
+  revision_number?: string;
+  /** consensus state revision height */
+  revision_height?: string;
+  /**
+   * latest_height overrrides the height field and queries the latest stored
+   * ConsensusState
+   */
+  latest_height?: boolean;
+}
+export interface QueryConsensusStateRequestAminoMsg {
+  type: "cosmos-sdk/QueryConsensusStateRequest";
+  value: QueryConsensusStateRequestAmino;
+}
+/**
+ * QueryConsensusStateRequest is the request type for the Query/ConsensusState
+ * RPC method. Besides the consensus state, it includes a proof and the height
+ * from which the proof was retrieved.
+ */
 export interface QueryConsensusStateRequestSDKType {
   client_id: string;
   revision_number: bigint;
@@ -140,6 +218,22 @@ export interface QueryConsensusStateResponse {
 export interface QueryConsensusStateResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse";
   value: Uint8Array;
+}
+/**
+ * QueryConsensusStateResponse is the response type for the Query/ConsensusState
+ * RPC method
+ */
+export interface QueryConsensusStateResponseAmino {
+  /** consensus state associated with the client identifier at the given height */
+  consensus_state?: AnyAmino;
+  /** merkle proof of existence */
+  proof?: string;
+  /** height at which the proof was retrieved */
+  proof_height?: HeightAmino;
+}
+export interface QueryConsensusStateResponseAminoMsg {
+  type: "cosmos-sdk/QueryConsensusStateResponse";
+  value: QueryConsensusStateResponseAmino;
 }
 /**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
@@ -168,6 +262,20 @@ export interface QueryConsensusStatesRequestProtoMsg {
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
  * RPC method.
  */
+export interface QueryConsensusStatesRequestAmino {
+  /** client identifier */
+  client_id?: string;
+  /** pagination request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryConsensusStatesRequestAminoMsg {
+  type: "cosmos-sdk/QueryConsensusStatesRequest";
+  value: QueryConsensusStatesRequestAmino;
+}
+/**
+ * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
+ * RPC method.
+ */
 export interface QueryConsensusStatesRequestSDKType {
   client_id: string;
   pagination?: PageRequestSDKType;
@@ -185,6 +293,20 @@ export interface QueryConsensusStatesResponse {
 export interface QueryConsensusStatesResponseProtoMsg {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse";
   value: Uint8Array;
+}
+/**
+ * QueryConsensusStatesResponse is the response type for the
+ * Query/ConsensusStates RPC method
+ */
+export interface QueryConsensusStatesResponseAmino {
+  /** consensus states associated with the identifier */
+  consensus_states?: ConsensusStateWithHeightAmino[];
+  /** pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryConsensusStatesResponseAminoMsg {
+  type: "cosmos-sdk/QueryConsensusStatesResponse";
+  value: QueryConsensusStatesResponseAmino;
 }
 /**
  * QueryConsensusStatesResponse is the response type for the
@@ -210,6 +332,18 @@ export interface QueryClientStatusRequestProtoMsg {
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
  */
+export interface QueryClientStatusRequestAmino {
+  /** client unique identifier */
+  client_id?: string;
+}
+export interface QueryClientStatusRequestAminoMsg {
+  type: "cosmos-sdk/QueryClientStatusRequest";
+  value: QueryClientStatusRequestAmino;
+}
+/**
+ * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
+ * method
+ */
 export interface QueryClientStatusRequestSDKType {
   client_id: string;
 }
@@ -228,6 +362,17 @@ export interface QueryClientStatusResponseProtoMsg {
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
  * method. It returns the current status of the IBC client.
  */
+export interface QueryClientStatusResponseAmino {
+  status?: string;
+}
+export interface QueryClientStatusResponseAminoMsg {
+  type: "cosmos-sdk/QueryClientStatusResponse";
+  value: QueryClientStatusResponseAmino;
+}
+/**
+ * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
+ * method. It returns the current status of the IBC client.
+ */
 export interface QueryClientStatusResponseSDKType {
   status: string;
 }
@@ -239,6 +384,15 @@ export interface QueryClientParamsRequest {}
 export interface QueryClientParamsRequestProtoMsg {
   typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest";
   value: Uint8Array;
+}
+/**
+ * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
+ * method.
+ */
+export interface QueryClientParamsRequestAmino {}
+export interface QueryClientParamsRequestAminoMsg {
+  type: "cosmos-sdk/QueryClientParamsRequest";
+  value: QueryClientParamsRequestAmino;
 }
 /**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
@@ -261,6 +415,18 @@ export interface QueryClientParamsResponseProtoMsg {
  * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
  * method.
  */
+export interface QueryClientParamsResponseAmino {
+  /** params defines the parameters of the module. */
+  params?: ParamsAmino;
+}
+export interface QueryClientParamsResponseAminoMsg {
+  type: "cosmos-sdk/QueryClientParamsResponse";
+  value: QueryClientParamsResponseAmino;
+}
+/**
+ * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
+ * method.
+ */
 export interface QueryClientParamsResponseSDKType {
   params?: ParamsSDKType;
 }
@@ -272,6 +438,15 @@ export interface QueryUpgradedClientStateRequest {}
 export interface QueryUpgradedClientStateRequestProtoMsg {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest";
   value: Uint8Array;
+}
+/**
+ * QueryUpgradedClientStateRequest is the request type for the
+ * Query/UpgradedClientState RPC method
+ */
+export interface QueryUpgradedClientStateRequestAmino {}
+export interface QueryUpgradedClientStateRequestAminoMsg {
+  type: "cosmos-sdk/QueryUpgradedClientStateRequest";
+  value: QueryUpgradedClientStateRequestAmino;
 }
 /**
  * QueryUpgradedClientStateRequest is the request type for the
@@ -294,6 +469,18 @@ export interface QueryUpgradedClientStateResponseProtoMsg {
  * QueryUpgradedClientStateResponse is the response type for the
  * Query/UpgradedClientState RPC method.
  */
+export interface QueryUpgradedClientStateResponseAmino {
+  /** client state associated with the request identifier */
+  upgraded_client_state?: AnyAmino;
+}
+export interface QueryUpgradedClientStateResponseAminoMsg {
+  type: "cosmos-sdk/QueryUpgradedClientStateResponse";
+  value: QueryUpgradedClientStateResponseAmino;
+}
+/**
+ * QueryUpgradedClientStateResponse is the response type for the
+ * Query/UpgradedClientState RPC method.
+ */
 export interface QueryUpgradedClientStateResponseSDKType {
   upgraded_client_state?: AnySDKType;
 }
@@ -305,6 +492,15 @@ export interface QueryUpgradedConsensusStateRequest {}
 export interface QueryUpgradedConsensusStateRequestProtoMsg {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest";
   value: Uint8Array;
+}
+/**
+ * QueryUpgradedConsensusStateRequest is the request type for the
+ * Query/UpgradedConsensusState RPC method
+ */
+export interface QueryUpgradedConsensusStateRequestAmino {}
+export interface QueryUpgradedConsensusStateRequestAminoMsg {
+  type: "cosmos-sdk/QueryUpgradedConsensusStateRequest";
+  value: QueryUpgradedConsensusStateRequestAmino;
 }
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the
@@ -327,6 +523,18 @@ export interface QueryUpgradedConsensusStateResponseProtoMsg {
  * QueryUpgradedConsensusStateResponse is the response type for the
  * Query/UpgradedConsensusState RPC method.
  */
+export interface QueryUpgradedConsensusStateResponseAmino {
+  /** Consensus state associated with the request identifier */
+  upgraded_consensus_state?: AnyAmino;
+}
+export interface QueryUpgradedConsensusStateResponseAminoMsg {
+  type: "cosmos-sdk/QueryUpgradedConsensusStateResponse";
+  value: QueryUpgradedConsensusStateResponseAmino;
+}
+/**
+ * QueryUpgradedConsensusStateResponse is the response type for the
+ * Query/UpgradedConsensusState RPC method.
+ */
 export interface QueryUpgradedConsensusStateResponseSDKType {
   upgraded_consensus_state?: AnySDKType;
 }
@@ -337,6 +545,16 @@ function createBaseQueryClientStateRequest(): QueryClientStateRequest {
 }
 export const QueryClientStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientStateRequest",
+  aminoType: "cosmos-sdk/QueryClientStateRequest",
+  is(o: any): o is QueryClientStateRequest {
+    return o && (o.$typeUrl === QueryClientStateRequest.typeUrl || typeof o.clientId === "string");
+  },
+  isSDK(o: any): o is QueryClientStateRequestSDKType {
+    return o && (o.$typeUrl === QueryClientStateRequest.typeUrl || typeof o.client_id === "string");
+  },
+  isAmino(o: any): o is QueryClientStateRequestAmino {
+    return o && (o.$typeUrl === QueryClientStateRequest.typeUrl || typeof o.client_id === "string");
+  },
   encode(message: QueryClientStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
@@ -422,7 +640,8 @@ export const QueryClientStateRequest = {
       typeUrl: "/ibc.core.client.v1.QueryClientStateRequest",
       value: QueryClientStateRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryClientStateResponse(): QueryClientStateResponse {
   return {
@@ -433,6 +652,16 @@ function createBaseQueryClientStateResponse(): QueryClientStateResponse {
 }
 export const QueryClientStateResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientStateResponse",
+  aminoType: "cosmos-sdk/QueryClientStateResponse",
+  is(o: any): o is QueryClientStateResponse {
+    return o && (o.$typeUrl === QueryClientStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryClientStateResponseSDKType {
+    return o && (o.$typeUrl === QueryClientStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryClientStateResponseAmino {
+    return o && (o.$typeUrl === QueryClientStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryClientStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
@@ -554,6 +783,9 @@ export const QueryClientStateResponse = {
       typeUrl: "/ibc.core.client.v1.QueryClientStateResponse",
       value: QueryClientStateResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
@@ -563,6 +795,16 @@ function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
 }
 export const QueryClientStatesRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatesRequest",
+  aminoType: "cosmos-sdk/QueryClientStatesRequest",
+  is(o: any): o is QueryClientStatesRequest {
+    return o && o.$typeUrl === QueryClientStatesRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryClientStatesRequestSDKType {
+    return o && o.$typeUrl === QueryClientStatesRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryClientStatesRequestAmino {
+    return o && o.$typeUrl === QueryClientStatesRequest.typeUrl;
+  },
   encode(message: QueryClientStatesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -650,6 +892,9 @@ export const QueryClientStatesRequest = {
       typeUrl: "/ibc.core.client.v1.QueryClientStatesRequest",
       value: QueryClientStatesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
@@ -660,6 +905,16 @@ function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
 }
 export const QueryClientStatesResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse",
+  aminoType: "cosmos-sdk/QueryClientStatesResponse",
+  is(o: any): o is QueryClientStatesResponse {
+    return o && (o.$typeUrl === QueryClientStatesResponse.typeUrl || Array.isArray(o.clientStates) && (!o.clientStates.length || IdentifiedClientState.is(o.clientStates[0])));
+  },
+  isSDK(o: any): o is QueryClientStatesResponseSDKType {
+    return o && (o.$typeUrl === QueryClientStatesResponse.typeUrl || Array.isArray(o.client_states) && (!o.client_states.length || IdentifiedClientState.isSDK(o.client_states[0])));
+  },
+  isAmino(o: any): o is QueryClientStatesResponseAmino {
+    return o && (o.$typeUrl === QueryClientStatesResponse.typeUrl || Array.isArray(o.client_states) && (!o.client_states.length || IdentifiedClientState.isAmino(o.client_states[0])));
+  },
   encode(message: QueryClientStatesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.clientStates) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -773,6 +1028,10 @@ export const QueryClientStatesResponse = {
       typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse",
       value: QueryClientStatesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    IdentifiedClientState.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
@@ -785,6 +1044,16 @@ function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
 }
 export const QueryConsensusStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest",
+  aminoType: "cosmos-sdk/QueryConsensusStateRequest",
+  is(o: any): o is QueryConsensusStateRequest {
+    return o && (o.$typeUrl === QueryConsensusStateRequest.typeUrl || typeof o.clientId === "string" && typeof o.revisionNumber === "bigint" && typeof o.revisionHeight === "bigint" && typeof o.latestHeight === "boolean");
+  },
+  isSDK(o: any): o is QueryConsensusStateRequestSDKType {
+    return o && (o.$typeUrl === QueryConsensusStateRequest.typeUrl || typeof o.client_id === "string" && typeof o.revision_number === "bigint" && typeof o.revision_height === "bigint" && typeof o.latest_height === "boolean");
+  },
+  isAmino(o: any): o is QueryConsensusStateRequestAmino {
+    return o && (o.$typeUrl === QueryConsensusStateRequest.typeUrl || typeof o.client_id === "string" && typeof o.revision_number === "bigint" && typeof o.revision_height === "bigint" && typeof o.latest_height === "boolean");
+  },
   encode(message: QueryConsensusStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
@@ -922,7 +1191,8 @@ export const QueryConsensusStateRequest = {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest",
       value: QueryConsensusStateRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
   return {
@@ -933,6 +1203,16 @@ function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
 }
 export const QueryConsensusStateResponse = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse",
+  aminoType: "cosmos-sdk/QueryConsensusStateResponse",
+  is(o: any): o is QueryConsensusStateResponse {
+    return o && (o.$typeUrl === QueryConsensusStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.is(o.proofHeight));
+  },
+  isSDK(o: any): o is QueryConsensusStateResponseSDKType {
+    return o && (o.$typeUrl === QueryConsensusStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isSDK(o.proof_height));
+  },
+  isAmino(o: any): o is QueryConsensusStateResponseAmino {
+    return o && (o.$typeUrl === QueryConsensusStateResponse.typeUrl || (o.proof instanceof Uint8Array || typeof o.proof === "string") && Height.isAmino(o.proof_height));
+  },
   encode(message: QueryConsensusStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -1054,6 +1334,9 @@ export const QueryConsensusStateResponse = {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse",
       value: QueryConsensusStateResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Height.registerTypeUrl();
   }
 };
 function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
@@ -1064,6 +1347,16 @@ function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
 }
 export const QueryConsensusStatesRequest = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest",
+  aminoType: "cosmos-sdk/QueryConsensusStatesRequest",
+  is(o: any): o is QueryConsensusStatesRequest {
+    return o && (o.$typeUrl === QueryConsensusStatesRequest.typeUrl || typeof o.clientId === "string");
+  },
+  isSDK(o: any): o is QueryConsensusStatesRequestSDKType {
+    return o && (o.$typeUrl === QueryConsensusStatesRequest.typeUrl || typeof o.client_id === "string");
+  },
+  isAmino(o: any): o is QueryConsensusStatesRequestAmino {
+    return o && (o.$typeUrl === QueryConsensusStatesRequest.typeUrl || typeof o.client_id === "string");
+  },
   encode(message: QueryConsensusStatesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
@@ -1167,6 +1460,9 @@ export const QueryConsensusStatesRequest = {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest",
       value: QueryConsensusStatesRequest.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    PageRequest.registerTypeUrl();
   }
 };
 function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse {
@@ -1177,6 +1473,16 @@ function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse 
 }
 export const QueryConsensusStatesResponse = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse",
+  aminoType: "cosmos-sdk/QueryConsensusStatesResponse",
+  is(o: any): o is QueryConsensusStatesResponse {
+    return o && (o.$typeUrl === QueryConsensusStatesResponse.typeUrl || Array.isArray(o.consensusStates) && (!o.consensusStates.length || ConsensusStateWithHeight.is(o.consensusStates[0])));
+  },
+  isSDK(o: any): o is QueryConsensusStatesResponseSDKType {
+    return o && (o.$typeUrl === QueryConsensusStatesResponse.typeUrl || Array.isArray(o.consensus_states) && (!o.consensus_states.length || ConsensusStateWithHeight.isSDK(o.consensus_states[0])));
+  },
+  isAmino(o: any): o is QueryConsensusStatesResponseAmino {
+    return o && (o.$typeUrl === QueryConsensusStatesResponse.typeUrl || Array.isArray(o.consensus_states) && (!o.consensus_states.length || ConsensusStateWithHeight.isAmino(o.consensus_states[0])));
+  },
   encode(message: QueryConsensusStatesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.consensusStates) {
       ConsensusStateWithHeight.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1290,6 +1596,10 @@ export const QueryConsensusStatesResponse = {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse",
       value: QueryConsensusStatesResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    ConsensusStateWithHeight.registerTypeUrl();
+    PageResponse.registerTypeUrl();
   }
 };
 function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
@@ -1299,6 +1609,16 @@ function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
 }
 export const QueryClientStatusRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest",
+  aminoType: "cosmos-sdk/QueryClientStatusRequest",
+  is(o: any): o is QueryClientStatusRequest {
+    return o && (o.$typeUrl === QueryClientStatusRequest.typeUrl || typeof o.clientId === "string");
+  },
+  isSDK(o: any): o is QueryClientStatusRequestSDKType {
+    return o && (o.$typeUrl === QueryClientStatusRequest.typeUrl || typeof o.client_id === "string");
+  },
+  isAmino(o: any): o is QueryClientStatusRequestAmino {
+    return o && (o.$typeUrl === QueryClientStatusRequest.typeUrl || typeof o.client_id === "string");
+  },
   encode(message: QueryClientStatusRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
@@ -1384,7 +1704,8 @@ export const QueryClientStatusRequest = {
       typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest",
       value: QueryClientStatusRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
   return {
@@ -1393,6 +1714,16 @@ function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
 }
 export const QueryClientStatusResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse",
+  aminoType: "cosmos-sdk/QueryClientStatusResponse",
+  is(o: any): o is QueryClientStatusResponse {
+    return o && (o.$typeUrl === QueryClientStatusResponse.typeUrl || typeof o.status === "string");
+  },
+  isSDK(o: any): o is QueryClientStatusResponseSDKType {
+    return o && (o.$typeUrl === QueryClientStatusResponse.typeUrl || typeof o.status === "string");
+  },
+  isAmino(o: any): o is QueryClientStatusResponseAmino {
+    return o && (o.$typeUrl === QueryClientStatusResponse.typeUrl || typeof o.status === "string");
+  },
   encode(message: QueryClientStatusResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.status !== undefined) {
       writer.uint32(10).string(message.status);
@@ -1478,13 +1809,24 @@ export const QueryClientStatusResponse = {
       typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse",
       value: QueryClientStatusResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryClientParamsRequest(): QueryClientParamsRequest {
   return {};
 }
 export const QueryClientParamsRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest",
+  aminoType: "cosmos-sdk/QueryClientParamsRequest",
+  is(o: any): o is QueryClientParamsRequest {
+    return o && o.$typeUrl === QueryClientParamsRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryClientParamsRequestSDKType {
+    return o && o.$typeUrl === QueryClientParamsRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryClientParamsRequestAmino {
+    return o && o.$typeUrl === QueryClientParamsRequest.typeUrl;
+  },
   encode(_: QueryClientParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1552,7 +1894,8 @@ export const QueryClientParamsRequest = {
       typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest",
       value: QueryClientParamsRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
   return {
@@ -1561,6 +1904,16 @@ function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
 }
 export const QueryClientParamsResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientParamsResponse",
+  aminoType: "cosmos-sdk/QueryClientParamsResponse",
+  is(o: any): o is QueryClientParamsResponse {
+    return o && o.$typeUrl === QueryClientParamsResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryClientParamsResponseSDKType {
+    return o && o.$typeUrl === QueryClientParamsResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryClientParamsResponseAmino {
+    return o && o.$typeUrl === QueryClientParamsResponse.typeUrl;
+  },
   encode(message: QueryClientParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1648,6 +2001,9 @@ export const QueryClientParamsResponse = {
       typeUrl: "/ibc.core.client.v1.QueryClientParamsResponse",
       value: QueryClientParamsResponse.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Params.registerTypeUrl();
   }
 };
 function createBaseQueryUpgradedClientStateRequest(): QueryUpgradedClientStateRequest {
@@ -1655,6 +2011,16 @@ function createBaseQueryUpgradedClientStateRequest(): QueryUpgradedClientStateRe
 }
 export const QueryUpgradedClientStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest",
+  aminoType: "cosmos-sdk/QueryUpgradedClientStateRequest",
+  is(o: any): o is QueryUpgradedClientStateRequest {
+    return o && o.$typeUrl === QueryUpgradedClientStateRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryUpgradedClientStateRequestSDKType {
+    return o && o.$typeUrl === QueryUpgradedClientStateRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryUpgradedClientStateRequestAmino {
+    return o && o.$typeUrl === QueryUpgradedClientStateRequest.typeUrl;
+  },
   encode(_: QueryUpgradedClientStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1722,7 +2088,8 @@ export const QueryUpgradedClientStateRequest = {
       typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest",
       value: QueryUpgradedClientStateRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateResponse {
   return {
@@ -1731,6 +2098,16 @@ function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateR
 }
 export const QueryUpgradedClientStateResponse = {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateResponse",
+  aminoType: "cosmos-sdk/QueryUpgradedClientStateResponse",
+  is(o: any): o is QueryUpgradedClientStateResponse {
+    return o && o.$typeUrl === QueryUpgradedClientStateResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryUpgradedClientStateResponseSDKType {
+    return o && o.$typeUrl === QueryUpgradedClientStateResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryUpgradedClientStateResponseAmino {
+    return o && o.$typeUrl === QueryUpgradedClientStateResponse.typeUrl;
+  },
   encode(message: QueryUpgradedClientStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.upgradedClientState !== undefined) {
       Any.encode(message.upgradedClientState, writer.uint32(10).fork()).ldelim();
@@ -1818,13 +2195,24 @@ export const QueryUpgradedClientStateResponse = {
       typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateResponse",
       value: QueryUpgradedClientStateResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusStateRequest {
   return {};
 }
 export const QueryUpgradedConsensusStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest",
+  aminoType: "cosmos-sdk/QueryUpgradedConsensusStateRequest",
+  is(o: any): o is QueryUpgradedConsensusStateRequest {
+    return o && o.$typeUrl === QueryUpgradedConsensusStateRequest.typeUrl;
+  },
+  isSDK(o: any): o is QueryUpgradedConsensusStateRequestSDKType {
+    return o && o.$typeUrl === QueryUpgradedConsensusStateRequest.typeUrl;
+  },
+  isAmino(o: any): o is QueryUpgradedConsensusStateRequestAmino {
+    return o && o.$typeUrl === QueryUpgradedConsensusStateRequest.typeUrl;
+  },
   encode(_: QueryUpgradedConsensusStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1892,7 +2280,8 @@ export const QueryUpgradedConsensusStateRequest = {
       typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest",
       value: QueryUpgradedConsensusStateRequest.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensusStateResponse {
   return {
@@ -1901,6 +2290,16 @@ function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensus
 }
 export const QueryUpgradedConsensusStateResponse = {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateResponse",
+  aminoType: "cosmos-sdk/QueryUpgradedConsensusStateResponse",
+  is(o: any): o is QueryUpgradedConsensusStateResponse {
+    return o && o.$typeUrl === QueryUpgradedConsensusStateResponse.typeUrl;
+  },
+  isSDK(o: any): o is QueryUpgradedConsensusStateResponseSDKType {
+    return o && o.$typeUrl === QueryUpgradedConsensusStateResponse.typeUrl;
+  },
+  isAmino(o: any): o is QueryUpgradedConsensusStateResponseAmino {
+    return o && o.$typeUrl === QueryUpgradedConsensusStateResponse.typeUrl;
+  },
   encode(message: QueryUpgradedConsensusStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.upgradedConsensusState !== undefined) {
       Any.encode(message.upgradedConsensusState, writer.uint32(10).fork()).ldelim();
@@ -1988,5 +2387,6 @@ export const QueryUpgradedConsensusStateResponse = {
       typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateResponse",
       value: QueryUpgradedConsensusStateResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

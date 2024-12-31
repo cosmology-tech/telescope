@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "akash.base.v1beta1";
 /** Attribute represents key value pair */
 export interface Attribute {
@@ -10,6 +11,15 @@ export interface Attribute {
 export interface AttributeProtoMsg {
   typeUrl: "/akash.base.v1beta1.Attribute";
   value: Uint8Array;
+}
+/** Attribute represents key value pair */
+export interface AttributeAmino {
+  key?: string;
+  value?: string;
+}
+export interface AttributeAminoMsg {
+  type: "akash/base/attribute";
+  value: AttributeAmino;
 }
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
@@ -38,6 +48,22 @@ export interface SignedByProtoMsg {
  * entries there
  * this behaviour to be discussed
  */
+export interface SignedByAmino {
+  /** all_of all keys in this list must have signed attributes */
+  all_of: string[];
+  /** any_of at least of of the keys from the list must have signed attributes */
+  any_of: string[];
+}
+export interface SignedByAminoMsg {
+  type: "akash/base/signed-by";
+  value: SignedByAmino;
+}
+/**
+ * SignedBy represents validation accounts that tenant expects signatures for provider attributes
+ * AllOf has precedence i.e. if there is at least one entry AnyOf is ignored regardless to how many
+ * entries there
+ * this behaviour to be discussed
+ */
 export interface SignedBySDKType {
   all_of: string[];
   any_of: string[];
@@ -54,6 +80,17 @@ export interface PlacementRequirementsProtoMsg {
   value: Uint8Array;
 }
 /** PlacementRequirements */
+export interface PlacementRequirementsAmino {
+  /** SignedBy list of keys that tenants expect to have signatures from */
+  signed_by: SignedByAmino;
+  /** Attribute list of attributes tenant expects from the provider */
+  attributes: AttributeAmino[];
+}
+export interface PlacementRequirementsAminoMsg {
+  type: "akash/base/placement-requirements";
+  value: PlacementRequirementsAmino;
+}
+/** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
   signed_by: SignedBySDKType;
   attributes: AttributeSDKType[];
@@ -66,6 +103,16 @@ function createBaseAttribute(): Attribute {
 }
 export const Attribute = {
   typeUrl: "/akash.base.v1beta1.Attribute",
+  aminoType: "akash/base/attribute",
+  is(o: any): o is Attribute {
+    return o && (o.$typeUrl === Attribute.typeUrl || typeof o.key === "string" && typeof o.value === "string");
+  },
+  isSDK(o: any): o is AttributeSDKType {
+    return o && (o.$typeUrl === Attribute.typeUrl || typeof o.key === "string" && typeof o.value === "string");
+  },
+  isAmino(o: any): o is AttributeAmino {
+    return o && (o.$typeUrl === Attribute.typeUrl || typeof o.key === "string" && typeof o.value === "string");
+  },
   encode(message: Attribute, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
@@ -167,7 +214,8 @@ export const Attribute = {
       typeUrl: "/akash.base.v1beta1.Attribute",
       value: Attribute.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseSignedBy(): SignedBy {
   return {
@@ -177,6 +225,16 @@ function createBaseSignedBy(): SignedBy {
 }
 export const SignedBy = {
   typeUrl: "/akash.base.v1beta1.SignedBy",
+  aminoType: "akash/base/signed-by",
+  is(o: any): o is SignedBy {
+    return o && (o.$typeUrl === SignedBy.typeUrl || Array.isArray(o.allOf) && (!o.allOf.length || typeof o.allOf[0] === "string") && Array.isArray(o.anyOf) && (!o.anyOf.length || typeof o.anyOf[0] === "string"));
+  },
+  isSDK(o: any): o is SignedBySDKType {
+    return o && (o.$typeUrl === SignedBy.typeUrl || Array.isArray(o.all_of) && (!o.all_of.length || typeof o.all_of[0] === "string") && Array.isArray(o.any_of) && (!o.any_of.length || typeof o.any_of[0] === "string"));
+  },
+  isAmino(o: any): o is SignedByAmino {
+    return o && (o.$typeUrl === SignedBy.typeUrl || Array.isArray(o.all_of) && (!o.all_of.length || typeof o.all_of[0] === "string") && Array.isArray(o.any_of) && (!o.any_of.length || typeof o.any_of[0] === "string"));
+  },
   encode(message: SignedBy, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allOf) {
       writer.uint32(10).string(v!);
@@ -298,7 +356,8 @@ export const SignedBy = {
       typeUrl: "/akash.base.v1beta1.SignedBy",
       value: SignedBy.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBasePlacementRequirements(): PlacementRequirements {
   return {
@@ -308,6 +367,16 @@ function createBasePlacementRequirements(): PlacementRequirements {
 }
 export const PlacementRequirements = {
   typeUrl: "/akash.base.v1beta1.PlacementRequirements",
+  aminoType: "akash/base/placement-requirements",
+  is(o: any): o is PlacementRequirements {
+    return o && (o.$typeUrl === PlacementRequirements.typeUrl || SignedBy.is(o.signedBy) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.is(o.attributes[0])));
+  },
+  isSDK(o: any): o is PlacementRequirementsSDKType {
+    return o && (o.$typeUrl === PlacementRequirements.typeUrl || SignedBy.isSDK(o.signed_by) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.isSDK(o.attributes[0])));
+  },
+  isAmino(o: any): o is PlacementRequirementsAmino {
+    return o && (o.$typeUrl === PlacementRequirements.typeUrl || SignedBy.isAmino(o.signed_by) && Array.isArray(o.attributes) && (!o.attributes.length || Attribute.isAmino(o.attributes[0])));
+  },
   encode(message: PlacementRequirements, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.signedBy !== undefined) {
       SignedBy.encode(message.signedBy, writer.uint32(10).fork()).ldelim();
@@ -421,5 +490,9 @@ export const PlacementRequirements = {
       typeUrl: "/akash.base.v1beta1.PlacementRequirements",
       value: PlacementRequirements.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    SignedBy.registerTypeUrl();
+    Attribute.registerTypeUrl();
   }
 };

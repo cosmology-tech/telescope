@@ -48,6 +48,7 @@ export interface TelescopeGeneratedCodec<
   toProto?: (message: T) => Uint8Array;
   fromProtoMsg?: (message: ProtoMsg) => T;
   toProtoMsg?: (message: T) => Any;
+  registerTypeurl?: () => void;
 }
 
 export type TelescopeGeneratedType<

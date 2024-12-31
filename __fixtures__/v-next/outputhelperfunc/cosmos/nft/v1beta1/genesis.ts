@@ -1,4 +1,4 @@
-import { Class, ClassSDKType, NFT, NFTSDKType } from "./nft";
+import { Class, ClassAmino, ClassSDKType, NFT, NFTAmino, NFTSDKType } from "./nft";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
@@ -12,6 +12,16 @@ export interface GenesisState {
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.GenesisState";
   value: Uint8Array;
+}
+/** GenesisState defines the nft module's genesis state. */
+export interface GenesisStateAmino {
+  /** class defines the class of the nft type. */
+  classes?: ClassAmino[];
+  entries?: EntryAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateSDKType {
@@ -30,6 +40,17 @@ export interface EntryProtoMsg {
   value: Uint8Array;
 }
 /** Entry Defines all nft owned by a person */
+export interface EntryAmino {
+  /** owner is the owner address of the following nft */
+  owner?: string;
+  /** nfts is a group of nfts of the same owner */
+  nfts?: NFTAmino[];
+}
+export interface EntryAminoMsg {
+  type: "cosmos-sdk/Entry";
+  value: EntryAmino;
+}
+/** Entry Defines all nft owned by a person */
 export interface EntrySDKType {
   owner: string;
   nfts: NFTSDKType[];
@@ -42,6 +63,16 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.nft.v1beta1.GenesisState",
+  aminoType: "cosmos-sdk/GenesisState",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.classes) && (!o.classes.length || Class.is(o.classes[0])) && Array.isArray(o.entries) && (!o.entries.length || Entry.is(o.entries[0])));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.classes) && (!o.classes.length || Class.isSDK(o.classes[0])) && Array.isArray(o.entries) && (!o.entries.length || Entry.isSDK(o.entries[0])));
+  },
+  isAmino(o: any): o is GenesisStateAmino {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.classes) && (!o.classes.length || Class.isAmino(o.classes[0])) && Array.isArray(o.entries) && (!o.entries.length || Entry.isAmino(o.entries[0])));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.classes) {
       Class.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -163,6 +194,10 @@ export const GenesisState = {
       typeUrl: "/cosmos.nft.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Class.registerTypeUrl();
+    Entry.registerTypeUrl();
   }
 };
 function createBaseEntry(): Entry {
@@ -173,6 +208,16 @@ function createBaseEntry(): Entry {
 }
 export const Entry = {
   typeUrl: "/cosmos.nft.v1beta1.Entry",
+  aminoType: "cosmos-sdk/Entry",
+  is(o: any): o is Entry {
+    return o && (o.$typeUrl === Entry.typeUrl || typeof o.owner === "string" && Array.isArray(o.nfts) && (!o.nfts.length || NFT.is(o.nfts[0])));
+  },
+  isSDK(o: any): o is EntrySDKType {
+    return o && (o.$typeUrl === Entry.typeUrl || typeof o.owner === "string" && Array.isArray(o.nfts) && (!o.nfts.length || NFT.isSDK(o.nfts[0])));
+  },
+  isAmino(o: any): o is EntryAmino {
+    return o && (o.$typeUrl === Entry.typeUrl || typeof o.owner === "string" && Array.isArray(o.nfts) && (!o.nfts.length || NFT.isAmino(o.nfts[0])));
+  },
   encode(message: Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -284,5 +329,8 @@ export const Entry = {
       typeUrl: "/cosmos.nft.v1beta1.Entry",
       value: Entry.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    NFT.registerTypeUrl();
   }
 };

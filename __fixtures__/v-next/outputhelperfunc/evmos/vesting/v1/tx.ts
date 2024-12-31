@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
@@ -33,6 +33,34 @@ export interface MsgCreateClawbackVestingAccountProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
+export interface MsgCreateClawbackVestingAccountAmino {
+  /**
+   * from_address specifies the account to provide the funds and sign the
+   * clawback request
+   */
+  from_address?: string;
+  /** to_address specifies the account to receive the funds */
+  to_address?: string;
+  /** start_time defines the time at which the vesting period begins */
+  start_time?: string;
+  /** lockup_periods defines the unlocking schedule relative to the start_time */
+  lockup_periods?: PeriodAmino[];
+  /** vesting_periods defines thevesting schedule relative to the start_time */
+  vesting_periods?: PeriodAmino[];
+  /**
+   * merge specifies a the creation mechanism for existing
+   * ClawbackVestingAccounts. If true, merge this new grant into an existing
+   * ClawbackVestingAccount, or create it if it does not exist. If false,
+   * creates a new account. New grants to an existing account must be from the
+   * same from_address.
+   */
+  merge?: boolean;
+}
+export interface MsgCreateClawbackVestingAccountAminoMsg {
+  type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
+  value: MsgCreateClawbackVestingAccountAmino;
+}
+/** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccountSDKType {
   from_address: string;
   to_address: string;
@@ -49,6 +77,15 @@ export interface MsgCreateClawbackVestingAccountResponse {}
 export interface MsgCreateClawbackVestingAccountResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
   value: Uint8Array;
+}
+/**
+ * MsgCreateClawbackVestingAccountResponse defines the
+ * MsgCreateClawbackVestingAccount response type.
+ */
+export interface MsgCreateClawbackVestingAccountResponseAmino {}
+export interface MsgCreateClawbackVestingAccountResponseAminoMsg {
+  type: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
+  value: MsgCreateClawbackVestingAccountResponseAmino;
 }
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
@@ -79,6 +116,26 @@ export interface MsgClawbackProtoMsg {
  * MsgClawback defines a message that removes unvested tokens from a
  * ClawbackVestingAccount.
  */
+export interface MsgClawbackAmino {
+  /** funder_address is the address which funded the account */
+  funder_address?: string;
+  /** account_address is the address of the ClawbackVestingAccount to claw back from. */
+  account_address?: string;
+  /**
+   * dest_address specifies where the clawed-back tokens should be transferred
+   * to. If empty, the tokens will be transferred back to the original funder of
+   * the account.
+   */
+  dest_address?: string;
+}
+export interface MsgClawbackAminoMsg {
+  type: "/evmos.vesting.v1.MsgClawback";
+  value: MsgClawbackAmino;
+}
+/**
+ * MsgClawback defines a message that removes unvested tokens from a
+ * ClawbackVestingAccount.
+ */
 export interface MsgClawbackSDKType {
   funder_address: string;
   account_address: string;
@@ -89,6 +146,12 @@ export interface MsgClawbackResponse {}
 export interface MsgClawbackResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.MsgClawbackResponse";
   value: Uint8Array;
+}
+/** MsgClawbackResponse defines the MsgClawback response type. */
+export interface MsgClawbackResponseAmino {}
+export interface MsgClawbackResponseAminoMsg {
+  type: "/evmos.vesting.v1.MsgClawbackResponse";
+  value: MsgClawbackResponseAmino;
 }
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponseSDKType {}
@@ -104,6 +167,15 @@ function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAc
 }
 export const MsgCreateClawbackVestingAccount = {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",
+  is(o: any): o is MsgCreateClawbackVestingAccount {
+    return o && (o.$typeUrl === MsgCreateClawbackVestingAccount.typeUrl || typeof o.fromAddress === "string" && typeof o.toAddress === "string" && Timestamp.is(o.startTime) && Array.isArray(o.lockupPeriods) && (!o.lockupPeriods.length || Period.is(o.lockupPeriods[0])) && Array.isArray(o.vestingPeriods) && (!o.vestingPeriods.length || Period.is(o.vestingPeriods[0])) && typeof o.merge === "boolean");
+  },
+  isSDK(o: any): o is MsgCreateClawbackVestingAccountSDKType {
+    return o && (o.$typeUrl === MsgCreateClawbackVestingAccount.typeUrl || typeof o.from_address === "string" && typeof o.to_address === "string" && Timestamp.isSDK(o.start_time) && Array.isArray(o.lockup_periods) && (!o.lockup_periods.length || Period.isSDK(o.lockup_periods[0])) && Array.isArray(o.vesting_periods) && (!o.vesting_periods.length || Period.isSDK(o.vesting_periods[0])) && typeof o.merge === "boolean");
+  },
+  isAmino(o: any): o is MsgCreateClawbackVestingAccountAmino {
+    return o && (o.$typeUrl === MsgCreateClawbackVestingAccount.typeUrl || typeof o.from_address === "string" && typeof o.to_address === "string" && Timestamp.isAmino(o.start_time) && Array.isArray(o.lockup_periods) && (!o.lockup_periods.length || Period.isAmino(o.lockup_periods[0])) && Array.isArray(o.vesting_periods) && (!o.vesting_periods.length || Period.isAmino(o.vesting_periods[0])) && typeof o.merge === "boolean");
+  },
   encode(message: MsgCreateClawbackVestingAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fromAddress !== undefined) {
       writer.uint32(10).string(message.fromAddress);
@@ -283,6 +355,10 @@ export const MsgCreateClawbackVestingAccount = {
       typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",
       value: MsgCreateClawbackVestingAccount.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Period.registerTypeUrl();
+    Period.registerTypeUrl();
   }
 };
 function createBaseMsgCreateClawbackVestingAccountResponse(): MsgCreateClawbackVestingAccountResponse {
@@ -290,6 +366,15 @@ function createBaseMsgCreateClawbackVestingAccountResponse(): MsgCreateClawbackV
 }
 export const MsgCreateClawbackVestingAccountResponse = {
   typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse",
+  is(o: any): o is MsgCreateClawbackVestingAccountResponse {
+    return o && o.$typeUrl === MsgCreateClawbackVestingAccountResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCreateClawbackVestingAccountResponseSDKType {
+    return o && o.$typeUrl === MsgCreateClawbackVestingAccountResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgCreateClawbackVestingAccountResponseAmino {
+    return o && o.$typeUrl === MsgCreateClawbackVestingAccountResponse.typeUrl;
+  },
   encode(_: MsgCreateClawbackVestingAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -351,7 +436,8 @@ export const MsgCreateClawbackVestingAccountResponse = {
       typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse",
       value: MsgCreateClawbackVestingAccountResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgClawback(): MsgClawback {
   return {
@@ -362,6 +448,15 @@ function createBaseMsgClawback(): MsgClawback {
 }
 export const MsgClawback = {
   typeUrl: "/evmos.vesting.v1.MsgClawback",
+  is(o: any): o is MsgClawback {
+    return o && (o.$typeUrl === MsgClawback.typeUrl || typeof o.funderAddress === "string" && typeof o.accountAddress === "string" && typeof o.destAddress === "string");
+  },
+  isSDK(o: any): o is MsgClawbackSDKType {
+    return o && (o.$typeUrl === MsgClawback.typeUrl || typeof o.funder_address === "string" && typeof o.account_address === "string" && typeof o.dest_address === "string");
+  },
+  isAmino(o: any): o is MsgClawbackAmino {
+    return o && (o.$typeUrl === MsgClawback.typeUrl || typeof o.funder_address === "string" && typeof o.account_address === "string" && typeof o.dest_address === "string");
+  },
   encode(message: MsgClawback, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.funderAddress !== undefined) {
       writer.uint32(10).string(message.funderAddress);
@@ -473,13 +568,23 @@ export const MsgClawback = {
       typeUrl: "/evmos.vesting.v1.MsgClawback",
       value: MsgClawback.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgClawbackResponse(): MsgClawbackResponse {
   return {};
 }
 export const MsgClawbackResponse = {
   typeUrl: "/evmos.vesting.v1.MsgClawbackResponse",
+  is(o: any): o is MsgClawbackResponse {
+    return o && o.$typeUrl === MsgClawbackResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgClawbackResponseSDKType {
+    return o && o.$typeUrl === MsgClawbackResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgClawbackResponseAmino {
+    return o && o.$typeUrl === MsgClawbackResponse.typeUrl;
+  },
   encode(_: MsgClawbackResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -541,5 +646,6 @@ export const MsgClawbackResponse = {
       typeUrl: "/evmos.vesting.v1.MsgClawbackResponse",
       value: MsgClawbackResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

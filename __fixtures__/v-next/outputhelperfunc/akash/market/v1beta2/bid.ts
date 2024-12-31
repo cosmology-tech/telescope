@@ -1,6 +1,7 @@
-import { OrderID, OrderIDSDKType } from "./order";
-import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
+import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
@@ -19,6 +20,7 @@ export enum Bid_State {
   UNRECOGNIZED = -1,
 }
 export const Bid_StateSDKType = Bid_State;
+export const Bid_StateAmino = Bid_State;
 export function bid_StateFromJSON(object: any): Bid_State {
   switch (object) {
     case 0:
@@ -71,6 +73,17 @@ export interface MsgCreateBidProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateBid defines an SDK message for creating Bid */
+export interface MsgCreateBidAmino {
+  order: OrderIDAmino;
+  provider: string;
+  price: DecCoinAmino;
+  deposit: CoinAmino;
+}
+export interface MsgCreateBidAminoMsg {
+  type: "akash/market/v1beta2/testonly-create-bid";
+  value: MsgCreateBidAmino;
+}
+/** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidSDKType {
   order: OrderIDSDKType;
   provider: string;
@@ -84,6 +97,12 @@ export interface MsgCreateBidResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgCreateBidResponse defines the Msg/CreateBid response type. */
+export interface MsgCreateBidResponseAmino {}
+export interface MsgCreateBidResponseAminoMsg {
+  type: "akash/market/v1beta2/testonly-create-bid-response";
+  value: MsgCreateBidResponseAmino;
+}
+/** MsgCreateBidResponse defines the Msg/CreateBid response type. */
 export interface MsgCreateBidResponseSDKType {}
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBid {
@@ -94,6 +113,14 @@ export interface MsgCloseBidProtoMsg {
   value: Uint8Array;
 }
 /** MsgCloseBid defines an SDK message for closing bid */
+export interface MsgCloseBidAmino {
+  bid_id: BidIDAmino;
+}
+export interface MsgCloseBidAminoMsg {
+  type: "akash/market/v1beta2/testonly-close-bid";
+  value: MsgCloseBidAmino;
+}
+/** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBidSDKType {
   bid_id: BidIDSDKType;
 }
@@ -102,6 +129,12 @@ export interface MsgCloseBidResponse {}
 export interface MsgCloseBidResponseProtoMsg {
   typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse";
   value: Uint8Array;
+}
+/** MsgCloseBidResponse defines the Msg/CloseBid response type. */
+export interface MsgCloseBidResponseAmino {}
+export interface MsgCloseBidResponseAminoMsg {
+  type: "akash/market/v1beta2/testonly-close-bid-response";
+  value: MsgCloseBidResponseAmino;
 }
 /** MsgCloseBidResponse defines the Msg/CloseBid response type. */
 export interface MsgCloseBidResponseSDKType {}
@@ -119,6 +152,21 @@ export interface BidID {
 export interface BidIDProtoMsg {
   typeUrl: "/akash.market.v1beta2.BidID";
   value: Uint8Array;
+}
+/**
+ * BidID stores owner and all other seq numbers
+ * A successful bid becomes a Lease(ID).
+ */
+export interface BidIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
+}
+export interface BidIDAminoMsg {
+  type: "akash/market/v1beta2/bid-i-d";
+  value: BidIDAmino;
 }
 /**
  * BidID stores owner and all other seq numbers
@@ -143,6 +191,17 @@ export interface BidProtoMsg {
   value: Uint8Array;
 }
 /** Bid stores BidID, state of bid and price */
+export interface BidAmino {
+  bid_id: BidIDAmino;
+  state: Bid_State;
+  price: DecCoinAmino;
+  created_at?: string;
+}
+export interface BidAminoMsg {
+  type: "akash/market/v1beta2/bid";
+  value: BidAmino;
+}
+/** Bid stores BidID, state of bid and price */
 export interface BidSDKType {
   bid_id: BidIDSDKType;
   state: Bid_State;
@@ -163,6 +222,19 @@ export interface BidFiltersProtoMsg {
   value: Uint8Array;
 }
 /** BidFilters defines flags for bid list filter */
+export interface BidFiltersAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
+}
+export interface BidFiltersAminoMsg {
+  type: "akash/market/v1beta2/bid-filters";
+  value: BidFiltersAmino;
+}
+/** BidFilters defines flags for bid list filter */
 export interface BidFiltersSDKType {
   owner: string;
   dseq: bigint;
@@ -181,6 +253,16 @@ function createBaseMsgCreateBid(): MsgCreateBid {
 }
 export const MsgCreateBid = {
   typeUrl: "/akash.market.v1beta2.MsgCreateBid",
+  aminoType: "akash/market/v1beta2/testonly-create-bid",
+  is(o: any): o is MsgCreateBid {
+    return o && (o.$typeUrl === MsgCreateBid.typeUrl || OrderID.is(o.order) && typeof o.provider === "string" && DecCoin.is(o.price) && Coin.is(o.deposit));
+  },
+  isSDK(o: any): o is MsgCreateBidSDKType {
+    return o && (o.$typeUrl === MsgCreateBid.typeUrl || OrderID.isSDK(o.order) && typeof o.provider === "string" && DecCoin.isSDK(o.price) && Coin.isSDK(o.deposit));
+  },
+  isAmino(o: any): o is MsgCreateBidAmino {
+    return o && (o.$typeUrl === MsgCreateBid.typeUrl || OrderID.isAmino(o.order) && typeof o.provider === "string" && DecCoin.isAmino(o.price) && Coin.isAmino(o.deposit));
+  },
   encode(message: MsgCreateBid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.order !== undefined) {
       OrderID.encode(message.order, writer.uint32(10).fork()).ldelim();
@@ -320,6 +402,11 @@ export const MsgCreateBid = {
       typeUrl: "/akash.market.v1beta2.MsgCreateBid",
       value: MsgCreateBid.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    OrderID.registerTypeUrl();
+    DecCoin.registerTypeUrl();
+    Coin.registerTypeUrl();
   }
 };
 function createBaseMsgCreateBidResponse(): MsgCreateBidResponse {
@@ -327,6 +414,16 @@ function createBaseMsgCreateBidResponse(): MsgCreateBidResponse {
 }
 export const MsgCreateBidResponse = {
   typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse",
+  aminoType: "akash/market/v1beta2/testonly-create-bid-response",
+  is(o: any): o is MsgCreateBidResponse {
+    return o && o.$typeUrl === MsgCreateBidResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCreateBidResponseSDKType {
+    return o && o.$typeUrl === MsgCreateBidResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgCreateBidResponseAmino {
+    return o && o.$typeUrl === MsgCreateBidResponse.typeUrl;
+  },
   encode(_: MsgCreateBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -394,7 +491,8 @@ export const MsgCreateBidResponse = {
       typeUrl: "/akash.market.v1beta2.MsgCreateBidResponse",
       value: MsgCreateBidResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseMsgCloseBid(): MsgCloseBid {
   return {
@@ -403,6 +501,16 @@ function createBaseMsgCloseBid(): MsgCloseBid {
 }
 export const MsgCloseBid = {
   typeUrl: "/akash.market.v1beta2.MsgCloseBid",
+  aminoType: "akash/market/v1beta2/testonly-close-bid",
+  is(o: any): o is MsgCloseBid {
+    return o && (o.$typeUrl === MsgCloseBid.typeUrl || BidID.is(o.bidId));
+  },
+  isSDK(o: any): o is MsgCloseBidSDKType {
+    return o && (o.$typeUrl === MsgCloseBid.typeUrl || BidID.isSDK(o.bid_id));
+  },
+  isAmino(o: any): o is MsgCloseBidAmino {
+    return o && (o.$typeUrl === MsgCloseBid.typeUrl || BidID.isAmino(o.bid_id));
+  },
   encode(message: MsgCloseBid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
@@ -490,6 +598,9 @@ export const MsgCloseBid = {
       typeUrl: "/akash.market.v1beta2.MsgCloseBid",
       value: MsgCloseBid.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    BidID.registerTypeUrl();
   }
 };
 function createBaseMsgCloseBidResponse(): MsgCloseBidResponse {
@@ -497,6 +608,16 @@ function createBaseMsgCloseBidResponse(): MsgCloseBidResponse {
 }
 export const MsgCloseBidResponse = {
   typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse",
+  aminoType: "akash/market/v1beta2/testonly-close-bid-response",
+  is(o: any): o is MsgCloseBidResponse {
+    return o && o.$typeUrl === MsgCloseBidResponse.typeUrl;
+  },
+  isSDK(o: any): o is MsgCloseBidResponseSDKType {
+    return o && o.$typeUrl === MsgCloseBidResponse.typeUrl;
+  },
+  isAmino(o: any): o is MsgCloseBidResponseAmino {
+    return o && o.$typeUrl === MsgCloseBidResponse.typeUrl;
+  },
   encode(_: MsgCloseBidResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -564,7 +685,8 @@ export const MsgCloseBidResponse = {
       typeUrl: "/akash.market.v1beta2.MsgCloseBidResponse",
       value: MsgCloseBidResponse.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseBidID(): BidID {
   return {
@@ -577,6 +699,16 @@ function createBaseBidID(): BidID {
 }
 export const BidID = {
   typeUrl: "/akash.market.v1beta2.BidID",
+  aminoType: "akash/market/v1beta2/bid-i-d",
+  is(o: any): o is BidID {
+    return o && (o.$typeUrl === BidID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.provider === "string");
+  },
+  isSDK(o: any): o is BidIDSDKType {
+    return o && (o.$typeUrl === BidID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.provider === "string");
+  },
+  isAmino(o: any): o is BidIDAmino {
+    return o && (o.$typeUrl === BidID.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.provider === "string");
+  },
   encode(message: BidID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -728,7 +860,8 @@ export const BidID = {
       typeUrl: "/akash.market.v1beta2.BidID",
       value: BidID.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };
 function createBaseBid(): Bid {
   return {
@@ -740,6 +873,16 @@ function createBaseBid(): Bid {
 }
 export const Bid = {
   typeUrl: "/akash.market.v1beta2.Bid",
+  aminoType: "akash/market/v1beta2/bid",
+  is(o: any): o is Bid {
+    return o && (o.$typeUrl === Bid.typeUrl || BidID.is(o.bidId) && isSet(o.state) && DecCoin.is(o.price) && typeof o.createdAt === "bigint");
+  },
+  isSDK(o: any): o is BidSDKType {
+    return o && (o.$typeUrl === Bid.typeUrl || BidID.isSDK(o.bid_id) && isSet(o.state) && DecCoin.isSDK(o.price) && typeof o.created_at === "bigint");
+  },
+  isAmino(o: any): o is BidAmino {
+    return o && (o.$typeUrl === Bid.typeUrl || BidID.isAmino(o.bid_id) && isSet(o.state) && DecCoin.isAmino(o.price) && typeof o.created_at === "bigint");
+  },
   encode(message: Bid, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bidId !== undefined) {
       BidID.encode(message.bidId, writer.uint32(10).fork()).ldelim();
@@ -879,6 +1022,10 @@ export const Bid = {
       typeUrl: "/akash.market.v1beta2.Bid",
       value: Bid.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    BidID.registerTypeUrl();
+    DecCoin.registerTypeUrl();
   }
 };
 function createBaseBidFilters(): BidFilters {
@@ -893,6 +1040,16 @@ function createBaseBidFilters(): BidFilters {
 }
 export const BidFilters = {
   typeUrl: "/akash.market.v1beta2.BidFilters",
+  aminoType: "akash/market/v1beta2/bid-filters",
+  is(o: any): o is BidFilters {
+    return o && (o.$typeUrl === BidFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.provider === "string" && typeof o.state === "string");
+  },
+  isSDK(o: any): o is BidFiltersSDKType {
+    return o && (o.$typeUrl === BidFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.provider === "string" && typeof o.state === "string");
+  },
+  isAmino(o: any): o is BidFiltersAmino {
+    return o && (o.$typeUrl === BidFilters.typeUrl || typeof o.owner === "string" && typeof o.dseq === "bigint" && typeof o.gseq === "number" && typeof o.oseq === "number" && typeof o.provider === "string" && typeof o.state === "string");
+  },
   encode(message: BidFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
@@ -1060,5 +1217,6 @@ export const BidFilters = {
       typeUrl: "/akash.market.v1beta2.BidFilters",
       value: BidFilters.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

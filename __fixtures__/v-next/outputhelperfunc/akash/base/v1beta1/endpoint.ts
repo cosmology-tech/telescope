@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta1";
 /** This describes how the endpoint is implemented when the lease is deployed */
@@ -11,6 +11,7 @@ export enum Endpoint_Kind {
   UNRECOGNIZED = -1,
 }
 export const Endpoint_KindSDKType = Endpoint_Kind;
+export const Endpoint_KindAmino = Endpoint_Kind;
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:
@@ -45,6 +46,14 @@ export interface EndpointProtoMsg {
   value: Uint8Array;
 }
 /** Endpoint describes a publicly accessible IP service */
+export interface EndpointAmino {
+  kind?: Endpoint_Kind;
+}
+export interface EndpointAminoMsg {
+  type: "akash/base/endpoint";
+  value: EndpointAmino;
+}
+/** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
   kind: Endpoint_Kind;
 }
@@ -55,6 +64,16 @@ function createBaseEndpoint(): Endpoint {
 }
 export const Endpoint = {
   typeUrl: "/akash.base.v1beta1.Endpoint",
+  aminoType: "akash/base/endpoint",
+  is(o: any): o is Endpoint {
+    return o && (o.$typeUrl === Endpoint.typeUrl || isSet(o.kind));
+  },
+  isSDK(o: any): o is EndpointSDKType {
+    return o && (o.$typeUrl === Endpoint.typeUrl || isSet(o.kind));
+  },
+  isAmino(o: any): o is EndpointAmino {
+    return o && (o.$typeUrl === Endpoint.typeUrl || isSet(o.kind));
+  },
   encode(message: Endpoint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
@@ -140,5 +159,6 @@ export const Endpoint = {
       typeUrl: "/akash.base.v1beta1.Endpoint",
       value: Endpoint.encode(message).finish()
     };
-  }
+  },
+  registerTypeUrl() {}
 };

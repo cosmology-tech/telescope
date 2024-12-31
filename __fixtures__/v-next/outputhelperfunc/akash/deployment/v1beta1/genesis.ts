@@ -1,7 +1,8 @@
-import { Deployment, DeploymentSDKType } from "./deployment";
-import { Group, GroupSDKType } from "./group";
-import { Params, ParamsSDKType } from "./params";
+import { Deployment, DeploymentAmino, DeploymentSDKType } from "./deployment";
+import { Group, GroupAmino, GroupSDKType } from "./group";
+import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { GlobalDecoderRegistry } from "../../../registry";
 import { isSet, Exact } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
@@ -13,6 +14,15 @@ export interface GenesisDeployment {
 export interface GenesisDeploymentProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.GenesisDeployment";
   value: Uint8Array;
+}
+/** GenesisDeployment defines the basic genesis state used by deployment module */
+export interface GenesisDeploymentAmino {
+  deployment: DeploymentAmino | undefined;
+  groups: GroupAmino[];
+}
+export interface GenesisDeploymentAminoMsg {
+  type: "akash/deployment/genesis-deployment";
+  value: GenesisDeploymentAmino;
 }
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
@@ -29,6 +39,15 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState stores slice of genesis deployment instance */
+export interface GenesisStateAmino {
+  deployments: GenesisDeploymentAmino[];
+  params: ParamsAmino | undefined;
+}
+export interface GenesisStateAminoMsg {
+  type: "akash/deployment/genesis-state";
+  value: GenesisStateAmino;
+}
+/** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
   deployments: GenesisDeploymentSDKType[];
   params: ParamsSDKType | undefined;
@@ -41,6 +60,13 @@ function createBaseGenesisDeployment(): GenesisDeployment {
 }
 export const GenesisDeployment = {
   typeUrl: "/akash.deployment.v1beta1.GenesisDeployment",
+  aminoType: "akash/deployment/genesis-deployment",
+  is(o: any): o is GenesisDeployment {
+    return o && (o.$typeUrl === GenesisDeployment.typeUrl || Deployment.is(o.deployment) && Array.isArray(o.groups) && (!o.groups.length || Group.is(o.groups[0])));
+  },
+  isSDK(o: any): o is GenesisDeploymentSDKType {
+    return o && (o.$typeUrl === GenesisDeployment.typeUrl || Deployment.isSDK(o.deployment) && Array.isArray(o.groups) && (!o.groups.length || Group.isSDK(o.groups[0])));
+  },
   encode(message: GenesisDeployment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.deployment !== undefined) {
       Deployment.encode(message.deployment, writer.uint32(10).fork()).ldelim();
@@ -154,6 +180,10 @@ export const GenesisDeployment = {
       typeUrl: "/akash.deployment.v1beta1.GenesisDeployment",
       value: GenesisDeployment.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Deployment.registerTypeUrl();
+    Group.registerTypeUrl();
   }
 };
 function createBaseGenesisState(): GenesisState {
@@ -164,6 +194,13 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/akash.deployment.v1beta1.GenesisState",
+  aminoType: "akash/deployment/genesis-state",
+  is(o: any): o is GenesisState {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.deployments) && (!o.deployments.length || GenesisDeployment.is(o.deployments[0])) && Params.is(o.params));
+  },
+  isSDK(o: any): o is GenesisStateSDKType {
+    return o && (o.$typeUrl === GenesisState.typeUrl || Array.isArray(o.deployments) && (!o.deployments.length || GenesisDeployment.isSDK(o.deployments[0])) && Params.isSDK(o.params));
+  },
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.deployments) {
       GenesisDeployment.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -277,5 +314,9 @@ export const GenesisState = {
       typeUrl: "/akash.deployment.v1beta1.GenesisState",
       value: GenesisState.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    GenesisDeployment.registerTypeUrl();
+    Params.registerTypeUrl();
   }
 };

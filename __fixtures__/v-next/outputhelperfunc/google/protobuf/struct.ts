@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { GlobalDecoderRegistry } from "../../registry";
 import { isSet, DeepPartial, isObject } from "../../helpers";
 import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
@@ -14,6 +15,7 @@ export enum NullValue {
   UNRECOGNIZED = -1,
 }
 export const NullValueSDKType = NullValue;
+export const NullValueAmino = NullValue;
 export function nullValueFromJSON(object: any): NullValue {
   switch (object) {
     case 0:
@@ -42,6 +44,14 @@ export interface Struct_FieldsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
+export interface Struct_FieldsEntryAmino {
+  key?: string;
+  value?: ValueAmino;
+}
+export interface Struct_FieldsEntryAminoMsg {
+  type: string;
+  value: Struct_FieldsEntryAmino;
+}
 export interface Struct_FieldsEntrySDKType {
   key: string;
   value?: ValueSDKType;
@@ -65,6 +75,26 @@ export interface Struct {
 export interface StructProtoMsg {
   typeUrl: "/google.protobuf.Struct";
   value: Uint8Array;
+}
+/**
+ * `Struct` represents a structured data value, consisting of fields
+ * which map to dynamically typed values. In some languages, `Struct`
+ * might be supported by a native representation. For example, in
+ * scripting languages like JS a struct is represented as an
+ * object. The details of that representation are described together
+ * with the proto support for the language.
+ * 
+ * The JSON representation for `Struct` is JSON object.
+ */
+export interface StructAmino {
+  /** Unordered map of dynamically typed values. */
+  fields?: {
+    [key: string]: ValueAmino;
+  };
+}
+export interface StructAminoMsg {
+  type: "/google.protobuf.Struct";
+  value: StructAmino;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -115,6 +145,32 @@ export interface ValueProtoMsg {
  * 
  * The JSON representation for `Value` is JSON value.
  */
+export interface ValueAmino {
+  /** Represents a null value. */
+  null_value?: NullValue;
+  /** Represents a double value. */
+  number_value?: number;
+  /** Represents a string value. */
+  string_value?: string;
+  /** Represents a boolean value. */
+  bool_value?: boolean;
+  /** Represents a structured value. */
+  struct_value?: StructAmino;
+  /** Represents a repeated `Value`. */
+  list_value?: ListValueAmino;
+}
+export interface ValueAminoMsg {
+  type: "/google.protobuf.Value";
+  value: ValueAmino;
+}
+/**
+ * `Value` represents a dynamically typed value which can be either
+ * null, a number, a string, a boolean, a recursive struct value, or a
+ * list of values. A producer of value is expected to set one of that
+ * variants, absence of any variant indicates an error.
+ * 
+ * The JSON representation for `Value` is JSON value.
+ */
 export interface ValueSDKType {
   null_value?: NullValue;
   number_value?: number;
@@ -135,6 +191,19 @@ export interface ListValue {
 export interface ListValueProtoMsg {
   typeUrl: "/google.protobuf.ListValue";
   value: Uint8Array;
+}
+/**
+ * `ListValue` is a wrapper around a repeated field of values.
+ * 
+ * The JSON representation for `ListValue` is JSON array.
+ */
+export interface ListValueAmino {
+  /** Repeated field of dynamically typed values. */
+  values?: ValueAmino[];
+}
+export interface ListValueAminoMsg {
+  type: "/google.protobuf.ListValue";
+  value: ListValueAmino;
 }
 /**
  * `ListValue` is a wrapper around a repeated field of values.
@@ -242,6 +311,9 @@ export const Struct_FieldsEntry = {
   },
   toProto(message: Struct_FieldsEntry): Uint8Array {
     return Struct_FieldsEntry.encode(message).finish();
+  },
+  registerTypeUrl() {
+    Value.registerTypeUrl();
   }
 };
 function createBaseStruct(): Struct {
@@ -251,6 +323,15 @@ function createBaseStruct(): Struct {
 }
 export const Struct = {
   typeUrl: "/google.protobuf.Struct",
+  is(o: any): o is Struct {
+    return o && (o.$typeUrl === Struct.typeUrl || isSet(o.fields));
+  },
+  isSDK(o: any): o is StructSDKType {
+    return o && (o.$typeUrl === Struct.typeUrl || isSet(o.fields));
+  },
+  isAmino(o: any): o is StructAmino {
+    return o && (o.$typeUrl === Struct.typeUrl || isSet(o.fields));
+  },
   encode(message: Struct, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.fields).forEach(([key, value]) => {
       Struct_FieldsEntry.encode({
@@ -378,6 +459,9 @@ export const Struct = {
       typeUrl: "/google.protobuf.Struct",
       value: Struct.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Value.registerTypeUrl();
   }
 };
 function createBaseValue(): Value {
@@ -392,6 +476,15 @@ function createBaseValue(): Value {
 }
 export const Value = {
   typeUrl: "/google.protobuf.Value",
+  is(o: any): o is Value {
+    return o && o.$typeUrl === Value.typeUrl;
+  },
+  isSDK(o: any): o is ValueSDKType {
+    return o && o.$typeUrl === Value.typeUrl;
+  },
+  isAmino(o: any): o is ValueAmino {
+    return o && o.$typeUrl === Value.typeUrl;
+  },
   encode(message: Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.nullValue !== undefined) {
       writer.uint32(8).int32(message.nullValue);
@@ -555,6 +648,10 @@ export const Value = {
       typeUrl: "/google.protobuf.Value",
       value: Value.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Struct.registerTypeUrl();
+    ListValue.registerTypeUrl();
   }
 };
 function createBaseListValue(): ListValue {
@@ -564,6 +661,15 @@ function createBaseListValue(): ListValue {
 }
 export const ListValue = {
   typeUrl: "/google.protobuf.ListValue",
+  is(o: any): o is ListValue {
+    return o && (o.$typeUrl === ListValue.typeUrl || Array.isArray(o.values) && (!o.values.length || Value.is(o.values[0])));
+  },
+  isSDK(o: any): o is ListValueSDKType {
+    return o && (o.$typeUrl === ListValue.typeUrl || Array.isArray(o.values) && (!o.values.length || Value.isSDK(o.values[0])));
+  },
+  isAmino(o: any): o is ListValueAmino {
+    return o && (o.$typeUrl === ListValue.typeUrl || Array.isArray(o.values) && (!o.values.length || Value.isAmino(o.values[0])));
+  },
   encode(message: ListValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.values) {
       Value.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -653,5 +759,8 @@ export const ListValue = {
       typeUrl: "/google.protobuf.ListValue",
       value: ListValue.encode(message).finish()
     };
+  },
+  registerTypeUrl() {
+    Value.registerTypeUrl();
   }
 };
