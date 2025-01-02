@@ -2,6 +2,7 @@ import { DistrRecord, DistrRecordAmino, DistrRecordSDKType } from "./incentives"
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -256,6 +257,8 @@ export const ReplacePoolIncentivesProposal = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(ReplacePoolIncentivesProposal.typeUrl, ReplacePoolIncentivesProposal);
+    GlobalDecoderRegistry.registerAminoProtoMapping(ReplacePoolIncentivesProposal.aminoType, ReplacePoolIncentivesProposal.typeUrl);
     DistrRecord.registerTypeUrl();
   }
 };
@@ -408,6 +411,8 @@ export const UpdatePoolIncentivesProposal = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(UpdatePoolIncentivesProposal.typeUrl, UpdatePoolIncentivesProposal);
+    GlobalDecoderRegistry.registerAminoProtoMapping(UpdatePoolIncentivesProposal.aminoType, UpdatePoolIncentivesProposal.typeUrl);
     DistrRecord.registerTypeUrl();
   }
 };

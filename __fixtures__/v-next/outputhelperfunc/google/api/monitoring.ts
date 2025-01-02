@@ -399,7 +399,6 @@ export const Monitoring = {
   },
   registerTypeUrl() {
     Monitoring_MonitoringDestination.registerTypeUrl();
-    Monitoring_MonitoringDestination.registerTypeUrl();
   }
 };
 function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDestination {

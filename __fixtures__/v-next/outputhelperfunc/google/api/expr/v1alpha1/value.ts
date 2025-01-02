@@ -1003,6 +1003,5 @@ export const MapValue_Entry = {
   },
   registerTypeUrl() {
     Value.registerTypeUrl();
-    Value.registerTypeUrl();
   }
 };

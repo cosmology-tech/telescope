@@ -495,8 +495,9 @@ export const Pool = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(Pool.typeUrl, Pool);
+    GlobalDecoderRegistry.registerAminoProtoMapping(Pool.aminoType, Pool.typeUrl);
     PoolParams.registerTypeUrl();
-    Coin.registerTypeUrl();
     Coin.registerTypeUrl();
   }
 };

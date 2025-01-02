@@ -600,7 +600,6 @@ export const ClientState = {
   registerTypeUrl() {
     Fraction.registerTypeUrl();
     Height.registerTypeUrl();
-    Height.registerTypeUrl();
     ProofSpec.registerTypeUrl();
   }
 };
@@ -890,7 +889,6 @@ export const Misbehaviour = {
   },
   registerTypeUrl() {
     Header.registerTypeUrl();
-    Header.registerTypeUrl();
   }
 };
 function createBaseHeader(): Header {
@@ -1059,7 +1057,6 @@ export const Header = {
     SignedHeader.registerTypeUrl();
     ValidatorSet.registerTypeUrl();
     Height.registerTypeUrl();
-    ValidatorSet.registerTypeUrl();
   }
 };
 function createBaseFraction(): Fraction {

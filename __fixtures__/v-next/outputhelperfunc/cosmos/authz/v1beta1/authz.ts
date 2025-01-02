@@ -258,7 +258,10 @@ export const GenericAuthorization = {
       value: GenericAuthorization.encode(message).finish()
     };
   },
-  registerTypeUrl() {}
+  registerTypeUrl() {
+    GlobalDecoderRegistry.register(GenericAuthorization.typeUrl, GenericAuthorization);
+    GlobalDecoderRegistry.registerAminoProtoMapping(GenericAuthorization.aminoType, GenericAuthorization.typeUrl);
+  }
 };
 function createBaseGrant(): Grant {
   return {
@@ -383,20 +386,10 @@ export const Grant = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(GenericAuthorization.typeUrl, GenericAuthorization);
-    GlobalDecoderRegistry.registerAminoProtoMapping(GenericAuthorization.aminoType, GenericAuthorization.typeUrl);
     GenericAuthorization.registerTypeUrl();
-    GlobalDecoderRegistry.register(DepositDeploymentAuthorization1.typeUrl, DepositDeploymentAuthorization1);
-    GlobalDecoderRegistry.registerAminoProtoMapping(DepositDeploymentAuthorization1.aminoType, DepositDeploymentAuthorization1.typeUrl);
     DepositDeploymentAuthorization1.registerTypeUrl();
-    GlobalDecoderRegistry.register(DepositDeploymentAuthorization2.typeUrl, DepositDeploymentAuthorization2);
-    GlobalDecoderRegistry.registerAminoProtoMapping(DepositDeploymentAuthorization2.aminoType, DepositDeploymentAuthorization2.typeUrl);
     DepositDeploymentAuthorization2.registerTypeUrl();
-    GlobalDecoderRegistry.register(SendAuthorization.typeUrl, SendAuthorization);
-    GlobalDecoderRegistry.registerAminoProtoMapping(SendAuthorization.aminoType, SendAuthorization.typeUrl);
     SendAuthorization.registerTypeUrl();
-    GlobalDecoderRegistry.register(StakeAuthorization.typeUrl, StakeAuthorization);
-    GlobalDecoderRegistry.registerAminoProtoMapping(StakeAuthorization.aminoType, StakeAuthorization.typeUrl);
     StakeAuthorization.registerTypeUrl();
   }
 };
@@ -557,20 +550,10 @@ export const GrantAuthorization = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(GenericAuthorization.typeUrl, GenericAuthorization);
-    GlobalDecoderRegistry.registerAminoProtoMapping(GenericAuthorization.aminoType, GenericAuthorization.typeUrl);
     GenericAuthorization.registerTypeUrl();
-    GlobalDecoderRegistry.register(DepositDeploymentAuthorization1.typeUrl, DepositDeploymentAuthorization1);
-    GlobalDecoderRegistry.registerAminoProtoMapping(DepositDeploymentAuthorization1.aminoType, DepositDeploymentAuthorization1.typeUrl);
     DepositDeploymentAuthorization1.registerTypeUrl();
-    GlobalDecoderRegistry.register(DepositDeploymentAuthorization2.typeUrl, DepositDeploymentAuthorization2);
-    GlobalDecoderRegistry.registerAminoProtoMapping(DepositDeploymentAuthorization2.aminoType, DepositDeploymentAuthorization2.typeUrl);
     DepositDeploymentAuthorization2.registerTypeUrl();
-    GlobalDecoderRegistry.register(SendAuthorization.typeUrl, SendAuthorization);
-    GlobalDecoderRegistry.registerAminoProtoMapping(SendAuthorization.aminoType, SendAuthorization.typeUrl);
     SendAuthorization.registerTypeUrl();
-    GlobalDecoderRegistry.register(StakeAuthorization.typeUrl, StakeAuthorization);
-    GlobalDecoderRegistry.registerAminoProtoMapping(StakeAuthorization.aminoType, StakeAuthorization.typeUrl);
     StakeAuthorization.registerTypeUrl();
   }
 };

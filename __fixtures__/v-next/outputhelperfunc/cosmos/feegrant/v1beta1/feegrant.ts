@@ -325,6 +325,8 @@ export const BasicAllowance = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(BasicAllowance.typeUrl, BasicAllowance);
+    GlobalDecoderRegistry.registerAminoProtoMapping(BasicAllowance.aminoType, BasicAllowance.typeUrl);
     Coin.registerTypeUrl();
   }
 };
@@ -525,8 +527,9 @@ export const PeriodicAllowance = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(PeriodicAllowance.typeUrl, PeriodicAllowance);
+    GlobalDecoderRegistry.registerAminoProtoMapping(PeriodicAllowance.aminoType, PeriodicAllowance.typeUrl);
     BasicAllowance.registerTypeUrl();
-    Coin.registerTypeUrl();
     Coin.registerTypeUrl();
   }
 };
@@ -664,14 +667,10 @@ export const AllowedMsgAllowance = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(BasicAllowance.typeUrl, BasicAllowance);
-    GlobalDecoderRegistry.registerAminoProtoMapping(BasicAllowance.aminoType, BasicAllowance.typeUrl);
-    BasicAllowance.registerTypeUrl();
-    GlobalDecoderRegistry.register(PeriodicAllowance.typeUrl, PeriodicAllowance);
-    GlobalDecoderRegistry.registerAminoProtoMapping(PeriodicAllowance.aminoType, PeriodicAllowance.typeUrl);
-    PeriodicAllowance.registerTypeUrl();
     GlobalDecoderRegistry.register(AllowedMsgAllowance.typeUrl, AllowedMsgAllowance);
     GlobalDecoderRegistry.registerAminoProtoMapping(AllowedMsgAllowance.aminoType, AllowedMsgAllowance.typeUrl);
+    BasicAllowance.registerTypeUrl();
+    PeriodicAllowance.registerTypeUrl();
     AllowedMsgAllowance.registerTypeUrl();
   }
 };
@@ -815,14 +814,8 @@ export const Grant = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(BasicAllowance.typeUrl, BasicAllowance);
-    GlobalDecoderRegistry.registerAminoProtoMapping(BasicAllowance.aminoType, BasicAllowance.typeUrl);
     BasicAllowance.registerTypeUrl();
-    GlobalDecoderRegistry.register(PeriodicAllowance.typeUrl, PeriodicAllowance);
-    GlobalDecoderRegistry.registerAminoProtoMapping(PeriodicAllowance.aminoType, PeriodicAllowance.typeUrl);
     PeriodicAllowance.registerTypeUrl();
-    GlobalDecoderRegistry.register(AllowedMsgAllowance.typeUrl, AllowedMsgAllowance);
-    GlobalDecoderRegistry.registerAminoProtoMapping(AllowedMsgAllowance.aminoType, AllowedMsgAllowance.typeUrl);
     AllowedMsgAllowance.registerTypeUrl();
   }
 };

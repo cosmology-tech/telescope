@@ -326,7 +326,5 @@ export const QueryBalancesResponse = {
   },
   registerTypeUrl() {
     Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
   }
 };

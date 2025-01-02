@@ -820,7 +820,6 @@ export const SuperfluidDelegationRecord = {
   },
   registerTypeUrl() {
     Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
   }
 };
 function createBaseLockIdIntermediaryAccountConnection(): LockIdIntermediaryAccountConnection {

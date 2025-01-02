@@ -414,8 +414,6 @@ export const BaseVestingAccount = {
   registerTypeUrl() {
     BaseAccount.registerTypeUrl();
     Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
   }
 };
 function createBaseContinuousVestingAccount(): ContinuousVestingAccount {

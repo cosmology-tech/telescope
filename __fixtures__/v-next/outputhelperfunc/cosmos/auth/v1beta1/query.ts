@@ -558,8 +558,6 @@ export const QueryAccountsResponse = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(BaseAccount.typeUrl, BaseAccount);
-    GlobalDecoderRegistry.registerAminoProtoMapping(BaseAccount.aminoType, BaseAccount.typeUrl);
     BaseAccount.registerTypeUrl();
     PageResponse.registerTypeUrl();
   }
@@ -969,8 +967,6 @@ export const QueryAccountResponse = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(BaseAccount.typeUrl, BaseAccount);
-    GlobalDecoderRegistry.registerAminoProtoMapping(BaseAccount.aminoType, BaseAccount.typeUrl);
     BaseAccount.registerTypeUrl();
   }
 };
@@ -1173,8 +1169,6 @@ export const QueryModuleAccountsResponse = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(ModuleAccount.typeUrl, ModuleAccount);
-    GlobalDecoderRegistry.registerAminoProtoMapping(ModuleAccount.aminoType, ModuleAccount.typeUrl);
     ModuleAccount.registerTypeUrl();
   }
 };

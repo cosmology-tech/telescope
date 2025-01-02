@@ -257,6 +257,5 @@ export const ClawbackVestingAccount = {
   registerTypeUrl() {
     BaseVestingAccount.registerTypeUrl();
     Period.registerTypeUrl();
-    Period.registerTypeUrl();
   }
 };

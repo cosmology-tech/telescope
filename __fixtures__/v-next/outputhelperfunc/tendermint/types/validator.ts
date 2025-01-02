@@ -219,7 +219,6 @@ export const ValidatorSet = {
   },
   registerTypeUrl() {
     Validator.registerTypeUrl();
-    Validator.registerTypeUrl();
   }
 };
 function createBaseValidator(): Validator {

@@ -403,7 +403,6 @@ export const DuplicateVoteEvidence = {
   },
   registerTypeUrl() {
     Vote.registerTypeUrl();
-    Vote.registerTypeUrl();
   }
 };
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {

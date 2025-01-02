@@ -1640,7 +1640,6 @@ export const Expr_Call = {
   },
   registerTypeUrl() {
     Expr.registerTypeUrl();
-    Expr.registerTypeUrl();
   }
 };
 function createBaseExpr_CreateList(): Expr_CreateList {
@@ -2035,7 +2034,6 @@ export const Expr_CreateStruct_Entry = {
   },
   registerTypeUrl() {
     Expr.registerTypeUrl();
-    Expr.registerTypeUrl();
   }
 };
 function createBaseExpr_Comprehension(): Expr_Comprehension {
@@ -2247,10 +2245,6 @@ export const Expr_Comprehension = {
     };
   },
   registerTypeUrl() {
-    Expr.registerTypeUrl();
-    Expr.registerTypeUrl();
-    Expr.registerTypeUrl();
-    Expr.registerTypeUrl();
     Expr.registerTypeUrl();
   }
 };

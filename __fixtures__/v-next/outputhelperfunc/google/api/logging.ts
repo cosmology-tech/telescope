@@ -326,7 +326,6 @@ export const Logging = {
   },
   registerTypeUrl() {
     Logging_LoggingDestination.registerTypeUrl();
-    Logging_LoggingDestination.registerTypeUrl();
   }
 };
 function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {

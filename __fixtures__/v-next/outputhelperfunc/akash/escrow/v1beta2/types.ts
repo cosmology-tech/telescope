@@ -591,8 +591,6 @@ export const Account = {
   registerTypeUrl() {
     AccountID.registerTypeUrl();
     DecCoin.registerTypeUrl();
-    DecCoin.registerTypeUrl();
-    DecCoin.registerTypeUrl();
   }
 };
 function createBaseFractionalPayment(): FractionalPayment {
@@ -810,7 +808,6 @@ export const FractionalPayment = {
   },
   registerTypeUrl() {
     AccountID.registerTypeUrl();
-    DecCoin.registerTypeUrl();
     DecCoin.registerTypeUrl();
     Coin.registerTypeUrl();
   }
