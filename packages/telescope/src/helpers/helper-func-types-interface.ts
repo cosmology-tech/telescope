@@ -19,6 +19,8 @@ export interface QueryBuilderOptions<TReq, TRes> {
 }
 
 export function buildQuery<TReq, TRes>(opts: QueryBuilderOptions<TReq, TRes>) {
+    registerDependencies(opts.deps ?? []);
+
     return async (request: TReq) => {
       let rpc: Rpc | undefined;
 
@@ -29,8 +31,6 @@ export function buildQuery<TReq, TRes>(opts: QueryBuilderOptions<TReq, TRes>) {
       }
 
       if (!rpc) throw new Error("Query Rpc is not initialized");
-
-      registerDependencies(opts.deps ?? []);
 
       const data = opts.encode(request).finish();
       const response = await rpc.request(opts.service, opts.method, data);
@@ -79,6 +79,8 @@ export interface TxBuilderOptions {
 }
 
 export function buildTx<TMsg>(opts: TxBuilderOptions) {
+  registerDependencies(opts.deps ?? []);
+
   return async (
     signerAddress: string,
     message: TMsg,
@@ -97,7 +99,6 @@ export function buildTx<TMsg>(opts: TxBuilderOptions) {
     //register all related encoders and converters
     client.addEncoders(opts.encoders ?? []);
     client.addConverters(opts.converters ?? []);
-    registerDependencies(opts.deps ?? []);
 
     const data = [
       {
