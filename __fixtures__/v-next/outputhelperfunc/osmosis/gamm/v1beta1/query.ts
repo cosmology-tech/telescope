@@ -862,11 +862,7 @@ export const QueryPoolResponse = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(Pool1.typeUrl, Pool1);
-    GlobalDecoderRegistry.registerAminoProtoMapping(Pool1.aminoType, Pool1.typeUrl);
     Pool1.registerTypeUrl();
-    GlobalDecoderRegistry.register(Pool2.typeUrl, Pool2);
-    GlobalDecoderRegistry.registerAminoProtoMapping(Pool2.aminoType, Pool2.typeUrl);
     Pool2.registerTypeUrl();
   }
 };
@@ -1112,11 +1108,7 @@ export const QueryPoolsResponse = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(Pool1.typeUrl, Pool1);
-    GlobalDecoderRegistry.registerAminoProtoMapping(Pool1.aminoType, Pool1.typeUrl);
     Pool1.registerTypeUrl();
-    GlobalDecoderRegistry.register(Pool2.typeUrl, Pool2);
-    GlobalDecoderRegistry.registerAminoProtoMapping(Pool2.aminoType, Pool2.typeUrl);
     Pool2.registerTypeUrl();
     PageResponse.registerTypeUrl();
   }
@@ -3388,11 +3380,7 @@ export const QueryPoolsWithFilterResponse = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(Pool1.typeUrl, Pool1);
-    GlobalDecoderRegistry.registerAminoProtoMapping(Pool1.aminoType, Pool1.typeUrl);
     Pool1.registerTypeUrl();
-    GlobalDecoderRegistry.register(Pool2.typeUrl, Pool2);
-    GlobalDecoderRegistry.registerAminoProtoMapping(Pool2.aminoType, Pool2.typeUrl);
     Pool2.registerTypeUrl();
     PageResponse.registerTypeUrl();
   }

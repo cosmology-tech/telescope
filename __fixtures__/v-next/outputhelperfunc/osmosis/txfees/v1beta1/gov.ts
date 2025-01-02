@@ -191,6 +191,8 @@ export const UpdateFeeTokenProposal = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(UpdateFeeTokenProposal.typeUrl, UpdateFeeTokenProposal);
+    GlobalDecoderRegistry.registerAminoProtoMapping(UpdateFeeTokenProposal.aminoType, UpdateFeeTokenProposal.typeUrl);
     FeeToken.registerTypeUrl();
   }
 };

@@ -1896,11 +1896,7 @@ export const MsgCreateGroupPolicy = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(ThresholdDecisionPolicy.typeUrl, ThresholdDecisionPolicy);
-    GlobalDecoderRegistry.registerAminoProtoMapping(ThresholdDecisionPolicy.aminoType, ThresholdDecisionPolicy.typeUrl);
     ThresholdDecisionPolicy.registerTypeUrl();
-    GlobalDecoderRegistry.register(PercentageDecisionPolicy.typeUrl, PercentageDecisionPolicy);
-    GlobalDecoderRegistry.registerAminoProtoMapping(PercentageDecisionPolicy.aminoType, PercentageDecisionPolicy.typeUrl);
     PercentageDecisionPolicy.registerTypeUrl();
   }
 };
@@ -2349,11 +2345,7 @@ export const MsgCreateGroupWithPolicy = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(ThresholdDecisionPolicy.typeUrl, ThresholdDecisionPolicy);
-    GlobalDecoderRegistry.registerAminoProtoMapping(ThresholdDecisionPolicy.aminoType, ThresholdDecisionPolicy.typeUrl);
     ThresholdDecisionPolicy.registerTypeUrl();
-    GlobalDecoderRegistry.register(PercentageDecisionPolicy.typeUrl, PercentageDecisionPolicy);
-    GlobalDecoderRegistry.registerAminoProtoMapping(PercentageDecisionPolicy.aminoType, PercentageDecisionPolicy.typeUrl);
     PercentageDecisionPolicy.registerTypeUrl();
   }
 };
@@ -2706,11 +2698,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(ThresholdDecisionPolicy.typeUrl, ThresholdDecisionPolicy);
-    GlobalDecoderRegistry.registerAminoProtoMapping(ThresholdDecisionPolicy.aminoType, ThresholdDecisionPolicy.typeUrl);
     ThresholdDecisionPolicy.registerTypeUrl();
-    GlobalDecoderRegistry.register(PercentageDecisionPolicy.typeUrl, PercentageDecisionPolicy);
-    GlobalDecoderRegistry.registerAminoProtoMapping(PercentageDecisionPolicy.aminoType, PercentageDecisionPolicy.typeUrl);
     PercentageDecisionPolicy.registerTypeUrl();
   }
 };

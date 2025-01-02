@@ -17,9 +17,14 @@ export const registerTypeUrlMethod = (args: {
 }) => {
     const { context, name, proto } = args;
 
-    const methodName = "registerTypeUrl";
+    const isImplementsInterface = Boolean(
+        proto.options?.["(cosmos_proto.implements_interface)"]
+    );
 
-    const registerStats = Object.keys(proto.fields ?? {}).reduce<t.Statement[]>(
+    const methodName = "registerTypeUrl";
+    const typeNames = new Set<string>();
+
+    let registerStats = Object.keys(proto.fields ?? {}).reduce<t.Statement[]>(
         (statements, fieldName) => {
             const field = proto.fields[fieldName];
 
@@ -49,18 +54,14 @@ export const registerTypeUrlMethod = (args: {
 
                         return acceptedTypeNames.reduce<t.Statement[]>(
                             (states, acceptedTypeName) => {
+                                if (typeNames.has(acceptedTypeName)) {
+                                    return states;
+                                }
+
+                                typeNames.add(acceptedTypeName);
+
                                 return [
                                     ...states,
-                                    createRegisterObject(
-                                        context,
-                                        acceptedTypeName,
-                                        proto
-                                    ),
-                                    createRegisterAminoProtoMapping(
-                                        context,
-                                        acceptedTypeName,
-                                        proto
-                                    ),
                                     createRegisterType(acceptedTypeName),
                                 ].filter(Boolean);
                             },
@@ -69,6 +70,12 @@ export const registerTypeUrlMethod = (args: {
                 }
 
                 const typeName = context.getTypeName(field);
+
+                if (typeNames.has(typeName)) {
+                    return statements;
+                }
+
+                typeNames.add(typeName);
 
                 return [...statements, createRegisterType(typeName)].filter(
                     Boolean
@@ -79,6 +86,14 @@ export const registerTypeUrlMethod = (args: {
         },
         []
     );
+
+    if (isImplementsInterface) {
+        registerStats = [
+            createRegisterObject(context, name, proto),
+            createRegisterAminoProtoMapping(context, name, proto),
+            ...registerStats,
+        ].filter(Boolean);
+    }
 
     const method = objectMethod(
         "method",

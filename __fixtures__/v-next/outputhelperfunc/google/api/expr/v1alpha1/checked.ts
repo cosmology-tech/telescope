@@ -1701,7 +1701,6 @@ export const Type = {
     Type_MapType.registerTypeUrl();
     Type_FunctionType.registerTypeUrl();
     Type.registerTypeUrl();
-    Empty.registerTypeUrl();
     Type_AbstractType.registerTypeUrl();
   }
 };
@@ -1926,7 +1925,6 @@ export const Type_MapType = {
   },
   registerTypeUrl() {
     Type.registerTypeUrl();
-    Type.registerTypeUrl();
   }
 };
 function createBaseType_FunctionType(): Type_FunctionType {
@@ -2055,7 +2053,6 @@ export const Type_FunctionType = {
     };
   },
   registerTypeUrl() {
-    Type.registerTypeUrl();
     Type.registerTypeUrl();
   }
 };
@@ -2778,7 +2775,6 @@ export const Decl_FunctionDecl_Overload = {
     };
   },
   registerTypeUrl() {
-    Type.registerTypeUrl();
     Type.registerTypeUrl();
   }
 };

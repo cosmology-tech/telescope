@@ -3026,7 +3026,6 @@ export const DescriptorProto = {
   },
   registerTypeUrl() {
     FieldDescriptorProto.registerTypeUrl();
-    FieldDescriptorProto.registerTypeUrl();
     DescriptorProto.registerTypeUrl();
     EnumDescriptorProto.registerTypeUrl();
     DescriptorProto_ExtensionRange.registerTypeUrl();

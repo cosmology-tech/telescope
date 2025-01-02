@@ -268,7 +268,10 @@ export const BaseAccount = {
       value: BaseAccount.encode(message).finish()
     };
   },
-  registerTypeUrl() {}
+  registerTypeUrl() {
+    GlobalDecoderRegistry.register(BaseAccount.typeUrl, BaseAccount);
+    GlobalDecoderRegistry.registerAminoProtoMapping(BaseAccount.aminoType, BaseAccount.typeUrl);
+  }
 };
 function createBaseModuleAccount(): ModuleAccount {
   return {
@@ -421,6 +424,8 @@ export const ModuleAccount = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(ModuleAccount.typeUrl, ModuleAccount);
+    GlobalDecoderRegistry.registerAminoProtoMapping(ModuleAccount.aminoType, ModuleAccount.typeUrl);
     BaseAccount.registerTypeUrl();
   }
 };

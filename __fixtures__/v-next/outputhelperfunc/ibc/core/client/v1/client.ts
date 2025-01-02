@@ -850,7 +850,10 @@ export const ClientUpdateProposal = {
       value: ClientUpdateProposal.encode(message).finish()
     };
   },
-  registerTypeUrl() {}
+  registerTypeUrl() {
+    GlobalDecoderRegistry.register(ClientUpdateProposal.typeUrl, ClientUpdateProposal);
+    GlobalDecoderRegistry.registerAminoProtoMapping(ClientUpdateProposal.aminoType, ClientUpdateProposal.typeUrl);
+  }
 };
 function createBaseUpgradeProposal(): UpgradeProposal {
   return {
@@ -1011,7 +1014,10 @@ export const UpgradeProposal = {
       value: UpgradeProposal.encode(message).finish()
     };
   },
-  registerTypeUrl() {}
+  registerTypeUrl() {
+    GlobalDecoderRegistry.register(UpgradeProposal.typeUrl, UpgradeProposal);
+    GlobalDecoderRegistry.registerAminoProtoMapping(UpgradeProposal.aminoType, UpgradeProposal.typeUrl);
+  }
 };
 function createBaseHeight(): Height {
   return {

@@ -3,6 +3,7 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { JsonSafe } from "../../../json-safe";
+import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -653,6 +654,7 @@ export const RegisterIncentiveProposal = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(RegisterIncentiveProposal.typeUrl, RegisterIncentiveProposal);
     DecCoin.registerTypeUrl();
   }
 };

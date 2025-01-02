@@ -378,10 +378,6 @@ export const GenesisState = {
   registerTypeUrl() {
     IdentifiedChannel.registerTypeUrl();
     PacketState.registerTypeUrl();
-    PacketState.registerTypeUrl();
-    PacketState.registerTypeUrl();
-    PacketSequence.registerTypeUrl();
-    PacketSequence.registerTypeUrl();
     PacketSequence.registerTypeUrl();
   }
 };

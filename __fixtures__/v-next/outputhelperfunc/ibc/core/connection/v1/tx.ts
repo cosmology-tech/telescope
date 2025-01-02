@@ -892,7 +892,6 @@ export const MsgConnectionOpenTry = {
     Counterparty.registerTypeUrl();
     Version.registerTypeUrl();
     Height.registerTypeUrl();
-    Height.registerTypeUrl();
   }
 };
 function createBaseMsgConnectionOpenTryResponse(): MsgConnectionOpenTryResponse {
@@ -1245,7 +1244,6 @@ export const MsgConnectionOpenAck = {
     };
   },
   registerTypeUrl() {
-    Height.registerTypeUrl();
     Height.registerTypeUrl();
   }
 };

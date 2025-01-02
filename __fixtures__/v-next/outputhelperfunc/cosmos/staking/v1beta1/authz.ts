@@ -302,8 +302,9 @@ export const StakeAuthorization = {
     };
   },
   registerTypeUrl() {
+    GlobalDecoderRegistry.register(StakeAuthorization.typeUrl, StakeAuthorization);
+    GlobalDecoderRegistry.registerAminoProtoMapping(StakeAuthorization.aminoType, StakeAuthorization.typeUrl);
     Coin.registerTypeUrl();
-    StakeAuthorization_Validators.registerTypeUrl();
     StakeAuthorization_Validators.registerTypeUrl();
   }
 };

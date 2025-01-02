@@ -384,7 +384,6 @@ export const Gauge = {
   registerTypeUrl() {
     QueryCondition.registerTypeUrl();
     Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
   }
 };
 function createBaseLockableDurationsInfo(): LockableDurationsInfo {

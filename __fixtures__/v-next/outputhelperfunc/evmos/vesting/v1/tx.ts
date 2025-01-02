@@ -358,7 +358,6 @@ export const MsgCreateClawbackVestingAccount = {
   },
   registerTypeUrl() {
     Period.registerTypeUrl();
-    Period.registerTypeUrl();
   }
 };
 function createBaseMsgCreateClawbackVestingAccountResponse(): MsgCreateClawbackVestingAccountResponse {

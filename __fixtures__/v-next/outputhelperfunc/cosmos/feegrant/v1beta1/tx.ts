@@ -244,14 +244,8 @@ export const MsgGrantAllowance = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(BasicAllowance.typeUrl, BasicAllowance);
-    GlobalDecoderRegistry.registerAminoProtoMapping(BasicAllowance.aminoType, BasicAllowance.typeUrl);
     BasicAllowance.registerTypeUrl();
-    GlobalDecoderRegistry.register(PeriodicAllowance.typeUrl, PeriodicAllowance);
-    GlobalDecoderRegistry.registerAminoProtoMapping(PeriodicAllowance.aminoType, PeriodicAllowance.typeUrl);
     PeriodicAllowance.registerTypeUrl();
-    GlobalDecoderRegistry.register(AllowedMsgAllowance.typeUrl, AllowedMsgAllowance);
-    GlobalDecoderRegistry.registerAminoProtoMapping(AllowedMsgAllowance.aminoType, AllowedMsgAllowance.typeUrl);
     AllowedMsgAllowance.registerTypeUrl();
   }
 };

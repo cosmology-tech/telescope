@@ -3099,7 +3099,6 @@ export const SuperfluidDelegationsByDelegatorResponse = {
   registerTypeUrl() {
     SuperfluidDelegationRecord.registerTypeUrl();
     Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
   }
 };
 function createBaseSuperfluidUndelegationsByDelegatorRequest(): SuperfluidUndelegationsByDelegatorRequest {
@@ -4169,7 +4168,6 @@ export const QueryTotalDelegationByDelegatorResponse = {
   registerTypeUrl() {
     SuperfluidDelegationRecord.registerTypeUrl();
     DelegationResponse.registerTypeUrl();
-    Coin.registerTypeUrl();
     Coin.registerTypeUrl();
   }
 };

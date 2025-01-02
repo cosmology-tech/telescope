@@ -531,7 +531,6 @@ export const Account = {
   registerTypeUrl() {
     AccountID.registerTypeUrl();
     Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
   }
 };
 function createBasePayment(): Payment {
@@ -749,8 +748,6 @@ export const Payment = {
   },
   registerTypeUrl() {
     AccountID.registerTypeUrl();
-    Coin.registerTypeUrl();
-    Coin.registerTypeUrl();
     Coin.registerTypeUrl();
   }
 };

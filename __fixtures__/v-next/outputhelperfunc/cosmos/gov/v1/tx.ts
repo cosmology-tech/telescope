@@ -429,35 +429,15 @@ export const MsgSubmitProposal = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(TextProposal.typeUrl, TextProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(TextProposal.aminoType, TextProposal.typeUrl);
     TextProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(RegisterIncentiveProposal.typeUrl, RegisterIncentiveProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(RegisterIncentiveProposal.aminoType, RegisterIncentiveProposal.typeUrl);
     RegisterIncentiveProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(ClientUpdateProposal.typeUrl, ClientUpdateProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(ClientUpdateProposal.aminoType, ClientUpdateProposal.typeUrl);
     ClientUpdateProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(UpgradeProposal.typeUrl, UpgradeProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(UpgradeProposal.aminoType, UpgradeProposal.typeUrl);
     UpgradeProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(ReplacePoolIncentivesProposal.typeUrl, ReplacePoolIncentivesProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(ReplacePoolIncentivesProposal.aminoType, ReplacePoolIncentivesProposal.typeUrl);
     ReplacePoolIncentivesProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(UpdatePoolIncentivesProposal.typeUrl, UpdatePoolIncentivesProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(UpdatePoolIncentivesProposal.aminoType, UpdatePoolIncentivesProposal.typeUrl);
     UpdatePoolIncentivesProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(SetSuperfluidAssetsProposal.typeUrl, SetSuperfluidAssetsProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(SetSuperfluidAssetsProposal.aminoType, SetSuperfluidAssetsProposal.typeUrl);
     SetSuperfluidAssetsProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(RemoveSuperfluidAssetsProposal.typeUrl, RemoveSuperfluidAssetsProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(RemoveSuperfluidAssetsProposal.aminoType, RemoveSuperfluidAssetsProposal.typeUrl);
     RemoveSuperfluidAssetsProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(UpdateUnpoolWhiteListProposal.typeUrl, UpdateUnpoolWhiteListProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(UpdateUnpoolWhiteListProposal.aminoType, UpdateUnpoolWhiteListProposal.typeUrl);
     UpdateUnpoolWhiteListProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(UpdateFeeTokenProposal.typeUrl, UpdateFeeTokenProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(UpdateFeeTokenProposal.aminoType, UpdateFeeTokenProposal.typeUrl);
     UpdateFeeTokenProposal.registerTypeUrl();
     Coin.registerTypeUrl();
   }
@@ -692,35 +672,15 @@ export const MsgExecLegacyContent = {
     };
   },
   registerTypeUrl() {
-    GlobalDecoderRegistry.register(TextProposal.typeUrl, TextProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(TextProposal.aminoType, TextProposal.typeUrl);
     TextProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(RegisterIncentiveProposal.typeUrl, RegisterIncentiveProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(RegisterIncentiveProposal.aminoType, RegisterIncentiveProposal.typeUrl);
     RegisterIncentiveProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(ClientUpdateProposal.typeUrl, ClientUpdateProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(ClientUpdateProposal.aminoType, ClientUpdateProposal.typeUrl);
     ClientUpdateProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(UpgradeProposal.typeUrl, UpgradeProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(UpgradeProposal.aminoType, UpgradeProposal.typeUrl);
     UpgradeProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(ReplacePoolIncentivesProposal.typeUrl, ReplacePoolIncentivesProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(ReplacePoolIncentivesProposal.aminoType, ReplacePoolIncentivesProposal.typeUrl);
     ReplacePoolIncentivesProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(UpdatePoolIncentivesProposal.typeUrl, UpdatePoolIncentivesProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(UpdatePoolIncentivesProposal.aminoType, UpdatePoolIncentivesProposal.typeUrl);
     UpdatePoolIncentivesProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(SetSuperfluidAssetsProposal.typeUrl, SetSuperfluidAssetsProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(SetSuperfluidAssetsProposal.aminoType, SetSuperfluidAssetsProposal.typeUrl);
     SetSuperfluidAssetsProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(RemoveSuperfluidAssetsProposal.typeUrl, RemoveSuperfluidAssetsProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(RemoveSuperfluidAssetsProposal.aminoType, RemoveSuperfluidAssetsProposal.typeUrl);
     RemoveSuperfluidAssetsProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(UpdateUnpoolWhiteListProposal.typeUrl, UpdateUnpoolWhiteListProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(UpdateUnpoolWhiteListProposal.aminoType, UpdateUnpoolWhiteListProposal.typeUrl);
     UpdateUnpoolWhiteListProposal.registerTypeUrl();
-    GlobalDecoderRegistry.register(UpdateFeeTokenProposal.typeUrl, UpdateFeeTokenProposal);
-    GlobalDecoderRegistry.registerAminoProtoMapping(UpdateFeeTokenProposal.aminoType, UpdateFeeTokenProposal.typeUrl);
     UpdateFeeTokenProposal.registerTypeUrl();
   }
 };

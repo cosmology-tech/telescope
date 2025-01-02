@@ -1840,7 +1840,6 @@ export const ConsumerQuotaMetric = {
   },
   registerTypeUrl() {
     ConsumerQuotaLimit.registerTypeUrl();
-    ConsumerQuotaLimit.registerTypeUrl();
   }
 };
 function createBaseConsumerQuotaLimit(): ConsumerQuotaLimit {
@@ -2377,8 +2376,6 @@ export const QuotaBucket = {
     };
   },
   registerTypeUrl() {
-    QuotaOverride.registerTypeUrl();
-    QuotaOverride.registerTypeUrl();
     QuotaOverride.registerTypeUrl();
   }
 };

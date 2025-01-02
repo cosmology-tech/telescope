@@ -1295,7 +1295,6 @@ export const Misbehaviour = {
   },
   registerTypeUrl() {
     SignatureAndData.registerTypeUrl();
-    SignatureAndData.registerTypeUrl();
   }
 };
 function createBaseSignatureAndData(): SignatureAndData {

@@ -1056,7 +1056,6 @@ export const NonExistenceProof = {
   },
   registerTypeUrl() {
     ExistenceProof.registerTypeUrl();
-    ExistenceProof.registerTypeUrl();
   }
 };
 function createBaseCommitmentProof(): CommitmentProof {
@@ -2676,7 +2675,6 @@ export const CompressedNonExistenceProof = {
     };
   },
   registerTypeUrl() {
-    CompressedExistenceProof.registerTypeUrl();
     CompressedExistenceProof.registerTypeUrl();
   }
 };
