@@ -150,7 +150,7 @@ export const createScopedRpcFactory = (
     identifier: string,
     className: string,
     options?: {
-      restoreImportExtension?: string;
+        restoreImportExtension?: string;
     }
 ) => {
     return t.exportNamedDeclaration(
@@ -174,6 +174,10 @@ export const createScopedRpcTmFactory = (
     identifier: string
 ) => {
     const newClientType = context.pluginValue("rpcClients.useConnectComet");
+    const useQueryClientResolver = context.pluginValue(
+        "rpcClients.useQueryClientResolver"
+    );
+
     const extensions = context.pluginValue("rpcClients.extensions");
     let functionParams;
     const returnStatement = t.returnStatement(
@@ -213,6 +217,13 @@ export const createScopedRpcTmFactory = (
 
         context.addUtil("HttpEndpoint");
         context.addUtil("QueryClient");
+        const rpcEndpointParam = t.identifier("rpcEndpoint");
+        rpcEndpointParam.typeAnnotation = t.tsTypeAnnotation(
+            t.tsUnionType([
+                t.tsStringKeyword(),
+                t.tsTypeReference(t.identifier("HttpEndpoint")),
+            ])
+        );
 
         functionParams = [
             objectPattern(
@@ -223,7 +234,14 @@ export const createScopedRpcTmFactory = (
                         false,
                         true
                     ),
-                ],
+                    useQueryClientResolver &&
+                        t.objectProperty(
+                            t.identifier("queryClientResolver"),
+                            t.identifier("queryClientResolver"),
+                            false,
+                            true
+                        ),
+                ].filter(Boolean),
                 t.tsTypeAnnotation(
                     t.tsTypeLiteral([
                         t.tsPropertySignature(
@@ -237,30 +255,72 @@ export const createScopedRpcTmFactory = (
                                 ])
                             )
                         ),
-                    ])
+                        useQueryClientResolver &&
+                            t.tsPropertySignature(
+                                t.identifier("queryClientResolver"),
+                                t.tsTypeAnnotation(
+                                    t.tsFunctionType(
+                                        null,
+                                        [rpcEndpointParam],
+                                        t.tsTypeAnnotation(
+                                            t.tsTypeReference(
+                                                t.identifier("QueryClient")
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                    ].filter(Boolean))
                 )
             ),
         ];
 
-        functionStatements = [
-            t.variableDeclaration("const", [
-                t.variableDeclarator(
-                    t.identifier("tmClient"),
-                    t.awaitExpression(awaitClientCreation)
-                ),
-            ]),
-            /////
-            t.variableDeclaration("const", [
-                t.variableDeclarator(
-                    t.identifier("client"),
-                    t.newExpression(t.identifier("QueryClient"), [
-                        t.identifier("tmClient"),
-                    ])
-                ),
-            ]),
+        if (useQueryClientResolver) {
+            let createQueryClientName = newClientType ? "createConnectCometQueryClient" : "createTm34QueryClient";
+            context.addUtil(createQueryClientName);
 
-            returnStatement,
-        ];
+            functionStatements = [
+                t.variableDeclaration("let", [
+                    t.variableDeclarator(
+                        t.identifier("client"),
+                        t.conditionalExpression(
+                            t.identifier("queryClientResolver"),
+                            t.callExpression(
+                                t.identifier("queryClientResolver"),
+                                [t.identifier("rpcEndpoint")]
+                            ),
+                            t.awaitExpression(
+                                t.callExpression(
+                                    t.identifier(createQueryClientName),
+                                    [t.identifier("rpcEndpoint")]
+                                )
+                            )
+                        )
+                    ),
+                ]),
+                returnStatement,
+            ];
+        } else {
+            functionStatements = [
+                t.variableDeclaration("const", [
+                    t.variableDeclarator(
+                        t.identifier("tmClient"),
+                        t.awaitExpression(awaitClientCreation)
+                    ),
+                ]),
+                /////
+                t.variableDeclaration("const", [
+                    t.variableDeclarator(
+                        t.identifier("client"),
+                        t.newExpression(t.identifier("QueryClient"), [
+                            t.identifier("tmClient"),
+                        ])
+                    ),
+                ]),
+
+                returnStatement,
+            ];
+        }
     } else {
         functionParams = rpcFuncArguments();
         functionStatements = [returnStatement];

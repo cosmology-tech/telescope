@@ -153,7 +153,7 @@ Examples:
 
 ```sh
 # Telescope will do the download according to .json file of --config
-# Telescope will put proto into location specified by --out 
+# Telescope will put proto into location specified by --out
 telescope download --config ./protod.config.json --out ./git-modules
 ```
 
@@ -161,7 +161,7 @@ telescope download --config ./protod.config.json --out ./git-modules
 # Telescope download from target repo according to --git-repo
 # in format of (i.e. <owner>/<repository> or <owner>/<repository>/<branch>)
 # <branch> can be empty, it will use main as default
-# Also --targets is required to specify the targets to download 
+# Also --targets is required to specify the targets to download
 # in format like cosmos/auth/v1beta1/auth.proto
 telescope download --git-repo target-repo --targets target-proto
 ```
@@ -185,7 +185,7 @@ telescope download --config ./protod.config.json --out ./git-modules --ssh true
 //
 // `outDir` is where the output proto will be put
 //
-// `targets` are the target proto to download 
+// `targets` are the target proto to download
 // `targets` can be patterns like:
 // "cosmos/bank/v1beta1/tx.proto",
 // "cosmos/gov/**/*.proto",
@@ -443,6 +443,8 @@ See [LCD Clients](#lcd-clients) for more info.
 | `rpcClients.scopedIsExclusive` | will allow both scoped bundles and all RPC Clients                      | `true`                        |
 | `rpcClients.enabledServices`   | which services to enable                                                | [`Msg`,`Query`,`Service`]     |
 | `rpcClients.instantOps` |        will generate instant rpc operations in the file `service-ops.ts` under root folder, which contains customized classes having selected rpc methods    | `undefined`                        |
+| `rpcClients.useConnectComet` |      will use connectComet function to get a tendermint client    | `undefined`                        |
+| `rpcClients.useQueryClientResolver` |      allow user to pass a query client resolver to create query client in createRPCQueryClient function    | `undefined`                        |
 | `rpcClients.serviceImplement` |     assign implement type of rpc methods, `Query` or `Tx`, by setting patterns under service types.       | `undefined`                        |
   `rpcClients.clientStyle.useUpdatedClientStyle` | The default value is `false`, which sets the generated client to use the legacy style. Setting it to `true` applies the updated style and activates the remaining options in clientStyle. | `false`
 | `rpcClients.clientStyle.type` | A string array containing possible values: `all-client`, `sdk-module-client`, and `custom-client`. The value `all-client` generates an all-module-client file. The value `sdk-module-client` generates a client for the module specified by the `sdkModuleClientOption`. The value `custom-client` generates a customized client as specified by `customClientOption` | `undefined`
@@ -1107,7 +1109,7 @@ There'll be client files (`all-module-client.ts`, `akash-sdk-module-client.ts`, 
 The `all-module-client.ts` file consolidates all proto imports into one file and exports them as a single client.<br>
 All sdk module client files will be identical to the legacy `client.ts` files generated in each module directory, except they will be located in the root directory. <br>
 The custom client imports proto files based on `include.patterns`, allowing protos to originate from different modules.<br>
-For example the custom-client.ts will be like: 
+For example the custom-client.ts will be like:
 ```ts
 export const cosmosIbcAminoConverters = {
   ...cosmosGovV1TxAmino.AminoConverter,

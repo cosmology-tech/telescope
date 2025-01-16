@@ -38,7 +38,7 @@ export function buildQuery<TReq, TRes>(opts: QueryBuilderOptions<TReq, TRes>) {
 
 export interface ITxArgs<TMsg> {
   signerAddress: string;
-  message: TMsg;
+  message: TMsg | TMsg[];
   fee: StdFee | 'auto';
   memo: string;
 }
@@ -78,7 +78,7 @@ export interface TxBuilderOptions {
 export function buildTx<TMsg>(opts: TxBuilderOptions) {
   return async (
     signerAddress: string,
-    message: TMsg,
+    message: TMsg | TMsg[],
     fee: StdFee | 'auto',
     memo: string
   ): Promise<DeliverTxResponse> => {
