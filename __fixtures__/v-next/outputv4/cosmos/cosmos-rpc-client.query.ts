@@ -7,9 +7,9 @@ export const createCosmicRPCQueryClient = async ({
   queryClientResolver
 }: {
   rpcEndpoint: string | HttpEndpoint;
-  queryClientResolver: (rpcEndpoint: string | HttpEndpoint) => QueryClient;
+  queryClientResolver: (rpcEndpoint: string | HttpEndpoint) => Promise<QueryClient>;
 }) => {
-  let client = queryClientResolver ? queryClientResolver(rpcEndpoint) : await createConnectCometQueryClient(rpcEndpoint);
+  let client = queryClientResolver ? await queryClientResolver(rpcEndpoint) : await createConnectCometQueryClient(rpcEndpoint);
   return {
     cosmos: {
       bank: {

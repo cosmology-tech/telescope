@@ -243,40 +243,53 @@ export const createScopedRpcTmFactory = (
                         ),
                 ].filter(Boolean),
                 t.tsTypeAnnotation(
-                    t.tsTypeLiteral([
-                        t.tsPropertySignature(
-                            t.identifier("rpcEndpoint"),
-                            t.tsTypeAnnotation(
-                                t.tsUnionType([
-                                    t.tsStringKeyword(),
-                                    t.tsTypeReference(
-                                        t.identifier("HttpEndpoint")
-                                    ),
-                                ])
-                            )
-                        ),
-                        useQueryClientResolver &&
+                    t.tsTypeLiteral(
+                        [
                             t.tsPropertySignature(
-                                t.identifier("queryClientResolver"),
+                                t.identifier("rpcEndpoint"),
                                 t.tsTypeAnnotation(
-                                    t.tsFunctionType(
-                                        null,
-                                        [rpcEndpointParam],
-                                        t.tsTypeAnnotation(
-                                            t.tsTypeReference(
-                                                t.identifier("QueryClient")
+                                    t.tsUnionType([
+                                        t.tsStringKeyword(),
+                                        t.tsTypeReference(
+                                            t.identifier("HttpEndpoint")
+                                        ),
+                                    ])
+                                )
+                            ),
+                            useQueryClientResolver &&
+                                t.tsPropertySignature(
+                                    t.identifier("queryClientResolver"),
+                                    t.tsTypeAnnotation(
+                                        t.tsFunctionType(
+                                            null,
+                                            [rpcEndpointParam],
+                                            t.tsTypeAnnotation(
+                                                t.tsTypeReference(
+                                                    t.identifier("Promise"),
+                                                    t.tsTypeParameterInstantiation(
+                                                        [
+                                                            t.tsTypeReference(
+                                                                t.identifier(
+                                                                    "QueryClient"
+                                                                )
+                                                            ),
+                                                        ]
+                                                    )
+                                                )
                                             )
                                         )
                                     )
-                                )
-                            ),
-                    ].filter(Boolean))
+                                ),
+                        ].filter(Boolean)
+                    )
                 )
             ),
         ];
 
         if (useQueryClientResolver) {
-            let createQueryClientName = newClientType ? "createConnectCometQueryClient" : "createTm34QueryClient";
+            let createQueryClientName = newClientType
+                ? "createConnectCometQueryClient"
+                : "createTm34QueryClient";
             context.addUtil(createQueryClientName);
 
             functionStatements = [
@@ -285,9 +298,11 @@ export const createScopedRpcTmFactory = (
                         t.identifier("client"),
                         t.conditionalExpression(
                             t.identifier("queryClientResolver"),
-                            t.callExpression(
-                                t.identifier("queryClientResolver"),
-                                [t.identifier("rpcEndpoint")]
+                            t.awaitExpression(
+                                t.callExpression(
+                                    t.identifier("queryClientResolver"),
+                                    [t.identifier("rpcEndpoint")]
+                                )
                             ),
                             t.awaitExpression(
                                 t.callExpression(
