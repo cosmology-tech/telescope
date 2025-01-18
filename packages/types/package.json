@@ -3,7 +3,7 @@
   "version": "1.11.2",
   "description": "Telescope types",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/types#readme",
+  "homepage": "https://github.com/hyperweb-io/telescope/tree/master/packages/types#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "typings": "types/index.d.ts",
@@ -36,11 +36,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cosmology-tech/telescope"
+    "url": "https://github.com/hyperweb-io/telescope"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/cosmology-tech/telescope/issues"
+    "url": "https://github.com/hyperweb-io/telescope/issues"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",

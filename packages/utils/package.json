@@ -3,7 +3,7 @@
   "version": "1.9.2",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils#readme",
+  "homepage": "https://github.com/hyperweb-io/telescope/tree/master/packages/utils#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -52,11 +52,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils"
+    "url": "https://github.com/hyperweb-io/telescope/tree/master/packages/utils"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils/issues"
+    "url": "https://github.com/hyperweb-io/telescope/tree/master/packages/utils/issues"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",

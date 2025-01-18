@@ -3,7 +3,7 @@
   "version": "0.14.0",
   "description": "Telescope LCDClient helpers",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/helpers#readme",
+  "homepage": "https://github.com/hyperweb-io/telescope/tree/master/packages/helpers#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "module": "module/index.js",
@@ -49,11 +49,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cosmology-tech/telescope/tree/master/packages/helpers"
+    "url": "https://github.com/hyperweb-io/telescope/tree/master/packages/helpers"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/cosmology-tech/telescope/tree/master/packages/helpers/issues"
+    "url": "https://github.com/hyperweb-io/telescope/tree/master/packages/helpers/issues"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",

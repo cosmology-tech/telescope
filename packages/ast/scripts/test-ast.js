@@ -3,7 +3,7 @@
 // 2. cd into `packages/ast`.
 // 3. Run `yarn test:ast`.
 // `test-output.json` will be created containing an abstract syntax tree of the `fixture.ts` file.
-// A broader documentation you may find here: https://github.com/cosmology-tech/telescope/blob/main/docs/working-with-asts.md
+// A broader documentation you may find here: https://github.com/hyperweb-io/telescope/blob/main/docs/working-with-asts.md
 
 import { stringify } from 'ast-stringify';
 import { parse } from '@babel/parser';

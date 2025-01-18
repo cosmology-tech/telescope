@@ -12,7 +12,7 @@
   "registry": "https://registry.npmjs.org",
   "command": {
     "create": {
-      "homepage": "https://github.com/cosmology-tech/telescope",
+      "homepage": "https://github.com/hyperweb-io/telescope",
       "license": "SEE LICENSE IN LICENSE",
       "access": "restricted"
     },

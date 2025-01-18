@@ -3,446 +3,446 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.11.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.11.7...@cosmology/telescope@1.11.8) (2025-01-15)
+## [1.11.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.11.7...@cosmology/telescope@1.11.8) (2025-01-15)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.11.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.11.6...@cosmology/telescope@1.11.7) (2025-01-02)
+## [1.11.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.11.6...@cosmology/telescope@1.11.7) (2025-01-02)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.11.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.11.5...@cosmology/telescope@1.11.6) (2025-01-02)
+## [1.11.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.11.5...@cosmology/telescope@1.11.6) (2025-01-02)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.11.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.11.4...@cosmology/telescope@1.11.5) (2025-01-02)
+## [1.11.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.11.4...@cosmology/telescope@1.11.5) (2025-01-02)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.11.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.11.3...@cosmology/telescope@1.11.4) (2024-12-31)
+## [1.11.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.11.3...@cosmology/telescope@1.11.4) (2024-12-31)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.11.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.11.2...@cosmology/telescope@1.11.3) (2024-12-25)
+## [1.11.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.11.2...@cosmology/telescope@1.11.3) (2024-12-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.11.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.11.1...@cosmology/telescope@1.11.2) (2024-12-25)
+## [1.11.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.11.1...@cosmology/telescope@1.11.2) (2024-12-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.11.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.11.0...@cosmology/telescope@1.11.1) (2024-12-25)
+## [1.11.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.11.0...@cosmology/telescope@1.11.1) (2024-12-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [1.11.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.11...@cosmology/telescope@1.11.0) (2024-12-17)
+# [1.11.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.11...@cosmology/telescope@1.11.0) (2024-12-17)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.11](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.10...@cosmology/telescope@1.10.11) (2024-12-09)
+## [1.10.11](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.10...@cosmology/telescope@1.10.11) (2024-12-09)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.9...@cosmology/telescope@1.10.10) (2024-12-09)
+## [1.10.10](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.9...@cosmology/telescope@1.10.10) (2024-12-09)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.9](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.8...@cosmology/telescope@1.10.9) (2024-11-14)
+## [1.10.9](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.8...@cosmology/telescope@1.10.9) (2024-11-14)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.7...@cosmology/telescope@1.10.8) (2024-11-05)
+## [1.10.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.7...@cosmology/telescope@1.10.8) (2024-11-05)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.6...@cosmology/telescope@1.10.7) (2024-11-04)
+## [1.10.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.6...@cosmology/telescope@1.10.7) (2024-11-04)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.5...@cosmology/telescope@1.10.6) (2024-10-25)
+## [1.10.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.5...@cosmology/telescope@1.10.6) (2024-10-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.4...@cosmology/telescope@1.10.5) (2024-10-23)
+## [1.10.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.4...@cosmology/telescope@1.10.5) (2024-10-23)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.3...@cosmology/telescope@1.10.4) (2024-10-22)
+## [1.10.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.3...@cosmology/telescope@1.10.4) (2024-10-22)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.2...@cosmology/telescope@1.10.3) (2024-10-21)
+## [1.10.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.2...@cosmology/telescope@1.10.3) (2024-10-21)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.10.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.1...@cosmology/telescope@1.10.2) (2024-10-21)
-
-### Bug Fixes
-
-- fix ast export issue, add imports utils. ([a224606](https://github.com/cosmology-tech/telescope/commit/a2246062dda6a5f1ec3c2953263a5c7aff2bb71d))
-- flag names ([eed7fb3](https://github.com/cosmology-tech/telescope/commit/eed7fb3b6f726ff3590b7919f6445298f98f07da))
-- minor ast adjustments ([e38bbb6](https://github.com/cosmology-tech/telescope/commit/e38bbb610aeaf234602838d0f83368e6735a3eb2))
-- pass in ProtoServiceMethod type, use SigningClientResolver type, remove type aliases. ([620568c](https://github.com/cosmology-tech/telescope/commit/620568c0e5d44b96d39c88a6293b16507a42ab9f))
-
-### Features
-
-- use ast call expression for toEncoders&toConverters. ([471d866](https://github.com/cosmology-tech/telescope/commit/471d86645cde92a3dcb71ee00c1c8f529926c72a))
-
-## [1.10.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.0...@cosmology/telescope@1.10.1) (2024-10-05)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-# [1.10.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.9.0...@cosmology/telescope@1.10.0) (2024-09-18)
-
-### Features
-
-- add endo base64 lib support ([197da9e](https://github.com/cosmology-tech/telescope/commit/197da9e3ea10c7dde76dcf31da4484be70498c6e))
-- add endo/base64 support ([a920d39](https://github.com/cosmology-tech/telescope/commit/a920d39802b3c9fc45c12710c719f82adbdee04e))
-
-# [1.9.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.4...@cosmology/telescope@1.9.0) (2024-09-16)
+## [1.10.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.1...@cosmology/telescope@1.10.2) (2024-10-21)
 
 ### Bug Fixes
 
-- remove unused code. ([40b4130](https://github.com/cosmology-tech/telescope/commit/40b4130db43f14c8ea938171de0be53b9a19fe3f))
-- use correct var name for options ([f294fb9](https://github.com/cosmology-tech/telescope/commit/f294fb936e1688e30a8b884db756693a80f52407))
+- fix ast export issue, add imports utils. ([a224606](https://github.com/hyperweb-io/telescope/commit/a2246062dda6a5f1ec3c2953263a5c7aff2bb71d))
+- flag names ([eed7fb3](https://github.com/hyperweb-io/telescope/commit/eed7fb3b6f726ff3590b7919f6445298f98f07da))
+- minor ast adjustments ([e38bbb6](https://github.com/hyperweb-io/telescope/commit/e38bbb610aeaf234602838d0f83368e6735a3eb2))
+- pass in ProtoServiceMethod type, use SigningClientResolver type, remove type aliases. ([620568c](https://github.com/hyperweb-io/telescope/commit/620568c0e5d44b96d39c88a6293b16507a42ab9f))
 
 ### Features
 
-- add conditional logic to change UTILS.decimals value ([cf5279b](https://github.com/cosmology-tech/telescope/commit/cf5279bbc9afa52bae57cccb2961c945d64c9ad4))
-- decimal supporting bigInt and options to use from cosmjs or agoric-sdk ([cc8dbb7](https://github.com/cosmology-tech/telescope/commit/cc8dbb7e7d96c1b53cd630fe9e987981389cf585))
+- use ast call expression for toEncoders&toConverters. ([471d866](https://github.com/hyperweb-io/telescope/commit/471d86645cde92a3dcb71ee00c1c8f529926c72a))
 
-## [1.8.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.3...@cosmology/telescope@1.8.4) (2024-09-12)
-
-### Bug Fixes
-
-- **JsonSafe:** handle nested structures and arrays ([5812e73](https://github.com/cosmology-tech/telescope/commit/5812e734a15bdc6e9659930069e945586218a1e0))
-
-## [1.8.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.2...@cosmology/telescope@1.8.3) (2024-06-28)
+## [1.10.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.10.0...@cosmology/telescope@1.10.1) (2024-10-05)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.8.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.1...@cosmology/telescope@1.8.2) (2024-06-28)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.8.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.0...@cosmology/telescope@1.8.1) (2024-06-26)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-# [1.8.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.7.1...@cosmology/telescope@1.8.0) (2024-06-25)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.7.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.7.0...@cosmology/telescope@1.7.1) (2024-06-03)
-
-### Bug Fixes
-
-- **types:** handle Date in JsonSafe ([ae60a32](https://github.com/cosmology-tech/telescope/commit/ae60a32cc3dcd46bf84c3acfe49ba89ff328539c))
-
-# [1.7.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.6.0...@cosmology/telescope@1.7.0) (2024-05-25)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-# [1.6.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.10...@cosmology/telescope@1.6.0) (2024-05-25)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.9...@cosmology/telescope@1.5.10) (2024-05-13)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.9](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.8...@cosmology/telescope@1.5.9) (2024-05-09)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.7...@cosmology/telescope@1.5.8) (2024-05-08)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.6...@cosmology/telescope@1.5.7) (2024-05-08)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.5...@cosmology/telescope@1.5.6) (2024-05-08)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.4...@cosmology/telescope@1.5.5) (2024-05-08)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.3...@cosmology/telescope@1.5.4) (2024-04-07)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.2...@cosmology/telescope@1.5.3) (2024-04-03)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.1...@cosmology/telescope@1.5.2) (2024-04-02)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.5.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.0...@cosmology/telescope@1.5.1) (2024-03-21)
-
-**Note:** Version bump only for package @cosmology/telescope
-
-# [1.5.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.13...@cosmology/telescope@1.5.0) (2024-03-20)
+# [1.10.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.9.0...@cosmology/telescope@1.10.0) (2024-09-18)
 
 ### Features
 
-- ESM compatibility ([7901482](https://github.com/cosmology-tech/telescope/commit/79014823e2424594d4d4544b27000905e696a3f0))
+- add endo base64 lib support ([197da9e](https://github.com/hyperweb-io/telescope/commit/197da9e3ea10c7dde76dcf31da4484be70498c6e))
+- add endo/base64 support ([a920d39](https://github.com/hyperweb-io/telescope/commit/a920d39802b3c9fc45c12710c719f82adbdee04e))
 
-## [1.4.13](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.12...@cosmology/telescope@1.4.13) (2024-03-18)
+# [1.9.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.8.4...@cosmology/telescope@1.9.0) (2024-09-16)
 
 ### Bug Fixes
 
-- optional field default value ([1590b18](https://github.com/cosmology-tech/telescope/commit/1590b18a6d81fc2e767869ed366f6d0deaabad02))
+- remove unused code. ([40b4130](https://github.com/hyperweb-io/telescope/commit/40b4130db43f14c8ea938171de0be53b9a19fe3f))
+- use correct var name for options ([f294fb9](https://github.com/hyperweb-io/telescope/commit/f294fb936e1688e30a8b884db756693a80f52407))
 
 ### Features
 
-- add emit default and fix timestamp ([1c4296c](https://github.com/cosmology-tech/telescope/commit/1c4296c5eb5cb48b42b6c9ba7523f8faa8a8bcbe))
-- fix omit empty handling ([3a8e76b](https://github.com/cosmology-tech/telescope/commit/3a8e76ba6a402cec7a64e4ec98e58133acf19f09))
-- partially add support for amino ([f9ae22c](https://github.com/cosmology-tech/telescope/commit/f9ae22c86665590b8caa6b3918738a903592c29b))
-- re-run tests and update snapshots ([ced5e43](https://github.com/cosmology-tech/telescope/commit/ced5e4313ff29a7e268dd0aee7aa2f492ac176a3))
+- add conditional logic to change UTILS.decimals value ([cf5279b](https://github.com/hyperweb-io/telescope/commit/cf5279bbc9afa52bae57cccb2961c945d64c9ad4))
+- decimal supporting bigInt and options to use from cosmjs or agoric-sdk ([cc8dbb7](https://github.com/hyperweb-io/telescope/commit/cc8dbb7e7d96c1b53cd630fe9e987981389cf585))
 
-## [1.4.12](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.11...@cosmology/telescope@1.4.12) (2024-01-23)
+## [1.8.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.8.3...@cosmology/telescope@1.8.4) (2024-09-12)
 
-**Note:** Version bump only for package @cosmology/telescope
+### Bug Fixes
 
-## [1.4.11](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.10...@cosmology/telescope@1.4.11) (2024-01-23)
+- **JsonSafe:** handle nested structures and arrays ([5812e73](https://github.com/hyperweb-io/telescope/commit/5812e734a15bdc6e9659930069e945586218a1e0))
 
-**Note:** Version bump only for package @cosmology/telescope
-
-## [1.4.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.9...@cosmology/telescope@1.4.10) (2024-01-23)
+## [1.8.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.8.2...@cosmology/telescope@1.8.3) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.9](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.8...@cosmology/telescope@1.4.9) (2024-01-19)
+## [1.8.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.8.1...@cosmology/telescope@1.8.2) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.7...@cosmology/telescope@1.4.8) (2024-01-19)
+## [1.8.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.8.0...@cosmology/telescope@1.8.1) (2024-06-26)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.6...@cosmology/telescope@1.4.7) (2024-01-19)
+# [1.8.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.7.1...@cosmology/telescope@1.8.0) (2024-06-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.5...@cosmology/telescope@1.4.6) (2024-01-16)
+## [1.7.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.7.0...@cosmology/telescope@1.7.1) (2024-06-03)
+
+### Bug Fixes
+
+- **types:** handle Date in JsonSafe ([ae60a32](https://github.com/hyperweb-io/telescope/commit/ae60a32cc3dcd46bf84c3acfe49ba89ff328539c))
+
+# [1.7.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.6.0...@cosmology/telescope@1.7.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.4...@cosmology/telescope@1.4.5) (2024-01-16)
+# [1.6.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.10...@cosmology/telescope@1.6.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.3...@cosmology/telescope@1.4.4) (2024-01-16)
+## [1.5.10](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.9...@cosmology/telescope@1.5.10) (2024-05-13)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.2...@cosmology/telescope@1.4.3) (2024-01-08)
+## [1.5.9](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.8...@cosmology/telescope@1.5.9) (2024-05-09)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.1...@cosmology/telescope@1.4.2) (2024-01-08)
+## [1.5.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.7...@cosmology/telescope@1.5.8) (2024-05-08)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.4.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.0...@cosmology/telescope@1.4.1) (2024-01-02)
+## [1.5.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.6...@cosmology/telescope@1.5.7) (2024-05-08)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [1.4.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.3.3...@cosmology/telescope@1.4.0) (2023-12-26)
+## [1.5.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.5...@cosmology/telescope@1.5.6) (2024-05-08)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.3.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.3.2...@cosmology/telescope@1.3.3) (2023-12-18)
+## [1.5.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.4...@cosmology/telescope@1.5.5) (2024-05-08)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.3.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.3.1...@cosmology/telescope@1.3.2) (2023-12-14)
+## [1.5.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.3...@cosmology/telescope@1.5.4) (2024-04-07)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.3.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.3.0...@cosmology/telescope@1.3.1) (2023-12-13)
+## [1.5.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.2...@cosmology/telescope@1.5.3) (2024-04-03)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [1.3.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.8...@cosmology/telescope@1.3.0) (2023-12-13)
+## [1.5.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.1...@cosmology/telescope@1.5.2) (2024-04-02)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.2.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.7...@cosmology/telescope@1.2.8) (2023-12-11)
+## [1.5.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.5.0...@cosmology/telescope@1.5.1) (2024-03-21)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.2.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.6...@cosmology/telescope@1.2.7) (2023-12-11)
+# [1.5.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.13...@cosmology/telescope@1.5.0) (2024-03-20)
+
+### Features
+
+- ESM compatibility ([7901482](https://github.com/hyperweb-io/telescope/commit/79014823e2424594d4d4544b27000905e696a3f0))
+
+## [1.4.13](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.12...@cosmology/telescope@1.4.13) (2024-03-18)
+
+### Bug Fixes
+
+- optional field default value ([1590b18](https://github.com/hyperweb-io/telescope/commit/1590b18a6d81fc2e767869ed366f6d0deaabad02))
+
+### Features
+
+- add emit default and fix timestamp ([1c4296c](https://github.com/hyperweb-io/telescope/commit/1c4296c5eb5cb48b42b6c9ba7523f8faa8a8bcbe))
+- fix omit empty handling ([3a8e76b](https://github.com/hyperweb-io/telescope/commit/3a8e76ba6a402cec7a64e4ec98e58133acf19f09))
+- partially add support for amino ([f9ae22c](https://github.com/hyperweb-io/telescope/commit/f9ae22c86665590b8caa6b3918738a903592c29b))
+- re-run tests and update snapshots ([ced5e43](https://github.com/hyperweb-io/telescope/commit/ced5e4313ff29a7e268dd0aee7aa2f492ac176a3))
+
+## [1.4.12](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.11...@cosmology/telescope@1.4.12) (2024-01-23)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.2.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.5...@cosmology/telescope@1.2.6) (2023-12-11)
+## [1.4.11](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.10...@cosmology/telescope@1.4.11) (2024-01-23)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.2.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.4...@cosmology/telescope@1.2.5) (2023-12-07)
+## [1.4.10](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.9...@cosmology/telescope@1.4.10) (2024-01-23)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.2.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.3...@cosmology/telescope@1.2.4) (2023-12-05)
+## [1.4.9](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.8...@cosmology/telescope@1.4.9) (2024-01-19)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.2.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.2...@cosmology/telescope@1.2.3) (2023-12-05)
+## [1.4.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.7...@cosmology/telescope@1.4.8) (2024-01-19)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.2.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.1...@cosmology/telescope@1.2.2) (2023-12-04)
+## [1.4.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.6...@cosmology/telescope@1.4.7) (2024-01-19)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.2.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.2.0...@cosmology/telescope@1.2.1) (2023-12-04)
+## [1.4.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.5...@cosmology/telescope@1.4.6) (2024-01-16)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [1.2.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.1.1...@cosmology/telescope@1.2.0) (2023-12-03)
+## [1.4.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.4...@cosmology/telescope@1.4.5) (2024-01-16)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.1.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.1.0...@cosmology/telescope@1.1.1) (2023-11-19)
+## [1.4.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.3...@cosmology/telescope@1.4.4) (2024-01-16)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [1.1.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.17...@cosmology/telescope@1.1.0) (2023-11-19)
+## [1.4.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.2...@cosmology/telescope@1.4.3) (2024-01-08)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.17](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.16...@cosmology/telescope@1.0.17) (2023-11-15)
+## [1.4.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.1...@cosmology/telescope@1.4.2) (2024-01-08)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.16](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.15...@cosmology/telescope@1.0.16) (2023-11-13)
+## [1.4.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.4.0...@cosmology/telescope@1.4.1) (2024-01-02)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.15](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.14...@cosmology/telescope@1.0.15) (2023-11-12)
+# [1.4.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.3.3...@cosmology/telescope@1.4.0) (2023-12-26)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.14](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.13...@cosmology/telescope@1.0.14) (2023-11-12)
+## [1.3.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.3.2...@cosmology/telescope@1.3.3) (2023-12-18)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.13](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.12...@cosmology/telescope@1.0.13) (2023-11-10)
+## [1.3.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.3.1...@cosmology/telescope@1.3.2) (2023-12-14)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.12](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.11...@cosmology/telescope@1.0.12) (2023-11-03)
+## [1.3.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.3.0...@cosmology/telescope@1.3.1) (2023-12-13)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.11](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.10...@cosmology/telescope@1.0.11) (2023-10-30)
+# [1.3.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.8...@cosmology/telescope@1.3.0) (2023-12-13)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.9...@cosmology/telescope@1.0.10) (2023-10-29)
+## [1.2.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.7...@cosmology/telescope@1.2.8) (2023-12-11)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.9](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.8...@cosmology/telescope@1.0.9) (2023-10-29)
+## [1.2.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.6...@cosmology/telescope@1.2.7) (2023-12-11)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.7...@cosmology/telescope@1.0.8) (2023-10-28)
+## [1.2.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.5...@cosmology/telescope@1.2.6) (2023-12-11)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.6...@cosmology/telescope@1.0.7) (2023-10-23)
+## [1.2.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.4...@cosmology/telescope@1.2.5) (2023-12-07)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.5...@cosmology/telescope@1.0.6) (2023-10-23)
+## [1.2.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.3...@cosmology/telescope@1.2.4) (2023-12-05)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.4...@cosmology/telescope@1.0.5) (2023-10-20)
+## [1.2.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.2...@cosmology/telescope@1.2.3) (2023-12-05)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.3...@cosmology/telescope@1.0.4) (2023-10-17)
+## [1.2.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.1...@cosmology/telescope@1.2.2) (2023-12-04)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.2...@cosmology/telescope@1.0.3) (2023-10-02)
+## [1.2.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.2.0...@cosmology/telescope@1.2.1) (2023-12-04)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.1...@cosmology/telescope@1.0.2) (2023-09-20)
+# [1.2.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.1.1...@cosmology/telescope@1.2.0) (2023-12-03)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [1.0.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.0.0...@cosmology/telescope@1.0.1) (2023-09-13)
+## [1.1.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.1.0...@cosmology/telescope@1.1.1) (2023-11-19)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [1.0.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.109.4...@cosmology/telescope@1.0.0) (2023-09-13)
+# [1.1.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.17...@cosmology/telescope@1.1.0) (2023-11-19)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [0.109.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.109.3...@cosmology/telescope@0.109.4) (2023-09-07)
+## [1.0.17](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.16...@cosmology/telescope@1.0.17) (2023-11-15)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [0.109.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.109.2...@cosmology/telescope@0.109.3) (2023-09-07)
+## [1.0.16](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.15...@cosmology/telescope@1.0.16) (2023-11-13)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [0.109.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.109.1...@cosmology/telescope@0.109.2) (2023-09-07)
+## [1.0.15](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.14...@cosmology/telescope@1.0.15) (2023-11-12)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [0.109.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.109.0...@cosmology/telescope@0.109.1) (2023-09-06)
+## [1.0.14](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.13...@cosmology/telescope@1.0.14) (2023-11-12)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [0.109.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.108.0...@cosmology/telescope@0.109.0) (2023-09-06)
+## [1.0.13](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.12...@cosmology/telescope@1.0.13) (2023-11-10)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [0.108.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.107.0...@cosmology/telescope@0.108.0) (2023-09-05)
+## [1.0.12](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.11...@cosmology/telescope@1.0.12) (2023-11-03)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [0.107.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.106.0...@cosmology/telescope@0.107.0) (2023-09-05)
+## [1.0.11](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.10...@cosmology/telescope@1.0.11) (2023-10-30)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [0.106.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.105.0...@cosmology/telescope@0.106.0) (2023-08-24)
+## [1.0.10](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.9...@cosmology/telescope@1.0.10) (2023-10-29)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [0.105.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.104.0...@cosmology/telescope@0.105.0) (2023-08-21)
+## [1.0.9](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.8...@cosmology/telescope@1.0.9) (2023-10-29)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [0.104.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.103.2...@cosmology/telescope@0.104.0) (2023-08-16)
+## [1.0.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.7...@cosmology/telescope@1.0.8) (2023-10-28)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [0.103.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.103.0...@cosmology/telescope@0.103.2) (2023-08-11)
+## [1.0.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.6...@cosmology/telescope@1.0.7) (2023-10-23)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [0.103.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.103.0...@cosmology/telescope@0.103.1) (2023-08-11)
+## [1.0.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.5...@cosmology/telescope@1.0.6) (2023-10-23)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-# [0.103.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.102.1...@cosmology/telescope@0.103.0) (2023-08-11)
+## [1.0.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.4...@cosmology/telescope@1.0.5) (2023-10-20)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-## [0.102.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@0.102.0...@cosmology/telescope@0.102.1) (2023-07-30)
+## [1.0.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.3...@cosmology/telescope@1.0.4) (2023-10-17)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [1.0.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.2...@cosmology/telescope@1.0.3) (2023-10-02)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [1.0.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.1...@cosmology/telescope@1.0.2) (2023-09-20)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [1.0.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@1.0.0...@cosmology/telescope@1.0.1) (2023-09-13)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+# [1.0.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.109.4...@cosmology/telescope@1.0.0) (2023-09-13)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [0.109.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.109.3...@cosmology/telescope@0.109.4) (2023-09-07)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [0.109.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.109.2...@cosmology/telescope@0.109.3) (2023-09-07)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [0.109.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.109.1...@cosmology/telescope@0.109.2) (2023-09-07)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [0.109.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.109.0...@cosmology/telescope@0.109.1) (2023-09-06)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+# [0.109.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.108.0...@cosmology/telescope@0.109.0) (2023-09-06)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+# [0.108.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.107.0...@cosmology/telescope@0.108.0) (2023-09-05)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+# [0.107.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.106.0...@cosmology/telescope@0.107.0) (2023-09-05)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+# [0.106.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.105.0...@cosmology/telescope@0.106.0) (2023-08-24)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+# [0.105.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.104.0...@cosmology/telescope@0.105.0) (2023-08-21)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+# [0.104.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.103.2...@cosmology/telescope@0.104.0) (2023-08-16)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [0.103.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.103.0...@cosmology/telescope@0.103.2) (2023-08-11)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [0.103.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.103.0...@cosmology/telescope@0.103.1) (2023-08-11)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+# [0.103.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.102.1...@cosmology/telescope@0.103.0) (2023-08-11)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [0.102.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/telescope@0.102.0...@cosmology/telescope@0.102.1) (2023-07-30)
 
 **Note:** Version bump only for package @cosmology/telescope
 
@@ -450,8 +450,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Reverts
 
-- Revert "RC versions ready" ([04081a9](https://github.com/cosmology-tech/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
-- Revert "chore(release): publish" ([086a55f](https://github.com/cosmology-tech/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+- Revert "RC versions ready" ([04081a9](https://github.com/hyperweb-io/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+- Revert "chore(release): publish" ([086a55f](https://github.com/hyperweb-io/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
 
 ## [0.101.3](https://github.com/osmosis-labs/telescope/compare/@cosmology/telescope@0.101.2...@cosmology/telescope@0.101.3) (2023-07-29)
 

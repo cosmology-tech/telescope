@@ -1,4 +1,4 @@
-[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
+[< back](https://github.com/hyperweb-io/telescope/blob/main/docs/README.md)
 
 # working with ASTs
 
@@ -135,7 +135,7 @@ export const createNewGenerator = () => {
 };
 ```
 
-NOTE, see our docs on [creating new generators](https://github.com/cosmology-tech/telescope/blob/main/docs/creating-new-generators.md) which shows how to create and run a test.
+NOTE, see our docs on [creating new generators](https://github.com/hyperweb-io/telescope/blob/main/docs/creating-new-generators.md) which shows how to create and run a test.
 
 
-[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
+[< back](https://github.com/hyperweb-io/telescope/blob/main/docs/README.md)

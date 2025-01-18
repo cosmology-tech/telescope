@@ -3,199 +3,199 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.9.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.9.1...@cosmology/proto-parser@1.9.2) (2024-12-31)
+## [1.9.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.9.1...@cosmology/proto-parser@1.9.2) (2024-12-31)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.9.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.9.0...@cosmology/proto-parser@1.9.1) (2024-12-25)
+## [1.9.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.9.0...@cosmology/proto-parser@1.9.1) (2024-12-25)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.9.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.8...@cosmology/proto-parser@1.9.0) (2024-12-17)
+# [1.9.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.8...@cosmology/proto-parser@1.9.0) (2024-12-17)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.8.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.7...@cosmology/proto-parser@1.8.8) (2024-12-09)
+## [1.8.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.7...@cosmology/proto-parser@1.8.8) (2024-12-09)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.8.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.6...@cosmology/proto-parser@1.8.7) (2024-11-04)
+## [1.8.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.6...@cosmology/proto-parser@1.8.7) (2024-11-04)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.8.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.5...@cosmology/proto-parser@1.8.6) (2024-10-21)
+## [1.8.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.5...@cosmology/proto-parser@1.8.6) (2024-10-21)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.8.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.4...@cosmology/proto-parser@1.8.5) (2024-10-05)
+## [1.8.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.4...@cosmology/proto-parser@1.8.5) (2024-10-05)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.8.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.3...@cosmology/proto-parser@1.8.4) (2024-09-18)
+## [1.8.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.3...@cosmology/proto-parser@1.8.4) (2024-09-18)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.8.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.2...@cosmology/proto-parser@1.8.3) (2024-09-16)
+## [1.8.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.2...@cosmology/proto-parser@1.8.3) (2024-09-16)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.8.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.1...@cosmology/proto-parser@1.8.2) (2024-09-12)
+## [1.8.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.1...@cosmology/proto-parser@1.8.2) (2024-09-12)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.8.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.8.0...@cosmology/proto-parser@1.8.1) (2024-06-28)
+## [1.8.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.8.0...@cosmology/proto-parser@1.8.1) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.8.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.7.0...@cosmology/proto-parser@1.8.0) (2024-06-25)
+# [1.8.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.7.0...@cosmology/proto-parser@1.8.0) (2024-06-25)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.7.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.6.0...@cosmology/proto-parser@1.7.0) (2024-05-25)
+# [1.7.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.6.0...@cosmology/proto-parser@1.7.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.6.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.5.3...@cosmology/proto-parser@1.6.0) (2024-05-25)
+# [1.6.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.5.3...@cosmology/proto-parser@1.6.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.5.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.5.2...@cosmology/proto-parser@1.5.3) (2024-05-13)
+## [1.5.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.5.2...@cosmology/proto-parser@1.5.3) (2024-05-13)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.5.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.5.1...@cosmology/proto-parser@1.5.2) (2024-04-03)
+## [1.5.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.5.1...@cosmology/proto-parser@1.5.2) (2024-04-03)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.5.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.5.0...@cosmology/proto-parser@1.5.1) (2024-04-02)
+## [1.5.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.5.0...@cosmology/proto-parser@1.5.1) (2024-04-02)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.5.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.4.5...@cosmology/proto-parser@1.5.0) (2024-03-20)
+# [1.5.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.4.5...@cosmology/proto-parser@1.5.0) (2024-03-20)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.4.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.4.4...@cosmology/proto-parser@1.4.5) (2024-03-18)
+## [1.4.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.4.4...@cosmology/proto-parser@1.4.5) (2024-03-18)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.4.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.4.3...@cosmology/proto-parser@1.4.4) (2024-01-19)
+## [1.4.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.4.3...@cosmology/proto-parser@1.4.4) (2024-01-19)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.4.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.4.2...@cosmology/proto-parser@1.4.3) (2024-01-16)
+## [1.4.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.4.2...@cosmology/proto-parser@1.4.3) (2024-01-16)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.4.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.4.1...@cosmology/proto-parser@1.4.2) (2024-01-16)
+## [1.4.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.4.1...@cosmology/proto-parser@1.4.2) (2024-01-16)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.4.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.4.0...@cosmology/proto-parser@1.4.1) (2024-01-08)
+## [1.4.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.4.0...@cosmology/proto-parser@1.4.1) (2024-01-08)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.4.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.3.2...@cosmology/proto-parser@1.4.0) (2023-12-26)
+# [1.4.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.3.2...@cosmology/proto-parser@1.4.0) (2023-12-26)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.3.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.3.1...@cosmology/proto-parser@1.3.2) (2023-12-14)
+## [1.3.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.3.1...@cosmology/proto-parser@1.3.2) (2023-12-14)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.3.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.3.0...@cosmology/proto-parser@1.3.1) (2023-12-13)
+## [1.3.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.3.0...@cosmology/proto-parser@1.3.1) (2023-12-13)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.3.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.2.1...@cosmology/proto-parser@1.3.0) (2023-12-13)
+# [1.3.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.2.1...@cosmology/proto-parser@1.3.0) (2023-12-13)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.2.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.2.0...@cosmology/proto-parser@1.2.1) (2023-12-05)
+## [1.2.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.2.0...@cosmology/proto-parser@1.2.1) (2023-12-05)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.2.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.1.0...@cosmology/proto-parser@1.2.0) (2023-12-03)
+# [1.2.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.1.0...@cosmology/proto-parser@1.2.0) (2023-12-03)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.1.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.11...@cosmology/proto-parser@1.1.0) (2023-11-19)
+# [1.1.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.11...@cosmology/proto-parser@1.1.0) (2023-11-19)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.11](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.10...@cosmology/proto-parser@1.0.11) (2023-11-13)
+## [1.0.11](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.10...@cosmology/proto-parser@1.0.11) (2023-11-13)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.9...@cosmology/proto-parser@1.0.10) (2023-11-12)
+## [1.0.10](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.9...@cosmology/proto-parser@1.0.10) (2023-11-12)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.9](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.8...@cosmology/proto-parser@1.0.9) (2023-11-12)
+## [1.0.9](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.8...@cosmology/proto-parser@1.0.9) (2023-11-12)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.7...@cosmology/proto-parser@1.0.8) (2023-11-10)
+## [1.0.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.7...@cosmology/proto-parser@1.0.8) (2023-11-10)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.6...@cosmology/proto-parser@1.0.7) (2023-10-30)
+## [1.0.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.6...@cosmology/proto-parser@1.0.7) (2023-10-30)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.5...@cosmology/proto-parser@1.0.6) (2023-10-29)
+## [1.0.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.5...@cosmology/proto-parser@1.0.6) (2023-10-29)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.4...@cosmology/proto-parser@1.0.5) (2023-10-29)
+## [1.0.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.4...@cosmology/proto-parser@1.0.5) (2023-10-29)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.3...@cosmology/proto-parser@1.0.4) (2023-10-28)
+## [1.0.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.3...@cosmology/proto-parser@1.0.4) (2023-10-28)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.2...@cosmology/proto-parser@1.0.3) (2023-10-23)
+## [1.0.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.2...@cosmology/proto-parser@1.0.3) (2023-10-23)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.1...@cosmology/proto-parser@1.0.2) (2023-10-17)
+## [1.0.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.1...@cosmology/proto-parser@1.0.2) (2023-10-17)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [1.0.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@1.0.0...@cosmology/proto-parser@1.0.1) (2023-09-20)
+## [1.0.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@1.0.0...@cosmology/proto-parser@1.0.1) (2023-09-20)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [1.0.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.51.2...@cosmology/proto-parser@1.0.0) (2023-09-13)
+# [1.0.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@0.51.2...@cosmology/proto-parser@1.0.0) (2023-09-13)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [0.51.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.51.1...@cosmology/proto-parser@0.51.2) (2023-09-07)
+## [0.51.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@0.51.1...@cosmology/proto-parser@0.51.2) (2023-09-07)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-## [0.51.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.51.0...@cosmology/proto-parser@0.51.1) (2023-09-07)
+## [0.51.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@0.51.0...@cosmology/proto-parser@0.51.1) (2023-09-07)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [0.51.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.50.0...@cosmology/proto-parser@0.51.0) (2023-09-06)
+# [0.51.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@0.50.0...@cosmology/proto-parser@0.51.0) (2023-09-06)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [0.50.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.49.0...@cosmology/proto-parser@0.50.0) (2023-09-05)
+# [0.50.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@0.49.0...@cosmology/proto-parser@0.50.0) (2023-09-05)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [0.49.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.48.0...@cosmology/proto-parser@0.49.0) (2023-09-05)
+# [0.49.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@0.48.0...@cosmology/proto-parser@0.49.0) (2023-09-05)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [0.48.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.47.0...@cosmology/proto-parser@0.48.0) (2023-08-16)
+# [0.48.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@0.47.0...@cosmology/proto-parser@0.48.0) (2023-08-16)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
-# [0.47.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/proto-parser@0.46.0...@cosmology/proto-parser@0.47.0) (2023-08-11)
+# [0.47.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/proto-parser@0.46.0...@cosmology/proto-parser@0.47.0) (2023-08-11)
 
 **Note:** Version bump only for package @cosmology/proto-parser
 
@@ -203,8 +203,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Reverts
 
-- Revert "RC versions ready" ([04081a9](https://github.com/cosmology-tech/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
-- Revert "chore(release): publish" ([086a55f](https://github.com/cosmology-tech/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+- Revert "RC versions ready" ([04081a9](https://github.com/hyperweb-io/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+- Revert "chore(release): publish" ([086a55f](https://github.com/hyperweb-io/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
 
 ## [0.45.1](https://github.com/osmosis-labs/telescope/compare/@cosmology/proto-parser@0.45.0...@cosmology/proto-parser@0.45.1) (2023-07-06)
 

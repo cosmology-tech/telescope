@@ -17,7 +17,7 @@ const getStore = () => {
 syntax = "proto3";
 
 package ${pkg};
-option go_package = "github.com/cosmology-tech/go";
+option go_package = "github.com/hyperweb-io/go";
 
 message Dog {
     option (cosmos_proto.implements_interface) = "AnimalI";
@@ -48,7 +48,7 @@ message Dog {
         content: `
 syntax = "proto3";
 package cosmology.zone;
-option go_package = "github.com/cosmology-tech/go";
+option go_package = "github.com/hyperweb-io/go";
 
 message Cat {
     option (cosmos_proto.implements_interface) = "AnimalI";
@@ -68,7 +68,7 @@ import "google/protobuf/any.proto";
 import "cosmology/example/dog1.proto";
 import "cosmology/example/dog2.proto";
 
-option go_package = "github.com/cosmology-tech/go";
+option go_package = "github.com/hyperweb-io/go";
 
 message QueryAnimalsRequest {
     google.protobuf.Any animal = 1 [ (cosmos_proto.accepts_interface) = "AnimalI" ];
