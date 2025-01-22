@@ -5,19 +5,19 @@
 </p>
 
 <p align="center" width="100%">
-  <a href="https://github.com/cosmology-tech/telescope/actions/workflows/run-tests.yaml">
-    <img height="20" src="https://github.com/cosmology-tech/telescope/actions/workflows/run-tests.yaml/badge.svg" />
+  <a href="https://github.com/hyperweb-io/telescope/actions/workflows/run-tests.yaml">
+    <img height="20" src="https://github.com/hyperweb-io/telescope/actions/workflows/run-tests.yaml/badge.svg" />
   </a>
-    <a href="https://github.com/cosmology-tech/lib-count">
-      <img height="20" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcosmology-tech%2Flib-count%2Fmain%2Foutput%2Fbadges%2Fproducts%2Ftelescope%2Ftotal.json"/>
+    <a href="https://github.com/hyperweb-io/lib-count">
+      <img height="20" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhyperweb-io%2Flib-count%2Fmain%2Foutput%2Fbadges%2Fproducts%2Ftelescope%2Ftotal.json"/>
     </a>
-    <a href="https://github.com/cosmology-tech/lib-count">
-      <img height="20" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcosmology-tech%2Flib-count%2Fmain%2Foutput%2Fbadges%2Fproducts%2Ftelescope%2Fmonthly.json"/>
+    <a href="https://github.com/hyperweb-io/lib-count">
+      <img height="20" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhyperweb-io%2Flib-count%2Fmain%2Foutput%2Fbadges%2Fproducts%2Ftelescope%2Fmonthly.json"/>
     </a>
     <br />
-   <a href="https://github.com/cosmology-tech/telescope/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
-   <a href="https://github.com/cosmology-tech/telescope/blob/main/LICENSE-Apache"><img height="20" src="https://img.shields.io/badge/license-Apache-blue.svg"/></a>
-   <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/telescope?filename=packages%2Ftelescope%2Fpackage.json"/></a>
+   <a href="https://github.com/hyperweb-io/telescope/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
+   <a href="https://github.com/hyperweb-io/telescope/blob/main/LICENSE-Apache"><img height="20" src="https://img.shields.io/badge/license-Apache-blue.svg"/></a>
+   <a href="https://www.npmjs.com/package/@cosmology/telescope"><img height="20" src="https://img.shields.io/github/package-json/v/hyperweb-io/telescope?filename=packages%2Ftelescope%2Fpackage.json"/></a>
 </p>
 
 <p align="center">
@@ -119,7 +119,7 @@ npm install -g @cosmology/telescope create-cosmos-app
 
 ### Generate
 
-Use the [`create-cosmos-app`](https://github.com/cosmology-tech/create-cosmos-app/) command to create a new package from the `telescope` boilerplate.
+Use the [`create-cosmos-app`](https://github.com/hyperweb-io/create-cosmos-app/) command to create a new package from the `telescope` boilerplate.
 
 ```sh
 cca --boilerplate telescope
@@ -1349,7 +1349,7 @@ This should not be an issue, but if you experience problems with syntax or are n
 
 ## Developing
 
-See our [documentation](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md) for how to contribute and develop Telescope.
+See our [documentation](https://github.com/hyperweb-io/telescope/blob/main/docs/README.md) for how to contribute and develop Telescope.
 
 ## Sponsors
 
@@ -1361,17 +1361,17 @@ Kudos to our sponsors:
 
 Checkout these related projects:
 
-* [@cosmology/telescope](https://github.com/cosmology-tech/telescope) Your Frontend Companion for Building with TypeScript with Cosmos SDK Modules.
+* [telescope](https://github.com/hyperweb-io/telescope) Your Frontend Companion for Building with TypeScript with Cosmos SDK Modules.
 * [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen) Convert your CosmWasm smart contracts into dev-friendly TypeScript classes.
-* [chain-registry](https://github.com/cosmology-tech/chain-registry) Everything from token symbols, logos, and IBC denominations for all assets you want to support in your application.
-* [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) Experience the convenience of connecting with a variety of web3 wallets through a single, streamlined interface.
-* [create-cosmos-app](https://github.com/cosmology-tech/create-cosmos-app) Set up a modern Cosmos app by running one command.
-* [interchain-ui](https://github.com/cosmology-tech/interchain-ui) The Interchain Design System, empowering developers with a flexible, easy-to-use UI kit.
-* [starship](https://github.com/cosmology-tech/starship) Unified Testing and Development for the Interchain.
+* [chain-registry](https://github.com/hyperweb-io/chain-registry) Everything from token symbols, logos, and IBC denominations for all assets you want to support in your application.
+* [cosmos-kit](https://github.com/hyperweb-io/cosmos-kit) Experience the convenience of connecting with a variety of web3 wallets through a single, streamlined interface.
+* [create-cosmos-app](https://github.com/hyperweb-io/create-cosmos-app) Set up a modern Cosmos app by running one command.
+* [interchain-ui](https://github.com/hyperweb-io/interchain-ui) The Interchain Design System, empowering developers with a flexible, easy-to-use UI kit.
+* [starship](https://github.com/hyperweb-io/starship) Unified Testing and Development for the Interchain.
 
 ## Credits
 
-🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.zone/validator)
+🛠 Built by Hyperweb (formerly Cosmology) — if you like our tools, please checkout and contribute to [our github ⚛️](https://github.com/hyperweb-io)
 
 Thanks to these engineers, teams and projects for inspiring Telescope:
 

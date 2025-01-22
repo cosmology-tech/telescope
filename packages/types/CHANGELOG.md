@@ -3,199 +3,207 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.11.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.11.1...@cosmology/types@1.11.2) (2024-12-31)
+## [1.11.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.11.2...@cosmology/types@1.11.3) (2025-01-18)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.11.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.11.0...@cosmology/types@1.11.1) (2024-12-25)
+
+
+
+
+## [1.11.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.11.1...@cosmology/types@1.11.2) (2024-12-31)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.11.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.10.4...@cosmology/types@1.11.0) (2024-12-17)
+## [1.11.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.11.0...@cosmology/types@1.11.1) (2024-12-25)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.10.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.10.3...@cosmology/types@1.10.4) (2024-12-09)
+# [1.11.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.10.4...@cosmology/types@1.11.0) (2024-12-17)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.10.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.10.2...@cosmology/types@1.10.3) (2024-11-04)
+## [1.10.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.10.3...@cosmology/types@1.10.4) (2024-12-09)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.10.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.10.1...@cosmology/types@1.10.2) (2024-10-21)
+## [1.10.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.10.2...@cosmology/types@1.10.3) (2024-11-04)
+
+**Note:** Version bump only for package @cosmology/types
+
+## [1.10.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.10.1...@cosmology/types@1.10.2) (2024-10-21)
 
 ### Bug Fixes
 
-- flag names ([eed7fb3](https://github.com/cosmology-tech/telescope/commit/eed7fb3b6f726ff3590b7919f6445298f98f07da))
+- flag names ([eed7fb3](https://github.com/hyperweb-io/telescope/commit/eed7fb3b6f726ff3590b7919f6445298f98f07da))
 
-## [1.10.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.10.0...@cosmology/types@1.10.1) (2024-10-05)
+## [1.10.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.10.0...@cosmology/types@1.10.1) (2024-10-05)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.10.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.9.0...@cosmology/types@1.10.0) (2024-09-18)
+# [1.10.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.9.0...@cosmology/types@1.10.0) (2024-09-18)
 
 ### Features
 
-- add endo base64 lib support ([197da9e](https://github.com/cosmology-tech/telescope/commit/197da9e3ea10c7dde76dcf31da4484be70498c6e))
-- add endo/base64 support ([a920d39](https://github.com/cosmology-tech/telescope/commit/a920d39802b3c9fc45c12710c719f82adbdee04e))
+- add endo base64 lib support ([197da9e](https://github.com/hyperweb-io/telescope/commit/197da9e3ea10c7dde76dcf31da4484be70498c6e))
+- add endo/base64 support ([a920d39](https://github.com/hyperweb-io/telescope/commit/a920d39802b3c9fc45c12710c719f82adbdee04e))
 
-# [1.9.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.8.2...@cosmology/types@1.9.0) (2024-09-16)
+# [1.9.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.8.2...@cosmology/types@1.9.0) (2024-09-16)
 
 ### Bug Fixes
 
-- use correct var name for options ([f294fb9](https://github.com/cosmology-tech/telescope/commit/f294fb936e1688e30a8b884db756693a80f52407))
+- use correct var name for options ([f294fb9](https://github.com/hyperweb-io/telescope/commit/f294fb936e1688e30a8b884db756693a80f52407))
 
 ### Features
 
-- add conditional logic to change UTILS.decimals value ([cf5279b](https://github.com/cosmology-tech/telescope/commit/cf5279bbc9afa52bae57cccb2961c945d64c9ad4))
-- add options to choose beteen cosmjs or agoric-sdk ([f4a4a6b](https://github.com/cosmology-tech/telescope/commit/f4a4a6bc28ab413823dbf2c59caf5d8a28a14666))
+- add conditional logic to change UTILS.decimals value ([cf5279b](https://github.com/hyperweb-io/telescope/commit/cf5279bbc9afa52bae57cccb2961c945d64c9ad4))
+- add options to choose beteen cosmjs or agoric-sdk ([f4a4a6b](https://github.com/hyperweb-io/telescope/commit/f4a4a6bc28ab413823dbf2c59caf5d8a28a14666))
 
-## [1.8.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.8.1...@cosmology/types@1.8.2) (2024-09-12)
-
-**Note:** Version bump only for package @cosmology/types
-
-## [1.8.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.8.0...@cosmology/types@1.8.1) (2024-06-28)
+## [1.8.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.8.1...@cosmology/types@1.8.2) (2024-09-12)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.8.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.7.0...@cosmology/types@1.8.0) (2024-06-25)
+## [1.8.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.8.0...@cosmology/types@1.8.1) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.7.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.6.0...@cosmology/types@1.7.0) (2024-05-25)
+# [1.8.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.7.0...@cosmology/types@1.8.0) (2024-06-25)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.6.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.5.3...@cosmology/types@1.6.0) (2024-05-25)
+# [1.7.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.6.0...@cosmology/types@1.7.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.5.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.5.2...@cosmology/types@1.5.3) (2024-05-13)
+# [1.6.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.5.3...@cosmology/types@1.6.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.5.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.5.1...@cosmology/types@1.5.2) (2024-04-03)
+## [1.5.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.5.2...@cosmology/types@1.5.3) (2024-05-13)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.5.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.5.0...@cosmology/types@1.5.1) (2024-04-02)
+## [1.5.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.5.1...@cosmology/types@1.5.2) (2024-04-03)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.5.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.4.3...@cosmology/types@1.5.0) (2024-03-20)
+## [1.5.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.5.0...@cosmology/types@1.5.1) (2024-04-02)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.4.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.4.2...@cosmology/types@1.4.3) (2024-03-18)
+# [1.5.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.4.3...@cosmology/types@1.5.0) (2024-03-20)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.4.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.4.1...@cosmology/types@1.4.2) (2024-01-16)
+## [1.4.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.4.2...@cosmology/types@1.4.3) (2024-03-18)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.4.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.4.0...@cosmology/types@1.4.1) (2024-01-16)
+## [1.4.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.4.1...@cosmology/types@1.4.2) (2024-01-16)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.4.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.3.2...@cosmology/types@1.4.0) (2023-12-26)
+## [1.4.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.4.0...@cosmology/types@1.4.1) (2024-01-16)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.3.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.3.1...@cosmology/types@1.3.2) (2023-12-14)
+# [1.4.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.3.2...@cosmology/types@1.4.0) (2023-12-26)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.3.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.3.0...@cosmology/types@1.3.1) (2023-12-13)
+## [1.3.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.3.1...@cosmology/types@1.3.2) (2023-12-14)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.3.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.2.1...@cosmology/types@1.3.0) (2023-12-13)
+## [1.3.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.3.0...@cosmology/types@1.3.1) (2023-12-13)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.2.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.2.0...@cosmology/types@1.2.1) (2023-12-05)
+# [1.3.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.2.1...@cosmology/types@1.3.0) (2023-12-13)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.2.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.1.0...@cosmology/types@1.2.0) (2023-12-03)
+## [1.2.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.2.0...@cosmology/types@1.2.1) (2023-12-05)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.1.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.10...@cosmology/types@1.1.0) (2023-11-19)
+# [1.2.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.1.0...@cosmology/types@1.2.0) (2023-12-03)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.9...@cosmology/types@1.0.10) (2023-11-13)
+# [1.1.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.10...@cosmology/types@1.1.0) (2023-11-19)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.9](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.8...@cosmology/types@1.0.9) (2023-11-12)
+## [1.0.10](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.9...@cosmology/types@1.0.10) (2023-11-13)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.7...@cosmology/types@1.0.8) (2023-11-12)
+## [1.0.9](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.8...@cosmology/types@1.0.9) (2023-11-12)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.6...@cosmology/types@1.0.7) (2023-11-10)
+## [1.0.8](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.7...@cosmology/types@1.0.8) (2023-11-12)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.5...@cosmology/types@1.0.6) (2023-10-29)
+## [1.0.7](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.6...@cosmology/types@1.0.7) (2023-11-10)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.4...@cosmology/types@1.0.5) (2023-10-29)
+## [1.0.6](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.5...@cosmology/types@1.0.6) (2023-10-29)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.3...@cosmology/types@1.0.4) (2023-10-28)
+## [1.0.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.4...@cosmology/types@1.0.5) (2023-10-29)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.2...@cosmology/types@1.0.3) (2023-10-23)
+## [1.0.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.3...@cosmology/types@1.0.4) (2023-10-28)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.1...@cosmology/types@1.0.2) (2023-10-17)
+## [1.0.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.2...@cosmology/types@1.0.3) (2023-10-23)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [1.0.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.0.0...@cosmology/types@1.0.1) (2023-09-20)
+## [1.0.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.1...@cosmology/types@1.0.2) (2023-10-17)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [1.0.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@0.42.2...@cosmology/types@1.0.0) (2023-09-13)
+## [1.0.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@1.0.0...@cosmology/types@1.0.1) (2023-09-20)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [0.42.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@0.42.1...@cosmology/types@0.42.2) (2023-09-07)
+# [1.0.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@0.42.2...@cosmology/types@1.0.0) (2023-09-13)
 
 **Note:** Version bump only for package @cosmology/types
 
-## [0.42.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@0.42.0...@cosmology/types@0.42.1) (2023-09-07)
+## [0.42.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@0.42.1...@cosmology/types@0.42.2) (2023-09-07)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [0.42.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@0.41.0...@cosmology/types@0.42.0) (2023-09-06)
+## [0.42.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@0.42.0...@cosmology/types@0.42.1) (2023-09-07)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [0.41.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@0.40.0...@cosmology/types@0.41.0) (2023-09-05)
+# [0.42.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@0.41.0...@cosmology/types@0.42.0) (2023-09-06)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [0.40.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@0.39.0...@cosmology/types@0.40.0) (2023-09-05)
+# [0.41.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@0.40.0...@cosmology/types@0.41.0) (2023-09-05)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [0.39.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@0.38.0...@cosmology/types@0.39.0) (2023-08-16)
+# [0.40.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@0.39.0...@cosmology/types@0.40.0) (2023-09-05)
 
 **Note:** Version bump only for package @cosmology/types
 
-# [0.38.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@0.37.0...@cosmology/types@0.38.0) (2023-08-11)
+# [0.39.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@0.38.0...@cosmology/types@0.39.0) (2023-08-16)
+
+**Note:** Version bump only for package @cosmology/types
+
+# [0.38.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/types@0.37.0...@cosmology/types@0.38.0) (2023-08-11)
 
 **Note:** Version bump only for package @cosmology/types
 
@@ -203,8 +211,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Reverts
 
-- Revert "RC versions ready" ([04081a9](https://github.com/cosmology-tech/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
-- Revert "chore(release): publish" ([086a55f](https://github.com/cosmology-tech/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+- Revert "RC versions ready" ([04081a9](https://github.com/hyperweb-io/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+- Revert "chore(release): publish" ([086a55f](https://github.com/hyperweb-io/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
 
 ## [0.36.1](https://github.com/osmosis-labs/telescope/compare/@cosmology/types@0.36.0...@cosmology/types@0.36.1) (2023-07-06)
 

@@ -57,7 +57,7 @@ num_chains=$(yq -r ".chains | length - 1" ${CONFIGFILE})
 if [[ $num_chains -gt -1 ]]; then
   for i in $(seq 0 $num_chains); do
     # derive chain pod name from chain id
-    # https://github.com/cosmology-tech/starship/blob/main/charts/devnet/templates/_helpers.tpl#L56
+    # https://github.com/hyperweb-io/starship/blob/main/charts/devnet/templates/_helpers.tpl#L56
     chain=$(yq -r ".chains[$i].name" ${CONFIGFILE} )
     chain=${chain/_/"-"}
     localrpc=$(yq -r ".chains[$i].ports.rpc" ${CONFIGFILE} )
@@ -88,7 +88,7 @@ num_relayers=$(yq -r ".relayers | length - 1" ${CONFIGFILE})
 if [[ $num_relayers -gt -1 ]]; then
   for i in $(seq 0 $num_relayers); do
     # derive chain pod name from chain id
-    # https://github.com/cosmology-tech/starship/blob/main/charts/devnet/templates/_helpers.tpl#L56
+    # https://github.com/hyperweb-io/starship/blob/main/charts/devnet/templates/_helpers.tpl#L56
     relayer=$(yq -r ".relayers[$i].name" ${CONFIGFILE} )
     relayer=$(yq -r ".relayers[$i].type" ${CONFIGFILE} )-${relayer/_/"-"}
     localrest=$(yq -r ".relayers[$i].ports.rest" ${CONFIGFILE} )

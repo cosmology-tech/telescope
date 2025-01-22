@@ -1,9 +1,9 @@
 {
   "name": "@cosmology/proto-parser",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "A Parser for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
-  "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/parser#readme",
+  "homepage": "https://github.com/hyperweb-io/telescope/tree/master/packages/parser#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "main/index.js",
   "typings": "types/index.d.ts",
@@ -49,11 +49,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cosmology-tech/telescope"
+    "url": "https://github.com/hyperweb-io/telescope"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/cosmology-tech/telescope/issues"
+    "url": "https://github.com/hyperweb-io/telescope/issues"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",
@@ -74,8 +74,8 @@
   },
   "dependencies": {
     "@cosmology/protobufjs": "7.3.2",
-    "@cosmology/types": "^1.11.2",
-    "@cosmology/utils": "^1.9.2",
+    "@cosmology/types": "^1.11.3",
+    "@cosmology/utils": "^1.9.3",
     "dotty": "0.1.2",
     "fast-json-patch": "3.1.1",
     "glob": "8.0.3",

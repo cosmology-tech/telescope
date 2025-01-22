@@ -5,7 +5,7 @@ import { crossGlob as glob } from '@cosmology/utils';
 
 const fs = require('fs');
 const path = require('path');
-const repo = 'https://github.com/cosmology-tech/telescope-module-boilerplate.git';
+const repo = 'https://github.com/hyperweb-io/telescope-module-boilerplate.git';
 
 export default async argv => {
     if (!shell.which('git')) {

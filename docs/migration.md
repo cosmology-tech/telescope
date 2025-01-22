@@ -1,4 +1,4 @@
-[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
+[< back](https://github.com/hyperweb-io/telescope/blob/main/docs/README.md)
 
 ## Migration to v1.0
 

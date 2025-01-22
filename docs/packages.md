@@ -1,4 +1,4 @@
-[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
+[< back](https://github.com/hyperweb-io/telescope/blob/main/docs/README.md)
 
 # Packages and workspace
 
@@ -39,4 +39,4 @@ yarn build:ts # now the types will also show up
 ```
 
 
-[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
+[< back](https://github.com/hyperweb-io/telescope/blob/main/docs/README.md)
