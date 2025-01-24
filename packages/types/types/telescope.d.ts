@@ -239,10 +239,13 @@ export interface TelescopeOpts {
         }[];
         useConnectComet?: boolean;
     };
-    helperFuncCreators?: {
+    helperFunctions?: {
         enabled: boolean;
         useGlobalDecoderRegistry?: boolean;
-        genCustomHooks?: boolean;
+        hooks?: {
+            react: boolean;
+            vue?: boolean;
+        };
         include?: {
             serviceTypes?: ("Query" | "Tx")[];
             patterns?: string[];
@@ -285,17 +288,6 @@ export interface TelescopeOpts {
             nameMapping?: {
                 [key: string]: string;
             };
-        };
-    };
-    vueQuery?: {
-        enabled: boolean;
-        include?: {
-            /**
-             * @deprecated in favor of packages and protos supporting minimatch
-             */
-            patterns?: string[];
-            packages?: string[];
-            protos?: string[];
         };
     };
     mobx?: {

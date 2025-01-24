@@ -41,7 +41,7 @@ export const createObjectWithMethods = (
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.fromProto')) && fromProtoMsgMethod(context, name, proto),
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.toProto')) && toProtoMethod(context, name, proto),
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.toProto')) && toProtoMsgMethod(context, name, proto),
-        context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') && context.pluginValue('helperFuncCreators.enabled') && context.pluginValue('helperFuncCreators.useGlobalDecoderRegistry') && registerTypeUrlMethod({context, name, proto}),
+        context.pluginValue('interfaces.enabled') && context.pluginValue('interfaces.useGlobalDecoderRegistry') && context.pluginValue('helperFunctions.enabled') && context.pluginValue('helperFunctions.useGlobalDecoderRegistry') && registerTypeUrlMethod({context, name, proto}),
     ].filter(Boolean);
 
     return t.exportNamedDeclaration(

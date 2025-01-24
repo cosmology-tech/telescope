@@ -25,8 +25,8 @@ export function createQueryHelperCreator(
     const useGlobalDecoderRegistry =
         context.pluginValue("interfaces.enabled") &&
         context.pluginValue("interfaces.useGlobalDecoderRegistry") &&
-        context.pluginValue("helperFuncCreators.enabled") &&
-        context.pluginValue("helperFuncCreators.useGlobalDecoderRegistry");
+        context.pluginValue("helperFunctions.enabled") &&
+        context.pluginValue("helperFunctions.useGlobalDecoderRegistry");
 
     const callExpression = ast.callExpression(ast.identifier("buildQuery"), [
         ast.objectExpression(
@@ -60,13 +60,13 @@ export function createQueryHelperCreator(
                     true
                 ),
                 useGlobalDecoderRegistry &&
-                    ast.objectProperty(
-                        ast.identifier("deps"),
-                        ast.arrayExpression([
-                            ast.identifier(service.requestType),
-                            ast.identifier(service.responseType),
-                        ])
-                    ),
+                ast.objectProperty(
+                    ast.identifier("deps"),
+                    ast.arrayExpression([
+                        ast.identifier(service.requestType),
+                        ast.identifier(service.responseType),
+                    ])
+                ),
             ].filter(Boolean)
         ),
     ]);
@@ -127,6 +127,48 @@ export function createQueryHooks(
         ast.tsTypeReference(ast.identifier(service.requestType)),
         ast.tsTypeReference(ast.identifier(service.responseType)),
     ]);
+    return ast.exportNamedDeclaration(
+        ast.variableDeclaration("const", [
+            ast.variableDeclarator(ast.identifier(hookName), callExpression),
+        ])
+    );
+}
+
+
+/**
+ *
+ * @param context
+ * @param service
+ * @param methodKey e.g. "balance"
+ * @param helperCreatorName e.g. "createGetBalance"
+ * @param hookName e.g. "useGetBalance"
+ * @returns
+ */
+export function createVueQueryHooks(
+    context: GenericParseContext,
+    service: ProtoServiceMethod,
+    methodKey?: string,
+    helperCreatorName?: string,
+    hookName?: string,
+) {
+    context.addUtil("buildUseVueQuery");
+    const callExpression = ast.callExpression(ast.identifier("buildUseVueQuery"), [
+        ast.objectExpression([
+            ast.objectProperty(
+                ast.identifier("builderQueryFn"),
+                ast.identifier(helperCreatorName)
+            ),
+            ast.objectProperty(
+                ast.identifier("queryKeyPrefix"),
+                ast.stringLiteral(`${methodKey}Query`)
+            ),
+        ]),
+    ]);
+    callExpression.typeParameters = ast.tsTypeParameterInstantiation([
+        ast.tsTypeReference(ast.identifier(service.requestType)),
+        ast.tsTypeReference(ast.identifier(service.responseType)),
+    ]);
+
     return ast.exportNamedDeclaration(
         ast.variableDeclaration("const", [
             ast.variableDeclarator(ast.identifier(hookName), callExpression),

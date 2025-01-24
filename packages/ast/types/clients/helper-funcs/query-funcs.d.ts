@@ -20,3 +20,13 @@ export declare function createQueryHelperCreator(context: GenericParseContext, s
  * @returns
  */
 export declare function createQueryHooks(context: GenericParseContext, service: ProtoServiceMethod, methodKey?: string, helperCreatorName?: string, hookName?: string): ast.ExportNamedDeclaration;
+/**
+ *
+ * @param context
+ * @param service
+ * @param methodKey e.g. "balance"
+ * @param helperCreatorName e.g. "createGetBalance"
+ * @param hookName e.g. "useGetBalance"
+ * @returns
+ */
+export declare function createVueQueryHooks(context: GenericParseContext, service: ProtoServiceMethod, methodKey?: string, helperCreatorName?: string, hookName?: string): ast.ExportNamedDeclaration;

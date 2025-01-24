@@ -1,6 +1,6 @@
 import { buildAllImports, getDepsFromQueries } from "../imports";
 import { Bundler } from "../bundler";
-import { createMsgHelperCreator, createMsgHooks } from "@cosmology/ast";
+import { createMsgHelperCreator, createMsgHooks, createVueMsgHooks } from "@cosmology/ast";
 import { getNestedProto } from "@cosmology/proto-parser";
 import { parse } from "../parse";
 import { TelescopeBuilder } from "../builder";
@@ -20,11 +20,11 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
 
   const clients = mutationContexts
     .map((c) => {
-      const enabled = c.proto.pluginValue("helperFuncCreators.enabled");
+      const enabled = c.proto.pluginValue("helperFunctions.enabled");
       if (!enabled) return;
 
       const serviceTypes = c.proto.pluginValue(
-        "helperFuncCreators.include.serviceTypes"
+        "helperFunctions.include.serviceTypes"
       );
 
       if (serviceTypes && !serviceTypes.includes("Tx")) {
@@ -34,8 +34,14 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
       if (c.proto.isExcluded()) return;
 
       const localname = bundler.getLocalFilename(c.ref, "rpc.func");
+      const localnameReact = bundler.getLocalFilename(c.ref, `rpc.react`);
+      const localnameVue = bundler.getLocalFilename(c.ref, `rpc.vue`);
       const filename = bundler.getFilename(localname);
+      const filenameReact = bundler.getFilename(localnameReact);
+      const filenameVue = bundler.getFilename(localnameVue);
+
       const ctx = bundler.getFreshContext(c);
+
 
       // get mutations, services
       parse(ctx);
@@ -47,6 +53,10 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
       }
 
       const asts = [];
+      const reactAsts = [];
+      const vueAsts = [];
+      const helperCreatorNameList = [];
+
       const bundlerFile: BundlerFile = {
         proto: c.ref.filename,
         package: c.ref.proto.package,
@@ -59,10 +69,10 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
         if (proto[svcKey]) {
           const svc: ProtoService = proto[svcKey];
           const patterns = c.proto.pluginValue(
-            "helperFuncCreators.include.patterns"
+            "helperFunctions.include.patterns"
           );
           const nameMappers = c.proto.pluginValue(
-            "helperFuncCreators.nameMappers"
+            "helperFunctions.nameMappers"
           );
 
           const methodKeys = getQueryMethodNames(
@@ -89,6 +99,7 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
                 "unchanged"
               );
 
+            helperCreatorNameList.push(helperCreatorName);
             // gen helper funcs
             asts.push(
               createMsgHelperCreator(
@@ -99,12 +110,16 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
             );
 
             const genCustomHooks = c.proto.pluginValue(
-              "helperFuncCreators.genCustomHooks"
+              "helperFunctions.hooks.react"
+            );
+
+            const genCustomHooksVue = c.proto.pluginValue(
+              "helperFunctions.hooks.vue"
             );
 
             if (genCustomHooks) {
-              // gen custom hooks
-              asts.push(
+              // gen custom react hooks
+              reactAsts.push(
                 createMsgHooks(
                   ctx.generic,
                   svc.methods[methodKey],
@@ -113,6 +128,19 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
                 )
               );
             }
+
+            if (genCustomHooksVue) {
+              // gen custom vue hooks
+              vueAsts.push(
+                createVueMsgHooks(
+                  ctx.generic,
+                  svc.methods[methodKey],
+                  helperCreatorName,
+                  hookName
+                )
+              );
+            }
+
           });
         }
       });
@@ -122,11 +150,24 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
       }
 
       const serviceImports = getDepsFromQueries(ctx.mutations, localname);
+      const serviceImportsReact = getDepsFromQueries(ctx.mutations, localnameReact);
+      const serviceImportsVue = getDepsFromQueries(ctx.mutations, localnameVue);
+
+      const funcFileName = "./".concat(localname.substring(localname.lastIndexOf("/") + 1))
+      serviceImportsReact[funcFileName] = helperCreatorNameList;
+      serviceImportsVue[funcFileName] = helperCreatorNameList;
 
       const imports = buildAllImports(ctx, serviceImports, localname);
+      const importsReact = buildAllImports(ctx, serviceImportsReact, localnameReact);
+      const importsVue = buildAllImports(ctx, serviceImportsVue, localnameReact);
+
       const prog = [].concat(imports).concat(ctx.body).concat(asts);
+      const progReact = [].concat(importsReact).concat(reactAsts);
+      const progVue = [].concat(importsVue).concat(vueAsts);
 
       bundler.writeAst(prog, filename);
+      bundler.writeAst(progReact, filenameReact);
+      bundler.writeAst(progVue, filenameVue);
       bundler.addToBundle(c, localname);
 
       return {

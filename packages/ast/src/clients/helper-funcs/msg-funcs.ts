@@ -24,8 +24,8 @@ export function createMsgHelperCreator(
     const useGlobalDecoderRegistry =
         context.pluginValue("interfaces.enabled") &&
         context.pluginValue("interfaces.useGlobalDecoderRegistry") &&
-        context.pluginValue("helperFuncCreators.enabled") &&
-        context.pluginValue("helperFuncCreators.useGlobalDecoderRegistry");
+        context.pluginValue("helperFunctions.enabled") &&
+        context.pluginValue("helperFunctions.useGlobalDecoderRegistry");
 
     const callExpression = ast.callExpression(ast.identifier("buildTx"), [
         ast.objectExpression(
@@ -104,6 +104,45 @@ export function createMsgHooks(
 
     const callExpression = ast.callExpression(
         ast.identifier("buildUseMutation"),
+        [
+            ast.objectExpression([
+                ast.objectProperty(
+                    ast.identifier("builderMutationFn"),
+                    ast.identifier(helperCreatorName)
+                ),
+            ]),
+        ]
+    );
+    callExpression.typeParameters = ast.tsTypeParameterInstantiation([
+        ast.tsTypeReference(ast.identifier(service.requestType)),
+        ast.tsTypeReference(ast.identifier(`Error`)),
+    ]);
+    return ast.exportNamedDeclaration(
+        ast.variableDeclaration("const", [
+            ast.variableDeclarator(ast.identifier(hookName), callExpression),
+        ])
+    );
+}
+
+/**
+ *
+ * @param context
+ * @param service
+ * @param methodKey e.g. "balance"
+ * @param helperCreatorName e.g. "createGetBalance"
+ * @param hookName e.g. "useGetBalance"
+ * @returns
+ */
+export function createVueMsgHooks(
+    context: GenericParseContext,
+    service: ProtoServiceMethod,
+    helperCreatorName?: string,
+    hookName?: string
+) {
+    context.addUtil("buildUseVueMutation");
+
+    const callExpression = ast.callExpression(
+        ast.identifier("buildUseVueMutation"),
         [
             ast.objectExpression([
                 ast.objectProperty(

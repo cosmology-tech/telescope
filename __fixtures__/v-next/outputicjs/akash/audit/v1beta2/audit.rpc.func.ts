@@ -1,6 +1,5 @@
 import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
-import { buildUseMutation } from "../../../react-query";
 import { MsgSignProviderAttributes, MsgDeleteProviderAttributes } from "./audit";
 export const createSignProviderAttributes = (clientResolver?: SigningClientResolver) => buildTx<MsgSignProviderAttributes>({
   clientResolver,
@@ -8,15 +7,9 @@ export const createSignProviderAttributes = (clientResolver?: SigningClientResol
   encoders: toEncoders(MsgSignProviderAttributes),
   converters: toConverters(MsgSignProviderAttributes)
 });
-export const useSignProviderAttributes = buildUseMutation<MsgSignProviderAttributes, Error>({
-  builderMutationFn: createSignProviderAttributes
-});
 export const createDeleteProviderAttributes = (clientResolver?: SigningClientResolver) => buildTx<MsgDeleteProviderAttributes>({
   clientResolver,
   typeUrl: MsgDeleteProviderAttributes.typeUrl,
   encoders: toEncoders(MsgDeleteProviderAttributes),
   converters: toConverters(MsgDeleteProviderAttributes)
-});
-export const useDeleteProviderAttributes = buildUseMutation<MsgDeleteProviderAttributes, Error>({
-  builderMutationFn: createDeleteProviderAttributes
 });

@@ -71,11 +71,6 @@ export const UTILS: { [key: string]: UtilValue } = {
   toTimestamp: '__helpers__',
   toUtf8: '@cosmjs/encoding',
   useQuery: '@tanstack/react-query',
-  useVueQuery: {
-    type: 'import',
-    name: 'useQuery',
-    path: '@tanstack/vue-query'
-  },
   ComputedRef: 'vue',
   computed: 'vue',
   Ref: 'vue',
@@ -83,15 +78,12 @@ export const UTILS: { [key: string]: UtilValue } = {
   useRpcClient: '__react-query__',
   useTendermintClient: '__react-query__',
   ReactQueryParams: '__react-query__',
-  VueQueryParams: {
-    type: 'import',
-    name: 'VueQueryParams',
-    path: '../../../vue-query'
-  },
   buildUseMutation:'__react-query__',
   UseQueryParams:'__react-query__',
   buildUseQuery:'__react-query__',
   UseQueryOptions: '@tanstack/react-query',
+  buildUseVueMutation:'__vue-query__',
+  buildUseVueQuery:'__vue-query__',
   QueryStore: '__mobx__',
   MobxResponse: '__mobx__',
   useEndpoint: '__pinia-endpoint__',
@@ -118,6 +110,7 @@ export const UTIL_HELPERS = [
   '__helpers__',
   '__extern__',
   '__react-query__',
+  '__vue-query__',
   '__mobx__',
   '__binary__',
   '__pinia-endpoint__',

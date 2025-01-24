@@ -173,17 +173,6 @@ export const plugin = (
             .concat(importStmts)
             ;
 
-        if (context.proto.pluginValue('vueQuery.enabled')) {
-          // import { ComputedRef } from 'vue'
-          const importVueStatement = t.importDeclaration(
-            [
-              t.importSpecifier(t.identifier('ComputedRef'), t.identifier('ComputedRef')),
-            ],
-            t.stringLiteral('vue') 
-          );
-          prog.push(importVueStatement)
-        }
-
         // package var
         if (context.proto.pluginValue('prototypes.includePackageVar')) {
             prog.push(t.exportNamedDeclaration(t.variableDeclaration('const', [

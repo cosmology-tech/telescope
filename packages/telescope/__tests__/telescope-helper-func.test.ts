@@ -217,15 +217,19 @@ const options: TelescopeOptions = {
     ],
   },
 
-  helperFuncCreators: {
+  helperFunctions: {
     enabled: true,
     useGlobalDecoderRegistry: true,
-    genCustomHooks: true,
+    hooks: {
+      react: true,
+      vue: true
+    },
     include: {
       // pattern matching is case sensitive
       patterns: [
         "cosmos.gov.v1beta1.**",
-        "cosmos.bank.v1beta1.*Send*"
+        "cosmos.bank.v1beta1.**",
+        "cosmos.staking.v1beta1.**"
       ],
     },
     nameMappers: {
@@ -279,7 +283,7 @@ const options: TelescopeOptions = {
     include: {
       patterns: ["osmosis/**/gamm/**/query.proto"],
       protos: ["akash/cert/v1beta2/query.proto"],
-      packages: ["cosmos.bank.v1beta1", "cosmos.auth.**", "cosmos.nft.**"],
+      packages: ["cosmos.bank.v1beta1", "cosmos.auth.**", "cosmos.nft.**", "cosmos.staking.**"],
     },
     instantExport: {
       include: {

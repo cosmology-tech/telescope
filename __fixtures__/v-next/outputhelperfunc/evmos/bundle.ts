@@ -22,54 +22,54 @@ import * as _173 from "./recovery/v1/query";
 import * as _174 from "./vesting/v1/query";
 import * as _175 from "./vesting/v1/tx";
 import * as _176 from "./vesting/v1/vesting";
-import * as _442 from "./erc20/v1/tx.amino";
-import * as _443 from "./fees/v1/tx.amino";
-import * as _444 from "./vesting/v1/tx.amino";
-import * as _445 from "./erc20/v1/tx.registry";
-import * as _446 from "./fees/v1/tx.registry";
-import * as _447 from "./vesting/v1/tx.registry";
-import * as _448 from "./claims/v1/query.lcd";
-import * as _449 from "./epochs/v1/query.lcd";
-import * as _450 from "./erc20/v1/query.lcd";
-import * as _451 from "./fees/v1/query.lcd";
-import * as _452 from "./incentives/v1/query.lcd";
-import * as _453 from "./inflation/v1/query.lcd";
-import * as _454 from "./recovery/v1/query.lcd";
-import * as _455 from "./vesting/v1/query.lcd";
-import * as _456 from "./claims/v1/query.rpc.Query";
-import * as _457 from "./epochs/v1/query.rpc.Query";
-import * as _458 from "./erc20/v1/query.rpc.Query";
-import * as _459 from "./fees/v1/query.rpc.Query";
-import * as _460 from "./incentives/v1/query.rpc.Query";
-import * as _461 from "./inflation/v1/query.rpc.Query";
-import * as _462 from "./recovery/v1/query.rpc.Query";
-import * as _463 from "./vesting/v1/query.rpc.Query";
-import * as _464 from "./erc20/v1/tx.rpc.msg";
-import * as _465 from "./fees/v1/tx.rpc.msg";
-import * as _466 from "./vesting/v1/tx.rpc.msg";
-import * as _467 from "./erc20/v1/query.pinia.store";
-import * as _550 from "./lcd";
-import * as _551 from "./custom-lcd-client";
-import * as _552 from "./rpc.query";
-import * as _553 from "./evmos-rpc-client.query";
-import * as _554 from "./rpc.tx";
-import * as _555 from "./evmos-rpc-client.tx";
+import * as _445 from "./erc20/v1/tx.amino";
+import * as _446 from "./fees/v1/tx.amino";
+import * as _447 from "./vesting/v1/tx.amino";
+import * as _448 from "./erc20/v1/tx.registry";
+import * as _449 from "./fees/v1/tx.registry";
+import * as _450 from "./vesting/v1/tx.registry";
+import * as _451 from "./claims/v1/query.lcd";
+import * as _452 from "./epochs/v1/query.lcd";
+import * as _453 from "./erc20/v1/query.lcd";
+import * as _454 from "./fees/v1/query.lcd";
+import * as _455 from "./incentives/v1/query.lcd";
+import * as _456 from "./inflation/v1/query.lcd";
+import * as _457 from "./recovery/v1/query.lcd";
+import * as _458 from "./vesting/v1/query.lcd";
+import * as _459 from "./claims/v1/query.rpc.Query";
+import * as _460 from "./epochs/v1/query.rpc.Query";
+import * as _461 from "./erc20/v1/query.rpc.Query";
+import * as _462 from "./fees/v1/query.rpc.Query";
+import * as _463 from "./incentives/v1/query.rpc.Query";
+import * as _464 from "./inflation/v1/query.rpc.Query";
+import * as _465 from "./recovery/v1/query.rpc.Query";
+import * as _466 from "./vesting/v1/query.rpc.Query";
+import * as _467 from "./erc20/v1/tx.rpc.msg";
+import * as _468 from "./fees/v1/tx.rpc.msg";
+import * as _469 from "./vesting/v1/tx.rpc.msg";
+import * as _470 from "./erc20/v1/query.pinia.store";
+import * as _553 from "./lcd";
+import * as _554 from "./custom-lcd-client";
+import * as _555 from "./rpc.query";
+import * as _556 from "./evmos-rpc-client.query";
+import * as _557 from "./rpc.tx";
+import * as _558 from "./evmos-rpc-client.tx";
 export namespace evmos {
   export namespace claims {
     export const v1 = {
       ..._153,
       ..._154,
       ..._155,
-      ..._448,
-      ..._456
+      ..._451,
+      ..._459
     };
   }
   export namespace epochs {
     export const v1 = {
       ..._156,
       ..._157,
-      ..._449,
-      ..._457
+      ..._452,
+      ..._460
     };
   }
   export namespace erc20 {
@@ -78,12 +78,12 @@ export namespace evmos {
       ..._159,
       ..._160,
       ..._161,
-      ..._442,
       ..._445,
-      ..._450,
-      ..._458,
-      ..._464,
-      ..._467
+      ..._448,
+      ..._453,
+      ..._461,
+      ..._467,
+      ..._470
     };
   }
   export namespace fees {
@@ -92,11 +92,11 @@ export namespace evmos {
       ..._163,
       ..._164,
       ..._165,
-      ..._443,
       ..._446,
-      ..._451,
-      ..._459,
-      ..._465
+      ..._449,
+      ..._454,
+      ..._462,
+      ..._468
     };
   }
   export namespace incentives {
@@ -104,8 +104,8 @@ export namespace evmos {
       ..._166,
       ..._167,
       ..._168,
-      ..._452,
-      ..._460
+      ..._455,
+      ..._463
     };
   }
   export namespace inflation {
@@ -113,16 +113,16 @@ export namespace evmos {
       ..._169,
       ..._170,
       ..._171,
-      ..._453,
-      ..._461
+      ..._456,
+      ..._464
     };
   }
   export namespace recovery {
     export const v1 = {
       ..._172,
       ..._173,
-      ..._454,
-      ..._462
+      ..._457,
+      ..._465
     };
   }
   export namespace vesting {
@@ -130,19 +130,19 @@ export namespace evmos {
       ..._174,
       ..._175,
       ..._176,
-      ..._444,
       ..._447,
-      ..._455,
-      ..._463,
-      ..._466
+      ..._450,
+      ..._458,
+      ..._466,
+      ..._469
     };
   }
   export const ClientFactory = {
-    ..._550,
-    ..._551,
-    ..._552,
     ..._553,
     ..._554,
-    ..._555
+    ..._555,
+    ..._556,
+    ..._557,
+    ..._558
   };
 }
