@@ -161,7 +161,7 @@ const options: TelescopeOptions = {
       'ABCIApplication'
     ],
     useConnectComet: true,
-    useQueryClientResolver: true
+    useMakeClient: true
   },
 
   reactQuery: {

@@ -1,6 +1,10 @@
 import * as t from "@babel/types";
 import { GenericParseContext } from "../../../encoding";
-import { objectPattern } from "../../../utils";
+import {
+    objectPattern,
+    objectProperty,
+    tsPropertySignature,
+} from "../../../utils";
 import { restoreExtension } from "@cosmology/utils";
 
 export const rpcFuncArguments = (): t.ObjectPattern[] => {
@@ -174,9 +178,7 @@ export const createScopedRpcTmFactory = (
     identifier: string
 ) => {
     const newClientType = context.pluginValue("rpcClients.useConnectComet");
-    const useQueryClientResolver = context.pluginValue(
-        "rpcClients.useQueryClientResolver"
-    );
+    const useMakeClient = context.pluginValue("rpcClients.useMakeClient");
 
     const extensions = context.pluginValue("rpcClients.extensions");
     let functionParams;
@@ -234,10 +236,10 @@ export const createScopedRpcTmFactory = (
                         false,
                         true
                     ),
-                    useQueryClientResolver &&
+                    useMakeClient &&
                         t.objectProperty(
-                            t.identifier("queryClientResolver"),
-                            t.identifier("queryClientResolver"),
+                            t.identifier("makeClient"),
+                            t.identifier("makeClient"),
                             false,
                             true
                         ),
@@ -256,9 +258,9 @@ export const createScopedRpcTmFactory = (
                                     ])
                                 )
                             ),
-                            useQueryClientResolver &&
-                                t.tsPropertySignature(
-                                    t.identifier("queryClientResolver"),
+                            useMakeClient &&
+                                tsPropertySignature(
+                                    t.identifier("makeClient"),
                                     t.tsTypeAnnotation(
                                         t.tsFunctionType(
                                             null,
@@ -278,7 +280,8 @@ export const createScopedRpcTmFactory = (
                                                 )
                                             )
                                         )
-                                    )
+                                    ),
+                                    true
                                 ),
                         ].filter(Boolean)
                     )
@@ -286,30 +289,30 @@ export const createScopedRpcTmFactory = (
             ),
         ];
 
-        if (useQueryClientResolver) {
+        if (useMakeClient) {
             let createQueryClientName = newClientType
                 ? "createConnectCometQueryClient"
                 : "createTm34QueryClient";
             context.addUtil(createQueryClientName);
 
             functionStatements = [
-                t.variableDeclaration("let", [
+                t.variableDeclaration("const", [
+                    t.variableDeclarator(
+                        t.identifier("make"),
+                        t.logicalExpression(
+                            "||",
+                            t.identifier("makeClient"),
+                            t.identifier(createQueryClientName)
+                        )
+                    ),
+                ]),
+                t.variableDeclaration("const", [
                     t.variableDeclarator(
                         t.identifier("client"),
-                        t.conditionalExpression(
-                            t.identifier("queryClientResolver"),
-                            t.awaitExpression(
-                                t.callExpression(
-                                    t.identifier("queryClientResolver"),
-                                    [t.identifier("rpcEndpoint")]
-                                )
-                            ),
-                            t.awaitExpression(
-                                t.callExpression(
-                                    t.identifier(createQueryClientName),
-                                    [t.identifier("rpcEndpoint")]
-                                )
-                            )
+                        t.awaitExpression(
+                            t.callExpression(t.identifier("make"), [
+                                t.identifier("rpcEndpoint"),
+                            ])
                         )
                     ),
                 ]),

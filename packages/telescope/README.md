@@ -444,7 +444,7 @@ See [LCD Clients](#lcd-clients) for more info.
 | `rpcClients.enabledServices`   | which services to enable                                                | [`Msg`,`Query`,`Service`]     |
 | `rpcClients.instantOps` |        will generate instant rpc operations in the file `service-ops.ts` under root folder, which contains customized classes having selected rpc methods    | `undefined`                        |
 | `rpcClients.useConnectComet` |      will use connectComet function to get a tendermint client    | `undefined`                        |
-| `rpcClients.useQueryClientResolver` |      allow user to pass a query client resolver to create query client in createRPCQueryClient function    | `undefined`                        |
+| `rpcClients.useMakeClient` |      allow user to pass a query client resolver to create query client in createRPCQueryClient function    | `undefined`                        |
 | `rpcClients.serviceImplement` |     assign implement type of rpc methods, `Query` or `Tx`, by setting patterns under service types.       | `undefined`                        |
   `rpcClients.clientStyle.useUpdatedClientStyle` | The default value is `false`, which sets the generated client to use the legacy style. Setting it to `true` applies the updated style and activates the remaining options in clientStyle. | `false`
 | `rpcClients.clientStyle.type` | A string array containing possible values: `all-client`, `sdk-module-client`, and `custom-client`. The value `all-client` generates an all-module-client file. The value `sdk-module-client` generates a client for the module specified by the `sdkModuleClientOption`. The value `custom-client` generates a customized client as specified by `customClientOption` | `undefined`

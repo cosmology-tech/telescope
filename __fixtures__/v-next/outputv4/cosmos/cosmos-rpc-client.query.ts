@@ -4,12 +4,13 @@ import { QueryClient } from "@cosmjs/stargate";
 import { createConnectCometQueryClient } from "../extern.js";
 export const createCosmicRPCQueryClient = async ({
   rpcEndpoint,
-  queryClientResolver
+  makeClient
 }: {
   rpcEndpoint: string | HttpEndpoint;
-  queryClientResolver: (rpcEndpoint: string | HttpEndpoint) => Promise<QueryClient>;
+  makeClient?: (rpcEndpoint: string | HttpEndpoint) => Promise<QueryClient>;
 }) => {
-  let client = queryClientResolver ? await queryClientResolver(rpcEndpoint) : await createConnectCometQueryClient(rpcEndpoint);
+  const make = makeClient || createConnectCometQueryClient;
+  const client = await make(rpcEndpoint);
   return {
     cosmos: {
       bank: {
