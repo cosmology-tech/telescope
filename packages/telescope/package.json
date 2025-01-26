@@ -1,6 +1,6 @@
 {
   "name": "@cosmology/telescope",
-  "version": "1.11.14",
+  "version": "1.11.15",
   "description": "A TypeScript Transpiler for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/hyperweb-io/telescope/tree/master/packages/telescope#readme",
