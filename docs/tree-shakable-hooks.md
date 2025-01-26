@@ -101,3 +101,80 @@ export const useGetBalance = buildUseVueQuery<QueryBalanceRequest, QueryBalanceR
 3. **Framework-Specific**: Provides optimized hooks tailored for React and Vue.
 
 By adopting this approach, you can ensure cleaner, more maintainable, and efficient code.
+
+
+## Use Example of Shared Functions
+
+Shared functions allow you to create API interaction logic that can be used across both React and Vue without duplicating code. Here's an example of how you might use the shared function `createGetBalance`:
+
+```typescript
+import { createGetBalance } from "@interchainjs/cosmos-types/cosmos/bank/v1beta1/query.rpc.func";
+
+({ chainInfo, getCoin, getRpcEndpoint, creditFromFaucet } = useChain('osmosis'));
+const rpcEndpoint = await getRpcEndpoint();
+getBalance = createGetBalance(rpcEndpoint);
+const { balance } = await getBalance({
+  address: directAddress,
+  denom,
+});
+```
+
+In this example, the createGetBalance function is called with an RPC endpoint and is used to fetch the balance for a specific address and denomination.
+
+## Use Example of Tree-Shakable Hooks
+
+Tree-shakable hooks provide a framework-specific API interaction method. Here's an example of how to use the tree-shakable hook `useGetBalance` in a React component:
+
+```typescript
+import BigNumber from "bignumber.js";
+import { useGetBalance } from "../../codegen/cosmos/bank/v1beta1/query.rpc.vue";
+import { Ref, computed } from "vue";
+import { assetLists } from "@chain-registry/v2";
+
+const defaultChainName = 'osmosistestnet' // 'cosmoshub'\
+const defaultAssetList = assetLists.find((assetList) => assetList.chainName === defaultChainName)
+const defaultRpcEndpoint = 'https://rpc.testnet.osmosis.zone' // 'https://cosmos-rpc.publicnode.com'
+
+export const useBalanceVue = (address: Ref) => {
+  const coin = defaultAssetList?.assets[0];
+
+  const denom = coin!.base!
+
+  const COIN_DISPLAY_EXPONENT = coin!.denomUnits.find(
+    (unit) => unit.denom === coin!.display
+  )?.exponent as number;
+
+  const request = computed(() => ({
+    address: address.value,
+    denom,
+  }));
+
+  const {
+    data: balance,
+    isSuccess: isBalanceLoaded,
+    isLoading: isFetchingBalance,
+    refetch: refetchBalance
+  } = useGetBalance({
+    request,
+    options: {
+      enabled: !!address,
+      //@ts-ignore
+      select: ({ balance }) =>
+        new BigNumber(balance?.amount ?? 0).multipliedBy(
+          10 ** -COIN_DISPLAY_EXPONENT
+        ),
+    },
+    clientResolver: defaultRpcEndpoint,
+  })
+
+  return {
+    balance,
+    isBalanceLoaded,
+    isFetchingBalance,
+    refetchBalance,
+  };
+};
+
+export default useBalanceVue;
+```
+In this example, the `defaultChainName`, `defaultAssetList`, and `defaultRpcEndpoint` are hardcoded for demonstration purposes. Please modify them according to your specific requirements.
