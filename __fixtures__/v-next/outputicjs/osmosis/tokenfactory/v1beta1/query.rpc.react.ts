@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryParamsRequest, QueryParamsResponse, QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataResponse, QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorResponse } from "./query";
-import { createGetParams, createGetDenomAuthorityMetadata, createGetDenomsFromCreator } from "./query.rpc.func.ts";
+import { createGetParams, createGetDenomAuthorityMetadata, createGetDenomsFromCreator } from "./query.rpc.func";
 export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsResponse>({
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"

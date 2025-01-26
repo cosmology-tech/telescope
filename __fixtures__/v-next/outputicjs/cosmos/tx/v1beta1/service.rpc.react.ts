@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { SimulateRequest, SimulateResponse, GetTxRequest, GetTxResponse, BroadcastTxRequest, BroadcastTxResponse, GetTxsEventRequest, GetTxsEventResponse, GetBlockWithTxsRequest, GetBlockWithTxsResponse } from "./service";
-import { createGetSimulate, createGetGetTx, createGetBroadcastTx, createGetGetTxsEvent, createGetGetBlockWithTxs } from "./service.rpc.func.ts";
+import { createGetSimulate, createGetGetTx, createGetBroadcastTx, createGetGetTxsEvent, createGetGetBlockWithTxs } from "./service.rpc.func";
 export const useGetSimulate = buildUseQuery<SimulateRequest, SimulateResponse>({
   builderQueryFn: createGetSimulate,
   queryKeyPrefix: "SimulateQuery"

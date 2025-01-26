@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../react-query";
 import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse, GaugeByIDRequest, GaugeByIDResponse, GaugesRequest, GaugesResponse, ActiveGaugesRequest, ActiveGaugesResponse, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomResponse, UpcomingGaugesRequest, UpcomingGaugesResponse, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomResponse, RewardsEstRequest, RewardsEstResponse, QueryLockableDurationsRequest, QueryLockableDurationsResponse } from "./query";
-import { createGetModuleToDistributeCoins, createGetGaugeByID, createGetGauges, createGetActiveGauges, createGetActiveGaugesPerDenom, createGetUpcomingGauges, createGetUpcomingGaugesPerDenom, createGetRewardsEst, createGetLockableDurations } from "./query.rpc.func.ts";
+import { createGetModuleToDistributeCoins, createGetGaugeByID, createGetGauges, createGetActiveGauges, createGetActiveGaugesPerDenom, createGetUpcomingGauges, createGetUpcomingGaugesPerDenom, createGetRewardsEst, createGetLockableDurations } from "./query.rpc.func";
 export const useGetModuleToDistributeCoins = buildUseQuery<ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse>({
   builderQueryFn: createGetModuleToDistributeCoins,
   queryKeyPrefix: "ModuleToDistributeCoinsQuery"

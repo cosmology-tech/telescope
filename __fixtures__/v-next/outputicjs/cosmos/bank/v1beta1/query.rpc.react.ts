@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryBalanceRequest, QueryBalanceResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySpendableBalancesRequest, QuerySpendableBalancesResponse, QueryTotalSupplyRequest, QueryTotalSupplyResponse, QuerySupplyOfRequest, QuerySupplyOfResponse, QueryParamsRequest, QueryParamsResponse, QueryDenomMetadataRequest, QueryDenomMetadataResponse, QueryDenomsMetadataRequest, QueryDenomsMetadataResponse, QueryDenomOwnersRequest, QueryDenomOwnersResponse } from "./query";
-import { createGetBalance, createGetAllBalances, createGetSpendableBalances, createGetTotalSupply, createGetSupplyOf, createGetParams, createGetDenomMetadata, createGetDenomsMetadata, createGetDenomOwners } from "./query.rpc.func.ts";
+import { createGetBalance, createGetAllBalances, createGetSpendableBalances, createGetTotalSupply, createGetSupplyOf, createGetParams, createGetDenomMetadata, createGetDenomsMetadata, createGetDenomOwners } from "./query.rpc.func";
 export const useGetBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResponse>({
   builderQueryFn: createGetBalance,
   queryKeyPrefix: "BalanceQuery"

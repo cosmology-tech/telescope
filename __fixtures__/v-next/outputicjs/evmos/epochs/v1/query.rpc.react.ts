@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochRequest, QueryCurrentEpochResponse } from "./query";
-import { createGetEpochInfos, createGetCurrentEpoch } from "./query.rpc.func.ts";
+import { createGetEpochInfos, createGetCurrentEpoch } from "./query.rpc.func";
 export const useGetEpochInfos = buildUseQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
   builderQueryFn: createGetEpochInfos,
   queryKeyPrefix: "EpochInfosQuery"

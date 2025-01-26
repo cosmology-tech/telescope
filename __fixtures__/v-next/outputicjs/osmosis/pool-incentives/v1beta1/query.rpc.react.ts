@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryGaugeIdsRequest, QueryGaugeIdsResponse, QueryDistrInfoRequest, QueryDistrInfoResponse, QueryParamsRequest, QueryParamsResponse, QueryLockableDurationsRequest, QueryLockableDurationsResponse, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsResponse, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesResponse } from "./query";
-import { createGetGaugeIds, createGetDistrInfo, createGetParams, createGetLockableDurations, createGetIncentivizedPools, createGetExternalIncentiveGauges } from "./query.rpc.func.ts";
+import { createGetGaugeIds, createGetDistrInfo, createGetParams, createGetLockableDurations, createGetIncentivizedPools, createGetExternalIncentiveGauges } from "./query.rpc.func";
 export const useGetGaugeIds = buildUseQuery<QueryGaugeIdsRequest, QueryGaugeIdsResponse>({
   builderQueryFn: createGetGaugeIds,
   queryKeyPrefix: "GaugeIdsQuery"

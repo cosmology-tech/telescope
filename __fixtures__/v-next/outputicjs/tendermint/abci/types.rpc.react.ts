@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../react-query";
 import { RequestEcho, ResponseEcho, RequestFlush, ResponseFlush, RequestInfo, ResponseInfo, RequestSetOption, ResponseSetOption, RequestDeliverTx, ResponseDeliverTx, RequestCheckTx, ResponseCheckTx, RequestQuery, ResponseQuery, RequestCommit, ResponseCommit, RequestInitChain, ResponseInitChain, RequestBeginBlock, ResponseBeginBlock, RequestEndBlock, ResponseEndBlock, RequestListSnapshots, ResponseListSnapshots, RequestOfferSnapshot, ResponseOfferSnapshot, RequestLoadSnapshotChunk, ResponseLoadSnapshotChunk, RequestApplySnapshotChunk, ResponseApplySnapshotChunk } from "./types";
-import { createGetEcho, createGetFlush, createGetInfo, createGetSetOption, createGetDeliverTx, createGetCheckTx, createGetQuery, createGetCommit, createGetInitChain, createGetBeginBlock, createGetEndBlock, createGetListSnapshots, createGetOfferSnapshot, createGetLoadSnapshotChunk, createGetApplySnapshotChunk } from "./types.rpc.func.ts";
+import { createGetEcho, createGetFlush, createGetInfo, createGetSetOption, createGetDeliverTx, createGetCheckTx, createGetQuery, createGetCommit, createGetInitChain, createGetBeginBlock, createGetEndBlock, createGetListSnapshots, createGetOfferSnapshot, createGetLoadSnapshotChunk, createGetApplySnapshotChunk } from "./types.rpc.func";
 export const useGetEcho = buildUseQuery<RequestEcho, ResponseEcho>({
   builderQueryFn: createGetEcho,
   queryKeyPrefix: "EchoQuery"

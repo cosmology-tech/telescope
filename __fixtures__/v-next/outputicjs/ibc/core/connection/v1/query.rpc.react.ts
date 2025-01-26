@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../../react-query";
 import { QueryConnectionRequest, QueryConnectionResponse, QueryConnectionsRequest, QueryConnectionsResponse, QueryClientConnectionsRequest, QueryClientConnectionsResponse, QueryConnectionClientStateRequest, QueryConnectionClientStateResponse, QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateResponse } from "./query";
-import { createGetConnection, createGetConnections, createGetClientConnections, createGetConnectionClientState, createGetConnectionConsensusState } from "./query.rpc.func.ts";
+import { createGetConnection, createGetConnections, createGetClientConnections, createGetConnectionClientState, createGetConnectionConsensusState } from "./query.rpc.func";
 export const useGetConnection = buildUseQuery<QueryConnectionRequest, QueryConnectionResponse>({
   builderQueryFn: createGetConnection,
   queryKeyPrefix: "ConnectionQuery"

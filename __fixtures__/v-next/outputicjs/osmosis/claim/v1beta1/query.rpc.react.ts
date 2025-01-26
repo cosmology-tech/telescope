@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse, QueryParamsRequest, QueryParamsResponse, QueryClaimRecordRequest, QueryClaimRecordResponse, QueryClaimableForActionRequest, QueryClaimableForActionResponse, QueryTotalClaimableRequest, QueryTotalClaimableResponse } from "./query";
-import { createGetModuleAccountBalance, createGetParams, createGetClaimRecord, createGetClaimableForAction, createGetTotalClaimable } from "./query.rpc.func.ts";
+import { createGetModuleAccountBalance, createGetParams, createGetClaimRecord, createGetClaimableForAction, createGetTotalClaimable } from "./query.rpc.func";
 export const useGetModuleAccountBalance = buildUseQuery<QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse>({
   builderQueryFn: createGetModuleAccountBalance,
   queryKeyPrefix: "ModuleAccountBalanceQuery"

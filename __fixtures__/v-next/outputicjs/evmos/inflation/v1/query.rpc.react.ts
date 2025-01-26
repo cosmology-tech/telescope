@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryPeriodRequest, QueryPeriodResponse, QueryEpochMintProvisionRequest, QueryEpochMintProvisionResponse, QuerySkippedEpochsRequest, QuerySkippedEpochsResponse, QueryCirculatingSupplyRequest, QueryCirculatingSupplyResponse, QueryInflationRateRequest, QueryInflationRateResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-import { createGetPeriod, createGetEpochMintProvision, createGetSkippedEpochs, createGetCirculatingSupply, createGetInflationRate, createGetParams } from "./query.rpc.func.ts";
+import { createGetPeriod, createGetEpochMintProvision, createGetSkippedEpochs, createGetCirculatingSupply, createGetInflationRate, createGetParams } from "./query.rpc.func";
 export const useGetPeriod = buildUseQuery<QueryPeriodRequest, QueryPeriodResponse>({
   builderQueryFn: createGetPeriod,
   queryKeyPrefix: "PeriodQuery"
