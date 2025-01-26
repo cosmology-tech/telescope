@@ -1,4 +1,4 @@
-[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
+[< back](https://github.com/hyperweb-io/telescope/blob/main/docs/README.md)
 
 ## Setup
 
@@ -11,4 +11,4 @@ yarn bootstrap  ## this installs dependencies and links the local packages inste
 yarn build      ## this recursively builds all packages (this command also exists inside each package)
 ```
 
-[< back](https://github.com/cosmology-tech/telescope/blob/main/docs/README.md)
+[< back](https://github.com/hyperweb-io/telescope/blob/main/docs/README.md)

@@ -175,7 +175,7 @@ export interface ReactMutationParams<TData, TError, TVariables, TContext = unkno
 export interface UseMutationBuilderOptions<TMsg> {
   builderMutationFn: (clientResolver?: SigningClientResolver) => (
     signerAddress: string,
-    message: TMsg,
+    message: TMsg | TMsg[],
     fee: StdFee | 'auto',
     memo: string
   ) => Promise<DeliverTxResponse>,

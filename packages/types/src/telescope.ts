@@ -291,6 +291,7 @@ export interface TelescopeOpts {
       };
     }[];
     useConnectComet?: boolean;
+    useMakeClient?: boolean;
   };
   helperFunctions?: {
     enabled: boolean;

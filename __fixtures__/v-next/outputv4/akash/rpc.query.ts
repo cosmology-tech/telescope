@@ -1,13 +1,16 @@
 import { Rpc } from "../helpers.js";
 import { connectComet, HttpEndpoint } from "@cosmjs/tendermint-rpc";
 import { QueryClient } from "@cosmjs/stargate";
+import { createConnectCometQueryClient } from "../extern.js";
 export const createRPCQueryClient = async ({
-  rpcEndpoint
+  rpcEndpoint,
+  makeClient
 }: {
   rpcEndpoint: string | HttpEndpoint;
+  makeClient?: (rpcEndpoint: string | HttpEndpoint) => Promise<QueryClient>;
 }) => {
-  const tmClient = await connectComet(rpcEndpoint);
-  const client = new QueryClient(tmClient);
+  const make = makeClient || createConnectCometQueryClient;
+  const client = await make(rpcEndpoint);
   return {
     akash: {
       audit: {

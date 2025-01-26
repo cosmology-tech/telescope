@@ -3,46 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.14.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.13.5...@cosmology/lcd@0.14.0) (2024-09-16)
+## [0.14.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.14.1...@cosmology/lcd@0.14.2) (2025-01-26)
 
+**Note:** Version bump only for package @cosmology/lcd
+
+## [0.14.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.14.0...@cosmology/lcd@0.14.1) (2025-01-18)
+
+**Note:** Version bump only for package @cosmology/lcd
+
+# [0.14.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.13.5...@cosmology/lcd@0.14.0) (2024-09-16)
 
 ### Features
 
-* add timeout to the argument of LcdClient constructor ([8e7c4e9](https://github.com/cosmology-tech/telescope/commit/8e7c4e92206b4931f8397c9810d582d85784ef4e))
+- add timeout to the argument of LcdClient constructor ([8e7c4e9](https://github.com/hyperweb-io/telescope/commit/8e7c4e92206b4931f8397c9810d582d85784ef4e))
 
-
-
-
-
-## [0.13.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.13.4...@cosmology/lcd@0.13.5) (2024-09-12)
+## [0.13.5](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.13.4...@cosmology/lcd@0.13.5) (2024-09-12)
 
 **Note:** Version bump only for package @cosmology/lcd
 
-
-
-
-
-## [0.13.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.13.3...@cosmology/lcd@0.13.4) (2024-06-28)
+## [0.13.4](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.13.3...@cosmology/lcd@0.13.4) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/lcd
 
-
-
-
-
-## [0.13.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.13.2...@cosmology/lcd@0.13.3) (2023-11-13)
+## [0.13.3](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.13.2...@cosmology/lcd@0.13.3) (2023-11-13)
 
 **Note:** Version bump only for package @cosmology/lcd
 
-## [0.13.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.13.1...@cosmology/lcd@0.13.2) (2023-11-12)
+## [0.13.2](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.13.1...@cosmology/lcd@0.13.2) (2023-11-12)
 
 **Note:** Version bump only for package @cosmology/lcd
 
-## [0.13.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.13.0...@cosmology/lcd@0.13.1) (2023-11-12)
+## [0.13.1](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.13.0...@cosmology/lcd@0.13.1) (2023-11-12)
 
 **Note:** Version bump only for package @cosmology/lcd
 
-# [0.13.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.12.0...@cosmology/lcd@0.13.0) (2023-09-05)
+# [0.13.0](https://github.com/hyperweb-io/telescope/compare/@cosmology/lcd@0.12.0...@cosmology/lcd@0.13.0) (2023-09-05)
 
 **Note:** Version bump only for package @cosmology/lcd
 
@@ -50,8 +45,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Reverts
 
-- Revert "RC versions ready" ([04081a9](https://github.com/cosmology-tech/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
-- Revert "chore(release): publish" ([086a55f](https://github.com/cosmology-tech/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
+- Revert "RC versions ready" ([04081a9](https://github.com/hyperweb-io/telescope/commit/04081a9d1f80feb3ae664bce2d1364850b3daaca))
+- Revert "chore(release): publish" ([086a55f](https://github.com/hyperweb-io/telescope/commit/086a55f14c5ca33ee70a0e2121406dd37eb643f1))
 
 ## [0.11.1](https://github.com/osmosis-labs/telescope/compare/@cosmology/lcd@0.11.0...@cosmology/lcd@0.11.1) (2023-04-11)
 

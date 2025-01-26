@@ -76,7 +76,7 @@ export const plugin = (builder: TelescopeBuilder) => {
       write(
         builder,
         "extern.ts",
-        builder.options.rpcClients?.useConnectComet ? externalComet : external
+        builder.options.rpcClients?.useConnectComet || builder.options.rpcClients?.useMakeClient ? externalComet : external
       );
     }
   }

@@ -1,6 +1,10 @@
 import * as t from "@babel/types";
 import { GenericParseContext } from "../../../encoding";
-import { objectPattern } from "../../../utils";
+import {
+    objectPattern,
+    objectProperty,
+    tsPropertySignature,
+} from "../../../utils";
 import { restoreExtension } from "@cosmology/utils";
 
 export const rpcFuncArguments = (): t.ObjectPattern[] => {
@@ -150,7 +154,7 @@ export const createScopedRpcFactory = (
     identifier: string,
     className: string,
     options?: {
-      restoreImportExtension?: string;
+        restoreImportExtension?: string;
     }
 ) => {
     return t.exportNamedDeclaration(
@@ -174,6 +178,8 @@ export const createScopedRpcTmFactory = (
     identifier: string
 ) => {
     const newClientType = context.pluginValue("rpcClients.useConnectComet");
+    const useMakeClient = context.pluginValue("rpcClients.useMakeClient");
+
     const extensions = context.pluginValue("rpcClients.extensions");
     let functionParams;
     const returnStatement = t.returnStatement(
@@ -213,6 +219,13 @@ export const createScopedRpcTmFactory = (
 
         context.addUtil("HttpEndpoint");
         context.addUtil("QueryClient");
+        const rpcEndpointParam = t.identifier("rpcEndpoint");
+        rpcEndpointParam.typeAnnotation = t.tsTypeAnnotation(
+            t.tsUnionType([
+                t.tsStringKeyword(),
+                t.tsTypeReference(t.identifier("HttpEndpoint")),
+            ])
+        );
 
         functionParams = [
             objectPattern(
@@ -223,44 +236,109 @@ export const createScopedRpcTmFactory = (
                         false,
                         true
                     ),
-                ],
-                t.tsTypeAnnotation(
-                    t.tsTypeLiteral([
-                        t.tsPropertySignature(
-                            t.identifier("rpcEndpoint"),
-                            t.tsTypeAnnotation(
-                                t.tsUnionType([
-                                    t.tsStringKeyword(),
-                                    t.tsTypeReference(
-                                        t.identifier("HttpEndpoint")
-                                    ),
-                                ])
-                            )
+                    useMakeClient &&
+                        t.objectProperty(
+                            t.identifier("makeClient"),
+                            t.identifier("makeClient"),
+                            false,
+                            true
                         ),
-                    ])
+                ].filter(Boolean),
+                t.tsTypeAnnotation(
+                    t.tsTypeLiteral(
+                        [
+                            t.tsPropertySignature(
+                                t.identifier("rpcEndpoint"),
+                                t.tsTypeAnnotation(
+                                    t.tsUnionType([
+                                        t.tsStringKeyword(),
+                                        t.tsTypeReference(
+                                            t.identifier("HttpEndpoint")
+                                        ),
+                                    ])
+                                )
+                            ),
+                            useMakeClient &&
+                                tsPropertySignature(
+                                    t.identifier("makeClient"),
+                                    t.tsTypeAnnotation(
+                                        t.tsFunctionType(
+                                            null,
+                                            [rpcEndpointParam],
+                                            t.tsTypeAnnotation(
+                                                t.tsTypeReference(
+                                                    t.identifier("Promise"),
+                                                    t.tsTypeParameterInstantiation(
+                                                        [
+                                                            t.tsTypeReference(
+                                                                t.identifier(
+                                                                    "QueryClient"
+                                                                )
+                                                            ),
+                                                        ]
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    true
+                                ),
+                        ].filter(Boolean)
+                    )
                 )
             ),
         ];
 
-        functionStatements = [
-            t.variableDeclaration("const", [
-                t.variableDeclarator(
-                    t.identifier("tmClient"),
-                    t.awaitExpression(awaitClientCreation)
-                ),
-            ]),
-            /////
-            t.variableDeclaration("const", [
-                t.variableDeclarator(
-                    t.identifier("client"),
-                    t.newExpression(t.identifier("QueryClient"), [
-                        t.identifier("tmClient"),
-                    ])
-                ),
-            ]),
+        if (useMakeClient) {
+            let createQueryClientName = newClientType
+                ? "createConnectCometQueryClient"
+                : "createTm34QueryClient";
+            context.addUtil(createQueryClientName);
 
-            returnStatement,
-        ];
+            functionStatements = [
+                t.variableDeclaration("const", [
+                    t.variableDeclarator(
+                        t.identifier("make"),
+                        t.logicalExpression(
+                            "||",
+                            t.identifier("makeClient"),
+                            t.identifier(createQueryClientName)
+                        )
+                    ),
+                ]),
+                t.variableDeclaration("const", [
+                    t.variableDeclarator(
+                        t.identifier("client"),
+                        t.awaitExpression(
+                            t.callExpression(t.identifier("make"), [
+                                t.identifier("rpcEndpoint"),
+                            ])
+                        )
+                    ),
+                ]),
+                returnStatement,
+            ];
+        } else {
+            functionStatements = [
+                t.variableDeclaration("const", [
+                    t.variableDeclarator(
+                        t.identifier("tmClient"),
+                        t.awaitExpression(awaitClientCreation)
+                    ),
+                ]),
+                /////
+                t.variableDeclaration("const", [
+                    t.variableDeclarator(
+                        t.identifier("client"),
+                        t.newExpression(t.identifier("QueryClient"), [
+                            t.identifier("tmClient"),
+                        ])
+                    ),
+                ]),
+
+                returnStatement,
+            ];
+        }
     } else {
         functionParams = rpcFuncArguments();
         functionStatements = [returnStatement];

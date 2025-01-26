@@ -41,6 +41,8 @@ export const UTILS: { [key: string]: UtilValue } = {
   fromTimestamp: '__helpers__',
   fromUtf8: '@cosmjs/encoding',
   GeneratedType: '@cosmjs/proto-signing',
+  createTm34QueryClient: '__extern__',
+  createConnectCometQueryClient: '__extern__',
   getRpcClient: '__extern__',
   createRpcClient: '__extern__',
   getRpcEndpointKey: '__extern__',
