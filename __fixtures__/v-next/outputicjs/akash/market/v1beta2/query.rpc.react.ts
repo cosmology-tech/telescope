@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryOrdersRequest, QueryOrdersResponse, QueryOrderRequest, QueryOrderResponse, QueryBidsRequest, QueryBidsResponse, QueryBidRequest, QueryBidResponse, QueryLeasesRequest, QueryLeasesResponse, QueryLeaseRequest, QueryLeaseResponse } from "./query";
-import { createGetOrders, createGetOrder, createGetBids, createGetBid, createGetLeases, createGetLease } from "./query.rpc.func.ts";
+import { createGetOrders, createGetOrder, createGetBids, createGetBid, createGetLeases, createGetLease } from "./query.rpc.func";
 export const useGetOrders = buildUseQuery<QueryOrdersRequest, QueryOrdersResponse>({
   builderQueryFn: createGetOrders,
   queryKeyPrefix: "OrdersQuery"

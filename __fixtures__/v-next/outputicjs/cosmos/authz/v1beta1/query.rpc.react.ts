@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryGrantsRequest, QueryGrantsResponse, QueryGranterGrantsRequest, QueryGranterGrantsResponse, QueryGranteeGrantsRequest, QueryGranteeGrantsResponse } from "./query";
-import { createGetGrants, createGetGranterGrants, createGetGranteeGrants } from "./query.rpc.func.ts";
+import { createGetGrants, createGetGranterGrants, createGetGranteeGrants } from "./query.rpc.func";
 export const useGetGrants = buildUseQuery<QueryGrantsRequest, QueryGrantsResponse>({
   builderQueryFn: createGetGrants,
   queryKeyPrefix: "GrantsQuery"

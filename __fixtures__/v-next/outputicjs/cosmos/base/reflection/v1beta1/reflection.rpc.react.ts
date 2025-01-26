@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../../react-query";
 import { ListAllInterfacesRequest, ListAllInterfacesResponse, ListImplementationsRequest, ListImplementationsResponse } from "./reflection";
-import { createGetListAllInterfaces, createGetListImplementations } from "./reflection.rpc.func.ts";
+import { createGetListAllInterfaces, createGetListImplementations } from "./reflection.rpc.func";
 export const useGetListAllInterfaces = buildUseQuery<ListAllInterfacesRequest, ListAllInterfacesResponse>({
   builderQueryFn: createGetListAllInterfaces,
   queryKeyPrefix: "ListAllInterfacesQuery"

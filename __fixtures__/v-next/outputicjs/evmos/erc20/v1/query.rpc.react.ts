@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryTokenPairsRequest, QueryTokenPairsResponse, QueryTokenPairRequest, QueryTokenPairResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-import { createGetTokenPairs, createGetTokenPair, createGetParams } from "./query.rpc.func.ts";
+import { createGetTokenPairs, createGetTokenPair, createGetParams } from "./query.rpc.func";
 export const useGetTokenPairs = buildUseQuery<QueryTokenPairsRequest, QueryTokenPairsResponse>({
   builderQueryFn: createGetTokenPairs,
   queryKeyPrefix: "TokenPairsQuery"

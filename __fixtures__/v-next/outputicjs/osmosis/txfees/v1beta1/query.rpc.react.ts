@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryFeeTokensRequest, QueryFeeTokensResponse, QueryDenomSpotPriceRequest, QueryDenomSpotPriceResponse, QueryDenomPoolIdRequest, QueryDenomPoolIdResponse, QueryBaseDenomRequest, QueryBaseDenomResponse } from "./query";
-import { createGetFeeTokens, createGetDenomSpotPrice, createGetDenomPoolId, createGetBaseDenom } from "./query.rpc.func.ts";
+import { createGetFeeTokens, createGetDenomSpotPrice, createGetDenomPoolId, createGetBaseDenom } from "./query.rpc.func";
 export const useGetFeeTokens = buildUseQuery<QueryFeeTokensRequest, QueryFeeTokensResponse>({
   builderQueryFn: createGetFeeTokens,
   queryKeyPrefix: "FeeTokensQuery"

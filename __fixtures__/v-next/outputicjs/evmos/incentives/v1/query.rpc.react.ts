@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryIncentivesRequest, QueryIncentivesResponse, QueryIncentiveRequest, QueryIncentiveResponse, QueryGasMetersRequest, QueryGasMetersResponse, QueryGasMeterRequest, QueryGasMeterResponse, QueryAllocationMetersRequest, QueryAllocationMetersResponse, QueryAllocationMeterRequest, QueryAllocationMeterResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-import { createGetIncentives, createGetIncentive, createGetGasMeters, createGetGasMeter, createGetAllocationMeters, createGetAllocationMeter, createGetParams } from "./query.rpc.func.ts";
+import { createGetIncentives, createGetIncentive, createGetGasMeters, createGetGasMeter, createGetAllocationMeters, createGetAllocationMeter, createGetParams } from "./query.rpc.func";
 export const useGetIncentives = buildUseQuery<QueryIncentivesRequest, QueryIncentivesResponse>({
   builderQueryFn: createGetIncentives,
   queryKeyPrefix: "IncentivesQuery"

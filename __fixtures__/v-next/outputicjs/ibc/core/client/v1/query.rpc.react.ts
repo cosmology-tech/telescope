@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../../react-query";
 import { QueryClientStateRequest, QueryClientStateResponse, QueryClientStatesRequest, QueryClientStatesResponse, QueryConsensusStateRequest, QueryConsensusStateResponse, QueryConsensusStatesRequest, QueryConsensusStatesResponse, QueryClientStatusRequest, QueryClientStatusResponse, QueryClientParamsRequest, QueryClientParamsResponse, QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse } from "./query";
-import { createGetClientState, createGetClientStates, createGetConsensusState, createGetConsensusStates, createGetClientStatus, createGetClientParams, createGetUpgradedClientState, createGetUpgradedConsensusState } from "./query.rpc.func.ts";
+import { createGetClientState, createGetClientStates, createGetConsensusState, createGetConsensusStates, createGetClientStatus, createGetClientParams, createGetUpgradedClientState, createGetUpgradedConsensusState } from "./query.rpc.func";
 export const useGetClientState = buildUseQuery<QueryClientStateRequest, QueryClientStateResponse>({
   builderQueryFn: createGetClientState,
   queryKeyPrefix: "ClientStateQuery"

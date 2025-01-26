@@ -4,7 +4,7 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { buildUseVueQuery } from "../../../vue-query";
 import { QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsRequest, QueryProposalsRequestSDKType, QueryProposalsResponse, QueryProposalsResponseSDKType, QueryVoteRequest, QueryVoteRequestSDKType, QueryVoteResponse, QueryVoteResponseSDKType, QueryVotesRequest, QueryVotesRequestSDKType, QueryVotesResponse, QueryVotesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDepositRequest, QueryDepositRequestSDKType, QueryDepositResponse, QueryDepositResponseSDKType, QueryDepositsRequest, QueryDepositsRequestSDKType, QueryDepositsResponse, QueryDepositsResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
-import { createGetProposal, createGetProposals, buildHelperVote, buildHelperVotes, createGetParams, createCheckDeposit, createGoOverDeposits, createGetTallyResult } from "./query.rpc.func.ts";
+import { createGetProposal, createGetProposals, buildHelperVote, buildHelperVotes, createGetParams, createCheckDeposit, createGoOverDeposits, createGetTallyResult } from "./query.rpc.func";
 export const useGetProposal = buildUseQuery<QueryProposalRequest, QueryProposalResponse>({
   builderQueryFn: createGetProposal,
   queryKeyPrefix: "ProposalQuery"

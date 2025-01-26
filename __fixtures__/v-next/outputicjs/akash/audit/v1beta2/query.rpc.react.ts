@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryAllProvidersAttributesRequest, QueryProvidersResponse, QueryProviderAttributesRequest, QueryProviderAuditorRequest, QueryAuditorAttributesRequest } from "./query";
-import { createGetAllProvidersAttributes, createGetProviderAttributes, createGetProviderAuditorAttributes, createGetAuditorAttributes } from "./query.rpc.func.ts";
+import { createGetAllProvidersAttributes, createGetProviderAttributes, createGetProviderAuditorAttributes, createGetAuditorAttributes } from "./query.rpc.func";
 export const useGetAllProvidersAttributes = buildUseQuery<QueryAllProvidersAttributesRequest, QueryProvidersResponse>({
   builderQueryFn: createGetAllProvidersAttributes,
   queryKeyPrefix: "AllProvidersAttributesQuery"

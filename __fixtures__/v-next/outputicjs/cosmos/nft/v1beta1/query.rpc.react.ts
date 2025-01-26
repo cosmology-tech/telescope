@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryBalanceRequest, QueryBalanceResponse, QueryOwnerRequest, QueryOwnerResponse, QuerySupplyRequest, QuerySupplyResponse, QueryNFTsRequest, QueryNFTsResponse, QueryNFTRequest, QueryNFTResponse, QueryClassRequest, QueryClassResponse, QueryClassesRequest, QueryClassesResponse } from "./query";
-import { createGetBalance, createGetOwner, createGetSupply, createGetNFTs, createGetNFT, createGetClass, createGetClasses } from "./query.rpc.func.ts";
+import { createGetBalance, createGetOwner, createGetSupply, createGetNFTs, createGetNFT, createGetClass, createGetClasses } from "./query.rpc.func";
 export const useGetBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResponse>({
   builderQueryFn: createGetBalance,
   queryKeyPrefix: "BalanceQuery"

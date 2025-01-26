@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse, QueryParamsRequest, QueryParamsResponse, QueryClaimsRecordsRequest, QueryClaimsRecordsResponse, QueryClaimsRecordRequest, QueryClaimsRecordResponse } from "./query";
-import { createGetTotalUnclaimed, createGetParams, createGetClaimsRecords, createGetClaimsRecord } from "./query.rpc.func.ts";
+import { createGetTotalUnclaimed, createGetParams, createGetClaimsRecords, createGetClaimsRecord } from "./query.rpc.func";
 export const useGetTotalUnclaimed = buildUseQuery<QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse>({
   builderQueryFn: createGetTotalUnclaimed,
   queryKeyPrefix: "TotalUnclaimedQuery"

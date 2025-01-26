@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosResponse, QueryDevFeeInfoRequest, QueryDevFeeInfoResponse, QueryParamsRequest, QueryParamsResponse, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse } from "./query";
-import { createGetDevFeeInfos, createGetDevFeeInfo, createGetParams, createGetDevFeeInfosPerDeployer } from "./query.rpc.func.ts";
+import { createGetDevFeeInfos, createGetDevFeeInfo, createGetParams, createGetDevFeeInfosPerDeployer } from "./query.rpc.func";
 export const useGetDevFeeInfos = buildUseQuery<QueryDevFeeInfosRequest, QueryDevFeeInfosResponse>({
   builderQueryFn: createGetDevFeeInfos,
   queryKeyPrefix: "DevFeeInfosQuery"

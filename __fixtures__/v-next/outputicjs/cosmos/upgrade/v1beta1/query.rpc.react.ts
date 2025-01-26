@@ -1,6 +1,6 @@
 import { buildUseQuery } from "../../../react-query";
 import { QueryCurrentPlanRequest, QueryCurrentPlanResponse, QueryAppliedPlanRequest, QueryAppliedPlanResponse, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse, QueryModuleVersionsRequest, QueryModuleVersionsResponse, QueryAuthorityRequest, QueryAuthorityResponse } from "./query";
-import { createGetCurrentPlan, createGetAppliedPlan, createGetUpgradedConsensusState, createGetModuleVersions, createGetAuthority } from "./query.rpc.func.ts";
+import { createGetCurrentPlan, createGetAppliedPlan, createGetUpgradedConsensusState, createGetModuleVersions, createGetAuthority } from "./query.rpc.func";
 export const useGetCurrentPlan = buildUseQuery<QueryCurrentPlanRequest, QueryCurrentPlanResponse>({
   builderQueryFn: createGetCurrentPlan,
   queryKeyPrefix: "CurrentPlanQuery"
