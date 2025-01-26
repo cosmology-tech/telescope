@@ -67,9 +67,12 @@ const options: TelescopeOptions = {
     enabled: false,
   },
 
-  helperFuncCreators: {
+  helperFunctions: {
     enabled: true,
-    genCustomHooks: true,
+    hooks: {
+      react: true,
+      vue: true
+    },
   },
 
   interfaces: {

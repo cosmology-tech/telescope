@@ -1,6 +1,5 @@
 import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
-import { buildUseMutation } from "../../../react-query";
 import { MsgJoinPool, MsgExitPool, MsgSwapExactAmountIn, MsgSwapExactAmountOut, MsgJoinSwapExternAmountIn, MsgJoinSwapShareAmountOut, MsgExitSwapExternAmountOut, MsgExitSwapShareAmountIn } from "./tx";
 export const createJoinPool = (clientResolver?: SigningClientResolver) => buildTx<MsgJoinPool>({
   clientResolver,
@@ -8,17 +7,11 @@ export const createJoinPool = (clientResolver?: SigningClientResolver) => buildT
   encoders: toEncoders(MsgJoinPool),
   converters: toConverters(MsgJoinPool)
 });
-export const useJoinPool = buildUseMutation<MsgJoinPool, Error>({
-  builderMutationFn: createJoinPool
-});
 export const createExitPool = (clientResolver?: SigningClientResolver) => buildTx<MsgExitPool>({
   clientResolver,
   typeUrl: MsgExitPool.typeUrl,
   encoders: toEncoders(MsgExitPool),
   converters: toConverters(MsgExitPool)
-});
-export const useExitPool = buildUseMutation<MsgExitPool, Error>({
-  builderMutationFn: createExitPool
 });
 export const createSwapExactAmountIn = (clientResolver?: SigningClientResolver) => buildTx<MsgSwapExactAmountIn>({
   clientResolver,
@@ -26,17 +19,11 @@ export const createSwapExactAmountIn = (clientResolver?: SigningClientResolver) 
   encoders: toEncoders(MsgSwapExactAmountIn),
   converters: toConverters(MsgSwapExactAmountIn)
 });
-export const useSwapExactAmountIn = buildUseMutation<MsgSwapExactAmountIn, Error>({
-  builderMutationFn: createSwapExactAmountIn
-});
 export const createSwapExactAmountOut = (clientResolver?: SigningClientResolver) => buildTx<MsgSwapExactAmountOut>({
   clientResolver,
   typeUrl: MsgSwapExactAmountOut.typeUrl,
   encoders: toEncoders(MsgSwapExactAmountOut),
   converters: toConverters(MsgSwapExactAmountOut)
-});
-export const useSwapExactAmountOut = buildUseMutation<MsgSwapExactAmountOut, Error>({
-  builderMutationFn: createSwapExactAmountOut
 });
 export const createJoinSwapExternAmountIn = (clientResolver?: SigningClientResolver) => buildTx<MsgJoinSwapExternAmountIn>({
   clientResolver,
@@ -44,17 +31,11 @@ export const createJoinSwapExternAmountIn = (clientResolver?: SigningClientResol
   encoders: toEncoders(MsgJoinSwapExternAmountIn),
   converters: toConverters(MsgJoinSwapExternAmountIn)
 });
-export const useJoinSwapExternAmountIn = buildUseMutation<MsgJoinSwapExternAmountIn, Error>({
-  builderMutationFn: createJoinSwapExternAmountIn
-});
 export const createJoinSwapShareAmountOut = (clientResolver?: SigningClientResolver) => buildTx<MsgJoinSwapShareAmountOut>({
   clientResolver,
   typeUrl: MsgJoinSwapShareAmountOut.typeUrl,
   encoders: toEncoders(MsgJoinSwapShareAmountOut),
   converters: toConverters(MsgJoinSwapShareAmountOut)
-});
-export const useJoinSwapShareAmountOut = buildUseMutation<MsgJoinSwapShareAmountOut, Error>({
-  builderMutationFn: createJoinSwapShareAmountOut
 });
 export const createExitSwapExternAmountOut = (clientResolver?: SigningClientResolver) => buildTx<MsgExitSwapExternAmountOut>({
   clientResolver,
@@ -62,15 +43,9 @@ export const createExitSwapExternAmountOut = (clientResolver?: SigningClientReso
   encoders: toEncoders(MsgExitSwapExternAmountOut),
   converters: toConverters(MsgExitSwapExternAmountOut)
 });
-export const useExitSwapExternAmountOut = buildUseMutation<MsgExitSwapExternAmountOut, Error>({
-  builderMutationFn: createExitSwapExternAmountOut
-});
 export const createExitSwapShareAmountIn = (clientResolver?: SigningClientResolver) => buildTx<MsgExitSwapShareAmountIn>({
   clientResolver,
   typeUrl: MsgExitSwapShareAmountIn.typeUrl,
   encoders: toEncoders(MsgExitSwapShareAmountIn),
   converters: toConverters(MsgExitSwapShareAmountIn)
-});
-export const useExitSwapShareAmountIn = buildUseMutation<MsgExitSwapShareAmountIn, Error>({
-  builderMutationFn: createExitSwapShareAmountIn
 });

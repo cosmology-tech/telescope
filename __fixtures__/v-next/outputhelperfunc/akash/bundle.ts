@@ -88,9 +88,9 @@ import * as _349 from "./market/v1beta2/service.rpc.msg";
 import * as _350 from "./provider/v1beta1/provider.rpc.msg";
 import * as _351 from "./provider/v1beta2/provider.rpc.msg";
 import * as _352 from "./cert/v1beta2/query.pinia.store";
-import * as _539 from "./lcd";
-import * as _540 from "./rpc.query";
-import * as _541 from "./rpc.tx";
+import * as _542 from "./lcd";
+import * as _543 from "./rpc.query";
+import * as _544 from "./rpc.tx";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = {
@@ -225,8 +225,8 @@ export namespace akash {
     };
   }
   export const ClientFactory = {
-    ..._539,
-    ..._540,
-    ..._541
+    ..._542,
+    ..._543,
+    ..._544
   };
 }

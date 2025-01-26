@@ -9,13 +9,13 @@ import * as _312 from "./types/params";
 import * as _313 from "./types/types";
 import * as _314 from "./types/validator";
 import * as _315 from "./version/types";
-import * as _538 from "./abci/types.rpc.ABCIApplication";
-import * as _563 from "./lcd";
-import * as _564 from "./rpc.query";
+import * as _541 from "./abci/types.rpc.ABCIApplication";
+import * as _566 from "./lcd";
+import * as _567 from "./rpc.query";
 export namespace tendermint {
   export const abci = {
     ..._305,
-    ..._538
+    ..._541
   };
   export const crypto = {
     ..._306,
@@ -40,7 +40,7 @@ export namespace tendermint {
     ..._315
   };
   export const ClientFactory = {
-    ..._563,
-    ..._564
+    ..._566,
+    ..._567
   };
 }

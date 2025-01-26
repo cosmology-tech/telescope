@@ -20,3 +20,13 @@ export declare function createMsgHelperCreator(context: GenericParseContext, ser
  * @returns
  */
 export declare function createMsgHooks(context: GenericParseContext, service: ProtoServiceMethod, helperCreatorName?: string, hookName?: string): ast.ExportNamedDeclaration;
+/**
+ *
+ * @param context
+ * @param service
+ * @param methodKey e.g. "balance"
+ * @param helperCreatorName e.g. "createGetBalance"
+ * @param hookName e.g. "useGetBalance"
+ * @returns
+ */
+export declare function createVueMsgHooks(context: GenericParseContext, service: ProtoServiceMethod, helperCreatorName?: string, hookName?: string): ast.ExportNamedDeclaration;

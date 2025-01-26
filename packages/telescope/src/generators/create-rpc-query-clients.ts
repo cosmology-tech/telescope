@@ -5,11 +5,8 @@ import {
     createRpcClientClass,
     createRpcClientInterface,
     createRpcQueryHookInterfaces,
-    createRpcVueQueryHookInterfaces,
     createRpcQueryHookClientMap,
-    createRpcVueQueryHookClientMap,
     createRpcQueryHooks,
-    createRpcVueQueryHooks,
     // grpc-gateway:
     createGRPCGatewayQueryClass,
     createGRPCGatewayWrapperClass,
@@ -241,20 +238,6 @@ export const plugin = (
                             [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
                         }
 
-                        // see if current file has been vueQuery enabled and included
-                        const includeVueQueryHooks = c.proto.pluginValue('vueQuery.enabled') && isRefIncluded(
-                            c.ref,
-                            c.proto.pluginValue('vueQuery.include')
-                        )
-
-                        if (includeVueQueryHooks) {
-                            [].push.apply(asts, createRpcVueQueryHookInterfaces(ctx.generic, svc));
-                        }
-
-                        if (includeVueQueryHooks) {
-                            [].push.apply(asts, createRpcVueQueryHookClientMap(ctx.generic, svc));
-                        }
-
                         // react query
                         // generate react query parts if included.
                         // eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts
@@ -271,9 +254,6 @@ export const plugin = (
                             bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns).map((key) => proto[svcKey].methods[key]);
 
                             reactQueryBundlerFiles.push(bundlerFile);
-                        }
-                        if (includeVueQueryHooks) {
-                            asts.push(createRpcVueQueryHooks(ctx.generic, proto[svcKey]));
                         }
 
                         // whether mobx plugin is enabled has been dealt with inside createMobxQueryStores
@@ -294,22 +274,10 @@ export const plugin = (
             return;
         }
 
-        let serviceImports = getDepsFromQueries(
+        const serviceImports = getDepsFromQueries(
             getImportsFrom,
             localname
         );
-
-        if (c.proto.pluginValue('vueQuery.enabled')) {
-            const reactiveRequests = []
-            serviceImports['./query']?.forEach(servImp => {
-                if (/^Query.*Request$/.test(servImp)) {
-                    reactiveRequests.push(`Reactive${servImp}`)
-                }
-            })
-            if (reactiveRequests.length > 0) {
-                serviceImports['./query'] = serviceImports['./query'].concat(reactiveRequests)
-            }
-        }
 
         // TODO we do NOT need all imports...
         const imports = buildAllImports(ctx, serviceImports, localname);

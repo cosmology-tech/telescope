@@ -213,50 +213,6 @@ export const createProtoType = (
     return declaration;
 };
 
-export const cloneAndWrapFieldsWithComputedRef = (
-    originalDeclaration: t.ExportNamedDeclaration
-  ): t.ExportNamedDeclaration => {
-    // Extract the interface declaration
-    const interfaceDeclaration = originalDeclaration.declaration as t.TSInterfaceDeclaration;
-    const originalFields = (interfaceDeclaration.body as t.TSInterfaceBody).body;
-
-    // Clone and modify each field
-    const newFields = originalFields.map((field) => {
-        if (t.isTSPropertySignature(field) && field.typeAnnotation) {
-            // Get the original field type
-            const originalType = field.typeAnnotation.typeAnnotation;
-
-            // Create the new type: ComputedRef<OriginalType>
-            const computedRefType = t.tsTypeReference(
-                t.identifier('ComputedRef'),
-                t.tsTypeParameterInstantiation([originalType])
-            );
-
-            // Clone the field and replace its type
-            return tsPropertySignature(
-                field.key,
-                t.tsTypeAnnotation(computedRefType),
-                field.optional
-            );
-        }
-        // Keep the field unchanged if it's not a TSPropertySignature
-        return field;
-    });
-
-    const newInterfaceId = t.identifier(`Reactive${interfaceDeclaration.id.name}`);
-    // const newInterfaceId = t.identifier(`${interfaceDeclaration.id.name}`)
-    // Create a new interface declaration
-    const newInterfaceDeclaration = t.tsInterfaceDeclaration(
-        newInterfaceId,
-        interfaceDeclaration.typeParameters,
-        interfaceDeclaration.extends,
-        t.tsInterfaceBody(newFields)
-    );
-
-    // Wrap it as a new ExportNamedDeclaration
-    return t.exportNamedDeclaration(newInterfaceDeclaration);
-}
-
 export const createProtoTypeType = (
     context: ProtoParseContext,
     name: string,

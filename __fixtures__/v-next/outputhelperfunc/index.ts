@@ -27,6 +27,7 @@ export * from "./mobx.stores";
 export * from "./extern";
 export * from "./helper-func-types";
 export * from "./react-query";
+export * from "./vue-query";
 export * from "./mobx";
 export * from "./pinia-endpoint";
 export * from "./json-safe";
