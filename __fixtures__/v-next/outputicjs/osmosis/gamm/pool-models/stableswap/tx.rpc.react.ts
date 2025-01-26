@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../../react-query";
 import { MsgCreateStableswapPool, MsgStableSwapAdjustScalingFactors } from "./tx";
-import { createCreateStableswapPool, createStableSwapAdjustScalingFactors } from "./tx.rpc.func.ts";
+import { createCreateStableswapPool, createStableSwapAdjustScalingFactors } from "./tx.rpc.func";
 export const useCreateStableswapPool = buildUseMutation<MsgCreateStableswapPool, Error>({
   builderMutationFn: createCreateStableswapPool
 });

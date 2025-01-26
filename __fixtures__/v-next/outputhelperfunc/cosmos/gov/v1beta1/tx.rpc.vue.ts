@@ -11,7 +11,7 @@ import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { buildUseMutation } from "../../../react-query";
 import { buildUseVueMutation } from "../../../vue-query";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgVoteWeightedResponse, MsgVoteWeightedResponseSDKType, MsgDeposit, MsgDepositSDKType, MsgDepositResponse, MsgDepositResponseSDKType } from "./tx";
-import { createSubmitProposal, buildHelperVote, constructLetsVoteWeighted, createToDeposit } from "./tx.rpc.func.ts";
+import { createSubmitProposal, buildHelperVote, constructLetsVoteWeighted, createToDeposit } from "./tx.rpc.func";
 export const useSubmitProposal = buildUseVueMutation<MsgSubmitProposal, Error>({
   builderMutationFn: createSubmitProposal
 });

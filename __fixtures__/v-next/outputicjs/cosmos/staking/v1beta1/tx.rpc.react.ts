@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgCreateValidator, MsgEditValidator, MsgDelegate, MsgBeginRedelegate, MsgUndelegate } from "./tx";
-import { createCreateValidator, createEditValidator, createDelegate, createBeginRedelegate, createUndelegate } from "./tx.rpc.func.ts";
+import { createCreateValidator, createEditValidator, createDelegate, createBeginRedelegate, createUndelegate } from "./tx.rpc.func";
 export const useCreateValidator = buildUseMutation<MsgCreateValidator, Error>({
   builderMutationFn: createCreateValidator
 });

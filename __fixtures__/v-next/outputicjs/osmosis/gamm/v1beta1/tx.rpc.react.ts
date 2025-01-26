@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgJoinPool, MsgExitPool, MsgSwapExactAmountIn, MsgSwapExactAmountOut, MsgJoinSwapExternAmountIn, MsgJoinSwapShareAmountOut, MsgExitSwapExternAmountOut, MsgExitSwapShareAmountIn } from "./tx";
-import { createJoinPool, createExitPool, createSwapExactAmountIn, createSwapExactAmountOut, createJoinSwapExternAmountIn, createJoinSwapShareAmountOut, createExitSwapExternAmountOut, createExitSwapShareAmountIn } from "./tx.rpc.func.ts";
+import { createJoinPool, createExitPool, createSwapExactAmountIn, createSwapExactAmountOut, createJoinSwapExternAmountIn, createJoinSwapShareAmountOut, createExitSwapExternAmountOut, createExitSwapShareAmountIn } from "./tx.rpc.func";
 export const useJoinPool = buildUseMutation<MsgJoinPool, Error>({
   builderMutationFn: createJoinPool
 });

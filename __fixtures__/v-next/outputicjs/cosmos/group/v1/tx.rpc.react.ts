@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgCreateGroup, MsgUpdateGroupMembers, MsgUpdateGroupAdmin, MsgUpdateGroupMetadata, MsgCreateGroupPolicy, MsgCreateGroupWithPolicy, MsgUpdateGroupPolicyAdmin, MsgUpdateGroupPolicyDecisionPolicy, MsgUpdateGroupPolicyMetadata, MsgSubmitProposal, MsgWithdrawProposal, MsgVote, MsgExec, MsgLeaveGroup } from "./tx";
-import { createCreateGroup, createUpdateGroupMembers, createUpdateGroupAdmin, createUpdateGroupMetadata, createCreateGroupPolicy, createCreateGroupWithPolicy, createUpdateGroupPolicyAdmin, createUpdateGroupPolicyDecisionPolicy, createUpdateGroupPolicyMetadata, createSubmitProposal, createWithdrawProposal, createVote, createExec, createLeaveGroup } from "./tx.rpc.func.ts";
+import { createCreateGroup, createUpdateGroupMembers, createUpdateGroupAdmin, createUpdateGroupMetadata, createCreateGroupPolicy, createCreateGroupWithPolicy, createUpdateGroupPolicyAdmin, createUpdateGroupPolicyDecisionPolicy, createUpdateGroupPolicyMetadata, createSubmitProposal, createWithdrawProposal, createVote, createExec, createLeaveGroup } from "./tx.rpc.func";
 export const useCreateGroup = buildUseMutation<MsgCreateGroup, Error>({
   builderMutationFn: createCreateGroup
 });

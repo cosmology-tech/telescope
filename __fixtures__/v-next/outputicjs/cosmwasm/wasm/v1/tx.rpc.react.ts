@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgStoreCode, MsgInstantiateContract, MsgExecuteContract, MsgMigrateContract, MsgUpdateAdmin, MsgClearAdmin } from "./tx";
-import { createStoreCode, createInstantiateContract, createExecuteContract, createMigrateContract, createUpdateAdmin, createClearAdmin } from "./tx.rpc.func.ts";
+import { createStoreCode, createInstantiateContract, createExecuteContract, createMigrateContract, createUpdateAdmin, createClearAdmin } from "./tx.rpc.func";
 export const useStoreCode = buildUseMutation<MsgStoreCode, Error>({
   builderMutationFn: createStoreCode
 });

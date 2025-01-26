@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../react-query";
 import { MsgSuperfluidDelegate, MsgSuperfluidUndelegate, MsgSuperfluidUnbondLock, MsgLockAndSuperfluidDelegate, MsgUnPoolWhitelistedPool } from "./tx";
-import { createSuperfluidDelegate, createSuperfluidUndelegate, createSuperfluidUnbondLock, createLockAndSuperfluidDelegate, createUnPoolWhitelistedPool } from "./tx.rpc.func.ts";
+import { createSuperfluidDelegate, createSuperfluidUndelegate, createSuperfluidUnbondLock, createLockAndSuperfluidDelegate, createUnPoolWhitelistedPool } from "./tx.rpc.func";
 export const useSuperfluidDelegate = buildUseMutation<MsgSuperfluidDelegate, Error>({
   builderMutationFn: createSuperfluidDelegate
 });

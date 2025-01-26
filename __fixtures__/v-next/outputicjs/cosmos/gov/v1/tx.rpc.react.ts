@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgSubmitProposal, MsgExecLegacyContent, MsgVote, MsgVoteWeighted, MsgDeposit } from "./tx";
-import { createSubmitProposal, createExecLegacyContent, createVote, createVoteWeighted, createDeposit } from "./tx.rpc.func.ts";
+import { createSubmitProposal, createExecLegacyContent, createVote, createVoteWeighted, createDeposit } from "./tx.rpc.func";
 export const useSubmitProposal = buildUseMutation<MsgSubmitProposal, Error>({
   builderMutationFn: createSubmitProposal
 });

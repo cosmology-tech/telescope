@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgRegisterDevFeeInfo, MsgCancelDevFeeInfo, MsgUpdateDevFeeInfo } from "./tx";
-import { createRegisterDevFeeInfo, createCancelDevFeeInfo, createUpdateDevFeeInfo } from "./tx.rpc.func.ts";
+import { createRegisterDevFeeInfo, createCancelDevFeeInfo, createUpdateDevFeeInfo } from "./tx.rpc.func";
 export const useRegisterDevFeeInfo = buildUseMutation<MsgRegisterDevFeeInfo, Error>({
   builderMutationFn: createRegisterDevFeeInfo
 });

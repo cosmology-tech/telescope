@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgSend, MsgMultiSend } from "./tx";
-import { createSend, createMultiSend } from "./tx.rpc.func.ts";
+import { createSend, createMultiSend } from "./tx.rpc.func";
 export const useSend = buildUseMutation<MsgSend, Error>({
   builderMutationFn: createSend
 });

@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../react-query";
 import { MsgLockTokens, MsgBeginUnlockingAll, MsgBeginUnlocking, MsgExtendLockup, MsgForceUnlock } from "./tx";
-import { createLockTokens, createBeginUnlockingAll, createBeginUnlocking, createExtendLockup, createForceUnlock } from "./tx.rpc.func.ts";
+import { createLockTokens, createBeginUnlockingAll, createBeginUnlocking, createExtendLockup, createForceUnlock } from "./tx.rpc.func";
 export const useLockTokens = buildUseMutation<MsgLockTokens, Error>({
   builderMutationFn: createLockTokens
 });
