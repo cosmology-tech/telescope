@@ -153,7 +153,8 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
       const serviceImportsReact = getDepsFromQueries(ctx.mutations, localnameReact);
       const serviceImportsVue = getDepsFromQueries(ctx.mutations, localnameVue);
 
-      const funcFileName = "./".concat(localname.substring(localname.lastIndexOf("/") + 1))
+      // add imports from func file like query.rpc.func.ts without the .ts extension
+      const funcFileName = "./".concat(localname.substring(localname.lastIndexOf("/") + 1).replace(/\.ts$/, ""));
       serviceImportsReact[funcFileName] = helperCreatorNameList;
       serviceImportsVue[funcFileName] = helperCreatorNameList;
 

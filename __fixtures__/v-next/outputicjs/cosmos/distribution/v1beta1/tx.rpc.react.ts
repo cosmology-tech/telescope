@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgSetWithdrawAddress, MsgWithdrawDelegatorReward, MsgWithdrawValidatorCommission, MsgFundCommunityPool } from "./tx";
-import { createSetWithdrawAddress, createWithdrawDelegatorReward, createWithdrawValidatorCommission, createFundCommunityPool } from "./tx.rpc.func.ts";
+import { createSetWithdrawAddress, createWithdrawDelegatorReward, createWithdrawValidatorCommission, createFundCommunityPool } from "./tx.rpc.func";
 export const useSetWithdrawAddress = buildUseMutation<MsgSetWithdrawAddress, Error>({
   builderMutationFn: createSetWithdrawAddress
 });

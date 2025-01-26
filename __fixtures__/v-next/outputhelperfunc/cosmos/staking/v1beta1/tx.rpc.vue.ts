@@ -7,7 +7,7 @@ import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { buildUseMutation } from "../../../react-query";
 import { buildUseVueMutation } from "../../../vue-query";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgCreateValidatorResponse, MsgCreateValidatorResponseSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgEditValidatorResponse, MsgEditValidatorResponseSDKType, MsgDelegate, MsgDelegateSDKType, MsgDelegateResponse, MsgDelegateResponseSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgBeginRedelegateResponse, MsgBeginRedelegateResponseSDKType, MsgUndelegate, MsgUndelegateSDKType, MsgUndelegateResponse, MsgUndelegateResponseSDKType } from "./tx";
-import { createCreateValidator, createEditValidator, createDelegate, createBeginRedelegate, createUndelegate } from "./tx.rpc.func.ts";
+import { createCreateValidator, createEditValidator, createDelegate, createBeginRedelegate, createUndelegate } from "./tx.rpc.func";
 export const useCreateValidator = buildUseVueMutation<MsgCreateValidator, Error>({
   builderMutationFn: createCreateValidator
 });

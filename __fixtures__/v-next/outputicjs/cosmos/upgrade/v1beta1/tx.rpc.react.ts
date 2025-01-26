@@ -1,6 +1,6 @@
 import { buildUseMutation } from "../../../react-query";
 import { MsgSoftwareUpgrade, MsgCancelUpgrade } from "./tx";
-import { createSoftwareUpgrade, createCancelUpgrade } from "./tx.rpc.func.ts";
+import { createSoftwareUpgrade, createCancelUpgrade } from "./tx.rpc.func";
 export const useSoftwareUpgrade = buildUseMutation<MsgSoftwareUpgrade, Error>({
   builderMutationFn: createSoftwareUpgrade
 });

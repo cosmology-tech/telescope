@@ -1,7 +1,7 @@
 import { MsgCreateBid, MsgCloseBid } from "./bid";
 import { MsgWithdrawLease, MsgCreateLease, MsgCloseLease } from "./lease";
 import { buildUseMutation } from "../../../react-query";
-import { createCreateBid, createCloseBid, createWithdrawLease, createCreateLease, createCloseLease } from "./service.rpc.func.ts";
+import { createCreateBid, createCloseBid, createWithdrawLease, createCreateLease, createCloseLease } from "./service.rpc.func";
 export const useCreateBid = buildUseMutation<MsgCreateBid, Error>({
   builderMutationFn: createCreateBid
 });

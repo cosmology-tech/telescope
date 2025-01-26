@@ -1,7 +1,7 @@
 import { MsgCloseGroup, MsgPauseGroup, MsgStartGroup } from "./group";
 import { buildUseMutation } from "../../../react-query";
 import { MsgCreateDeployment, MsgDepositDeployment, MsgUpdateDeployment, MsgCloseDeployment } from "./deployment";
-import { createCreateDeployment, createDepositDeployment, createUpdateDeployment, createCloseDeployment, createCloseGroup, createPauseGroup, createStartGroup } from "./deployment.rpc.func.ts";
+import { createCreateDeployment, createDepositDeployment, createUpdateDeployment, createCloseDeployment, createCloseGroup, createPauseGroup, createStartGroup } from "./deployment.rpc.func";
 export const useCreateDeployment = buildUseMutation<MsgCreateDeployment, Error>({
   builderMutationFn: createCreateDeployment
 });
