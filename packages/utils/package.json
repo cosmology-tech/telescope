@@ -1,6 +1,6 @@
 {
   "name": "@cosmology/utils",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/hyperweb-io/telescope/tree/master/packages/utils#readme",
@@ -74,7 +74,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@cosmology/types": "^1.11.3",
+    "@cosmology/types": "^1.11.4",
     "dotty": "0.1.2"
   }
 }
