@@ -71,7 +71,7 @@ const options: TelescopeOptions = {
     enabled: true,
     hooks: {
       react: true,
-      vue: true
+      vue: false
     },
   },
 

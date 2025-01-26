@@ -176,8 +176,12 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
       const progVue = [].concat(importsVue).concat(vueAsts);
 
       bundler.writeAst(prog, filename);
-      bundler.writeAst(progReact, filenameReact);
-      bundler.writeAst(progVue, filenameVue);
+      if(reactAsts.length) {
+        bundler.writeAst(progReact, filenameReact);
+      }
+      if(vueAsts.length) {
+        bundler.writeAst(progVue, filenameVue);
+      }
       bundler.addToBundle(c, localname);
 
       return bundlerFile;
