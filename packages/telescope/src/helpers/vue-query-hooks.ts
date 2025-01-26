@@ -123,7 +123,7 @@ ${
 /**
  * Function that uses vue-query to cache a connected tendermint client.
  */
-export function useTendermintClient = ({
+export const useTendermintClient = ({
     rpcEndpoint,
     options,
 }: UseTendermintClient) => {
