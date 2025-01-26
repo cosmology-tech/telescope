@@ -218,7 +218,7 @@ export interface UseMutationBuilderOptions<TMsg> {
     clientResolver?: SigningClientResolver
   ) => (
     signerAddress: string,
-    message: TMsg,
+    message: TMsg | TMsg[],
     fee: StdFee | 'auto',
     memo: string
   ) => Promise<DeliverTxResponse>;
