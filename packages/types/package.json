@@ -1,6 +1,6 @@
 {
   "name": "@cosmology/types",
-  "version": "1.11.5",
+  "version": "1.11.6",
   "description": "Telescope types",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/hyperweb-io/telescope/tree/master/packages/types#readme",
