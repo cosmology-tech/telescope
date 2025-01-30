@@ -1,6 +1,9 @@
+name: starship-devnet
+version: 1.0.0
+
 chains:
-  - name: osmosis-1
-    type: osmosis
+  - id: osmosis-1
+    name: osmosis
     numValidators: 1
     ports:
       rest: 1317
@@ -9,9 +12,11 @@ chains:
     resources:
       cpu: "0.2"
       memory: "200M"
-  - name: cosmos-2
-    type: cosmos
+  - id: cosmos-2
+    name: cosmoshub
     numValidators: 1
+    faucet:
+      type: starship
     ports:
       rest: 1313
       rpc: 26653

@@ -21,15 +21,10 @@
     "lint": "eslint .",
     "format": "eslint . --fix",
     "clean": "rimraf ./types && rimraf ./src/codegen && rimraf ./src/codegen1",
-    "e2e": "npm run e2e:test",
-    "e2e:deps": "make setup",
-    "e2e:kind": "make setup-kind",
-    "e2e:start": "make install",
-    "e2e:port": "make port-forward",
-    "e2e:test": "jest --testPathPattern=starship/ --verbose",
-    "e2e:debug": "jest --testPathPattern=starship/ --runInBand --verbose --bail",
-    "e2e:stop": "make stop",
-    "e2e:clean": "make stop clean"
+    "starship": "starship --config configs/config.yaml",
+    "starship:test": "jest --config ./jest.starship.config.js --verbose --bail",
+    "starship:debug": "jest --config ./jest.starship.config.js --runInBand --verbose --bail",
+    "starship:watch": "jest --watch --config ./jest.starship.config.js"
   },
   "jest": {
     "preset": "ts-jest",
@@ -94,7 +89,9 @@
     "sinon": "14.0.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@starship-ci/cli": "^3.0.0",
+    "starshipjs": "^3.0.0"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.32.0",

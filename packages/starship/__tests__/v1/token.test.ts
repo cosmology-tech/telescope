@@ -102,7 +102,7 @@ describe("Token transfers", () => {
       chainInfo: cosmosChainInfo,
       getStargateClient: cosmosGetStargateClient,
       getRpcEndpoint: cosmosRpcEndpoint,
-    } = useChain("cosmos");
+    } = useChain("cosmoshub");
 
     // Initialize wallet address for cosmos chain
     const cosmosWallet = await DirectSecp256k1HdWallet.fromMnemonic(

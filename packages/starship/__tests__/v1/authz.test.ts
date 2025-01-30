@@ -32,7 +32,7 @@ describe("Authz testing", () => {
 
   beforeAll(async () => {
     ({ chainInfo, getCoin, getRpcEndpoint, creditFromFaucet } =
-      useChain("cosmos"));
+      useChain("cosmoshub"));
     denom = getCoin().base;
 
     // Initialize wallet
