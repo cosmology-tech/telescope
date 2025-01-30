@@ -38,7 +38,7 @@ jobs:
         id: starship-action
         uses: cosmology-tech/starship-action@0.5.8
         with:
-          values: packages/starship/configs/local-config.yaml
+          config: packages/starship/configs/local-config.yaml
           cli-version: 3.0.0
       - name: e2e
         run: cd ./packages/starship && yarn run e2e:test
