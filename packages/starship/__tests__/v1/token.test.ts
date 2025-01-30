@@ -1,6 +1,6 @@
 import { generateMnemonic } from "@confio/relayer/build/lib/helpers";
 import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
-import { assertIsDeliverTxSuccess } from "@cosmjs/stargate";
+import { assertIsDeliverTxSuccess, StargateClient } from '@cosmjs/stargate';
 
 import {
   ibc,
@@ -8,7 +8,7 @@ import {
   getSigningOsmosisTxRpc,
   osmosis,
 } from "../../src/codegen1";
-import { useChain } from "../../src";
+import { useChain } from 'starshipjs';
 import "./setup.test";
 import { MsgSend } from "../../src/codegen1/cosmos/bank/v1beta1/tx";
 import { MsgTransfer } from "../../src/codegen1/ibc/applications/transfer/v1/tx";
@@ -16,13 +16,12 @@ import { QueryBalanceRequest } from "../../src/codegen1/cosmos/bank/v1beta1/quer
 
 describe("Token transfers", () => {
   let wallet, denom, address;
-  let chainInfo, getCoin, getStargateClient, getRpcEndpoint, creditFromFaucet;
+  let chainInfo, getCoin, getRpcEndpoint, creditFromFaucet;
 
   beforeAll(async () => {
     ({
       chainInfo,
       getCoin,
-      getStargateClient,
       getRpcEndpoint,
       creditFromFaucet,
     } = useChain("osmosis"));
@@ -100,7 +99,6 @@ describe("Token transfers", () => {
 
     const {
       chainInfo: cosmosChainInfo,
-      getStargateClient: cosmosGetStargateClient,
       getRpcEndpoint: cosmosRpcEndpoint,
     } = useChain("cosmoshub");
 
@@ -164,7 +162,7 @@ describe("Token transfers", () => {
     assertIsDeliverTxSuccess(txResult);
 
     // Check osmos in address on cosmos chain
-    const cosmosClient = await cosmosGetStargateClient();
+    const cosmosClient = await StargateClient.connect(await cosmosRpcEndpoint());
     const balances = await cosmosClient.getAllBalances(cosmosAddress);
 
     // check balances
@@ -177,7 +175,7 @@ describe("Token transfers", () => {
 
     // check ibc denom trace of the same
     const queryClient = await ibc.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: cosmosRpcEndpoint(),
+      rpcEndpoint: await cosmosRpcEndpoint(),
     });
     const trace = await queryClient.ibc.applications.transfer.v1.denomTrace({
       hash: ibcBalance!.denom.replace("ibc/", ""),

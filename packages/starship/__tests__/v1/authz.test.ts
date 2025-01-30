@@ -3,7 +3,7 @@ import { assertIsDeliverTxSuccess } from "@cosmjs/stargate";
 import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 
 import { cosmos, getSigningCosmosClient, getSigningCosmosTxRpc } from "../../src/codegen1";
-import { useChain } from "../../src";
+import { useChain } from 'starshipjs';
 import "./setup.test";
 import {
   GenericAuthorization,

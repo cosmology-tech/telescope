@@ -8,7 +8,7 @@ import {
   cosmos,
   getSigningCosmosTxRpc,
 } from '../../src/codegen1';
-import { useChain } from '../../src';
+import { useChain } from 'starshipjs';
 import './setup.test';
 import { MsgDelegate } from '../../src/codegen1/cosmos/staking/v1beta1/tx';
 

@@ -22,9 +22,9 @@
     "format": "eslint . --fix",
     "clean": "rimraf ./types && rimraf ./src/codegen && rimraf ./src/codegen1",
     "starship": "starship --config configs/config.yaml",
-    "starship:test": "jest --testPathPattern=starship/ --verbose --bail",
-    "starship:debug": "jest --testPathPattern=starship/ --runInBand --verbose --bail",
-    "starship:watch": "jest --watch --testPathPattern=starship/"
+    "starship:test": "jest --testPathPattern=__tests__/ --verbose --bail",
+    "starship:debug": "jest --testPathPattern=__tests__/ --runInBand --verbose --bail",
+    "starship:watch": "jest --watch --testPathPattern=__tests__/"
   },
   "jest": {
     "preset": "ts-jest",

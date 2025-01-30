@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js';
 
 //@ts-ignore
 import { getSigningIbcClient } from './codegen';
-import { useChain, Config } from './config';
+import { useChain, Config } from 'starshipjs';
 
 export const calcShareOutAmount = (poolInfo, coinsNeeded) => {
   return poolInfo.poolAssets
