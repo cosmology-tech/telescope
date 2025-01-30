@@ -95,7 +95,7 @@ describe('Governance tests for osmosis', () => {
       amount: [
         {
           denom,
-          amount: '100000'
+          amount: '1000000'
         }
       ],
       gas: '550000'
@@ -135,7 +135,7 @@ describe('Governance tests for osmosis', () => {
       amount: [
         {
           denom,
-          amount: '100000'
+          amount: '1000000'
         }
       ],
       gas: '550000'
@@ -182,7 +182,7 @@ describe('Governance tests for osmosis', () => {
       amount: [
         {
           denom,
-          amount: '100000'
+          amount: '1000000'
         }
       ],
       gas: '550000'
