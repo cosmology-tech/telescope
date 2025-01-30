@@ -1,5 +1,5 @@
 name: starship-devnet
-version: 1.0.0
+version: 1.1.0
 
 chains:
   - id: osmosis-1
