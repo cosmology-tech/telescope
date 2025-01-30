@@ -15,8 +15,6 @@ chains:
   - id: cosmos-2
     name: cosmoshub
     numValidators: 1
-    faucet:
-      type: starship
     ports:
       rest: 1313
       rpc: 26653
