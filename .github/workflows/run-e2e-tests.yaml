@@ -41,4 +41,4 @@ jobs:
           config: packages/starship/configs/local-config.yaml
           cli-version: 3.0.0
       - name: e2e
-        run: cd ./packages/starship && yarn run e2e:test
+        run: cd ./packages/starship && yarn run starship:test
