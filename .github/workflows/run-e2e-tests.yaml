@@ -39,7 +39,6 @@ jobs:
         uses: cosmology-tech/starship-action@0.5.8
         with:
           values: packages/starship/configs/local-config.yaml
-          port-forward: true
-          version: 1.0.0
+          cli-version: 3.0.0
       - name: e2e
         run: cd ./packages/starship && yarn run e2e:test
