@@ -6,7 +6,7 @@ import { ConfigContext, useChain, useRegistry } from 'starshipjs';
 beforeAll(async () => {
   const configFile = path.join(__dirname, '../..', 'configs', 'config.yaml');
   ConfigContext.setConfigFile(configFile);
-  ConfigContext.setRegistry(await useRegistry(configFile))
+  ConfigContext.setRegistry(await useRegistry(configFile));
 }, 200000);
 
 describe('Test clients', () => {

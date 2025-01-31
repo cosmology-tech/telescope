@@ -1,24 +1,23 @@
 import { generateMnemonic } from '@confio/relayer/build/lib/helpers';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
-import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
+import {assertIsDeliverTxSuccess, StargateClient} from '@cosmjs/stargate';
 
 import { ibc, getSigningOsmosisClient } from '../../src/codegen';
-import { useChain } from '../../src';
+import { useChain } from 'starshipjs';
 import './setup.test';
 
 describe('Token transfers', () => {
   let wallet, denom, address;
-  let chainInfo, getCoin, getStargateClient, getRpcEndpoint, creditFromFaucet;
+  let chainInfo, getCoin, getRpcEndpoint, creditFromFaucet;
 
   beforeAll(async () => {
     ({
       chainInfo,
       getCoin,
-      getStargateClient,
       getRpcEndpoint,
       creditFromFaucet
     } = useChain('osmosis'));
-    denom = getCoin().base;
+    denom = (await getCoin()).base;
 
     // Initialize wallet
     wallet = await DirectSecp256k1HdWallet.fromMnemonic(generateMnemonic(), {
@@ -38,7 +37,7 @@ describe('Token transfers', () => {
     const address2 = (await wallet2.getAccounts())[0].address;
 
     const signingClient = await getSigningOsmosisClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet
     });
 
@@ -74,13 +73,12 @@ describe('Token transfers', () => {
 
   it('send ibc osmo tokens to address on cosmos chain', async () => {
     const signingClient = await getSigningOsmosisClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet
     });
 
     const {
       chainInfo: cosmosChainInfo,
-      getStargateClient: cosmosGetStargateClient,
       getRpcEndpoint: cosmosRpcEndpoint
     } = useChain('cosmoshub');
 
@@ -139,7 +137,7 @@ describe('Token transfers', () => {
     assertIsDeliverTxSuccess(resp);
 
     // Check osmos in address on cosmos chain
-    const cosmosClient = await cosmosGetStargateClient();
+    const cosmosClient = await StargateClient.connect(await cosmosRpcEndpoint());
     const balances = await cosmosClient.getAllBalances(cosmosAddress);
 
     // check balances
@@ -147,15 +145,15 @@ describe('Token transfers', () => {
     const ibcBalance = balances.find((balance) => {
       return balance.denom.startsWith('ibc/');
     });
-    expect(ibcBalance!.amount).toEqual(token.amount);
-    expect(ibcBalance!.denom).toContain('ibc/');
+    expect(ibcBalance.amount).toEqual(token.amount);
+    expect(ibcBalance.denom).toContain('ibc/');
 
     // check ibc denom trace of the same
     const queryClient = await ibc.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: cosmosRpcEndpoint()
+      rpcEndpoint: await cosmosRpcEndpoint()
     });
     const trace = await queryClient.ibc.applications.transfer.v1.denomTrace({
-      hash: ibcBalance!.denom.replace('ibc/', '')
+      hash: ibcBalance.denom.replace('ibc/', '')
     });
     expect(trace?.denomTrace?.baseDenom).toEqual(denom);
   }, 200000);

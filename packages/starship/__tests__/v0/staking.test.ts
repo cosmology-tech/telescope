@@ -1,15 +1,14 @@
-import { generateMnemonic } from '@confio/relayer/build/lib/helpers';
 import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
-import BigNumber from 'bignumber.js';
+import { BigNumber } from 'bignumber.js';
 
 import { cosmos, getSigningOsmosisClient } from '../../src/codegen';
-import { useChain } from '../../src';
+import { useChain, generateMnemonic } from 'starshipjs';
 import './setup.test';
 
 describe('Staking tokens testing', () => {
   let wallet, denom, address;
-  let chainInfo, getCoin, getStargateClient, getRpcEndpoint, creditFromFaucet;
+  let chainInfo, getCoin, getRpcEndpoint, creditFromFaucet;
 
   // Variables used accross testcases
   let queryClient;
@@ -18,13 +17,13 @@ describe('Staking tokens testing', () => {
 
   beforeAll(async () => {
     ({
+      // @ts-ignore
       chainInfo,
       getCoin,
-      getStargateClient,
       getRpcEndpoint,
       creditFromFaucet
     } = useChain('osmosis'));
-    denom = getCoin().base;
+    denom = (await getCoin()).base;
 
     // Initialize wallet
     wallet = await DirectSecp256k1HdWallet.fromMnemonic(generateMnemonic(), {
@@ -34,7 +33,7 @@ describe('Staking tokens testing', () => {
 
     // Create custom cosmos interchain client
     queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint()
+      rpcEndpoint: await getRpcEndpoint()
     });
 
     // Transfer osmosis and ibc tokens to address, send only osmo to address
@@ -71,7 +70,7 @@ describe('Staking tokens testing', () => {
 
   it('stake tokens to genesis validator', async () => {
     const signingClient = await getSigningOsmosisClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet
     });
 
