@@ -90,12 +90,12 @@ describe('Token transfers', () => {
     const cosmosAddress = (await cosmosWallet.getAccounts())[0].address;
 
     const ibcInfos = chainInfo.fetcher.getChainIbcData(
-      chainInfo.chain.chain_id
+      chainInfo.chain.chain_name
     );
     const ibcInfo = ibcInfos.find(
       (i) =>
-        i.chain_1.chain_name === chainInfo.chain.chain_id &&
-        i.chain_2.chain_name === cosmosChainInfo.chain.chain_id
+        i.chain_1.chain_name === chainInfo.chain.chain_name &&
+        i.chain_2.chain_name === cosmosChainInfo.chain.chain_name
     );
 
     expect(ibcInfo).toBeTruthy();

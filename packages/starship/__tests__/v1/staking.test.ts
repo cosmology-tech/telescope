@@ -2,7 +2,7 @@ import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 
 import { BigNumber } from 'bignumber.js';
-import { cosmos, getSigningCosmosTxRpc } from '../../src/codegen1';
+import { cosmos, getSigningOsmosisClient } from '../../src/codegen1';
 import { useChain, generateMnemonic } from 'starshipjs';
 import './setup.test';
 import { MsgDelegate } from '../../src/codegen1/cosmos/staking/v1beta1/tx';
@@ -33,11 +33,6 @@ describe('Staking tokens testing', () => {
       prefix: chainInfo.chain.bech32_prefix
     });
     address1 = (await wallet1.getAccounts())[0].address;
-
-    msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: await getRpcEndpoint(),
-      signer: wallet1
-    });
 
     // Create custom cosmos interchain client
     queryClient = await cosmos.ClientFactory.createRPCQueryClient({
@@ -77,6 +72,10 @@ describe('Staking tokens testing', () => {
   });
 
   it('stake tokens to genesis validator', async () => {
+    const signingClient = await getSigningOsmosisClient({
+      rpcEndpoint: await getRpcEndpoint(),
+      signer: wallet1
+    });
     const { balance } = await queryClient.cosmos.bank.v1beta1.balance({
       address: address1,
       denom
@@ -105,12 +104,7 @@ describe('Staking tokens testing', () => {
       gas: '550000'
     };
 
-    const result = await msgClient1.cosmos.staking.v1beta1.delegate(
-      address1,
-      msg,
-      fee
-    );
-
+    const result = await signingClient.signAndBroadcast(address1, [msg], fee);
     assertIsDeliverTxSuccess(result);
   });
 
