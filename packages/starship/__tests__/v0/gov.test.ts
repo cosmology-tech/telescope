@@ -1,6 +1,7 @@
 import { generateMnemonic } from '@confio/relayer/build/lib/helpers';
 import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
+import Long from 'long';
 import BigNumber from 'bignumber.js';
 
 import { cosmos, getSigningOsmosisClient } from '../../src/codegen';
@@ -158,7 +159,7 @@ describe('Governance tests for osmosis', () => {
 
   it('query proposal', async () => {
     const result = await queryClient.cosmos.gov.v1beta1.proposal({
-      proposalId: BigInt(proposalId)
+      proposalId: Long.fromString(proposalId)
     });
 
     expect(result.proposal.proposalId.toString()).toEqual(proposalId);
@@ -173,7 +174,7 @@ describe('Governance tests for osmosis', () => {
 
     // Vote on proposal from genesis mnemonic address
     const msg = cosmos.gov.v1beta1.MessageComposer.withTypeUrl.vote({
-      proposalId: BigInt(proposalId),
+      proposalId: Long.fromString(proposalId),
       voter: address,
       option: cosmos.gov.v1beta1.VoteOption.VOTE_OPTION_YES
     });
@@ -194,7 +195,7 @@ describe('Governance tests for osmosis', () => {
 
   it('verify vote', async () => {
     const { vote } = await queryClient.cosmos.gov.v1beta1.vote({
-      proposalId: BigInt(proposalId),
+      proposalId: Long.fromString(proposalId),
       voter: address
     });
 
@@ -205,7 +206,7 @@ describe('Governance tests for osmosis', () => {
   it('wait for voting period to end', async () => {
     // wait for the voting period to end
     const { proposal } = await queryClient.cosmos.gov.v1beta1.proposal({
-      proposalId: BigInt(proposalId)
+      proposalId: Long.fromString(proposalId)
     });
 
     await expect(waitUntil(proposal.votingEndTime)).resolves.not.toThrow();
@@ -213,7 +214,7 @@ describe('Governance tests for osmosis', () => {
 
   it('verify proposal passed', async () => {
     const { proposal } = await queryClient.cosmos.gov.v1beta1.proposal({
-      proposalId: BigInt(proposalId)
+      proposalId: Long.fromString(proposalId)
     });
 
     expect(proposal.status).toEqual(
