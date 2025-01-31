@@ -115,7 +115,7 @@ describe("Authz testing", () => {
       amount: [
         {
           denom,
-          amount: "100000",
+          amount: "1000000",
         },
       ],
       gas: "550000",
@@ -174,7 +174,7 @@ describe("Authz testing", () => {
       amount: [
         {
           denom,
-          amount: "100000",
+          amount: "1000000",
         },
       ],
       gas: "550000",
@@ -228,7 +228,7 @@ describe("Authz testing", () => {
       amount: [
         {
           denom,
-          amount: "100000",
+          amount: "1000000",
         },
       ],
       gas: "550000",
@@ -300,7 +300,7 @@ describe("Authz testing", () => {
       amount: [
         {
           denom,
-          amount: "100000",
+          amount: "1000000",
         },
       ],
       gas: "550000",
@@ -339,7 +339,7 @@ describe("Authz testing", () => {
 
     console.log(balance)
 
-    expect(balance?.amount).toEqual("9999990000"); // not 10000000000, due to fees deduction
+    expect(balance?.amount).toEqual("9999090000"); // not 10000000000, due to fees deduction
   }, 2000000);
 
   it("revoke address2 vote auth", async () => {
@@ -356,7 +356,7 @@ describe("Authz testing", () => {
       amount: [
         {
           denom,
-          amount: "100000",
+          amount: "1000000",
         },
       ],
       gas: "550000",
@@ -405,7 +405,7 @@ describe("Authz testing", () => {
       amount: [
         {
           denom,
-          amount: "100000",
+          amount: "1000000",
         },
       ],
       gas: "550000",
@@ -446,7 +446,7 @@ describe("Authz testing", () => {
       amount: [
         {
           denom,
-          amount: "100000",
+          amount: "1000000",
         },
       ],
       gas: "550000",
