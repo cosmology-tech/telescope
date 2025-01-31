@@ -44,7 +44,7 @@ export const transferIbcTokens = async (
   const registry = Config.registry;
   const { chainInfo, getCoin, getRpcEndpoint, creditFromFaucet } =
     useChain(fromChain);
-  const denom = getCoin().base;
+  const denom = (await getCoin()).base;
 
   const { chainInfo: toChainInfo } = useChain(toChain);
 
@@ -74,7 +74,7 @@ export const transferIbcTokens = async (
 
   // Create ibc client to transfer tokens
   const fromClient = await getSigningIbcClient({
-    rpcEndpoint: getRpcEndpoint(),
+    rpcEndpoint: await getRpcEndpoint(),
     signer: wallet
   });
 

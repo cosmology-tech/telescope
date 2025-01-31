@@ -25,7 +25,7 @@ describe("Token transfers", () => {
       getRpcEndpoint,
       creditFromFaucet,
     } = useChain("osmosis"));
-    denom = getCoin().base;
+    denom = (await getCoin()).base;
 
     // Initialize wallet
     wallet = await DirectSecp256k1HdWallet.fromMnemonic(generateMnemonic(), {
@@ -45,11 +45,11 @@ describe("Token transfers", () => {
     const address2 = (await wallet2.getAccounts())[0].address;
 
     const queryClient = await osmosis.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const msgClient = await osmosis.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet
     });
 
@@ -87,13 +87,13 @@ describe("Token transfers", () => {
       denom
     }));
 
-    expect(balance?.amount).toEqual(token.amount);
-    expect(balance?.denom).toEqual(denom);
+    expect(balance.amount).toEqual(token.amount);
+    expect(balance.denom).toEqual(denom);
   }, 200000);
 
   it("send ibc osmo tokens to address on cosmos chain", async () => {
     const msgClient = await ibc.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet
     });
 
@@ -170,15 +170,15 @@ describe("Token transfers", () => {
     const ibcBalance = balances.find((balance) => {
       return balance.denom.startsWith("ibc/");
     });
-    expect(ibcBalance!.amount).toEqual(token.amount);
-    expect(ibcBalance!.denom).toContain("ibc/");
+    expect(ibcBalance.amount).toEqual(token.amount);
+    expect(ibcBalance.denom).toContain("ibc/");
 
     // check ibc denom trace of the same
     const queryClient = await ibc.ClientFactory.createRPCQueryClient({
       rpcEndpoint: await cosmosRpcEndpoint(),
     });
     const trace = await queryClient.ibc.applications.transfer.v1.denomTrace({
-      hash: ibcBalance!.denom.replace("ibc/", ""),
+      hash: ibcBalance.denom.replace("ibc/", ""),
     });
     expect(trace?.denomTrace?.baseDenom).toEqual(denom);
   }, 200000);

@@ -33,7 +33,7 @@ describe("Authz testing", () => {
   beforeAll(async () => {
     ({ chainInfo, getCoin, getRpcEndpoint, creditFromFaucet } =
       useChain("cosmoshub"));
-    denom = getCoin().base;
+    denom = (await getCoin()).base;
 
     // Initialize wallet
     wallet1 = await DirectSecp256k1HdWallet.fromMnemonic(generateMnemonic(), {
@@ -64,7 +64,7 @@ describe("Authz testing", () => {
 
   it("check address1 has tokens", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const { balance } = await queryClient.cosmos.bank.v1beta1.balance({
@@ -77,7 +77,7 @@ describe("Authz testing", () => {
 
   it("check address2 has tokens", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const { balance } = await queryClient.cosmos.bank.v1beta1.balance({
@@ -90,7 +90,7 @@ describe("Authz testing", () => {
 
   it("check address3 has tokens", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const { balance } = await queryClient.cosmos.bank.v1beta1.balance({
@@ -103,12 +103,12 @@ describe("Authz testing", () => {
 
   it("grant address2 Send Auth with limits", async () => {
     const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet1,
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const fee = {
@@ -162,12 +162,12 @@ describe("Authz testing", () => {
 
   it("grant address3 Generic Send Auth", async () => {
     const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet1,
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const fee = {
@@ -216,12 +216,12 @@ describe("Authz testing", () => {
 
   it("grant address2 Generic Vote Auth", async () => {
     const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet1,
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const fee = {
@@ -271,7 +271,7 @@ describe("Authz testing", () => {
   it("get address2 auths", async () => {
     await sleep(1000)
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     console.log(`granter: ${address1}, grantee: ${address2}, msg: ${MsgVote.typeUrl}`)
@@ -288,12 +288,12 @@ describe("Authz testing", () => {
 
   it("exec address2 send", async () => {
     const msgClient2 = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet2,
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const fee = {
@@ -344,12 +344,12 @@ describe("Authz testing", () => {
 
   it("revoke address2 vote auth", async () => {
     const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet1,
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const fee = {
@@ -393,12 +393,12 @@ describe("Authz testing", () => {
 
   it("revoke address3 generic send auth", async () => {
     const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet1,
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const fee = {
@@ -434,12 +434,12 @@ describe("Authz testing", () => {
 
   it("revoke address2 send auth", async () => {
     const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: wallet1,
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const fee = {

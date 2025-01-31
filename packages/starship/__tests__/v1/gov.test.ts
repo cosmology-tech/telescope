@@ -19,7 +19,7 @@ describe("Governance tests for osmosis", () => {
   beforeAll(async () => {
     ({ chainInfo, getCoin, getRpcEndpoint, creditFromFaucet } =
       useChain("osmosis"));
-    denom = getCoin().base;
+    denom = (await getCoin()).base;
 
     // Initialize wallet
     protoSigner = await DirectSecp256k1HdWallet.fromMnemonic(
@@ -36,7 +36,7 @@ describe("Governance tests for osmosis", () => {
 
   it("check address has tokens", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const { balance } = await queryClient.cosmos.bank.v1beta1.balance({
@@ -44,12 +44,12 @@ describe("Governance tests for osmosis", () => {
       denom,
     });
 
-    expect(balance?.amount).toEqual("10000000000");
+    expect(balance.amount).toEqual("10000000000");
   }, 200000);
 
   it("query validator address", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const { validators } = await queryClient.cosmos.staking.v1beta1.validators({
@@ -72,12 +72,12 @@ describe("Governance tests for osmosis", () => {
 
   it("stake tokens to genesis validator", async () => {
     const msgClient = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: protoSigner,
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const { balance } = await queryClient.cosmos.bank.v1beta1.balance({
@@ -87,7 +87,7 @@ describe("Governance tests for osmosis", () => {
 
     // Stake half of the tokens
     // eslint-disable-next-line no-undef
-    const delegationAmount = (BigInt(balance!.amount) / BigInt(2)).toString();
+    const delegationAmount = (BigInt(balance.amount) / BigInt(2)).toString();
 
     const fee = {
       amount: [
@@ -107,7 +107,7 @@ describe("Governance tests for osmosis", () => {
         validatorAddress: validatorAddress,
         amount: {
           amount: delegationAmount,
-          denom: balance!.denom,
+          denom: balance.denom,
         },
       },
       fee
@@ -117,7 +117,7 @@ describe("Governance tests for osmosis", () => {
 
   it("submit a txt proposal", async () => {
     const msgClient = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: protoSigner,
     });
 
@@ -166,7 +166,7 @@ describe("Governance tests for osmosis", () => {
 
   it("query proposal", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const result = await queryClient.cosmos.gov.v1beta1.proposal({
@@ -179,7 +179,7 @@ describe("Governance tests for osmosis", () => {
   it("vote on proposal from genesis address", async () => {
     // create genesis address signing client
     const msgClient = await cosmos.ClientFactory.createRPCMsgExtensions({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
       signer: protoSigner,
     });
 
@@ -209,7 +209,7 @@ describe("Governance tests for osmosis", () => {
 
   it("verify vote", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const { vote } = await queryClient.cosmos.gov.v1beta1.vote({
@@ -223,7 +223,7 @@ describe("Governance tests for osmosis", () => {
 
   it("wait for voting period to end", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     // wait for the voting period to end
@@ -236,7 +236,7 @@ describe("Governance tests for osmosis", () => {
 
   it("verify proposal passed", async () => {
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: getRpcEndpoint(),
+      rpcEndpoint: await getRpcEndpoint(),
     });
 
     const { proposal } = await queryClient.cosmos.gov.v1beta1.proposal({
