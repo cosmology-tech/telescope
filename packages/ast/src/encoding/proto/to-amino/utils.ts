@@ -205,7 +205,8 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
 
       anyType(args: ToAminoJSONMethod) {
           const { propName, origName } = getFieldNames(args.field);
-          const interfaceName = Object.keys(args.context.ref.traversed.acceptsInterface)[0];
+          const accepts_interface = args.field.options["(cosmos_proto.accepts_interface)"];
+          const interfaceName = accepts_interface.split(",")[0];
           const interfaceFnName = getInterfaceToAminoName(interfaceName)
 
           args.context.getTypeName(args.field);
@@ -795,7 +796,8 @@ export const arrayTypes = {
     },
     anyType(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
-        const interfaceName = Object.keys(args.context.ref.traversed.acceptsInterface)[0];
+        const accepts_interface = args.field.options["(cosmos_proto.accepts_interface)"];
+        const interfaceName = accepts_interface.split(",")[0];
         const interfaceFnName = getInterfaceToAminoName(interfaceName)
 
         const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
