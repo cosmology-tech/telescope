@@ -1,7 +1,7 @@
 {
   "name": "@cosmology/starship-test",
   "private": true,
-  "version": "1.9.17",
+  "version": "1.9.18",
   "description": "E2E tests for telescope with Starship",
   "author": "Anmol1696 <anmol1696@gmail.com>",
   "homepage": "https://github.com/osmosis-labs/telescope#readme",
@@ -54,7 +54,7 @@
     "@confio/relayer": "0.7.0",
     "@cosmjs/cosmwasm-stargate": "0.29.4",
     "@cosmjs/crypto": "0.29.4",
-    "@cosmology/telescope": "^1.11.17",
+    "@cosmology/telescope": "^1.11.18",
     "@protobufs/confio": "^0.0.6",
     "@protobufs/cosmos": "^0.0.11",
     "@protobufs/cosmos_proto": "^0.0.10",
@@ -64,6 +64,7 @@
     "@protobufs/ibc": "^0.0.11",
     "@protobufs/osmosis": "^0.2.0",
     "@protobufs/tendermint": "^0.0.10",
+    "@starship-ci/cli": "^3.0.0",
     "@types/jest": "^29.5.0",
     "ast-stringify": "0.1.0",
     "axios": "^1.7.4",
@@ -87,11 +88,10 @@
     "regenerator-runtime": "^0.13.11",
     "rimraf": "5.0.0",
     "sinon": "14.0.2",
+    "starshipjs": "^3.0.0",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "^5.0.4",
-    "@starship-ci/cli": "^3.0.0",
-    "starshipjs": "^3.0.0"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.32.0",
