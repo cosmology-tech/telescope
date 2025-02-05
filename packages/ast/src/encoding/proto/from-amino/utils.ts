@@ -125,8 +125,7 @@ export const fromAmino = {
   anyType(args: fromAminoMethod) {
     const { origName } = getFieldNames(args.field);
 
-    const interfaceName =
-      args.field.options["(cosmos_proto.accepts_interface)"];
+    const interfaceName = Object.keys(args.context.ref.traversed.acceptsInterface)[0];
     const interfaceFnName = getInterfaceFromAminoName(interfaceName);
 
     let aminoFuncExpr: t.Expression = t.identifier(interfaceFnName);
@@ -553,8 +552,7 @@ export const arrayTypes = {
   },
 
   anyType(args: fromAminoMethod) {
-    const interfaceName =
-      args.field.options["(cosmos_proto.accepts_interface)"];
+    const interfaceName = Object.keys(args.context.ref.traversed.acceptsInterface)[0];
     const interfaceFnName = getInterfaceFromAminoName(interfaceName);
 
     let aminoFuncExpr: t.Expression = t.identifier(interfaceFnName);

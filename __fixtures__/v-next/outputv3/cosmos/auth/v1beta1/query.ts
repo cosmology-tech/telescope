@@ -842,13 +842,13 @@ export const QueryModuleAccountsResponse = {
   },
   fromAmino(object: QueryModuleAccountsResponseAmino): QueryModuleAccountsResponse {
     const message = createBaseQueryModuleAccountsResponse();
-    message.accounts = object.accounts?.map(e => ModuleAccountI_FromAmino(e)) || [];
+    message.accounts = object.accounts?.map(e => AccountI_FromAmino(e)) || [];
     return message;
   },
   toAmino(message: QueryModuleAccountsResponse, useInterfaces: boolean = true): QueryModuleAccountsResponseAmino {
     const obj: any = {};
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? ModuleAccountI_ToAmino((e as Any), useInterfaces) : undefined);
+      obj.accounts = message.accounts.map(e => e ? AccountI_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
       obj.accounts = message.accounts;
     }
