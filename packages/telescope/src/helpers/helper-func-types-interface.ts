@@ -7,7 +7,6 @@ import { BinaryReader, BinaryWriter } from "./binary${options.restoreImportExten
 import { getRpcClient } from "./extern${options.restoreImportExtension ?? ""}";
 import { isRpc, Rpc } from "./helpers${options.restoreImportExtension ?? ""}";
 import { TelescopeGeneratedCodec } from "./types";
-import { GlobalDecoderRegistry } from "./registry";
 
 export interface QueryBuilderOptions<TReq, TRes> {
   encode: (request: TReq, writer?: BinaryWriter) => BinaryWriter
@@ -100,12 +99,15 @@ export function buildTx<TMsg>(opts: TxBuilderOptions) {
     client.addEncoders(opts.encoders ?? []);
     client.addConverters(opts.converters ?? []);
 
-    const data = [
-      {
-        typeUrl: opts.typeUrl,
-        value: message,
-      },
-    ];
+    const data = Array.isArray(message)
+      ? message.map(msg => ({
+          typeUrl: opts.typeUrl,
+          value: msg,
+        }))
+      : [{
+          typeUrl: opts.typeUrl,
+          value: message,
+        }];
     return client.signAndBroadcast!(signerAddress, data, fee, memo);
   };
 }

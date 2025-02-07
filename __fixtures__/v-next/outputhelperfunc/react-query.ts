@@ -127,6 +127,14 @@ export interface UseQueryBuilderOptions<TReq, TRes> {
   queryKeyPrefix: string,
 }
 
+const getRpcClientFromCache = (
+  queryClient: ReturnType<typeof useQueryClient>,
+  key: string,
+  rpcEndpoint?: string | HttpEndpoint
+): Rpc | undefined => {
+  const queryKey = rpcEndpoint ? [key, rpcEndpoint] : [key];
+  return queryClient.getQueryData<Rpc>(queryKey);
+};
 
 export function buildUseQuery<TReq, TRes>(opts: UseQueryBuilderOptions<TReq, TRes>) {
   return <TData = TRes>({
@@ -143,16 +151,17 @@ export function buildUseQuery<TReq, TRes>(opts: UseQueryBuilderOptions<TReq, TRe
 
     if(isRpc(clientResolver)) {
       rpcResolver = clientResolver;
-    } else if(isCacheResolver(clientResolver)) {
-      const key = clientResolver.clientQueryKey || DEFAULT_RPC_CLIENT_QUERY_KEY;
-      const queryKey = clientResolver.rpcEndpoint ? [key, clientResolver.rpcEndpoint] : [key];
-      rpcResolver = queryClient.getQueryData<Rpc>(queryKey);
-
-      if(!rpcResolver && clientResolver.rpcEndpoint) {
-        rpcResolver = clientResolver.rpcEndpoint;
-      }
     } else {
-      rpcResolver = clientResolver;
+      const key = isCacheResolver(clientResolver)
+        ? clientResolver.clientQueryKey || DEFAULT_RPC_CLIENT_QUERY_KEY
+        : DEFAULT_RPC_CLIENT_QUERY_KEY;
+      const endpoint = isCacheResolver(clientResolver) ? clientResolver.rpcEndpoint : undefined;
+
+      const cachedClient = getRpcClientFromCache(queryClient, key, endpoint);
+      // For CacheResolver with endpoint, use endpoint as fallback if no cached client
+      rpcResolver = cachedClient ||
+        (isCacheResolver(clientResolver) && clientResolver.rpcEndpoint ? clientResolver.rpcEndpoint :
+          (!isCacheResolver(clientResolver) ? clientResolver : undefined));
     }
 
     const queryFn = opts.builderQueryFn(rpcResolver);
@@ -181,6 +190,14 @@ export interface UseMutationBuilderOptions<TMsg> {
   ) => Promise<DeliverTxResponse>,
 }
 
+const getSigningClientFromCache = (
+  queryClient: ReturnType<typeof useQueryClient>,
+  key: string,
+  rpcEndpoint?: string | HttpEndpoint
+): ISigningClient | undefined => {
+  const queryKey = rpcEndpoint ? [key, rpcEndpoint] : [key];
+  return queryClient.getQueryData<ISigningClient>(queryKey);
+};
 
 export function buildUseMutation<TMsg, TError>(opts: UseMutationBuilderOptions<TMsg>) {
   return ({
@@ -195,12 +212,15 @@ export function buildUseMutation<TMsg, TError>(opts: UseMutationBuilderOptions<T
 
     if(isISigningClient(clientResolver)) {
       signingClientResolver = clientResolver;
-    } else if(isCacheResolver(clientResolver)) {
-      const key = clientResolver.clientQueryKey || DEFAULT_SIGNING_CLIENT_QUERY_KEY;
-      const queryKey = clientResolver.rpcEndpoint ? [key, clientResolver.rpcEndpoint] : [key];
-      signingClientResolver = queryClient.getQueryData<ISigningClient>(queryKey);
     } else {
-      clientResolver = clientResolver;
+      // For both CacheResolver and other cases, try to get from cache first
+      const key = isCacheResolver(clientResolver)
+        ? clientResolver.clientQueryKey || DEFAULT_SIGNING_CLIENT_QUERY_KEY
+        : DEFAULT_SIGNING_CLIENT_QUERY_KEY;
+      const endpoint = isCacheResolver(clientResolver) ? clientResolver.rpcEndpoint : undefined;
+
+      const cachedClient = getSigningClientFromCache(queryClient, key, endpoint);
+      signingClientResolver = cachedClient || (!isCacheResolver(clientResolver) ? clientResolver : undefined);
     }
 
     const mutationFn = opts.builderMutationFn(signingClientResolver);
