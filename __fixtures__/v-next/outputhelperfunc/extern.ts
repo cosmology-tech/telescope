@@ -8,7 +8,7 @@
 import { HttpEndpoint } from "@interchainjs/types";
 import {
   createQueryRpc,
-} from '@interchainjs/cosmos/utils';
+} from '@interchainjs/utils';
 import { Rpc } from "./helpers";
 
 const _rpcClients: Record<string, Rpc> = {};

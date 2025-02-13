@@ -2,7 +2,7 @@ import { AccessConfig, AccessConfigAmino } from "./types";
 import { Coin, CoinAmino } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
+import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@interchainjs/encoding";
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCode {
   /** Sender is the that actor that signed the messages */

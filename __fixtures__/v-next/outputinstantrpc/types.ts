@@ -154,3 +154,4 @@ export interface SigningClientParams {
   rpcEndpoint: string | HttpEndpoint;
   signer: OfflineSigner;
 }
+

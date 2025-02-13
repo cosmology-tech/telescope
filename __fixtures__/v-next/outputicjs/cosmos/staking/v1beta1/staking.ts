@@ -5,7 +5,7 @@ import { Duration, DurationAmino } from "../../../google/protobuf/duration";
 import { Coin, CoinAmino } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
-import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
+import { encodePubkey, decodePubkey } from "@interchainjs/pubkey";
 import { Pubkey } from "@cosmjs/amino";
 /** BondStatus is the status of a validator. */
 export enum BondStatus {

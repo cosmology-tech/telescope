@@ -6,7 +6,7 @@
 
 import { IBinaryReader, IBinaryWriter } from "./binary";
 import { Any } from "./google/protobuf/any";
-import { OfflineSigner } from "@interchainjs/cosmos/types/wallet";
+
 import { HttpEndpoint } from "@interchainjs/types";
 
 export type ProtoMsg = Omit<Any, "typeUrl"> & { typeUrl: any };
@@ -150,7 +150,3 @@ export interface TxRpc {
   ): Promise<DeliverTxResponse>;
 }
 
-export interface SigningClientParams {
-  rpcEndpoint: string | HttpEndpoint;
-  signer: OfflineSigner;
-}
