@@ -30,8 +30,9 @@ import {
     QueryKey,
 } from '@tanstack/vue-query';
 
-import { HttpEndpoint, ProtobufRpcClient } from '@cosmjs/stargate';
-import { CometClient, connectComet, Tendermint34Client, Tendermint37Client } from '@cosmjs/tendermint-rpc';
+import { HttpEndpoint } from "@interchainjs/types";
+import { Rpc as ProtobufRpcClient } from "./helpers";
+
 import {Ref} from 'vue'
 
 export const DEFAULT_RPC_CLIENT_QUERY_KEY = 'rpcClient';
@@ -110,32 +111,6 @@ export function useRpcClient<TData = ProtobufRpcClient>({
   }
   );
 }
-
-interface UseTendermintClient extends VueQueryParams<Tendermint34Client | Tendermint37Client | CometClient> {
-    rpcEndpoint: string | HttpEndpoint;
-}
-
-/**
- * Function that uses vue-query to cache a connected tendermint client.
- */
-export const useTendermintClient = ({
-    rpcEndpoint,
-    options,
-}: UseTendermintClient) => {
-    const { data: client } = useQuery<Tendermint34Client | Tendermint37Client | CometClient, Error, Tendermint34Client | Tendermint37Client | CometClient>({
-        queryKey: ['client', 'tendermint', rpcEndpoint],
-        queryFn: () => connectComet(rpcEndpoint),
-        ...{
-            // allow overriding
-            onError: (e: any) => {
-                throw new Error(`Failed to connect to ${rpcEndpoint}` + '\n' + e)
-            },
-            ...options,
-        }
-      }
-    );
-    return { client };
-};
 
 export interface UseQueryBuilderOptions<TReq, TRes> {
   builderQueryFn: (

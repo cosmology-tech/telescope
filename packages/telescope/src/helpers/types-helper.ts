@@ -7,11 +7,7 @@ export const getTypesHelper = (options: TelescopeOptions) => {
 import { Any } from "./google/protobuf/any${
     options.restoreImportExtension ?? ""
   }";
-import { OfflineSigner } from "${
-    options.useInterchainJs
-      ? "@interchainjs/cosmos/types/wallet"
-      : "@cosmjs/proto-signing"
-  }";
+${options.useInterchainJs ? '' : `import { OfflineSigner } from "@cosmjs/proto-signing";`}
 import { HttpEndpoint } from "${
     options.useInterchainJs ? "@interchainjs/types" : "@cosmjs/tendermint-rpc"
   }";
@@ -156,10 +152,11 @@ export interface TxRpc {
     memo: string
   ): Promise<DeliverTxResponse>;
 }
-
+${options.useInterchainJs ? '' : `
 export interface SigningClientParams {
   rpcEndpoint: string | HttpEndpoint;
   signer: OfflineSigner;
 }
+`}
 `;
 };
