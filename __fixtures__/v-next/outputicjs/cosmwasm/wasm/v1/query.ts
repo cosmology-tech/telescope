@@ -2,7 +2,7 @@ import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "
 import { ContractInfo, ContractInfoAmino, ContractCodeHistoryEntry, ContractCodeHistoryEntryAmino, Model, ModelAmino } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
+import { toUtf8, fromUtf8 } from "@interchainjs/encoding";
 /**
  * QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
  * method

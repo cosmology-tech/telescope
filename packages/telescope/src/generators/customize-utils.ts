@@ -2,6 +2,18 @@ import { TelescopeBuilder } from '../builder';
 import { UTILS } from '../utils';
 
 export const plugin = (builder: TelescopeBuilder) => {
+  if(builder.options.useInterchainJs) {
+    UTILS.encodePubkey = '@interchainjs/pubkey';
+    UTILS.decodePubkey = '@interchainjs/pubkey';
+
+    UTILS.fromBase64 = '@interchainjs/encoding';
+    UTILS.fromBech32 = '@interchainjs/encoding';
+    UTILS.fromHex = '@interchainjs/encoding';
+    UTILS.fromUtf8 = '@interchainjs/encoding';
+    UTILS.toBase64 = '@interchainjs/encoding';
+    UTILS.toUtf8 = '@interchainjs/encoding';
+  }
+
   if (
     builder.options.prototypes.typingsFormat.customTypes.useEnhancedDecimal ===
     true
