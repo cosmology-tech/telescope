@@ -172,7 +172,7 @@ export const protoScopeImportLookup = (
   const root = getRoot(ref);
 
   // TODO pass in the imports and this ref
-  // e.g. only include packges of those files !!!!!
+  // e.g. only include packages of those files !!!!!
   // this is currently looking at ALL protos
   const parsed = store.parseScope(name);
   if (!parsed) {

@@ -1,4 +1,4 @@
-// This file is a demonstation of how ast package works. In order to try it yourself you need:
+// This file is a demonstration of how ast package works. In order to try it yourself you need:
 // 1. Create a 'fixture.tx' file in the same directory as this file and write any TypeScript to it.
 // 2. cd into `packages/ast`.
 // 3. Run `yarn test:ast`.
